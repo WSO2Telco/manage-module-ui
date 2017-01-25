@@ -1,11 +1,14 @@
-# WorkflowManagerUi
+# Workflow UI
 
 Project consist of two main parts 
+
 1. client app
+
 2. node js server to server all api calls and static files
 
 client angular app is build using angular-cli generator
 [angular-cli](https://github.com/angular/angular-cli)
+
 
 client app and server can be started independently
 client app can be started in dev server with live reloading
