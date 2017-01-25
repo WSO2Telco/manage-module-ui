@@ -1,0 +1,14 @@
+:host{
+  display: block;
+
+  @media screen and (max-width: 768px) {
+    padding: 0px 15px;
+    display: block;
+  }
+
+}
+
+app-approval-count{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

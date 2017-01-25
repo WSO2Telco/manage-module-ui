@@ -1,0 +1,13 @@
+<div class="row">
+  <app-approval-count class="col-sm-6"
+                      [count]="appDetailsSummery?.totalAppCreations"
+                      backColor="#3598dc"
+                      iconClass="glyphicon-gift"
+                      name="Application Creations"></app-approval-count>
+
+  <app-approval-count class="col-sm-6"
+                      [count]="appDetailsSummery?.totalSubCreations"
+                      backColor="#8E44AD"
+                      iconClass="glyphicon-hand-right"
+                      name="Subscription Creations"></app-approval-count>
+</div>

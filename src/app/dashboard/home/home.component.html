@@ -1,0 +1,47 @@
+<div class="animated fadeInUp" style="animation-delay: 0.3s">
+
+  <div class="row">
+    <div class="col-lg-6">
+      <app-approval-summery [appDetailsSummery]="dashboardData"></app-approval-summery>
+    </div>
+    <div class="col-lg-6">
+      <app-approval-history-graph></app-approval-history-graph>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <app-responsive-table
+        tableHeader="MY APPLICATIONS"
+        [dataSource]="myApplications"
+        [fieldSet]="myApplicationHeaders"></app-responsive-table>
+    </div>
+
+    <div class="col-sm-6">
+      <app-responsive-table
+        tableHeader="MY SUBSCRIPTIONS"
+        [dataSource]="myAppSubscriptionTask"
+        [fieldSet]="myAppSubscriptionHeaders"></app-responsive-table>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-6">
+      <app-responsive-table
+        tableHeader="All APPLICATIONS"
+        [dataSource]="allApplications"
+        [fieldSet]="myApplicationHeaders"></app-responsive-table>
+    </div>
+
+    <div class="col-sm-6">
+      <app-responsive-table
+        tableHeader="ALl SUBSCRIPTIONS"
+        [dataSource]="allSubscriptions"
+        [fieldSet]="myAppSubscriptionHeaders"></app-responsive-table>
+    </div>
+  </div>
+
+
+</div>
+
