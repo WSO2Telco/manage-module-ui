@@ -10,35 +10,33 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-6">
-      <app-responsive-table
-        tableHeader="MY APPLICATIONS"
-        [dataSource]="myApplications"
-        [fieldSet]="myApplicationHeaders"></app-responsive-table>
+    <div class="col-md-6">
+      <application-data-table
+              class="my"
+              tableTitle="MY APPLICATIONS"
+              [dataSource]="myApplications"></application-data-table>
     </div>
 
-    <div class="col-sm-6">
-      <app-responsive-table
-        tableHeader="MY SUBSCRIPTIONS"
-        [dataSource]="myAppSubscriptionTask"
-        [fieldSet]="myAppSubscriptionHeaders"></app-responsive-table>
+    <div class="col-md-6">
+      <application-data-table
+              class="my"
+              tableTitle="MY SUBSCRIPTIONS"
+              [dataSource]="myAppSubscriptionTask"></application-data-table>
     </div>
   </div>
 
 
   <div class="row">
-    <div class="col-sm-6">
-      <app-responsive-table
-        tableHeader="All APPLICATIONS"
-        [dataSource]="allApplications"
-        [fieldSet]="myApplicationHeaders"></app-responsive-table>
+    <div class="col-md-6">
+      <application-data-table
+              tableTitle="All APPLICATIONS"
+              [dataSource]="allApplications"></application-data-table>
     </div>
 
-    <div class="col-sm-6">
-      <app-responsive-table
-        tableHeader="ALl SUBSCRIPTIONS"
-        [dataSource]="allSubscriptions"
-        [fieldSet]="myAppSubscriptionHeaders"></app-responsive-table>
+    <div class="col-md-6">
+      <application-data-table
+              tableTitle="All SUBSCRIPTIONS"
+              [dataSource]="allSubscriptions"></application-data-table>
     </div>
   </div>
 

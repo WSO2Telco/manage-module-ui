@@ -1,7 +1,14 @@
+export class DateTimeInfo{
+  date:string;
+  time:string;
+  offset: string;
+  unformatted:string;
+}
+
 export class ApplicationTask {
   id: number;
   assignee: string;
-  createTime: string;
+  createTime: DateTimeInfo;
   taskDescription: string;
   applicationId: number;
   applicationName: string;

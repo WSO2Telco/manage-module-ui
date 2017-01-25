@@ -1,9 +1,18 @@
+@import "../../../styles/colors";
+
 app-approval-history-graph{
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
-app-responsive-table{
+app-responsive-table,application-data-table{
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+
+:host /deep/ application-data-table.my .header{
+  background-color: #445566 !important;
+}
+
+
