@@ -9,24 +9,24 @@
             <div class="tbl-cell">APP NAME</div>
             <div class="tbl-cell">USER</div>
             <div class="tbl-cell">CREATED ON</div>
-            <div class="tbl-cell text-center">ACTION</div>
+            <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
         </div>
 
-        <ng-container *ngFor="let item of dataSource">
-            <div class="tbl-row">
+        <ng-container *ngFor="let item of dataSource; let i=index">
+            <div class="tbl-row" [ngClass]="{'modified' : item.isModified}" *ngIf="!!!recordLimit || i < recordLimit">
                 <div class="tbl-cell">{{item.id}}</div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
                 <div class="tbl-cell">{{item.userName}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
-                <div class="tbl-cell text-center">
+                <div class="tbl-cell text-right">
                     <span   tooltip="More Info"
                             class="action expand glyphicon glyphicon-chevron-down" (click)="item.isExpand = !item.isExpand"></span>
                     <span  tooltip="Approve"
-                           class="action  approve glyphicon glyphicon-ok-sign"></span>
+                           class="action  approve glyphicon glyphicon-ok-sign" ></span>
                     <span tooltip="Reject"
                           class="action  reject glyphicon glyphicon-remove-sign"></span>
                     <span tooltip="Assign to Me"
-                          class="action  assign glyphicon glyphicon-user"></span>
+                          class="action  assign glyphicon glyphicon-user" (click)="onAction('ASSIGN',item)"></span>
                 </div>
             </div>
             <div class="tbl-row" *ngIf="item.isExpand" >
@@ -37,7 +37,8 @@
         <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">
             <span class="no-rec">No Records..</span>
         </div>
+    </div> <!--TABLE END-->
 
+    <div class="text-right" *ngIf="dataSource?.length > recordLimit"><span class="more">View All</span></div>
 
-    </div>
-</div>
+</div> <!--WRAPPER END-->

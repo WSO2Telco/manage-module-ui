@@ -49,6 +49,10 @@
           display: block;
         }
       }
+
+      &.modified{
+        background-color: #ffffcc;
+      }
     }
   }
 
@@ -66,10 +70,13 @@
     line-height: 29px;
     margin: 2px 5px;
     cursor: pointer;
+    color: $gray;
+
     @include transition(all 0.2s ease-in);
 
     &:hover{
       background-color: $secondary_color;
+      color: $gray_lighter;
     }
 
   }
@@ -87,6 +94,5 @@
       color: $gray;
     }
   }
-
 
 }

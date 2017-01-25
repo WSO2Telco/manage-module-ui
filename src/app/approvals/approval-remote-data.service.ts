@@ -1,70 +1,107 @@
 import {Injectable} from '@angular/core';
 import {Headers, RequestOptions, Response, Http} from "@angular/http";
-import {Observable} from "rxjs";
-import {ApplicationTask, ApplicationTaskSearchParam} from "../commons/models/application-data-models";
+import {Observable, Subject, ReplaySubject} from "rxjs";
+import {
+    ApplicationTask, ApplicationTaskSearchParam,
+    AssignApplicationTaskParam
+} from "../commons/models/application-data-models";
 
 @Injectable()
 export class ApprovalRemoteDataService {
 
-  private apiContext: string = 'api';
-  private headers: Headers = new Headers({'Content-Type': 'application/json'});
-  private options: RequestOptions = new RequestOptions({headers: this.headers});
+    public myApplicationCreationTasks: Subject<ApplicationTask[]> = new ReplaySubject();
+    public groupApplicationCreationTasks: Subject<ApplicationTask[]> = new ReplaySubject();
 
-  private apiEndpoints: Object = {
-    search: this.apiContext + '/applications/search',
-  };
+    private modifiedApplicationTaskIDs:number[] = new Array();
 
-  constructor(private http: Http) {
-  }
 
-  getUserApplicationTasks(): Observable<ApplicationTask[]> {
-    //TODO GET USER FROM AUTH SERVICE
-    const param: ApplicationTaskSearchParam = {
-      assignee: 'admin',
-      size: 100,
-      processType: "APPLICATION_CREATION",
-      candidateGroups: null
+    private apiContext: string = 'api';
+    private headers: Headers = new Headers({'Content-Type': 'application/json'});
+    private options: RequestOptions = new RequestOptions({headers: this.headers});
+
+    private apiEndpoints: Object = {
+        search: this.apiContext + '/applications/search',
+        assign: this.apiContext + '/applications/assign',
     };
-    return this.http.post(this.apiEndpoints['search'], param, this.options)
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json().message))
-  }
 
-  getUserGroupApplicationTasks(): Observable<ApplicationTask[]> {
-    //TODO GET GROUP FROM AUTH SERVICE
-    const param: ApplicationTaskSearchParam = {
-      assignee: null,
-      processType: "APPLICATION_CREATION",
-      size: 100,
-      candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
-    };
-    return this.http.post(this.apiEndpoints['search'], param, this.options)
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json().message))
-  }
+    constructor(private http: Http) {
+    }
 
-  getUserAppSubscriptionTasks(): Observable<ApplicationTask[]> {
-    const param: ApplicationTaskSearchParam = {
-      assignee: 'admin',
-      size: 100,
-      processType: "SUBSCRIPTION_CREATION",
-      candidateGroups: null
-    };
-    return this.http.post(this.apiEndpoints['search'], param, this.options)
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json().message))
-  }
+    getUserApplicationTasks(): void {
+        //TODO GET USER FROM AUTH SERVICE
+        const param: ApplicationTaskSearchParam = {
+            assignee: 'admin',
+            size: 100,
+            processType: "APPLICATION_CREATION",
+            candidateGroups: null
+        };
 
-  getUserGroupAppSubscriptionTask(): Observable<ApplicationTask[]> {
-    const param: ApplicationTaskSearchParam = {
-      assignee: null,
-      size: 100,
-      processType: "SUBSCRIPTION_CREATION",
-      candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
-    };
-    return this.http.post(this.apiEndpoints['search'], param, this.options)
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json().message))
-  }
+        this.http.post(this.apiEndpoints['search'], param, this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (result:ApplicationTask[])=>{this.myApplicationCreationTasks.next(result)},
+                (error: Response) => Observable.throw(error.json().message)
+            )
+    }
+
+    getUserGroupApplicationTasks(): void {
+        //TODO GET GROUP FROM AUTH SERVICE
+        const param: ApplicationTaskSearchParam = {
+            assignee: null,
+            processType: "APPLICATION_CREATION",
+            size: 100,
+            candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
+        };
+        this.http.post(this.apiEndpoints['search'], param, this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (result:ApplicationTask[])=>{this.groupApplicationCreationTasks.next(result)},
+                (error: Response) => Observable.throw(error.json().message))
+
+    }
+
+    getUserAppSubscriptionTasks(): Observable<ApplicationTask[]> {
+        //TODO GET USER FROM AUTH SERVICE
+        const param: ApplicationTaskSearchParam = {
+            assignee: 'admin',
+            size: 100,
+            processType: "SUBSCRIPTION_CREATION",
+            candidateGroups: null
+        };
+        return this.http.post(this.apiEndpoints['search'], param, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message))
+    }
+
+    getUserGroupAppSubscriptionTask(): Observable<ApplicationTask[]> {
+        //TODO GET GROUP FROM AUTH SERVICE
+        const param: ApplicationTaskSearchParam = {
+            assignee: null,
+            size: 100,
+            processType: "SUBSCRIPTION_CREATION",
+            candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
+        };
+        return this.http.post(this.apiEndpoints['search'], param, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message))
+    }
+
+    assignApplicationTaskToUser(taskId) {
+        //TODO update to this if success
+        this.modifiedApplicationTaskIDs.push(taskId);
+
+        //TODO GET LOGIN USER FROM AUTH SERVICE
+        const param = new AssignApplicationTaskParam();
+        param.assignee = 'admin';
+        param.taskId = taskId;
+
+        return this.http.post(this.apiEndpoints['assign'], param, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message))
+    }
+
+    getModifiedTaskIds():number[]{
+        return this.modifiedApplicationTaskIDs;
+    }
 
 }

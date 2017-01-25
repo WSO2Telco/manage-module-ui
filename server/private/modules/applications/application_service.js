@@ -4,6 +4,7 @@ const boom = require('boom');
 const Messages = require('../common/messages');
 const applicationREST = require('./application_tasks_rest_service');
 const applicationDetailsREST = require('./application_details_rest_service');
+const applicationAssignREST = require('./application_assign_rest_service');
 
 
 /**
@@ -196,11 +197,41 @@ const _getAppStat = function (request, reply) {
 
 };
 
+/**
+ * Assign Application Task to User
+ * @private
+ */
+const _assignApplicationTaskToUser = function (request,reply) {
+
+    let validateRequest = function (request) {
+        let data = request.payload;
+        if(data && data.assignee && data.taskId){
+            return true;
+        }
+        return false;
+    };
+
+    let onAssignSuccess = function (result) {
+        reply(result);
+    };
+
+    let onAssignFail = function (error) {
+        reply(error);
+    };
+
+    if(!validateRequest(request)){
+        reply(boom.badRequest(Messages['BAD_REQUEST']));
+    }
+
+    applicationAssignREST.Invoke(request.payload).then(onAssignSuccess,onAssignFail);
+};
+
 
 function applicationService() {
     return {
         searchApplicationsForApproval: _getApplications,
-        getApplicationStatistics: _getAppStat
+        getApplicationStatistics: _getAppStat,
+        assignApplicationTaskToUser : _assignApplicationTaskToUser
     };
 }
 

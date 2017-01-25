@@ -4,6 +4,7 @@
 @import "form-controlls";
 @import "animations";
 @import "bootstrap_overides";
+@import "mixing";
 
 html,body{
   width: 100%;
@@ -59,6 +60,26 @@ input,button{
       background-color: $accent-color;
     }
   }
+}
+
+.more{
+  background-color: $accent-color;
+  display: inline-block;
+  padding: 5px 15px;
+  color: white;
+  font-weight: 900;
+  font-size: 0.9em;
+  cursor: pointer;
+  @include transition(all 0.2s ease-in);
+
+  &:hover{
+    background-color: #E37F35;
+    color: $gray_lighter;
+  }
+}
+
+.pad-r-15-im{
+  padding-right: 15px !important;
 }
 
 

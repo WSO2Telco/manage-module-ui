@@ -10,6 +10,7 @@ import {ChartsModule} from "ng2-charts";
 import {ApprovalRemoteDataService} from "../approvals/approval-remote-data.service";
 import {DashboardRemoteDataService} from "./dashboard-remote-data.service";
 import {ApplicationDataTableComponent} from "../approvals/application-data-table/application-data-table.component";
+import {DashboardHelperService} from "./dashboard-helper.service";
 
 @NgModule({
     imports: [
@@ -17,7 +18,10 @@ import {ApplicationDataTableComponent} from "../approvals/application-data-table
         DashboardRoutes,
         ChartsModule
     ],
-    providers: [ApprovalRemoteDataService, DashboardRemoteDataService],
+    providers: [
+        ApprovalRemoteDataService,
+        DashboardRemoteDataService,
+        DashboardHelperService],
     declarations: [
         HomeComponent,
         ApprovalSummeryComponent,

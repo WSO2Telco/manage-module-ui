@@ -17,6 +17,7 @@ export class ApplicationTask {
   tier: string;
   allTiers: string[];
   userName: string;
+  isModified :boolean;
 }
 
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
@@ -27,3 +28,9 @@ export class ApplicationTaskSearchParam{
   assignee:string;
   size:number
 }
+
+export class AssignApplicationTaskParam{
+  taskId : number;
+  assignee : string;
+}
+
