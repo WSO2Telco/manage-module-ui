@@ -3,7 +3,7 @@ import {Headers, RequestOptions, Response, Http} from "@angular/http";
 import {Observable, Subject, ReplaySubject} from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
-    AssignApplicationTaskParam
+    AssignApplicationTaskParam, ApproveApplicationCreationTaskParam
 } from "../commons/models/application-data-models";
 
 @Injectable()
@@ -22,6 +22,7 @@ export class ApprovalRemoteDataService {
     private apiEndpoints: Object = {
         search: this.apiContext + '/applications/search',
         assign: this.apiContext + '/applications/assign',
+        approveCreation: this.apiContext + '/applications/approve/creation',
     };
 
     constructor(private http: Http) {
@@ -102,6 +103,13 @@ export class ApprovalRemoteDataService {
 
     getModifiedTaskIds():number[]{
         return this.modifiedApplicationTaskIDs;
+    }
+
+    approveApplicationCreationTask(param:ApproveApplicationCreationTaskParam):Observable<any>{
+        return this.http.post(this.apiEndpoints['approveCreation'], param, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message))
+
     }
 
 }

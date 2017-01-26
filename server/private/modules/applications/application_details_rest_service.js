@@ -16,7 +16,7 @@ function invokeApplicationDetailRest(taskId){
       rejectUnauthorized: false,
       json : true,
       headers: {
-        Authorization: 'Basic ' + new Buffer('kermit:kermit').toString('base64')
+          Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName+':'+ config.businessProcessEnginePassword).toString('base64')
       },
     };
   };

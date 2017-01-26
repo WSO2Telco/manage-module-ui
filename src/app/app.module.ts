@@ -22,7 +22,7 @@ import {ChartsModule} from "ng2-charts";
         HamburgerMenuComponent,
         UserAvatarComponent,
         MainMenuComponent,
-        BreadcrumbsComponent,
+        BreadcrumbsComponent
     ],
     imports: [
         BrowserModule,

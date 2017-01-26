@@ -15,6 +15,11 @@ module.exports = [
         method: 'POST',
         path: '/api/applications/assign',
         handler: ApplicationService.assignApplicationTaskToUser
+    },
+    {
+        method: 'POST',
+        path: '/api/applications/approve/creation',
+        handler: ApplicationService.approveApplicationCreation
     }
 
 ];

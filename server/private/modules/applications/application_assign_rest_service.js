@@ -21,7 +21,7 @@ function invokeAssignApplicationTask(params){
             json : true,
             payload : _payload,
             headers: {
-                Authorization: 'Basic ' + new Buffer('kermit:kermit').toString('base64')
+                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName+':'+ config.businessProcessEnginePassword).toString('base64')
             },
         };
     };

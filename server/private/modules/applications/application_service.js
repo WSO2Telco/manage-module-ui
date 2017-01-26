@@ -5,6 +5,8 @@ const Messages = require('../common/messages');
 const applicationREST = require('./application_tasks_rest_service');
 const applicationDetailsREST = require('./application_details_rest_service');
 const applicationAssignREST = require('./application_assign_rest_service');
+const applicationCompleteRest = require('./application_task_complete_rest_service');
+const APP_CONSTANT =require('./appication_const');
 
 
 /**
@@ -201,11 +203,11 @@ const _getAppStat = function (request, reply) {
  * Assign Application Task to User
  * @private
  */
-const _assignApplicationTaskToUser = function (request,reply) {
+const _assignApplicationTaskToUser = function (request, reply) {
 
     let validateRequest = function (request) {
         let data = request.payload;
-        if(data && data.assignee && data.taskId){
+        if (data && data.assignee && data.taskId) {
             return true;
         }
         return false;
@@ -219,11 +221,46 @@ const _assignApplicationTaskToUser = function (request,reply) {
         reply(error);
     };
 
-    if(!validateRequest(request)){
+    if (!validateRequest(request)) {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
 
-    applicationAssignREST.Invoke(request.payload).then(onAssignSuccess,onAssignFail);
+    applicationAssignREST.Invoke(request.payload).then(onAssignSuccess, onAssignFail);
+};
+
+
+/**
+ * Approve Application Creation task handler
+ * @param request
+ * @param reply
+ * @private
+ */
+const _approveApplicationCreation = function (request, reply) {
+
+    let validateRequest = function (request) {
+        let data = request.payload;
+        if (data && data.taskId && data.selectedTier && data.status && data.description) {
+            return true;
+        }
+        return false;
+    };
+
+    let onAproveSuccess = function (result) {
+        reply(result);
+    };
+
+    let onApproveError = function (error) {
+      reply(error);
+    };
+
+    if (validateRequest(request)) {
+        reply(boom.badRequest(Messages['BAD_REQUEST']));
+    }
+
+    let param = request.payload;
+    param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+
+    applicationCompleteRest.Invoke(param).then(onAproveSuccess,onApproveError);
 };
 
 
@@ -231,7 +268,8 @@ function applicationService() {
     return {
         searchApplicationsForApproval: _getApplications,
         getApplicationStatistics: _getAppStat,
-        assignApplicationTaskToUser : _assignApplicationTaskToUser
+        assignApplicationTaskToUser: _assignApplicationTaskToUser,
+        approveApplicationCreation: _approveApplicationCreation
     };
 }
 

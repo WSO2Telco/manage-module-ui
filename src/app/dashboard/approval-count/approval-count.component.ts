@@ -8,13 +8,16 @@ import {Component, OnInit, Input} from '@angular/core';
 export class ApprovalCountComponent implements OnInit {
 
   @Input()
-  private count:number;
+  private totalCount:number;
+
+  @Input()
+  private myCount:number;
+
+  @Input()
+  private groupCount:number;
 
   @Input()
   private name:string;
-
-  @Input()
-  private backColor:string;
 
   @Input()
   private iconClass:string;

@@ -12,3 +12,20 @@ app-approval-count{
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+:host /deep/ app-approval-count.apps .approval-count{
+  background-color: #3598dc;
+
+  .breakdown{
+    color : #a7d8fa;
+  }
+}
+
+:host /deep/ app-approval-count.subs .approval-count{
+  background-color: #8E44AD;
+
+  .breakdown{
+    color: #fb9db1;
+  }
+;
+}

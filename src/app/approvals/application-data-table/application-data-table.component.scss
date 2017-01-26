@@ -8,7 +8,7 @@
   padding: 10px;
   border: solid 1px $gray_lighter;
   background-color: white;
-  min-height: 300px;
+  min-height: 425px;
 
   .tbl-header{
     font-weight: 600;
@@ -76,7 +76,12 @@
 
     &:hover{
       background-color: $secondary_color;
-      color: $gray_lighter;
+      color: black;
+    }
+
+    &.expand{
+      border : none;
+      font-size: 0.9em;
     }
 
   }
@@ -94,5 +99,37 @@
       color: $gray;
     }
   }
+
+  .expand-container{
+    height: 200px;
+    background-color: gray !important;
+
+    .more-content{
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top : 0px;
+      bottom: 0px;
+    }
+
+  }
+
+  .div-tbl{
+    background-color: lightyellow;
+    .dtb-row{
+      .dtb-cell{
+        float: left;
+        width: 20%;
+        border: solid 1px #cccccc;
+      }
+    }
+
+    &:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
 
 }
