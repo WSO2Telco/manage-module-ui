@@ -14,6 +14,8 @@ import {UserAvatarComponent} from "./commons/components/user-avatar/user-avatar.
 import {MainMenuComponent} from "./commons/components/main-menu/main-menu.component";
 import {BreadcrumbsComponent} from "./commons/components/breadcrumbs/breadcrumbs.component";
 import {ChartsModule} from "ng2-charts";
+import {DataProvidersModule} from "./data-providers/data-providers.module";
+import {ToastyModule} from "ng2-toasty";
 
 @NgModule({
     declarations: [
@@ -31,10 +33,12 @@ import {ChartsModule} from "ng2-charts";
         HttpModule,
         CommonsModule,
         ChartsModule,
+        DataProvidersModule,
         ButtonsModule.forRoot(),
         PopoverModule.forRoot(),
         DropdownModule.forRoot(),
-        TooltipModule.forRoot()
+        TooltipModule.forRoot(),
+        ToastyModule.forRoot()
     ],
     providers: [
         AppGuard,

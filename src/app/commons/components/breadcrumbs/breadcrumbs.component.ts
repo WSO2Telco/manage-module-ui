@@ -1,25 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, NavigationEnd} from "@angular/router";
+import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
+import {ToastyService, ToastOptions} from "ng2-toasty";
+import {MessageService} from "../../services/message.service";
 
 @Component({
-  selector: 'app-breadcrumbs',
-  template: `
-      {{activeView || 'HOME'}}
-  `,
-  styleUrls: ['./breadcrumbs.component.scss']
+    selector: 'app-breadcrumbs',
+    templateUrl: './breadcrumbs.component.html',
+    styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent implements OnInit {
 
-  private activeView:any;
+    private activeView: any;
 
-  constructor(private _router:Router) {}
+    constructor(private _router: Router,
+                private approval: ApprovalRemoteDataService,
+                private message: MessageService) {
+    }
 
-  ngOnInit() {
-    this._router.events
-      .filter((event:any)=> event instanceof NavigationEnd)
-      .subscribe((event:NavigationEnd)=>{
-        this.activeView = event.url;
-      });
-  }
+    ngOnInit() {
+        this._router.events
+            .filter((event: any) => event instanceof NavigationEnd)
+            .subscribe((event: NavigationEnd) => {
+                this.activeView = event.url;
+            });
+    }
+
+    onReload() {
+        this.approval.getUserApplicationTasks();
+        this.approval.getUserGroupApplicationTasks();
+        this.message.info('Dashboard Data Refreshed','');
+    }
 
 }

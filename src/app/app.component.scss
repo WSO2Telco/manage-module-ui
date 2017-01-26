@@ -8,6 +8,19 @@
   min-width: 300px;
 }
 
+:host /deep/ ng2-toasty .toast{
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+
+
+  -webkit-animation-name: bounceInUp;
+  -moz-animation-name: bounceInUp;
+  -o-animation-name: bounceInUp;
+  animation-name: bounceInUp;
+}
+
 .container-fluid{
   height: 100%;
 }

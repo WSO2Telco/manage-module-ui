@@ -103,7 +103,7 @@ var AuthenticationService = (function () {
     };
     AuthenticationService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__remote_data_service__["a" /* RemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__remote_data_service__["a" /* RemoteDataService */]) === 'function' && _b) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* Router */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__remote_data_service__["a" /* LoginRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__remote_data_service__["a" /* LoginRemoteDataService */]) === 'function' && _b) || Object])
     ], AuthenticationService);
     return AuthenticationService;
     var _a, _b;
@@ -1176,7 +1176,7 @@ var CommonsModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"]
             ],
             declarations: [],
-            providers: [__WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */], __WEBPACK_IMPORTED_MODULE_3__services_remote_data_service__["a" /* RemoteDataService */], __WEBPACK_IMPORTED_MODULE_4__services_app_common_service__["a" /* AppCommonService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_2__services_authentication_service__["a" /* AuthenticationService */], __WEBPACK_IMPORTED_MODULE_3__services_remote_data_service__["a" /* LoginRemoteDataService */], __WEBPACK_IMPORTED_MODULE_4__services_app_common_service__["a" /* AppCommonService */]]
         }), 
         __metadata('design:paramtypes', [])
     ], CommonsModule);

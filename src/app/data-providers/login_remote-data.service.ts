@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
-import {User} from "./authentication.service";
+import {User} from "../commons/services/authentication.service";
 
 @Injectable()
-export class RemoteDataService {
+export class LoginRemoteDataService {
 
   private apiContext: string = 'api';
   private headers: Headers = new Headers({'Content-Type': 'application/json'});

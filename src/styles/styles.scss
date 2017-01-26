@@ -105,4 +105,29 @@ input,button{
 }
 
 
+#toasty {
+  .toast{
+    width: 350px;
+    &.toasty-theme-material{
+
+      &.toasty-type-error{
+        background-color: $error-red;
+        color: white;
+      }
+
+      &.toasty-type-success{
+        background-color: $success;
+        color: white;
+      }
+
+      &.toasty-type-warning{
+        background-color: $warning;
+        color: white;
+      }
+
+    }
+
+  }
+}
+
 

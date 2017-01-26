@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ApplicationTask} from "../../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../../approvals/approval-remote-data.service";
+import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {DashboardData} from "../../commons/models/dashboard-data-models";
-import {DashboardRemoteDataService} from "../dashboard-remote-data.service";
+import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
 import {DashboardHelperService} from "../dashboard-helper.service";
 
 @Component({

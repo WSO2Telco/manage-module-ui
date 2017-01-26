@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
 import {Subject} from "rxjs";
-import {RemoteDataService} from "./remote-data.service";
+import {LoginRemoteDataService} from "../../data-providers/login_remote-data.service";
 import {Response} from "@angular/http";
 
 export class User {
@@ -14,7 +14,7 @@ export class AuthenticationService {
 
   loginUserInfo: Subject<User> = new Subject();
 
-  constructor(private _router: Router, private _remoteService: RemoteDataService) {
+  constructor(private _router: Router, private _remoteService: LoginRemoteDataService) {
   }
 
   doLogin(userName: string, password: string,callback:Function) {

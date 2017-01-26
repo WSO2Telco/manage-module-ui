@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ApplicationTask} from "../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../approvals/approval-remote-data.service";
+import {ApprovalRemoteDataService} from "../data-providers/approval-remote-data.service";
 
 @Injectable()
 export class DashboardHelperService {

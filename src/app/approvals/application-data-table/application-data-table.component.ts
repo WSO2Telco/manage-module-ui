@@ -1,7 +1,8 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ApplicationTask, ApproveApplicationCreationTaskParam} from "../../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../approval-remote-data.service";
+import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {Response} from "@angular/http";
+import {MessageService} from "../../commons/services/message.service";
 
 @Component({
     selector: 'application-data-table',
@@ -22,7 +23,8 @@ export class ApplicationDataTableComponent implements OnInit {
     @Input()
     private recordsType: 'USER' | 'GROUP';
 
-    constructor(private approvalService: ApprovalRemoteDataService) {
+    constructor(private approvalService: ApprovalRemoteDataService,
+                private message: MessageService) {
     }
 
     ngOnInit() {
@@ -52,6 +54,7 @@ export class ApplicationDataTableComponent implements OnInit {
                 param.user = 'admin';
                 this.approvalService.approveApplicationCreationTask(param).subscribe(
                     (result: any) => {
+                        this.message.success('Application successfully approved','');
                         this.approvalService.getUserApplicationTasks();
                     },
                     (error) => {

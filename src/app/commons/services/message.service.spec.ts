@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { RemoteDataService } from './remote-data.service';
+import { MessageService } from './message.service';
 
-describe('RemoteDataService', () => {
+describe('MessageService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [RemoteDataService]
+      providers: [MessageService]
     });
   });
 
-  it('should ...', inject([RemoteDataService], (service: RemoteDataService) => {
+  it('should ...', inject([MessageService], (service: MessageService) => {
     expect(service).toBeTruthy();
   }));
 });
