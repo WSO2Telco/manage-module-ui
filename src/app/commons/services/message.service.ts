@@ -20,15 +20,15 @@ export class MessageService {
         this.toast.success(Object.assign({}, this.toastOptions, {title, msg: message}));
     }
 
-    error(message: string, title: string) {
+    error(message: string, title?: string) {
         this.toast.error(Object.assign({}, this.toastOptions, {title, msg: message}));
     }
 
-    warning(message: string, title: string) {
+    warning(message: string, title?: string) {
         this.toast.warning(Object.assign({}, this.toastOptions, {title, msg: message}));
     }
 
-    info(message: string, title: string) {
+    info(message: string, title?: string) {
         this.toast.info(Object.assign({}, this.toastOptions, {title, msg: message}));
     }
 

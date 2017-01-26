@@ -9,10 +9,13 @@ import {
 @Injectable()
 export class ApprovalRemoteDataService {
 
-    public myApplicationCreationTasks: Subject<ApplicationTask[]> = new ReplaySubject();
-    public groupApplicationCreationTasks: Subject<ApplicationTask[]> = new ReplaySubject();
+    public MyApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
+    public GroupApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
 
-    private modifiedApplicationTaskIDs:number[] = new Array();
+    public MySubscriptionTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
+    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new Subject();
+
+    private modifiedApplicationTaskIDs: number[] = new Array();
 
 
     private apiContext: string = 'api';
@@ -40,7 +43,9 @@ export class ApprovalRemoteDataService {
         this.http.post(this.apiEndpoints['search'], param, this.options)
             .map((response: Response) => response.json())
             .subscribe(
-                (result:ApplicationTask[])=>{this.myApplicationCreationTasks.next(result)},
+                (result: ApplicationTask[]) => {
+                    this.MyApplicationCreationTasksProvider.next(result)
+                },
                 (error: Response) => Observable.throw(error.json().message)
             )
     }
@@ -56,12 +61,14 @@ export class ApprovalRemoteDataService {
         this.http.post(this.apiEndpoints['search'], param, this.options)
             .map((response: Response) => response.json())
             .subscribe(
-                (result:ApplicationTask[])=>{this.groupApplicationCreationTasks.next(result)},
+                (result: ApplicationTask[]) => {
+                    this.GroupApplicationCreationTasksProvider.next(result)
+                },
                 (error: Response) => Observable.throw(error.json().message))
 
     }
 
-    getUserAppSubscriptionTasks(): Observable<ApplicationTask[]> {
+    getUserAppSubscriptionTasks(): void {
         //TODO GET USER FROM AUTH SERVICE
         const param: ApplicationTaskSearchParam = {
             assignee: 'admin',
@@ -69,12 +76,17 @@ export class ApprovalRemoteDataService {
             processType: "SUBSCRIPTION_CREATION",
             candidateGroups: null
         };
-        return this.http.post(this.apiEndpoints['search'], param, this.options)
+        this.http.post(this.apiEndpoints['search'], param, this.options)
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message))
+            .subscribe(
+                (result) => {
+                    this.MySubscriptionTasksProvider.next(result)
+                },
+                (error: Response) => Observable.throw(error.json().message)
+            );
     }
 
-    getUserGroupAppSubscriptionTask(): Observable<ApplicationTask[]> {
+    getUserGroupAppSubscriptionTask(): void {
         //TODO GET GROUP FROM AUTH SERVICE
         const param: ApplicationTaskSearchParam = {
             assignee: null,
@@ -82,9 +94,14 @@ export class ApprovalRemoteDataService {
             processType: "SUBSCRIPTION_CREATION",
             candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
         };
-        return this.http.post(this.apiEndpoints['search'], param, this.options)
+        this.http.post(this.apiEndpoints['search'], param, this.options)
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message))
+            .subscribe(
+                (result:ApplicationTask[])=>{
+                    this.GroupSubscriptionTasksProvider.next(result);
+                },
+                (error: Response) => Observable.throw(error.json().message)
+            );
     }
 
     assignApplicationTaskToUser(taskId) {
@@ -101,15 +118,22 @@ export class ApprovalRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message))
     }
 
-    getModifiedTaskIds():number[]{
+    getModifiedTaskIds(): number[] {
         return this.modifiedApplicationTaskIDs;
     }
 
-    approveApplicationCreationTask(param:ApproveApplicationCreationTaskParam):Observable<any>{
+    approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveCreation'], param, this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
 
+    }
+
+    getAllTasks():void{
+        this.getUserApplicationTasks();
+        this.getUserAppSubscriptionTasks();
+        this.getUserGroupAppSubscriptionTask();
+        this.getUserGroupApplicationTasks();
     }
 
 }

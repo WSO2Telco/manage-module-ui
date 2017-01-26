@@ -63,6 +63,8 @@ export class ApplicationDataTableComponent implements OnInit {
                 );
                 break;
             }
+
+
         }
     }
 

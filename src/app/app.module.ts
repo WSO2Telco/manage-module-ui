@@ -16,6 +16,7 @@ import {BreadcrumbsComponent} from "./commons/components/breadcrumbs/breadcrumbs
 import {ChartsModule} from "ng2-charts";
 import {DataProvidersModule} from "./data-providers/data-providers.module";
 import {ToastyModule} from "ng2-toasty";
+import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.service";
 
 @NgModule({
     declarations: [
@@ -43,6 +44,7 @@ import {ToastyModule} from "ng2-toasty";
     providers: [
         AppGuard,
         LoginGuard,
+        ApprovalRemoteDataService
 
     ],
     bootstrap: [AppComponent]

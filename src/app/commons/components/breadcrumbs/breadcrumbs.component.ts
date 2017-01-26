@@ -27,8 +27,7 @@ export class BreadcrumbsComponent implements OnInit {
     }
 
     onReload() {
-        this.approval.getUserApplicationTasks();
-        this.approval.getUserGroupApplicationTasks();
+        this.approval.getAllTasks();
         this.message.info('Dashboard Data Refreshed','');
     }
 

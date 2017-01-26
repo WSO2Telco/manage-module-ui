@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Headers, RequestOptions, Http, Response} from "@angular/http";
-import {Observable} from "rxjs";
+import {Observable, ReplaySubject} from "rxjs";
 import {DashboardData, DashboardDataRequestParam} from "../commons/models/dashboard-data-models";
+import {ApprovalRemoteDataService} from "./approval-remote-data.service";
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -14,8 +15,12 @@ export class DashboardRemoteDataService {
     dashboardData: this.apiContext + '/applications/statistics',
   };
 
-  constructor(private http: Http) {
+  constructor(private http: Http,private approvalService:ApprovalRemoteDataService) {
+
   }
+
+  public DashboardDataProvider:ReplaySubject<DashboardData> = new ReplaySubject();
+
 
   getDashboardData(): Observable<DashboardData> {
     let param = new DashboardDataRequestParam();

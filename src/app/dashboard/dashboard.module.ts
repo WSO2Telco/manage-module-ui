@@ -19,7 +19,6 @@ import {DashboardHelperService} from "./dashboard-helper.service";
         ChartsModule
     ],
     providers: [
-        ApprovalRemoteDataService,
         DashboardRemoteDataService,
         DashboardHelperService],
     declarations: [

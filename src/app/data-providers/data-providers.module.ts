@@ -9,6 +9,6 @@ import {ApprovalRemoteDataService} from "./approval-remote-data.service";
     CommonModule
   ],
   declarations: [],
-  providers : [LoginRemoteDataService,DashboardRemoteDataService,ApprovalRemoteDataService]
+  providers : [LoginRemoteDataService,DashboardRemoteDataService]
 })
 export class DataProvidersModule { }
