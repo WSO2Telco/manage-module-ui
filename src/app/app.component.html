@@ -1,17 +1,21 @@
 <div class="container-fluid">
-  <app-header *ngIf="isLoggedIn"></app-header>
-  <div class="content-container">
-    <div class="menu-container animated slideInLeft" *ngIf="isLoggedIn">
-      <app-main-menu></app-main-menu>
-    </div>
-    <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
-      <div>
-        <div class="col-sm-12 breadcrumbs-bar" *ngIf="isLoggedIn" ><app-breadcrumbs></app-breadcrumbs></div>
-        <div class="col-sm-12"> <router-outlet></router-outlet></div>
-      </div>
+    <app-header *ngIf="isLoggedIn"></app-header>
+    <div class="content-container">
+        <div class="menu-container animated slideInLeft" *ngIf="isLoggedIn">
+            <app-main-menu></app-main-menu>
+        </div>
+        <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
+            <div>
+                <div class="col-sm-12 breadcrumbs-bar" *ngIf="isLoggedIn">
+                    <app-breadcrumbs></app-breadcrumbs>
+                </div>
+                <div class="col-sm-12">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
 
+        </div>
     </div>
-  </div>
 </div>
 <ng2-toasty
         [position]="'bottom-center'"></ng2-toasty>

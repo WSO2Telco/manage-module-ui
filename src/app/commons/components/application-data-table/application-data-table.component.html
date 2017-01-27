@@ -1,5 +1,5 @@
 <div class="table-wrapper">
-    <span class="filter"><i class="material-icons">filter_list</i></span>
+    <span class="filter" tooltip="Filter"><i class="material-icons">filter_list</i></span>
     <div><span class="tbl-cat">{{recordsType.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
     <div class="tbl-header">
         {{tableTitle}}
@@ -34,7 +34,8 @@
                           class="action  reject glyphicon glyphicon-remove-sign"></span>
 
                     <span tooltip="Assign to Me" *ngIf="recordsType.dataCategory  == 'GROUP'"
-                          class="action  assign glyphicon glyphicon-user" (click)="onAction('ASSIGN',item,recordsType)"></span>
+                          class="action  assign glyphicon glyphicon-user"
+                          (click)="onAction('ASSIGN',item,recordsType)"></span>
                 </div>
             </div>
             <div class="expand-container tbl-row animated fadeIn" *ngIf="item.isExpand">
@@ -47,6 +48,7 @@
         </div>
     </div> <!--TABLE END-->
 
-    <div class="text-right" *ngIf="dataSource?.length > recordLimit"><span class="more" (click)="onViewAll()">View All</span></div>
+    <div class="text-right" *ngIf="dataSource?.length > recordLimit"><span class="more"
+                                                                           (click)="onViewAll()">View All</span></div>
 
 </div> <!--WRAPPER END-->

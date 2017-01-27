@@ -22,7 +22,7 @@ export class BreadcrumbsComponent implements OnInit {
         this._router.events
             .filter((event: any) => event instanceof NavigationEnd)
             .subscribe((event: NavigationEnd) => {
-                this.activeView = event.url;
+                this.activeView = event.url.replace('/', '').split('/')
             });
     }
 

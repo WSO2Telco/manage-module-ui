@@ -130,4 +130,16 @@ input,button{
   }
 }
 
+.tooltip-inner{
+  padding: 5px 10px;
+  color: #fff;
+  background-color: $primary-color_light;
+  border-radius: 0px;
+}
+
+.tooltip.top .tooltip-arrow{
+  border-top-color: $primary-color_light;
+}
+
+
 

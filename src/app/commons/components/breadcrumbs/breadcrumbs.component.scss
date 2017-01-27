@@ -3,16 +3,26 @@
 
 :host {
   line-height: 5rem;
+  position: relative;
+  display: block;
+}
 
-  &:after {
-    content: '';
-    display: block;
-    clear: both;
+.url-part{
+  display: inline-block;
+  padding-right: 10px;
+  font-size: 1.3em;
+  font-weight: 300;
+  text-transform: capitalize;
+
+  &:last-child{
+    font-weight: 900;
+    text-transform: uppercase;
   }
 }
 
 .refresh-icon {
-  float: right;
+  position: absolute;
+  right: 0px;
   height: 30px;
   width: 30px;
   background-color: $accent-color;

@@ -49,7 +49,7 @@ const _getApplications = function (request, reply) {
                 id: task.id,
                 assignee: task.assignee,
                 createTime: {
-                    date: (isValidDate && moCreated.format('DD-MM-YYYY') ) || '',
+                    date: (isValidDate && moCreated.format('DD-MMM-YYYY') ) || '',
                     time: (isValidDate && moCreated.format('HH:mm:ss') ) || '',
                     offset: (isValidDate && moCreated.format('Z') ) || '',
                     unformatted: task.createTime
