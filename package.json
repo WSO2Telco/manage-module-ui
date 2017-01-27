@@ -34,6 +34,7 @@
     "good-console": "^6.2.0",
     "hapi": "^16.1.0",
     "inert": "^4.1.0",
+    "material-design-icons": "^3.0.1",
     "ng2-bootstrap": "^1.2.6",
     "ng2-charts": "^1.5.0",
     "ng2-toasty": "^2.3.0",

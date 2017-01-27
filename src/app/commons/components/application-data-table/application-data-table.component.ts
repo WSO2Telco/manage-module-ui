@@ -15,6 +15,7 @@ import {Router} from "@angular/router";
 })
 export class ApplicationDataTableComponent implements OnInit {
 
+
     @Input()
     private tableTitle: string;
 

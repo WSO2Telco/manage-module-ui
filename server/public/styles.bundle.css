@@ -3489,6 +3489,43 @@
 #toasty .toast.toasty-theme-material.toasty-type-warning {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NTc3MiwgMjAxNC8wMS8xMy0xOTo0NDowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6REZBRTRCMkYzMjMxMTFFNUI4QjZEQkFEN0Q5RUExNzAiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6REZBRTRCMzAzMjMxMTFFNUI4QjZEQkFEN0Q5RUExNzAiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpERkFFNEIyRDMyMzExMUU1QjhCNkRCQUQ3RDlFQTE3MCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpERkFFNEIyRTMyMzExMUU1QjhCNkRCQUQ3RDlFQTE3MCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Po80HzoAAAIcSURBVHja7Fm7agJBFHWX2NhY2doFDAwBIa3kA5La9H7AdtrZWohNPmP62KQLtgEhBCKks7WysRHc3IEr8bGPOztzZ3dhDxzUndGZs2d29p7VC8OwVmZ4lYBKQN4CpEhqfcLXeWyPl2+j4W8YT04dOMP378A9xyA+o4AA2EEGXINwCWgBxyefx3isNAImwObJ5yYeK4WALnAQcXyAbYUW4AFfY37XxzavyAL6wF5Cew/7FFJAAzgl9Jti38IJGALbhH5t7FsoAWpSI43+I6JYZwJ0lwV1uTkRkPXCTLvgHRRzUqgT8Gmwvy+BD1DQHfJywPTmFHfTc+CAFKo8+LVQ42yAt+DC1rUDaQWad0Fq4efAASlUifyFNX+SgFMkDaSywj24sHLlwCxl8ibhh9kBKVRMfCMWdlQHjngGF+Z8AqSo49LpMAlY4VLacy2hgDj5rNCOn3QHpGjhttnUyAa6DihscVvd2HZgojF5E2jFT5oDUnSxZPBrbnDAEmNpLkAKtRQ+bBRemlgAH0FEaLqE+jlMnlzlJjsgharbf2yFjwxYA+/AhV1WB4YGk6fWQkbxM94BKdp49hsGArJso5fYoQtrXQesPj3getoR7YAUPdx5TB5C2XLg+F21Iy3SBZjHRC5Exk+fISZyITJ+njtgLyZy4Sp++poxMW9cxc9/B2gxsQg4i58+Y0zkwln8rP5mrQRUAioB+eJPgAEAEga0oSjgsNgAAAAASUVORK5CYII=") !important;
 }
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url(MaterialIcons-Regular.woff2) format('woff2'),
+       url(MaterialIcons-Regular.woff) format('woff'),
+       url(MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  -webkit-font-feature-settings: 'liga';
+          font-feature-settings: 'liga';
+}
 /* You can add global styles to this file, and also import other style files */
 .checkbox-lbl {
   display: inline-block;

@@ -9,8 +9,37 @@
   border: solid 1px $gray_lighter;
   background-color: white;
   min-height: 425px;
+  position: relative;
+
+  .tbl-cat{
+    font-weight: 600;
+    position: absolute;
+    left: 0px;
+    top: 10px;
+    padding: 4px 10px;
+    color: #9a9a9a;
+  }
+
+  .filter{
+    position: absolute;
+    right: 10px;
+    top:30px;
+    width: 30px;
+    text-align: center;
+    height: 30px;
+    padding-top: 2px;
+    color: $gray;
+    @include transition(all 0.2s ease-in);
+    cursor: pointer;
+
+    &:hover{
+      color: black;
+      background-color: $secondary_color;
+    }
+  }
 
   .tbl-header{
+    margin-top: 22px;
     font-weight: 600;
     font-size: 1.3em;
     padding: 5px 0px 15px;

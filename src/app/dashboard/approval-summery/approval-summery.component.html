@@ -3,7 +3,7 @@
                       [totalCount]="appDetailsSummery?.totalAppCreations"
                       [myCount]="appDetailsSummery?.appCreationsForUser"
                       [groupCount]="appDetailsSummery?.appCreationsForGroup"
-                      iconClass="glyphicon-gift"
+                      iconClass="apps"
                       name="Application Creations"
                       (click)="onCountClick('APPLICATIONS')"></app-approval-count>
 
@@ -11,7 +11,7 @@
                       [totalCount]="appDetailsSummery?.totalSubCreations"
                       [myCount]="appDetailsSummery?.subCreationsForUser"
                       [groupCount]="appDetailsSummery?.subCreationsForGroup"
-                      iconClass="glyphicon-hand-right"
+                      iconClass="subscriptions"
                       name="Subscription Creations"
                       (click)="onCountClick('SUBSCRIPTIONS')"></app-approval-count>
 </div>

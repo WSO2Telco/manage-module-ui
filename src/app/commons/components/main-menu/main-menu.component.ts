@@ -14,10 +14,10 @@ export class MainMenuComponent implements OnInit {
     private isExpand: boolean = false;
 
     private menuSource: MenuItem[] = [
-        {id: 1, route: '/home', name: 'Home', iconName: 'glyphicon-home'},
-        {id: 2, route: '/approvals/applications', name: 'Approve Applications', iconName: 'glyphicon-gift'},
-        {id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'glyphicon-hand-right'},
-        {id: 4, route: '/history', name: 'Approval History', iconName: 'glyphicon-hourglass'}
+        {id: 1, route: '/home', name: 'Home', iconName: 'home'},
+        {id: 2, route: '/approvals/applications', name: 'Approve Applications', iconName: 'apps'},
+        {id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'subscriptions'},
+        {id: 4, route: '/history', name: 'Approval History', iconName: 'history'}
     ];
 
     constructor(private _appCommonService: AppCommonService,
