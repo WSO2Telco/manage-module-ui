@@ -61,5 +61,12 @@
     border-radius: 0px;
     height: $main-breadcrumbs-height;
     line-height: 2.2em;
+    background-color: white;
+    position: fixed;
+    z-index: 100;
+  }
+
+  .content-div{
+    margin-top: 40px;
   }
 }

@@ -18,8 +18,8 @@
             <div class="tbl-row" [ngClass]="{'modified' : item.isModified}" *ngIf="!!!recordLimit || i < recordLimit">
                 <div class="tbl-cell">
                     <span tooltip="More Info"
-                          class="action expand glyphicon glyphicon-chevron-down"
-                          (click)="item.isExpand = !item.isExpand"></span>
+                          class="action expand material-icons"
+                          (click)="item.isExpand = !item.isExpand">expand_more</span>
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
@@ -27,15 +27,15 @@
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="recordsType.dataCategory == 'USER'"
-                          class="action  approve glyphicon glyphicon-ok-sign"
-                          (click)="onAction('APPROVE',item,recordsType)"></span>
+                          class="action  approve material-icons"
+                          (click)="onAction('APPROVE',item,recordsType)">check</span>
 
                     <span tooltip="Reject" *ngIf="recordsType.dataCategory  == 'USER'"
-                          class="action  reject glyphicon glyphicon-remove-sign"></span>
+                          class="action  reject material-icons">close</span>
 
                     <span tooltip="Assign to Me" *ngIf="recordsType.dataCategory  == 'GROUP'"
-                          class="action  assign glyphicon glyphicon-user"
-                          (click)="onAction('ASSIGN',item,recordsType)"></span>
+                          class="action  assign material-icons"
+                          (click)="onAction('ASSIGN',item,recordsType)">assignment_ind</span>
                 </div>
             </div>
             <div class="expand-container tbl-row animated fadeIn" *ngIf="item.isExpand">
