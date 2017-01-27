@@ -15,6 +15,7 @@
               class="my"
               [recordsType]="{dataCategory:'USER',dataType:'APPLICATION'}"
               [recordLimit]="5"
+              moreLinkPath="/approvals/applications"
               tableTitle="MY APPLICATIONS"
               [dataSource]="myApplications"></application-data-table>
     </div>
@@ -23,6 +24,7 @@
       <application-data-table
               class="my"
               [recordLimit]="5"
+              moreLinkPath="/approvals/subscriptions"
               [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
               tableTitle="MY SUBSCRIPTIONS"
               [dataSource]="myAppSubscriptionTask"></application-data-table>
@@ -35,6 +37,7 @@
       <application-data-table
               [recordsType]="{dataCategory:'GROUP',dataType:'APPLICATION'}"
               [recordLimit]="5"
+              moreLinkPath="/approvals/applications"
               tableTitle="All APPLICATIONS"
               [dataSource]="allApplications"></application-data-table>
     </div>
@@ -43,6 +46,7 @@
       <application-data-table
               [recordsType]="{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}"
               [recordLimit]="5"
+              moreLinkPath="/approvals/subscriptions"
               tableTitle="All SUBSCRIPTIONS"
               [dataSource]="allSubscriptions"></application-data-table>
     </div>

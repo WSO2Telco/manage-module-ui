@@ -6,6 +6,7 @@ import {
 import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../services/message.service";
 import {TableDataType} from "../../models/common-data-models";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'application-data-table',
@@ -26,21 +27,31 @@ export class ApplicationDataTableComponent implements OnInit {
     @Input()
     private recordsType: TableDataType;
 
+    @Input()
+    private moreLinkPath: string;
+
     constructor(private approvalService: ApprovalRemoteDataService,
-                private message: MessageService) {
+                private message: MessageService,
+                private _router: Router) {
     }
 
     ngOnInit() {
     }
 
-    onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType) {
+    onViewAll(): void {
+        if(!!this.moreLinkPath){
+            this._router.navigate([this.moreLinkPath]);
+        }
+    }
+
+    onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
         switch (actionType) {
             case 'ASSIGN' : {
                 this.approvalService.assignApplicationTaskToUser(appTask.id).subscribe(
                     () => {
-                        if(typeInfo.dataType == "APPLICATION"){
+                        if (typeInfo.dataType == "APPLICATION") {
                             this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                        }else if(typeInfo.dataType == "SUBSCRIPTION"){
+                        } else if (typeInfo.dataType == "SUBSCRIPTION") {
                             this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
                         }
                         this.approvalService.getAllTasks();
@@ -94,7 +105,7 @@ export class ApplicationDataTableComponent implements OnInit {
                     );
                 };
 
-                let approveActions ={};
+                let approveActions = {};
                 approveActions['APPLICATION'] = approveApplicationActions;
                 approveActions['SUBSCRIPTION'] = approveSubscriptionActions;
 
