@@ -3,7 +3,7 @@ import {Headers, RequestOptions, Response, Http} from "@angular/http";
 import {Observable, Subject, ReplaySubject} from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
-    AssignApplicationTaskParam, ApproveApplicationCreationTaskParam
+    AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam
 } from "../commons/models/application-data-models";
 
 @Injectable()
@@ -13,7 +13,7 @@ export class ApprovalRemoteDataService {
     public GroupApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
 
     public MySubscriptionTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
-    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new Subject();
+    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
 
     private modifiedApplicationTaskIDs: number[] = new Array();
 
@@ -25,7 +25,8 @@ export class ApprovalRemoteDataService {
     private apiEndpoints: Object = {
         search: this.apiContext + '/applications/search',
         assign: this.apiContext + '/applications/assign',
-        approveCreation: this.apiContext + '/applications/approve/creation',
+        approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
+        approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
     };
 
     constructor(private http: Http) {
@@ -123,10 +124,15 @@ export class ApprovalRemoteDataService {
     }
 
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
-        return this.http.post(this.apiEndpoints['approveCreation'], param, this.options)
+        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
+    }
 
+    approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
+        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message))
     }
 
     getAllTasks():void{

@@ -1,10 +1,10 @@
 export class DashboardData {
-  appCreationsForUser: number;
-  appCreationsForGroup: number;
-  totalAppCreations: number;
-  subCreationsForUser: number;
-  subCreationsForGroup: number;
-  totalSubCreations: number;
+  appCreationsForUser: number = 0;
+  appCreationsForGroup: number = 0;
+  totalAppCreations: number = 0;
+  subCreationsForUser: number = 0;
+  subCreationsForGroup: number = 0;
+  totalSubCreations: number = 0;
 }
 
 export class DashboardDataRequestParam{

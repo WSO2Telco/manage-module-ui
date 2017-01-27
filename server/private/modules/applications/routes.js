@@ -18,8 +18,13 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/api/applications/approve/creation',
+        path: '/api/applications/approve/application/creation',
         handler: ApplicationService.approveApplicationCreation
+    },
+    {
+        method: 'POST',
+        path: '/api/applications/approve/subscription/creation',
+        handler: ApplicationService.approveSubscriptionCreation
     }
 
 ];

@@ -25,6 +25,7 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit() {
+   // alert(this._router.routerState);
     this.selectedMenu = this.menuSource[0];
     this._appCommonService.menuToggleStream.subscribe((flag) => this.isExpand = flag);
   }

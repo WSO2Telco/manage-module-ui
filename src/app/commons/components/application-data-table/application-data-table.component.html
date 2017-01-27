@@ -1,0 +1,71 @@
+<div class="table-wrapper">
+    <div class="tbl-header">
+        {{tableTitle}}
+    </div>
+
+    <!--<div class="div-tbl">
+        <div class="dtb-row header">
+            <div class="dtb-cell">ID</div>
+            <div class="dtb-cell">APP NAME</div>
+            <div class="dtb-cell">USER</div>
+            <div class="dtb-cell">CREATED ON</div>
+            <div class="dtb-cell text-right pad-r-15-im">ACTION</div>
+        </div>
+       &lt;!&ndash; <div style="clear: both"></div>&ndash;&gt;
+        <div class="dtb-row">
+            <div class="dtb-cell">ONE</div>
+            <div class="dtb-cell">2</div>
+            <div class="dtb-cell">O3NE</div>
+            <div class="dtb-cell">ONE</div>
+            <div class="dtb-cell">ONE</div>
+        </div>
+       &lt;!&ndash; <div style="clear: both"></div>&ndash;&gt;
+
+    </div>-->
+
+    <div class="table">
+
+        <div class="tbl-row header">
+            <div class="tbl-cell">ID</div>
+            <div class="tbl-cell">APP NAME</div>
+            <div class="tbl-cell">USER</div>
+            <div class="tbl-cell">CREATED ON</div>
+            <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
+        </div>
+
+        <ng-container *ngFor="let item of dataSource; let i=index">
+            <div class="tbl-row" [ngClass]="{'modified' : item.isModified}" *ngIf="!!!recordLimit || i < recordLimit">
+                <div class="tbl-cell">
+                    <span tooltip="More Info"
+                          class="action expand glyphicon glyphicon-chevron-down"
+                          (click)="item.isExpand = !item.isExpand"></span>
+                    {{item.id}}
+                </div>
+                <div class="tbl-cell">{{item.applicationName}}</div>
+                <div class="tbl-cell">{{item.userName}}</div>
+                <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
+                <div class="tbl-cell text-right">
+                    <span tooltip="Approve" *ngIf="recordsType.dataCategory == 'USER'"
+                          class="action  approve glyphicon glyphicon-ok-sign"
+                          (click)="onAction('APPROVE',item,recordsType)"></span>
+
+                    <span tooltip="Reject" *ngIf="recordsType.dataCategory  == 'USER'"
+                          class="action  reject glyphicon glyphicon-remove-sign"></span>
+
+                    <span tooltip="Assign to Me" *ngIf="recordsType.dataCategory  == 'GROUP'"
+                          class="action  assign glyphicon glyphicon-user" (click)="onAction('ASSIGN',item,recordsType)"></span>
+                </div>
+            </div>
+            <div class="expand-container tbl-row animated fadeIn" *ngIf="item.isExpand">
+                <!-- <div class="more-content"></div>-->
+            </div>
+        </ng-container>
+
+        <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">
+            <span class="no-rec">No Records..</span>
+        </div>
+    </div> <!--TABLE END-->
+
+    <div class="text-right" *ngIf="dataSource?.length > recordLimit"><span class="more">View All</span></div>
+
+</div> <!--WRAPPER END-->

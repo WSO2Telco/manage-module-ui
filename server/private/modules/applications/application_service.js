@@ -6,7 +6,7 @@ const applicationREST = require('./application_tasks_rest_service');
 const applicationDetailsREST = require('./application_details_rest_service');
 const applicationAssignREST = require('./application_assign_rest_service');
 const applicationCompleteRest = require('./application_task_complete_rest_service');
-const APP_CONSTANT =require('./appication_const');
+const APP_CONSTANT = require('./appication_const');
 
 
 /**
@@ -59,8 +59,8 @@ const _getApplications = function (request, reply) {
                 applicationName: details['applicationName'] || '',
                 applicationDescription: details['description'] || details['applicationDescription'] || '',
                 operators: details['operators'],
-                tier: details['tier'],
-                tiersStr: details['tiersStr'],
+                tier: details['tier'] || details['tierName'],
+                tiersStr: details['tiersStr'] || details['apiTiers'],
                 userName: details['userName'],
                 apiVersion: details['apiVersion'],
                 apiContext: details['apiContext'],
@@ -161,42 +161,41 @@ const _getAppStat = function (request, reply) {
     };
 
 
-    if (!requestValidator(request)) {
-        reply(boom.badRequest(Messages['BAD_REQUEST']));
-    }
-
-    //Application Creations for user
-    promises.push(applicationREST.Invoke({
-        assignee: param.assignee,
-        candidateGroups: null,
-        processType: 'APPLICATION_CREATION'
-    }));
-
-    //Application Creations for Group
-    promises.push(applicationREST.Invoke({
-        assignee: null,
-        candidateGroups: param.candidateGroups,
-        processType: 'APPLICATION_CREATION'
-    }));
-
-    //Subscription Creations for User
-    promises.push(applicationREST.Invoke(
-        {
+    if (requestValidator(request)) {
+        //Application Creations for user
+        promises.push(applicationREST.Invoke({
             assignee: param.assignee,
             candidateGroups: null,
-            processType: 'SUBSCRIPTION_CREATION'
+            processType: 'APPLICATION_CREATION'
         }));
 
-    //Subscription Creations for Group
-    promises.push(applicationREST.Invoke(
-        {
+        //Application Creations for Group
+        promises.push(applicationREST.Invoke({
             assignee: null,
             candidateGroups: param.candidateGroups,
-            processType: 'SUBSCRIPTION_CREATION'
+            processType: 'APPLICATION_CREATION'
         }));
 
-    Q.all(promises).then(onSuccess, onError);
+        //Subscription Creations for User
+        promises.push(applicationREST.Invoke(
+            {
+                assignee: param.assignee,
+                candidateGroups: null,
+                processType: 'SUBSCRIPTION_CREATION'
+            }));
 
+        //Subscription Creations for Group
+        promises.push(applicationREST.Invoke(
+            {
+                assignee: null,
+                candidateGroups: param.candidateGroups,
+                processType: 'SUBSCRIPTION_CREATION'
+            }));
+
+        Q.all(promises).then(onSuccess, onError);
+    } else {
+        reply(boom.badRequest(Messages['BAD_REQUEST']));
+    }
 };
 
 /**
@@ -221,11 +220,13 @@ const _assignApplicationTaskToUser = function (request, reply) {
         reply(error);
     };
 
-    if (!validateRequest(request)) {
+    if (validateRequest(request)) {
+        applicationAssignREST.Invoke(request.payload).then(onAssignSuccess, onAssignFail);
+    } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
 
-    applicationAssignREST.Invoke(request.payload).then(onAssignSuccess, onAssignFail);
+
 };
 
 
@@ -245,22 +246,57 @@ const _approveApplicationCreation = function (request, reply) {
         return false;
     };
 
-    let onAproveSuccess = function (result) {
+    let onApproveSuccess = function (result) {
         reply(result);
     };
 
     let onApproveError = function (error) {
-      reply(error);
+        reply(error);
     };
 
     if (validateRequest(request)) {
+        let param = request.payload;
+        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+
+        applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
+    } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
 
-    let param = request.payload;
-    param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
 
-    applicationCompleteRest.Invoke(param).then(onAproveSuccess,onApproveError);
+};
+
+/**
+ * Approve Subscriptioin creation task handler
+ * @private
+ */
+const _approveSubscriptionCreation = function (request, reply) {
+    let validateRequest = function (request) {
+        let data = request.payload;
+        if (data && data.taskId && data.selectedTier && data.status && data.description) {
+            return true;
+        }
+        return false;
+    };
+
+    let onApproveSuccess = function (result) {
+        reply(result);
+    };
+
+    let onApproveError = function (error) {
+        reply(error);
+    };
+
+    if (validateRequest(request)) {
+        let param = request.payload;
+        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+
+        //Invoke the Same Service as Application Creation approval coz same backend implementation
+        //If requirement change, plug another Invoker here
+        applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
+    } else {
+        reply(boom.badRequest(Messages['BAD_REQUEST']));
+    }
 };
 
 
@@ -269,7 +305,8 @@ function applicationService() {
         searchApplicationsForApproval: _getApplications,
         getApplicationStatistics: _getAppStat,
         assignApplicationTaskToUser: _assignApplicationTaskToUser,
-        approveApplicationCreation: _approveApplicationCreation
+        approveApplicationCreation: _approveApplicationCreation,
+        approveSubscriptionCreation: _approveSubscriptionCreation
     };
 }
 

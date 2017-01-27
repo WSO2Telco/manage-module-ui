@@ -32,42 +32,33 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
 
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(
-            (response: ApplicationTask[]) => {
-                this.myApplications = this.dashboardHelper.updateModifiedApplications(response);
-            },
-            (error) => this.message.error(error)
-        );
+            (response: ApplicationTask[]) => this.myApplications = this.dashboardHelper.updateModifiedApplications(response),
+            (error) => this.message.error(error));
 
         this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
-            (response: ApplicationTask[]) => {
-                this.allApplications = response
-            },
-            (error) => this.message.error(error)
-        );
+            (response: ApplicationTask[]) => this.allApplications = response,
+            (error) => this.message.error(error));
 
         this.approvalService.MySubscriptionTasksProvider.subscribe(
-            (response: ApplicationTask[]) => {
-                this.myAppSubscriptionTask = response;
-            },
-            (error) => this.message.error(error)
-        );
+            (response: ApplicationTask[]) => this.myAppSubscriptionTask = this.dashboardHelper.updateModifiedApplications(response),
+            (error) => this.message.error(error));
 
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
-            (response) => {
-                this.allSubscriptions = response;
-            },
-            (error) => {
-                this.message.error(error)
-            });
+            (response) => this.allSubscriptions = response,
+            (error) => this.message.error(error));
+
+        this.dashboardService.DashboardDataProvider.subscribe(
+            (response) => this.dashboardData = response,
+            (error) => this.message.error(error));
 
         this.approvalService.getAllTasks();
 
-        this.dashboardService.getDashboardData().subscribe(
-            (response: DashboardData) => {
-                this.dashboardData = response
-            },
-            (error) => this.message.error(error)
-        )
+        /*this.dashboardService.getDashboardData().subscribe(
+         (response: DashboardData) => {
+         this.dashboardData = response
+         },
+         (error) => this.message.error(error)
+         )*/
     }
 
 }

@@ -15,6 +15,13 @@ export class MessageService {
         theme: 'material'
     };
 
+    public APPROVAL_MESSAGES = {
+        APPLICATION_CREATION_ASSIGN_SUCCESS : 'Application creation task successfully assigned',
+        SUBSCRIPTION_CREATION_ASSIGN_SUCCESS : 'Subscription creation task successfully assigned',
+        APP_CREATION_APPROVE_SUCCESS : 'Application successfully approved',
+        APP_SUBSCRIPTION_APPROVE_SUCCESS : 'Application subscription successfully approved'
+    };
+
 
     success(message: string, title?: string) {
         this.toast.success(Object.assign({}, this.toastOptions, {title, msg: message}));

@@ -1,0 +1,135 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/mixing";
+
+:host{
+  display: block;
+}
+.table-wrapper{
+  padding: 10px;
+  border: solid 1px $gray_lighter;
+  background-color: white;
+  min-height: 425px;
+
+  .tbl-header{
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 5px 0px 15px;
+  }
+
+  .table{
+    display: table;
+    width: 100%;
+
+    @media only screen and (max-width : 768px) {
+      display: block;
+    }
+
+    .tbl-row{
+      display: table-row;
+      background-color: #f6f6f6;
+
+      &:nth-of-type(odd){
+        background-color: white;
+      }
+
+      &.header{
+        background-color: #7788aa;
+        font-weight:600;
+        color: white;
+      }
+
+      @media only screen and (max-width : 768px) {
+        display: block;
+      }
+
+      .tbl-cell{
+        display: table-cell;
+        padding: 10px 10px;
+        @media only screen and (max-width : 768px) {
+          display: block;
+        }
+      }
+
+      &.modified{
+        background-color: #ffffcc;
+      }
+    }
+  }
+
+  .time{
+    display: block;
+    font-size:0.8em;
+  }
+
+  .action{
+    width: 30px;
+    height: 30px;
+    border: solid 1px #c7c7c7;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 29px;
+    margin: 2px 5px;
+    cursor: pointer;
+    color: $gray;
+
+    @include transition(all 0.2s ease-in);
+
+    &:hover{
+      background-color: $secondary_color;
+      color: black;
+    }
+
+    &.expand{
+      border : none;
+      font-size: 0.9em;
+    }
+
+  }
+
+  .no-rec-row{
+    position: relative;
+
+    .no-rec{
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+      width: 100px;
+      padding-top: 150px;
+      color: $gray;
+    }
+  }
+
+  .expand-container{
+    height: 200px;
+    background-color: gray !important;
+
+    .more-content{
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top : 0px;
+      bottom: 0px;
+    }
+
+  }
+
+  .div-tbl{
+    background-color: lightyellow;
+    .dtb-row{
+      .dtb-cell{
+        float: left;
+        width: 20%;
+        border: solid 1px #cccccc;
+      }
+    }
+
+    &:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
+
+}
