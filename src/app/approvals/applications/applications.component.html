@@ -1,9 +1,17 @@
 <div class="animated fadeInUp row">
     <div class="col-sm-6">
-        <application-data-table></application-data-table>
+        <application-data-table
+                class="my"
+                [recordsType]="{dataCategory:'USER',dataType:'APPLICATION'}"
+                tableTitle="MY APPLICATIONS"
+                [dataSource]="myApplications"></application-data-table>
     </div>
     <div class="col-sm-6">
-        <application-data-table></application-data-table>
+        <application-data-table
+                class="group"
+                [recordsType]="{dataCategory:'GROUP',dataType:'APPLICATION'}"
+                tableTitle="All APPLICATIONS"
+                [dataSource]="allApplications"></application-data-table>
     </div>
 </div>
 

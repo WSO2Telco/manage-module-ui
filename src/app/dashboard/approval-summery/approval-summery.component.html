@@ -4,12 +4,14 @@
                       [myCount]="appDetailsSummery?.appCreationsForUser"
                       [groupCount]="appDetailsSummery?.appCreationsForGroup"
                       iconClass="glyphicon-gift"
-                      name="Application Creations"></app-approval-count>
+                      name="Application Creations"
+                      (click)="onCountClick('APPLICATIONS')"></app-approval-count>
 
   <app-approval-count class="col-sm-6 subs"
                       [totalCount]="appDetailsSummery?.totalSubCreations"
                       [myCount]="appDetailsSummery?.subCreationsForUser"
                       [groupCount]="appDetailsSummery?.subCreationsForGroup"
                       iconClass="glyphicon-hand-right"
-                      name="Subscription Creations"></app-approval-count>
+                      name="Subscription Creations"
+                      (click)="onCountClick('SUBSCRIPTIONS')"></app-approval-count>
 </div>

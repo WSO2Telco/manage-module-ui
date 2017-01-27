@@ -11,8 +11,16 @@ application-data-table{
 }
 
 
-:host /deep/ application-data-table.my .header{
-  background-color: #445566 !important;
+:host /deep/ application-data-table.my {
+  .tbl-header{
+    color: $accent-color;
+    font-weight: 900;
+  }
+
+  .header{
+    background-color: $accent-color !important;
+  }
+
 }
 
 
