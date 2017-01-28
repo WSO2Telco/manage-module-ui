@@ -23,7 +23,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
-                <div class="tbl-cell">{{item.userName}}</div>
+                <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="recordsType.dataCategory == 'USER'"
@@ -38,9 +38,15 @@
                           (click)="onAction('ASSIGN',item,recordsType)">assignment_ind</span>
                 </div>
             </div>
-            <div class="expand-container tbl-row animated fadeIn" *ngIf="item.isExpand">
-                <!-- <div class="more-content"></div>-->
+            <div class="expand-container tbl-row" [ngClass]="{'open':item.isExpand}" *ngIf="item.isExpand">
+                <div class="more-details animated fadeInUp" style="animation-delay: 0.2s">
+                    <div class="row">
+                        <div class="col-xs-6">ONE</div>
+                        <div class="col-xs-6">ONE</div>
+                    </div>
+                </div>
             </div>
+
         </ng-container>
 
         <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">

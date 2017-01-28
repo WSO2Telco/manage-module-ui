@@ -34,6 +34,10 @@
   margin-top: 6px;
   cursor: pointer;
 
+  @media screen and (max-width: 768px) {
+    right: 0px;
+  }
+
   @include transition(all 0.2s ease-in);
 
   &:hover{

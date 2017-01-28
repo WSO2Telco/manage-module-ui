@@ -6,7 +6,7 @@
         </div>
         <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
             <div>
-                <div class="col-sm-12 breadcrumbs-bar" *ngIf="isLoggedIn">
+                <div class="col-sm-12 breadcrumbs-bar"  [ngClass]="{'menu-expand':isMenuExpanded}" *ngIf="isLoggedIn">
                     <app-breadcrumbs></app-breadcrumbs>
                 </div>
                 <div class="col-sm-12 content-div">

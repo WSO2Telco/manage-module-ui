@@ -64,6 +64,14 @@
     background-color: white;
     position: fixed;
     z-index: 100;
+    left: $main-menu-default-width;
+    right: 0px;
+    min-width: $app-min-width - $main-menu-default-width;
+    @include transition(width 0.3s ease-in-out);
+
+    &.menu-expand{
+      left: $main-menu-expanded-width;
+    }
   }
 
   .content-div{

@@ -131,8 +131,13 @@
   }
 
   .expand-container{
-    height: 200px;
-    background-color: gray !important;
+    height: 0px;
+    position: relative;
+    @include transition(all 0.4s ease-in-out);
+
+    &.open{
+      height: 200px;
+    }
 
     .more-content{
       position: absolute;
@@ -159,6 +164,14 @@
       display: block;
       clear: both;
     }
+  }
+
+  .more-details{
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    height: 100px;
+    background-color: green;
   }
 
 

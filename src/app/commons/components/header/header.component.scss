@@ -35,8 +35,25 @@
 .navbar-brand{
   float: right;
   padding-left: 25px;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: $accent-color;
+  position: relative;
+
+  .logo,.name{
+    float: left;
+  }
+
+  .logo{
+    top: 0px;
+    img{
+      height: 30px;
+      margin-top: -6px;
+    }
+  }
+
+  .name{
+    margin-left: 10px;
+  }
 
   &:hover,&:focus,&:active{
     color: $accent-color;
@@ -44,7 +61,9 @@
 
   .man {
     color: #8A98A0;
-    font-weight: 300;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 4px;
   }
 }
 
