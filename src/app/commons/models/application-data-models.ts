@@ -19,6 +19,11 @@ export class ApplicationTask {
     userName: string;
     isModified: boolean;
     status : string;
+    comment : string;
+
+    toString(){
+        return '' + this.id + ','+this.applicationName + ',' + this.applicationDescription +','+ this.comment;
+    }
 }
 
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
@@ -42,6 +47,10 @@ export class ApproveApplicationCreationTaskParam{
     selectedTier : string;
     status : 'APPROVED' | 'REJECTED';
     description : string;
+
+    toString(){
+        return this.taskId + ', '+this.description + ', '+ this.selectedTier + ', ' + this.status;
+    }
 }
 
 export  class ApproveSubscriptionCreationTaskParam{

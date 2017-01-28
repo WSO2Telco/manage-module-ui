@@ -45,6 +45,10 @@ export class ApplicationDataTableComponent implements OnInit {
         }
     }
 
+    onOptionChange(event,item){
+        item.tier = event.target.value;
+    }
+
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
         switch (actionType) {
             case 'ASSIGN' : {
@@ -67,9 +71,10 @@ export class ApplicationDataTableComponent implements OnInit {
             case 'APPROVE' : {
 
                 let approveApplicationActions = () => {
+
                     let param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
                     param.taskId = appTask.id;
-                    param.description = appTask.applicationDescription;
+                    param.description = appTask.toString();
                     param.selectedTier = appTask.tier;
                     param.status = "APPROVED";
                     param.user = 'admin';

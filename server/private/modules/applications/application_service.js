@@ -45,6 +45,9 @@ const _getApplications = function (request, reply) {
                 isValidDate = moCreated.isValid();
             }
 
+            let getTiers = (tierString) => tierString.split(',').filter((item) => !!item);
+
+
             return {
                 id: task.id,
                 assignee: task.assignee,
@@ -60,7 +63,7 @@ const _getApplications = function (request, reply) {
                 applicationDescription: details['description'] || details['applicationDescription'] || '',
                 operators: details['operators'],
                 tier: details['tier'] || details['tierName'],
-                tiersStr: details['tiersStr'] || details['apiTiers'],
+                tiersStr: getTiers(details['tiersStr'] || details['apiTiers']),
                 userName: details['userName'],
                 apiVersion: details['apiVersion'],
                 apiContext: details['apiContext'],

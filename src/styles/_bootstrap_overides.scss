@@ -1,3 +1,5 @@
+@import "colors";
+
 .popover{
   border-radius: 0px;
 
@@ -18,4 +20,26 @@
 .dropdown-menu{
   border-radius: 0px;
   box-shadow: none;
+}
+
+
+.form-control{
+  border-radius: 0px;
+}
+
+.btn{
+  margin-top: 1px;
+  font-weight: 600;
+  padding: 10px 20px!important;
+  outline: 0!important;
+  box-shadow: none!important;
+}
+
+.btn-primary{
+  background-color: $secondary_color;
+  border-color: #29A2AD;
+
+  &:hover{
+    background-color: $primary-color_light;
+  }
 }
