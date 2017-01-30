@@ -15,7 +15,7 @@ export class ApplicationsComponent implements OnInit {
     private allApplications: ApplicationTask[];
 
     constructor(private message: MessageService,
-                private approvalHelperService:ApprovalHelperService,
+                private approvalHelperService: ApprovalHelperService,
                 private approvalService: ApprovalRemoteDataService) {
     }
 
@@ -42,12 +42,12 @@ export class ApplicationsComponent implements OnInit {
         this.approvalService.getUserGroupApplicationTasks();
     }
 
-    onAssignTaskHandler(event:ApprovalEvent):void{
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType,event.task.id);
+    onAssignTaskHandler(event: ApprovalEvent): void {
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
     }
 
-    onApproveRejectHandler(event:ApprovalEvent):void{
-        this.approvalHelperService.approveRejectTask(event.dataType,event.task,event.status);
+    onApproveRejectHandler(event: ApprovalEvent): void {
+        this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
     }
 
 }

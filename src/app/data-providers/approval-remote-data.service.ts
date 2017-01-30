@@ -32,6 +32,27 @@ export class ApprovalRemoteDataService {
     constructor(private http: Http) {
     }
 
+    private updateModifiedTask(result: ApplicationTask[], modified: number[]) {
+        if(!!result){
+            return result.map((task: ApplicationTask) => {
+                task.isModified = modified.indexOf(task.id) >= 0 ? true : false;
+                return task;
+            }).sort((taskOne, taskTwo) => {
+                if (taskOne.isModified && !taskTwo.isModified) {
+                    return -1;
+                }
+
+                if (!taskOne.isModified && taskTwo.isModified) {
+                    return 1;
+                }
+
+                return 0;
+            });
+        }else{
+            return [];
+        }
+    }
+
     getUserApplicationTasks(): void {
         //TODO GET USER FROM AUTH SERVICE
         const param: ApplicationTaskSearchParam = {
@@ -45,7 +66,7 @@ export class ApprovalRemoteDataService {
             .map((response: Response) => response.json())
             .subscribe(
                 (result: ApplicationTask[]) => {
-                    this.MyApplicationCreationTasksProvider.next(result)
+                    this.MyApplicationCreationTasksProvider.next(this.updateModifiedTask(result,this.modifiedApplicationTaskIDs))
                 },
                 (error: Response) => Observable.throw(error.json().message)
             )
@@ -81,7 +102,7 @@ export class ApprovalRemoteDataService {
             .map((response: Response) => response.json())
             .subscribe(
                 (result) => {
-                    this.MySubscriptionTasksProvider.next(result)
+                    this.MySubscriptionTasksProvider.next(this.updateModifiedTask(result,this.modifiedApplicationTaskIDs))
                 },
                 (error: Response) => Observable.throw(error.json().message)
             );
@@ -98,7 +119,7 @@ export class ApprovalRemoteDataService {
         this.http.post(this.apiEndpoints['search'], param, this.options)
             .map((response: Response) => response.json())
             .subscribe(
-                (result:ApplicationTask[])=>{
+                (result: ApplicationTask[]) => {
                     this.GroupSubscriptionTasksProvider.next(result);
                 },
                 (error: Response) => Observable.throw(error.json().message)
@@ -135,7 +156,7 @@ export class ApprovalRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message))
     }
 
-    getAllTasks():void{
+    getAllTasks(): void {
         this.getUserApplicationTasks();
         this.getUserAppSubscriptionTasks();
         this.getUserGroupAppSubscriptionTask();
