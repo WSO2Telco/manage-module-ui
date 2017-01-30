@@ -5,6 +5,7 @@ import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam
 } from "../commons/models/application-data-models";
+import {AuthenticationService} from "../commons/services/authentication.service";
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -29,11 +30,11 @@ export class ApprovalRemoteDataService {
         approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
     };
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private authService: AuthenticationService) {
     }
 
     private updateModifiedTask(result: ApplicationTask[], modified: number[]) {
-        if(!!result){
+        if (!!result) {
             return result.map((task: ApplicationTask) => {
                 task.isModified = modified.indexOf(task.id) >= 0 ? true : false;
                 return task;
@@ -48,96 +49,105 @@ export class ApprovalRemoteDataService {
 
                 return 0;
             });
-        }else{
+        } else {
             return [];
         }
     }
 
     getUserApplicationTasks(): void {
-        //TODO GET USER FROM AUTH SERVICE
-        const param: ApplicationTaskSearchParam = {
-            assignee: 'admin',
-            size: 100,
-            processType: "APPLICATION_CREATION",
-            candidateGroups: null
-        };
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        if (!!loginInfo) {
+            const param: ApplicationTaskSearchParam = {
+                assignee: loginInfo.userName,
+                size: 100,
+                processType: "APPLICATION_CREATION",
+                candidateGroups: null
+            };
 
-        this.http.post(this.apiEndpoints['search'], param, this.options)
-            .map((response: Response) => response.json())
-            .subscribe(
-                (result: ApplicationTask[]) => {
-                    this.MyApplicationCreationTasksProvider.next(this.updateModifiedTask(result,this.modifiedApplicationTaskIDs))
-                },
-                (error: Response) => Observable.throw(error.json().message)
-            )
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTask[]) => {
+                        this.MyApplicationCreationTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
+                    },
+                    (error: Response) => Observable.throw(error.json().message)
+                )
+        }
     }
 
     getUserGroupApplicationTasks(): void {
-        //TODO GET GROUP FROM AUTH SERVICE
-        const param: ApplicationTaskSearchParam = {
-            assignee: null,
-            processType: "APPLICATION_CREATION",
-            size: 100,
-            candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
-        };
-        this.http.post(this.apiEndpoints['search'], param, this.options)
-            .map((response: Response) => response.json())
-            .subscribe(
-                (result: ApplicationTask[]) => {
-                    this.GroupApplicationCreationTasksProvider.next(result)
-                },
-                (error: Response) => Observable.throw(error.json().message))
-
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        if (!!loginInfo) {
+            const param: ApplicationTaskSearchParam = {
+                assignee: null,
+                processType: "APPLICATION_CREATION",
+                size: 100,
+                candidateGroups: loginInfo.roles.toString()
+            };
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTask[]) => {
+                        this.GroupApplicationCreationTasksProvider.next(result)
+                    },
+                    (error: Response) => Observable.throw(error.json().message))
+        }
     }
 
     getUserAppSubscriptionTasks(): void {
-        //TODO GET USER FROM AUTH SERVICE
-        const param: ApplicationTaskSearchParam = {
-            assignee: 'admin',
-            size: 100,
-            processType: "SUBSCRIPTION_CREATION",
-            candidateGroups: null
-        };
-        this.http.post(this.apiEndpoints['search'], param, this.options)
-            .map((response: Response) => response.json())
-            .subscribe(
-                (result) => {
-                    this.MySubscriptionTasksProvider.next(this.updateModifiedTask(result,this.modifiedApplicationTaskIDs))
-                },
-                (error: Response) => Observable.throw(error.json().message)
-            );
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        if (!!loginInfo) {
+            const param: ApplicationTaskSearchParam = {
+                assignee: loginInfo.userName,
+                size: 100,
+                processType: "SUBSCRIPTION_CREATION",
+                candidateGroups: null
+            };
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result) => {
+                        this.MySubscriptionTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
+                    },
+                    (error: Response) => Observable.throw(error.json().message)
+                );
+        }
     }
 
     getUserGroupAppSubscriptionTask(): void {
-        //TODO GET GROUP FROM AUTH SERVICE
-        const param: ApplicationTaskSearchParam = {
-            assignee: null,
-            size: 100,
-            processType: "SUBSCRIPTION_CREATION",
-            candidateGroups: "Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin"
-        };
-        this.http.post(this.apiEndpoints['search'], param, this.options)
-            .map((response: Response) => response.json())
-            .subscribe(
-                (result: ApplicationTask[]) => {
-                    this.GroupSubscriptionTasksProvider.next(result);
-                },
-                (error: Response) => Observable.throw(error.json().message)
-            );
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        if (!!loginInfo) {
+            const param: ApplicationTaskSearchParam = {
+                assignee: null,
+                size: 100,
+                processType: "SUBSCRIPTION_CREATION",
+                candidateGroups: loginInfo.roles.toString()
+            };
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTask[]) => {
+                        this.GroupSubscriptionTasksProvider.next(result);
+                    },
+                    (error: Response) => Observable.throw(error.json().message)
+                );
+        }
     }
 
     assignApplicationTaskToUser(taskId) {
-        //TODO update to this if success
-        this.modifiedApplicationTaskIDs.push(taskId);
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        if (!!loginInfo) {
+            const param = new AssignApplicationTaskParam();
+            param.assignee = loginInfo.userName;
+            param.taskId = taskId;
 
-        //TODO GET LOGIN USER FROM AUTH SERVICE
-        const param = new AssignApplicationTaskParam();
-        param.assignee = 'admin';
-        param.taskId = taskId;
-
-        return this.http.post(this.apiEndpoints['assign'], param, this.options)
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message))
+            return this.http.post(this.apiEndpoints['assign'], param, this.options)
+                .map((response: Response) => {
+                    this.modifiedApplicationTaskIDs.push(taskId);
+                    return response.json();
+                })
+                .catch((error: Response) => Observable.throw(error.json().message))
+        }
     }
 
     getModifiedTaskIds(): number[] {

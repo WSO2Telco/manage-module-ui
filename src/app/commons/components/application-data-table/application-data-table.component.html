@@ -1,8 +1,45 @@
 <div class="table-wrapper">
-    <span class="filter" tooltip="Filter"><i class="material-icons">filter_list</i></span>
+    <span class="filter" tooltip="Filter"
+          [ngClass]="{'on':isFilterVisible}"
+          (click)="isFilterVisible = !isFilterVisible"><i class="material-icons">filter_list</i></span>
     <div><span class="tbl-cat">{{recordsType.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
     <div class="tbl-header">
         {{tableTitle}}
+    </div>
+
+    <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
+        <div class="content animated fadeInUp delay-03" *ngIf="isFilterVisible">
+           <div class="head">Filter</div>
+            <div><span *ngFor="let id of filter.ids">{{id}}</span></div>
+            <div><span *ngFor="let name of filter.appNames">{{name}}</span></div>
+            <div class="row">
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="filterId"
+                           [typeahead]="dataSource"
+                           typeaheadOptionField="id"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
+                           placeholder="Id">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text"
+                           [(ngModel)]="filterAppName"
+                           [typeahead]="dataSource"
+                           typeaheadOptionField="applicationName"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'APP_NAME')"
+                           class="form-control" placeholder="App Name">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text"
+                           [(ngModel)]="filterUser"
+                           [typeahead]="dataSource"
+                           typeaheadOptionField="userName"
+                           typeaheadGroupField="userName"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'USER')"
+                           class="form-control" placeholder="User">
+                </div>
+            </div>
+        </div>
     </div>
     <div class="table">
 
@@ -85,9 +122,9 @@
                     </div>
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">
-                        <button class="btn btn-default" (click)="item.isExpand = false; item.actionType = '' ">Cancel
+                        <button class="btn btn-default animated fadeIn" (click)="item.isExpand = false; item.actionType = '' ">Cancel
                         </button>
-                        <button class="btn btn-primary"
+                        <button class="btn btn-primary animated fadeIn"
                                 *ngIf="item.actionType == 'APPROVE'"
                                 (click)="onAction('APPROVE',item,recordsType)">Approve</button>
                         <button  *ngIf="item.actionType == 'REJECT'"

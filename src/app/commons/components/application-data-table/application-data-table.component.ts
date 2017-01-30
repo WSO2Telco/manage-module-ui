@@ -1,12 +1,13 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {
     ApplicationTask, ApproveApplicationCreationTaskParam,
-    ApproveSubscriptionCreationTaskParam, ApprovalEvent
+    ApproveSubscriptionCreationTaskParam, ApprovalEvent, ApplicationTaskFilter
 } from "../../models/application-data-models";
 import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../services/message.service";
 import {TableDataType} from "../../models/common-data-models";
 import {Router} from "@angular/router";
+import {TypeaheadMatch} from "ng2-bootstrap";
 
 @Component({
     selector: 'application-data-table',
@@ -35,7 +36,15 @@ export class ApplicationDataTableComponent implements OnInit {
     private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
     @Output()
-    private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter()
+    private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter();
+
+    private filter:ApplicationTaskFilter;
+
+    private filterId:number;
+    private filterAppName:string;
+    private filterUser:string;
+    private filterFromDate:string;
+    private filterToDate:string;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
@@ -43,6 +52,7 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.filter = new ApplicationTaskFilter();
     }
 
     onViewAll(): void {
@@ -72,6 +82,31 @@ export class ApplicationDataTableComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    onFilterItemAdded(event:TypeaheadMatch,type:string){
+        let task:ApplicationTask = <ApplicationTask>event.item;
+
+        switch(type){
+            case 'ID' : {
+                this.filter.ids.push(task.id);
+                this.filterId = null;
+                break;
+            }
+
+            case 'APP_NAME' : {
+                this.filter.appNames.push(task.applicationName);
+                this.filterAppName = null;
+                break;
+            }
+
+            case 'USER' : {
+                this.filter.users.push(task.userName);
+                this.filterUser = null;
+                break;
+            }
+        }
+
     }
 
 }

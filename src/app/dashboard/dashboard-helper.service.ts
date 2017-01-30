@@ -22,7 +22,7 @@ export class DashboardHelperService {
             return acc;
         }, {modified: [], unmodified: []});
 
-        return [].concat(reduced.modified,reduced.unmodified);
+        return [].concat(reduced.modified, reduced.unmodified);
     }
 
 }

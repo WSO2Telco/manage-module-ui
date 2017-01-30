@@ -11,4 +11,15 @@ export class TableDataType {
 }
 
 
+export class User {
+    userName: string;
+    password: string;
+}
+
+export class LoginResponse{
+    userName:string;
+    isLoggedIn:boolean;
+    roles : string[];
+}
+
 

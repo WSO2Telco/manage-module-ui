@@ -1,20 +1,18 @@
 import {Injectable} from '@angular/core';
 import {Router} from "@angular/router";
-import {Subject} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 import {LoginRemoteDataService} from "../../data-providers/login_remote-data.service";
-import {Response} from "@angular/http";
+import {User, LoginResponse} from "../models/common-data-models";
 
-export class User {
-  userName: string;
-  password: string;
-}
 
 @Injectable()
 export class AuthenticationService {
 
-  loginUserInfo: Subject<User> = new Subject();
+  loginUserInfo: BehaviorSubject<LoginResponse> = new BehaviorSubject(null);
 
   constructor(private _router: Router, private _remoteService: LoginRemoteDataService) {
+    let _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
+    this.loginUserInfo.next(_loginUserInfo);
   }
 
   doLogin(userName: string, password: string,callback:Function) {
@@ -24,9 +22,9 @@ export class AuthenticationService {
 
     this._remoteService.login(user)
       .subscribe(
-        (user: any) => {
-          this.loginUserInfo.next(user);
-          sessionStorage.setItem('loginUserInfo', JSON.stringify(user));
+        (loginInfo: LoginResponse) => {
+          this.loginUserInfo.next(loginInfo);
+          sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
           this._router.navigate(['home']);
         },
         (error: string) => {
@@ -50,8 +48,8 @@ export class AuthenticationService {
   }
 
   isLoggedIn() {
-    let user = JSON.parse(sessionStorage.getItem('loginUserInfo'));
-    return !!user;
+    let loginInfo =  this.loginUserInfo && this.loginUserInfo.getValue();
+    return !!loginInfo;
   }
 
 }

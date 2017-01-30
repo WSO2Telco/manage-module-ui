@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
+import {LoginResponse} from "../../models/common-data-models";
 
 @Component({
   selector: 'app-user-avatar',
@@ -9,10 +10,12 @@ import {AuthenticationService} from "../../services/authentication.service";
 export class UserAvatarComponent implements OnInit {
 
   private dropDownStatus:{isOpen:boolean} = {isOpen:false};
+  private loginInfo:LoginResponse;
 
   constructor(private _authenticationService:AuthenticationService) { }
 
   ngOnInit() {
+    this.loginInfo = this._authenticationService.loginUserInfo.getValue();
   }
 
   onClick(){

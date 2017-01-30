@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http, Headers, RequestOptions, Response} from "@angular/http";
-import {User} from "../commons/services/authentication.service";
+import {User, LoginResponse} from "../commons/models/common-data-models";
+
 
 @Injectable()
 export class LoginRemoteDataService {
@@ -23,7 +24,7 @@ export class LoginRemoteDataService {
    * @param data
    * @returns {Observable<User>}
    */
-  login(data: User): Observable<User> {
+  login(data: User): Observable<LoginResponse> {
     return this.http.post(this.apiEndpoints['login'], data, this.options)
       .map((response: Response) => response.json())
       .catch((error: Response) => Observable.throw(error.json().message))

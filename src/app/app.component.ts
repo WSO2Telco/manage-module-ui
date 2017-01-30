@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService, User} from "./commons/services/authentication.service";
+import {AuthenticationService} from "./commons/services/authentication.service";
 import {AppCommonService} from "./commons/services/app-common.service";
+import {User, LoginResponse} from "./commons/models/common-data-models";
 
 @Component({
     selector: 'body',
@@ -23,7 +24,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.isLoggedIn = this._authenticationService.isLoggedIn();
-        this._authenticationService.loginUserInfo.subscribe((userInfo: User) => this.isLoggedIn = !!userInfo);
+        this._authenticationService.loginUserInfo.subscribe((userInfo: LoginResponse) =>{ this.isLoggedIn = !!userInfo });
         this._appCommonService.menuToggleStream.subscribe((isExpand: boolean) => this.isMenuExpanded = isExpand);
 
 

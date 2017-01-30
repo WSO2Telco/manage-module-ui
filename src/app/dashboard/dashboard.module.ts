@@ -6,7 +6,6 @@ import {ApprovalSummeryComponent} from './approval-summery/approval-summery.comp
 import {ApprovalCountComponent} from './approval-count/approval-count.component';
 import {ApprovalHistoryGraphComponent} from './approval-history-graph/approval-history-graph.component';
 import {ChartsModule} from "ng2-charts";
-import {DashboardRemoteDataService} from "../data-providers/dashboard-remote-data.service";
 import {DashboardHelperService} from "./dashboard-helper.service";
 import {SharedModule} from "../shared/shared.module";
 

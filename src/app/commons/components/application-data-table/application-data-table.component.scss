@@ -37,6 +37,11 @@
       color: black;
       background-color: $secondary_color;
     }
+
+    &.on{
+      background-color: $secondary_color;
+      color: black;
+    }
   }
 
   .tbl-header {
@@ -212,4 +217,20 @@
   }
 
 
+}
+
+.filter-container{
+  height : 0px;
+  margin-bottom: 10px;
+  @include transition(all 0.4s ease-in);
+
+  &.open{
+    height: 100px;
+  }
+
+  .content{
+    background-color:$gray_1 ;
+    height: 100%;
+    padding: 10px;
+  }
 }

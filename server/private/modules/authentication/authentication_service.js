@@ -26,7 +26,7 @@ function authenticationService() {
     let loginResult;
 
     let onRoleSuccess = function (roleResults) {
-        callback(Object.assign({},loginResult,roleResults));
+        callback(Object.assign({},loginResult,roleResults,{userName:request.payload.userName}));
     };
 
     let onRoleError = function (roleError) {

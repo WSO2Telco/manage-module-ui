@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule} from 'ng2-bootstrap'
+import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap'
 
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
@@ -41,7 +41,8 @@ import {ApprovalHelperService} from "./approvals/approval-helper.service";
         PopoverModule.forRoot(),
         DropdownModule.forRoot(),
         TooltipModule.forRoot(),
-        ToastyModule.forRoot()
+        ToastyModule.forRoot(),
+        TypeaheadModule.forRoot()
     ],
     providers: [
         AppGuard,
