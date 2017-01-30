@@ -18,6 +18,7 @@ import {DataProvidersModule} from "./data-providers/data-providers.module";
 import {ToastyModule} from "ng2-toasty";
 import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.service";
 import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data.service";
+import {ApprovalHelperService} from "./approvals/approval-helper.service";
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data
         AppGuard,
         LoginGuard,
         ApprovalRemoteDataService,
-        DashboardRemoteDataService
+        DashboardRemoteDataService,
+        ApprovalHelperService
 
     ],
     bootstrap: [AppComponent]

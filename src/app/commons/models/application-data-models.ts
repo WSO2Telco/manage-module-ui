@@ -1,3 +1,4 @@
+import {TableDataType} from "./common-data-models";
 export class DateTimeInfo {
     date: string;
     time: string;
@@ -18,11 +19,11 @@ export class ApplicationTask {
     allTiers: string[];
     userName: string;
     isModified: boolean;
-    status : string;
-    comment : string;
+    status: string;
+    comment: string;
 
-    toString(){
-        return '' + this.id + ','+this.applicationName + ',' + this.applicationDescription +','+ this.comment;
+    toString() {
+        return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
     }
 }
 
@@ -40,25 +41,37 @@ export class AssignApplicationTaskParam {
     assignee: string;
 }
 
-export class ApproveApplicationCreationTaskParam{
-    taskId : number;
-    taskType : 'application';
-    user : string;
-    selectedTier : string;
-    status : 'APPROVED' | 'REJECTED';
-    description : string;
+export class ApproveApplicationCreationTaskParam {
+    taskId: number;
+    taskType: 'application';
+    user: string;
+    selectedTier: string;
+    status: 'APPROVED' | 'REJECTED';
+    description: string;
 
-    toString(){
-        return this.taskId + ', '+this.description + ', '+ this.selectedTier + ', ' + this.status;
+    toString() {
+        return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;
     }
 }
 
-export  class ApproveSubscriptionCreationTaskParam{
-    taskId : number;
-    taskType : 'subscription';
-    user : string;
-    selectedTier : string;
-    status : 'APPROVED' | 'REJECTED';
-    description : string;
+export class ApproveSubscriptionCreationTaskParam {
+    taskId: number;
+    taskType: 'subscription';
+    user: string;
+    selectedTier: string;
+    status: 'APPROVED' | 'REJECTED';
+    description: string;
+}
+
+export class ApprovalEvent {
+    task: ApplicationTask;
+    dataType: TableDataType;
+    status: 'APPROVED' | 'REJECTED';
+
+    constructor(task: ApplicationTask, dataType: TableDataType,status?) {
+        this.task = task;
+        this.dataType = dataType;
+        this.status = status;
+    }
 }
 

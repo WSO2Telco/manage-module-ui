@@ -1,7 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {
     ApplicationTask, ApproveApplicationCreationTaskParam,
-    ApproveSubscriptionCreationTaskParam
+    ApproveSubscriptionCreationTaskParam, ApprovalEvent
 } from "../../models/application-data-models";
 import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../services/message.service";
@@ -31,6 +31,12 @@ export class ApplicationDataTableComponent implements OnInit {
     @Input()
     private moreLinkPath: string;
 
+    @Output()
+    private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
+
+    @Output()
+    private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter()
+
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
                 private _router: Router) {
@@ -40,87 +46,31 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     onViewAll(): void {
-        if(!!this.moreLinkPath){
+        if (!!this.moreLinkPath) {
             this._router.navigate([this.moreLinkPath]);
         }
     }
 
-    onOptionChange(event,item){
+    onOptionChange(event, item) {
         item.tier = event.target.value;
     }
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
         switch (actionType) {
             case 'ASSIGN' : {
-                this.approvalService.assignApplicationTaskToUser(appTask.id).subscribe(
-                    () => {
-                        if (typeInfo.dataType == "APPLICATION") {
-                            this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                        } else if (typeInfo.dataType == "SUBSCRIPTION") {
-                            this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
-                        }
-                        this.approvalService.getAllTasks();
-                    },
-                    (error) => {
-                        this.message.error(error);
-                    }
-                );
+                this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
                 break;
             }
 
             case 'APPROVE' : {
-
-                let approveApplicationActions = () => {
-
-                    let param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
-                    param.taskId = appTask.id;
-                    param.description = appTask.toString();
-                    param.selectedTier = appTask.tier;
-                    param.status = "APPROVED";
-                    param.user = 'admin';
-                    param.taskType = "application";
-
-                    this.approvalService.approveApplicationCreationTask(param).subscribe(
-                        () => {
-                            this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
-                            this.approvalService.getAllTasks();
-                        },
-                        (error) => {
-                            this.message.error(error);
-                        }
-                    );
-                };
-
-                let approveSubscriptionActions = () => {
-                    let param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
-                    param.taskId = appTask.id;
-                    param.description = appTask.applicationDescription;
-                    param.selectedTier = appTask.tier;
-                    param.status = "APPROVED";
-                    param.user = 'admin';
-                    param.taskType = "subscription";
-
-                    this.approvalService.approveSubscriptionCreationTask(param).subscribe(
-                        () => {
-                            this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
-                            this.approvalService.getAllTasks();
-                        },
-                        (error) => {
-                            this.message.error(error);
-                        }
-                    );
-                };
-
-                let approveActions = {};
-                approveActions['APPLICATION'] = approveApplicationActions;
-                approveActions['SUBSCRIPTION'] = approveSubscriptionActions;
-
-                approveActions[typeInfo.dataType] && approveActions[typeInfo.dataType]();
-
+                this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
                 break;
             }
 
-
+            case 'REJECT' : {
+                this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                break;
+            }
         }
     }
 

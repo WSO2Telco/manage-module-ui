@@ -19,7 +19,9 @@ export class MessageService {
         APPLICATION_CREATION_ASSIGN_SUCCESS : 'Application creation task successfully assigned',
         SUBSCRIPTION_CREATION_ASSIGN_SUCCESS : 'Subscription creation task successfully assigned',
         APP_CREATION_APPROVE_SUCCESS : 'Application successfully approved',
-        APP_SUBSCRIPTION_APPROVE_SUCCESS : 'Application subscription successfully approved'
+        APP_CREATION_REJECT_SUCCESS : 'Application successfully rejected',
+        APP_SUBSCRIPTION_APPROVE_SUCCESS : 'Application subscription successfully approved',
+        APP_SUBSCRIPTION_REJECT_SUCCESS : 'Application subscription successfully rejected'
     };
 
 

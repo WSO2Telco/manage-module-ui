@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ApplicationTask} from "../../commons/models/application-data-models";
+import {ApplicationTask, ApprovalEvent} from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {DashboardData} from "../../commons/models/dashboard-data-models";
 import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
 import {DashboardHelperService} from "../dashboard-helper.service";
 import {MessageService} from "../../commons/services/message.service";
+import {ApprovalHelperService} from "../../approvals/approval-helper.service";
 
 @Component({
     selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit {
     private dashboardData: DashboardData;
 
     constructor(private approvalService: ApprovalRemoteDataService,
+                private approvalHelperService:ApprovalHelperService,
                 private dashboardService: DashboardRemoteDataService,
                 private dashboardHelper: DashboardHelperService,
                 private message: MessageService) {
@@ -52,13 +54,14 @@ export class HomeComponent implements OnInit {
             (error) => this.message.error(error));
 
         this.approvalService.getAllTasks();
+    }
 
-        /*this.dashboardService.getDashboardData().subscribe(
-         (response: DashboardData) => {
-         this.dashboardData = response
-         },
-         (error) => this.message.error(error)
-         )*/
+    onAssignTaskHandler(event:ApprovalEvent):void{
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType,event.task.id);
+    }
+
+    onApproveRejectHandler(event:ApprovalEvent):void{
+        this.approvalHelperService.approveRejectTask(event.dataType,event.task,event.status);
     }
 
 }

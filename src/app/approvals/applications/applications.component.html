@@ -4,14 +4,16 @@
                 class="my"
                 [recordsType]="{dataCategory:'USER',dataType:'APPLICATION'}"
                 tableTitle="MY APPLICATIONS"
-                [dataSource]="myApplications"></application-data-table>
+                [dataSource]="myApplications"
+                (onApproveRejectTask)="onApproveRejectHandler($event)"></application-data-table>
     </div>
     <div class="col-sm-6">
         <application-data-table
                 class="group"
                 [recordsType]="{dataCategory:'GROUP',dataType:'APPLICATION'}"
                 tableTitle="All APPLICATIONS"
-                [dataSource]="allApplications"></application-data-table>
+                [dataSource]="allApplications"
+                (onAssignTask)="onAssignTaskHandler($event)"></application-data-table>
     </div>
 </div>
 

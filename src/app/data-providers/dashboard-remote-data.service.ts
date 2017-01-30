@@ -36,7 +36,7 @@ export class DashboardRemoteDataService {
             }
         );
 
-        approvalService.GroupApplicationCreationTasksProvider.subscribe(
+        approvalService.GroupSubscriptionTasksProvider.subscribe(
             (result) => {
                 this.updateDashboardData(result, 'subCreationsForGroup')
             }

@@ -129,6 +129,10 @@ input,button{
   border-radius: 0px;
 }
 
+.tooltip.top{
+  min-width: 120px;
+}
+
 .tooltip.top .tooltip-arrow{
   border-top-color: $primary-color_light;
 }

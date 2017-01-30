@@ -5,13 +5,15 @@
                class="my"
                [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
                tableTitle="SUBSCRIPTION CREATIONS"
-               [dataSource]="mySubscriptions"></application-data-table>
+               [dataSource]="mySubscriptions"
+               (onApproveRejectTask)="onApproveRejectHandler($event)"></application-data-table>
    </div>
    <div class="col-sm-6">
        <application-data-table
                [recordsType]="{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}"
                tableTitle="SUBSCRIPTION CREATIONS"
-               [dataSource]="allSubscriptions"></application-data-table>
+               [dataSource]="allSubscriptions"
+               (onAssignTask)="onAssignTaskHandler($event)"></application-data-table>
    </div>
  </div>
 </div>

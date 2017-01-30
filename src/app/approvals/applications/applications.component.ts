@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ApplicationTask} from "../../commons/models/application-data-models";
+import {ApplicationTask, ApprovalEvent} from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
+import {ApprovalHelperService} from "../approval-helper.service";
 
 @Component({
     selector: 'app-applications',
@@ -14,6 +15,7 @@ export class ApplicationsComponent implements OnInit {
     private allApplications: ApplicationTask[];
 
     constructor(private message: MessageService,
+                private approvalHelperService:ApprovalHelperService,
                 private approvalService: ApprovalRemoteDataService) {
     }
 
@@ -38,6 +40,14 @@ export class ApplicationsComponent implements OnInit {
 
         this.approvalService.getUserApplicationTasks();
         this.approvalService.getUserGroupApplicationTasks();
+    }
+
+    onAssignTaskHandler(event:ApprovalEvent):void{
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType,event.task.id);
+    }
+
+    onApproveRejectHandler(event:ApprovalEvent):void{
+        this.approvalHelperService.approveRejectTask(event.dataType,event.task,event.status);
     }
 
 }

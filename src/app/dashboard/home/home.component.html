@@ -17,7 +17,9 @@
               [recordLimit]="5"
               moreLinkPath="/approvals/applications"
               tableTitle="APPLICATION CREATIONS"
-              [dataSource]="myApplications"></application-data-table>
+              [dataSource]="myApplications"
+              (onApproveRejectTask)="onApproveRejectHandler($event)"
+      ></application-data-table>
     </div>
 
     <div class="col-md-6">
@@ -27,7 +29,8 @@
               moreLinkPath="/approvals/subscriptions"
               [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
               tableTitle="SUBSCRIPTION CREATIONS"
-              [dataSource]="myAppSubscriptionTask"></application-data-table>
+              [dataSource]="myAppSubscriptionTask"
+              (onApproveRejectTask)="onApproveRejectHandler($event)"></application-data-table>
     </div>
   </div>
 
@@ -39,7 +42,8 @@
               [recordLimit]="5"
               moreLinkPath="/approvals/applications"
               tableTitle="APPLICATION CREATIONS"
-              [dataSource]="allApplications"></application-data-table>
+              [dataSource]="allApplications"
+              (onAssignTask)="onAssignTaskHandler($event)"></application-data-table>
     </div>
 
     <div class="col-md-6">
@@ -48,7 +52,8 @@
               [recordLimit]="5"
               moreLinkPath="/approvals/subscriptions"
               tableTitle="SUBSCRIPTION CREATIONS"
-              [dataSource]="allSubscriptions"></application-data-table>
+              [dataSource]="allSubscriptions"
+              (onAssignTask)="onAssignTaskHandler($event)"></application-data-table>
     </div>
   </div>
 
