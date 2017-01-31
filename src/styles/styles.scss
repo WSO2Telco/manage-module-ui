@@ -74,6 +74,13 @@ input,button{
   padding-right: 15px !important;
 }
 
+.delay-02{
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  -o-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
 .delay-03{
   -webkit-animation-delay: 0.3s;
   -moz-animation-delay: 0.3s;

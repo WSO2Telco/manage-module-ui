@@ -7,6 +7,7 @@
   padding: 10px;
   border: solid 1px $gray_lighter;
   background-color: white;
+  width: 100%;
 
   .tbl-header{
     font-weight: 600;
@@ -31,7 +32,7 @@
       }
 
       &.header{
-        background-color: $secondary_color;
+        background-color: $gray_4;
         font-weight:600;
       }
 

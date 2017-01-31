@@ -1,3 +1,10 @@
-<p>
-  history-main works!
-</p>
+<div class="animated fadeInUp row">
+    <div class="col-sm-12">
+        <app-history-filter></app-history-filter>
+    </div>
+    <div class="col-sm-12">
+        <app-responsive-table
+                [dataSource]="historyJson"
+                [fieldSet]="fieldSet"></app-responsive-table>
+    </div>
+</div>

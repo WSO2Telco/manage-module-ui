@@ -81,5 +81,6 @@ export class ApplicationTaskFilter{
     users:string[] = [];
     fromDate:string;
     toDate:string;
+    dataType:TableDataType;
 }
 

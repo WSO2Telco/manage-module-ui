@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, SimpleChanges} from '@angular/core';
 import {
     ApplicationTask, ApproveApplicationCreationTaskParam,
     ApproveSubscriptionCreationTaskParam, ApprovalEvent, ApplicationTaskFilter
@@ -38,13 +38,20 @@ export class ApplicationDataTableComponent implements OnInit {
     @Output()
     private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
+    @Output()
+    private onFilterChange:EventEmitter<ApplicationTaskFilter> = new EventEmitter()
+
     private filter:ApplicationTaskFilter;
+
+    private FilterFieldsDataSource:ApplicationTask[]
 
     private filterId:number;
     private filterAppName:string;
     private filterUser:string;
     private filterFromDate:string;
     private filterToDate:string;
+
+    private isFilterActivated:boolean = false;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
@@ -53,6 +60,13 @@ export class ApplicationDataTableComponent implements OnInit {
 
     ngOnInit() {
         this.filter = new ApplicationTaskFilter();
+        this.filter.dataType = this.recordsType;
+    }
+
+    ngOnChanges(changeObj:SimpleChanges){
+        if(!this.isFilterActivated  && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)){
+            this.FilterFieldsDataSource =  changeObj['dataSource'].currentValue;
+        }
     }
 
     onViewAll(): void {
@@ -86,6 +100,7 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onFilterItemAdded(event:TypeaheadMatch,type:string){
         let task:ApplicationTask = <ApplicationTask>event.item;
+        this.isFilterActivated = true;
 
         switch(type){
             case 'ID' : {
@@ -106,7 +121,37 @@ export class ApplicationDataTableComponent implements OnInit {
                 break;
             }
         }
+        this.onFilterChange.emit(this.filter);
+    }
 
+    onClear(type:string){
+        switch (type){
+            case 'ID':{
+                this.filter.ids.length = 0;
+                this.filterId = null;
+                break;
+            }
+            case 'NAME':{
+                this.filter.appNames.length = 0;
+                this.filterAppName = null;
+                break;
+            }
+            case 'USER':{
+                this.filter.users.length = 0;
+                this.filterUser = null;
+                break;
+            }
+            case 'ALL':{
+                this.filter.ids.length = 0;
+                this.filter.appNames.length = 0;
+                this.filter.users.length = 0;
+                this.filterId = null;
+                this.filterAppName = null;
+                this.filterUser = null;
+                break;
+            }
+        }
+        this.onFilterChange.emit(this.filter);
     }
 
 }

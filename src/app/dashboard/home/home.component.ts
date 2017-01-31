@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApplicationTask, ApprovalEvent} from "../../commons/models/application-data-models";
+import {ApplicationTask, ApprovalEvent, ApplicationTaskFilter} from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {DashboardData} from "../../commons/models/dashboard-data-models";
 import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
@@ -60,6 +60,10 @@ export class HomeComponent implements OnInit {
 
     onApproveRejectHandler(event:ApprovalEvent):void{
         this.approvalHelperService.approveRejectTask(event.dataType,event.task,event.status);
+    }
+
+    onFilterChangeHandler(event:ApplicationTaskFilter):void{
+        this.approvalService.getUserApplicationTasks(event);
     }
 
 }

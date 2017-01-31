@@ -19,6 +19,7 @@
               tableTitle="APPLICATION CREATIONS"
               [dataSource]="myApplications"
               (onApproveRejectTask)="onApproveRejectHandler($event)"
+              (onFilterChange)="onFilterChangeHandler($event)"
       ></application-data-table>
     </div>
 
@@ -30,7 +31,9 @@
               [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
               tableTitle="SUBSCRIPTION CREATIONS"
               [dataSource]="myAppSubscriptionTask"
-              (onApproveRejectTask)="onApproveRejectHandler($event)"></application-data-table>
+              (onApproveRejectTask)="onApproveRejectHandler($event)"
+              (onFilterChange)="onFilterChangeHandler($event)"
+      ></application-data-table>
     </div>
   </div>
 

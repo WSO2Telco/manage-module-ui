@@ -4,6 +4,7 @@ import {ApplicationDataTableComponent} from "../commons/components/application-d
 import {TooltipModule, TypeaheadModule} from "ng2-bootstrap";
 import {FormsModule} from "@angular/forms";
 import {SlimLoadingBarModule} from "ng2-slim-loading-bar";
+import {ResponsiveTableComponent} from "../commons/components/responsive-table/responsive-table.component";
 
 @NgModule({
     imports: [
@@ -13,8 +14,8 @@ import {SlimLoadingBarModule} from "ng2-slim-loading-bar";
         FormsModule,
         SlimLoadingBarModule.forRoot()
     ],
-    declarations: [ApplicationDataTableComponent],
-    exports: [ApplicationDataTableComponent,SlimLoadingBarModule]
+    declarations: [ApplicationDataTableComponent,ResponsiveTableComponent],
+    exports: [ApplicationDataTableComponent,SlimLoadingBarModule,ResponsiveTableComponent]
 })
 export class SharedModule {
 }
