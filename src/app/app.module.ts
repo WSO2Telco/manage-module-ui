@@ -19,6 +19,7 @@ import {ToastyModule} from "ng2-toasty";
 import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.service";
 import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data.service";
 import {ApprovalHelperService} from "./approvals/approval-helper.service";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import {ApprovalHelperService} from "./approvals/approval-helper.service";
         HttpModule,
         CommonsModule,
         ChartsModule,
+        SharedModule,
         DataProvidersModule,
         ButtonsModule.forRoot(),
         PopoverModule.forRoot(),
@@ -49,7 +51,11 @@ import {ApprovalHelperService} from "./approvals/approval-helper.service";
         LoginGuard,
         ApprovalRemoteDataService,
         DashboardRemoteDataService,
-        ApprovalHelperService
+        ApprovalHelperService,
+        {
+            provide : 'API_CONTEXT',
+            useValue : 'api'
+        }
 
     ],
     bootstrap: [AppComponent]

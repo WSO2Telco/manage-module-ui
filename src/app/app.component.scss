@@ -21,6 +21,19 @@
   animation-name: bounceInUp;
 }
 
+ng2-slim-loading-bar{
+  position: fixed;
+  top: $topbar-height;
+  z-index: 500;
+  left: 0px;
+  right: 0px;
+}
+
+:host /deep/ ng2-slim-loading-bar .slim-loading-bar-progress{
+  background-color: $accent-color !important;
+  height: 4px !important;
+}
+
 .container-fluid{
   height: 100%;
 }

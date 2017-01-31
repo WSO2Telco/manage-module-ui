@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {Headers, RequestOptions, Http, Response} from "@angular/http";
 import {Observable, ReplaySubject} from "rxjs";
 import {DashboardData, DashboardDataRequestParam} from "../commons/models/dashboard-data-models";
@@ -7,8 +7,7 @@ import {ApplicationTask} from "../commons/models/application-data-models";
 
 @Injectable()
 export class DashboardRemoteDataService {
-
-    private apiContext: string = 'api';
+   
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
     private _dashboardStatisticsData = new DashboardData();
@@ -17,7 +16,9 @@ export class DashboardRemoteDataService {
         dashboardData: this.apiContext + '/applications/statistics',
     };
 
-    constructor(private http: Http, private approvalService: ApprovalRemoteDataService) {
+    constructor(private http: Http, 
+                @Inject('API_CONTEXT')private apiContext:string,
+                private approvalService: ApprovalRemoteDataService) {
         approvalService.MyApplicationCreationTasksProvider.subscribe(
             (result) => {
                 this.updateDashboardData(result, 'appCreationsForUser')

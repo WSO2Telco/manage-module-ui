@@ -6,16 +6,21 @@ import {
     ApproveSubscriptionCreationTaskParam, ApplicationTask
 } from "../commons/models/application-data-models";
 import {TableDataType} from "../commons/models/common-data-models";
+import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 
 @Injectable()
 export class ApprovalHelperService {
 
     constructor(private approvalService: ApprovalRemoteDataService,
-                private message: MessageService) {
+                private message: MessageService,
+                private slimLoadingBarService: SlimLoadingBarService) {
     }
 
 
     assignApplicationTask(dataType: string, taskId: number):void {
+
+        this.slimLoadingBarService.start();
+
         this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
             () => {
                 if (dataType == "APPLICATION") {
@@ -27,11 +32,16 @@ export class ApprovalHelperService {
             },
             (error) => {
                 this.message.error(error);
+            },
+            ()=>{
+                this.slimLoadingBarService.complete();
             }
         );
     }
 
     approveRejectTask(dataType:TableDataType,appTask:ApplicationTask,status):void{
+
+        this.slimLoadingBarService.start();
 
         let applicationActions = (status:'APPROVED' | 'REJECTED') => {
 
@@ -50,6 +60,9 @@ export class ApprovalHelperService {
                 },
                 (error) => {
                     this.message.error(error);
+                },
+                ()=>{
+                    this.slimLoadingBarService.complete();
                 }
             );
         };
@@ -70,6 +83,9 @@ export class ApprovalHelperService {
                 },
                 (error) => {
                     this.message.error(error);
+                },
+                ()=>{
+                    this.slimLoadingBarService.complete();
                 }
             );
         };

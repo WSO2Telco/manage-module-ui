@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject} from '@angular/core';
 import {Headers, RequestOptions, Response, Http} from "@angular/http";
 import {Observable, Subject, ReplaySubject} from "rxjs";
 import {
@@ -6,6 +6,7 @@ import {
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam
 } from "../commons/models/application-data-models";
 import {AuthenticationService} from "../commons/services/authentication.service";
+import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -18,8 +19,6 @@ export class ApprovalRemoteDataService {
 
     private modifiedApplicationTaskIDs: number[] = new Array();
 
-
-    private apiContext: string = 'api';
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
 
@@ -30,7 +29,10 @@ export class ApprovalRemoteDataService {
         approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
     };
 
-    constructor(private http: Http, private authService: AuthenticationService) {
+    constructor(private http: Http,
+                @Inject('API_CONTEXT') private apiContext: string,
+                private slimLoadingBarService: SlimLoadingBarService,
+                private authService: AuthenticationService) {
     }
 
     private updateModifiedTask(result: ApplicationTask[], modified: number[]) {
@@ -63,6 +65,7 @@ export class ApprovalRemoteDataService {
                 processType: "APPLICATION_CREATION",
                 candidateGroups: null
             };
+            this.slimLoadingBarService.start();
 
             this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json())
@@ -70,7 +73,13 @@ export class ApprovalRemoteDataService {
                     (result: ApplicationTask[]) => {
                         this.MyApplicationCreationTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
                     },
-                    (error: Response) => Observable.throw(error.json().message)
+                    (error: Response) => {
+                        this.slimLoadingBarService.stop();
+                        return Observable.throw(error.json().message)
+                    },
+                    () => {
+                        this.slimLoadingBarService.complete();
+                    }
                 )
         }
     }
@@ -84,13 +93,18 @@ export class ApprovalRemoteDataService {
                 size: 100,
                 candidateGroups: loginInfo.roles.toString()
             };
+            this.slimLoadingBarService.start();
             this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTask[]) => {
                         this.GroupApplicationCreationTasksProvider.next(result)
                     },
-                    (error: Response) => Observable.throw(error.json().message))
+                    (error: Response) => Observable.throw(error.json().message),
+                    () => {
+                        this.slimLoadingBarService.complete();
+                    }
+                )
         }
     }
 
@@ -103,13 +117,17 @@ export class ApprovalRemoteDataService {
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: null
             };
+            this.slimLoadingBarService.start();
             this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result) => {
                         this.MySubscriptionTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
                     },
-                    (error: Response) => Observable.throw(error.json().message)
+                    (error: Response) => Observable.throw(error.json().message),
+                    () => {
+                        this.slimLoadingBarService.complete();
+                    }
                 );
         }
     }
@@ -123,13 +141,17 @@ export class ApprovalRemoteDataService {
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: loginInfo.roles.toString()
             };
+            this.slimLoadingBarService.start();
             this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTask[]) => {
                         this.GroupSubscriptionTasksProvider.next(result);
                     },
-                    (error: Response) => Observable.throw(error.json().message)
+                    (error: Response) => Observable.throw(error.json().message),
+                    () => {
+                        this.slimLoadingBarService.start();
+                    }
                 );
         }
     }
