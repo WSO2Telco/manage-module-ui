@@ -63,7 +63,6 @@
       display: table-row;
       background-color: #f6f6f6;
       height: 0px;
-      position: relative;
       @include transition(all 0.5s ease-in);
 
       &:nth-of-type(odd) {
@@ -116,8 +115,6 @@
         margin-top: 53px;
         border:solid 1px #d0d0d0;
         @include box-shadow( inset 0px 10px 10px -9px rgba(209,209,209,1));
-
-
 
         &.A,&.R{
           height: 190px;
@@ -293,5 +290,11 @@
         font-weight: 600;
       }
     }
+  }
+}
+
+@-moz-document url-prefix() {
+  .more-con{
+    margin-top: 25px !important;
   }
 }
