@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ApplicationTask, ApprovalEvent} from "../../commons/models/application-data-models";
+import {ApplicationTask, ApprovalEvent, ApplicationTaskFilter} from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
 import {error} from "util";
@@ -50,6 +50,10 @@ export class SubscriptionsComponent implements OnInit {
 
     onApproveRejectHandler(event:ApprovalEvent):void{
         this.approvalHelperService.approveRejectTask(event.dataType,event.task,event.status);
+    }
+
+    onFilterChangeHandler(event:ApplicationTaskFilter):void{
+        this.approvalService.getFilteredResult(event);
     }
 
 }

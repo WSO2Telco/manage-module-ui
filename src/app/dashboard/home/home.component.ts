@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
     }
 
     onFilterChangeHandler(event:ApplicationTaskFilter):void{
-        this.approvalService.getUserApplicationTasks(event);
+        this.approvalService.getFilteredResult(event);
     }
 
 }

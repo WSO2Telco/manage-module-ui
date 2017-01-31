@@ -51,7 +51,11 @@ export class ApplicationDataTableComponent implements OnInit {
     private filterFromDate:string;
     private filterToDate:string;
 
+    //Flag to determine whether to filtering is active or not
     private isFilterActivated:boolean = false;
+
+    //Flag to determine whether to show or hide filtering panel
+    private isFilterVisible:boolean= false;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
@@ -79,6 +83,13 @@ export class ApplicationDataTableComponent implements OnInit {
         item.tier = event.target.value;
     }
 
+    onToggleFilter(){
+        this.isFilterVisible = !this.isFilterVisible;
+        if(!this.isFilterVisible){
+            this.onClear('ALL');
+        }
+    }
+
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
         switch (actionType) {
             case 'ASSIGN' : {
@@ -104,19 +115,25 @@ export class ApplicationDataTableComponent implements OnInit {
 
         switch(type){
             case 'ID' : {
-                this.filter.ids.push(task.id);
+                if(this.filter.ids.indexOf(task.id) < 0){
+                    this.filter.ids.push(task.id);
+                }
                 this.filterId = null;
                 break;
             }
 
             case 'APP_NAME' : {
-                this.filter.appNames.push(task.applicationName);
+                if(this.filter.appNames.indexOf(task.applicationName) < 0){
+                    this.filter.appNames.push(task.applicationName);
+                }
                 this.filterAppName = null;
                 break;
             }
 
             case 'USER' : {
-                this.filter.users.push(task.userName);
+                if(this.filter.users.indexOf(task.userName) < 0){
+                    this.filter.users.push(task.userName);
+                }
                 this.filterUser = null;
                 break;
             }
@@ -151,6 +168,11 @@ export class ApplicationDataTableComponent implements OnInit {
                 break;
             }
         }
+
+        if(this.filter.ids.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0){
+            this.isFilterActivated = false;
+        }
+
         this.onFilterChange.emit(this.filter);
     }
 

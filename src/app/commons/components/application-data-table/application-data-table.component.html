@@ -1,7 +1,7 @@
 <div class="table-wrapper">
     <span class="filter" tooltip="Filter"
           [ngClass]="{'on':isFilterVisible}"
-          (click)="isFilterVisible = !isFilterVisible"><i class="material-icons">filter_list</i></span>
+          (click)="onToggleFilter()"><i class="material-icons">filter_list</i></span>
     <div><span class="tbl-cat">{{recordsType.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
     <div class="tbl-header">
         {{tableTitle}}

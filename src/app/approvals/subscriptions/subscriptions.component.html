@@ -6,14 +6,16 @@
                [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
                tableTitle="SUBSCRIPTION CREATIONS"
                [dataSource]="mySubscriptions"
-               (onApproveRejectTask)="onApproveRejectHandler($event)"></application-data-table>
+               (onApproveRejectTask)="onApproveRejectHandler($event)"
+               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
    </div>
    <div class="col-sm-6">
        <application-data-table
                [recordsType]="{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}"
                tableTitle="SUBSCRIPTION CREATIONS"
                [dataSource]="allSubscriptions"
-               (onAssignTask)="onAssignTaskHandler($event)"></application-data-table>
+               (onAssignTask)="onAssignTaskHandler($event)"
+               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
    </div>
  </div>
 </div>
