@@ -21,12 +21,12 @@ export class HistoryMainComponent implements OnInit {
 
     private approvalHistoryData: ApprovalHistoryDataset;
 
-    private totalItems:number = 500;
+    private totalItems:number=0;
     private currentPage:number = 1;
-    private itemsPerPage:number = 10;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
+        this.filter.count = 15;
 
         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
             this.approvalHistoryData = history;
@@ -43,10 +43,8 @@ export class HistoryMainComponent implements OnInit {
     }
 
     onPageChanged(event){
-        console.log(this.currentPage);
-        this.filter.offset = (this.currentPage) * this.itemsPerPage;
+        this.filter.offset = (event.page - 1) * this.filter.count;
         this.reportingService.getApprovalHistory(this.filter);
-       // alert(JSON.stringify(event) + 'OFF : '+this.filter.offset);
     }
 
 }
