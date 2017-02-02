@@ -26,7 +26,7 @@ export class HistoryMainComponent implements OnInit {
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
-        this.filter.count = 15;
+        this.filter.count = 10;
 
         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
             this.approvalHistoryData = history;
@@ -34,6 +34,7 @@ export class HistoryMainComponent implements OnInit {
         });
 
         this.reportingService.getSubscribers();
+        this.reportingService.getOperators();
         this.reportingService.getApprovalHistory(this.filter);
     }
 

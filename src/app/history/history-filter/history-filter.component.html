@@ -6,20 +6,34 @@
                 [(ngModel)]="filter.subscriber"
                 [typeaheadMinLength]="0"
                 [typeahead]="subscribers"
-                (typeaheadOnSelect)="onFilterCriteriaChange()"
+                (typeaheadOnSelect)="onFilterCriteriaChange('SUBSCRIBER')"
                 placeholder="Service Provider">
       </div>
        <div class="col-sm-3">
-           <input type="text" class="form-control" placeholder="Application">
+           <input type="text" class="form-control"
+                  [(ngModel)]="selectedApplication"
+                  [typeaheadMinLength]="0"
+                  typeaheadOptionField="name"
+                  [typeahead]="applications"
+                  (typeaheadOnSelect)="onFilterCriteriaChange('APPLICATION',$event)"
+                  placeholder="Application">
        </div>
        <div class="col-sm-3">
-           <input type="text" class="form-control" placeholder="Operator">
+           <input type="text" class="form-control"
+                  [(ngModel)]="filter.operator"
+                  [typeaheadMinLength]="0"
+                  [typeahead]="operators"
+                  (typeaheadOnSelect)="onFilterCriteriaChange()"
+                  placeholder="Operator">
        </div>
        <div class="col-sm-3">
            <input type="text" class="form-control" placeholder="Status">
        </div>
    </div>
     <div class="row">
-        <div class="col-sm-12 text-right"><button class="btn btn-primary btn-sm" (click)="onFilterCriteriaChange()">Search</button></div>
+        <div class="col-sm-12 text-right">
+            <button class="btn btn-default btn-sm" (click)="onClearFilter()">Clear</button>
+            <button class="btn btn-primary btn-sm" (click)="onFilterCriteriaChange()">Search</button>
+        </div>
     </div>
 </div>

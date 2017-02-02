@@ -24,6 +24,9 @@ export class ApplicationDataTableComponent implements OnInit {
     private recordLimit: string;
 
     @Input()
+    private noOfRecordsPerPage:number= 0;
+
+    @Input()
     private dataSource: ApplicationTask;
 
     @Input()
@@ -56,6 +59,11 @@ export class ApplicationDataTableComponent implements OnInit {
 
     //Flag to determine whether to show or hide filtering panel
     private isFilterVisible:boolean= false;
+
+    //TODO Remove this when pagination data comes from backend
+    private totalItems:number = 50;
+    private currentPage:number=1;
+    private itemsPerPage:number = 5;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
@@ -174,6 +182,10 @@ export class ApplicationDataTableComponent implements OnInit {
         }
 
         this.onFilterChange.emit(this.filter);
+    }
+
+    onPageChanged($event){
+
     }
 
 }

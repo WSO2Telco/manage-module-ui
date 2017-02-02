@@ -3,7 +3,10 @@ import {Headers, RequestOptions, Http, Response} from "@angular/http";
 import {Subject, BehaviorSubject, Observable} from "rxjs";
 import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
-import {ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset} from "../commons/models/reporing-data-models";
+import {
+    ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
+    Application
+} from "../commons/models/reporing-data-models";
 
 @Injectable()
 export class ReportingRemoteDataService {
@@ -13,6 +16,18 @@ export class ReportingRemoteDataService {
      * @type {BehaviorSubject<string[]>}
      */
     public SubscribersProvider: Subject<string[]> = new BehaviorSubject<string[]>([]);
+
+    /**
+     * Operators Stream
+     * @type {BehaviorSubject<string[]>}
+     */
+    public OperatorsProvider:Subject<string[]> = new BehaviorSubject<string[]>([]);
+
+    /**
+     * Applications Stream
+     * @type {BehaviorSubject<any[]>}
+     */
+    public ApplicationsProvider:Subject<Application[]> = new BehaviorSubject<Application[]>([])
 
     /**
      * Approval History stream
@@ -26,7 +41,9 @@ export class ReportingRemoteDataService {
 
     private apiEndpoints: Object = {
         subscribers: this.apiContext + '/reports/subscribers',
-        approvalHistory : this.apiContext + '/reports/approval'
+        operators : this.apiContext + '/reports/operators',
+        approvalHistory : this.apiContext + '/reports/approval',
+        applications : this.apiContext + '/reports/applications',
     };
 
     constructor(@Inject('API_CONTEXT') private apiContext: string,
@@ -42,6 +59,42 @@ export class ReportingRemoteDataService {
             .subscribe(
                 (subscribers) => {
                     this.SubscribersProvider.next(subscribers)
+                },
+                (error) => {
+                    this.message.error(error);
+                    this.slimLoadingBarService.complete();
+                },
+                () => {
+                    this.slimLoadingBarService.complete()
+                }
+            )
+    }
+
+    getOperators(){
+        this.slimLoadingBarService.start();
+        this.http.get(this.apiEndpoints['operators'], this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (operators) => {
+                    this.OperatorsProvider.next(operators)
+                },
+                (error) => {
+                    this.message.error(error);
+                    this.slimLoadingBarService.complete();
+                },
+                () => {
+                    this.slimLoadingBarService.complete()
+                }
+            )
+    }
+
+    getApplicationsBySubscriber(subscriber:string){
+        this.slimLoadingBarService.start();
+        this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (applications:Application[]) => {
+                    this.ApplicationsProvider.next(applications)
                 },
                 (error) => {
                     this.message.error(error);

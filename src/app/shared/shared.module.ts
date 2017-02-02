@@ -15,8 +15,16 @@ import {ResponsiveTableComponent} from "../commons/components/responsive-table/r
         SlimLoadingBarModule.forRoot(),
         PaginationModule.forRoot()
     ],
-    declarations: [ApplicationDataTableComponent,ResponsiveTableComponent],
-    exports: [ApplicationDataTableComponent,SlimLoadingBarModule,ResponsiveTableComponent,FormsModule,TypeaheadModule,PaginationModule]
+    declarations: [
+        ApplicationDataTableComponent,
+        ResponsiveTableComponent],
+    exports: [
+        ApplicationDataTableComponent,
+        SlimLoadingBarModule,
+        ResponsiveTableComponent,
+        FormsModule,
+        TypeaheadModule,
+        PaginationModule]
 })
 export class SharedModule {
 }
