@@ -89,21 +89,26 @@ export class ReportingRemoteDataService {
     }
 
     getApplicationsBySubscriber(subscriber:string){
-        this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.options)
-            .map((response: Response) => response.json())
-            .subscribe(
-                (applications:Application[]) => {
-                    this.ApplicationsProvider.next(applications)
-                },
-                (error) => {
-                    this.message.error(error);
-                    this.slimLoadingBarService.complete();
-                },
-                () => {
-                    this.slimLoadingBarService.complete()
-                }
-            )
+        if(!!subscriber){
+            this.slimLoadingBarService.start();
+            this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (applications:Application[]) => {
+                        this.ApplicationsProvider.next(applications)
+                    },
+                    (error) => {
+                        this.message.error(error);
+                        this.slimLoadingBarService.complete();
+                    },
+                    () => {
+                        this.slimLoadingBarService.complete()
+                    }
+                )
+        }else{
+            this.ApplicationsProvider.next([]);
+        }
+
     }
 
     getApprovalHistory(approvalHistoryFilter:ApprovalHistoryFilter){
@@ -138,7 +143,6 @@ export class ReportingRemoteDataService {
             },new ApprovalHistoryDataset())
             .subscribe(
                 (approvalHistory) => {
-                   console.log(approvalHistory);
                     this.ApprovalHistoryProvider.next(approvalHistory)
                 },
                 (error) => {

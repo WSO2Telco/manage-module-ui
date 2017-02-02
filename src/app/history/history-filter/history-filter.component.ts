@@ -12,21 +12,20 @@ export class HistoryFilterComponent implements OnInit {
     private subscribers: string[];
     private operators: string[];
     private applications: Application[];
-    private selectedApplication:Application;
+    private selectedApplication: Application;
 
 
     @Input()
-    private filter:ApprovalHistoryFilter;
+    private filter: ApprovalHistoryFilter;
 
     @Output()
-    private onFilterChange:EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
+    private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
 
     constructor(private reportingService: ReportingRemoteDataService) {
     }
 
     ngOnInit() {
-
         this.reportingService.SubscribersProvider.subscribe((subscribers) => {
             this.subscribers = subscribers;
         });
@@ -35,25 +34,57 @@ export class HistoryFilterComponent implements OnInit {
             this.operators = operators;
         });
 
-        this.reportingService.ApplicationsProvider.subscribe((apps)=>{
+        this.reportingService.ApplicationsProvider.subscribe((apps) => {
             this.applications = apps;
+            this.selectedApplication = null;
         });
     }
 
-    onFilterCriteriaChange(type:string,event?){
-        if(type == 'SUBSCRIBER' && !!this.filter.subscriber){
-            this.reportingService.getApplicationsBySubscriber(this.filter.subscriber);
-        }else if(type == 'APPLICATION'){
-            this.filter.applicationId = (<Application>event.item).id || 0;
+    onNoApplicationSelected(event){
+        if(!event){
+            this.filter.applicationId = 0;
+            this.selectedApplication = null;
         }
+    }
 
+    onNoSubscriberSelected(event){
+        if(!event){
+            this.filter.subscriber = '';
+            this.reportingService.getApplicationsBySubscriber('');
+        }
+    }
+
+    onFilterCriteriaChange() {
         this.onFilterChange.emit(this.filter);
     }
 
-    onClearFilter(){
+    onSubscriberChange() {
+        if (!!this.filter.subscriber) {
+            this.reportingService.getApplicationsBySubscriber(this.filter.subscriber);
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    }
+
+    onApplicationChange(event) {
+        if (!!event.item) {
+            this.filter.applicationId = (<Application>event.item).id || 0;
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    }
+
+    onOperatorChange() {
+        if (!!this.filter.operator) {
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    }
+
+    onClearFilter() {
         this.filter.operator = '';
-        this.filter.subscriber= '';
-        this.filter.api= '';
+        this.filter.subscriber = '';
+        this.filter.api = '';
         this.filter.applicationId = 0;
         this.selectedApplication = null;
         this.onFilterChange.emit(this.filter);

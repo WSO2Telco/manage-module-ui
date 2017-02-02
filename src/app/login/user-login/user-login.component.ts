@@ -21,7 +21,6 @@ export class UserLoginComponent implements OnInit {
   onLoginClick(loginForm){
       this.isSubmitted = true;
       if(loginForm.valid){
-        console.log(loginForm.value);
         this._authenticationService.doLogin(this.userName,this.password,(errorMsg)=> {
           this.loginError = errorMsg;
           setTimeout(()=>{this.loginError=null},5000);

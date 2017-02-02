@@ -6,7 +6,8 @@
                 [(ngModel)]="filter.subscriber"
                 [typeaheadMinLength]="0"
                 [typeahead]="subscribers"
-                (typeaheadOnSelect)="onFilterCriteriaChange('SUBSCRIBER')"
+                (typeaheadNoResults)="onNoSubscriberSelected($event)"
+                (typeaheadOnSelect)="onSubscriberChange()"
                 placeholder="Service Provider">
       </div>
        <div class="col-sm-3">
@@ -15,7 +16,8 @@
                   [typeaheadMinLength]="0"
                   typeaheadOptionField="name"
                   [typeahead]="applications"
-                  (typeaheadOnSelect)="onFilterCriteriaChange('APPLICATION',$event)"
+                  (typeaheadOnSelect)="onApplicationChange($event)"
+                  (typeaheadNoResults)="onNoApplicationSelected($event)"
                   placeholder="Application">
        </div>
        <div class="col-sm-3">
@@ -23,7 +25,7 @@
                   [(ngModel)]="filter.operator"
                   [typeaheadMinLength]="0"
                   [typeahead]="operators"
-                  (typeaheadOnSelect)="onFilterCriteriaChange()"
+                  (typeaheadOnSelect)="onOperatorChange()"
                   placeholder="Operator">
        </div>
        <div class="col-sm-3">

@@ -9,7 +9,6 @@ export class AppGuard implements CanActivate {
   }
 
   canActivate() {
-    console.log('ISLOGGED IN  CAN ACTIVATE - ' + this._authenticationService.isLoggedIn());
     if (this._authenticationService.isLoggedIn()) {
       return true;
     } else {
@@ -26,7 +25,6 @@ export class LoginGuard implements CanActivate {
   constructor(private _authenticationService: AuthenticationService, private _router: Router ){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-    console.log('ISLOGGED IN - ' + this._authenticationService.isLoggedIn());
     if(this._authenticationService.isLoggedIn()){
       this._router.navigate(['home']);
       return false;
