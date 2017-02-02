@@ -32,6 +32,7 @@
     "glue": "^4.1.0",
     "good": "^7.1.0",
     "good-console": "^6.2.0",
+    "h2o2": "^5.4.0",
     "hapi": "^16.1.0",
     "inert": "^4.1.0",
     "material-design-icons": "^3.0.1",

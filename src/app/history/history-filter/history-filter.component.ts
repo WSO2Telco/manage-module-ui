@@ -1,4 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
+import {ApprovalHistoryFilter} from "../../commons/models/reporing-data-models";
 
 @Component({
     selector: 'app-history-filter',
@@ -7,10 +9,26 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HistoryFilterComponent implements OnInit {
 
-    constructor() {
+    private subscribers: string[];
+
+    @Input()
+    private filter:ApprovalHistoryFilter;
+
+    @Output()
+    private onFilterChange:EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
+
+
+    constructor(private reportingService: ReportingRemoteDataService) {
     }
 
     ngOnInit() {
+
+        this.reportingService.SubscribersProvider.subscribe((subscribers) => {
+            this.subscribers = subscribers;
+        });
     }
 
+    onFilterCriteriaChange(){
+        this.onFilterChange.emit(this.filter);
+    }
 }

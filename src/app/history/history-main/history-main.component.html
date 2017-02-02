@@ -1,10 +1,27 @@
 <div class="animated fadeInUp row">
     <div class="col-sm-12">
-        <app-history-filter></app-history-filter>
+        <app-history-filter
+                [filter]="filter"
+                (onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>
     </div>
     <div class="col-sm-12">
         <app-responsive-table
-                [dataSource]="historyJson"
+                [dataSource]="approvalHistoryData?.recordsCol"
                 [fieldSet]="fieldSet"></app-responsive-table>
+    </div>
+    <div class="col-sm-12">
+        <pagination
+                [boundaryLinks]="true"
+                [totalItems]="totalItems"
+                [(ngModel)]="currentPage"
+                [itemsPerPage]="itemsPerPage"
+                [maxSize]="5"
+                (pageChanged)="onPageChanged($event)"
+                class="pagination-sm"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination>
+
     </div>
 </div>

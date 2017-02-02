@@ -20,6 +20,7 @@ import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.s
 import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data.service";
 import {ApprovalHelperService} from "./approvals/approval-helper.service";
 import {SharedModule} from "./shared/shared.module";
+import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data.service";
 
 @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import {SharedModule} from "./shared/shared.module";
         LoginGuard,
         ApprovalRemoteDataService,
         DashboardRemoteDataService,
+        ReportingRemoteDataService,
         ApprovalHelperService,
         {
             provide : 'API_CONTEXT',

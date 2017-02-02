@@ -1,6 +1,6 @@
 import {Injectable, Inject} from '@angular/core';
 import {Headers, RequestOptions, Response, Http} from "@angular/http";
-import {Observable, Subject, ReplaySubject, BehaviorSubject} from "rxjs";
+import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
@@ -13,15 +13,35 @@ import {MessageService} from "../commons/services/message.service";
 @Injectable()
 export class ApprovalRemoteDataService {
 
-    public MyApplicationCreationTasksProvider: BehaviorSubject<ApplicationTask[]> = new BehaviorSubject([]);
-    public GroupApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
+    /**
+     * Application Creations assigned to USER Stream
+     * @type {BehaviorSubject<ApplicationTask[]>}
+     */
+    public MyApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
 
-    public MySubscriptionTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
-    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new ReplaySubject();
+    /**
+     * Application Creations assigned to GROUP user belongs to
+     * @type {BehaviorSubject<ApplicationTask[]>}
+     */
+    public GroupApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+
+    /**
+     * Application Api subscription creations assigned to USER Stream
+     * @type {BehaviorSubject<ApplicationTask[]>}
+     */
+    public MySubscriptionTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+
+    /**
+     * Application Api subscription creations assigned to GROUP Stream
+     * @type {BehaviorSubject<ApplicationTask[]>}
+     */
+    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+
 
     private modifiedApplicationTaskIDs: number[] = new Array();
 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
+
     private options: RequestOptions = new RequestOptions({headers: this.headers});
 
     private apiEndpoints: Object = {
@@ -105,7 +125,7 @@ export class ApprovalRemoteDataService {
             let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json());
 
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this,observable, filter) : observable);
+            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
 
@@ -135,7 +155,7 @@ export class ApprovalRemoteDataService {
             let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json());
 
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this,observable, filter) : observable);
+            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
 
@@ -165,7 +185,7 @@ export class ApprovalRemoteDataService {
             let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json());
 
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this,observable, filter) : observable);
+            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
 
@@ -195,7 +215,7 @@ export class ApprovalRemoteDataService {
             let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
                 .map((response: Response) => response.json());
 
-            doSubscribe((!!filter)? this.getFilteredObservable.call(this,observable,filter) : observable);
+            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
 
@@ -252,6 +272,5 @@ export class ApprovalRemoteDataService {
 
         actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
     }
-
 
 }

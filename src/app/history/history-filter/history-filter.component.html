@@ -1,10 +1,13 @@
 <div class="history-filter">
-    <div class="row">
-        <div class="col-sm-12 title">Filter</div>
-    </div>
+
    <div class="row fields-container">
       <div class="col-sm-3">
-         <input type="text" class="form-control" placeholder="Service Provider">
+         <input type="text" class="form-control"
+                [(ngModel)]="filter.subscriber"
+                [typeaheadMinLength]="0"
+                [typeahead]="subscribers"
+                (typeaheadOnSelect)="onFilterCriteriaChange()"
+                placeholder="Service Provider">
       </div>
        <div class="col-sm-3">
            <input type="text" class="form-control" placeholder="Application">
@@ -16,4 +19,7 @@
            <input type="text" class="form-control" placeholder="Status">
        </div>
    </div>
+    <div class="row">
+        <div class="col-sm-12 text-right"><button class="btn btn-primary btn-sm" (click)="onFilterCriteriaChange()">Search</button></div>
+    </div>
 </div>
