@@ -32,44 +32,59 @@ const _getApplications = function (request, reply) {
     };
 
     let responseAdaptor = function (appTaskResult, appDetailsResult) {
-        let adapted = appTaskResult.map((task, index) => {
-            let details = appDetailsResult[index].reduce((pre, curr) => {
-                pre[curr.name] = curr.value;
-                return pre;
-            }, {});
-
-            let moCreated;
-            let isValidDate = false;
-            if (!!task.createTime) {
-                moCreated = moment(task.createTime);
-                isValidDate = moCreated.isValid();
+        let adapted = {
+            applicationTasks : [],
+            metadata : {
+                order: appTaskResult.order,
+                size: appTaskResult.size,
+                sort: appTaskResult.sort,
+                start: appTaskResult.start,
+                total: appTaskResult.total
             }
+        };
 
-            let getTiers = (tierString) => tierString.split(',').filter((item) => !!item);
+
+        if(appTaskResult && appTaskResult.data){
+            adapted.applicationTasks = appTaskResult.data.map((task, index) => {
+                let details = appDetailsResult[index].reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+                let moCreated;
+                let isValidDate = false;
+                if (!!task.createTime) {
+                    moCreated = moment(task.createTime);
+                    isValidDate = moCreated.isValid();
+                }
+
+                let getTiers = (tierString) => tierString.split(',').filter((item) => !!item);
 
 
-            return {
-                id: task.id,
-                assignee: task.assignee,
-                createTime: {
-                    date: (isValidDate && moCreated.format('DD-MMM-YYYY') ) || '',
-                    time: (isValidDate && moCreated.format('HH:mm:ss') ) || '',
-                    offset: (isValidDate && moCreated.format('Z') ) || '',
-                    unformatted: task.createTime
-                },
-                taskDescription: task.description,
-                applicationId: details['applicationId'] || '',
-                applicationName: details['applicationName'] || '',
-                applicationDescription: details['description'] || details['applicationDescription'] || '',
-                operators: details['operators'],
-                tier: details['tier'] || details['tierName'],
-                tiersStr: getTiers(details['tiersStr'] || details['apiTiers']),
-                userName: details['userName'],
-                apiVersion: details['apiVersion'],
-                apiContext: details['apiContext'],
-                subscriber: details['subscriber']
-            }
-        });
+                return {
+                    id: task.id,
+                    assignee: task.assignee,
+                    createTime: {
+                        date: (isValidDate && moCreated.format('DD-MMM-YYYY') ) || '',
+                        time: (isValidDate && moCreated.format('HH:mm:ss') ) || '',
+                        offset: (isValidDate && moCreated.format('Z') ) || '',
+                        unformatted: task.createTime
+                    },
+                    taskDescription: task.description,
+                    applicationId: details['applicationId'] || '',
+                    applicationName: details['applicationName'] || '',
+                    applicationDescription: details['description'] || details['applicationDescription'] || '',
+                    operators: details['operators'],
+                    tier: details['tier'] || details['tierName'],
+                    tiersStr: getTiers(details['tiersStr'] || details['apiTiers']),
+                    userName: details['userName'],
+                    apiVersion: details['apiVersion'],
+                    apiContext: details['apiContext'],
+                    subscriber: details['subscriber']
+                }
+            });
+        }
+
         return adapted;
     };
 
@@ -85,7 +100,7 @@ const _getApplications = function (request, reply) {
     let onApplicationSuccess = function (applicationTasksResult) {
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
-            appTaskResult = applicationTasksResult.data;
+            appTaskResult = applicationTasksResult;
             appDetailsPromises = applicationTasksResult.data.map((appTask) => {
                 return applicationDetailsREST.Invoke(appTask.id);
             });

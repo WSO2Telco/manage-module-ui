@@ -27,6 +27,19 @@ export class ApplicationTask {
     }
 }
 
+export class MetaData {
+    order: string;
+    size: number;
+    sort: string;
+    start: number;
+    total: number;
+}
+
+export class ApplicationTaskResult {
+    applicationTasks: ApplicationTask[];
+    meteData: MetaData
+}
+
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
 
 export class ApplicationTaskSearchParam {
@@ -68,19 +81,19 @@ export class ApprovalEvent {
     dataType: TableDataType;
     status: 'APPROVED' | 'REJECTED';
 
-    constructor(task: ApplicationTask, dataType: TableDataType,status?) {
+    constructor(task: ApplicationTask, dataType: TableDataType, status?) {
         this.task = task;
         this.dataType = dataType;
         this.status = status;
     }
 }
 
-export class ApplicationTaskFilter{
-    ids:number[]= [];
-    appNames:string[] = [];
-    users:string[] = [];
-    fromDate:string;
-    toDate:string;
-    dataType:TableDataType;
+export class ApplicationTaskFilter {
+    ids: number[] = [];
+    appNames: string[] = [];
+    users: string[] = [];
+    fromDate: string;
+    toDate: string;
+    dataType: TableDataType;
 }
 

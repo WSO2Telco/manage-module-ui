@@ -15,6 +15,7 @@
                     <input type="text" class="form-control"
                            [(ngModel)]="filterId"
                            [typeaheadMinLength]="0"
+                           container="body"
                            [typeahead]="FilterFieldsDataSource"
                            typeaheadOptionField="id"
                            (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
@@ -23,6 +24,7 @@
                 <div class="form-group col-xs-4">
                     <input type="text"
                            [(ngModel)]="filterAppName"
+                           container="body"
                            [typeaheadMinLength]="0"
                            [typeahead]="FilterFieldsDataSource"
                            typeaheadOptionField="applicationName"
@@ -32,6 +34,7 @@
                 <div class="form-group col-xs-4">
                     <input type="text"
                            [(ngModel)]="filterUser"
+                           container="body"
                            [typeahead]="FilterFieldsDataSource"
                            typeaheadOptionField="userName"
                            typeaheadGroupField="userName"

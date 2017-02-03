@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ApplicationTask, ApprovalEvent, ApplicationTaskFilter} from "../../commons/models/application-data-models";
+import {
+    ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
+    ApplicationTaskResult
+} from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
 import {ApprovalHelperService} from "../approval-helper.service";
@@ -21,8 +24,8 @@ export class ApplicationsComponent implements OnInit {
 
     ngOnInit() {
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(
-            (apps) => {
-                this.myApplications = apps;
+            (apps:ApplicationTaskResult) => {
+                this.myApplications = apps && apps.applicationTasks;
             },
             (error) => {
                 this.message.error(error);
@@ -30,8 +33,8 @@ export class ApplicationsComponent implements OnInit {
         );
 
         this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
-            (apps) => {
-                this.allApplications = apps;
+            (apps:ApplicationTaskResult) => {
+                this.allApplications = apps && apps.applicationTasks;
             },
             (error) => {
                 this.message.error(error)

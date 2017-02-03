@@ -4,7 +4,7 @@ import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
-    ApplicationTaskFilter
+    ApplicationTaskFilter, ApplicationTaskResult
 } from "../commons/models/application-data-models";
 import {AuthenticationService} from "../commons/services/authentication.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
@@ -17,25 +17,25 @@ export class ApprovalRemoteDataService {
      * Application Creations assigned to USER Stream
      * @type {BehaviorSubject<ApplicationTask[]>}
      */
-    public MyApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+    public MyApplicationCreationTasksProvider: Subject<ApplicationTaskResult> = new BehaviorSubject<ApplicationTaskResult>(null);
 
     /**
      * Application Creations assigned to GROUP user belongs to
      * @type {BehaviorSubject<ApplicationTask[]>}
      */
-    public GroupApplicationCreationTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+    public GroupApplicationCreationTasksProvider: Subject<ApplicationTaskResult> = new BehaviorSubject<ApplicationTaskResult>(null);
 
     /**
      * Application Api subscription creations assigned to USER Stream
      * @type {BehaviorSubject<ApplicationTask[]>}
      */
-    public MySubscriptionTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+    public MySubscriptionTasksProvider: Subject<ApplicationTaskResult> = new BehaviorSubject<ApplicationTaskResult>(null);
 
     /**
      * Application Api subscription creations assigned to GROUP Stream
      * @type {BehaviorSubject<ApplicationTask[]>}
      */
-    public GroupSubscriptionTasksProvider: Subject<ApplicationTask[]> = new BehaviorSubject<ApplicationTask[]>([]);
+    public GroupSubscriptionTasksProvider: Subject<ApplicationTaskResult> = new BehaviorSubject<ApplicationTaskResult>(null);
 
 
     private modifiedApplicationTaskIDs: number[] = new Array();
@@ -79,22 +79,21 @@ export class ApprovalRemoteDataService {
         }
     }
 
-    private getFilteredObservable(observable: Observable<ApplicationTask[]>, filter: ApplicationTaskFilter): Observable<ApplicationTask[]> {
-        if (observable && filter) {
-            return observable
-                .flatMap((tasks: ApplicationTask[]) => Observable.from(tasks))
+    private getFilteredObservable(appTask: ApplicationTask[], filter: ApplicationTaskFilter): ApplicationTask[] {
+        if (appTask && filter) {
+            return appTask
                 .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
                 .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
                 .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
                 .reduce((acc, curr) => {
                     acc.push(curr);
                     return acc;
-                }, [])
+                }, []);
         } else {
-            return observable;
+            return appTask;
         }
-
     }
+
 
     getUserApplicationTasks(filter?: ApplicationTaskFilter): void {
         let loginInfo = this.authService.loginUserInfo.getValue();
@@ -107,10 +106,17 @@ export class ApprovalRemoteDataService {
             };
             this.slimLoadingBarService.start();
 
-            let doSubscribe = (obs: Observable<ApplicationTask[]>) => {
-                obs.subscribe(
-                    (result: ApplicationTask[]) => {
-                        this.MyApplicationCreationTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTaskResult) => {
+                        if (!!filter) {
+                            result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
+                        }
+
+                        result.applicationTasks = this.updateModifiedTask(result.applicationTasks, this.modifiedApplicationTaskIDs);
+
+                        this.MyApplicationCreationTasksProvider.next(result);
                     },
                     (error: Response) => {
                         this.slimLoadingBarService.stop();
@@ -119,13 +125,7 @@ export class ApprovalRemoteDataService {
                     () => {
                         this.slimLoadingBarService.complete();
                     }
-                )
-            };
-
-            let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map((response: Response) => response.json());
-
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+                );
         }
     }
 
@@ -140,22 +140,23 @@ export class ApprovalRemoteDataService {
             };
             this.slimLoadingBarService.start();
 
-            let doSubscribe = (observable: Observable<ApplicationTask[]>) => {
-                observable .subscribe(
-                    (result: ApplicationTask[]) => {
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTaskResult) => {
+                        if (!!filter) {
+                            result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
+                        }
+
+                        result.applicationTasks = this.updateModifiedTask(result.applicationTasks, this.modifiedApplicationTaskIDs);
+
                         this.GroupApplicationCreationTasksProvider.next(result)
                     },
                     (error: Response) => Observable.throw(error.json().message),
                     () => {
                         this.slimLoadingBarService.complete();
                     }
-                )
-            };
-
-            let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map((response: Response) => response.json());
-
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+                );
         }
     }
 
@@ -169,25 +170,27 @@ export class ApprovalRemoteDataService {
                 candidateGroups: null
             };
 
-            let doSubscribe = (observable: Observable<ApplicationTask[]>) => {
-                observable.subscribe(
-                    (result) => {
-                        this.MySubscriptionTasksProvider.next(this.updateModifiedTask(result, this.modifiedApplicationTaskIDs))
+            this.slimLoadingBarService.start();
+
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTaskResult) => {
+                        if (!!filter) {
+                            result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
+                        }
+                        result.applicationTasks = this.updateModifiedTask(result.applicationTasks, this.modifiedApplicationTaskIDs);
+
+                        this.MySubscriptionTasksProvider.next(result);
                     },
                     (error: Response) => Observable.throw(error.json().message),
                     () => {
                         this.slimLoadingBarService.complete();
                     }
                 );
-            };
-
-            this.slimLoadingBarService.start();
-            let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map((response: Response) => response.json());
-
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
+
 
     getUserGroupAppSubscriptionTask(filter?: ApplicationTaskFilter): void {
         let loginInfo = this.authService.loginUserInfo.getValue();
@@ -199,9 +202,17 @@ export class ApprovalRemoteDataService {
                 candidateGroups: loginInfo.roles.toString()
             };
 
-            let doSubscribe = (observable: Observable<ApplicationTask[]>) => {
-                observable.subscribe(
-                    (result: ApplicationTask[]) => {
+            this.slimLoadingBarService.start();
+
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map((response: Response) => response.json())
+                .subscribe(
+                    (result: ApplicationTaskResult) => {
+                        if (!!filter) {
+                            result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
+                        }
+                        result.applicationTasks = this.updateModifiedTask(result.applicationTasks, this.modifiedApplicationTaskIDs);
+
                         this.GroupSubscriptionTasksProvider.next(result);
                     },
                     (error: Response) => Observable.throw(error.json().message),
@@ -209,13 +220,7 @@ export class ApprovalRemoteDataService {
                         this.slimLoadingBarService.complete();
                     }
                 );
-            };
 
-            this.slimLoadingBarService.start();
-            let observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map((response: Response) => response.json());
-
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
         }
     }
 
@@ -254,8 +259,8 @@ export class ApprovalRemoteDataService {
     getAllTasks(): void {
         this.getUserApplicationTasks();
         this.getUserAppSubscriptionTasks();
-        this.getUserGroupAppSubscriptionTask();
         this.getUserGroupApplicationTasks();
+        this.getUserGroupAppSubscriptionTask();
     }
 
     getFilteredResult(filter: ApplicationTaskFilter): void {

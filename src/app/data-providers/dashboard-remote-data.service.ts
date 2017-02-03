@@ -3,7 +3,7 @@ import {Headers, RequestOptions, Http, Response} from "@angular/http";
 import {Observable, ReplaySubject} from "rxjs";
 import {DashboardData, DashboardDataRequestParam} from "../commons/models/dashboard-data-models";
 import {ApprovalRemoteDataService} from "./approval-remote-data.service";
-import {ApplicationTask} from "../commons/models/application-data-models";
+import {ApplicationTask, ApplicationTaskResult} from "../commons/models/application-data-models";
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -19,6 +19,7 @@ export class DashboardRemoteDataService {
     constructor(private http: Http, 
                 @Inject('API_CONTEXT')private apiContext:string,
                 private approvalService: ApprovalRemoteDataService) {
+
         approvalService.MyApplicationCreationTasksProvider.subscribe(
             (result) => {
                 this.updateDashboardData(result, 'appCreationsForUser')
@@ -57,9 +58,9 @@ export class DashboardRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message))
     };
 
-    updateDashboardData(result: ApplicationTask[], type: string): void {
+    updateDashboardData(result:ApplicationTaskResult, type: string): void {
         let changeObj = {};
-        changeObj[type] = result.length || 0;
+        changeObj[type] = (result && result.applicationTasks && result.applicationTasks.length) || 0;
         this._dashboardStatisticsData = Object.assign({},this._dashboardStatisticsData,changeObj);
         this._dashboardStatisticsData.totalAppCreations = this._dashboardStatisticsData.appCreationsForGroup + this._dashboardStatisticsData.appCreationsForUser;
         this._dashboardStatisticsData.totalSubCreations = this._dashboardStatisticsData.subCreationsForGroup + this._dashboardStatisticsData.subCreationsForUser;
