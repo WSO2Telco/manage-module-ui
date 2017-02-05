@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {
     ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
-    ApplicationTaskResult
+    ApplicationTaskResult, PaginationInfo
 } from "../../commons/models/application-data-models";
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
 import {ApprovalHelperService} from "../approval-helper.service";
+import {TableDataType} from "../../commons/models/common-data-models";
 
 @Component({
     selector: 'app-applications',
@@ -14,8 +15,13 @@ import {ApprovalHelperService} from "../approval-helper.service";
 })
 export class ApplicationsComponent implements OnInit {
 
-    private myApplications: ApplicationTask[];
-    private allApplications: ApplicationTask[];
+    private myApplications: ApplicationTaskResult;
+
+    private allApplications: ApplicationTaskResult;
+
+    private userApplicationFilter: ApplicationTaskFilter;
+
+    private groupApplicationFilter: ApplicationTaskFilter;
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
@@ -23,9 +29,13 @@ export class ApplicationsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.userApplicationFilter = new ApplicationTaskFilter(new TableDataType('USER', 'APPLICATION'),10);
+
+        this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'),10);
+
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(
-            (apps:ApplicationTaskResult) => {
-                this.myApplications = apps && apps.applicationTasks;
+            (apps: ApplicationTaskResult) => {
+                this.myApplications = apps;
             },
             (error) => {
                 this.message.error(error);
@@ -33,16 +43,16 @@ export class ApplicationsComponent implements OnInit {
         );
 
         this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
-            (apps:ApplicationTaskResult) => {
-                this.allApplications = apps && apps.applicationTasks;
+            (apps: ApplicationTaskResult) => {
+                this.allApplications = apps;
             },
             (error) => {
                 this.message.error(error)
             }
         );
 
-        this.approvalService.getUserApplicationTasks();
-        this.approvalService.getUserGroupApplicationTasks();
+        this.approvalService.getFilteredResult(this.userApplicationFilter);
+        this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
@@ -53,7 +63,7 @@ export class ApplicationsComponent implements OnInit {
         this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
     }
 
-    onFilterChangeHandler(event:ApplicationTaskFilter):void{
+    onFilterChangeHandler(event: ApplicationTaskFilter): void {
         this.approvalService.getFilteredResult(event);
     }
 

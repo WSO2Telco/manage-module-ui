@@ -4,7 +4,7 @@ import {Observable, Subject, BehaviorSubject} from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
-    ApplicationTaskFilter, ApplicationTaskResult
+    ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo
 } from "../commons/models/application-data-models";
 import {AuthenticationService} from "../commons/services/authentication.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
@@ -49,6 +49,17 @@ export class ApprovalRemoteDataService {
         assign: this.apiContext + '/applications/assign',
         approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
         approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
+    };
+
+    private actionMap = {
+        USER: {
+            APPLICATION: this.getUserApplicationTasks,
+            SUBSCRIPTION: this.getUserAppSubscriptionTasks
+        },
+        GROUP: {
+            APPLICATION: this.getUserGroupApplicationTasks,
+            SUBSCRIPTION: this.getUserGroupAppSubscriptionTask
+        }
     };
 
     constructor(private http: Http,
@@ -101,9 +112,16 @@ export class ApprovalRemoteDataService {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
                 size: 100,
+                start: 0,
                 processType: "APPLICATION_CREATION",
                 candidateGroups: null
             };
+
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
+
             this.slimLoadingBarService.start();
 
             this.http.post(this.apiEndpoints['search'], param, this.options)
@@ -129,6 +147,7 @@ export class ApprovalRemoteDataService {
         }
     }
 
+
     getUserGroupApplicationTasks(filter?: ApplicationTaskFilter): void {
         let loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
@@ -136,8 +155,16 @@ export class ApprovalRemoteDataService {
                 assignee: null,
                 processType: "APPLICATION_CREATION",
                 size: 100,
+                start: 0,
                 candidateGroups: loginInfo.roles.toString()
             };
+
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
+
+
             this.slimLoadingBarService.start();
 
             this.http.post(this.apiEndpoints['search'], param, this.options)
@@ -166,9 +193,16 @@ export class ApprovalRemoteDataService {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
                 size: 100,
+                start: 0,
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: null
             };
+
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
+
 
             this.slimLoadingBarService.start();
 
@@ -198,9 +232,16 @@ export class ApprovalRemoteDataService {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
                 size: 100,
+                start: 0,
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: loginInfo.roles.toString()
             };
+
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
+
 
             this.slimLoadingBarService.start();
 
@@ -264,18 +305,7 @@ export class ApprovalRemoteDataService {
     }
 
     getFilteredResult(filter: ApplicationTaskFilter): void {
-        let actionMap = {
-            USER: {
-                APPLICATION: this.getUserApplicationTasks,
-                SUBSCRIPTION: this.getUserAppSubscriptionTasks
-            },
-            GROUP: {
-                APPLICATION: this.getUserGroupApplicationTasks,
-                SUBSCRIPTION: this.getUserGroupAppSubscriptionTask
-            }
-        };
-
-        actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
+        this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
     }
 
 }

@@ -8,6 +8,12 @@ export class MenuItem {
 export class TableDataType {
     dataCategory: 'USER' | 'GROUP';
     dataType: 'APPLICATION' | 'SUBSCRIPTION';
+
+
+    constructor(dataCategory,dataType) {
+        this.dataCategory = dataCategory;
+        this.dataType = dataType;
+    }
 }
 
 

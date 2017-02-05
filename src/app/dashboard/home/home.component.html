@@ -13,8 +13,8 @@
     <div class="col-md-6">
       <application-data-table
               class="my"
-              [recordsType]="{dataCategory:'USER',dataType:'APPLICATION'}"
-              [recordLimit]="5"
+              [filter]="myApplicationFilter"
+              [summeryModeRecordLimit]="5"
               moreLinkPath="/approvals/applications"
               tableTitle="APPLICATION CREATIONS"
               [dataSource]="myApplications"
@@ -26,9 +26,9 @@
     <div class="col-md-6">
       <application-data-table
               class="my"
-              [recordLimit]="5"
+              [summeryModeRecordLimit]="5"
               moreLinkPath="/approvals/subscriptions"
-              [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
+              [filter]="mySubscriptionFilter"
               tableTitle="SUBSCRIPTION CREATIONS"
               [dataSource]="myAppSubscriptionTask"
               (onApproveRejectTask)="onApproveRejectHandler($event)"
@@ -41,8 +41,8 @@
   <div class="row">
     <div class="col-md-6">
       <application-data-table
-              [recordsType]="{dataCategory:'GROUP',dataType:'APPLICATION'}"
-              [recordLimit]="5"
+              [filter]="groupApplicationFilter"
+              [summeryModeRecordLimit]="5"
               moreLinkPath="/approvals/applications"
               tableTitle="APPLICATION CREATIONS"
               [dataSource]="allApplications"
@@ -52,8 +52,8 @@
 
     <div class="col-md-6">
       <application-data-table
-              [recordsType]="{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}"
-              [recordLimit]="5"
+              [filter]="groupSubscriptionFilter"
+              [summeryModeRecordLimit]="5"
               moreLinkPath="/approvals/subscriptions"
               tableTitle="SUBSCRIPTION CREATIONS"
               [dataSource]="allSubscriptions"

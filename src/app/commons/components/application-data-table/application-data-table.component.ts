@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, SimpleChanges} from '@angular/core';
 import {
     ApplicationTask, ApproveApplicationCreationTaskParam,
-    ApproveSubscriptionCreationTaskParam, ApprovalEvent, ApplicationTaskFilter
+    ApproveSubscriptionCreationTaskParam, ApprovalEvent, ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo
 } from "../../models/application-data-models";
 import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../services/message.service";
@@ -21,19 +21,16 @@ export class ApplicationDataTableComponent implements OnInit {
     private tableTitle: string;
 
     @Input()
-    private recordLimit: string;
+    private summeryModeRecordLimit: string;
 
     @Input()
-    private noOfRecordsPerPage:number= 0;
-
-    @Input()
-    private dataSource: ApplicationTask;
-
-    @Input()
-    private recordsType: TableDataType;
+    private dataSource: ApplicationTaskResult;
 
     @Input()
     private moreLinkPath: string;
+
+    @Input()
+    private filter: ApplicationTaskFilter;
 
     @Output()
     private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
@@ -42,28 +39,23 @@ export class ApplicationDataTableComponent implements OnInit {
     private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
     @Output()
-    private onFilterChange:EventEmitter<ApplicationTaskFilter> = new EventEmitter()
+    private onFilterChange: EventEmitter<ApplicationTaskFilter> = new EventEmitter();
 
-    private filter:ApplicationTaskFilter;
+    private FilterFieldsDataSource: ApplicationTask[];
 
-    private FilterFieldsDataSource:ApplicationTask[]
-
-    private filterId:number;
-    private filterAppName:string;
-    private filterUser:string;
-    private filterFromDate:string;
-    private filterToDate:string;
+    private filterId: number;
+    private filterAppName: string;
+    private filterUser: string;
+    private filterFromDate: string;
+    private filterToDate: string;
 
     //Flag to determine whether to filtering is active or not
-    private isFilterActivated:boolean = false;
+    private isFilterActivated: boolean = false;
 
     //Flag to determine whether to show or hide filtering panel
-    private isFilterVisible:boolean= false;
+    private isFilterVisible: boolean = false;
 
-    //TODO Remove this when pagination data comes from backend
-    private totalItems:number = 50;
-    private currentPage:number=1;
-    private itemsPerPage:number = 5;
+    private currentPage: number = 1;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
@@ -71,13 +63,13 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.filter = new ApplicationTaskFilter();
-        this.filter.dataType = this.recordsType;
+
     }
 
-    ngOnChanges(changeObj:SimpleChanges){
-        if(!this.isFilterActivated  && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)){
-            this.FilterFieldsDataSource =  changeObj['dataSource'].currentValue;
+    ngOnChanges(changeObj: SimpleChanges) {
+        if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
+            let res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
+            this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
         }
     }
 
@@ -91,9 +83,9 @@ export class ApplicationDataTableComponent implements OnInit {
         item.tier = event.target.value;
     }
 
-    onToggleFilter(){
+    onToggleFilter() {
         this.isFilterVisible = !this.isFilterVisible;
-        if(!this.isFilterVisible){
+        if (!this.isFilterVisible) {
             this.onClear('ALL');
         }
     }
@@ -117,13 +109,13 @@ export class ApplicationDataTableComponent implements OnInit {
         }
     }
 
-    onFilterItemAdded(event:TypeaheadMatch,type:string){
-        let task:ApplicationTask = <ApplicationTask>event.item;
+    onFilterItemAdded(event: TypeaheadMatch, type: string) {
+        let task: ApplicationTask = <ApplicationTask>event.item;
         this.isFilterActivated = true;
 
-        switch(type){
+        switch (type) {
             case 'ID' : {
-                if(this.filter.ids.indexOf(task.id) < 0){
+                if (this.filter.ids.indexOf(task.id) < 0) {
                     this.filter.ids.push(task.id);
                 }
                 this.filterId = null;
@@ -131,7 +123,7 @@ export class ApplicationDataTableComponent implements OnInit {
             }
 
             case 'APP_NAME' : {
-                if(this.filter.appNames.indexOf(task.applicationName) < 0){
+                if (this.filter.appNames.indexOf(task.applicationName) < 0) {
                     this.filter.appNames.push(task.applicationName);
                 }
                 this.filterAppName = null;
@@ -139,7 +131,7 @@ export class ApplicationDataTableComponent implements OnInit {
             }
 
             case 'USER' : {
-                if(this.filter.users.indexOf(task.userName) < 0){
+                if (this.filter.users.indexOf(task.userName) < 0) {
                     this.filter.users.push(task.userName);
                 }
                 this.filterUser = null;
@@ -149,24 +141,24 @@ export class ApplicationDataTableComponent implements OnInit {
         this.onFilterChange.emit(this.filter);
     }
 
-    onClear(type:string){
-        switch (type){
-            case 'ID':{
+    onClear(type: string) {
+        switch (type) {
+            case 'ID': {
                 this.filter.ids.length = 0;
                 this.filterId = null;
                 break;
             }
-            case 'NAME':{
+            case 'NAME': {
                 this.filter.appNames.length = 0;
                 this.filterAppName = null;
                 break;
             }
-            case 'USER':{
+            case 'USER': {
                 this.filter.users.length = 0;
                 this.filterUser = null;
                 break;
             }
-            case 'ALL':{
+            case 'ALL': {
                 this.filter.ids.length = 0;
                 this.filter.appNames.length = 0;
                 this.filter.users.length = 0;
@@ -177,15 +169,16 @@ export class ApplicationDataTableComponent implements OnInit {
             }
         }
 
-        if(this.filter.ids.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0){
+        if (this.filter.ids.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0) {
             this.isFilterActivated = false;
         }
 
         this.onFilterChange.emit(this.filter);
     }
 
-    onPageChanged($event){
-
+    onPageChanged(event) {
+        this.filter.startRecordNumber = (<number>event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
+        this.onFilterChange.emit(this.filter);
     }
 
 }

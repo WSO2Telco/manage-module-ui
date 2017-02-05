@@ -2,17 +2,16 @@
     <div class="col-sm-6">
         <application-data-table
                 class="my"
-                [recordsType]="{dataCategory:'USER',dataType:'APPLICATION'}"
+                [filter]="userApplicationFilter"
                 tableTitle="MY APPLICATIONS"
                 [dataSource]="myApplications"
-                [noOfRecordsPerPage]="8"
                 (onApproveRejectTask)="onApproveRejectHandler($event)"
                 (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>
     <div class="col-sm-6">
         <application-data-table
                 class="group"
-                [recordsType]="{dataCategory:'GROUP',dataType:'APPLICATION'}"
+                [filter]="groupApplicationFilter"
                 tableTitle="All APPLICATIONS"
                 [dataSource]="allApplications"
                 (onAssignTask)="onAssignTaskHandler($event)"

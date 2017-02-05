@@ -6,6 +6,7 @@ import {
 import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
 import {ApprovalHelperService} from "../approval-helper.service";
+import {TableDataType} from "../../commons/models/common-data-models";
 
 @Component({
     selector: 'app-subscriptions',
@@ -14,8 +15,11 @@ import {ApprovalHelperService} from "../approval-helper.service";
 })
 export class SubscriptionsComponent implements OnInit {
 
-    private mySubscriptions: ApplicationTask[];
-    private allSubscriptions: ApplicationTask[];
+    private mySubscriptions: ApplicationTaskResult;
+    private allSubscriptions: ApplicationTaskResult;
+
+    private mySubscriptionFilter:ApplicationTaskFilter;
+    private groupSubscriptionFilter:ApplicationTaskFilter;
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
@@ -23,9 +27,14 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER','SUBSCRIPTION'),5);
+
+        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP','SUBSCRIPTION'),5);
+
         this.approvalService.MySubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
-                this.mySubscriptions = subs && subs.applicationTasks;
+                this.mySubscriptions = subs;
             },
             (error) => {
                 this.message.error(error)
@@ -34,15 +43,15 @@ export class SubscriptionsComponent implements OnInit {
 
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
-                this.allSubscriptions = subs && subs.applicationTasks;
+                this.allSubscriptions = subs;
             },
             (error) => {
                 this.message.error(error)
             }
         );
 
-        this.approvalService.getUserAppSubscriptionTasks();
-        this.approvalService.getUserGroupAppSubscriptionTask();
+        this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
+        this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
     }
 
 

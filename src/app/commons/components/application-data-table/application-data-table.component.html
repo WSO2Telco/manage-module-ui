@@ -2,7 +2,7 @@
     <span class="filter" tooltip="Filter"
           [ngClass]="{'on':isFilterVisible}"
           (click)="onToggleFilter()"><i class="material-icons">filter_list</i></span>
-    <div><span class="tbl-cat">{{recordsType.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
+    <div><span class="tbl-cat">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
     <div class="tbl-header">
         {{tableTitle}}
     </div>
@@ -79,7 +79,7 @@
             <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
         </div>
 
-        <ng-container *ngFor="let item of dataSource; let i=index">
+        <ng-container *ngFor="let item of dataSource?.applicationTasks; let i=index">
             <div class="tbl-row"
                  [ngClass]="{
                  'modified' : item.isModified,
@@ -87,7 +87,7 @@
                  'M':item.actionType == 'MORE',
                  'A':item.actionType == 'APPROVE',
                  'R':item.actionType == 'REJECT'}"
-                 *ngIf="!!!recordLimit || i < recordLimit">
+                 *ngIf="!!!summeryModeRecordLimit || i < summeryModeRecordLimit">
                 <div class="tbl-cell">
                     <span tooltip="More Info"
                           class="action expand material-icons"
@@ -98,19 +98,19 @@
                 <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
-                    <span tooltip="Approve" *ngIf="recordsType.dataCategory == 'USER'"
+                    <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
                           class="action  approve material-icons"
                           [ngClass]="{'A':item.actionType =='APPROVE' }"
                           (click)="item.isExpand = true; item.actionType = 'APPROVE' ">check</span>
 
-                    <span tooltip="Reject" *ngIf="recordsType.dataCategory  == 'USER'"
+                    <span tooltip="Reject" *ngIf="filter?.dataType?.dataCategory  == 'USER'"
                           class="action  reject material-icons"
                           [ngClass]="{'R':item.actionType =='REJECT' }"
                           (click)="item.isExpand = true; item.actionType = 'REJECT' ">close</span>
 
-                    <span tooltip="Assign to Me" *ngIf="recordsType.dataCategory  == 'GROUP'"
+                    <span tooltip="Assign to Me" *ngIf="filter?.dataType?.dataCategory  == 'GROUP'"
                           class="action  assign material-icons"
-                          (click)="onAction('ASSIGN',item,recordsType)">assignment_ind</span>
+                          (click)="onAction('ASSIGN',item,filter?.dataType)">assignment_ind</span>
                 </div>
                 <div class="more-con animated fadeInUp" *ngIf="item.isExpand"
                      [ngClass]="{ 'M':item.actionType == 'MORE',
@@ -156,10 +156,10 @@
                         </button>
                         <button class="btn btn-primary animated fadeIn"
                                 *ngIf="item.actionType == 'APPROVE'"
-                                (click)="onAction('APPROVE',item,recordsType)">Approve
+                                (click)="onAction('APPROVE',item,filter?.dataType)">Approve
                         </button>
                         <button *ngIf="item.actionType == 'REJECT'"
-                                class="btn btn-danger" (click)="onAction('REJECT',item,recordsType)">Reject
+                                class="btn btn-danger" (click)="onAction('REJECT',item,filter?.dataType)">Reject
                         </button>
                     </div>
 
@@ -167,20 +167,22 @@
             </div>
         </ng-container>
 
-        <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">
+        <div class="no-rec-row tbl-row" *ngIf="dataSource?.applicationTasks?.length == 0">
             <span class="no-rec">No Records..</span>
         </div>
     </div> <!--TABLE END-->
 
-    <div class="text-right" *ngIf="dataSource?.length > recordLimit"><span class="more"
-                                                                           (click)="onViewAll()">View All</span></div>
+    <div class="text-right" *ngIf="dataSource?.applicationTasks?.length > summeryModeRecordLimit"><span class="more"
+                                                                          (click)="onViewAll()">View All</span></div>
 
-    <div class="pagination-container text-center" *ngIf="!!noOfRecordsPerPage && noOfRecordsPerPage > 0">
+    <div class="pagination-container text-center"
+         *ngIf="dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) ">
+
         <pagination
                 [boundaryLinks]="true"
-                [totalItems]="totalItems"
+                [totalItems]="dataSource?.metadata?.total"
                 [(ngModel)]="currentPage"
-                [itemsPerPage]="itemsPerPage"
+                [itemsPerPage]="filter.numberOfRecordsPerPage"
                 [maxSize]="5"
                 (pageChanged)="onPageChanged($event)"
                 class="pagination-sm"

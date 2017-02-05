@@ -21,6 +21,7 @@ function invokeApplicationRest(params) {
         }
 
         path += ( (!!params.size) ? '&size=' + params.size : '&size=100');
+        path += ( (!!params.start) ? '&start=' + params.start : '&size=0');
 
         if (params.processType == 'APPLICATION_CREATION') {
             path += '&processDefinitionKey=application_creation_approval_process';

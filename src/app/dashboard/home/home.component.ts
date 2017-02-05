@@ -8,6 +8,7 @@ import {DashboardData} from "../../commons/models/dashboard-data-models";
 import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
 import {MessageService} from "../../commons/services/message.service";
 import {ApprovalHelperService} from "../../approvals/approval-helper.service";
+import {TableDataType} from "../../commons/models/common-data-models";
 
 @Component({
     selector: 'app-home',
@@ -16,15 +17,21 @@ import {ApprovalHelperService} from "../../approvals/approval-helper.service";
 })
 export class HomeComponent implements OnInit {
 
-    private myApplications: ApplicationTask[];
+    private myApplications: ApplicationTaskResult;
 
-    private myAppSubscriptionTask: ApplicationTask[];
+    private myAppSubscriptionTask: ApplicationTaskResult;
 
-    private allApplications: ApplicationTask[];
+    private allApplications: ApplicationTaskResult;
 
-    private allSubscriptions: ApplicationTask[];
+    private allSubscriptions: ApplicationTaskResult;
 
     private dashboardData: DashboardData;
+
+    private myApplicationFilter:ApplicationTaskFilter;
+    private mySubscriptionFilter:ApplicationTaskFilter;
+    private groupApplicationFilter:ApplicationTaskFilter;
+    private groupSubscriptionFilter:ApplicationTaskFilter;
+
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private approvalHelperService: ApprovalHelperService,
@@ -34,28 +41,38 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
+        this.myApplicationFilter = new ApplicationTaskFilter(new TableDataType('USER','APPLICATION'));
+        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER','SUBSCRIPTION'));
+        this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP','APPLICATION'));
+        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP','SUBSCRIPTION'));
+
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
-                this.myApplications = response && response.applicationTasks
+                this.myApplications = response;
             },
             (error) => this.message.error(error));
 
         this.approvalService.MySubscriptionTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
-                this.myAppSubscriptionTask = response && response.applicationTasks
+                this.myAppSubscriptionTask = response;
             },
             (error) => this.message.error(error));
 
         this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
-                this.allApplications = response && response.applicationTasks
+                this.allApplications = response;
             },
             (error) => this.message.error(error));
 
 
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
-            (response:ApplicationTaskResult) => this.allSubscriptions = response && response.applicationTasks,
-            (error) => this.message.error(error));
+            (response: ApplicationTaskResult) => {
+                this.allSubscriptions = response
+            },
+            (error) => {
+                this.message.error(error)
+            });
+
 
         this.dashboardService.DashboardDataProvider.subscribe(
             (response) => this.dashboardData = response,

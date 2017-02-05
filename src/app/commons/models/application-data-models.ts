@@ -35,6 +35,16 @@ export class MetaData {
     total: number;
 }
 
+export class PaginationInfo{
+    pageNo:number;
+    recordsPerPage : number;
+
+    constructor(pageNo: number,recordsPerPage:number) {
+        this.pageNo = pageNo;
+        this.recordsPerPage = recordsPerPage;
+    }
+}
+
 export class ApplicationTaskResult {
     applicationTasks: ApplicationTask[];
     meteData: MetaData
@@ -46,6 +56,7 @@ export class ApplicationTaskSearchParam {
     candidateGroups: string;
     processType: PROCESS_TYPE;
     assignee: string;
+    start:number;
     size: number
 }
 
@@ -95,5 +106,12 @@ export class ApplicationTaskFilter {
     fromDate: string;
     toDate: string;
     dataType: TableDataType;
+    startRecordNumber : number=0;
+    numberOfRecordsPerPage:number=0;
+
+    constructor(dataType: TableDataType,recPerPage?:number) {
+        this.dataType = dataType;
+        this.numberOfRecordsPerPage = recPerPage;
+    }
 }
 

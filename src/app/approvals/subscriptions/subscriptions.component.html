@@ -3,7 +3,7 @@
    <div class="col-sm-6">
        <application-data-table
                class="my"
-               [recordsType]="{dataCategory:'USER',dataType:'SUBSCRIPTION'}"
+               [filter]="mySubscriptionFilter"
                tableTitle="SUBSCRIPTION CREATIONS"
                [dataSource]="mySubscriptions"
                (onApproveRejectTask)="onApproveRejectHandler($event)"
@@ -11,7 +11,7 @@
    </div>
    <div class="col-sm-6">
        <application-data-table
-               [recordsType]="{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}"
+               [filter]="groupSubscriptionFilter"
                tableTitle="SUBSCRIPTION CREATIONS"
                [dataSource]="allSubscriptions"
                (onAssignTask)="onAssignTaskHandler($event)"
