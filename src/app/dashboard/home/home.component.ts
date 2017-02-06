@@ -82,7 +82,9 @@ export class HomeComponent implements OnInit {
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id,()=>{
+            this.approvalService.getAllTasks();
+        });
     }
 
     onApproveRejectHandler(event: ApprovalEvent): void {

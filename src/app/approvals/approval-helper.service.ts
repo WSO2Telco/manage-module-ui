@@ -17,7 +17,7 @@ export class ApprovalHelperService {
     }
 
 
-    assignApplicationTask(dataType: string, taskId: number):void {
+    assignApplicationTask(dataType: string, taskId: number,callBack):void {
 
         this.slimLoadingBarService.start();
 
@@ -28,7 +28,7 @@ export class ApprovalHelperService {
                 } else if (dataType == "SUBSCRIPTION") {
                     this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
                 }
-                this.approvalService.getAllTasks();
+                callBack();
             },
             (error) => {
                 this.message.error(error);
@@ -55,7 +55,13 @@ export class ApprovalHelperService {
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {
-                    this.message.success((status == 'APPROVED') ? this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS : this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+
+                    if(status == 'APPROVED'){
+                        this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
+                    }else{
+                        this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                    }
+
                     this.approvalService.getAllTasks();
                 },
                 (error) => {
@@ -78,7 +84,12 @@ export class ApprovalHelperService {
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 () => {
-                    this.message.success((status == 'APPROVED')? this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS : this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
+                    if(status == 'APPROVED'){
+                        this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
+                    }else{
+                        this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
+                    }
+
                     this.approvalService.getAllTasks();
                 },
                 (error) => {

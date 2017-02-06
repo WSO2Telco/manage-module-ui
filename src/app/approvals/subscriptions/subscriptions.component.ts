@@ -18,8 +18,8 @@ export class SubscriptionsComponent implements OnInit {
     private mySubscriptions: ApplicationTaskResult;
     private allSubscriptions: ApplicationTaskResult;
 
-    private mySubscriptionFilter:ApplicationTaskFilter;
-    private groupSubscriptionFilter:ApplicationTaskFilter;
+    private mySubscriptionFilter: ApplicationTaskFilter;
+    private groupSubscriptionFilter: ApplicationTaskFilter;
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
@@ -28,9 +28,9 @@ export class SubscriptionsComponent implements OnInit {
 
     ngOnInit() {
 
-        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER','SUBSCRIPTION'),5);
+        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER', 'SUBSCRIPTION'), 10);
 
-        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP','SUBSCRIPTION'),5);
+        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'), 10);
 
         this.approvalService.MySubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
@@ -50,13 +50,18 @@ export class SubscriptionsComponent implements OnInit {
             }
         );
 
+        this.getData();
+    }
+
+    private getData() {
         this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
         this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
     }
 
-
     onAssignTaskHandler(event: ApprovalEvent): void {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, () => {
+            this.getData();
+        });
     }
 
     onApproveRejectHandler(event: ApprovalEvent): void {

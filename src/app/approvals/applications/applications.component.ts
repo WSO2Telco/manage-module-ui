@@ -51,12 +51,18 @@ export class ApplicationsComponent implements OnInit {
             }
         );
 
+        this.getData();
+    }
+
+    private getData(){
         this.approvalService.getFilteredResult(this.userApplicationFilter);
         this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id,()=>{
+            this.getData();
+        });
     }
 
     onApproveRejectHandler(event: ApprovalEvent): void {

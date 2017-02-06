@@ -11,7 +11,7 @@ export class MessageService {
         title: '',
         msg: '',
         showClose: true,
-        timeout: 5000,
+        timeout: 7000,
         theme: 'material'
     };
 
