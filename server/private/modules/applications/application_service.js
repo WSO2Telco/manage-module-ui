@@ -6,6 +6,7 @@ const applicationREST = require('./application_tasks_rest_service');
 const applicationDetailsREST = require('./application_details_rest_service');
 const applicationAssignREST = require('./application_assign_rest_service');
 const applicationCompleteRest = require('./application_task_complete_rest_service');
+const applicationHistoryREST = require('./application_history_rest_service');
 const APP_CONSTANT = require('./appication_const');
 
 
@@ -319,13 +320,16 @@ const _approveSubscriptionCreation = function (request, reply) {
 
 
 const _getGraphData = function (request, reply) {
-    reply({
-        x_axis: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul'],
-        data: [
-            {data: [65, 59, 80, 81, 75, 55, 90], label: 'Applications'},
-            {data: [28, 48, 40, 19, 12, 27, 80], label: 'Subscriptions'}
-        ]
-    });
+
+    let onSuccess = function (result) {
+        reply(result);
+    };
+
+    let onError = function (error) {
+        reply(error);
+    };
+
+    applicationHistoryREST.Invoke().then(onSuccess, onError);
 };
 
 

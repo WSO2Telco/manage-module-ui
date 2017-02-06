@@ -13,7 +13,7 @@ export class DashboardRemoteDataService {
      * Application and Subscription Creation History Graph Data Stream
      * @type {BehaviorSubject<HistoryBarGraphData>}
      */
-    public CreationHistoryGraphDataProvider:BehaviorSubject<HistoryBarGraphData> = new BehaviorSubject<HistoryBarGraphData>(null);
+    public CreationHistoryGraphDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
@@ -83,7 +83,7 @@ export class DashboardRemoteDataService {
         this.http.get(this.apiEndpoints['graph'],this.options)
             .map((response: Response) => response.json())
             .subscribe(
-                (graphData:HistoryBarGraphData)=>{
+                (graphData)=>{
                     this.CreationHistoryGraphDataProvider.next(graphData);
                 },
                 (error: Response) => Observable.throw(error.json().message),

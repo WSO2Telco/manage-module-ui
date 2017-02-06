@@ -32,27 +32,34 @@ export class ApprovalHistoryGraphComponent implements OnInit {
     public barChartType: string = 'bar';
     public barChartLegend: boolean = false;
 
-    public barChartDataApplications: any[] = [
-        {data: [65, 59, 80, 81, 75, 55, 90], label: 'All Applications'},
-        {data: [28, 48, 40, 19, 12, 27, 80], label: 'My Applications'}
-    ];
 
     public barChartDataSubscriptions: any[] = [
         {data: [65, 59, 80, 81, 85, 55, 79], label: 'All Applications'},
         {data: [28, 48, 40, 19, 27, 27, 16], label: 'My Applications'}
     ];
 
-    private historyCreation: HistoryBarGraphData = new HistoryBarGraphData();
+    private historyCreationDataSet:any[] =  [{ data: [] },{ data: [] }];
+    private historyCreationLabels:string[] = [];
 
     constructor(private dashboardService: DashboardRemoteDataService,
                 private message: MessageService) {
     }
 
     ngOnInit() {
+        this.dashboardService.getCreationHistoryGraphData();
+
         this.dashboardService.CreationHistoryGraphDataProvider.subscribe(
-            (historyData:HistoryBarGraphData) => {
-                if(historyData){
-                    this.historyCreation = historyData;
+            (historyData:any) => {
+                if(historyData && historyData.xAxisLabels){
+                    this.historyCreationLabels.length = 0;
+                    historyData.xAxisLabels.forEach((lbl,index)=>{
+                        this.historyCreationLabels[index] = lbl;
+                    });
+                }
+
+                if(historyData && historyData.graphData && historyData.graphData.length > 0){
+                    this.historyCreationDataSet = historyData.graphData;
+
                 }
             },
             (error) => {
@@ -60,7 +67,7 @@ export class ApprovalHistoryGraphComponent implements OnInit {
             }
         );
 
-        this.dashboardService.getCreationHistoryGraphData();
+
     }
 
 }
