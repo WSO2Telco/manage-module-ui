@@ -4,10 +4,10 @@ webpackJsonp([0,4],{
 /***/ function(module, exports, __webpack_require__) {
 
 var map = {
-	"app/approvals/approvals.module": 408,
-	"app/dashboard/dashboard.module": 412,
-	"app/history/history.module": 415,
-	"app/login/login.module": 416
+	"app/approvals/approvals.module": 410,
+	"app/dashboard/dashboard.module": 413,
+	"app/history/history.module": 416,
+	"app/login/login.module": 417
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -31,20 +31,20 @@ webpackContext.id = 1177;
 /***/ 1178:
 /***/ function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(544);
+module.exports = __webpack_require__(545);
 
 
 /***/ },
 
-/***/ 180:
+/***/ 181:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(198);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalHelperService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -66,7 +66,7 @@ var ApprovalHelperService = (function () {
         this.message = message;
         this.slimLoadingBarService = slimLoadingBarService;
     }
-    ApprovalHelperService.prototype.assignApplicationTask = function (dataType, taskId) {
+    ApprovalHelperService.prototype.assignApplicationTask = function (dataType, taskId, callBack) {
         var _this = this;
         this.slimLoadingBarService.start();
         this.approvalService.assignApplicationTaskToUser(taskId).subscribe(function () {
@@ -76,7 +76,7 @@ var ApprovalHelperService = (function () {
             else if (dataType == "SUBSCRIPTION") {
                 _this.message.success(_this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
             }
-            _this.approvalService.getAllTasks();
+            callBack();
         }, function (error) {
             _this.message.error(error);
         }, function () {
@@ -95,7 +95,12 @@ var ApprovalHelperService = (function () {
             param.user = 'admin';
             param.taskType = "application";
             _this.approvalService.approveApplicationCreationTask(param).subscribe(function () {
-                _this.message.success((status == 'APPROVED') ? _this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS : _this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                if (status == 'APPROVED') {
+                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
+                }
+                else {
+                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                }
                 _this.approvalService.getAllTasks();
             }, function (error) {
                 _this.message.error(error);
@@ -112,7 +117,12 @@ var ApprovalHelperService = (function () {
             param.user = 'admin';
             param.taskType = "subscription";
             _this.approvalService.approveSubscriptionCreationTask(param).subscribe(function () {
-                _this.message.success((status == 'APPROVED') ? _this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS : _this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
+                if (status == 'APPROVED') {
+                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
+                }
+                else {
+                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
+                }
                 _this.approvalService.getAllTasks();
             }, function (error) {
                 _this.message.error(error);
@@ -136,12 +146,46 @@ var ApprovalHelperService = (function () {
 
 /***/ },
 
-/***/ 181:
+/***/ 182:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* unused harmony export MenuItem */
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return User; });
+/* unused harmony export LoginResponse */
+var MenuItem = (function () {
+    function MenuItem() {
+    }
+    return MenuItem;
+}());
+var TableDataType = (function () {
+    function TableDataType(dataCategory, dataType) {
+        this.dataCategory = dataCategory;
+        this.dataType = dataType;
+    }
+    return TableDataType;
+}());
+var User = (function () {
+    function User() {
+    }
+    return User;
+}());
+var LoginResponse = (function () {
+    function LoginResponse() {
+    }
+    return LoginResponse;
+}());
+//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/common-data-models.js.map
+
+/***/ },
+
+/***/ 183:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppCommonService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -172,18 +216,18 @@ var AppCommonService = (function () {
 
 /***/ },
 
-/***/ 182:
+/***/ 184:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__ = __webpack_require__(670);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__ = __webpack_require__(671);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__ = __webpack_require__(479);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__ = __webpack_require__(675);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__ = __webpack_require__(676);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SharedModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -211,10 +255,19 @@ var SharedModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["TooltipModule"],
                 __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["TypeaheadModule"],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"],
-                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */].forRoot()
+                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["PaginationModule"].forRoot()
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */], __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */]],
-            exports: [__WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */], __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */], __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */], __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"], __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["TypeaheadModule"]]
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */],
+                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["TypeaheadModule"],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["PaginationModule"]]
         }), 
         __metadata('design:paramtypes', [])
     ], SharedModule);
@@ -224,83 +277,63 @@ var SharedModule = (function () {
 
 /***/ },
 
-/***/ 260:
+/***/ 262:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* unused harmony export DateTimeInfo */
-/* harmony export (binding) */ __webpack_require__.d(exports, "f", function() { return ApplicationTask; });
-/* unused harmony export ApplicationTaskSearchParam */
-/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return AssignApplicationTaskParam; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApproveApplicationCreationTaskParam; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ApproveSubscriptionCreationTaskParam; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "e", function() { return ApprovalEvent; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return ApplicationTaskFilter; });
-var DateTimeInfo = (function () {
-    function DateTimeInfo() {
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalHistoryFilter; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ApprovalHistory; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return ApprovalHistoryDataset; });
+/* unused harmony export Subscriber */
+/* unused harmony export Application */
+var ApprovalHistoryFilter = (function () {
+    function ApprovalHistoryFilter() {
+        this.fromDate = '';
+        this.toDate = '';
+        this.subscriber = '';
+        this.api = '';
+        this.applicationId = 0;
+        this.operator = '';
+        this.offset = 0;
+        this.count = 10;
     }
-    return DateTimeInfo;
+    return ApprovalHistoryFilter;
 }());
-var ApplicationTask = (function () {
-    function ApplicationTask() {
+var ApprovalHistory = (function () {
+    function ApprovalHistory() {
+        this.applicationId = 0;
     }
-    ApplicationTask.prototype.toString = function () {
-        return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
-    };
-    return ApplicationTask;
+    return ApprovalHistory;
 }());
-var ApplicationTaskSearchParam = (function () {
-    function ApplicationTaskSearchParam() {
+var ApprovalHistoryDataset = (function () {
+    function ApprovalHistoryDataset() {
+        this.recordsCol = [];
     }
-    return ApplicationTaskSearchParam;
+    return ApprovalHistoryDataset;
 }());
-var AssignApplicationTaskParam = (function () {
-    function AssignApplicationTaskParam() {
+var Subscriber = (function () {
+    function Subscriber() {
     }
-    return AssignApplicationTaskParam;
+    return Subscriber;
 }());
-var ApproveApplicationCreationTaskParam = (function () {
-    function ApproveApplicationCreationTaskParam() {
+var Application = (function () {
+    function Application() {
     }
-    ApproveApplicationCreationTaskParam.prototype.toString = function () {
-        return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;
-    };
-    return ApproveApplicationCreationTaskParam;
+    return Application;
 }());
-var ApproveSubscriptionCreationTaskParam = (function () {
-    function ApproveSubscriptionCreationTaskParam() {
-    }
-    return ApproveSubscriptionCreationTaskParam;
-}());
-var ApprovalEvent = (function () {
-    function ApprovalEvent(task, dataType, status) {
-        this.task = task;
-        this.dataType = dataType;
-        this.status = status;
-    }
-    return ApprovalEvent;
-}());
-var ApplicationTaskFilter = (function () {
-    function ApplicationTaskFilter() {
-        this.ids = [];
-        this.appNames = [];
-        this.users = [];
-    }
-    return ApplicationTaskFilter;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/application-data-models.js.map
+//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/reporing-data-models.js.map
 
 /***/ },
 
-/***/ 261:
+/***/ 263:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_remote_data_service__ = __webpack_require__(57);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -326,11 +359,17 @@ var DashboardRemoteDataService = (function () {
         this.http = http;
         this.apiContext = apiContext;
         this.approvalService = approvalService;
+        /**
+         * Application and Subscription Creation History Graph Data Stream
+         * @type {BehaviorSubject<HistoryBarGraphData>}
+         */
+        this.CreationHistoryGraphDataProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({ headers: this.headers });
         this._dashboardStatisticsData = new __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__["a" /* DashboardData */]();
         this.apiEndpoints = {
             dashboardData: this.apiContext + '/applications/statistics',
+            graph: this.apiContext + '/applications/graph',
         };
         this.DashboardDataProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["ReplaySubject"]();
         approvalService.MyApplicationCreationTasksProvider.subscribe(function (result) {
@@ -357,11 +396,16 @@ var DashboardRemoteDataService = (function () {
     ;
     DashboardRemoteDataService.prototype.updateDashboardData = function (result, type) {
         var changeObj = {};
-        changeObj[type] = result.length || 0;
+        changeObj[type] = (result && result.applicationTasks && result.applicationTasks.length) || 0;
         this._dashboardStatisticsData = Object.assign({}, this._dashboardStatisticsData, changeObj);
         this._dashboardStatisticsData.totalAppCreations = this._dashboardStatisticsData.appCreationsForGroup + this._dashboardStatisticsData.appCreationsForUser;
         this._dashboardStatisticsData.totalSubCreations = this._dashboardStatisticsData.subCreationsForGroup + this._dashboardStatisticsData.subCreationsForUser;
         this.DashboardDataProvider.next(this._dashboardStatisticsData);
+    };
+    DashboardRemoteDataService.prototype.getCreationHistoryGraphData = function () {
+        this.http.get(this.apiEndpoints['graph'], this.options)
+            .map(function (response) { return response.json(); })
+            .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); });
     };
     DashboardRemoteDataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -375,14 +419,14 @@ var DashboardRemoteDataService = (function () {
 
 /***/ },
 
-/***/ 262:
+/***/ 264:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(125);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(126);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return LoginRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -438,16 +482,17 @@ var LoginRemoteDataService = (function () {
 
 /***/ },
 
-/***/ 263:
+/***/ 265:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(198);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__ = __webpack_require__(262);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ReportingRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -466,6 +511,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
+
 var ReportingRemoteDataService = (function () {
     function ReportingRemoteDataService(apiContext, http, message, slimLoadingBarService) {
         this.apiContext = apiContext;
@@ -477,10 +523,28 @@ var ReportingRemoteDataService = (function () {
          * @type {BehaviorSubject<string[]>}
          */
         this.SubscribersProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        /**
+         * Operators Stream
+         * @type {BehaviorSubject<string[]>}
+         */
+        this.OperatorsProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        /**
+         * Applications Stream
+         * @type {BehaviorSubject<any[]>}
+         */
+        this.ApplicationsProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        /**
+         * Approval History stream
+         * @type {BehaviorSubject<ApprovalHistory[]>}
+         */
+        this.ApprovalHistoryProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({ headers: this.headers });
         this.apiEndpoints = {
-            subscribers: this.apiContext + '/reports/subscribers'
+            subscribers: this.apiContext + '/reports/subscribers',
+            operators: this.apiContext + '/reports/operators',
+            approvalHistory: this.apiContext + '/reports/approval',
+            applications: this.apiContext + '/reports/applications',
         };
     }
     ReportingRemoteDataService.prototype.getSubscribers = function () {
@@ -492,6 +556,77 @@ var ReportingRemoteDataService = (function () {
             _this.SubscribersProvider.next(subscribers);
         }, function (error) {
             _this.message.error(error);
+            _this.slimLoadingBarService.complete();
+        }, function () {
+            _this.slimLoadingBarService.complete();
+        });
+    };
+    ReportingRemoteDataService.prototype.getOperators = function () {
+        var _this = this;
+        this.slimLoadingBarService.start();
+        this.http.get(this.apiEndpoints['operators'], this.options)
+            .map(function (response) { return response.json(); })
+            .subscribe(function (operators) {
+            _this.OperatorsProvider.next(operators);
+        }, function (error) {
+            _this.message.error(error);
+            _this.slimLoadingBarService.complete();
+        }, function () {
+            _this.slimLoadingBarService.complete();
+        });
+    };
+    ReportingRemoteDataService.prototype.getApplicationsBySubscriber = function (subscriber) {
+        var _this = this;
+        if (!!subscriber) {
+            this.slimLoadingBarService.start();
+            this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.options)
+                .map(function (response) { return response.json(); })
+                .subscribe(function (applications) {
+                _this.ApplicationsProvider.next(applications);
+            }, function (error) {
+                _this.message.error(error);
+                _this.slimLoadingBarService.complete();
+            }, function () {
+                _this.slimLoadingBarService.complete();
+            });
+        }
+        else {
+            this.ApplicationsProvider.next([]);
+        }
+    };
+    ReportingRemoteDataService.prototype.getApprovalHistory = function (approvalHistoryFilter) {
+        var _this = this;
+        var filter = Object.assign({}, approvalHistoryFilter);
+        this.slimLoadingBarService.start();
+        if (!!!filter.subscriber) {
+            filter.subscriber = '__ALL__';
+        }
+        if (!!!filter.operator) {
+            filter.operator = '__ALL__';
+        }
+        this.http.post(this.apiEndpoints['approvalHistory'], filter, this.options)
+            .map(function (response) { return response.json(); })
+            .flatMap(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].from(res); })
+            .reduce(function (arr, cur) {
+            if (cur.length == 1) {
+                arr.noOfRecords = cur[0];
+            }
+            else {
+                var tmp = new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["b" /* ApprovalHistory */]();
+                tmp.applicationId = cur[0];
+                tmp.applicationName = cur[1];
+                tmp.applicationDescription = cur[2];
+                tmp.status = cur[3];
+                tmp.approvedOn = cur[4];
+                arr.recordsCol.push(tmp);
+            }
+            return arr;
+        }, new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["c" /* ApprovalHistoryDataset */]())
+            .subscribe(function (approvalHistory) {
+            _this.ApprovalHistoryProvider.next(approvalHistory);
+        }, function (error) {
+            _this.message.error(error);
+            _this.slimLoadingBarService.complete();
         }, function () {
             _this.slimLoadingBarService.complete();
         });
@@ -508,12 +643,12 @@ var ReportingRemoteDataService = (function () {
 
 /***/ },
 
-/***/ 405:
+/***/ 407:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppGuard; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return LoginGuard; });
@@ -535,7 +670,6 @@ var AppGuard = (function () {
         this._router = _router;
     }
     AppGuard.prototype.canActivate = function () {
-        console.log('ISLOGGED IN  CAN ACTIVATE - ' + this._authenticationService.isLoggedIn());
         if (this._authenticationService.isLoggedIn()) {
             return true;
         }
@@ -557,7 +691,6 @@ var LoginGuard = (function () {
         this._router = _router;
     }
     LoginGuard.prototype.canActivate = function (route, state) {
-        console.log('ISLOGGED IN - ' + this._authenticationService.isLoggedIn());
         if (this._authenticationService.isLoggedIn()) {
             this._router.navigate(['home']);
             return false;
@@ -577,14 +710,16 @@ var LoginGuard = (function () {
 
 /***/ },
 
-/***/ 406:
+/***/ 408:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApplicationsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -599,6 +734,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var ApplicationsComponent = (function () {
     function ApplicationsComponent(message, approvalHelperService, approvalService) {
         this.message = message;
@@ -607,6 +744,8 @@ var ApplicationsComponent = (function () {
     }
     ApplicationsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.userApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'APPLICATION'), 10);
+        this.groupApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'APPLICATION'), 10);
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(function (apps) {
             _this.myApplications = apps;
         }, function (error) {
@@ -617,11 +756,17 @@ var ApplicationsComponent = (function () {
         }, function (error) {
             _this.message.error(error);
         });
-        this.approvalService.getUserApplicationTasks();
-        this.approvalService.getUserGroupApplicationTasks();
+        this.getData();
+    };
+    ApplicationsComponent.prototype.getData = function () {
+        this.approvalService.getFilteredResult(this.userApplicationFilter);
+        this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
     };
     ApplicationsComponent.prototype.onAssignTaskHandler = function (event) {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        var _this = this;
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, function () {
+            _this.getData();
+        });
     };
     ApplicationsComponent.prototype.onApproveRejectHandler = function (event) {
         this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
@@ -635,7 +780,7 @@ var ApplicationsComponent = (function () {
             template: __webpack_require__(893),
             styles: [__webpack_require__(873)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], ApplicationsComponent);
     return ApplicationsComponent;
     var _a, _b, _c;
@@ -644,7 +789,7 @@ var ApplicationsComponent = (function () {
 
 /***/ },
 
-/***/ 407:
+/***/ 409:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -679,18 +824,18 @@ var ApprovalMainComponent = (function () {
 
 /***/ },
 
-/***/ 408:
+/***/ 410:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_applications_component__ = __webpack_require__(406);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__ = __webpack_require__(409);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_routes__ = __webpack_require__(668);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__ = __webpack_require__(407);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_applications_component__ = __webpack_require__(408);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_routes__ = __webpack_require__(669);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__ = __webpack_require__(409);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__(184);
 /* harmony export (binding) */ __webpack_require__.d(exports, "ApprovalsModule", function() { return ApprovalsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -728,14 +873,16 @@ var ApprovalsModule = (function () {
 
 /***/ },
 
-/***/ 409:
+/***/ 411:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SubscriptionsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -750,6 +897,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var SubscriptionsComponent = (function () {
     function SubscriptionsComponent(message, approvalHelperService, approvalService) {
         this.message = message;
@@ -758,6 +907,8 @@ var SubscriptionsComponent = (function () {
     }
     SubscriptionsComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.mySubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'SUBSCRIPTION'), 10);
+        this.groupSubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'SUBSCRIPTION'), 10);
         this.approvalService.MySubscriptionTasksProvider.subscribe(function (subs) {
             _this.mySubscriptions = subs;
         }, function (error) {
@@ -768,11 +919,17 @@ var SubscriptionsComponent = (function () {
         }, function (error) {
             _this.message.error(error);
         });
-        this.approvalService.getUserAppSubscriptionTasks();
-        this.approvalService.getUserGroupAppSubscriptionTask();
+        this.getData();
+    };
+    SubscriptionsComponent.prototype.getData = function () {
+        this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
+        this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
     };
     SubscriptionsComponent.prototype.onAssignTaskHandler = function (event) {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        var _this = this;
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, function () {
+            _this.getData();
+        });
     };
     SubscriptionsComponent.prototype.onApproveRejectHandler = function (event) {
         this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
@@ -786,7 +943,7 @@ var SubscriptionsComponent = (function () {
             template: __webpack_require__(894),
             styles: [__webpack_require__(875)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], SubscriptionsComponent);
     return SubscriptionsComponent;
     var _a, _b, _c;
@@ -795,44 +952,13 @@ var SubscriptionsComponent = (function () {
 
 /***/ },
 
-/***/ 410:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* unused harmony export MenuItem */
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return TableDataType; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return User; });
-/* unused harmony export LoginResponse */
-var MenuItem = (function () {
-    function MenuItem() {
-    }
-    return MenuItem;
-}());
-var TableDataType = (function () {
-    function TableDataType() {
-    }
-    return TableDataType;
-}());
-var User = (function () {
-    function User() {
-    }
-    return User;
-}());
-var LoginResponse = (function () {
-    function LoginResponse() {
-    }
-    return LoginResponse;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/common-data-models.js.map
-
-/***/ },
-
-/***/ 411:
+/***/ 412:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardData; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return DashboardDataRequestParam; });
+/* unused harmony export HistoryBarGraphData */
 var DashboardData = (function () {
     function DashboardData() {
         this.appCreationsForUser = 0;
@@ -849,26 +975,31 @@ var DashboardDataRequestParam = (function () {
     }
     return DashboardDataRequestParam;
 }());
+var HistoryBarGraphData = (function () {
+    function HistoryBarGraphData() {
+    }
+    return HistoryBarGraphData;
+}());
 //# sourceMappingURL=/home/sumudu/git/workflow-ui/src/dashboard-data-models.js.map
 
 /***/ },
 
-/***/ 412:
+/***/ 413:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home_component__ = __webpack_require__(414);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_routes__ = __webpack_require__(682);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_summery_approval_summery_component__ = __webpack_require__(680);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_count_approval_count_component__ = __webpack_require__(678);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__approval_history_graph_approval_history_graph_component__ = __webpack_require__(679);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_charts__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_charts__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__dashboard_helper_service__ = __webpack_require__(681);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_shared_module__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_shared_module__ = __webpack_require__(184);
 /* harmony export (binding) */ __webpack_require__.d(exports, "DashboardModule", function() { return DashboardModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -916,15 +1047,17 @@ var DashboardModule = (function () {
 
 /***/ },
 
-/***/ 413:
+/***/ 414:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_dashboard_remote_data_service__ = __webpack_require__(261);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approvals_approval_helper_service__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_dashboard_remote_data_service__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_services_message_service__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approvals_approval_helper_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_models_common_data_models__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -940,6 +1073,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var HomeComponent = (function () {
     function HomeComponent(approvalService, approvalHelperService, dashboardService, message) {
         this.approvalService = approvalService;
@@ -949,15 +1084,32 @@ var HomeComponent = (function () {
     }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.approvalService.MyApplicationCreationTasksProvider.subscribe(function (response) { return _this.myApplications = response; }, function (error) { return _this.message.error(error); });
-        this.approvalService.GroupApplicationCreationTasksProvider.subscribe(function (response) { return _this.allApplications = response; }, function (error) { return _this.message.error(error); });
-        this.approvalService.MySubscriptionTasksProvider.subscribe(function (response) { return _this.myAppSubscriptionTask = response; }, function (error) { return _this.message.error(error); });
-        this.approvalService.GroupSubscriptionTasksProvider.subscribe(function (response) { return _this.allSubscriptions = response; }, function (error) { return _this.message.error(error); });
+        this.myApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_6__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'APPLICATION'));
+        this.mySubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_6__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'SUBSCRIPTION'));
+        this.groupApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_6__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'APPLICATION'));
+        this.groupSubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_6__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'SUBSCRIPTION'));
+        this.approvalService.MyApplicationCreationTasksProvider.subscribe(function (response) {
+            _this.myApplications = response;
+        }, function (error) { return _this.message.error(error); });
+        this.approvalService.MySubscriptionTasksProvider.subscribe(function (response) {
+            _this.myAppSubscriptionTask = response;
+        }, function (error) { return _this.message.error(error); });
+        this.approvalService.GroupApplicationCreationTasksProvider.subscribe(function (response) {
+            _this.allApplications = response;
+        }, function (error) { return _this.message.error(error); });
+        this.approvalService.GroupSubscriptionTasksProvider.subscribe(function (response) {
+            _this.allSubscriptions = response;
+        }, function (error) {
+            _this.message.error(error);
+        });
         this.dashboardService.DashboardDataProvider.subscribe(function (response) { return _this.dashboardData = response; }, function (error) { return _this.message.error(error); });
         this.approvalService.getAllTasks();
     };
     HomeComponent.prototype.onAssignTaskHandler = function (event) {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id);
+        var _this = this;
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, function () {
+            _this.approvalService.getAllTasks();
+        });
     };
     HomeComponent.prototype.onApproveRejectHandler = function (event) {
         this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
@@ -971,7 +1123,7 @@ var HomeComponent = (function () {
             template: __webpack_require__(904),
             styles: [__webpack_require__(886)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approvals_approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approvals_approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__approvals_approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__approvals_approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__commons_services_message_service__["a" /* MessageService */]) === 'function' && _d) || Object])
     ], HomeComponent);
     return HomeComponent;
     var _a, _b, _c, _d;
@@ -980,12 +1132,13 @@ var HomeComponent = (function () {
 
 /***/ },
 
-/***/ 414:
+/***/ 415:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(262);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryMainComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -998,231 +1151,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
 var HistoryMainComponent = (function () {
     function HistoryMainComponent(reportingService) {
         this.reportingService = reportingService;
-        this.fieldSet = ["id", "applicationName", "applicationDescription", "userName"];
-        this.historyJson = [
-            {
-                "id": "25382",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "11:28:28",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T11:28:28.840+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "58",
-                "applicationName": "Food Master",
-                "applicationDescription": "Food Master",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "25466",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "12:11:59",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T12:11:59.029+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "60",
-                "applicationName": "Pizza Mapper",
-                "applicationDescription": "Pizza Mapper\n",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "25663",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "12:17:22",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T12:17:22.951+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "61",
-                "applicationName": "YYY",
-                "applicationDescription": "sdf",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "25714",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "12:49:10",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T12:49:10.009+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "62",
-                "applicationName": "Car Poker",
-                "applicationDescription": "Car Poker",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "25858",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "13:00:16",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T13:00:16.799+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "66",
-                "applicationName": "DO",
-                "applicationDescription": "DO\n",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "27534",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "14:23:02",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T14:23:02.476+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "67",
-                "applicationName": "Doge Finder",
-                "applicationDescription": "Doge Finder",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "27570",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "14:27:34",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T14:27:34.502+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "68",
-                "applicationName": "Fruit Picker",
-                "applicationDescription": "Fruit Picker",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "27606",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "30-Jan-2017",
-                    "time": "14:55:35",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-30T14:55:35.474+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "69",
-                "applicationName": "Fm101",
-                "applicationDescription": "F101",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            },
-            {
-                "id": "32534",
-                "assignee": "admin",
-                "createTime": {
-                    "date": "31-Jan-2017",
-                    "time": "09:40:42",
-                    "offset": "+05:30",
-                    "unformatted": "2017-01-31T09:40:42.845+05:30"
-                },
-                "taskDescription": null,
-                "applicationId": "71",
-                "applicationName": "TEST ME App",
-                "applicationDescription": "TEST ME App",
-                "operators": "operator1,",
-                "tier": "Default",
-                "tiersStr": [
-                    "Default",
-                    "Large",
-                    "Medium",
-                    "Small",
-                    "Unlimited"
-                ],
-                "userName": "admin"
-            }
-        ];
+        this.fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
+        this.totalItems = 0;
+        this.currentPage = 1;
     }
     HistoryMainComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.filter = new __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["a" /* ApprovalHistoryFilter */]();
+        this.filter.count = 10;
+        this.reportingService.ApprovalHistoryProvider.subscribe(function (history) {
+            _this.approvalHistoryData = history;
+            _this.totalItems = (_this.approvalHistoryData && _this.approvalHistoryData.noOfRecords) || _this.totalItems;
+        });
         this.reportingService.getSubscribers();
+        this.reportingService.getOperators();
+        this.reportingService.getApprovalHistory(this.filter);
+    };
+    HistoryMainComponent.prototype.onFilterChangeHandler = function (event) {
+        this.filter = event;
+        this.reportingService.getApprovalHistory(this.filter);
+    };
+    HistoryMainComponent.prototype.onPageChanged = function (event) {
+        this.filter.offset = (event.page - 1) * this.filter.count;
+        this.reportingService.getApprovalHistory(this.filter);
     };
     HistoryMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -1239,7 +1194,7 @@ var HistoryMainComponent = (function () {
 
 /***/ },
 
-/***/ 415:
+/***/ 416:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1248,10 +1203,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(686);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(687);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__(685);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__(684);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(184);
 /* harmony export (binding) */ __webpack_require__.d(exports, "HistoryModule", function() { return HistoryModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1290,7 +1245,7 @@ var HistoryModule = (function () {
 
 /***/ },
 
-/***/ 416:
+/***/ 417:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1298,7 +1253,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_routes__ = __webpack_require__(688);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_login_user_login_component__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__user_login_user_login_component__ = __webpack_require__(418);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(28);
 /* harmony export (binding) */ __webpack_require__.d(exports, "LoginModule", function() { return LoginModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1335,12 +1290,12 @@ var LoginModule = (function () {
 
 /***/ },
 
-/***/ 417:
+/***/ 418:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(99);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return UserLoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1363,7 +1318,6 @@ var UserLoginComponent = (function () {
         var _this = this;
         this.isSubmitted = true;
         if (loginForm.valid) {
-            console.log(loginForm.value);
             this._authenticationService.doLogin(this.userName, this.password, function (errorMsg) {
                 _this.loginError = errorMsg;
                 setTimeout(function () { _this.loginError = null; }, 5000);
@@ -1385,21 +1339,21 @@ var UserLoginComponent = (function () {
 
 /***/ },
 
-/***/ 543:
+/***/ 544:
 /***/ function(module, exports, __webpack_require__) {
 
 var map = {
 	"app/approvals/approvals.module": [
-		408
+		410
 	],
 	"app/dashboard/dashboard.module": [
-		412
+		413
 	],
 	"app/history/history.module": [
-		415
+		416
 	],
 	"app/login/login.module": [
-		416
+		417
 	]
 };
 function webpackAsyncContext(req) {
@@ -1413,21 +1367,21 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
 module.exports = webpackAsyncContext;
-webpackAsyncContext.id = 543;
+webpackAsyncContext.id = 544;
 
 
 /***/ },
 
-/***/ 544:
+/***/ 545:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__polyfills_ts__ = __webpack_require__(690);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(636);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(637);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(689);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_app_module__ = __webpack_require__(666);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_app_module__ = __webpack_require__(667);
 
 
 
@@ -1446,7 +1400,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__(508);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessageService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1466,7 +1420,7 @@ var MessageService = (function () {
             title: '',
             msg: '',
             showClose: true,
-            timeout: 5000,
+            timeout: 7000,
             theme: 'material'
         };
         this.APPROVAL_MESSAGES = {
@@ -1506,12 +1460,12 @@ var MessageService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_services_authentication_service__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__commons_services_authentication_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_services_message_service__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1544,22 +1498,22 @@ var ApprovalRemoteDataService = (function () {
          * Application Creations assigned to USER Stream
          * @type {BehaviorSubject<ApplicationTask[]>}
          */
-        this.MyApplicationCreationTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        this.MyApplicationCreationTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         /**
          * Application Creations assigned to GROUP user belongs to
          * @type {BehaviorSubject<ApplicationTask[]>}
          */
-        this.GroupApplicationCreationTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        this.GroupApplicationCreationTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         /**
          * Application Api subscription creations assigned to USER Stream
          * @type {BehaviorSubject<ApplicationTask[]>}
          */
-        this.MySubscriptionTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        this.MySubscriptionTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         /**
          * Application Api subscription creations assigned to GROUP Stream
          * @type {BehaviorSubject<ApplicationTask[]>}
          */
-        this.GroupSubscriptionTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"]([]);
+        this.GroupSubscriptionTasksProvider = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
         this.modifiedApplicationTaskIDs = new Array();
         this.headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({ 'Content-Type': 'application/json' });
         this.options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({ headers: this.headers });
@@ -1568,6 +1522,16 @@ var ApprovalRemoteDataService = (function () {
             assign: this.apiContext + '/applications/assign',
             approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
             approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
+        };
+        this.actionMap = {
+            USER: {
+                APPLICATION: this.getUserApplicationTasks,
+                SUBSCRIPTION: this.getUserAppSubscriptionTasks
+            },
+            GROUP: {
+                APPLICATION: this.getUserGroupApplicationTasks,
+                SUBSCRIPTION: this.getUserGroupAppSubscriptionTask
+            }
         };
     }
     ApprovalRemoteDataService.prototype.updateModifiedTask = function (result, modified) {
@@ -1589,10 +1553,9 @@ var ApprovalRemoteDataService = (function () {
             return [];
         }
     };
-    ApprovalRemoteDataService.prototype.getFilteredObservable = function (observable, filter) {
-        if (observable && filter) {
-            return observable
-                .flatMap(function (tasks) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].from(tasks); })
+    ApprovalRemoteDataService.prototype.getFilteredObservable = function (appTask, filter) {
+        if (appTask && filter) {
+            return appTask
                 .filter(function (task) { return filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0; })
                 .filter(function (task) { return filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0; })
                 .filter(function (task) { return filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0; })
@@ -1602,7 +1565,7 @@ var ApprovalRemoteDataService = (function () {
             }, []);
         }
         else {
-            return observable;
+            return appTask;
         }
     };
     ApprovalRemoteDataService.prototype.getUserApplicationTasks = function (filter) {
@@ -1612,23 +1575,29 @@ var ApprovalRemoteDataService = (function () {
             var param = {
                 assignee: loginInfo.userName,
                 size: 100,
+                start: 0,
                 processType: "APPLICATION_CREATION",
                 candidateGroups: null
             };
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
             this.slimLoadingBarService.start();
-            var doSubscribe = function (obs) {
-                obs.subscribe(function (result) {
-                    _this.MyApplicationCreationTasksProvider.next(_this.updateModifiedTask(result, _this.modifiedApplicationTaskIDs));
-                }, function (error) {
-                    _this.slimLoadingBarService.stop();
-                    return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message);
-                }, function () {
-                    _this.slimLoadingBarService.complete();
-                });
-            };
-            var observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map(function (response) { return response.json(); });
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map(function (response) { return response.json(); })
+                .subscribe(function (result) {
+                if (!!filter) {
+                    result.applicationTasks = _this.getFilteredObservable(result.applicationTasks, filter);
+                }
+                result.applicationTasks = _this.updateModifiedTask(result.applicationTasks, _this.modifiedApplicationTaskIDs);
+                _this.MyApplicationCreationTasksProvider.next(result);
+            }, function (error) {
+                _this.slimLoadingBarService.stop();
+                return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message);
+            }, function () {
+                _this.slimLoadingBarService.complete();
+            });
         }
     };
     ApprovalRemoteDataService.prototype.getUserGroupApplicationTasks = function (filter) {
@@ -1639,19 +1608,25 @@ var ApprovalRemoteDataService = (function () {
                 assignee: null,
                 processType: "APPLICATION_CREATION",
                 size: 100,
+                start: 0,
                 candidateGroups: loginInfo.roles.toString()
             };
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
             this.slimLoadingBarService.start();
-            var doSubscribe = function (observable) {
-                observable.subscribe(function (result) {
-                    _this.GroupApplicationCreationTasksProvider.next(result);
-                }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
-                    _this.slimLoadingBarService.complete();
-                });
-            };
-            var observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map(function (response) { return response.json(); });
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map(function (response) { return response.json(); })
+                .subscribe(function (result) {
+                if (!!filter) {
+                    result.applicationTasks = _this.getFilteredObservable(result.applicationTasks, filter);
+                }
+                result.applicationTasks = _this.updateModifiedTask(result.applicationTasks, _this.modifiedApplicationTaskIDs);
+                _this.GroupApplicationCreationTasksProvider.next(result);
+            }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
+                _this.slimLoadingBarService.complete();
+            });
         }
     };
     ApprovalRemoteDataService.prototype.getUserAppSubscriptionTasks = function (filter) {
@@ -1661,20 +1636,26 @@ var ApprovalRemoteDataService = (function () {
             var param = {
                 assignee: loginInfo.userName,
                 size: 100,
+                start: 0,
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: null
             };
-            var doSubscribe = function (observable) {
-                observable.subscribe(function (result) {
-                    _this.MySubscriptionTasksProvider.next(_this.updateModifiedTask(result, _this.modifiedApplicationTaskIDs));
-                }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
-                    _this.slimLoadingBarService.complete();
-                });
-            };
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
             this.slimLoadingBarService.start();
-            var observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map(function (response) { return response.json(); });
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map(function (response) { return response.json(); })
+                .subscribe(function (result) {
+                if (!!filter) {
+                    result.applicationTasks = _this.getFilteredObservable(result.applicationTasks, filter);
+                }
+                result.applicationTasks = _this.updateModifiedTask(result.applicationTasks, _this.modifiedApplicationTaskIDs);
+                _this.MySubscriptionTasksProvider.next(result);
+            }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
+                _this.slimLoadingBarService.complete();
+            });
         }
     };
     ApprovalRemoteDataService.prototype.getUserGroupAppSubscriptionTask = function (filter) {
@@ -1684,27 +1665,33 @@ var ApprovalRemoteDataService = (function () {
             var param = {
                 assignee: null,
                 size: 100,
+                start: 0,
                 processType: "SUBSCRIPTION_CREATION",
                 candidateGroups: loginInfo.roles.toString()
             };
-            var doSubscribe = function (observable) {
-                observable.subscribe(function (result) {
-                    _this.GroupSubscriptionTasksProvider.next(result);
-                }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
-                    _this.slimLoadingBarService.complete();
-                });
-            };
+            if (!!filter) {
+                param.size = filter.numberOfRecordsPerPage;
+                param.start = filter.startRecordNumber;
+            }
             this.slimLoadingBarService.start();
-            var observable = this.http.post(this.apiEndpoints['search'], param, this.options)
-                .map(function (response) { return response.json(); });
-            doSubscribe((!!filter) ? this.getFilteredObservable.call(this, observable, filter) : observable);
+            this.http.post(this.apiEndpoints['search'], param, this.options)
+                .map(function (response) { return response.json(); })
+                .subscribe(function (result) {
+                if (!!filter) {
+                    result.applicationTasks = _this.getFilteredObservable(result.applicationTasks, filter);
+                }
+                result.applicationTasks = _this.updateModifiedTask(result.applicationTasks, _this.modifiedApplicationTaskIDs);
+                _this.GroupSubscriptionTasksProvider.next(result);
+            }, function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); }, function () {
+                _this.slimLoadingBarService.complete();
+            });
         }
     };
     ApprovalRemoteDataService.prototype.assignApplicationTaskToUser = function (taskId) {
         var _this = this;
         var loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
-            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["c" /* AssignApplicationTaskParam */]();
+            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["d" /* AssignApplicationTaskParam */]();
             param.assignee = loginInfo.userName;
             param.taskId = taskId;
             return this.http.post(this.apiEndpoints['assign'], param, this.options)
@@ -1731,21 +1718,11 @@ var ApprovalRemoteDataService = (function () {
     ApprovalRemoteDataService.prototype.getAllTasks = function () {
         this.getUserApplicationTasks();
         this.getUserAppSubscriptionTasks();
-        this.getUserGroupAppSubscriptionTask();
         this.getUserGroupApplicationTasks();
+        this.getUserGroupAppSubscriptionTask();
     };
     ApprovalRemoteDataService.prototype.getFilteredResult = function (filter) {
-        var actionMap = {
-            USER: {
-                APPLICATION: this.getUserApplicationTasks,
-                SUBSCRIPTION: this.getUserAppSubscriptionTasks
-            },
-            GROUP: {
-                APPLICATION: this.getUserGroupApplicationTasks,
-                SUBSCRIPTION: this.getUserGroupAppSubscriptionTask
-            }
-        };
-        actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
+        this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
     };
     ApprovalRemoteDataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
@@ -1759,13 +1736,13 @@ var ApprovalRemoteDataService = (function () {
 
 /***/ },
 
-/***/ 665:
+/***/ 666:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_app_common_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_authentication_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_app_common_service__ = __webpack_require__(183);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1808,34 +1785,34 @@ var AppComponent = (function () {
 
 /***/ },
 
-/***/ 666:
+/***/ 667:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(479);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(665);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(667);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commons_commons_module__ = __webpack_require__(669);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_guard__ = __webpack_require__(405);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_components_header_header_component__ = __webpack_require__(673);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_components_hamburger_menu_hamburger_menu_component__ = __webpack_require__(672);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_components_user_avatar_user_avatar_component__ = __webpack_require__(676);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__commons_components_main_menu_main_menu_component__ = __webpack_require__(674);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__commons_components_breadcrumbs_breadcrumbs_component__ = __webpack_require__(671);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_charts__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(666);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(668);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commons_commons_module__ = __webpack_require__(670);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_guard__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_components_header_header_component__ = __webpack_require__(674);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_components_hamburger_menu_hamburger_menu_component__ = __webpack_require__(673);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_components_user_avatar_user_avatar_component__ = __webpack_require__(677);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__commons_components_main_menu_main_menu_component__ = __webpack_require__(675);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__commons_components_breadcrumbs_breadcrumbs_component__ = __webpack_require__(672);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_charts__ = __webpack_require__(505);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__data_providers_data_providers_module__ = __webpack_require__(683);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__ = __webpack_require__(508);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__data_providers_approval_remote_data_service__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__data_providers_dashboard_remote_data_service__ = __webpack_require__(261);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__approvals_approval_helper_service__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_shared_module__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__data_providers_reporting_remote_data_service__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__data_providers_dashboard_remote_data_service__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__approvals_approval_helper_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_shared_module__ = __webpack_require__(184);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__data_providers_reporting_remote_data_service__ = __webpack_require__(265);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1919,12 +1896,12 @@ var AppModule = (function () {
 
 /***/ },
 
-/***/ 667:
+/***/ 668:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_guard__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_guard__ = __webpack_require__(407);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RootLevelRoutes; });
 
 
@@ -1964,14 +1941,14 @@ var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Route
 
 /***/ },
 
-/***/ 668:
+/***/ 669:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__ = __webpack_require__(406);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__ = __webpack_require__(409);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__ = __webpack_require__(407);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__ = __webpack_require__(408);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__ = __webpack_require__(409);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalRoutes; });
 
 
@@ -1996,15 +1973,15 @@ var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Router
 
 /***/ },
 
-/***/ 669:
+/***/ 670:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_login_remote_data_service__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_app_common_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_login_remote_data_service__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_app_common_service__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_message_service__ = __webpack_require__(56);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return CommonsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2042,16 +2019,15 @@ var CommonsModule = (function () {
 
 /***/ },
 
-/***/ 670:
+/***/ 671:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__ = __webpack_require__(260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_message_service__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__ = __webpack_require__(410);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_router__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApplicationDataTableComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2062,7 +2038,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -2080,14 +2055,14 @@ var ApplicationDataTableComponent = (function () {
         this.isFilterActivated = false;
         //Flag to determine whether to show or hide filtering panel
         this.isFilterVisible = false;
+        this.currentPage = 1;
     }
     ApplicationDataTableComponent.prototype.ngOnInit = function () {
-        this.filter = new __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["d" /* ApplicationTaskFilter */]();
-        this.filter.dataType = this.recordsType;
     };
     ApplicationDataTableComponent.prototype.ngOnChanges = function (changeObj) {
         if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
-            this.FilterFieldsDataSource = changeObj['dataSource'].currentValue;
+            var res = changeObj['dataSource'].currentValue;
+            this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
         }
     };
     ApplicationDataTableComponent.prototype.onViewAll = function () {
@@ -2180,6 +2155,10 @@ var ApplicationDataTableComponent = (function () {
         }
         this.onFilterChange.emit(this.filter);
     };
+    ApplicationDataTableComponent.prototype.onPageChanged = function (event) {
+        this.filter.startRecordNumber = (event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
+        this.onFilterChange.emit(this.filter);
+    };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
         __metadata('design:type', String)
@@ -2187,19 +2166,19 @@ var ApplicationDataTableComponent = (function () {
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
         __metadata('design:type', String)
-    ], ApplicationDataTableComponent.prototype, "recordLimit", void 0);
+    ], ApplicationDataTableComponent.prototype, "summeryModeRecordLimit", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["f" /* ApplicationTask */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["f" /* ApplicationTask */]) === 'function' && _a) || Object)
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["f" /* ApplicationTaskResult */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["f" /* ApplicationTaskResult */]) === 'function' && _a) || Object)
     ], ApplicationDataTableComponent.prototype, "dataSource", void 0);
-    __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
-        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["b" /* TableDataType */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["b" /* TableDataType */]) === 'function' && _b) || Object)
-    ], ApplicationDataTableComponent.prototype, "recordsType", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
         __metadata('design:type', String)
     ], ApplicationDataTableComponent.prototype, "moreLinkPath", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["c" /* ApplicationTaskFilter */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__models_application_data_models__["c" /* ApplicationTaskFilter */]) === 'function' && _b) || Object)
+    ], ApplicationDataTableComponent.prototype, "filter", void 0);
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
         __metadata('design:type', (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _c) || Object)
@@ -2218,7 +2197,7 @@ var ApplicationDataTableComponent = (function () {
             template: __webpack_require__(895),
             styles: [__webpack_require__(876)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_message_service__["a" /* MessageService */]) === 'function' && _g) || Object, (typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__angular_router__["b" /* Router */]) === 'function' && _h) || Object])
+        __metadata('design:paramtypes', [(typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _f) || Object, (typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__services_message_service__["a" /* MessageService */]) === 'function' && _g) || Object, (typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__angular_router__["b" /* Router */]) === 'function' && _h) || Object])
     ], ApplicationDataTableComponent);
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h;
@@ -2227,7 +2206,7 @@ var ApplicationDataTableComponent = (function () {
 
 /***/ },
 
-/***/ 671:
+/***/ 672:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2282,12 +2261,12 @@ var BreadcrumbsComponent = (function () {
 
 /***/ },
 
-/***/ 672:
+/***/ 673:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_common_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_common_service__ = __webpack_require__(183);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HamburgerMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2326,7 +2305,7 @@ var HamburgerMenuComponent = (function () {
 
 /***/ },
 
-/***/ 673:
+/***/ 674:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2361,12 +2340,12 @@ var HeaderComponent = (function () {
 
 /***/ },
 
-/***/ 674:
+/***/ 675:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_common_service__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_app_common_service__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MainMenuComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2422,7 +2401,7 @@ var MainMenuComponent = (function () {
 
 /***/ },
 
-/***/ 675:
+/***/ 676:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2469,12 +2448,12 @@ var ResponsiveTableComponent = (function () {
 
 /***/ },
 
-/***/ 676:
+/***/ 677:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_authentication_service__ = __webpack_require__(99);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return UserAvatarComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2517,20 +2496,6 @@ var UserAvatarComponent = (function () {
     var _a;
 }());
 //# sourceMappingURL=/home/sumudu/git/workflow-ui/src/user-avatar.component.js.map
-
-/***/ },
-
-/***/ 677:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ReportingFilter; });
-var ReportingFilter = (function () {
-    function ReportingFilter() {
-    }
-    return ReportingFilter;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/reporing-data-models.js.map
 
 /***/ },
 
@@ -2656,7 +2621,7 @@ var ApprovalHistoryGraphComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_dashboard_data_models__ = __webpack_require__(411);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_dashboard_data_models__ = __webpack_require__(412);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(41);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalSummeryComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2756,7 +2721,7 @@ var DashboardHelperService = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home_component__ = __webpack_require__(413);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home_component__ = __webpack_require__(414);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardRoutes; });
 
 
@@ -2777,8 +2742,8 @@ var DashboardRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Route
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_remote_data_service__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_remote_data_service__ = __webpack_require__(261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__login_remote_data_service__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_remote_data_service__ = __webpack_require__(263);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DataProvidersModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2817,8 +2782,8 @@ var DataProvidersModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(677);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(262);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryFilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2835,24 +2800,82 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HistoryFilterComponent = (function () {
     function HistoryFilterComponent(reportingService) {
         this.reportingService = reportingService;
+        this.onFilterChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
     }
     HistoryFilterComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.filter = new __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["a" /* ReportingFilter */]();
         this.reportingService.SubscribersProvider.subscribe(function (subscribers) {
             _this.subscribers = subscribers;
         });
+        this.reportingService.OperatorsProvider.subscribe(function (operators) {
+            _this.operators = operators;
+        });
+        this.reportingService.ApplicationsProvider.subscribe(function (apps) {
+            _this.applications = apps;
+            _this.selectedApplication = null;
+        });
     };
+    HistoryFilterComponent.prototype.onNoApplicationSelected = function (event) {
+        if (!event) {
+            this.filter.applicationId = 0;
+            this.selectedApplication = null;
+        }
+    };
+    HistoryFilterComponent.prototype.onNoSubscriberSelected = function (event) {
+        if (!event) {
+            this.filter.subscriber = '';
+            this.reportingService.getApplicationsBySubscriber('');
+        }
+    };
+    HistoryFilterComponent.prototype.onFilterCriteriaChange = function () {
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onSubscriberChange = function () {
+        if (!!this.filter.subscriber) {
+            this.reportingService.getApplicationsBySubscriber(this.filter.subscriber);
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onApplicationChange = function (event) {
+        if (!!event.item) {
+            this.filter.applicationId = event.item.id || 0;
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onOperatorChange = function () {
+        if (!!this.filter.operator) {
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onClearFilter = function () {
+        this.filter.operator = '';
+        this.filter.subscriber = '';
+        this.filter.api = '';
+        this.filter.applicationId = 0;
+        this.selectedApplication = null;
+        this.onFilterChange.emit(this.filter);
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["a" /* ApprovalHistoryFilter */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["a" /* ApprovalHistoryFilter */]) === 'function' && _a) || Object)
+    ], HistoryFilterComponent.prototype, "filter", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
+    ], HistoryFilterComponent.prototype, "onFilterChange", void 0);
     HistoryFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-filter',
             template: __webpack_require__(905),
             styles: [__webpack_require__(887)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], HistoryFilterComponent);
     return HistoryFilterComponent;
-    var _a;
+    var _a, _b, _c;
 }());
 //# sourceMappingURL=/home/sumudu/git/workflow-ui/src/history-filter.component.js.map
 
@@ -2863,7 +2886,7 @@ var HistoryFilterComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(414);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(415);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryRoutes; });
 
 
@@ -2951,7 +2974,7 @@ var SearchResultsComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_login_user_login_component__ = __webpack_require__(417);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__user_login_user_login_component__ = __webpack_require__(418);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return LoginRoutes; });
 
 
@@ -3188,21 +3211,21 @@ module.exports = "<div class=\"container-fluid\">\n    <app-header *ngIf=\"isLog
 /***/ 893:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [recordsType]=\"{dataCategory:'USER',dataType:'APPLICATION'}\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [recordsType]=\"{dataCategory:'GROUP',dataType:'APPLICATION'}\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"animated fadeInUp row pad-r-15-im\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [filter]=\"userApplicationFilter\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [filter]=\"groupApplicationFilter\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
 
 /***/ },
 
 /***/ 894:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp\">\n <div class=\"row\">\n   <div class=\"col-sm-6\">\n       <application-data-table\n               class=\"my\"\n               [recordsType]=\"{dataCategory:'USER',dataType:'SUBSCRIPTION'}\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"mySubscriptions\"\n               (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n   <div class=\"col-sm-6\">\n       <application-data-table\n               [recordsType]=\"{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"allSubscriptions\"\n               (onAssignTask)=\"onAssignTaskHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n </div>\n</div>\n\n"
+module.exports = "<div class=\"animated fadeInUp\">\n <div class=\"row\">\n   <div class=\"col-sm-6\">\n       <application-data-table\n               class=\"my\"\n               [filter]=\"mySubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"mySubscriptions\"\n               (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n   <div class=\"col-sm-6\">\n       <application-data-table\n               [filter]=\"groupSubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"allSubscriptions\"\n               (onAssignTask)=\"onAssignTaskHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n </div>\n</div>\n\n"
 
 /***/ },
 
 /***/ 895:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"table-wrapper\">\n    <span class=\"filter\" tooltip=\"Filter\"\n          [ngClass]=\"{'on':isFilterVisible}\"\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\n    <div><span class=\"tbl-cat\">{{recordsType.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\n    <div class=\"tbl-header\">\n        {{tableTitle}}\n    </div>\n\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\n            <div class=\"row\">\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\" class=\"form-control\"\n                           [(ngModel)]=\"filterId\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"id\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\n                           placeholder=\"Id\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterAppName\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"applicationName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\n                           class=\"form-control\" placeholder=\"App Name\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterUser\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"userName\"\n                           typeaheadGroupField=\"userName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'USER')\"\n                           class=\"form-control\" placeholder=\"User\">\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.ids.length > 0\">\n                        <div class=\"sec-head\">ID</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\n                        <span class=\"filter-val ids\" *ngFor=\"let id of filter.ids\">{{id}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\n                        <div class=\"sec-head\">App Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n    <div class=\"table\">\n\n        <div class=\"tbl-row header\">\n            <div class=\"tbl-cell\">ID</div>\n            <div class=\"tbl-cell\">APP NAME</div>\n            <div class=\"tbl-cell\">USER</div>\n            <div class=\"tbl-cell\">CREATED ON</div>\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\n        </div>\n\n        <ng-container *ngFor=\"let item of dataSource; let i=index\">\n            <div class=\"tbl-row\"\n                 [ngClass]=\"{\n                 'modified' : item.isModified,\n                 'open':item.isExpand,\n                 'M':item.actionType == 'MORE',\n                 'A':item.actionType == 'APPROVE',\n                 'R':item.actionType == 'REJECT'}\"\n                 *ngIf=\"!!!recordLimit || i < recordLimit\">\n                <div class=\"tbl-cell\">\n                    <span tooltip=\"More Info\"\n                          class=\"action expand material-icons\"\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\n                    {{item.id}}\n                </div>\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\n                <div class=\"tbl-cell text-right\">\n                    <span tooltip=\"Approve\" *ngIf=\"recordsType.dataCategory == 'USER'\"\n                          class=\"action  approve material-icons\"\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE' \">check</span>\n\n                    <span tooltip=\"Reject\" *ngIf=\"recordsType.dataCategory  == 'USER'\"\n                          class=\"action  reject material-icons\"\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT' \">close</span>\n\n                    <span tooltip=\"Assign to Me\" *ngIf=\"recordsType.dataCategory  == 'GROUP'\"\n                          class=\"action  assign material-icons\"\n                          (click)=\"onAction('ASSIGN',item,recordsType)\">assignment_ind</span>\n                </div>\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\n                    'A':item.actionType == 'APPROVE',\n                    'R':item.actionType == 'REJECT'}\">\n                    <div class=\"col-sm-12\">\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Application Id</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Description</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationDescription}}</div>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Operator</div>\n                                <div class=\"col-xs-6 field-value\">{{item.operators}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Tier</div>\n                                <div class=\"col-xs-6 field-value\">\n                                    <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\n                                        <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\n                                            {{opt}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-12\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <div class=\"col-xs-3 field-name\">Comment</div>\n                        <div class=\"col-xs-9 field-value\"><input type=\"text\" class=\"form-control\"></div>\n                    </div>\n\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <button class=\"btn btn-default animated fadeIn\"\n                                (click)=\"item.isExpand = false; item.actionType = '' \">Cancel\n                        </button>\n                        <button class=\"btn btn-primary animated fadeIn\"\n                                *ngIf=\"item.actionType == 'APPROVE'\"\n                                (click)=\"onAction('APPROVE',item,recordsType)\">Approve\n                        </button>\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,recordsType)\">Reject\n                        </button>\n                    </div>\n\n                </div>\n            </div>\n        </ng-container>\n\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.length == 0\">\n            <span class=\"no-rec\">No Records..</span>\n        </div>\n    </div> <!--TABLE END-->\n\n    <div class=\"text-right\" *ngIf=\"dataSource?.length > recordLimit\"><span class=\"more\"\n                                                                           (click)=\"onViewAll()\">View All</span></div>\n\n</div> <!--WRAPPER END-->\n"
+module.exports = "<div class=\"table-wrapper\">\n    <span class=\"filter\" tooltip=\"Filter\"\n          [ngClass]=\"{'on':isFilterVisible}\"\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\n    <div><span class=\"tbl-cat\">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\n    <div class=\"tbl-header\">\n        {{tableTitle}}\n    </div>\n\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\n            <div class=\"row\">\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\" class=\"form-control\"\n                           [(ngModel)]=\"filterId\"\n                           [typeaheadMinLength]=\"0\"\n                           container=\"body\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"id\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\n                           placeholder=\"Id\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterAppName\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"applicationName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\n                           class=\"form-control\" placeholder=\"App Name\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterUser\"\n                           container=\"body\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"userName\"\n                           typeaheadGroupField=\"userName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'USER')\"\n                           class=\"form-control\" placeholder=\"User\">\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.ids.length > 0\">\n                        <div class=\"sec-head\">ID</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\n                        <span class=\"filter-val ids\" *ngFor=\"let id of filter.ids\">{{id}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\n                        <div class=\"sec-head\">App Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n    <div class=\"table\">\n\n        <div class=\"tbl-row header\">\n            <div class=\"tbl-cell\">ID</div>\n            <div class=\"tbl-cell\">APP NAME</div>\n            <div class=\"tbl-cell\">USER</div>\n            <div class=\"tbl-cell\">CREATED ON</div>\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\n        </div>\n\n        <ng-container *ngFor=\"let item of dataSource?.applicationTasks; let i=index\">\n            <div class=\"tbl-row\"\n                 [ngClass]=\"{\n                 'modified' : item.isModified,\n                 'open':item.isExpand,\n                 'M':item.actionType == 'MORE',\n                 'A':item.actionType == 'APPROVE',\n                 'R':item.actionType == 'REJECT'}\"\n                 *ngIf=\"!!!summeryModeRecordLimit || i < summeryModeRecordLimit\">\n                <div class=\"tbl-cell\">\n                    <span tooltip=\"More Info\"\n                          class=\"action expand material-icons\"\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\n                    {{item.id}}\n                </div>\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\n                <div class=\"tbl-cell text-right\">\n                    <span tooltip=\"Approve\" *ngIf=\"filter?.dataType?.dataCategory == 'USER'\"\n                          class=\"action  approve material-icons\"\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE' \">check</span>\n\n                    <span tooltip=\"Reject\" *ngIf=\"filter?.dataType?.dataCategory  == 'USER'\"\n                          class=\"action  reject material-icons\"\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT' \">close</span>\n\n                    <span tooltip=\"Assign to Me\" *ngIf=\"filter?.dataType?.dataCategory  == 'GROUP'\"\n                          class=\"action  assign material-icons\"\n                          (click)=\"onAction('ASSIGN',item,filter?.dataType)\">assignment_ind</span>\n                </div>\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\n                    'A':item.actionType == 'APPROVE',\n                    'R':item.actionType == 'REJECT'}\">\n                    <div class=\"col-sm-12\">\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Application Id</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Description</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationDescription}}</div>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Operator</div>\n                                <div class=\"col-xs-6 field-value\">{{item.operators}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Tier</div>\n                                <div class=\"col-xs-6 field-value\">\n                                    <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\n                                        <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\n                                            {{opt}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-12\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <div class=\"col-xs-3 field-name\">Comment</div>\n                        <div class=\"col-xs-9 field-value\"><input type=\"text\" class=\"form-control\"></div>\n                    </div>\n\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <button class=\"btn btn-default animated fadeIn\"\n                                (click)=\"item.isExpand = false; item.actionType = '' \">Cancel\n                        </button>\n                        <button class=\"btn btn-primary animated fadeIn\"\n                                *ngIf=\"item.actionType == 'APPROVE'\"\n                                (click)=\"onAction('APPROVE',item,filter?.dataType)\">Approve\n                        </button>\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,filter?.dataType)\">Reject\n                        </button>\n                    </div>\n\n                </div>\n            </div>\n        </ng-container>\n\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.applicationTasks?.length == 0\">\n            <span class=\"no-rec\">No Records..</span>\n        </div>\n    </div> <!--TABLE END-->\n\n    <div class=\"text-right\" *ngIf=\"dataSource?.applicationTasks?.length > summeryModeRecordLimit\"><span class=\"more\"\n                                                                          (click)=\"onViewAll()\">View All</span></div>\n\n    <div class=\"pagination-container text-center\"\n         *ngIf=\"dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) \">\n\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"dataSource?.metadata?.total\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.numberOfRecordsPerPage\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n    </div>\n\n</div> <!--WRAPPER END-->\n"
 
 /***/ },
 
@@ -3265,21 +3288,21 @@ module.exports = "<div class=\"row\">\n  <app-approval-count class=\"col-sm-6 ap
 /***/ 904:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp\" style=\"animation-delay: 0.3s\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6\">\n      <app-approval-summery [appDetailsSummery]=\"dashboardData\"></app-approval-summery>\n    </div>\n    <div class=\"col-lg-6\">\n      <app-approval-history-graph></app-approval-history-graph>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [recordsType]=\"{dataCategory:'USER',dataType:'APPLICATION'}\"\n              [recordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"myApplications\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [recordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              [recordsType]=\"{dataCategory:'USER',dataType:'SUBSCRIPTION'}\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"myAppSubscriptionTask\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n  </div>\n\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              [recordsType]=\"{dataCategory:'GROUP',dataType:'APPLICATION'}\"\n              [recordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"allApplications\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              [recordsType]=\"{dataCategory:'GROUP',dataType:'SUBSCRIPTION'}\"\n              [recordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"allSubscriptions\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n  </div>\n\n\n</div>\n\n"
+module.exports = "<div class=\"animated fadeInUp\" style=\"animation-delay: 0.3s\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6\">\n      <app-approval-summery [appDetailsSummery]=\"dashboardData\"></app-approval-summery>\n    </div>\n    <div class=\"col-lg-6\">\n      <app-approval-history-graph></app-approval-history-graph>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [filter]=\"myApplicationFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"myApplications\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              [filter]=\"mySubscriptionFilter\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"myAppSubscriptionTask\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n  </div>\n\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              [filter]=\"groupApplicationFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"allApplications\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              [filter]=\"groupSubscriptionFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"allSubscriptions\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n  </div>\n\n\n</div>\n\n"
 
 /***/ },
 
 /***/ 905:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"history-filter\">\n    <div class=\"row\">\n        <div class=\"col-sm-12 title\">Filter</div>\n    </div>\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadOnSelect)=\"onFilterItemAdded($event)\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n</div>\n"
+module.exports = "<div class=\"history-filter\">\n\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"selectedApplication\"\n                  [typeaheadMinLength]=\"0\"\n                  typeaheadOptionField=\"name\"\n                  [typeahead]=\"applications\"\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\n                  placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"filter.operator\"\n                  [typeaheadMinLength]=\"0\"\n                  [typeahead]=\"operators\"\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\n                  placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-right\">\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\n        </div>\n    </div>\n</div>\n"
 
 /***/ },
 
 /***/ 906:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"historyJson\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n</div>"
+module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter\n                [filter]=\"filter\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n    <div class=\"col-sm-12 text-center\">\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"totalItems\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.count\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n\n    </div>\n</div>"
 
 /***/ },
 
@@ -3308,12 +3331,104 @@ module.exports = "<div class=\"login-container animated fadeInDown\" style=\"ani
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* unused harmony export DateTimeInfo */
+/* unused harmony export ApplicationTask */
+/* unused harmony export MetaData */
+/* unused harmony export PaginationInfo */
+/* harmony export (binding) */ __webpack_require__.d(exports, "f", function() { return ApplicationTaskResult; });
+/* unused harmony export ApplicationTaskSearchParam */
+/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return AssignApplicationTaskParam; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApproveApplicationCreationTaskParam; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ApproveSubscriptionCreationTaskParam; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "e", function() { return ApprovalEvent; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return ApplicationTaskFilter; });
+var DateTimeInfo = (function () {
+    function DateTimeInfo() {
+    }
+    return DateTimeInfo;
+}());
+var ApplicationTask = (function () {
+    function ApplicationTask() {
+    }
+    ApplicationTask.prototype.toString = function () {
+        return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
+    };
+    return ApplicationTask;
+}());
+var MetaData = (function () {
+    function MetaData() {
+    }
+    return MetaData;
+}());
+var PaginationInfo = (function () {
+    function PaginationInfo(pageNo, recordsPerPage) {
+        this.pageNo = pageNo;
+        this.recordsPerPage = recordsPerPage;
+    }
+    return PaginationInfo;
+}());
+var ApplicationTaskResult = (function () {
+    function ApplicationTaskResult() {
+    }
+    return ApplicationTaskResult;
+}());
+var ApplicationTaskSearchParam = (function () {
+    function ApplicationTaskSearchParam() {
+    }
+    return ApplicationTaskSearchParam;
+}());
+var AssignApplicationTaskParam = (function () {
+    function AssignApplicationTaskParam() {
+    }
+    return AssignApplicationTaskParam;
+}());
+var ApproveApplicationCreationTaskParam = (function () {
+    function ApproveApplicationCreationTaskParam() {
+    }
+    ApproveApplicationCreationTaskParam.prototype.toString = function () {
+        return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;
+    };
+    return ApproveApplicationCreationTaskParam;
+}());
+var ApproveSubscriptionCreationTaskParam = (function () {
+    function ApproveSubscriptionCreationTaskParam() {
+    }
+    return ApproveSubscriptionCreationTaskParam;
+}());
+var ApprovalEvent = (function () {
+    function ApprovalEvent(task, dataType, status) {
+        this.task = task;
+        this.dataType = dataType;
+        this.status = status;
+    }
+    return ApprovalEvent;
+}());
+var ApplicationTaskFilter = (function () {
+    function ApplicationTaskFilter(dataType, recPerPage) {
+        this.ids = [];
+        this.appNames = [];
+        this.users = [];
+        this.startRecordNumber = 0;
+        this.numberOfRecordsPerPage = 0;
+        this.dataType = dataType;
+        this.numberOfRecordsPerPage = recPerPage;
+    }
+    return ApplicationTaskFilter;
+}());
+//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/application-data-models.js.map
+
+/***/ },
+
+/***/ 99:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_login_remote_data_service__ = __webpack_require__(262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__ = __webpack_require__(410);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_login_remote_data_service__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__ = __webpack_require__(182);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AuthenticationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3339,7 +3454,7 @@ var AuthenticationService = (function () {
     }
     AuthenticationService.prototype.doLogin = function (userName, password, callback) {
         var _this = this;
-        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["a" /* User */]();
+        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["b" /* User */]();
         user.userName = userName;
         user.password = password;
         this._remoteService.login(user)

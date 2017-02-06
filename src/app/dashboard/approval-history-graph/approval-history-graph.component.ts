@@ -1,48 +1,66 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
+import {HistoryBarGraphData} from "../../commons/models/dashboard-data-models";
+import {MessageService} from "../../commons/services/message.service";
 
 @Component({
-  selector: 'app-approval-history-graph',
-  templateUrl: './approval-history-graph.component.html',
-  styleUrls: ['./approval-history-graph.component.scss'],
+    selector: 'app-approval-history-graph',
+    templateUrl: './approval-history-graph.component.html',
+    styleUrls: ['./approval-history-graph.component.scss'],
 })
 export class ApprovalHistoryGraphComponent implements OnInit {
 
-  public barChartOptionsSubscriptions:any = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-    title: {
-      display: true,
-      text: 'Subscription Creations'
+    public barChartOptionsSubscriptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Subscription Creations'
+        }
+    };
+
+    public barChartOptionsApplications: any = {
+        scaleShowVerticalLines: false,
+        responsive: true,
+        title: {
+            display: true,
+            text: 'Application Creations'
+        }
+    };
+
+    public barChartLabels: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul'];
+    public barChartType: string = 'bar';
+    public barChartLegend: boolean = false;
+
+    public barChartDataApplications: any[] = [
+        {data: [65, 59, 80, 81, 75, 55, 90], label: 'All Applications'},
+        {data: [28, 48, 40, 19, 12, 27, 80], label: 'My Applications'}
+    ];
+
+    public barChartDataSubscriptions: any[] = [
+        {data: [65, 59, 80, 81, 85, 55, 79], label: 'All Applications'},
+        {data: [28, 48, 40, 19, 27, 27, 16], label: 'My Applications'}
+    ];
+
+    private historyCreation: HistoryBarGraphData = new HistoryBarGraphData();
+
+    constructor(private dashboardService: DashboardRemoteDataService,
+                private message: MessageService) {
     }
-  };
 
-  public barChartOptionsApplications:any = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-    title: {
-      display: true,
-      text: 'Application Creations'
+    ngOnInit() {
+        this.dashboardService.CreationHistoryGraphDataProvider.subscribe(
+            (historyData:HistoryBarGraphData) => {
+                if(historyData){
+                    this.historyCreation = historyData;
+                }
+            },
+            (error) => {
+                this.message.error(error);
+            }
+        );
+
+        this.dashboardService.getCreationHistoryGraphData();
     }
-  };
-
-  public barChartLabels:string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul'];
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = false;
-
-  public barChartDataApplications:any[] = [
-    {data: [65, 59, 80, 81, 75, 55, 90], label: 'All Applications'},
-    {data: [28, 48, 40, 19, 12, 27, 80], label: 'My Applications'}
-  ];
-
-  public barChartDataSubscriptions:any[] = [
-    {data: [65, 59, 80, 81, 85, 55, 79], label: 'All Applications'},
-    {data: [28, 48, 40, 19, 27, 27, 16], label: 'My Applications'}
-  ];
-
-  constructor() { }
-
-  ngOnInit() {
-
-  }
 
 }

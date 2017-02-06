@@ -12,6 +12,11 @@ module.exports = [
         handler: ApplicationService.getApplicationStatistics
     },
     {
+        method : 'GET',
+        path : '/api/applications/graph',
+        handler : ApplicationService.getGraphData
+    },
+    {
         method: 'POST',
         path: '/api/applications/assign',
         handler: ApplicationService.assignApplicationTaskToUser

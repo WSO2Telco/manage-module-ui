@@ -1,24 +1,33 @@
 import {Injectable, Inject} from '@angular/core';
 import {Headers, RequestOptions, Http, Response} from "@angular/http";
-import {Observable, ReplaySubject} from "rxjs";
-import {DashboardData, DashboardDataRequestParam} from "../commons/models/dashboard-data-models";
+import {Observable, ReplaySubject, BehaviorSubject} from "rxjs";
+import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from "../commons/models/dashboard-data-models";
 import {ApprovalRemoteDataService} from "./approval-remote-data.service";
 import {ApplicationTask, ApplicationTaskResult} from "../commons/models/application-data-models";
+import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 
 @Injectable()
 export class DashboardRemoteDataService {
-   
+
+    /**
+     * Application and Subscription Creation History Graph Data Stream
+     * @type {BehaviorSubject<HistoryBarGraphData>}
+     */
+    public CreationHistoryGraphDataProvider:BehaviorSubject<HistoryBarGraphData> = new BehaviorSubject<HistoryBarGraphData>(null);
+
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
     private _dashboardStatisticsData = new DashboardData();
 
     private apiEndpoints: Object = {
         dashboardData: this.apiContext + '/applications/statistics',
+        graph: this.apiContext + '/applications/graph',
     };
 
     constructor(private http: Http, 
                 @Inject('API_CONTEXT')private apiContext:string,
-                private approvalService: ApprovalRemoteDataService) {
+                private approvalService: ApprovalRemoteDataService,
+                private slimLoadingBarService: SlimLoadingBarService) {
 
         approvalService.MyApplicationCreationTasksProvider.subscribe(
             (result) => {
@@ -66,6 +75,22 @@ export class DashboardRemoteDataService {
         this._dashboardStatisticsData.totalSubCreations = this._dashboardStatisticsData.subCreationsForGroup + this._dashboardStatisticsData.subCreationsForUser;
 
         this.DashboardDataProvider.next(this._dashboardStatisticsData);
+    }
+
+    getCreationHistoryGraphData():void{
+        this.slimLoadingBarService.start();
+
+        this.http.get(this.apiEndpoints['graph'],this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (graphData:HistoryBarGraphData)=>{
+                    this.CreationHistoryGraphDataProvider.next(graphData);
+                },
+                (error: Response) => Observable.throw(error.json().message),
+                ()=>{
+                    this.slimLoadingBarService.complete();
+                }
+            );
     }
 
 }

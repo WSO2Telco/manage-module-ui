@@ -33,8 +33,8 @@ const _getApplications = function (request, reply) {
 
     let responseAdaptor = function (appTaskResult, appDetailsResult) {
         let adapted = {
-            applicationTasks : [],
-            metadata : {
+            applicationTasks: [],
+            metadata: {
                 order: appTaskResult.order,
                 size: appTaskResult.size,
                 sort: appTaskResult.sort,
@@ -44,7 +44,7 @@ const _getApplications = function (request, reply) {
         };
 
 
-        if(appTaskResult && appTaskResult.data){
+        if (appTaskResult && appTaskResult.data) {
             adapted.applicationTasks = appTaskResult.data.map((task, index) => {
                 let details = appDetailsResult[index].reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
@@ -318,13 +318,25 @@ const _approveSubscriptionCreation = function (request, reply) {
 };
 
 
+const _getGraphData = function (request, reply) {
+    reply({
+        x_axis: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul'],
+        data: [
+            {data: [65, 59, 80, 81, 75, 55, 90], label: 'Applications'},
+            {data: [28, 48, 40, 19, 12, 27, 80], label: 'Subscriptions'}
+        ]
+    });
+};
+
+
 function applicationService() {
     return {
-        searchApplicationsForApproval: _getApplications,
-        getApplicationStatistics: _getAppStat,
         assignApplicationTaskToUser: _assignApplicationTaskToUser,
         approveApplicationCreation: _approveApplicationCreation,
-        approveSubscriptionCreation: _approveSubscriptionCreation
+        approveSubscriptionCreation: _approveSubscriptionCreation,
+        getApplicationStatistics: _getAppStat,
+        getGraphData: _getGraphData,
+        searchApplicationsForApproval: _getApplications
     };
 }
 

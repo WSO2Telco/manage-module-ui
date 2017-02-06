@@ -3685,15 +3685,30 @@
 .btn {
   margin-top: 1px;
   font-weight: 600;
-  padding: 10px 20px !important;
-  outline: 0 !important;
-  box-shadow: none !important; }
+  outline: 0;
+  box-shadow: none; }
 
 .btn-primary {
   background-color: #32c5d2;
   border-color: #29A2AD; }
   .btn-primary:hover {
     background-color: #164e6a; }
+
+.pagination a {
+  color: #adb5bd !important; }
+
+.pagination > li:first-child > a, .pagination > li:last-child > a {
+  border-radius: 0px; }
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+  background-color: #E19131;
+  border-color: #c1711d;
+  color: white !important; }
 
 html, body {
   width: 100%;
@@ -3749,6 +3764,12 @@ input, button {
 .pad-r-15-im {
   padding-right: 15px !important; }
 
+ma-b-15 {
+  margin-bottom: 15px; }
+
+ma-b-20 {
+  margin-bottom: 20px; }
+
 .delay-02 {
   -webkit-animation-delay: 0.2s;
   animation-delay: 0.2s; }
@@ -3770,7 +3791,8 @@ input, button {
   animation-delay: 2s; }
 
 #toasty .toast {
-  width: 350px; }
+  width: 350px;
+  opacity: 1; }
   #toasty .toast.toasty-theme-material.toasty-type-error {
     background-color: #bb3535;
     color: white; }
@@ -3778,7 +3800,7 @@ input, button {
     background-color: #107124;
     color: white; }
   #toasty .toast.toasty-theme-material.toasty-type-warning {
-    background-color: #bb9535;
+    background-color: #e1a10c;
     color: white; }
 
 .tooltip-inner {
