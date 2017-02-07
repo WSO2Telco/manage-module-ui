@@ -75,12 +75,6 @@ module.exports = {
         },
         {
             "plugin": {
-                "register": "./dataProvider"
-            },
-            "options": getOptions({}, true)
-        },
-        {
-            "plugin": {
                 "register": "./applications"
             },
             "options": getOptions({}, true)
