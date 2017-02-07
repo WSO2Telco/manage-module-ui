@@ -28,38 +28,56 @@ export class ApprovalHistoryGraphComponent implements OnInit {
         }
     };
 
-    public barChartLabels: string[] = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'Jul'];
-    public barChartType: string = 'bar';
+    public chartType: string = 'bar';
     public barChartLegend: boolean = false;
 
+    private appCreationHistoryDataSet: any[] = [{data: []}];
+    private appCreationHistoryLabels: string[] = [];
+    public chartColors: Array<any> = [
+        {
+            backgroundColor: 'rgba(53,152,220,0.5)'
+        }];
 
-    public barChartDataSubscriptions: any[] = [
-        {data: [65, 59, 80, 81, 85, 55, 79], label: 'All Applications'},
-        {data: [28, 48, 40, 19, 27, 27, 16], label: 'My Applications'}
-    ];
-
-    private historyCreationDataSet:any[] =  [{ data: [] },{ data: [] }];
-    private historyCreationLabels:string[] = [];
+    private subscriptionHistoryDataSet: any[] = [{data: []}];
+    private subscriptionHistoryLabels: string[] = [];
 
     constructor(private dashboardService: DashboardRemoteDataService,
                 private message: MessageService) {
     }
 
     ngOnInit() {
-        this.dashboardService.getCreationHistoryGraphData();
+        this.dashboardService.getCreationHistoryGraphData('applications');
+        this.dashboardService.getCreationHistoryGraphData('subscriptions');
 
-        this.dashboardService.CreationHistoryGraphDataProvider.subscribe(
-            (historyData:any) => {
-                if(historyData && historyData.xAxisLabels){
-                    this.historyCreationLabels.length = 0;
-                    historyData.xAxisLabels.forEach((lbl,index)=>{
-                        this.historyCreationLabels[index] = lbl;
+        this.dashboardService.ApplicationCreationHistoryDataProvider.subscribe(
+            (historyData: any) => {
+                if (historyData && historyData.xAxisLabels) {
+                    this.appCreationHistoryLabels.length = 0;
+                    historyData.xAxisLabels.forEach((lbl, index) => {
+                        this.appCreationHistoryLabels[index] = lbl;
                     });
                 }
 
-                if(historyData && historyData.graphData && historyData.graphData.length > 0){
-                    this.historyCreationDataSet = historyData.graphData;
+                if (historyData && historyData.graphData && historyData.graphData.length > 0) {
+                    this.appCreationHistoryDataSet = historyData.graphData;
+                }
+            },
+            (error) => {
+                this.message.error(error);
+            }
+        );
 
+        this.dashboardService.SubscriptionCreationHistoryDataProvider.subscribe(
+            (historyData: any) => {
+                if (historyData && historyData.xAxisLabels) {
+                    this.subscriptionHistoryLabels.length = 0;
+                    historyData.xAxisLabels.forEach((lbl, index) => {
+                        this.subscriptionHistoryLabels[index] = lbl;
+                    });
+                }
+
+                if (historyData && historyData.graphData && historyData.graphData.length > 0) {
+                    this.subscriptionHistoryDataSet = historyData.graphData;
                 }
             },
             (error) => {

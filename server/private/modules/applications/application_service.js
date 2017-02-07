@@ -321,15 +321,22 @@ const _approveSubscriptionCreation = function (request, reply) {
 
 const _getGraphData = function (request, reply) {
 
-    let onSuccess = function (result) {
-        reply(result);
-    };
+    if (request &&
+        request.params &&
+        request.params.type &&
+        (request.params.type == 'applications' || request.params.type == 'subscriptions' )) {
+        let onSuccess = function (result) {
+            reply(result);
+        };
 
-    let onError = function (error) {
-        reply(error);
-    };
+        let onError = function (error) {
+            reply(error);
+        };
 
-    applicationHistoryREST.Invoke().then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type).then(onSuccess, onError);
+    } else {
+        reply(boom.badRequest(Messages['BAD_REQUEST']));
+    }
 };
 
 

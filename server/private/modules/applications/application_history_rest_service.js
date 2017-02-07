@@ -5,7 +5,7 @@ const config = require('../../config/application_config');
 const wreck = require('wreck');
 const moment = require('moment');
 
-const historyREST = function(){
+const historyREST = function(type){
 
     let last6Months  = [];
     let promiseCol = [];
@@ -14,11 +14,7 @@ const historyREST = function(){
         graphData : [
             {
                 data : [],
-                label: 'Applications'
-            },
-            {
-                data : [],
-                label: 'Subscriptions'
+                label: String(type).toUpperCase()
             }],
         xAxisLabels : []
     };
@@ -26,7 +22,10 @@ const historyREST = function(){
     let deferred = Q.defer();
 
     let getEndpointUrl = function (month) {
-        return config.businessProcessEngineBaseUrl + 'history/historic-task-instances?taskCreatedAfter='+month.start.format()+'&taskCreatedBefore='+month.end.format()+'processDefinitionKey=application_creation_approval_process';
+
+        let process = (type == 'applications') ? 'application_creation_approval_process' : 'subscription_approval_process';
+
+        return config.businessProcessEngineBaseUrl + '/history/historic-task-instances?taskCreatedAfter='+month.start.format()+'&taskCreatedBefore='+month.end.format()+'&processDefinitionKey='+process;
     };
 
     let getRequestOptions = function () {
@@ -49,25 +48,25 @@ const historyREST = function(){
         return adapted;
     };
 
-    for (var i = 0; i < 6; i++) {
-        let month = moment().subtract(i, 'months');
+    for (var i = 0; i <6; i++) {
+        let month = moment().subtract(5-i, 'months');
         last6Months[i] = {
-            start : month.startOf('month').set({'hour':'00','minute':'00','second':'00'}),
-            end : month.endOf('month').set({'hour':'00','minute':'00','second':'00'})
+            start : moment(month).startOf('month').set({'hour':'00','minute':'00','second':'00'}),
+            end : moment(month).endOf('month').set({'hour':'00','minute':'00','second':'00'})
         };
         adapted.xAxisLabels.push(month.format('MMM'));
     }
 
     last6Months.forEach((month)=>{
-        let deferred = Q.defer();
+        let monthDeferred = Q.defer();
         wreck.get(getEndpointUrl(month), getRequestOptions(), (error, res, payload) => {
             if(error){
-                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+                monthDeferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }else{
-                deferred.resolve(payload);
+                monthDeferred.resolve(payload);
             }
         });
-        promiseCol.push(deferred.promise);
+        promiseCol.push(monthDeferred.promise);
     });
 
     Q.all(promiseCol).then(

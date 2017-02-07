@@ -10,10 +10,16 @@ import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 export class DashboardRemoteDataService {
 
     /**
-     * Application and Subscription Creation History Graph Data Stream
+     * Application Creation History Graph Data Stream
      * @type {BehaviorSubject<HistoryBarGraphData>}
      */
-    public CreationHistoryGraphDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    public ApplicationCreationHistoryDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+
+    /**
+     * Subscription Creation History Graph Data Stream
+     * @type {BehaviorSubject<HistoryBarGraphData>}
+     */
+    public SubscriptionCreationHistoryDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
@@ -77,14 +83,19 @@ export class DashboardRemoteDataService {
         this.DashboardDataProvider.next(this._dashboardStatisticsData);
     }
 
-    getCreationHistoryGraphData():void{
+    getCreationHistoryGraphData(type:string):void{
         this.slimLoadingBarService.start();
 
-        this.http.get(this.apiEndpoints['graph'],this.options)
+        this.http.get(this.apiEndpoints['graph']+'/'+type,this.options)
             .map((response: Response) => response.json())
             .subscribe(
                 (graphData)=>{
-                    this.CreationHistoryGraphDataProvider.next(graphData);
+                    if(type == 'applications'){
+                        this.ApplicationCreationHistoryDataProvider.next(graphData);
+                    }else if(type == 'subscriptions'){
+                        this.SubscriptionCreationHistoryDataProvider.next(graphData);
+                    }
+
                 },
                 (error: Response) => Observable.throw(error.json().message),
                 ()=>{
