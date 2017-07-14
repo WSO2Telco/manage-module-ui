@@ -19,7 +19,7 @@ export class AuthenticationService {
     let user: User = new User();
     user.userName = userName;
     user.password = password;
-
+    console.log(user.userName);
     this._remoteService.login(user)
       .subscribe(
         (loginInfo: LoginResponse) => {

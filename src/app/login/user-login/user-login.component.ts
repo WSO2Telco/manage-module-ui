@@ -16,6 +16,7 @@ export class UserLoginComponent implements OnInit {
   constructor(private _authenticationService:AuthenticationService) { }
 
   ngOnInit() {
+    console.log('eees');
   }
 
   onLoginClick(loginForm){
