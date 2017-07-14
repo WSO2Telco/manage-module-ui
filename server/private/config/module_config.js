@@ -33,14 +33,14 @@ const goodOptions = {
 module.exports = {
     "server": {
         "app": {
-            "name": "workflow-manager"
+            "name": "workflow-manager-ui"
         }
     },
     "connections": [
         {
             "port": config.serverPort,
             "labels": [
-                "workflow-manager"
+                "workflow-manager-ui"
             ]
         }
     ],

@@ -1,4 +1,4 @@
-webpackJsonp([4,8],{
+webpackJsonp([5,9],{
 
 /***/ 106:
 /***/ function(module, exports, __webpack_require__) {
@@ -277,7 +277,7 @@ var ApprovalRemoteDataService = (function () {
     return ApprovalRemoteDataService;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/approval-remote-data.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-remote-data.service.js.map
 
 /***/ },
 
@@ -290,7 +290,7 @@ var ApprovalRemoteDataService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__data_providers_login_remote_data_service__ = __webpack_require__(263);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__ = __webpack_require__(654);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AuthenticationService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -319,6 +319,7 @@ var AuthenticationService = (function () {
         var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["b" /* User */]();
         user.userName = userName;
         user.password = password;
+        console.log(user.userName);
         this._remoteService.login(user)
             .subscribe(function (loginInfo) {
             _this.loginUserInfo.next(loginInfo);
@@ -351,7 +352,7 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/authentication.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/authentication.service.js.map
 
 /***/ },
 
@@ -395,7 +396,7 @@ var AppCommonService = (function () {
     ], AppCommonService);
     return AppCommonService;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/app-common.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/app-common.service.js.map
 
 /***/ },
 
@@ -487,7 +488,7 @@ var ApplicationTaskFilter = (function () {
     }
     return ApplicationTaskFilter;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/application-data-models.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/application-data-models.js.map
 
 /***/ },
 
@@ -550,7 +551,7 @@ var LoginRemoteDataService = (function () {
     return LoginRemoteDataService;
     var _a;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/login_remote-data.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/login_remote-data.service.js.map
 
 /***/ },
 
@@ -663,11 +664,11 @@ var DashboardRemoteDataService = (function () {
     return DashboardRemoteDataService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/dashboard-remote-data.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard-remote-data.service.js.map
 
 /***/ },
 
-/***/ 405:
+/***/ 407:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -730,7 +731,7 @@ var LoginGuard = (function () {
     return LoginGuard;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/app.guard.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.guard.js.map
 
 /***/ },
 
@@ -740,19 +741,23 @@ var LoginGuard = (function () {
 var map = {
 	"app/approvals/approvals.module": [
 		1249,
-		2
+		3
 	],
 	"app/dashboard/dashboard.module": [
 		1250,
-		0
+		1
 	],
 	"app/history/history.module": [
 		1251,
-		1
+		2
 	],
 	"app/login/login.module": [
 		1252,
-		3
+		4
+	],
+	"app/rate/rate.module": [
+		1253,
+		0
 	]
 };
 function webpackAsyncContext(req) {
@@ -790,263 +795,11 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/main.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/main.js.map
 
 /***/ },
 
 /***/ 651:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(138);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalHelperService; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var ApprovalHelperService = (function () {
-    function ApprovalHelperService(approvalService, message, slimLoadingBarService) {
-        this.approvalService = approvalService;
-        this.message = message;
-        this.slimLoadingBarService = slimLoadingBarService;
-    }
-    ApprovalHelperService.prototype.assignApplicationTask = function (dataType, taskId, callBack) {
-        var _this = this;
-        this.slimLoadingBarService.start();
-        this.approvalService.assignApplicationTaskToUser(taskId).subscribe(function () {
-            if (dataType == "APPLICATION") {
-                _this.message.success(_this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-            }
-            else if (dataType == "SUBSCRIPTION") {
-                _this.message.success(_this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
-            }
-            callBack();
-        }, function (error) {
-            _this.message.error(error);
-        }, function () {
-            _this.slimLoadingBarService.complete();
-        });
-    };
-    ApprovalHelperService.prototype.approveRejectTask = function (dataType, appTask, status) {
-        var _this = this;
-        this.slimLoadingBarService.start();
-        var applicationActions = function (status) {
-            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["a" /* ApproveApplicationCreationTaskParam */]();
-            param.taskId = appTask.id;
-            param.description = appTask.toString();
-            param.selectedTier = appTask.tier;
-            param.status = status;
-            param.user = 'admin';
-            param.taskType = "application";
-            _this.approvalService.approveApplicationCreationTask(param).subscribe(function () {
-                if (status == 'APPROVED') {
-                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
-                }
-                else {
-                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
-                }
-                _this.approvalService.getAllTasks();
-            }, function (error) {
-                _this.message.error(error);
-            }, function () {
-                _this.slimLoadingBarService.complete();
-            });
-        };
-        var subscriptionActions = function (status) {
-            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["b" /* ApproveSubscriptionCreationTaskParam */]();
-            param.taskId = appTask.id;
-            param.description = appTask.toString();
-            param.selectedTier = appTask.tier;
-            param.status = status;
-            param.user = 'admin';
-            param.taskType = "subscription";
-            _this.approvalService.approveSubscriptionCreationTask(param).subscribe(function () {
-                if (status == 'APPROVED') {
-                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
-                }
-                else {
-                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
-                }
-                _this.approvalService.getAllTasks();
-            }, function (error) {
-                _this.message.error(error);
-            }, function () {
-                _this.slimLoadingBarService.complete();
-            });
-        };
-        var approveActions = {};
-        approveActions['APPLICATION'] = applicationActions;
-        approveActions['SUBSCRIPTION'] = subscriptionActions;
-        approveActions[dataType.dataType] && approveActions[dataType.dataType](status);
-    };
-    ApprovalHelperService = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */]) === 'function' && _c) || Object])
-    ], ApprovalHelperService);
-    return ApprovalHelperService;
-    var _a, _b, _c;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/approval-helper.service.js.map
-
-/***/ },
-
-/***/ 652:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* unused harmony export MenuItem */
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return User; });
-/* unused harmony export LoginResponse */
-var MenuItem = (function () {
-    function MenuItem() {
-    }
-    return MenuItem;
-}());
-var TableDataType = (function () {
-    function TableDataType(dataCategory, dataType) {
-        this.dataCategory = dataCategory;
-        this.dataType = dataType;
-    }
-    return TableDataType;
-}());
-var User = (function () {
-    function User() {
-    }
-    return User;
-}());
-var LoginResponse = (function () {
-    function LoginResponse() {
-    }
-    return LoginResponse;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/common-data-models.js.map
-
-/***/ },
-
-/***/ 653:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__ = __webpack_require__(775);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__ = __webpack_require__(574);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__ = __webpack_require__(780);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SharedModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-var SharedModule = (function () {
-    function SharedModule() {
-    }
-    SharedModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["d" /* TooltipModule */],
-                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["e" /* TypeaheadModule */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["f" /* PaginationModule */].forRoot()
-            ],
-            declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */]],
-            exports: [
-                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */],
-                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */],
-                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["e" /* TypeaheadModule */],
-                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["f" /* PaginationModule */]]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], SharedModule);
-    return SharedModule;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/shared.module.js.map
-
-/***/ },
-
-/***/ 654:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalHistoryFilter; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ApprovalHistory; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return ApprovalHistoryDataset; });
-/* unused harmony export Subscriber */
-/* unused harmony export Application */
-var ApprovalHistoryFilter = (function () {
-    function ApprovalHistoryFilter() {
-        this.fromDate = '';
-        this.toDate = '';
-        this.subscriber = '';
-        this.api = '';
-        this.applicationId = 0;
-        this.operator = '';
-        this.offset = 0;
-        this.count = 10;
-    }
-    return ApprovalHistoryFilter;
-}());
-var ApprovalHistory = (function () {
-    function ApprovalHistory() {
-        this.applicationId = 0;
-    }
-    return ApprovalHistory;
-}());
-var ApprovalHistoryDataset = (function () {
-    function ApprovalHistoryDataset() {
-        this.recordsCol = [];
-    }
-    return ApprovalHistoryDataset;
-}());
-var Subscriber = (function () {
-    function Subscriber() {
-    }
-    return Subscriber;
-}());
-var Application = (function () {
-    function Application() {
-    }
-    return Application;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/reporing-data-models.js.map
-
-/***/ },
-
-/***/ 655:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1056,7 +809,7 @@ var Application = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(88);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(138);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__ = __webpack_require__(654);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__ = __webpack_require__(655);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ReportingRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1176,7 +929,7 @@ var ReportingRemoteDataService = (function () {
                 arr.noOfRecords = cur[0];
             }
             else {
-                var tmp = new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["b" /* ApprovalHistory */]();
+                var tmp = new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["c" /* ApprovalHistory */]();
                 tmp.applicationId = cur[0];
                 tmp.applicationName = cur[1];
                 tmp.applicationDescription = cur[2];
@@ -1185,7 +938,7 @@ var ReportingRemoteDataService = (function () {
                 arr.recordsCol.push(tmp);
             }
             return arr;
-        }, new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["c" /* ApprovalHistoryDataset */]())
+        }, new __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__["d" /* ApprovalHistoryDataset */]())
             .subscribe(function (approvalHistory) {
             _this.ApprovalHistoryProvider.next(approvalHistory);
         }, function (error) {
@@ -1203,7 +956,273 @@ var ReportingRemoteDataService = (function () {
     return ReportingRemoteDataService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/reporting-remote-data.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/reporting-remote-data.service.js.map
+
+/***/ },
+
+/***/ 652:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__ = __webpack_require__(775);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__ = __webpack_require__(576);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__ = __webpack_require__(780);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SharedModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var SharedModule = (function () {
+    function SharedModule() {
+    }
+    SharedModule = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["d" /* TooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["e" /* TypeaheadModule */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["f" /* PaginationModule */].forRoot()
+            ],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */]],
+            exports: [
+                __WEBPACK_IMPORTED_MODULE_2__commons_components_application_data_table_application_data_table_component__["a" /* ApplicationDataTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__["b" /* SlimLoadingBarModule */],
+                __WEBPACK_IMPORTED_MODULE_6__commons_components_responsive_table_responsive_table_component__["a" /* ResponsiveTableComponent */],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["e" /* TypeaheadModule */],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_bootstrap__["f" /* PaginationModule */]]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SharedModule);
+    return SharedModule;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/shared.module.js.map
+
+/***/ },
+
+/***/ 653:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__(138);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalHelperService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var ApprovalHelperService = (function () {
+    function ApprovalHelperService(approvalService, message, slimLoadingBarService) {
+        this.approvalService = approvalService;
+        this.message = message;
+        this.slimLoadingBarService = slimLoadingBarService;
+    }
+    ApprovalHelperService.prototype.assignApplicationTask = function (dataType, taskId, callBack) {
+        var _this = this;
+        this.slimLoadingBarService.start();
+        this.approvalService.assignApplicationTaskToUser(taskId).subscribe(function () {
+            if (dataType == "APPLICATION") {
+                _this.message.success(_this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
+            }
+            else if (dataType == "SUBSCRIPTION") {
+                _this.message.success(_this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
+            }
+            callBack();
+        }, function (error) {
+            _this.message.error(error);
+        }, function () {
+            _this.slimLoadingBarService.complete();
+        });
+    };
+    ApprovalHelperService.prototype.approveRejectTask = function (dataType, appTask, status) {
+        var _this = this;
+        this.slimLoadingBarService.start();
+        var applicationActions = function (status) {
+            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["a" /* ApproveApplicationCreationTaskParam */]();
+            param.taskId = appTask.id;
+            param.description = appTask.toString();
+            param.selectedTier = appTask.tier;
+            param.status = status;
+            param.user = 'admin';
+            param.taskType = "application";
+            _this.approvalService.approveApplicationCreationTask(param).subscribe(function () {
+                if (status == 'APPROVED') {
+                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
+                }
+                else {
+                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                }
+                _this.approvalService.getAllTasks();
+            }, function (error) {
+                _this.message.error(error);
+            }, function () {
+                _this.slimLoadingBarService.complete();
+            });
+        };
+        var subscriptionActions = function (status) {
+            var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["b" /* ApproveSubscriptionCreationTaskParam */]();
+            param.taskId = appTask.id;
+            param.description = appTask.toString();
+            param.selectedTier = appTask.tier;
+            param.status = status;
+            param.user = 'admin';
+            param.taskType = "subscription";
+            _this.approvalService.approveSubscriptionCreationTask(param).subscribe(function () {
+                if (status == 'APPROVED') {
+                    _this.message.success(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
+                }
+                else {
+                    _this.message.info(_this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
+                }
+                _this.approvalService.getAllTasks();
+            }, function (error) {
+                _this.message.error(error);
+            }, function () {
+                _this.slimLoadingBarService.complete();
+            });
+        };
+        var approveActions = {};
+        approveActions['APPLICATION'] = applicationActions;
+        approveActions['SUBSCRIPTION'] = subscriptionActions;
+        approveActions[dataType.dataType] && approveActions[dataType.dataType](status);
+    };
+    ApprovalHelperService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */]) === 'function' && _c) || Object])
+    ], ApprovalHelperService);
+    return ApprovalHelperService;
+    var _a, _b, _c;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-helper.service.js.map
+
+/***/ },
+
+/***/ 654:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* unused harmony export MenuItem */
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return User; });
+/* unused harmony export LoginResponse */
+var MenuItem = (function () {
+    function MenuItem() {
+    }
+    return MenuItem;
+}());
+var TableDataType = (function () {
+    function TableDataType(dataCategory, dataType) {
+        this.dataCategory = dataCategory;
+        this.dataType = dataType;
+    }
+    return TableDataType;
+}());
+var User = (function () {
+    function User() {
+    }
+    return User;
+}());
+var LoginResponse = (function () {
+    function LoginResponse() {
+    }
+    return LoginResponse;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/common-data-models.js.map
+
+/***/ },
+
+/***/ 655:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return ApprovalHistoryFilter; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalRateFilter; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return ApprovalHistory; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return ApprovalHistoryDataset; });
+/* unused harmony export Subscriber */
+/* unused harmony export Application */
+var ApprovalHistoryFilter = (function () {
+    function ApprovalHistoryFilter() {
+        this.fromDate = '';
+        this.toDate = '';
+        this.subscriber = '';
+        this.api = '';
+        this.applicationId = 0;
+        this.operator = '';
+        this.offset = 0;
+        this.count = 10;
+    }
+    return ApprovalHistoryFilter;
+}());
+var ApprovalRateFilter = (function () {
+    function ApprovalRateFilter() {
+        this.fromDate = '';
+        this.toDate = '';
+        this.subscriber = '';
+        this.api = '';
+        this.applicationId = 0;
+        this.operator = '';
+        this.offset = 0;
+        this.count = 10;
+    }
+    return ApprovalRateFilter;
+}());
+var ApprovalHistory = (function () {
+    function ApprovalHistory() {
+        this.applicationId = 0;
+    }
+    return ApprovalHistory;
+}());
+var ApprovalHistoryDataset = (function () {
+    function ApprovalHistoryDataset() {
+        this.recordsCol = [];
+    }
+    return ApprovalHistoryDataset;
+}());
+var Subscriber = (function () {
+    function Subscriber() {
+    }
+    return Subscriber;
+}());
+var Application = (function () {
+    function Application() {
+    }
+    return Application;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/reporing-data-models.js.map
 
 /***/ },
 
@@ -1236,7 +1255,7 @@ var HistoryBarGraphData = (function () {
     }
     return HistoryBarGraphData;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/dashboard-data-models.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard-data-models.js.map
 
 /***/ },
 
@@ -1285,7 +1304,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/app.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.component.js.map
 
 /***/ },
 
@@ -1297,11 +1316,11 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(125);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(574);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__ = __webpack_require__(576);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(771);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_routes__ = __webpack_require__(773);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__commons_commons_module__ = __webpack_require__(774);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_guard__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_guard__ = __webpack_require__(407);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__commons_components_header_header_component__ = __webpack_require__(778);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__commons_components_hamburger_menu_hamburger_menu_component__ = __webpack_require__(777);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__commons_components_user_avatar_user_avatar_component__ = __webpack_require__(781);
@@ -1310,12 +1329,12 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_charts__ = __webpack_require__(657);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__data_providers_data_providers_module__ = __webpack_require__(782);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__ = __webpack_require__(607);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__ = __webpack_require__(609);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__data_providers_approval_remote_data_service__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__data_providers_dashboard_remote_data_service__ = __webpack_require__(319);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__approvals_approval_helper_service__ = __webpack_require__(651);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_shared_module__ = __webpack_require__(653);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__data_providers_reporting_remote_data_service__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__approvals_approval_helper_service__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__shared_shared_module__ = __webpack_require__(652);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__data_providers_reporting_remote_data_service__ = __webpack_require__(651);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1359,7 +1378,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_10__commons_components_hamburger_menu_hamburger_menu_component__["a" /* HamburgerMenuComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__commons_components_user_avatar_user_avatar_component__["a" /* UserAvatarComponent */],
                 __WEBPACK_IMPORTED_MODULE_12__commons_components_main_menu_main_menu_component__["a" /* MainMenuComponent */],
-                __WEBPACK_IMPORTED_MODULE_13__commons_components_breadcrumbs_breadcrumbs_component__["a" /* BreadcrumbsComponent */]
+                __WEBPACK_IMPORTED_MODULE_13__commons_components_breadcrumbs_breadcrumbs_component__["a" /* BreadcrumbsComponent */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1375,7 +1394,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["c" /* DropdownModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["d" /* TooltipModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__["a" /* ToastyModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["e" /* TypeaheadModule */].forRoot()
+                __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["e" /* TypeaheadModule */].forRoot(),
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_8__app_guard__["a" /* AppGuard */],
@@ -1395,7 +1414,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/app.module.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.module.js.map
 
 /***/ },
 
@@ -1404,7 +1423,7 @@ var AppModule = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_guard__ = __webpack_require__(405);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_guard__ = __webpack_require__(407);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RootLevelRoutes; });
 
 
@@ -1425,6 +1444,10 @@ var routes = [
         canActivate: [__WEBPACK_IMPORTED_MODULE_1__app_guard__["a" /* AppGuard */]]
     },
     {
+        path: 'rate',
+        loadChildren: 'app/rate/rate.module#RateModule',
+    },
+    {
         path: 'approvals',
         loadChildren: 'app/approvals/approvals.module#ApprovalsModule',
         canActivate: [__WEBPACK_IMPORTED_MODULE_1__app_guard__["a" /* AppGuard */]]
@@ -1440,7 +1463,7 @@ var routes = [
     }
 ];
 var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/app.routes.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.routes.js.map
 
 /***/ },
 
@@ -1486,7 +1509,7 @@ var CommonsModule = (function () {
     ], CommonsModule);
     return CommonsModule;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/commons.module.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/commons.module.js.map
 
 /***/ },
 
@@ -1673,7 +1696,7 @@ var ApplicationDataTableComponent = (function () {
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/application-data-table.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/application-data-table.component.js.map
 
 /***/ },
 
@@ -1728,7 +1751,7 @@ var BreadcrumbsComponent = (function () {
     return BreadcrumbsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/breadcrumbs.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/breadcrumbs.component.js.map
 
 /***/ },
 
@@ -1772,7 +1795,7 @@ var HamburgerMenuComponent = (function () {
     return HamburgerMenuComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/hamburger-menu.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/hamburger-menu.component.js.map
 
 /***/ },
 
@@ -1807,7 +1830,7 @@ var HeaderComponent = (function () {
     ], HeaderComponent);
     return HeaderComponent;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/header.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/header.component.js.map
 
 /***/ },
 
@@ -1840,7 +1863,8 @@ var MainMenuComponent = (function () {
             { id: 1, route: '/home', name: 'Home', iconName: 'home' },
             { id: 2, route: '/approvals/applications', name: 'Approve Applications', iconName: 'apps' },
             { id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'subscriptions' },
-            { id: 4, route: '/history', name: 'Approval History', iconName: 'history' }
+            { id: 4, route: '/rate', name: 'Rate', iconName: 'apps' },
+            { id: 5, route: '/history', name: 'History', iconName: 'history' }
         ];
     }
     MainMenuComponent.prototype.ngOnInit = function () {
@@ -1868,7 +1892,7 @@ var MainMenuComponent = (function () {
     return MainMenuComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/main-menu.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/main-menu.component.js.map
 
 /***/ },
 
@@ -1915,7 +1939,7 @@ var ResponsiveTableComponent = (function () {
     ], ResponsiveTableComponent);
     return ResponsiveTableComponent;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/responsive-table.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/responsive-table.component.js.map
 
 /***/ },
 
@@ -1966,7 +1990,7 @@ var UserAvatarComponent = (function () {
     return UserAvatarComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/user-avatar.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/user-avatar.component.js.map
 
 /***/ },
 
@@ -2007,7 +2031,7 @@ var DataProvidersModule = (function () {
     ], DataProvidersModule);
     return DataProvidersModule;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/data-providers.module.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/data-providers.module.js.map
 
 /***/ },
 
@@ -2023,7 +2047,7 @@ var DataProvidersModule = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/environment.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/environment.js.map
 
 /***/ },
 
@@ -2079,7 +2103,7 @@ var environment = {
 
 
 
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/polyfills.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/polyfills.js.map
 
 /***/ },
 
@@ -2088,7 +2112,7 @@ var environment = {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__(607);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__(609);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return MessageService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2139,7 +2163,7 @@ var MessageService = (function () {
     return MessageService;
     var _a;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/message.service.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/message.service.js.map
 
 /***/ },
 
@@ -2147,222 +2171,222 @@ var MessageService = (function () {
 /***/ function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 444,
-	"./af.js": 444,
-	"./ar": 450,
-	"./ar-dz": 445,
-	"./ar-dz.js": 445,
-	"./ar-ly": 446,
-	"./ar-ly.js": 446,
-	"./ar-ma": 447,
-	"./ar-ma.js": 447,
-	"./ar-sa": 448,
-	"./ar-sa.js": 448,
-	"./ar-tn": 449,
-	"./ar-tn.js": 449,
-	"./ar.js": 450,
-	"./az": 451,
-	"./az.js": 451,
-	"./be": 452,
-	"./be.js": 452,
-	"./bg": 453,
-	"./bg.js": 453,
-	"./bn": 454,
-	"./bn.js": 454,
-	"./bo": 455,
-	"./bo.js": 455,
-	"./br": 456,
-	"./br.js": 456,
-	"./bs": 457,
-	"./bs.js": 457,
-	"./ca": 458,
-	"./ca.js": 458,
-	"./cs": 459,
-	"./cs.js": 459,
-	"./cv": 460,
-	"./cv.js": 460,
-	"./cy": 461,
-	"./cy.js": 461,
-	"./da": 462,
-	"./da.js": 462,
-	"./de": 464,
-	"./de-at": 463,
-	"./de-at.js": 463,
-	"./de.js": 464,
-	"./dv": 465,
-	"./dv.js": 465,
-	"./el": 466,
-	"./el.js": 466,
-	"./en-au": 467,
-	"./en-au.js": 467,
-	"./en-ca": 468,
-	"./en-ca.js": 468,
-	"./en-gb": 469,
-	"./en-gb.js": 469,
-	"./en-ie": 470,
-	"./en-ie.js": 470,
-	"./en-nz": 471,
-	"./en-nz.js": 471,
-	"./eo": 472,
-	"./eo.js": 472,
-	"./es": 474,
-	"./es-do": 473,
-	"./es-do.js": 473,
-	"./es.js": 474,
-	"./et": 475,
-	"./et.js": 475,
-	"./eu": 476,
-	"./eu.js": 476,
-	"./fa": 477,
-	"./fa.js": 477,
-	"./fi": 478,
-	"./fi.js": 478,
-	"./fo": 479,
-	"./fo.js": 479,
-	"./fr": 482,
-	"./fr-ca": 480,
-	"./fr-ca.js": 480,
-	"./fr-ch": 481,
-	"./fr-ch.js": 481,
-	"./fr.js": 482,
-	"./fy": 483,
-	"./fy.js": 483,
-	"./gd": 484,
-	"./gd.js": 484,
-	"./gl": 485,
-	"./gl.js": 485,
-	"./he": 486,
-	"./he.js": 486,
-	"./hi": 487,
-	"./hi.js": 487,
-	"./hr": 488,
-	"./hr.js": 488,
-	"./hu": 489,
-	"./hu.js": 489,
-	"./hy-am": 490,
-	"./hy-am.js": 490,
-	"./id": 491,
-	"./id.js": 491,
-	"./is": 492,
-	"./is.js": 492,
-	"./it": 493,
-	"./it.js": 493,
-	"./ja": 494,
-	"./ja.js": 494,
-	"./jv": 495,
-	"./jv.js": 495,
-	"./ka": 496,
-	"./ka.js": 496,
-	"./kk": 497,
-	"./kk.js": 497,
-	"./km": 498,
-	"./km.js": 498,
-	"./ko": 499,
-	"./ko.js": 499,
-	"./ky": 500,
-	"./ky.js": 500,
-	"./lb": 501,
-	"./lb.js": 501,
-	"./lo": 502,
-	"./lo.js": 502,
-	"./lt": 503,
-	"./lt.js": 503,
-	"./lv": 504,
-	"./lv.js": 504,
-	"./me": 505,
-	"./me.js": 505,
-	"./mi": 506,
-	"./mi.js": 506,
-	"./mk": 507,
-	"./mk.js": 507,
-	"./ml": 508,
-	"./ml.js": 508,
-	"./mr": 509,
-	"./mr.js": 509,
-	"./ms": 511,
-	"./ms-my": 510,
-	"./ms-my.js": 510,
-	"./ms.js": 511,
-	"./my": 512,
-	"./my.js": 512,
-	"./nb": 513,
-	"./nb.js": 513,
-	"./ne": 514,
-	"./ne.js": 514,
-	"./nl": 516,
-	"./nl-be": 515,
-	"./nl-be.js": 515,
-	"./nl.js": 516,
-	"./nn": 517,
-	"./nn.js": 517,
-	"./pa-in": 518,
-	"./pa-in.js": 518,
-	"./pl": 519,
-	"./pl.js": 519,
-	"./pt": 521,
-	"./pt-br": 520,
-	"./pt-br.js": 520,
-	"./pt.js": 521,
-	"./ro": 522,
-	"./ro.js": 522,
-	"./ru": 523,
-	"./ru.js": 523,
-	"./se": 524,
-	"./se.js": 524,
-	"./si": 525,
-	"./si.js": 525,
-	"./sk": 526,
-	"./sk.js": 526,
-	"./sl": 527,
-	"./sl.js": 527,
-	"./sq": 528,
-	"./sq.js": 528,
-	"./sr": 530,
-	"./sr-cyrl": 529,
-	"./sr-cyrl.js": 529,
-	"./sr.js": 530,
-	"./ss": 531,
-	"./ss.js": 531,
-	"./sv": 532,
-	"./sv.js": 532,
-	"./sw": 533,
-	"./sw.js": 533,
-	"./ta": 534,
-	"./ta.js": 534,
-	"./te": 535,
-	"./te.js": 535,
-	"./tet": 536,
-	"./tet.js": 536,
-	"./th": 537,
-	"./th.js": 537,
-	"./tl-ph": 538,
-	"./tl-ph.js": 538,
-	"./tlh": 539,
-	"./tlh.js": 539,
-	"./tr": 540,
-	"./tr.js": 540,
-	"./tzl": 541,
-	"./tzl.js": 541,
-	"./tzm": 543,
-	"./tzm-latn": 542,
-	"./tzm-latn.js": 542,
-	"./tzm.js": 543,
-	"./uk": 544,
-	"./uk.js": 544,
-	"./uz": 545,
-	"./uz.js": 545,
-	"./vi": 546,
-	"./vi.js": 546,
-	"./x-pseudo": 547,
-	"./x-pseudo.js": 547,
-	"./yo": 548,
-	"./yo.js": 548,
-	"./zh-cn": 549,
-	"./zh-cn.js": 549,
-	"./zh-hk": 550,
-	"./zh-hk.js": 550,
-	"./zh-tw": 551,
-	"./zh-tw.js": 551
+	"./af": 446,
+	"./af.js": 446,
+	"./ar": 452,
+	"./ar-dz": 447,
+	"./ar-dz.js": 447,
+	"./ar-ly": 448,
+	"./ar-ly.js": 448,
+	"./ar-ma": 449,
+	"./ar-ma.js": 449,
+	"./ar-sa": 450,
+	"./ar-sa.js": 450,
+	"./ar-tn": 451,
+	"./ar-tn.js": 451,
+	"./ar.js": 452,
+	"./az": 453,
+	"./az.js": 453,
+	"./be": 454,
+	"./be.js": 454,
+	"./bg": 455,
+	"./bg.js": 455,
+	"./bn": 456,
+	"./bn.js": 456,
+	"./bo": 457,
+	"./bo.js": 457,
+	"./br": 458,
+	"./br.js": 458,
+	"./bs": 459,
+	"./bs.js": 459,
+	"./ca": 460,
+	"./ca.js": 460,
+	"./cs": 461,
+	"./cs.js": 461,
+	"./cv": 462,
+	"./cv.js": 462,
+	"./cy": 463,
+	"./cy.js": 463,
+	"./da": 464,
+	"./da.js": 464,
+	"./de": 466,
+	"./de-at": 465,
+	"./de-at.js": 465,
+	"./de.js": 466,
+	"./dv": 467,
+	"./dv.js": 467,
+	"./el": 468,
+	"./el.js": 468,
+	"./en-au": 469,
+	"./en-au.js": 469,
+	"./en-ca": 470,
+	"./en-ca.js": 470,
+	"./en-gb": 471,
+	"./en-gb.js": 471,
+	"./en-ie": 472,
+	"./en-ie.js": 472,
+	"./en-nz": 473,
+	"./en-nz.js": 473,
+	"./eo": 474,
+	"./eo.js": 474,
+	"./es": 476,
+	"./es-do": 475,
+	"./es-do.js": 475,
+	"./es.js": 476,
+	"./et": 477,
+	"./et.js": 477,
+	"./eu": 478,
+	"./eu.js": 478,
+	"./fa": 479,
+	"./fa.js": 479,
+	"./fi": 480,
+	"./fi.js": 480,
+	"./fo": 481,
+	"./fo.js": 481,
+	"./fr": 484,
+	"./fr-ca": 482,
+	"./fr-ca.js": 482,
+	"./fr-ch": 483,
+	"./fr-ch.js": 483,
+	"./fr.js": 484,
+	"./fy": 485,
+	"./fy.js": 485,
+	"./gd": 486,
+	"./gd.js": 486,
+	"./gl": 487,
+	"./gl.js": 487,
+	"./he": 488,
+	"./he.js": 488,
+	"./hi": 489,
+	"./hi.js": 489,
+	"./hr": 490,
+	"./hr.js": 490,
+	"./hu": 491,
+	"./hu.js": 491,
+	"./hy-am": 492,
+	"./hy-am.js": 492,
+	"./id": 493,
+	"./id.js": 493,
+	"./is": 494,
+	"./is.js": 494,
+	"./it": 495,
+	"./it.js": 495,
+	"./ja": 496,
+	"./ja.js": 496,
+	"./jv": 497,
+	"./jv.js": 497,
+	"./ka": 498,
+	"./ka.js": 498,
+	"./kk": 499,
+	"./kk.js": 499,
+	"./km": 500,
+	"./km.js": 500,
+	"./ko": 501,
+	"./ko.js": 501,
+	"./ky": 502,
+	"./ky.js": 502,
+	"./lb": 503,
+	"./lb.js": 503,
+	"./lo": 504,
+	"./lo.js": 504,
+	"./lt": 505,
+	"./lt.js": 505,
+	"./lv": 506,
+	"./lv.js": 506,
+	"./me": 507,
+	"./me.js": 507,
+	"./mi": 508,
+	"./mi.js": 508,
+	"./mk": 509,
+	"./mk.js": 509,
+	"./ml": 510,
+	"./ml.js": 510,
+	"./mr": 511,
+	"./mr.js": 511,
+	"./ms": 513,
+	"./ms-my": 512,
+	"./ms-my.js": 512,
+	"./ms.js": 513,
+	"./my": 514,
+	"./my.js": 514,
+	"./nb": 515,
+	"./nb.js": 515,
+	"./ne": 516,
+	"./ne.js": 516,
+	"./nl": 518,
+	"./nl-be": 517,
+	"./nl-be.js": 517,
+	"./nl.js": 518,
+	"./nn": 519,
+	"./nn.js": 519,
+	"./pa-in": 520,
+	"./pa-in.js": 520,
+	"./pl": 521,
+	"./pl.js": 521,
+	"./pt": 523,
+	"./pt-br": 522,
+	"./pt-br.js": 522,
+	"./pt.js": 523,
+	"./ro": 524,
+	"./ro.js": 524,
+	"./ru": 525,
+	"./ru.js": 525,
+	"./se": 526,
+	"./se.js": 526,
+	"./si": 527,
+	"./si.js": 527,
+	"./sk": 528,
+	"./sk.js": 528,
+	"./sl": 529,
+	"./sl.js": 529,
+	"./sq": 530,
+	"./sq.js": 530,
+	"./sr": 532,
+	"./sr-cyrl": 531,
+	"./sr-cyrl.js": 531,
+	"./sr.js": 532,
+	"./ss": 533,
+	"./ss.js": 533,
+	"./sv": 534,
+	"./sv.js": 534,
+	"./sw": 535,
+	"./sw.js": 535,
+	"./ta": 536,
+	"./ta.js": 536,
+	"./te": 537,
+	"./te.js": 537,
+	"./tet": 538,
+	"./tet.js": 538,
+	"./th": 539,
+	"./th.js": 539,
+	"./tl-ph": 540,
+	"./tl-ph.js": 540,
+	"./tlh": 541,
+	"./tlh.js": 541,
+	"./tr": 542,
+	"./tr.js": 542,
+	"./tzl": 543,
+	"./tzl.js": 543,
+	"./tzm": 545,
+	"./tzm-latn": 544,
+	"./tzm-latn.js": 544,
+	"./tzm.js": 545,
+	"./uk": 546,
+	"./uk.js": 546,
+	"./uz": 547,
+	"./uz.js": 547,
+	"./vi": 548,
+	"./vi.js": 548,
+	"./x-pseudo": 549,
+	"./x-pseudo.js": 549,
+	"./yo": 550,
+	"./yo.js": 550,
+	"./zh-cn": 551,
+	"./zh-cn.js": 551,
+	"./zh-hk": 552,
+	"./zh-hk.js": 552,
+	"./zh-tw": 553,
+	"./zh-tw.js": 553
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2386,28 +2410,28 @@ webpackContext.id = 937;
 /***/ 964:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  min-height: 100%;\n  background-color: #f5f5f5;\n  min-width: 300px; }\n\n:host /deep/ ng2-toasty .toast {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation-name: bounceInUp;\n  animation-name: bounceInUp; }\n\nrouter-outlet {\n  display: block; }\n  @media screen and (max-width: 768px) {\n    router-outlet {\n      padding-top: 40px; } }\n\nng2-slim-loading-bar {\n  position: fixed;\n  top: 70px;\n  z-index: 500;\n  left: 0px;\n  right: 0px; }\n\n:host /deep/ ng2-slim-loading-bar .slim-loading-bar-progress {\n  background-color: #E19131 !important;\n  height: 4px !important; }\n\n.container-fluid {\n  height: 100%; }\n\n.content-container {\n  margin-left: -15px;\n  margin-right: -15px;\n  position: relative;\n  margin-top: 70px; }\n  @media screen and (max-width: 768px) {\n    .content-container {\n      margin-top: 140px; } }\n\n.menu-container {\n  position: fixed;\n  top: 70px;\n  bottom: 0px;\n  left: 0px;\n  z-index: 100; }\n  @media screen and (max-width: 768px) {\n    .menu-container {\n      top: 140px; } }\n\n.view-container {\n  -webkit-transition: margin-left 0.8s ease-in-out;\n  transition: margin-left 0.8s ease-in-out;\n  margin-left: 50px; }\n  .view-container.menu-expand {\n    -webkit-animation-delay: 0.5s;\n            animation-delay: 0.5s;\n    margin-left: 285px; }\n  .view-container .breadcrumbs-bar {\n    border-bottom: inset 1px #dfdfdf;\n    border-radius: 0px;\n    height: 46px;\n    line-height: 2.2em;\n    background-color: white;\n    position: fixed;\n    z-index: 100;\n    left: 50px;\n    right: 0px;\n    min-width: 450px;\n    -webkit-transition: width 0.3s ease-in-out;\n    transition: width 0.3s ease-in-out; }\n    .view-container .breadcrumbs-bar.menu-expand {\n      left: 285px; }\n  .view-container .content-div {\n    margin-top: 40px; }\n"
+module.exports = ":host {\n  min-height: 100%;\n  background-color: #f5f5f5;\n  min-width: 300px; }\n\n:host /deep/ ng2-toasty .toast {\n  -webkit-animation-duration: 1s;\n  animation-duration: 1s;\n  -webkit-animation-fill-mode: both;\n  animation-fill-mode: both;\n  -webkit-animation-name: bounceInUp;\n  animation-name: bounceInUp; }\n\nrouter-outlet {\n  display: block; }\n  @media screen and (max-width: 768px) {\n    router-outlet {\n      padding-top: 40px; } }\n\nng2-slim-loading-bar {\n  position: fixed;\n  top: 70px;\n  z-index: 500;\n  left: 0px;\n  right: 0px; }\n\n:host /deep/ ng2-slim-loading-bar .slim-loading-bar-progress {\n  background-color: #E19131 !important;\n  height: 4px !important; }\n\n.container-fluid {\n  height: 100%; }\n\n.content-container {\n  margin-left: -15px;\n  margin-right: -15px;\n  position: relative;\n  margin-top: 70px; }\n  @media screen and (max-width: 768px) {\n    .content-container {\n      margin-top: 140px; } }\n\n.menu-container {\n  position: fixed;\n  top: 70px;\n  bottom: 0px;\n  left: 0px;\n  z-index: 100; }\n  @media screen and (max-width: 768px) {\n    .menu-container {\n      top: 140px; } }\n\n.view-container {\n  transition: margin-left 0.8s ease-in-out;\n  margin-left: 50px; }\n  .view-container.menu-expand {\n    -webkit-animation-delay: 0.5s;\n            animation-delay: 0.5s;\n    margin-left: 285px; }\n  .view-container .breadcrumbs-bar {\n    border-bottom: inset 1px #dfdfdf;\n    border-radius: 0px;\n    height: 46px;\n    line-height: 2.2em;\n    background-color: white;\n    position: fixed;\n    z-index: 100;\n    left: 50px;\n    right: 0px;\n    min-width: 450px;\n    transition: width 0.3s ease-in-out; }\n    .view-container .breadcrumbs-bar.menu-expand {\n      left: 285px; }\n  .view-container .content-div {\n    margin-top: 40px; }\n"
 
 /***/ },
 
 /***/ 965:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block; }\n\n.table-wrapper {\n  padding: 10px;\n  border: solid 1px #e7ecf1;\n  background-color: white;\n  min-height: 425px;\n  position: relative; }\n  .table-wrapper .tbl-cat {\n    font-weight: 600;\n    position: absolute;\n    left: 0px;\n    top: 10px;\n    padding: 4px 10px;\n    color: #9a9a9a; }\n  .table-wrapper .filter {\n    position: absolute;\n    right: 10px;\n    top: 30px;\n    width: 30px;\n    text-align: center;\n    height: 30px;\n    padding-top: 2px;\n    color: #8A98A0;\n    -webkit-transition: all 0.2s ease-in;\n    transition: all 0.2s ease-in;\n    cursor: pointer; }\n    .table-wrapper .filter:hover {\n      color: black;\n      background-color: #32c5d2; }\n    .table-wrapper .filter.on {\n      background-color: #32c5d2;\n      color: black; }\n  .table-wrapper .tbl-header {\n    margin-top: 22px;\n    font-weight: 600;\n    font-size: 1.3em;\n    padding: 5px 0px 15px; }\n  .table-wrapper .table {\n    display: table;\n    width: 100%; }\n    .table-wrapper .table .tbl-row {\n      display: table-row;\n      background-color: #f6f6f6;\n      height: 0px;\n      -webkit-transition: all 0.5s ease-in;\n      transition: all 0.5s ease-in; }\n      .table-wrapper .table .tbl-row:nth-of-type(odd) {\n        background-color: white; }\n      .table-wrapper .table .tbl-row.header {\n        background-color: #7788aa;\n        font-weight: 600;\n        color: white; }\n      .table-wrapper .table .tbl-row .tbl-cell {\n        display: table-cell;\n        padding: 10px 10px; }\n      .table-wrapper .table .tbl-row.modified {\n        background-color: #ffffcc; }\n      .table-wrapper .table .tbl-row.open {\n        height: 158px;\n        background-color: #f4f2c9; }\n        .table-wrapper .table .tbl-row.open .action {\n          border-color: black;\n          color: black; }\n        .table-wrapper .table .tbl-row.open.A, .table-wrapper .table .tbl-row.open.R {\n          height: 243px; }\n      .table-wrapper .table .tbl-row .more-con {\n        padding: 10px 0px 10px 0px;\n        background-color: #f8f9fa;\n        position: absolute;\n        left: 10px;\n        right: 11px;\n        height: 105px;\n        margin-top: 53px;\n        border: solid 1px #d0d0d0;\n        -ms-box-shadow: inset 0px 10px 10px -9px #d1d1d1;\n        box-shadow: inset 0px 10px 10px -9px #d1d1d1; }\n        .table-wrapper .table .tbl-row .more-con.A, .table-wrapper .table .tbl-row .more-con.R {\n          height: 190px; }\n        .table-wrapper .table .tbl-row .more-con .more-row {\n          margin-bottom: 2px; }\n        .table-wrapper .table .tbl-row .more-con .field-name {\n          height: 40px;\n          background-color: #f1f3f5;\n          line-height: 40px;\n          text-align: right;\n          font-weight: 600; }\n        .table-wrapper .table .tbl-row .more-con .field-value {\n          height: 40px;\n          background-color: white;\n          line-height: 40px; }\n        .table-wrapper .table .tbl-row .more-con select, .table-wrapper .table .tbl-row .more-con input {\n          margin-top: 2px; }\n        .table-wrapper .table .tbl-row .more-con .btn {\n          margin-top: 10px;\n          padding-top: 5px !important;\n          padding-bottom: 5px !important; }\n  .table-wrapper .time {\n    display: block;\n    font-size: 0.8em; }\n  .table-wrapper .action {\n    width: 25px;\n    height: 25px;\n    border: solid 1px #c7c7c7;\n    text-align: center;\n    vertical-align: middle;\n    line-height: 25px;\n    margin: 2px 5px;\n    cursor: pointer;\n    color: #8A98A0;\n    font-size: 1em;\n    -webkit-transition: all 0.2s ease-in;\n    transition: all 0.2s ease-in; }\n    .table-wrapper .action:hover {\n      background-color: #32c5d2;\n      color: black; }\n    .table-wrapper .action.A {\n      background-color: #32c5d2; }\n    .table-wrapper .action.R {\n      background-color: #bb3535;\n      color: white !important; }\n    .table-wrapper .action.reject:hover {\n      background-color: #bb3535;\n      color: white !important; }\n    .table-wrapper .action.expand {\n      border: none;\n      font-size: 1.5em; }\n  .table-wrapper .no-rec-row {\n    position: relative; }\n    .table-wrapper .no-rec-row .no-rec {\n      position: absolute;\n      left: 0px;\n      right: 0px;\n      margin: auto;\n      width: 100px;\n      padding-top: 150px;\n      color: #8A98A0; }\n\n.filter-container {\n  min-height: 0px;\n  margin-bottom: 10px;\n  -webkit-transition: all 0.4s ease-in;\n  transition: all 0.4s ease-in; }\n  .filter-container.open {\n    min-height: 100px; }\n  .filter-container .content {\n    background-color: #f1f3f5;\n    height: 100%;\n    padding: 10px; }\n    .filter-container .content .head {\n      font-size: 1.3em;\n      font-weight: 600;\n      color: #868e96;\n      padding-bottom: 5px; }\n      .filter-container .content .head .clear {\n        font-size: 0.7em;\n        padding-left: 7px;\n        color: #adb5bd;\n        font-weight: 400;\n        -webkit-transition: all 0.2s ease-in;\n        transition: all 0.2s ease-in;\n        cursor: pointer; }\n        .filter-container .content .head .clear:hover {\n          color: #E19131; }\n    .filter-container .content .filter-val-container {\n      position: relative;\n      padding: 5px;\n      background-color: white; }\n      .filter-container .content .filter-val-container .close {\n        position: absolute;\n        right: 2px;\n        top: 2px;\n        font-size: 1em; }\n      .filter-container .content .filter-val-container .filter-val {\n        display: inline-block;\n        padding: 2px 5px;\n        font-size: 0.9em;\n        margin: 2px; }\n        .filter-container .content .filter-val-container .filter-val.ids {\n          background-color: #69db7c;\n          border: solid 1px #2f9e44; }\n        .filter-container .content .filter-val-container .filter-val.name {\n          background-color: #66d9e8;\n          border: solid 1px #1098ad; }\n        .filter-container .content .filter-val-container .filter-val.user {\n          background-color: #e599f7;\n          border: solid 1px #be4bdb; }\n      .filter-container .content .filter-val-container .sec-head {\n        padding: 0px 5px;\n        font-size: 0.9em;\n        font-weight: 600; }\n\n@-moz-document url-prefix() {\n  .more-con {\n    margin-top: 25px !important; } }\n"
+module.exports = ":host {\n  display: block; }\n\n.table-wrapper {\n  padding: 10px;\n  border: solid 1px #e7ecf1;\n  background-color: white;\n  min-height: 425px;\n  position: relative; }\n  .table-wrapper .tbl-cat {\n    font-weight: 600;\n    position: absolute;\n    left: 0px;\n    top: 10px;\n    padding: 4px 10px;\n    color: #9a9a9a; }\n  .table-wrapper .filter {\n    position: absolute;\n    right: 10px;\n    top: 30px;\n    width: 30px;\n    text-align: center;\n    height: 30px;\n    padding-top: 2px;\n    color: #8A98A0;\n    transition: all 0.2s ease-in;\n    cursor: pointer; }\n    .table-wrapper .filter:hover {\n      color: black;\n      background-color: #32c5d2; }\n    .table-wrapper .filter.on {\n      background-color: #32c5d2;\n      color: black; }\n  .table-wrapper .tbl-header {\n    margin-top: 22px;\n    font-weight: 600;\n    font-size: 1.3em;\n    padding: 5px 0px 15px; }\n  .table-wrapper .table {\n    display: table;\n    width: 100%; }\n    .table-wrapper .table .tbl-row {\n      display: table-row;\n      background-color: #f6f6f6;\n      height: 0px;\n      transition: all 0.5s ease-in; }\n      .table-wrapper .table .tbl-row:nth-of-type(odd) {\n        background-color: white; }\n      .table-wrapper .table .tbl-row.header {\n        background-color: #7788aa;\n        font-weight: 600;\n        color: white; }\n      .table-wrapper .table .tbl-row .tbl-cell {\n        display: table-cell;\n        padding: 10px 10px; }\n      .table-wrapper .table .tbl-row.modified {\n        background-color: #ffffcc; }\n      .table-wrapper .table .tbl-row.open {\n        height: 158px;\n        background-color: #f4f2c9; }\n        .table-wrapper .table .tbl-row.open .action {\n          border-color: black;\n          color: black; }\n        .table-wrapper .table .tbl-row.open.A, .table-wrapper .table .tbl-row.open.R {\n          height: 243px; }\n      .table-wrapper .table .tbl-row .more-con {\n        padding: 10px 0px 10px 0px;\n        background-color: #f8f9fa;\n        position: absolute;\n        left: 10px;\n        right: 11px;\n        height: 105px;\n        margin-top: 53px;\n        border: solid 1px #d0d0d0;\n        -ms-box-shadow: inset 0px 10px 10px -9px #d1d1d1;\n        box-shadow: inset 0px 10px 10px -9px #d1d1d1; }\n        .table-wrapper .table .tbl-row .more-con.A, .table-wrapper .table .tbl-row .more-con.R {\n          height: 190px; }\n        .table-wrapper .table .tbl-row .more-con .more-row {\n          margin-bottom: 2px; }\n        .table-wrapper .table .tbl-row .more-con .field-name {\n          height: 40px;\n          background-color: #f1f3f5;\n          line-height: 40px;\n          text-align: right;\n          font-weight: 600; }\n        .table-wrapper .table .tbl-row .more-con .field-value {\n          height: 40px;\n          background-color: white;\n          line-height: 40px; }\n        .table-wrapper .table .tbl-row .more-con select, .table-wrapper .table .tbl-row .more-con input {\n          margin-top: 2px; }\n        .table-wrapper .table .tbl-row .more-con .btn {\n          margin-top: 10px;\n          padding-top: 5px !important;\n          padding-bottom: 5px !important; }\n  .table-wrapper .time {\n    display: block;\n    font-size: 0.8em; }\n  .table-wrapper .action {\n    width: 25px;\n    height: 25px;\n    border: solid 1px #c7c7c7;\n    text-align: center;\n    vertical-align: middle;\n    line-height: 25px;\n    margin: 2px 5px;\n    cursor: pointer;\n    color: #8A98A0;\n    font-size: 1em;\n    transition: all 0.2s ease-in; }\n    .table-wrapper .action:hover {\n      background-color: #32c5d2;\n      color: black; }\n    .table-wrapper .action.A {\n      background-color: #32c5d2; }\n    .table-wrapper .action.R {\n      background-color: #bb3535;\n      color: white !important; }\n    .table-wrapper .action.reject:hover {\n      background-color: #bb3535;\n      color: white !important; }\n    .table-wrapper .action.expand {\n      border: none;\n      font-size: 1.5em; }\n  .table-wrapper .no-rec-row {\n    position: relative; }\n    .table-wrapper .no-rec-row .no-rec {\n      position: absolute;\n      left: 0px;\n      right: 0px;\n      margin: auto;\n      width: 100px;\n      padding-top: 150px;\n      color: #8A98A0; }\n\n.filter-container {\n  min-height: 0px;\n  margin-bottom: 10px;\n  transition: all 0.4s ease-in; }\n  .filter-container.open {\n    min-height: 100px; }\n  .filter-container .content {\n    background-color: #f1f3f5;\n    height: 100%;\n    padding: 10px; }\n    .filter-container .content .head {\n      font-size: 1.3em;\n      font-weight: 600;\n      color: #868e96;\n      padding-bottom: 5px; }\n      .filter-container .content .head .clear {\n        font-size: 0.7em;\n        padding-left: 7px;\n        color: #adb5bd;\n        font-weight: 400;\n        transition: all 0.2s ease-in;\n        cursor: pointer; }\n        .filter-container .content .head .clear:hover {\n          color: #E19131; }\n    .filter-container .content .filter-val-container {\n      position: relative;\n      padding: 5px;\n      background-color: white; }\n      .filter-container .content .filter-val-container .close {\n        position: absolute;\n        right: 2px;\n        top: 2px;\n        font-size: 1em; }\n      .filter-container .content .filter-val-container .filter-val {\n        display: inline-block;\n        padding: 2px 5px;\n        font-size: 0.9em;\n        margin: 2px; }\n        .filter-container .content .filter-val-container .filter-val.ids {\n          background-color: #69db7c;\n          border: solid 1px #2f9e44; }\n        .filter-container .content .filter-val-container .filter-val.name {\n          background-color: #66d9e8;\n          border: solid 1px #1098ad; }\n        .filter-container .content .filter-val-container .filter-val.user {\n          background-color: #e599f7;\n          border: solid 1px #be4bdb; }\n      .filter-container .content .filter-val-container .sec-head {\n        padding: 0px 5px;\n        font-size: 0.9em;\n        font-weight: 600; }\n\n@-moz-document url-prefix() {\n  .more-con {\n    margin-top: 25px !important; } }\n"
 
 /***/ },
 
 /***/ 966:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  line-height: 5rem;\n  position: relative;\n  display: block; }\n\n.url-part {\n  display: inline-block;\n  padding-right: 10px;\n  font-size: 1.3em;\n  font-weight: 300;\n  text-transform: capitalize; }\n  .url-part:last-child {\n    font-weight: 900;\n    text-transform: uppercase; }\n\n.refresh-icon {\n  position: absolute;\n  right: 50px;\n  height: 30px;\n  width: 30px;\n  background-color: #E19131;\n  text-align: center;\n  line-height: 30px;\n  border-radius: 20px;\n  color: white;\n  font-size: 1em;\n  margin-top: 6px;\n  cursor: pointer;\n  -webkit-transition: all 0.2s ease-in;\n  transition: all 0.2s ease-in; }\n  @media screen and (max-width: 768px) {\n    .refresh-icon {\n      right: 0px; } }\n  .refresh-icon:hover {\n    background-color: #e1a637;\n    color: black; }\n"
+module.exports = ":host {\n  line-height: 5rem;\n  position: relative;\n  display: block; }\n\n.url-part {\n  display: inline-block;\n  padding-right: 10px;\n  font-size: 1.3em;\n  font-weight: 300;\n  text-transform: capitalize; }\n  .url-part:last-child {\n    font-weight: 900;\n    text-transform: uppercase; }\n\n.refresh-icon {\n  position: absolute;\n  right: 50px;\n  height: 30px;\n  width: 30px;\n  background-color: #E19131;\n  text-align: center;\n  line-height: 30px;\n  border-radius: 20px;\n  color: white;\n  font-size: 1em;\n  margin-top: 6px;\n  cursor: pointer;\n  transition: all 0.2s ease-in; }\n  @media screen and (max-width: 768px) {\n    .refresh-icon {\n      right: 0px; } }\n  .refresh-icon:hover {\n    background-color: #e1a637;\n    color: black; }\n"
 
 /***/ },
 
 /***/ 967:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block; }\n\n.hm-menu-container {\n  position: relative;\n  width: 50px;\n  height: 50px; }\n  .hm-menu-container .hamburger-menu {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    margin: auto;\n    width: 25px;\n    height: 22px;\n    cursor: pointer; }\n    .hm-menu-container .hamburger-menu .bar,\n    .hm-menu-container .hamburger-menu .bar:after,\n    .hm-menu-container .hamburger-menu .bar:before {\n      width: 25px;\n      height: 2px; }\n    .hm-menu-container .hamburger-menu .bar {\n      position: relative;\n      -webkit-transform: translateY(10px);\n              transform: translateY(10px);\n      background: white;\n      -webkit-transition: all 0ms 300ms;\n      transition: all 0ms 300ms; }\n      .hm-menu-container .hamburger-menu .bar:before {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        bottom: 10px;\n        background: white;\n        -webkit-transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n      .hm-menu-container .hamburger-menu .bar:after {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        top: 10px;\n        background: white;\n        -webkit-transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n      .hm-menu-container .hamburger-menu .bar.animate {\n        background: rgba(255, 255, 255, 0); }\n        .hm-menu-container .hamburger-menu .bar.animate:after {\n          width: 15.625px;\n          top: 0;\n          left: 5px;\n          -webkit-transform-origin: 0px 0px;\n                  transform-origin: 0px 0px;\n          -webkit-transform: rotate(45deg);\n                  transform: rotate(45deg);\n          -webkit-transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n        .hm-menu-container .hamburger-menu .bar.animate:before {\n          width: 15.625px;\n          bottom: 0;\n          left: 5px;\n          -webkit-transform-origin: 0px 0px;\n                  transform-origin: 0px 0px;\n          -webkit-transform: rotate(-45deg);\n                  transform: rotate(-45deg);\n          -webkit-transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n"
+module.exports = ":host {\n  display: block; }\n\n.hm-menu-container {\n  position: relative;\n  width: 50px;\n  height: 50px; }\n  .hm-menu-container .hamburger-menu {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    margin: auto;\n    width: 25px;\n    height: 22px;\n    cursor: pointer; }\n    .hm-menu-container .hamburger-menu .bar,\n    .hm-menu-container .hamburger-menu .bar:after,\n    .hm-menu-container .hamburger-menu .bar:before {\n      width: 25px;\n      height: 2px; }\n    .hm-menu-container .hamburger-menu .bar {\n      position: relative;\n      -webkit-transform: translateY(10px);\n              transform: translateY(10px);\n      background: white;\n      transition: all 0ms 300ms; }\n      .hm-menu-container .hamburger-menu .bar:before {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        bottom: 10px;\n        background: white;\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n      .hm-menu-container .hamburger-menu .bar:after {\n        content: \"\";\n        position: absolute;\n        left: 0;\n        top: 10px;\n        background: white;\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);\n        transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n      .hm-menu-container .hamburger-menu .bar.animate {\n        background: rgba(255, 255, 255, 0); }\n        .hm-menu-container .hamburger-menu .bar.animate:after {\n          width: 15.625px;\n          top: 0;\n          left: 5px;\n          -webkit-transform-origin: 0px 0px;\n                  transform-origin: 0px 0px;\n          -webkit-transform: rotate(45deg);\n                  transform: rotate(45deg);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n        .hm-menu-container .hamburger-menu .bar.animate:before {\n          width: 15.625px;\n          bottom: 0;\n          left: 5px;\n          -webkit-transform-origin: 0px 0px;\n                  transform-origin: 0px 0px;\n          -webkit-transform: rotate(-45deg);\n                  transform: rotate(-45deg);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);\n          transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), -webkit-transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1); }\n"
 
 /***/ },
 
@@ -2421,7 +2445,7 @@ module.exports = ".navbar {\n  background-color: #14354C;\n  border: 0;\n  borde
 /***/ 969:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block;\n  background-color: #1b4665;\n  height: 100%; }\n\nul {\n  list-style: none;\n  padding: 0px;\n  width: 50px;\n  -webkit-transition: width 0.3s ease-in-out;\n  transition: width 0.3s ease-in-out; }\n  ul li {\n    cursor: pointer;\n    width: 100%;\n    height: 46px;\n    border-bottom: solid 1px #164e6a;\n    position: relative;\n    -webkit-transition: all 0.3s ease-in;\n    transition: all 0.3s ease-in; }\n    ul li:hover {\n      background-color: #14354C; }\n    ul li:after {\n      content: '';\n      width: 0px;\n      height: 0px;\n      border-right: solid 8px #f5f5f5;\n      border-top: solid 10px transparent;\n      border-bottom: solid 10px transparent;\n      position: absolute;\n      right: 0px;\n      top: 14px;\n      display: none; }\n    ul li .icon {\n      display: inline-block;\n      text-align: center;\n      width: 100%;\n      line-height: 46px;\n      color: #adadad;\n      font-size: 1.6em; }\n    ul li .menu-name {\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s;\n      color: #afafaf; }\n    ul li.selected {\n      background-color: #32c5d2; }\n      ul li.selected .icon {\n        color: white; }\n      ul li.selected .menu-name {\n        color: white; }\n      ul li.selected:after {\n        display: block; }\n  ul.is-expand {\n    width: 285px; }\n    ul.is-expand li .icon {\n      width: 50px; }\n"
+module.exports = ":host {\n  display: block;\n  background-color: #1b4665;\n  height: 100%; }\n\nul {\n  list-style: none;\n  padding: 0px;\n  width: 50px;\n  transition: width 0.3s ease-in-out; }\n  ul li {\n    cursor: pointer;\n    width: 100%;\n    height: 46px;\n    border-bottom: solid 1px #164e6a;\n    position: relative;\n    transition: all 0.3s ease-in; }\n    ul li:hover {\n      background-color: #14354C; }\n    ul li:after {\n      content: '';\n      width: 0px;\n      height: 0px;\n      border-right: solid 8px #f5f5f5;\n      border-top: solid 10px transparent;\n      border-bottom: solid 10px transparent;\n      position: absolute;\n      right: 0px;\n      top: 14px;\n      display: none; }\n    ul li .icon {\n      display: inline-block;\n      text-align: center;\n      width: 100%;\n      line-height: 46px;\n      color: #adadad;\n      font-size: 1.6em; }\n    ul li .menu-name {\n      -webkit-animation-delay: 0.3s;\n      animation-delay: 0.3s;\n      color: #afafaf; }\n    ul li.selected {\n      background-color: #32c5d2; }\n      ul li.selected .icon {\n        color: white; }\n      ul li.selected .menu-name {\n        color: white; }\n      ul li.selected:after {\n        display: block; }\n  ul.is-expand {\n    width: 285px; }\n    ul.is-expand li .icon {\n      width: 50px; }\n"
 
 /***/ },
 
@@ -2435,56 +2459,56 @@ module.exports = ":host {\n  display: block; }\n\n.table-wrapper {\n  padding: 1
 /***/ 971:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  height: 50px;\n  display: block;\n  background-color: #14354C;\n  -webkit-transition: all 0.3s ease-in;\n  transition: all 0.3s ease-in;\n  color: #8A98A0;\n  cursor: pointer; }\n  :host:hover {\n    color: white; }\n\n.avatar-component {\n  height: 100%;\n  /* &.expand{\n    background-color: $primary-color_light;\n  }*/ }\n  .avatar-component .avatar-dropdown {\n    margin-top: 12px; }\n    @media screen and (max-width: 768px) {\n      .avatar-component .avatar-dropdown {\n        width: 100%;\n        margin-top: 32px; } }\n  .avatar-component:before {\n    content: \"\";\n    display: inline-block;\n    vertical-align: middle;\n    height: 100%; }\n  .avatar-component > div {\n    display: inline-block;\n    vertical-align: middle;\n    padding: 5px; }\n    .avatar-component > div:first-child {\n      padding-right: 2px; }\n  .avatar-component .avatar {\n    width: 30px;\n    height: 30px;\n    border: solid 1px #8A98A0;\n    border-radius: 15px;\n    text-align: center;\n    padding-top: 3px; }\n  .avatar-component .arrow {\n    font-size: 0.8em;\n    padding-right: 15px; }\n\n.avatar-dropdown {\n  min-width: 250px;\n  padding: 0px; }\n  .avatar-dropdown li {\n    height: 35px;\n    border-bottom: solid 1px #f5f5f5; }\n    .avatar-dropdown li a {\n      height: 35px;\n      line-height: 27px;\n      -webkit-transition: background-color 0.2s ease-in;\n      transition: background-color 0.2s ease-in; }\n      .avatar-dropdown li a:hover {\n        background-color: #32c5d2; }\n\n.userName {\n  text-transform: capitalize; }\n"
+module.exports = ":host {\n  height: 50px;\n  display: block;\n  background-color: #14354C;\n  transition: all 0.3s ease-in;\n  color: #8A98A0;\n  cursor: pointer; }\n  :host:hover {\n    color: white; }\n\n.avatar-component {\n  height: 100%;\n  /* &.expand{\r\n    background-color: $primary-color_light;\r\n  }*/ }\n  .avatar-component .avatar-dropdown {\n    margin-top: 12px; }\n    @media screen and (max-width: 768px) {\n      .avatar-component .avatar-dropdown {\n        width: 100%;\n        margin-top: 32px; } }\n  .avatar-component:before {\n    content: \"\";\n    display: inline-block;\n    vertical-align: middle;\n    height: 100%; }\n  .avatar-component > div {\n    display: inline-block;\n    vertical-align: middle;\n    padding: 5px; }\n    .avatar-component > div:first-child {\n      padding-right: 2px; }\n  .avatar-component .avatar {\n    width: 30px;\n    height: 30px;\n    border: solid 1px #8A98A0;\n    border-radius: 15px;\n    text-align: center;\n    padding-top: 3px; }\n  .avatar-component .arrow {\n    font-size: 0.8em;\n    padding-right: 15px; }\n\n.avatar-dropdown {\n  min-width: 250px;\n  padding: 0px; }\n  .avatar-dropdown li {\n    height: 35px;\n    border-bottom: solid 1px #f5f5f5; }\n    .avatar-dropdown li a {\n      height: 35px;\n      line-height: 27px;\n      transition: background-color 0.2s ease-in; }\n      .avatar-dropdown li a:hover {\n        background-color: #32c5d2; }\n\n.userName {\n  text-transform: capitalize; }\n"
 
 /***/ },
 
 /***/ 972:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <app-header *ngIf=\"isLoggedIn\"></app-header>\n    <div class=\"content-container\">\n        <div class=\"menu-container animated slideInLeft\" *ngIf=\"isLoggedIn\">\n            <app-main-menu></app-main-menu>\n        </div>\n        <div class=\"view-container\" [ngClass]=\"{'menu-expand':isMenuExpanded}\">\n            <div>\n                <div class=\"col-sm-12 breadcrumbs-bar\"  [ngClass]=\"{'menu-expand':isMenuExpanded}\" *ngIf=\"isLoggedIn\">\n                    <app-breadcrumbs></app-breadcrumbs>\n                </div>\n                <div class=\"col-sm-12 content-div\">\n                    <router-outlet></router-outlet>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n<ng2-toasty\n        [position]=\"'bottom-center'\"></ng2-toasty>\n\n<ng2-slim-loading-bar></ng2-slim-loading-bar>\n\n"
+module.exports = "<div class=\"container-fluid\">\r\n    <app-header *ngIf=\"isLoggedIn\"></app-header>\r\n    <div class=\"content-container\">\r\n        <div class=\"menu-container animated slideInLeft\" *ngIf=\"isLoggedIn\">\r\n            <app-main-menu></app-main-menu>\r\n        </div>\r\n        <div class=\"view-container\" [ngClass]=\"{'menu-expand':isMenuExpanded}\">\r\n            <div>\r\n                <div class=\"col-sm-12 breadcrumbs-bar\"  [ngClass]=\"{'menu-expand':isMenuExpanded}\" *ngIf=\"isLoggedIn\">\r\n                    <app-breadcrumbs></app-breadcrumbs>\r\n                </div>\r\n                <div class=\"col-sm-12 content-div\">\r\n                    <router-outlet></router-outlet>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<ng2-toasty\r\n        [position]=\"'bottom-center'\"></ng2-toasty>\r\n\r\n<ng2-slim-loading-bar></ng2-slim-loading-bar>\r\n\r\n"
 
 /***/ },
 
 /***/ 973:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"table-wrapper\">\n    <span class=\"filter\" tooltip=\"Filter\"\n          [ngClass]=\"{'on':isFilterVisible}\"\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\n    <div><span class=\"tbl-cat\">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\n    <div class=\"tbl-header\">\n        {{tableTitle}}\n    </div>\n\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\n            <div class=\"row\">\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\" class=\"form-control\"\n                           [(ngModel)]=\"filterId\"\n                           [typeaheadMinLength]=\"0\"\n                           container=\"body\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"id\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\n                           placeholder=\"Id\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterAppName\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"applicationName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\n                           class=\"form-control\" placeholder=\"App Name\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterUser\"\n                           container=\"body\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"userName\"\n                           typeaheadGroupField=\"userName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'USER')\"\n                           class=\"form-control\" placeholder=\"User\">\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.ids.length > 0\">\n                        <div class=\"sec-head\">ID</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\n                        <span class=\"filter-val ids\" *ngFor=\"let id of filter.ids\">{{id}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\n                        <div class=\"sec-head\">App Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\n                    </div>\n                </div>\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n    <div class=\"table\">\n\n        <div class=\"tbl-row header\">\n            <div class=\"tbl-cell\">ID</div>\n            <div class=\"tbl-cell\">APP NAME</div>\n            <div class=\"tbl-cell\">USER</div>\n            <div class=\"tbl-cell\">CREATED ON</div>\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\n        </div>\n\n        <ng-container *ngFor=\"let item of dataSource?.applicationTasks; let i=index\">\n            <div class=\"tbl-row\"\n                 [ngClass]=\"{\n                 'modified' : item.isModified,\n                 'open':item.isExpand,\n                 'M':item.actionType == 'MORE',\n                 'A':item.actionType == 'APPROVE',\n                 'R':item.actionType == 'REJECT'}\"\n                 *ngIf=\"!!!summeryModeRecordLimit || i < summeryModeRecordLimit\">\n                <div class=\"tbl-cell\">\n                    <span tooltip=\"More Info\"\n                          class=\"action expand material-icons\"\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\n                    {{item.id}}\n                </div>\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\n                <div class=\"tbl-cell text-right\">\n                    <span tooltip=\"Approve\" *ngIf=\"filter?.dataType?.dataCategory == 'USER'\"\n                          class=\"action  approve material-icons\"\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE' \">check</span>\n\n                    <span tooltip=\"Reject\" *ngIf=\"filter?.dataType?.dataCategory  == 'USER'\"\n                          class=\"action  reject material-icons\"\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT' \">close</span>\n\n                    <span tooltip=\"Assign to Me\" *ngIf=\"filter?.dataType?.dataCategory  == 'GROUP'\"\n                          class=\"action  assign material-icons\"\n                          (click)=\"onAction('ASSIGN',item,filter?.dataType)\">assignment_ind</span>\n                </div>\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\n                    'A':item.actionType == 'APPROVE',\n                    'R':item.actionType == 'REJECT'}\">\n                    <div class=\"col-sm-12\">\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Application Id</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Description</div>\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationDescription}}</div>\n                            </div>\n                        </div>\n                        <div class=\"col-xs-6\">\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Operator</div>\n                                <div class=\"col-xs-6 field-value\">{{item.operators}}</div>\n                            </div>\n                            <div class=\"row more-row\">\n                                <div class=\"col-xs-6 field-name\">Tier</div>\n                                <div class=\"col-xs-6 field-value\">\n                                    <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\n                                        <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\n                                            {{opt}}\n                                        </option>\n                                    </select>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-12\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <div class=\"col-xs-3 field-name\">Comment</div>\n                        <div class=\"col-xs-9 field-value\"><input type=\"text\" class=\"form-control\"></div>\n                    </div>\n\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <button class=\"btn btn-default animated fadeIn\"\n                                (click)=\"item.isExpand = false; item.actionType = '' \">Cancel\n                        </button>\n                        <button class=\"btn btn-primary animated fadeIn\"\n                                *ngIf=\"item.actionType == 'APPROVE'\"\n                                (click)=\"onAction('APPROVE',item,filter?.dataType)\">Approve\n                        </button>\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,filter?.dataType)\">Reject\n                        </button>\n                    </div>\n\n                </div>\n            </div>\n        </ng-container>\n\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.applicationTasks?.length == 0\">\n            <span class=\"no-rec\">No Records..</span>\n        </div>\n    </div> <!--TABLE END-->\n\n    <div class=\"text-right\" *ngIf=\"dataSource?.applicationTasks?.length > summeryModeRecordLimit\"><span class=\"more\"\n                                                                          (click)=\"onViewAll()\">View All</span></div>\n\n    <div class=\"pagination-container text-center\"\n         *ngIf=\"dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) \">\n\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"dataSource?.metadata?.total\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.numberOfRecordsPerPage\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n    </div>\n\n</div> <!--WRAPPER END-->\n"
+module.exports = "<div class=\"table-wrapper\">\r\n    <span class=\"filter\" tooltip=\"Filter\"\r\n          [ngClass]=\"{'on':isFilterVisible}\"\r\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\r\n    <div><span class=\"tbl-cat\">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\r\n    <div class=\"tbl-header\">\r\n        {{tableTitle}}\r\n    </div>\r\n\r\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\r\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\r\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-xs-4\">\r\n                    <input type=\"text\" class=\"form-control\"\r\n                           [(ngModel)]=\"filterId\"\r\n                           [typeaheadMinLength]=\"0\"\r\n                           container=\"body\"\r\n                           [typeahead]=\"FilterFieldsDataSource\"\r\n                           typeaheadOptionField=\"id\"\r\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\r\n                           placeholder=\"Id\">\r\n                </div>\r\n                <div class=\"form-group col-xs-4\">\r\n                    <input type=\"text\"\r\n                           [(ngModel)]=\"filterAppName\"\r\n                           container=\"body\"\r\n                           [typeaheadMinLength]=\"0\"\r\n                           [typeahead]=\"FilterFieldsDataSource\"\r\n                           typeaheadOptionField=\"applicationName\"\r\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\r\n                           class=\"form-control\" placeholder=\"App Name\">\r\n                </div>\r\n                <div class=\"form-group col-xs-4\">\r\n                    <input type=\"text\"\r\n                           [(ngModel)]=\"filterUser\"\r\n                           container=\"body\"\r\n                           [typeahead]=\"FilterFieldsDataSource\"\r\n                           typeaheadOptionField=\"userName\"\r\n                           typeaheadGroupField=\"userName\"\r\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'USER')\"\r\n                           class=\"form-control\" placeholder=\"User\">\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"row\">\r\n                <div class=\"col-xs-4\">\r\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.ids.length > 0\">\r\n                        <div class=\"sec-head\">ID</div>\r\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\r\n                        <span class=\"filter-val ids\" *ngFor=\"let id of filter.ids\">{{id}}</span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xs-4\">\r\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\r\n                        <div class=\"sec-head\">App Name</div>\r\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\r\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xs-4\">\r\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\r\n                        <div class=\"sec-head\">User</div>\r\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\r\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n    <div class=\"table\">\r\n\r\n        <div class=\"tbl-row header\">\r\n            <div class=\"tbl-cell\">ID</div>\r\n            <div class=\"tbl-cell\">APP NAME</div>\r\n            <div class=\"tbl-cell\">USER</div>\r\n            <div class=\"tbl-cell\">CREATED ON</div>\r\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\r\n        </div>\r\n\r\n        <ng-container *ngFor=\"let item of dataSource?.applicationTasks; let i=index\">\r\n            <div class=\"tbl-row\"\r\n                 [ngClass]=\"{\r\n                 'modified' : item.isModified,\r\n                 'open':item.isExpand,\r\n                 'M':item.actionType == 'MORE',\r\n                 'A':item.actionType == 'APPROVE',\r\n                 'R':item.actionType == 'REJECT'}\"\r\n                 *ngIf=\"!!!summeryModeRecordLimit || i < summeryModeRecordLimit\">\r\n                <div class=\"tbl-cell\">\r\n                    <span tooltip=\"More Info\"\r\n                          class=\"action expand material-icons\"\r\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\r\n                    {{item.id}}\r\n                </div>\r\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\r\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\r\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\r\n                <div class=\"tbl-cell text-right\">\r\n                    <span tooltip=\"Approve\" *ngIf=\"filter?.dataType?.dataCategory == 'USER'\"\r\n                          class=\"action  approve material-icons\"\r\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\r\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE' \">check</span>\r\n\r\n                    <span tooltip=\"Reject\" *ngIf=\"filter?.dataType?.dataCategory  == 'USER'\"\r\n                          class=\"action  reject material-icons\"\r\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\r\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT' \">close</span>\r\n\r\n                    <span tooltip=\"Assign to Me\" *ngIf=\"filter?.dataType?.dataCategory  == 'GROUP'\"\r\n                          class=\"action  assign material-icons\"\r\n                          (click)=\"onAction('ASSIGN',item,filter?.dataType)\">assignment_ind</span>\r\n                </div>\r\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\r\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\r\n                    'A':item.actionType == 'APPROVE',\r\n                    'R':item.actionType == 'REJECT'}\">\r\n                    <div class=\"col-sm-12\">\r\n                        <div class=\"col-xs-6\">\r\n                            <div class=\"row more-row\">\r\n                                <div class=\"col-xs-6 field-name\">Application Id</div>\r\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\r\n                            </div>\r\n                            <div class=\"row more-row\">\r\n                                <div class=\"col-xs-6 field-name\">Description</div>\r\n                                <div class=\"col-xs-6 field-value\"> {{item.applicationDescription}}</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xs-6\">\r\n                            <div class=\"row more-row\">\r\n                                <div class=\"col-xs-6 field-name\">Operator</div>\r\n                                <div class=\"col-xs-6 field-value\">{{item.operators}}</div>\r\n                            </div>\r\n                            <div class=\"row more-row\">\r\n                                <div class=\"col-xs-6 field-name\">Tier</div>\r\n                                <div class=\"col-xs-6 field-value\">\r\n                                    <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\r\n                                        <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\r\n                                            {{opt}}\r\n                                        </option>\r\n                                    </select>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-sm-12\" *ngIf=\"item.actionType !== 'MORE'\">\r\n                        <div class=\"col-xs-3 field-name\">Comment</div>\r\n                        <div class=\"col-xs-9 field-value\"><input type=\"text\" class=\"form-control\"></div>\r\n                    </div>\r\n\r\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\r\n                        <button class=\"btn btn-default animated fadeIn\"\r\n                                (click)=\"item.isExpand = false; item.actionType = '' \">Cancel\r\n                        </button>\r\n                        <button class=\"btn btn-primary animated fadeIn\"\r\n                                *ngIf=\"item.actionType == 'APPROVE'\"\r\n                                (click)=\"onAction('APPROVE',item,filter?.dataType)\">Approve\r\n                        </button>\r\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\r\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,filter?.dataType)\">Reject\r\n                        </button>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </ng-container>\r\n\r\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.applicationTasks?.length == 0\">\r\n            <span class=\"no-rec\">No Records..</span>\r\n        </div>\r\n    </div> <!--TABLE END-->\r\n\r\n    <div class=\"text-right\" *ngIf=\"dataSource?.applicationTasks?.length > summeryModeRecordLimit\"><span class=\"more\"\r\n                                                                          (click)=\"onViewAll()\">View All</span></div>\r\n\r\n    <div class=\"pagination-container text-center\"\r\n         *ngIf=\"dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) \">\r\n\r\n        <pagination\r\n                [boundaryLinks]=\"true\"\r\n                [totalItems]=\"dataSource?.metadata?.total\"\r\n                [(ngModel)]=\"currentPage\"\r\n                [itemsPerPage]=\"filter.numberOfRecordsPerPage\"\r\n                [maxSize]=\"5\"\r\n                (pageChanged)=\"onPageChanged($event)\"\r\n                class=\"pagination-sm\"\r\n                previousText=\"&lsaquo;\"\r\n                nextText=\"&rsaquo;\"\r\n                firstText=\"&laquo;\"\r\n                lastText=\"&raquo;\"></pagination>\r\n    </div>\r\n\r\n</div> <!--WRAPPER END-->\r\n"
 
 /***/ },
 
 /***/ 974:
 /***/ function(module, exports) {
 
-module.exports = "<div>\n    <div>\n        <span class=\"url-part\" *ngFor=\"let path of activeView\">{{path}}</span>\n    </div>\n    <span class=\"animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh\"\n          tooltip=\"Reload\"\n          placement=\"bottom\"\n          (click)=\"onReload()\"></span>\n</div>"
+module.exports = "<div>\r\n    <div>\r\n        <span class=\"url-part\" *ngFor=\"let path of activeView\">{{path}}</span>\r\n    </div>\r\n    <span class=\"animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh\"\r\n          tooltip=\"Reload\"\r\n          placement=\"bottom\"\r\n          (click)=\"onReload()\"></span>\r\n</div>"
 
 /***/ },
 
 /***/ 975:
 /***/ function(module, exports) {
 
-module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\" routerLink=\"home\">\n        <span class=\"logo\"><img src=\"images/wso2telco_logo.png\" ></span>\n        <span class=\"name\"><span class=\"man\">WORKFLOW MANAGER</span></span>\n      </a>\n      <app-hamburger-menu></app-hamburger-menu>\n    </div>\n\n    <div class=\"navbar-right text-right\">\n      <app-user-avatar></app-user-avatar>\n    </div>\n  </div>\n</nav>\n\n\n<!--<nav>\n  <button (click)=\"onLogoutClick()\">logout</button>\n</nav>-->\n"
+module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" routerLink=\"home\">\r\n        <span class=\"logo\"><img src=\"images/wso2telco_logo.png\" ></span>\r\n        <span class=\"name\"><span class=\"man\">WORKFLOW MANAGER</span></span>\r\n      </a>\r\n      <app-hamburger-menu></app-hamburger-menu>\r\n    </div>\r\n\r\n    <div class=\"navbar-right text-right\">\r\n      <app-user-avatar></app-user-avatar>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--<nav>\r\n  <button (click)=\"onLogoutClick()\">logout</button>\r\n</nav>-->\r\n"
 
 /***/ },
 
 /***/ 976:
 /***/ function(module, exports) {
 
-module.exports = "<ul [ngClass]=\"{'is-expand':isExpand}\">\n  <li  *ngFor=\"let menu of menuSource\"\n       (click)=\"onClick(menu)\"\n  [ngClass]=\"{'selected':menu.id==selectedMenu?.id}\"><span class=\"icon material-icons\">{{menu.iconName}}</span>\n  <span class=\"menu-name animated fadeIn\" *ngIf=\"isExpand\">{{menu.name}}</span>\n  </li>\n </ul>\n"
+module.exports = "<ul [ngClass]=\"{'is-expand':isExpand}\">\r\n  <li  *ngFor=\"let menu of menuSource\"\r\n       (click)=\"onClick(menu)\"\r\n  [ngClass]=\"{'selected':menu.id==selectedMenu?.id}\"><span class=\"icon material-icons\">{{menu.iconName}}</span>\r\n  <span class=\"menu-name animated fadeIn\" *ngIf=\"isExpand\">{{menu.name}}</span>\r\n  </li>\r\n </ul>\r\n"
 
 /***/ },
 
 /***/ 977:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"table-wrapper\">\n  <div class=\"tbl-header\">\n    {{tableHeader}}\n  </div>\n  <div class=\"table\">\n\n    <div class=\"tbl-row header\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">{{field}}</div>\n    </div>\n\n    <div class=\"tbl-row\" *ngFor=\"let item of dataSource\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">{{item[field]}}</div>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"table-wrapper\">\r\n  <div class=\"tbl-header\">\r\n    {{tableHeader}}\r\n  </div>\r\n  <div class=\"table\">\r\n\r\n    <div class=\"tbl-row header\">\r\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">{{field}}</div>\r\n    </div>\r\n\r\n    <div class=\"tbl-row\" *ngFor=\"let item of dataSource\">\r\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">{{item[field]}}</div>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
 
 /***/ },
 
 /***/ 978:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"avatar-component\"\n     (click)=\"onClick()\"\n     [ngClass]=\"{'expand':dropDownStatus.isOpen}\"\n     dropdown\n     [isOpen]=\"dropDownStatus.isOpen\">\n  <div>\n    <div class=\"avatar\" dropdownToggle>\n      <span class=\"glyphicon glyphicon-user\"></span>\n    </div>\n  </div>\n  <div class=\"userName\">{{loginInfo.userName}}</div>\n  <div>\n    <span class=\"glyphicon arrow\" [ngClass]=\"{'glyphicon-chevron-up':dropDownStatus.isOpen,'glyphicon-chevron-down':!dropDownStatus.isOpen}\"></span>\n  </div>\n\n  <ul class=\"dropdown-menu avatar-dropdown animated fadeIn\" dropdownMenu aria-labelledby=\"simple-dropdown\">\n    <li>\n      <a class=\"dropdown-item\" href=\"#\">My Profile</a>\n    </li>\n    <li>\n      <a class=\"dropdown-item\" href=\"#\">My Assignments</a>\n    </li>\n    <li>\n      <a class=\"dropdown-item\" href=\"\" (click)=\"onMenuClick('logout')\">Logout</a>\n    </li>\n  </ul>\n\n</div>\n"
+module.exports = "<div class=\"avatar-component\"\r\n     (click)=\"onClick()\"\r\n     [ngClass]=\"{'expand':dropDownStatus.isOpen}\"\r\n     dropdown\r\n     [isOpen]=\"dropDownStatus.isOpen\">\r\n  <div>\r\n    <div class=\"avatar\" dropdownToggle>\r\n      <span class=\"glyphicon glyphicon-user\"></span>\r\n    </div>\r\n  </div>\r\n  <div class=\"userName\">{{loginInfo.userName}}</div>\r\n  <div>\r\n    <span class=\"glyphicon arrow\" [ngClass]=\"{'glyphicon-chevron-up':dropDownStatus.isOpen,'glyphicon-chevron-down':!dropDownStatus.isOpen}\"></span>\r\n  </div>\r\n\r\n  <ul class=\"dropdown-menu avatar-dropdown animated fadeIn\" dropdownMenu aria-labelledby=\"simple-dropdown\">\r\n    <li>\r\n      <a class=\"dropdown-item\" href=\"#\">My Profile</a>\r\n    </li>\r\n    <li>\r\n      <a class=\"dropdown-item\" href=\"#\">My Assignments</a>\r\n    </li>\r\n    <li>\r\n      <a class=\"dropdown-item\" href=\"\" (click)=\"onMenuClick('logout')\">Logout</a>\r\n    </li>\r\n  </ul>\r\n\r\n</div>\r\n"
 
 /***/ }
 

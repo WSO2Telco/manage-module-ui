@@ -29,7 +29,7 @@ import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data
         HamburgerMenuComponent,
         UserAvatarComponent,
         MainMenuComponent,
-        BreadcrumbsComponent
+        BreadcrumbsComponent,
     ],
     imports: [
         BrowserModule,
@@ -45,7 +45,7 @@ import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data
         DropdownModule.forRoot(),
         TooltipModule.forRoot(),
         ToastyModule.forRoot(),
-        TypeaheadModule.forRoot()
+        TypeaheadModule.forRoot(),
     ],
     providers: [
         AppGuard,

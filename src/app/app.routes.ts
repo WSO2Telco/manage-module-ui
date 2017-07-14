@@ -18,6 +18,10 @@ const routes = [
     canActivate : [AppGuard]
   },
   {
+    path: 'rate',
+    loadChildren: 'app/rate/rate.module#RateModule',
+  },
+  {
     path: 'approvals',
     loadChildren: 'app/approvals/approvals.module#ApprovalsModule',
     canActivate : [AppGuard]

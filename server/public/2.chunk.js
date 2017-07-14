@@ -1,18 +1,19 @@
-webpackJsonp([2,8],{
+webpackJsonp([2,9],{
 
-/***/ 1249:
+/***/ 1251:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_applications_component__ = __webpack_require__(1253);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__ = __webpack_require__(1255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_routes__ = __webpack_require__(1259);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__ = __webpack_require__(1254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__(653);
-/* harmony export (binding) */ __webpack_require__.d(exports, "ApprovalsModule", function() { return ApprovalsModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(1262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__(1280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__(1279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(652);
+/* harmony export (binding) */ __webpack_require__.d(exports, "HistoryModule", function() { return HistoryModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,37 +30,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ApprovalsModule = (function () {
-    function ApprovalsModule() {
+
+var HistoryModule = (function () {
+    function HistoryModule() {
     }
-    ApprovalsModule = __decorate([
+    HistoryModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_4__approval_routes__["a" /* ApprovalRoutes */],
-                __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__["a" /* SharedModule */]
+                __WEBPACK_IMPORTED_MODULE_5__history_routes__["a" /* HistoryRoutes */],
+                __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__["a" /* SharedModule */]
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__applications_applications_component__["a" /* ApplicationsComponent */], __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__["a" /* SubscriptionsComponent */], __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__["a" /* ApprovalMainComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */], __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__["a" /* SearchResultsComponent */], __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__["a" /* HistoryMainComponent */], __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__["a" /* HistoryFilterComponent */]]
         }), 
         __metadata('design:paramtypes', [])
-    ], ApprovalsModule);
-    return ApprovalsModule;
+    ], HistoryModule);
+    return HistoryModule;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/approvals.module.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/history.module.js.map
 
 /***/ },
 
-/***/ 1253:
+/***/ 1262:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__ = __webpack_require__(651);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__ = __webpack_require__(652);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApplicationsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(655);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryMainComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -72,240 +71,293 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-
-
-var ApplicationsComponent = (function () {
-    function ApplicationsComponent(message, approvalHelperService, approvalService) {
-        this.message = message;
-        this.approvalHelperService = approvalHelperService;
-        this.approvalService = approvalService;
+var HistoryMainComponent = (function () {
+    function HistoryMainComponent(reportingService) {
+        this.reportingService = reportingService;
+        this.fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
+        this.totalItems = 0;
+        this.currentPage = 1;
     }
-    ApplicationsComponent.prototype.ngOnInit = function () {
+    HistoryMainComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.userApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'APPLICATION'), 10);
-        this.groupApplicationFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'APPLICATION'), 10);
-        this.approvalService.MyApplicationCreationTasksProvider.subscribe(function (apps) {
-            _this.myApplications = apps;
-        }, function (error) {
-            _this.message.error(error);
+        this.filter = new __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["b" /* ApprovalHistoryFilter */]();
+        this.filter.count = 10;
+        this.reportingService.ApprovalHistoryProvider.subscribe(function (history) {
+            _this.approvalHistoryData = history;
+            _this.totalItems = (_this.approvalHistoryData && _this.approvalHistoryData.noOfRecords) || _this.totalItems;
         });
-        this.approvalService.GroupApplicationCreationTasksProvider.subscribe(function (apps) {
-            _this.allApplications = apps;
-        }, function (error) {
-            _this.message.error(error);
-        });
-        this.getData();
+        this.reportingService.getSubscribers();
+        this.reportingService.getOperators();
+        this.reportingService.getApprovalHistory(this.filter);
     };
-    ApplicationsComponent.prototype.getData = function () {
-        this.approvalService.getFilteredResult(this.userApplicationFilter);
-        this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
+    HistoryMainComponent.prototype.onFilterChangeHandler = function (event) {
+        this.filter = event;
+        this.reportingService.getApprovalHistory(this.filter);
     };
-    ApplicationsComponent.prototype.onAssignTaskHandler = function (event) {
-        var _this = this;
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, function () {
-            _this.getData();
-        });
+    HistoryMainComponent.prototype.onPageChanged = function (event) {
+        this.filter.offset = (event.page - 1) * this.filter.count;
+        this.reportingService.getApprovalHistory(this.filter);
     };
-    ApplicationsComponent.prototype.onApproveRejectHandler = function (event) {
-        this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
-    };
-    ApplicationsComponent.prototype.onFilterChangeHandler = function (event) {
-        this.approvalService.getFilteredResult(event);
-    };
-    ApplicationsComponent = __decorate([
+    HistoryMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-applications',
-            template: __webpack_require__(1282),
-            styles: [__webpack_require__(1270)]
+            selector: 'app-history-main',
+            template: __webpack_require__(1334),
+            styles: [__webpack_require__(1319)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
-    ], ApplicationsComponent);
-    return ApplicationsComponent;
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
+    ], HistoryMainComponent);
+    return HistoryMainComponent;
+    var _a;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/history-main.component.js.map
+
+/***/ },
+
+/***/ 1279:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(655);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryFilterComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var HistoryFilterComponent = (function () {
+    function HistoryFilterComponent(reportingService) {
+        this.reportingService = reportingService;
+        this.onFilterChange = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    HistoryFilterComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.reportingService.SubscribersProvider.subscribe(function (subscribers) {
+            _this.subscribers = subscribers;
+        });
+        this.reportingService.OperatorsProvider.subscribe(function (operators) {
+            _this.operators = operators;
+        });
+        this.reportingService.ApplicationsProvider.subscribe(function (apps) {
+            _this.applications = apps;
+            _this.selectedApplication = null;
+        });
+    };
+    HistoryFilterComponent.prototype.onNoApplicationSelected = function (event) {
+        if (!event) {
+            this.filter.applicationId = 0;
+            this.selectedApplication = null;
+        }
+    };
+    HistoryFilterComponent.prototype.onNoSubscriberSelected = function (event) {
+        if (!event) {
+            this.filter.subscriber = '';
+            this.reportingService.getApplicationsBySubscriber('');
+        }
+    };
+    HistoryFilterComponent.prototype.onFilterCriteriaChange = function () {
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onSubscriberChange = function () {
+        if (!!this.filter.subscriber) {
+            this.reportingService.getApplicationsBySubscriber(this.filter.subscriber);
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onApplicationChange = function (event) {
+        if (!!event.item) {
+            this.filter.applicationId = event.item.id || 0;
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onOperatorChange = function () {
+        if (!!this.filter.operator) {
+            this.filter.offset = 0;
+        }
+        this.onFilterChange.emit(this.filter);
+    };
+    HistoryFilterComponent.prototype.onClearFilter = function () {
+        this.filter.operator = '';
+        this.filter.subscriber = '';
+        this.filter.api = '';
+        this.filter.applicationId = 0;
+        this.selectedApplication = null;
+        this.onFilterChange.emit(this.filter);
+    };
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])(), 
+        __metadata('design:type', (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["b" /* ApprovalHistoryFilter */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["b" /* ApprovalHistoryFilter */]) === 'function' && _a) || Object)
+    ], HistoryFilterComponent.prototype, "filter", void 0);
+    __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"])(), 
+        __metadata('design:type', (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]) === 'function' && _b) || Object)
+    ], HistoryFilterComponent.prototype, "onFilterChange", void 0);
+    HistoryFilterComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-history-filter',
+            template: __webpack_require__(1333),
+            styles: [__webpack_require__(1318)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
+    ], HistoryFilterComponent);
+    return HistoryFilterComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/applications.component.js.map
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/history-filter.component.js.map
 
 /***/ },
 
-/***/ 1254:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalMainComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-var ApprovalMainComponent = (function () {
-    function ApprovalMainComponent() {
-    }
-    ApprovalMainComponent.prototype.ngOnInit = function () {
-    };
-    ApprovalMainComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-approval-main',
-            template: "<router-outlet></router-outlet>",
-            styles: [__webpack_require__(1271)]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ApprovalMainComponent);
-    return ApprovalMainComponent;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/approval-main.component.js.map
-
-/***/ },
-
-/***/ 1255:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__(88);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__ = __webpack_require__(651);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__ = __webpack_require__(652);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SubscriptionsComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var SubscriptionsComponent = (function () {
-    function SubscriptionsComponent(message, approvalHelperService, approvalService) {
-        this.message = message;
-        this.approvalHelperService = approvalHelperService;
-        this.approvalService = approvalService;
-    }
-    SubscriptionsComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.mySubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('USER', 'SUBSCRIPTION'), 10);
-        this.groupSubscriptionFilter = new __WEBPACK_IMPORTED_MODULE_1__commons_models_application_data_models__["c" /* ApplicationTaskFilter */](new __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__["a" /* TableDataType */]('GROUP', 'SUBSCRIPTION'), 10);
-        this.approvalService.MySubscriptionTasksProvider.subscribe(function (subs) {
-            _this.mySubscriptions = subs;
-        }, function (error) {
-            _this.message.error(error);
-        });
-        this.approvalService.GroupSubscriptionTasksProvider.subscribe(function (subs) {
-            _this.allSubscriptions = subs;
-        }, function (error) {
-            _this.message.error(error);
-        });
-        this.getData();
-    };
-    SubscriptionsComponent.prototype.getData = function () {
-        this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
-        this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
-    };
-    SubscriptionsComponent.prototype.onAssignTaskHandler = function (event) {
-        var _this = this;
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, function () {
-            _this.getData();
-        });
-    };
-    SubscriptionsComponent.prototype.onApproveRejectHandler = function (event) {
-        this.approvalHelperService.approveRejectTask(event.dataType, event.task, event.status);
-    };
-    SubscriptionsComponent.prototype.onFilterChangeHandler = function (event) {
-        this.approvalService.getFilteredResult(event);
-    };
-    SubscriptionsComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-subscriptions',
-            template: __webpack_require__(1283),
-            styles: [__webpack_require__(1272)]
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
-    ], SubscriptionsComponent);
-    return SubscriptionsComponent;
-    var _a, _b, _c;
-}());
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/subscriptions.component.js.map
-
-/***/ },
-
-/***/ 1259:
+/***/ 1280:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__ = __webpack_require__(1253);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__ = __webpack_require__(1255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__ = __webpack_require__(1254);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalRoutes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(1262);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryRoutes; });
 
 
-
-
-var routes = [
-    {
+var routes = [{
         path: '',
-        component: __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__["a" /* ApprovalMainComponent */]
-    },
-    {
-        path: 'applications',
-        component: __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__["a" /* ApplicationsComponent */]
-    },
-    {
-        path: 'subscriptions',
-        component: __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__["a" /* SubscriptionsComponent */]
-    }
-];
-var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/sumudu/git/workflow-ui/src/approval.routes.js.map
+        component: __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__["a" /* HistoryMainComponent */]
+    }];
+var HistoryRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/history.routes.js.map
 
 /***/ },
 
-/***/ 1270:
+/***/ 1281:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SearchPanelComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SearchPanelComponent = (function () {
+    function SearchPanelComponent() {
+    }
+    SearchPanelComponent.prototype.ngOnInit = function () {
+    };
+    SearchPanelComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-search-panel',
+            template: __webpack_require__(1335),
+            styles: [__webpack_require__(1320)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SearchPanelComponent);
+    return SearchPanelComponent;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/search-panel.component.js.map
+
+/***/ },
+
+/***/ 1282:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SearchResultsComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var SearchResultsComponent = (function () {
+    function SearchResultsComponent() {
+    }
+    SearchResultsComponent.prototype.ngOnInit = function () {
+    };
+    SearchResultsComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-search-results',
+            template: __webpack_require__(1336),
+            styles: [__webpack_require__(1321)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], SearchResultsComponent);
+    return SearchResultsComponent;
+}());
+//# sourceMappingURL=E:/telco_project/workflow-ui/src/search-results.component.js.map
+
+/***/ },
+
+/***/ 1318:
 /***/ function(module, exports) {
 
-module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
+module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
-/***/ 1271:
+/***/ 1319:
+/***/ function(module, exports) {
+
+module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n"
+
+/***/ },
+
+/***/ 1320:
 /***/ function(module, exports) {
 
 module.exports = ""
 
 /***/ },
 
-/***/ 1272:
+/***/ 1321:
 /***/ function(module, exports) {
 
-module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
+module.exports = ""
 
 /***/ },
 
-/***/ 1282:
+/***/ 1333:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp row pad-r-15-im\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [filter]=\"userApplicationFilter\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [filter]=\"groupApplicationFilter\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
+module.exports = "<div class=\"history-filter\">\r\n\r\n   <div class=\"row fields-container\">\r\n      <div class=\"col-sm-3\">\r\n         <input type=\"text\" class=\"form-control\"\r\n                [(ngModel)]=\"filter.subscriber\"\r\n                [typeaheadMinLength]=\"0\"\r\n                [typeahead]=\"subscribers\"\r\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\r\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\r\n                placeholder=\"Service Provider\">\r\n      </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\"\r\n                  [(ngModel)]=\"selectedApplication\"\r\n                  [typeaheadMinLength]=\"0\"\r\n                  typeaheadOptionField=\"name\"\r\n                  [typeahead]=\"applications\"\r\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\r\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\r\n                  placeholder=\"Application\">\r\n       </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\"\r\n                  [(ngModel)]=\"filter.operator\"\r\n                  [typeaheadMinLength]=\"0\"\r\n                  [typeahead]=\"operators\"\r\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\r\n                  placeholder=\"Operator\">\r\n       </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\r\n       </div>\r\n   </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12 text-right\">\r\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\r\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ },
 
-/***/ 1283:
+/***/ 1334:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp\">\n <div class=\"row\">\n   <div class=\"col-sm-6\">\n       <application-data-table\n               class=\"my\"\n               [filter]=\"mySubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"mySubscriptions\"\n               (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n   <div class=\"col-sm-6\">\n       <application-data-table\n               [filter]=\"groupSubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"allSubscriptions\"\n               (onAssignTask)=\"onAssignTaskHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n </div>\n</div>\n\n"
+module.exports = "<div class=\"animated fadeInUp row\">\r\n    <div class=\"col-sm-12\">\r\n        <app-history-filter\r\n                [filter]=\"filter\"\r\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\r\n    </div>\r\n    <div class=\"col-sm-12\">\r\n        <app-responsive-table\r\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\r\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\r\n    </div>\r\n    <div class=\"col-sm-12 text-center\">\r\n        <pagination\r\n                [boundaryLinks]=\"true\"\r\n                [totalItems]=\"totalItems\"\r\n                [(ngModel)]=\"currentPage\"\r\n                [itemsPerPage]=\"filter.count\"\r\n                [maxSize]=\"5\"\r\n                (pageChanged)=\"onPageChanged($event)\"\r\n                class=\"pagination-sm\"\r\n                previousText=\"&lsaquo;\"\r\n                nextText=\"&rsaquo;\"\r\n                firstText=\"&laquo;\"\r\n                lastText=\"&raquo;\"></pagination>\r\n\r\n    </div>\r\n</div>"
+
+/***/ },
+
+/***/ 1335:
+/***/ function(module, exports) {
+
+module.exports = "<p>\r\n  search-panel works!\r\n</p>\r\n"
+
+/***/ },
+
+/***/ 1336:
+/***/ function(module, exports) {
+
+module.exports = "<p>\r\n  search-results works!\r\n</p>\r\n"
 
 /***/ }
 

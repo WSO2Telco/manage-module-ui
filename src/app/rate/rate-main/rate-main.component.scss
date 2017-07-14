@@ -1,0 +1,42 @@
+:host{
+  display: block;
+  margin-top: 20px;
+}
+
+.content-div{
+  background-color: #ffffff;
+}
+
+.rateInputContainer {
+  min-height: 100px;
+  padding: 10px;
+  background-color: white;
+  border: solid 1px whitesmoke;
+
+  .fields-container{
+    div[class^="col-"]{
+      padding-bottom: 10px;
+    }
+  }
+
+  .title{
+    font-size: 1.2em;
+    font-weight: 600;
+    color: gray;
+    padding-bottom: 5px;
+  }
+}
+
+.rateForm {
+
+  input {
+    background-color: #dde3ec;
+    height: 43px;
+    color: #8290a3;
+    border: 1px solid #dde3ec;
+
+    &:focus{
+      border: 1px solid #c3ccda;
+    }
+  }
+}
