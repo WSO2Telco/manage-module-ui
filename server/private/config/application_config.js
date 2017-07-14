@@ -4,7 +4,7 @@
 'use strict';
 
 var appConfig = {
-    applicationContext: process.env.wm_context || 'workflow-manager',
+    applicationContext: process.env.wm_context || 'manage',
     serverPort: process.env.wm_server_port || '3060',
     authServerURL: process.env.wm_auth_server_url || 'https://localhost:9443/services',
     reportingUrl : process.env.wm_reporting_url || 'https://localhost:9443/apihostobject',

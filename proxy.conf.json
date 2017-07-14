@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://localhost:3060/workflow-manager",
+    "target": "http://localhost:3060/workflow",
     "secure": false
   }
 }
