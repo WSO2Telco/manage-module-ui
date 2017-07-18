@@ -45,7 +45,7 @@ var ApprovalsModule = (function () {
     ], ApprovalsModule);
     return ApprovalsModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approvals.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approvals.module.js.map
 
 /***/ },
 
@@ -124,7 +124,7 @@ var ApplicationsComponent = (function () {
     return ApplicationsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/applications.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/applications.component.js.map
 
 /***/ },
 
@@ -159,7 +159,7 @@ var ApprovalMainComponent = (function () {
     ], ApprovalMainComponent);
     return ApprovalMainComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-main.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-main.component.js.map
 
 /***/ },
 
@@ -238,7 +238,7 @@ var SubscriptionsComponent = (function () {
     return SubscriptionsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/subscriptions.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/subscriptions.component.js.map
 
 /***/ },
 
@@ -270,7 +270,7 @@ var routes = [
     }
 ];
 var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval.routes.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval.routes.js.map
 
 /***/ },
 

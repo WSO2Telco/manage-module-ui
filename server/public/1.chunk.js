@@ -59,7 +59,7 @@ var DashboardModule = (function () {
     ], DashboardModule);
     return DashboardModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.module.js.map
 
 /***/ },
 
@@ -144,7 +144,7 @@ var HomeComponent = (function () {
     return HomeComponent;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/home.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/home.component.js.map
 
 /***/ },
 
@@ -199,7 +199,7 @@ var ApprovalCountComponent = (function () {
     ], ApprovalCountComponent);
     return ApprovalCountComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-count.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-count.component.js.map
 
 /***/ },
 
@@ -296,7 +296,7 @@ var ApprovalHistoryGraphComponent = (function () {
     return ApprovalHistoryGraphComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-history-graph.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-history-graph.component.js.map
 
 /***/ },
 
@@ -349,7 +349,7 @@ var ApprovalSummeryComponent = (function () {
     return ApprovalSummeryComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-summery.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-summery.component.js.map
 
 /***/ },
 
@@ -396,7 +396,7 @@ var DashboardHelperService = (function () {
     return DashboardHelperService;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard-helper.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-helper.service.js.map
 
 /***/ },
 
@@ -416,7 +416,7 @@ var routes = [
     }
 ];
 var DashboardRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard.routes.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.routes.js.map
 
 /***/ },
 
