@@ -277,7 +277,7 @@ var ApprovalRemoteDataService = (function () {
     return ApprovalRemoteDataService;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-remote-data.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-remote-data.service.js.map
 
 /***/ },
 
@@ -352,7 +352,7 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/authentication.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/authentication.service.js.map
 
 /***/ },
 
@@ -396,7 +396,7 @@ var AppCommonService = (function () {
     ], AppCommonService);
     return AppCommonService;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/app-common.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app-common.service.js.map
 
 /***/ },
 
@@ -488,7 +488,7 @@ var ApplicationTaskFilter = (function () {
     }
     return ApplicationTaskFilter;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/application-data-models.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-models.js.map
 
 /***/ },
 
@@ -551,7 +551,7 @@ var LoginRemoteDataService = (function () {
     return LoginRemoteDataService;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/login_remote-data.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login_remote-data.service.js.map
 
 /***/ },
 
@@ -664,7 +664,7 @@ var DashboardRemoteDataService = (function () {
     return DashboardRemoteDataService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard-remote-data.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-remote-data.service.js.map
 
 /***/ },
 
@@ -731,7 +731,7 @@ var LoginGuard = (function () {
     return LoginGuard;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.guard.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.guard.js.map
 
 /***/ },
 
@@ -795,7 +795,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/main.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/main.js.map
 
 /***/ },
 
@@ -956,7 +956,7 @@ var ReportingRemoteDataService = (function () {
     return ReportingRemoteDataService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/reporting-remote-data.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/reporting-remote-data.service.js.map
 
 /***/ },
 
@@ -1016,7 +1016,7 @@ var SharedModule = (function () {
     ], SharedModule);
     return SharedModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/shared.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/shared.module.js.map
 
 /***/ },
 
@@ -1126,7 +1126,7 @@ var ApprovalHelperService = (function () {
     return ApprovalHelperService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/approval-helper.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-helper.service.js.map
 
 /***/ },
 
@@ -1160,7 +1160,7 @@ var LoginResponse = (function () {
     }
     return LoginResponse;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/common-data-models.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/common-data-models.js.map
 
 /***/ },
 
@@ -1222,7 +1222,7 @@ var Application = (function () {
     }
     return Application;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/reporing-data-models.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/reporing-data-models.js.map
 
 /***/ },
 
@@ -1255,7 +1255,7 @@ var HistoryBarGraphData = (function () {
     }
     return HistoryBarGraphData;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/dashboard-data-models.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-data-models.js.map
 
 /***/ },
 
@@ -1304,7 +1304,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.component.js.map
 
 /***/ },
 
@@ -1414,7 +1414,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.module.js.map
 
 /***/ },
 
@@ -1463,7 +1463,7 @@ var routes = [
     }
 ];
 var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/app.routes.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.routes.js.map
 
 /***/ },
 
@@ -1509,7 +1509,7 @@ var CommonsModule = (function () {
     ], CommonsModule);
     return CommonsModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/commons.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/commons.module.js.map
 
 /***/ },
 
@@ -1696,7 +1696,7 @@ var ApplicationDataTableComponent = (function () {
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/application-data-table.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-table.component.js.map
 
 /***/ },
 
@@ -1751,7 +1751,7 @@ var BreadcrumbsComponent = (function () {
     return BreadcrumbsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/breadcrumbs.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/breadcrumbs.component.js.map
 
 /***/ },
 
@@ -1795,7 +1795,7 @@ var HamburgerMenuComponent = (function () {
     return HamburgerMenuComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/hamburger-menu.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/hamburger-menu.component.js.map
 
 /***/ },
 
@@ -1830,7 +1830,7 @@ var HeaderComponent = (function () {
     ], HeaderComponent);
     return HeaderComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/header.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/header.component.js.map
 
 /***/ },
 
@@ -1892,7 +1892,7 @@ var MainMenuComponent = (function () {
     return MainMenuComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/main-menu.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/main-menu.component.js.map
 
 /***/ },
 
@@ -1939,7 +1939,7 @@ var ResponsiveTableComponent = (function () {
     ], ResponsiveTableComponent);
     return ResponsiveTableComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/responsive-table.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/responsive-table.component.js.map
 
 /***/ },
 
@@ -1990,7 +1990,7 @@ var UserAvatarComponent = (function () {
     return UserAvatarComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/user-avatar.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/user-avatar.component.js.map
 
 /***/ },
 
@@ -2031,7 +2031,7 @@ var DataProvidersModule = (function () {
     ], DataProvidersModule);
     return DataProvidersModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/data-providers.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/data-providers.module.js.map
 
 /***/ },
 
@@ -2047,7 +2047,7 @@ var DataProvidersModule = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/environment.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/environment.js.map
 
 /***/ },
 
@@ -2103,7 +2103,7 @@ var environment = {
 
 
 
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/polyfills.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/polyfills.js.map
 
 /***/ },
 
@@ -2163,7 +2163,7 @@ var MessageService = (function () {
     return MessageService;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/message.service.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/message.service.js.map
 
 /***/ },
 
@@ -2487,7 +2487,7 @@ module.exports = "<div>\r\n    <div>\r\n        <span class=\"url-part\" *ngFor=
 /***/ 975:
 /***/ function(module, exports) {
 
-module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" routerLink=\"home\">\r\n        <span class=\"logo\"><img src=\"images/wso2telco_logo.png\" ></span>\r\n        <span class=\"name\"><span class=\"man\">WORKFLOW MANAGER</span></span>\r\n      </a>\r\n      <app-hamburger-menu></app-hamburger-menu>\r\n    </div>\r\n\r\n    <div class=\"navbar-right text-right\">\r\n      <app-user-avatar></app-user-avatar>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--<nav>\r\n  <button (click)=\"onLogoutClick()\">logout</button>\r\n</nav>-->\r\n"
+module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" routerLink=\"home\">\r\n        <span class=\"logo\"><img src=\"images/wso2telco_logo_white.png\" ></span>\r\n        <span class=\"name\"><span class=\"man\">MANAGE APPLICATION 2</span></span>\r\n      </a>\r\n      <app-hamburger-menu></app-hamburger-menu>\r\n    </div>\r\n\r\n    <div class=\"navbar-right text-right\">\r\n      <app-user-avatar></app-user-avatar>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--<nav>\r\n  <button (click)=\"onLogoutClick()\">logout</button>\r\n</nav>-->\r\n"
 
 /***/ },
 

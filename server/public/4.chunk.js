@@ -41,7 +41,7 @@ var LoginModule = (function () {
     ], LoginModule);
     return LoginModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/login.module.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login.module.js.map
 
 /***/ },
 
@@ -91,7 +91,7 @@ var UserLoginComponent = (function () {
     return UserLoginComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/user-login.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/user-login.component.js.map
 
 /***/ },
 
@@ -111,7 +111,7 @@ var routes = [
     }
 ];
 var LoginRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/login.routes.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login.routes.js.map
 
 /***/ },
 
