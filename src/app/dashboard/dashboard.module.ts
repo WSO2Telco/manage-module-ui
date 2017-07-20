@@ -8,6 +8,7 @@ import {ApprovalHistoryGraphComponent} from './approval-history-graph/approval-h
 import {ChartsModule} from "ng2-charts";
 import {DashboardHelperService} from "./dashboard-helper.service";
 import {SharedModule} from "../shared/shared.module";
+import {SubcategoryComponent} from '../rate/subcategory/subcategory.component'
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {SharedModule} from "../shared/shared.module";
         HomeComponent,
         ApprovalSummeryComponent,
         ApprovalCountComponent,
-        ApprovalHistoryGraphComponent ]
+        ApprovalHistoryGraphComponent]
 })
 export class DashboardModule {
 }

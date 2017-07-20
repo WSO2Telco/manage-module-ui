@@ -1,20 +1,21 @@
 webpackJsonp([0,9],{
 
-/***/ 1253:
+/***/ 1255:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1286);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rate_main_rate_main_component__ = __webpack_require__(1264);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rate_routes__ = __webpack_require__(1285);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rate_filter_rate_filter_component__ = __webpack_require__(1284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(652);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_formly__ = __webpack_require__(1293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1288);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1289);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__subcategory_subcategory_component__ = __webpack_require__(1290);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rate_main_rate_main_component__ = __webpack_require__(1266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rate_routes__ = __webpack_require__(1287);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__rate_filter_rate_filter_component__ = __webpack_require__(1286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__shared_shared_module__ = __webpack_require__(654);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__angular_forms__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_formly__ = __webpack_require__(1296);
 /* harmony export (binding) */ __webpack_require__.d(exports, "RateModule", function() { return RateModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -35,6 +36,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RateModule = (function () {
     function RateModule() {
     }
@@ -42,42 +44,42 @@ var RateModule = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_5__rate_routes__["a" /* RateRoutes */],
-                __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__["a" /* SharedModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_forms__["a" /* FormsModule */],
-                __WEBPACK_IMPORTED_MODULE_8__angular_forms__["b" /* ReactiveFormsModule */],
-                __WEBPACK_IMPORTED_MODULE_9_ng2_formly__["a" /* FormlyModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_9_ng2_formly__["b" /* FormlyBootstrapModule */],
+                __WEBPACK_IMPORTED_MODULE_6__rate_routes__["a" /* RateRoutes */],
+                __WEBPACK_IMPORTED_MODULE_8__shared_shared_module__["a" /* SharedModule */],
+                __WEBPACK_IMPORTED_MODULE_9__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_9__angular_forms__["b" /* ReactiveFormsModule */],
+                __WEBPACK_IMPORTED_MODULE_10_ng2_formly__["a" /* FormlyModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_10_ng2_formly__["b" /* FormlyBootstrapModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */], __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__["a" /* SearchResultsComponent */], __WEBPACK_IMPORTED_MODULE_4__rate_main_rate_main_component__["a" /* RateMainComponent */], __WEBPACK_IMPORTED_MODULE_6__rate_filter_rate_filter_component__["a" /* RateFilterComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */], __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__["a" /* SearchResultsComponent */], __WEBPACK_IMPORTED_MODULE_5__rate_main_rate_main_component__["a" /* RateMainComponent */], __WEBPACK_IMPORTED_MODULE_7__rate_filter_rate_filter_component__["a" /* RateFilterComponent */], __WEBPACK_IMPORTED_MODULE_4__subcategory_subcategory_component__["a" /* SubcategoryComponent */]]
         }), 
         __metadata('design:paramtypes', [])
     ], RateModule);
     return RateModule;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/rate.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate.module.js.map
 
 /***/ },
 
-/***/ 1254:
+/***/ 1256:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_formly_form__ = __webpack_require__(1290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_formly_field__ = __webpack_require__(1289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_formly_attributes__ = __webpack_require__(1288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_formly_config__ = __webpack_require__(1256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_formly_form_builder__ = __webpack_require__(1267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_formly_validation_messages__ = __webpack_require__(1291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_formly_event_emitter__ = __webpack_require__(1266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__templates_field__ = __webpack_require__(1257);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__templates_field_type__ = __webpack_require__(1269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__templates_field_wrapper__ = __webpack_require__(1292);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_formly_group__ = __webpack_require__(1265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_formly_single_focus_dispatcher__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_formly_form__ = __webpack_require__(1293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_formly_field__ = __webpack_require__(1292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_formly_attributes__ = __webpack_require__(1291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_formly_config__ = __webpack_require__(1258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_formly_form_builder__ = __webpack_require__(1269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_formly_validation_messages__ = __webpack_require__(1294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_formly_event_emitter__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__templates_field__ = __webpack_require__(1259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__templates_field_type__ = __webpack_require__(1271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__templates_field_wrapper__ = __webpack_require__(1295);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_formly_group__ = __webpack_require__(1267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_formly_single_focus_dispatcher__ = __webpack_require__(1270);
 /* unused harmony reexport FormlyAttributes */
 /* unused harmony reexport FormlyFormBuilder */
 /* unused harmony reexport FormlyField */
@@ -143,7 +145,7 @@ var FormlyModule = (function () {
 
 /***/ },
 
-/***/ 1255:
+/***/ 1257:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -335,13 +337,13 @@ function evalExpression(expression, thisArg, argVal) {
 
 /***/ },
 
-/***/ 1256:
+/***/ 1258:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_formly_group__ = __webpack_require__(1265);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_formly_group__ = __webpack_require__(1267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return FORMLY_CONFIG_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyConfig; });
 
@@ -488,7 +490,7 @@ var FormlyConfig = (function () {
 
 /***/ },
 
-/***/ 1257:
+/***/ 1259:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -548,12 +550,12 @@ var Field = (function () {
 
 /***/ },
 
-/***/ 1264:
+/***/ 1266:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(651);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(653);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RateMainComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -574,6 +576,10 @@ var RateMainComponent = (function () {
         this.fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
         this.totalItems = 0;
         this.currentPage = 1;
+        this.user = {
+            email: 'email@gmail.com',
+            checked: false
+        };
         this.form = new __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* FormGroup */]({});
         this.userFields = [{
                 className: 'row',
@@ -635,26 +641,31 @@ var RateMainComponent = (function () {
                         }
                     }]
             }];
-        this.user = {
-            email: 'email@gmail.com',
-            checked: false
-        };
     }
     RateMainComponent.prototype.submit = function (user) {
         console.log(user);
     };
+    RateMainComponent.prototype.viewSubcategory = function () {
+        if (this.isSubcategory) {
+            this.isSubcategory = false;
+        }
+        else {
+            this.isSubcategory = false;
+        }
+    };
     RateMainComponent.prototype.ngOnInit = function () {
+        this.isSubcategory = false;
         /*  this.filter = new ApprovalRateFilter();
-          this.filter.count = 10;
-  
-          this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
-              this.approvalHistoryData = history;
-              this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.noOfRecords) || this.totalItems;
-          });
-  
-          this.reportingService.getSubscribers();
-          this.reportingService.getOperators();
-          this.reportingService.getApprovalHistory(this.filter); */
+         this.filter.count = 10;
+
+         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
+         this.approvalHistoryData = history;
+         this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.noOfRecords) || this.totalItems;
+         });
+
+         this.reportingService.getSubscribers();
+         this.reportingService.getOperators();
+         this.reportingService.getApprovalHistory(this.filter); */
     };
     RateMainComponent.prototype.onFilterChangeHandler = function (event) {
         this.filter = event;
@@ -667,25 +678,25 @@ var RateMainComponent = (function () {
     RateMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-rate-main',
-            template: __webpack_require__(1339),
-            styles: [__webpack_require__(1324)]
+            template: __webpack_require__(1343),
+            styles: [__webpack_require__(1327)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
     ], RateMainComponent);
     return RateMainComponent;
     var _a;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/rate-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate-main.component.js.map
 
 /***/ },
 
-/***/ 1265:
+/***/ 1267:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templates_field_type__ = __webpack_require__(1269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templates_field_type__ = __webpack_require__(1271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyGroup; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -732,7 +743,7 @@ var FormlyGroup = (function (_super) {
 
 /***/ },
 
-/***/ 1266:
+/***/ 1268:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -780,14 +791,14 @@ var FormlyPubSub = (function () {
 
 /***/ },
 
-/***/ 1267:
+/***/ 1269:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_config__ = __webpack_require__(1256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_config__ = __webpack_require__(1258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFormBuilder; });
 
 
@@ -1046,7 +1057,7 @@ var FormlyFormBuilder = (function () {
 
 /***/ },
 
-/***/ 1268:
+/***/ 1270:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1076,11 +1087,11 @@ var SingleFocusDispatcher = (function () {
 
 /***/ },
 
-/***/ 1269:
+/***/ 1271:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1259);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FieldType; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -1135,12 +1146,12 @@ var FieldType = (function (_super) {
 
 /***/ },
 
-/***/ 1270:
+/***/ 1272:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyValidationMessage; });
 
 
@@ -1193,16 +1204,16 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1271:
+/***/ 1273:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__checkbox__ = __webpack_require__(1297);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__multicheckbox__ = __webpack_require__(1299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input__ = __webpack_require__(1298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__radio__ = __webpack_require__(1300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__textarea__ = __webpack_require__(1302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__select__ = __webpack_require__(1301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__checkbox__ = __webpack_require__(1300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__multicheckbox__ = __webpack_require__(1302);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input__ = __webpack_require__(1301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__radio__ = __webpack_require__(1303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__textarea__ = __webpack_require__(1305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__select__ = __webpack_require__(1304);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "d", function() { return __WEBPACK_IMPORTED_MODULE_5__select__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__checkbox__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "f", function() { return __WEBPACK_IMPORTED_MODULE_1__multicheckbox__["a"]; });
@@ -1220,14 +1231,14 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1272:
+/***/ 1274:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fieldset__ = __webpack_require__(1308);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__label__ = __webpack_require__(1309);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__description__ = __webpack_require__(1307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_validation__ = __webpack_require__(1310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fieldset__ = __webpack_require__(1311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__label__ = __webpack_require__(1312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__description__ = __webpack_require__(1310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_validation__ = __webpack_require__(1313);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__fieldset__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__label__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__description__["a"]; });
@@ -1241,13 +1252,13 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1284:
+/***/ 1286:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(651);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(655);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(653);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(656);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RateFilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1333,24 +1344,24 @@ var RateFilterComponent = (function () {
     RateFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-rate-filter',
-            template: __webpack_require__(1338),
-            styles: [__webpack_require__(1323)]
+            template: __webpack_require__(1342),
+            styles: [__webpack_require__(1326)]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], RateFilterComponent);
     return RateFilterComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/rate-filter.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate-filter.component.js.map
 
 /***/ },
 
-/***/ 1285:
+/***/ 1287:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rate_main_rate_main_component__ = __webpack_require__(1264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rate_main_rate_main_component__ = __webpack_require__(1266);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RateRoutes; });
 
 
@@ -1359,11 +1370,11 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__rate_main_rate_main_component__["a" /* RateMainComponent */]
     }];
 var RateRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/rate.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate.routes.js.map
 
 /***/ },
 
-/***/ 1286:
+/***/ 1288:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1387,18 +1398,18 @@ var SearchPanelComponent = (function () {
     SearchPanelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-panel',
-            template: __webpack_require__(1340),
-            styles: [__webpack_require__(1325)]
+            template: __webpack_require__(1344),
+            styles: [__webpack_require__(1328)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchPanelComponent);
     return SearchPanelComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/search-panel.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-panel.component.js.map
 
 /***/ },
 
-/***/ 1287:
+/***/ 1289:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1422,23 +1433,96 @@ var SearchResultsComponent = (function () {
     SearchResultsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-results',
-            template: __webpack_require__(1341),
-            styles: [__webpack_require__(1326)]
+            template: __webpack_require__(1345),
+            styles: [__webpack_require__(1329)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchResultsComponent);
     return SearchResultsComponent;
 }());
-//# sourceMappingURL=E:/telco_project/workflow-ui/src/search-results.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-results.component.js.map
 
 /***/ },
 
-/***/ 1288:
+/***/ 1290:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_single_focus_dispatcher__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__ = __webpack_require__(658);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SubcategoryComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SubcategoryComponent = (function () {
+    function SubcategoryComponent(rateService) {
+        this.rateService = rateService;
+    }
+    SubcategoryComponent.prototype.ngOnInit = function () {
+        console.log('Sub category window loaded');
+        this.category = '';
+        this.subcategory = '';
+        this.tariff = '';
+        this.clearErrors();
+    };
+    SubcategoryComponent.prototype.onSubmit = function (subcategoryForm) {
+        var _this = this;
+        this.clearErrors();
+        if (this.category.length != 0 && this.subcategory.length != 0 && this.tariff.length != 0) {
+            console.log('form submitted : ' + this.category + '  ' + this.subcategory + '  ' + this.tariff);
+            this.rateService.addSubcategory(this.category, this.subcategory, this.tariff, function (errorMsg) {
+                _this.submissionError = errorMsg;
+                setTimeout(function () {
+                    _this.submissionError = null;
+                }, 5000);
+            });
+        }
+        else {
+            if (this.category.length == 0) {
+                this.isCategoryEmpty = true;
+            }
+            if (this.subcategory.length == 0) {
+                this.isSubcategoryEmpty = true;
+            }
+            if (this.tariff.length == 0) {
+                this.isTariffEmpty = true;
+            }
+        }
+    };
+    SubcategoryComponent.prototype.clearErrors = function () {
+        this.isSubcategoryEmpty = false;
+        this.isCategoryEmpty = false;
+        this.isTariffEmpty = false;
+    };
+    SubcategoryComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-subcategory',
+            template: __webpack_require__(1346),
+            styles: [__webpack_require__(1330)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */]) === 'function' && _a) || Object])
+    ], SubcategoryComponent);
+    return SubcategoryComponent;
+    var _a;
+}());
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/subcategory.component.js.map
+
+/***/ },
+
+/***/ 1291:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_single_focus_dispatcher__ = __webpack_require__(1270);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyAttributes; });
 
 
@@ -1515,17 +1599,17 @@ var FormlyAttributes = (function () {
 
 /***/ },
 
-/***/ 1289:
+/***/ 1292:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_event_emitter__ = __webpack_require__(1266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_config__ = __webpack_require__(1256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1255);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_event_emitter__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_config__ = __webpack_require__(1258);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(321);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__ = __webpack_require__(322);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_rxjs_add_operator_map__);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyField; });
 
@@ -1727,14 +1811,14 @@ var FormlyField = (function () {
 
 /***/ },
 
-/***/ 1290:
+/***/ 1293:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_form_builder__ = __webpack_require__(1267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1255);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_form_builder__ = __webpack_require__(1269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyForm; });
 
 
@@ -1866,12 +1950,12 @@ var FormlyForm = (function () {
 
 /***/ },
 
-/***/ 1291:
+/***/ 1294:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formly_config__ = __webpack_require__(1256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__formly_config__ = __webpack_require__(1258);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyValidationMessages; });
 
 
@@ -1907,11 +1991,11 @@ var FormlyValidationMessages = (function () {
 
 /***/ },
 
-/***/ 1292:
+/***/ 1295:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1259);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FieldWrapper; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -1930,13 +2014,13 @@ var FieldWrapper = (function (_super) {
 
 /***/ },
 
-/***/ 1293:
+/***/ 1296:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_core__ = __webpack_require__(1256);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__core_core__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__ = __webpack_require__(1304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__ = __webpack_require__(1307);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__["a"]; });
 
 
@@ -1944,7 +2028,7 @@ var FieldWrapper = (function (_super) {
 
 /***/ },
 
-/***/ 1294:
+/***/ 1297:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1965,7 +2049,7 @@ var TemplateAddons = (function () {
 
 /***/ },
 
-/***/ 1295:
+/***/ 1298:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1986,7 +2070,7 @@ var TemplateDescription = (function () {
 
 /***/ },
 
-/***/ 1296:
+/***/ 1299:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2007,13 +2091,13 @@ var TemplateValidation = (function () {
 
 /***/ },
 
-/***/ 1297:
+/***/ 1300:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldCheckbox; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2044,12 +2128,12 @@ var FormlyFieldCheckbox = (function (_super) {
 
 /***/ },
 
-/***/ 1298:
+/***/ 1301:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldInput; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2083,13 +2167,13 @@ var FormlyFieldInput = (function (_super) {
 
 /***/ },
 
-/***/ 1299:
+/***/ 1302:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldMultiCheckbox; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2124,12 +2208,12 @@ var FormlyFieldMultiCheckbox = (function (_super) {
 
 /***/ },
 
-/***/ 1300:
+/***/ 1303:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldRadio; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2156,12 +2240,12 @@ var FormlyFieldRadio = (function (_super) {
 
 /***/ },
 
-/***/ 1301:
+/***/ 1304:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* unused harmony export SelectOption */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldSelect; });
 var __extends = (this && this.__extends) || function (d, b) {
@@ -2243,12 +2327,12 @@ var FormlyFieldSelect = (function (_super) {
 
 /***/ },
 
-/***/ 1302:
+/***/ 1305:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyFieldTextArea; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2275,16 +2359,16 @@ var FormlyFieldTextArea = (function (_super) {
 
 /***/ },
 
-/***/ 1303:
+/***/ 1306:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrappers_addons__ = __webpack_require__(1306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__run_description__ = __webpack_require__(1295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__run_validation__ = __webpack_require__(1296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__run_addon__ = __webpack_require__(1294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__types_types__ = __webpack_require__(1271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__wrappers_wrappers__ = __webpack_require__(1272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrappers_addons__ = __webpack_require__(1309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__run_description__ = __webpack_require__(1298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__run_validation__ = __webpack_require__(1299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__run_addon__ = __webpack_require__(1297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__types_types__ = __webpack_require__(1273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__wrappers_wrappers__ = __webpack_require__(1274);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FIELD_TYPE_COMPONENTS; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return BOOTSTRAP_FORMLY_CONFIG; });
 
@@ -2356,17 +2440,17 @@ var BOOTSTRAP_FORMLY_CONFIG = {
 
 /***/ },
 
-/***/ 1304:
+/***/ 1307:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__types_types__ = __webpack_require__(1271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__types_types__ = __webpack_require__(1273);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrappers_wrappers__ = __webpack_require__(1272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrappers_wrappers__ = __webpack_require__(1274);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_validation_message__ = __webpack_require__(1270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_validation_message__ = __webpack_require__(1272);
 /* unused harmony reexport FormlyValidationMessage */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__ = __webpack_require__(1305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__ = __webpack_require__(1308);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__["a"]; });
 
 
@@ -2376,16 +2460,16 @@ var BOOTSTRAP_FORMLY_CONFIG = {
 
 /***/ },
 
-/***/ 1305:
+/***/ 1308:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_core__ = __webpack_require__(1254);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_bootstrap_config__ = __webpack_require__(1303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__formly_validation_message__ = __webpack_require__(1270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_core__ = __webpack_require__(1256);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_bootstrap_config__ = __webpack_require__(1306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__formly_validation_message__ = __webpack_require__(1272);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyBootstrapModule; });
 
 
@@ -2413,12 +2497,12 @@ var FormlyBootstrapModule = (function () {
 
 /***/ },
 
-/***/ 1306:
+/***/ 1309:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyWrapperAddons; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2458,12 +2542,12 @@ var FormlyWrapperAddons = (function (_super) {
 
 /***/ },
 
-/***/ 1307:
+/***/ 1310:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyWrapperDescription; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2493,12 +2577,12 @@ var FormlyWrapperDescription = (function (_super) {
 
 /***/ },
 
-/***/ 1308:
+/***/ 1311:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyWrapperFieldset; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2528,12 +2612,12 @@ var FormlyWrapperFieldset = (function (_super) {
 
 /***/ },
 
-/***/ 1309:
+/***/ 1312:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyWrapperLabel; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2563,12 +2647,12 @@ var FormlyWrapperLabel = (function (_super) {
 
 /***/ },
 
-/***/ 1310:
+/***/ 1313:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_core__ = __webpack_require__(1256);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyWrapperValidationMessages; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2605,59 +2689,73 @@ var FormlyWrapperValidationMessages = (function (_super) {
 
 /***/ },
 
-/***/ 1323:
+/***/ 1326:
 /***/ function(module, exports) {
 
 module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
-/***/ 1324:
+/***/ 1327:
 /***/ function(module, exports) {
 
 module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\n.content-div {\n  background-color: #ffffff; }\n\n.rateInputContainer {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .rateInputContainer .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .rateInputContainer .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n\n.rateForm input {\n  background-color: #dde3ec;\n  height: 43px;\n  color: #8290a3;\n  border: 1px solid #dde3ec; }\n  .rateForm input:focus {\n    border: 1px solid #c3ccda; }\n"
 
 /***/ },
 
-/***/ 1325:
+/***/ 1328:
 /***/ function(module, exports) {
 
 module.exports = ""
 
 /***/ },
 
-/***/ 1326:
+/***/ 1329:
 /***/ function(module, exports) {
 
 module.exports = ""
 
 /***/ },
 
-/***/ 1338:
+/***/ 1330:
+/***/ function(module, exports) {
+
+module.exports = ".subcategoryContainer {\n  background-color: #2e6da4;\n  padding: 5px;\n  font-size: 15px;\n  margin: 10px; }\n\n.btn {\n  margin: 5px; }\n"
+
+/***/ },
+
+/***/ 1342:
 /***/ function(module, exports) {
 
 module.exports = "<p>working</p>"
 
 /***/ },
 
-/***/ 1339:
+/***/ 1343:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp row\">\r\n   \r\n    <div class=\"col-sm-12\">\r\n      <div class=\"rateInputContainer\">\r\n       <!--Form Container - START-->\r\n  <div class=\"form-container rateInputContainer\">\r\n    <!--login form START-->\r\n    <div class=\"tbl-header\">\r\n       <h3>Create New Rate Card </h3>\r\n    </div>\r\n  <form class=\"form-horizontal\" action=\"\">\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"OperatorID\">Rate Name:</label>\r\n      <div class=\"col-sm-6\">\r\n        <input type=\"text\" class=\"form-control\" id=\"ratename\" placeholder=\"Enter prefer rate name\" name=\"id\">\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"code\">Rate Description:</label>\r\n      <div class=\"col-sm-6\">          \r\n        <textarea class=\"form-control\" id=\"ratedec\" placeholder=\"Enter Code\" rows=\"3\"></textarea>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"pwd\">Create Date:</label>\r\n      <div class=\"col-sm-6\">          \r\n        <input type=\"datetime\" class=\"form-control\" id=\"cdate\" placeholder=\"Enter Create Date\" name=\"Create Date\">\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"pwd\">Currency:</label>\r\n      <div class=\"col-sm-4\">   \r\n      <select class=\"form-control\" id=\"currencyid\">\r\n      <option>LKR</option>\r\n      <option>USD</option>\r\n      <option>INR</option>\r\n      <option>JPY</option>\r\n      <option>UKP</option>\r\n    </select>\r\n    </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"pwd\">Rate Type:</label>\r\n      <div class=\"col-sm-4\">   \r\n      <select class=\"form-control\" id=\"ratetype\">\r\n      <option>percentage</option>\r\n      <option>quota</option>\r\n      <option>constant</option>\r\n    </select>\r\n    </div>\r\n    </div>\r\n     <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"pwd\">Tariff:</label>\r\n      <div class=\"col-sm-4\">   \r\n      <select class=\"form-control\" id=\"tariffid\">\r\n      <option>cat35</option>\r\n      <option>cat36</option>\r\n      <option>cat38</option>\r\n    </select>\r\n    </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <label class=\"control-label col-sm-2\" for=\"pwd\">Add Sub Category:</label>\r\n      <div class=\"col-sm-4\">          \r\n       <div class=\"form-check\">\r\n    <label class=\"form-check-label\">\r\n      <input type=\"checkbox\" class=\"form-check-input\">\r\n    </label>\r\n  </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"form-group\">        \r\n      <div class=\"col-sm-offset-2 col-sm-10\">\r\n        <button type=\"submit\" class=\"btn btn-default\">Submit</button>\r\n      </div>\r\n    </div>\r\n  </form>\r\n\r\n  </div>\r\n</div>\r\n\r\n<!--form class=\"formly\" role=\"form\" [formGroup]=\"form\" (ngSubmit)=\"submit(user)\">\r\n        <formly-form [model]=\"user\" [fields]=\"userFields\">\r\n            <button type=\"submit\" class=\"btn btn-default\">Button</button>\r\n        </formly-form>\r\n</form>\r\n  </div>\r\n </div>\r\n</div -->"
+module.exports = "<div class=\"animated fadeInUp row\">\n\n    <div class=\"col-sm-12\">\n        <div class=\"rateInputContainer\">\n            <!--Form Container - START-->\n            <div class=\"form-container rateInputContainer\">\n                <!--login form START-->\n                <div class=\"tbl-header\">\n                    <h3>Create New Rate Card </h3>\n                </div>\n                <form class=\"form-horizontal\" action=\"\">\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"OperatorID\">Rate Name:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"text\" class=\"form-control\" id=\"ratename\" placeholder=\"Enter prefer rate name\"\n                                   name=\"id\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"code\">Rate Description:</label>\n                        <div class=\"col-sm-6\">\n                            <textarea class=\"form-control\" id=\"ratedec\" placeholder=\"Enter Code\" rows=\"3\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Create Date:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"datetime\" class=\"form-control\" id=\"cdate\" placeholder=\"Enter Create Date\"\n                                   name=\"Create Date\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Currency:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"currencyid\">\n                                <option>LKR</option>\n                                <option>USD</option>\n                                <option>INR</option>\n                                <option>JPY</option>\n                                <option>UKP</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Rate Type:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"ratetype\">\n                                <option>percentage</option>\n                                <option>quota</option>\n                                <option>constant</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Tariff:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"tariffid\">\n                                <option>cat35</option>\n                                <option>cat36</option>\n                                <option>cat38</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Add Sub Category:</label>\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-check\">\n                                <label class=\"form-check-label\">\n                                    <input type=\"checkbox\" class=\"form-check-input\" (click)=\"(isSubcategory)?isSubcategory=false:isSubcategory=true\" >\n                                </label>\n                            </div>\n                        </div>\n                    </div>\n                    <app-subcategory *ngIf=\"isSubcategory\"></app-subcategory>\n                    <div class=\"form-group\">\n                        <div class=\"col-sm-offset-2 col-sm-10\">\n                            <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n                        </div>\n                    </div>\n                </form>\n\n            </div>\n        </div>\n\n        <!--form class=\"formly\" role=\"form\" [formGroup]=\"form\" (ngSubmit)=\"submit(user)\">\n                <formly-form [model]=\"user\" [fields]=\"userFields\">\n                    <button type=\"submit\" class=\"btn btn-default\">Button</button>\n                </formly-form>\n        </form>\n          </div>\n         </div>\n        </div -->"
 
 /***/ },
 
-/***/ 1340:
+/***/ 1344:
 /***/ function(module, exports) {
 
-module.exports = "<p>\r\n  search-panel works!\r\n</p>\r\n"
+module.exports = "<p>\n  search-panel works!\n</p>\n"
 
 /***/ },
 
-/***/ 1341:
+/***/ 1345:
 /***/ function(module, exports) {
 
-module.exports = "<p>\r\n  search-results works!\r\n</p>\r\n"
+module.exports = "<p>\n  search-results works!\n</p>\n"
+
+/***/ },
+
+/***/ 1346:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"form-container subcategoryContainer\">\n    <!--login form START-->\n    <div class=\"tbl-header\">\n        <h5>Create Sub Category </h5>\n    </div>\n    <form #subcategoryForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(subcategoryForm)\">\n\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Category\"\n                        name=\"category\"\n                        #categoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"category\">\n                    <option>GAME</option>\n                    <option>SONGS</option>\n                    <option>RINGTONE</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isCategoryEmpty\">Category can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Sub Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Sub Category\"\n                        name=\"subcategory\"\n                        #subcategoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"subcategory\">\n                    <option>Action</option>\n                    <option>Racing</option>\n                    <option>Detective</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isSubcategoryEmpty\">Sub Category can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Tariff:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Tariff\"\n                        name=\"tariff\"\n                        #tariffRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"tariff\">\n                    <option>STV 123</option>\n                    <option>ABC 234</option>\n                    <option>IJK 345</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isTariffEmpty\">Tariff can not be empty</span>\n            </div>\n        </div>\n\n        <div class=\"form-group\">\n            <div class=\"col-sm-1\">\n                <button type=\"submit\" class=\"btn btn-success\">Add</button>\n            </div>\n            <div class=\"col-sm-1\">\n                <button type=\"reset\" class=\"btn btn-warning\">Reset</button>\n            </div>\n        </div>\n\n\n    </form>\n\n</div>\n\n<div class=\"error-container animated bounceIn\" *ngIf=\"submissionError\">{{submissionError}}</div>\n\n\n\n\n\n\n\n"
 
 /***/ }
 

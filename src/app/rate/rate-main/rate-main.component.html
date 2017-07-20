@@ -1,89 +1,92 @@
 <div class="animated fadeInUp row">
-   
+
     <div class="col-sm-12">
-      <div class="rateInputContainer">
-       <!--Form Container - START-->
-  <div class="form-container rateInputContainer">
-    <!--login form START-->
-    <div class="tbl-header">
-       <h3>Create New Rate Card </h3>
-    </div>
-  <form class="form-horizontal" action="">
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="OperatorID">Rate Name:</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control" id="ratename" placeholder="Enter prefer rate name" name="id">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="code">Rate Description:</label>
-      <div class="col-sm-6">          
-        <textarea class="form-control" id="ratedec" placeholder="Enter Code" rows="3"></textarea>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Create Date:</label>
-      <div class="col-sm-6">          
-        <input type="datetime" class="form-control" id="cdate" placeholder="Enter Create Date" name="Create Date">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Currency:</label>
-      <div class="col-sm-4">   
-      <select class="form-control" id="currencyid">
-      <option>LKR</option>
-      <option>USD</option>
-      <option>INR</option>
-      <option>JPY</option>
-      <option>UKP</option>
-    </select>
-    </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Rate Type:</label>
-      <div class="col-sm-4">   
-      <select class="form-control" id="ratetype">
-      <option>percentage</option>
-      <option>quota</option>
-      <option>constant</option>
-    </select>
-    </div>
-    </div>
-     <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Tariff:</label>
-      <div class="col-sm-4">   
-      <select class="form-control" id="tariffid">
-      <option>cat35</option>
-      <option>cat36</option>
-      <option>cat38</option>
-    </select>
-    </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="pwd">Add Sub Category:</label>
-      <div class="col-sm-4">          
-       <div class="form-check">
-    <label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
-    </label>
-  </div>
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-default">Submit</button>
-      </div>
-    </div>
-  </form>
+        <div class="rateInputContainer">
+            <!--Form Container - START-->
+            <div class="form-container rateInputContainer">
+                <!--login form START-->
+                <div class="tbl-header">
+                    <h3>Create New Rate Card </h3>
+                </div>
+                <form class="form-horizontal" action="">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="OperatorID">Rate Name:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="ratename" placeholder="Enter prefer rate name"
+                                   name="id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="code">Rate Description:</label>
+                        <div class="col-sm-6">
+                            <textarea class="form-control" id="ratedec" placeholder="Enter Code" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Create Date:</label>
+                        <div class="col-sm-6">
+                            <input type="datetime" class="form-control" id="cdate" placeholder="Enter Create Date"
+                                   name="Create Date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Currency:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="currencyid">
+                                <option>LKR</option>
+                                <option>USD</option>
+                                <option>INR</option>
+                                <option>JPY</option>
+                                <option>UKP</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Rate Type:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="ratetype">
+                                <option>percentage</option>
+                                <option>quota</option>
+                                <option>constant</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Tariff:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="tariffid">
+                                <option>cat35</option>
+                                <option>cat36</option>
+                                <option>cat38</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="pwd">Add Sub Category:</label>
+                        <div class="col-sm-4">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" (click)="(isSubcategory)?isSubcategory=false:isSubcategory=true" >
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <app-subcategory *ngIf="isSubcategory"></app-subcategory>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                </form>
 
-  </div>
-</div>
+            </div>
+        </div>
 
-<!--form class="formly" role="form" [formGroup]="form" (ngSubmit)="submit(user)">
-        <formly-form [model]="user" [fields]="userFields">
-            <button type="submit" class="btn btn-default">Button</button>
-        </formly-form>
-</form>
-  </div>
- </div>
-</div -->
+        <!--form class="formly" role="form" [formGroup]="form" (ngSubmit)="submit(user)">
+                <formly-form [model]="user" [fields]="userFields">
+                    <button type="submit" class="btn btn-default">Button</button>
+                </formly-form>
+        </form>
+          </div>
+         </div>
+        </div -->

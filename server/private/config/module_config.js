@@ -69,6 +69,12 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./rate"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./common"
             },
             "options": getOptions({}, true)

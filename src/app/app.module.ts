@@ -17,6 +17,7 @@ import {ChartsModule} from "ng2-charts";
 import {DataProvidersModule} from "./data-providers/data-providers.module";
 import {ToastyModule} from "ng2-toasty";
 import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.service";
+import {RateRemoteDataService} from "./data-providers/rate_remote-data.service";
 import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data.service";
 import {ApprovalHelperService} from "./approvals/approval-helper.service";
 import {SharedModule} from "./shared/shared.module";
@@ -53,6 +54,7 @@ import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data
         ApprovalRemoteDataService,
         DashboardRemoteDataService,
         ReportingRemoteDataService,
+        RateRemoteDataService,
         ApprovalHelperService,
         {
             provide : 'API_CONTEXT',

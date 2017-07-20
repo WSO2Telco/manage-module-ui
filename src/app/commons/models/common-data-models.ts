@@ -10,7 +10,7 @@ export class TableDataType {
     dataType: 'APPLICATION' | 'SUBSCRIPTION';
 
 
-    constructor(dataCategory,dataType) {
+    constructor(dataCategory, dataType) {
         this.dataCategory = dataCategory;
         this.dataType = dataType;
     }
@@ -22,10 +22,16 @@ export class User {
     password: string;
 }
 
-export class LoginResponse{
-    userName:string;
-    isLoggedIn:boolean;
-    roles : string[];
+export class LoginResponse {
+    userName: string;
+    isLoggedIn: boolean;
+    roles: string[];
+}
+
+export class SubCategory {
+    category: string;
+    subcategory: string;
+    tariff: string;
 }
 
 
