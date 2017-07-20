@@ -277,7 +277,11 @@ var ApprovalRemoteDataService = (function () {
     return ApprovalRemoteDataService;
     var _a, _b, _c, _d;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-remote-data.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-remote-data.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -352,7 +356,11 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/authentication.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/authentication.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -396,7 +404,11 @@ var AppCommonService = (function () {
     ], AppCommonService);
     return AppCommonService;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app-common.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app-common.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -488,7 +500,11 @@ var ApplicationTaskFilter = (function () {
     }
     return ApplicationTaskFilter;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/application-data-models.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-models.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -551,7 +567,11 @@ var LoginRemoteDataService = (function () {
     return LoginRemoteDataService;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/login_remote-data.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login_remote-data.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -704,7 +724,11 @@ var DashboardRemoteDataService = (function () {
     return DashboardRemoteDataService;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-remote-data.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-remote-data.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -771,7 +795,11 @@ var LoginGuard = (function () {
     return LoginGuard;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.guard.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.guard.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -889,7 +917,11 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/main.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/main.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1050,7 +1082,11 @@ var ReportingRemoteDataService = (function () {
     return ReportingRemoteDataService;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/reporting-remote-data.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/reporting-remote-data.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1110,7 +1146,11 @@ var SharedModule = (function () {
     ], SharedModule);
     return SharedModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/shared.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/shared.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1220,11 +1260,53 @@ var ApprovalHelperService = (function () {
     return ApprovalHelperService;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-helper.service.js.map
 
 /***/ },
 
 /***/ 656:
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-helper.service.js.map
+
+/***/ },
+
+/***/ 654:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* unused harmony export MenuItem */
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return User; });
+/* unused harmony export LoginResponse */
+var MenuItem = (function () {
+    function MenuItem() {
+    }
+    return MenuItem;
+}());
+var TableDataType = (function () {
+    function TableDataType(dataCategory, dataType) {
+        this.dataCategory = dataCategory;
+        this.dataType = dataType;
+    }
+    return TableDataType;
+}());
+var User = (function () {
+    function User() {
+    }
+    return User;
+}());
+var LoginResponse = (function () {
+    function LoginResponse() {
+    }
+    return LoginResponse;
+}());
+//# sourceMappingURL=E:/Git/manage-module-ui/src/common-data-models.js.map
+
+/***/ },
+
+/***/ 655:
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1282,7 +1364,11 @@ var Application = (function () {
     }
     return Application;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/reporing-data-models.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/reporing-data-models.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1315,6 +1401,7 @@ var HistoryBarGraphData = (function () {
     }
     return HistoryBarGraphData;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-data-models.js.map
 
 /***/ },
@@ -1374,6 +1461,9 @@ var RateService = (function () {
     var _a, _b;
 }());
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-data-models.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1422,7 +1512,11 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1535,7 +1629,11 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1584,7 +1682,11 @@ var routes = [
     }
 ];
 var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.routes.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/app.routes.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1632,7 +1734,11 @@ var CommonsModule = (function () {
     ], CommonsModule);
     return CommonsModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/commons.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/commons.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1819,7 +1925,11 @@ var ApplicationDataTableComponent = (function () {
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/application-data-table.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-table.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1874,7 +1984,11 @@ var BreadcrumbsComponent = (function () {
     return BreadcrumbsComponent;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/breadcrumbs.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/breadcrumbs.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1918,7 +2032,11 @@ var HamburgerMenuComponent = (function () {
     return HamburgerMenuComponent;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/hamburger-menu.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/hamburger-menu.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1953,7 +2071,11 @@ var HeaderComponent = (function () {
     ], HeaderComponent);
     return HeaderComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/header.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/header.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2015,7 +2137,11 @@ var MainMenuComponent = (function () {
     return MainMenuComponent;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/main-menu.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/main-menu.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2062,7 +2188,11 @@ var ResponsiveTableComponent = (function () {
     ], ResponsiveTableComponent);
     return ResponsiveTableComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/responsive-table.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/responsive-table.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2113,7 +2243,11 @@ var UserAvatarComponent = (function () {
     return UserAvatarComponent;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/user-avatar.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/user-avatar.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2154,7 +2288,11 @@ var DataProvidersModule = (function () {
     ], DataProvidersModule);
     return DataProvidersModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/data-providers.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/data-providers.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2170,7 +2308,11 @@ var DataProvidersModule = (function () {
 var environment = {
     production: false
 };
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/environment.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/environment.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2226,7 +2368,11 @@ var environment = {
 
 
 
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/polyfills.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/polyfills.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2286,7 +2432,11 @@ var MessageService = (function () {
     return MessageService;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/message.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/message.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2610,7 +2760,11 @@ module.exports = "<div>\n    <div>\n        <span class=\"url-part\" *ngFor=\"le
 /***/ 977:
 /***/ function(module, exports) {
 
+<<<<<<< HEAD
 module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\" routerLink=\"home\">\n        <span class=\"logo\"><img src=\"images/wso2telco_logo.png\" ></span>\n        <span class=\"name\"><span class=\"man\">WORKFLOW MANAGER</span></span>\n      </a>\n      <app-hamburger-menu></app-hamburger-menu>\n    </div>\n\n    <div class=\"navbar-right text-right\">\n      <app-user-avatar></app-user-avatar>\n    </div>\n  </div>\n</nav>\n\n\n<!--<nav>\n  <button (click)=\"onLogoutClick()\">logout</button>\n</nav>-->\n"
+=======
+module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" routerLink=\"home\">\r\n        <span class=\"logo\"><img src=\"images/wso2telco_logo_white.png\" ></span>\r\n        <span class=\"name\"><span class=\"man\">MANAGE APPLICATION 2</span></span>\r\n      </a>\r\n      <app-hamburger-menu></app-hamburger-menu>\r\n    </div>\r\n\r\n    <div class=\"navbar-right text-right\">\r\n      <app-user-avatar></app-user-avatar>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--<nav>\r\n  <button (click)=\"onLogoutClick()\">logout</button>\r\n</nav>-->\r\n"
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 

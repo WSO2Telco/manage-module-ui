@@ -47,7 +47,11 @@ var HistoryModule = (function () {
     ], HistoryModule);
     return HistoryModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -109,7 +113,11 @@ var HistoryMainComponent = (function () {
     return HistoryMainComponent;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-main.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history-main.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -213,7 +221,11 @@ var HistoryFilterComponent = (function () {
     return HistoryFilterComponent;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-filter.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history-filter.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -231,7 +243,11 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__["a" /* HistoryMainComponent */]
     }];
 var HistoryRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.routes.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history.routes.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -266,7 +282,11 @@ var SearchPanelComponent = (function () {
     ], SearchPanelComponent);
     return SearchPanelComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-panel.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/search-panel.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -301,7 +321,11 @@ var SearchResultsComponent = (function () {
     ], SearchResultsComponent);
     return SearchResultsComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-results.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/search-results.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 

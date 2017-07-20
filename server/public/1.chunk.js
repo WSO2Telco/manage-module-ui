@@ -59,7 +59,11 @@ var DashboardModule = (function () {
     ], DashboardModule);
     return DashboardModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -144,7 +148,11 @@ var HomeComponent = (function () {
     return HomeComponent;
     var _a, _b, _c, _d;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/home.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/home.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -199,7 +207,11 @@ var ApprovalCountComponent = (function () {
     ], ApprovalCountComponent);
     return ApprovalCountComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-count.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-count.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -296,7 +308,11 @@ var ApprovalHistoryGraphComponent = (function () {
     return ApprovalHistoryGraphComponent;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-history-graph.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-history-graph.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -349,7 +365,11 @@ var ApprovalSummeryComponent = (function () {
     return ApprovalSummeryComponent;
     var _a, _b;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-summery.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-summery.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -396,7 +416,11 @@ var DashboardHelperService = (function () {
     return DashboardHelperService;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-helper.service.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-helper.service.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -416,7 +440,11 @@ var routes = [
     }
 ];
 var DashboardRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard.routes.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.routes.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 

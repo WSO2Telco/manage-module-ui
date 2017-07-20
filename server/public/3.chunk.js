@@ -45,7 +45,11 @@ var ApprovalsModule = (function () {
     ], ApprovalsModule);
     return ApprovalsModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approvals.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approvals.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -124,7 +128,11 @@ var ApplicationsComponent = (function () {
     return ApplicationsComponent;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/applications.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/applications.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -159,7 +167,11 @@ var ApprovalMainComponent = (function () {
     ], ApprovalMainComponent);
     return ApprovalMainComponent;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-main.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-main.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -238,7 +250,11 @@ var SubscriptionsComponent = (function () {
     return SubscriptionsComponent;
     var _a, _b, _c;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/subscriptions.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/subscriptions.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -270,7 +286,11 @@ var routes = [
     }
 ];
 var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval.routes.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/approval.routes.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 

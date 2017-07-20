@@ -41,7 +41,11 @@ var LoginModule = (function () {
     ], LoginModule);
     return LoginModule;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/login.module.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login.module.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -93,7 +97,11 @@ var UserLoginComponent = (function () {
     return UserLoginComponent;
     var _a;
 }());
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/user-login.component.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/user-login.component.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -113,7 +121,11 @@ var routes = [
     }
 ];
 var LoginRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
+<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/login.routes.js.map
+=======
+//# sourceMappingURL=E:/Git/manage-module-ui/src/login.routes.js.map
+>>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
