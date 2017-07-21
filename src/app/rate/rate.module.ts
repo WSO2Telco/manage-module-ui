@@ -2,7 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SearchPanelComponent} from './search-panel/search-panel.component';
 import {SearchResultsComponent} from './search-results/search-results.component';
-import {SubcategoryComponent} from './subcategory/subcategory.component';
+import {SubcategoryComponent} from './rate-subcategory/subcategory.component';
+import {NewtypeComponent} from './rate-newtype/newtype.component'
 import {RateMainComponent} from './rate-main/rate-main.component';
 import {RateRoutes} from './rate.routes';
 import {RateFilterComponent} from './rate-filter/rate-filter.component';
@@ -20,7 +21,13 @@ import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
         FormlyModule.forRoot(),
         FormlyBootstrapModule,
     ],
-    declarations: [SearchPanelComponent, SearchResultsComponent, RateMainComponent, RateFilterComponent, SubcategoryComponent]
+    declarations: [
+        SearchPanelComponent,
+        SearchResultsComponent,
+        RateMainComponent,
+        RateFilterComponent,
+        SubcategoryComponent,
+        NewtypeComponent]
 })
 export class RateModule {
 }

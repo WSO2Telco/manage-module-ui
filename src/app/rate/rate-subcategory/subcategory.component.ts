@@ -11,6 +11,7 @@ export class SubcategoryComponent implements OnInit {
     category: string;
     subcategory: string;
     tariff: string;
+    type: string;
 
     submissionError: string;
 
@@ -19,20 +20,29 @@ export class SubcategoryComponent implements OnInit {
     isTariffEmpty: boolean;
 
     isSubmitted: boolean;
+    showNewCategory: boolean;
+    showNewSubCategory: boolean;
+    showNewTariff: boolean;
 
     constructor(private rateService: RateService) {
     }
 
     ngOnInit() {
-        console.log('Sub category window loaded');
+        console.log('Sub name window loaded');
         this.category = '';
         this.subcategory = '';
         this.tariff = '';
+        this.type = 'Sub Category';
+        this.showNewCategory = false;
+        this.showNewSubCategory = false;
+        this.showNewTariff = false;
         this.clearErrors();
     }
 
 
     onSubmit(subcategoryForm) {
+
+        console.log("on submit" + this.category.length+ ":" +this.subcategory.length+":"+this.tariff.length);
         this.clearErrors();
 
         if (this.category.length != 0 && this.subcategory.length != 0 && this.tariff.length != 0) {
@@ -44,6 +54,7 @@ export class SubcategoryComponent implements OnInit {
                 }, 5000);
             });
         } else {
+            console.log("invalid fields");
             if (this.category.length == 0) {
                 this.isCategoryEmpty = true;
             }

@@ -277,11 +277,7 @@ var ApprovalRemoteDataService = (function () {
     return ApprovalRemoteDataService;
     var _a, _b, _c, _d;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-remote-data.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-remote-data.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -320,7 +316,7 @@ var AuthenticationService = (function () {
     }
     AuthenticationService.prototype.doLogin = function (userName, password, callback) {
         var _this = this;
-        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["c" /* User */]();
+        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["d" /* User */]();
         user.userName = userName;
         user.password = password;
         console.log(user.userName);
@@ -356,11 +352,7 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/authentication.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/authentication.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -404,11 +396,7 @@ var AppCommonService = (function () {
     ], AppCommonService);
     return AppCommonService;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app-common.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/app-common.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -500,11 +488,7 @@ var ApplicationTaskFilter = (function () {
     }
     return ApplicationTaskFilter;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/application-data-models.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-models.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -567,11 +551,7 @@ var LoginRemoteDataService = (function () {
     return LoginRemoteDataService;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/login_remote-data.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/login_remote-data.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -581,9 +561,11 @@ var LoginRemoteDataService = (function () {
 "use strict";
 /* unused harmony export MenuItem */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return User; });
 /* unused harmony export LoginResponse */
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return SubCategory; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return NewType; });
+/* unused harmony export ServerResponse */
 var MenuItem = (function () {
     function MenuItem() {
     }
@@ -611,6 +593,16 @@ var SubCategory = (function () {
     }
     return SubCategory;
 }());
+var NewType = (function () {
+    function NewType() {
+    }
+    return NewType;
+}());
+var ServerResponse = (function () {
+    function ServerResponse() {
+    }
+    return ServerResponse;
+}());
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/common-data-models.js.map
 
 /***/ },
@@ -623,7 +615,7 @@ var SubCategory = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__ = __webpack_require__(657);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__ = __webpack_require__(658);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_remote_data_service__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_slim_loading_bar__ = __webpack_require__(138);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardRemoteDataService; });
@@ -724,11 +716,7 @@ var DashboardRemoteDataService = (function () {
     return DashboardRemoteDataService;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-remote-data.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-remote-data.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -795,11 +783,7 @@ var LoginGuard = (function () {
     return LoginGuard;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.guard.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/app.guard.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -832,17 +816,28 @@ var RateRemoteDataService = (function () {
         this.options = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* RequestOptions */]({ headers: this.headers });
         this.apiEndpoints = {
             addsubcategory: this.apiContext + '/rate/addsubcategory',
-            logout: this.apiContext + '/authentication/logout',
+            addnewtype: this.apiContext + '/rate/addnewtype',
         };
     }
     /**
-     *
+     * To add new sub category tariff relationship
      * @param data
-     * @returns {Observable<SubCategory>}
+     * @returns {Observable<ServerResponse>}
      */
     RateRemoteDataService.prototype.addSubcategory = function (data) {
         console.log('hit in the rate remote data service');
         return this.http.post(this.apiEndpoints['addsubcategory'], data, this.options)
+            .map(function (response) { return response.json(); })
+            .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs__["Observable"].throw(error.json().message); });
+    };
+    /**
+     * To add new category, subcategory or a tariff
+     * @param data
+     * @returns {Observable<ServerResponse>}
+     */
+    RateRemoteDataService.prototype.addNewType = function (data) {
+        console.log('hit in the rate remote data service');
+        return this.http.post(this.apiEndpoints['addnewtype'], data, this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs__["Observable"].throw(error.json().message); });
     };
@@ -917,11 +912,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/main.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/main.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1082,11 +1073,7 @@ var ReportingRemoteDataService = (function () {
     return ReportingRemoteDataService;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/reporting-remote-data.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/reporting-remote-data.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1146,11 +1133,7 @@ var SharedModule = (function () {
     ], SharedModule);
     return SharedModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/shared.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/shared.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1260,53 +1243,11 @@ var ApprovalHelperService = (function () {
     return ApprovalHelperService;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-helper.service.js.map
 
 /***/ },
 
 /***/ 656:
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-helper.service.js.map
-
-/***/ },
-
-/***/ 654:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* unused harmony export MenuItem */
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return User; });
-/* unused harmony export LoginResponse */
-var MenuItem = (function () {
-    function MenuItem() {
-    }
-    return MenuItem;
-}());
-var TableDataType = (function () {
-    function TableDataType(dataCategory, dataType) {
-        this.dataCategory = dataCategory;
-        this.dataType = dataType;
-    }
-    return TableDataType;
-}());
-var User = (function () {
-    function User() {
-    }
-    return User;
-}());
-var LoginResponse = (function () {
-    function LoginResponse() {
-    }
-    return LoginResponse;
-}());
-//# sourceMappingURL=E:/Git/manage-module-ui/src/common-data-models.js.map
-
-/***/ },
-
-/***/ 655:
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1364,49 +1305,11 @@ var Application = (function () {
     }
     return Application;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/reporing-data-models.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/reporing-data-models.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
 /***/ 657:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardData; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return DashboardDataRequestParam; });
-/* unused harmony export HistoryBarGraphData */
-var DashboardData = (function () {
-    function DashboardData() {
-        this.appCreationsForUser = 0;
-        this.appCreationsForGroup = 0;
-        this.totalAppCreations = 0;
-        this.subCreationsForUser = 0;
-        this.subCreationsForGroup = 0;
-        this.totalSubCreations = 0;
-    }
-    return DashboardData;
-}());
-var DashboardDataRequestParam = (function () {
-    function DashboardDataRequestParam() {
-    }
-    return DashboardDataRequestParam;
-}());
-var HistoryBarGraphData = (function () {
-    function HistoryBarGraphData() {
-        this.data = [];
-    }
-    return HistoryBarGraphData;
-}());
-<<<<<<< HEAD
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-data-models.js.map
-
-/***/ },
-
-/***/ 658:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1436,19 +1339,46 @@ var RateService = (function () {
         this._router = _router;
         this._remoteService = _remoteService;
         this.loginUserInfo = new __WEBPACK_IMPORTED_MODULE_2_rxjs__["BehaviorSubject"](null);
-        var _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
-        this.loginUserInfo.next(_loginUserInfo);
     }
+    /**
+     * This method call the remode data service to create a new category, subcategory, tariff relationship
+     * @param category
+     * @param subcategory
+     * @param tariff
+     * @param callback
+     */
     RateService.prototype.addSubcategory = function (category, subcategory, tariff, callback) {
-        console.log('hit in the rate service');
+        console.log('add sub category service called');
         var model = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["b" /* SubCategory */]();
         model.category = category;
         model.subcategory = subcategory;
         model.tariff = tariff;
         console.log(model.category);
         this._remoteService.addSubcategory(model)
-            .subscribe(function (loginInfo) {
+            .subscribe(function (response) {
             console.log('good response');
+        }, function (error) {
+            callback(error);
+        });
+    };
+    /**
+     * This method call the remote sevice to create a new category, subcategory or a tariff
+     * @param type
+     * @param name
+     * @param code
+     * @param description
+     * @param callback
+     */
+    RateService.prototype.addNewType = function (type, name, code, description, callback) {
+        console.log('add new ' + type + ' service called');
+        var model = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["c" /* NewType */]();
+        model.type = type;
+        model.name = name;
+        model.code = code;
+        model.description = description;
+        this._remoteService.addNewType(model)
+            .subscribe(function (response) {
+            console.log('good response' + response.messsage);
         }, function (error) {
             callback(error);
         });
@@ -1461,9 +1391,39 @@ var RateService = (function () {
     var _a, _b;
 }());
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-data-models.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
+
+/***/ },
+
+/***/ 658:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return DashboardData; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return DashboardDataRequestParam; });
+/* unused harmony export HistoryBarGraphData */
+var DashboardData = (function () {
+    function DashboardData() {
+        this.appCreationsForUser = 0;
+        this.appCreationsForGroup = 0;
+        this.totalAppCreations = 0;
+        this.subCreationsForUser = 0;
+        this.subCreationsForGroup = 0;
+        this.totalSubCreations = 0;
+    }
+    return DashboardData;
+}());
+var DashboardDataRequestParam = (function () {
+    function DashboardDataRequestParam() {
+    }
+    return DashboardDataRequestParam;
+}());
+var HistoryBarGraphData = (function () {
+    function HistoryBarGraphData() {
+        this.data = [];
+    }
+    return HistoryBarGraphData;
+}());
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-data-models.js.map
 
 /***/ },
 
@@ -1512,11 +1472,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/app.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1608,7 +1564,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["c" /* DropdownModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["d" /* TooltipModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_16_ng2_toasty__["a" /* ToastyModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["e" /* TypeaheadModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_4_ng2_bootstrap__["e" /* TypeaheadModule */].forRoot()
             ],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_8__app_guard__["a" /* AppGuard */],
@@ -1629,11 +1585,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/app.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1682,11 +1634,7 @@ var routes = [
     }
 ];
 var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forRoot(routes, { useHash: true });
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/app.routes.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/app.routes.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1697,7 +1645,7 @@ var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Route
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_authentication_service__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_rate_service__ = __webpack_require__(658);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_rate_service__ = __webpack_require__(657);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__data_providers_login_remote_data_service__ = __webpack_require__(263);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_app_common_service__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_message_service__ = __webpack_require__(89);
@@ -1734,11 +1682,7 @@ var CommonsModule = (function () {
     ], CommonsModule);
     return CommonsModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/commons.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/commons.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1925,11 +1869,7 @@ var ApplicationDataTableComponent = (function () {
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/application-data-table.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/application-data-table.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -1984,11 +1924,7 @@ var BreadcrumbsComponent = (function () {
     return BreadcrumbsComponent;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/breadcrumbs.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/breadcrumbs.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2032,11 +1968,7 @@ var HamburgerMenuComponent = (function () {
     return HamburgerMenuComponent;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/hamburger-menu.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/hamburger-menu.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2071,11 +2003,7 @@ var HeaderComponent = (function () {
     ], HeaderComponent);
     return HeaderComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/header.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/header.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2137,11 +2065,7 @@ var MainMenuComponent = (function () {
     return MainMenuComponent;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/main-menu.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/main-menu.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2188,11 +2112,7 @@ var ResponsiveTableComponent = (function () {
     ], ResponsiveTableComponent);
     return ResponsiveTableComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/responsive-table.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/responsive-table.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2243,11 +2163,7 @@ var UserAvatarComponent = (function () {
     return UserAvatarComponent;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/user-avatar.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/user-avatar.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2288,11 +2204,7 @@ var DataProvidersModule = (function () {
     ], DataProvidersModule);
     return DataProvidersModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/data-providers.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/data-providers.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2308,11 +2220,7 @@ var DataProvidersModule = (function () {
 var environment = {
     production: false
 };
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/environment.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/environment.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2368,11 +2276,7 @@ var environment = {
 
 
 
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/polyfills.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/polyfills.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2432,11 +2336,7 @@ var MessageService = (function () {
     return MessageService;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/message.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/message.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -2760,11 +2660,7 @@ module.exports = "<div>\n    <div>\n        <span class=\"url-part\" *ngFor=\"le
 /***/ 977:
 /***/ function(module, exports) {
 
-<<<<<<< HEAD
-module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\" routerLink=\"home\">\n        <span class=\"logo\"><img src=\"images/wso2telco_logo.png\" ></span>\n        <span class=\"name\"><span class=\"man\">WORKFLOW MANAGER</span></span>\n      </a>\n      <app-hamburger-menu></app-hamburger-menu>\n    </div>\n\n    <div class=\"navbar-right text-right\">\n      <app-user-avatar></app-user-avatar>\n    </div>\n  </div>\n</nav>\n\n\n<!--<nav>\n  <button (click)=\"onLogoutClick()\">logout</button>\n</nav>-->\n"
-=======
-module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\r\n  <div class=\"container-fluid\">\r\n    <div class=\"navbar-header\">\r\n      <a class=\"navbar-brand\" routerLink=\"home\">\r\n        <span class=\"logo\"><img src=\"images/wso2telco_logo_white.png\" ></span>\r\n        <span class=\"name\"><span class=\"man\">MANAGE APPLICATION 2</span></span>\r\n      </a>\r\n      <app-hamburger-menu></app-hamburger-menu>\r\n    </div>\r\n\r\n    <div class=\"navbar-right text-right\">\r\n      <app-user-avatar></app-user-avatar>\r\n    </div>\r\n  </div>\r\n</nav>\r\n\r\n\r\n<!--<nav>\r\n  <button (click)=\"onLogoutClick()\">logout</button>\r\n</nav>-->\r\n"
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
+module.exports = "<nav class=\"row navbar navbar-default animated fadeInDown navbar-fixed-top\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\" routerLink=\"home\">\n        <span class=\"logo\"><img src=\"images/wso2telco_logo_white.png\" ></span>\n        <span class=\"name\"><span class=\"man\">MANAGE APPLICATION</span></span>\n      </a>\n      <app-hamburger-menu></app-hamburger-menu>\n    </div>\n\n    <div class=\"navbar-right text-right\">\n      <app-user-avatar></app-user-avatar>\n    </div>\n  </div>\n</nav>\n\n\n<!--<nav>\n  <button (click)=\"onLogoutClick()\">logout</button>\n</nav>-->\n"
 
 /***/ },
 

@@ -59,11 +59,7 @@ var DashboardModule = (function () {
     ], DashboardModule);
     return DashboardModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -140,19 +136,15 @@ var HomeComponent = (function () {
     HomeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-home',
-            template: __webpack_require__(1336),
-            styles: [__webpack_require__(1320)]
+            template: __webpack_require__(1338),
+            styles: [__webpack_require__(1321)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__approvals_approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_5__approvals_approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__commons_services_message_service__["a" /* MessageService */]) === 'function' && _d) || Object])
     ], HomeComponent);
     return HomeComponent;
     var _a, _b, _c, _d;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/home.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/home.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -200,18 +192,14 @@ var ApprovalCountComponent = (function () {
     ApprovalCountComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-approval-count',
-            template: __webpack_require__(1333),
-            styles: [__webpack_require__(1317)]
+            template: __webpack_require__(1335),
+            styles: [__webpack_require__(1318)]
         }), 
         __metadata('design:paramtypes', [])
     ], ApprovalCountComponent);
     return ApprovalCountComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-count.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-count.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -300,19 +288,15 @@ var ApprovalHistoryGraphComponent = (function () {
     ApprovalHistoryGraphComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-approval-history-graph',
-            template: __webpack_require__(1334),
-            styles: [__webpack_require__(1318)],
+            template: __webpack_require__(1336),
+            styles: [__webpack_require__(1319)],
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_dashboard_remote_data_service__["a" /* DashboardRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__commons_services_message_service__["a" /* MessageService */]) === 'function' && _b) || Object])
     ], ApprovalHistoryGraphComponent);
     return ApprovalHistoryGraphComponent;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-history-graph.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-history-graph.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -321,7 +305,7 @@ var ApprovalHistoryGraphComponent = (function () {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_dashboard_data_models__ = __webpack_require__(657);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__commons_models_dashboard_data_models__ = __webpack_require__(658);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__(75);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalSummeryComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -357,19 +341,15 @@ var ApprovalSummeryComponent = (function () {
     ApprovalSummeryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-approval-summery',
-            template: __webpack_require__(1335),
-            styles: [__webpack_require__(1319)],
+            template: __webpack_require__(1337),
+            styles: [__webpack_require__(1320)],
         }), 
         __metadata('design:paramtypes', [(typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === 'function' && _b) || Object])
     ], ApprovalSummeryComponent);
     return ApprovalSummeryComponent;
     var _a, _b;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-summery.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-summery.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -416,11 +396,7 @@ var DashboardHelperService = (function () {
     return DashboardHelperService;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard-helper.service.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard-helper.service.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -440,64 +416,60 @@ var routes = [
     }
 ];
 var DashboardRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/dashboard.routes.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/dashboard.routes.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
-
-/***/ },
-
-/***/ 1317:
-/***/ function(module, exports) {
-
-module.exports = ".approval-count {\n  height: 170px;\n  position: relative;\n  overflow: hidden; }\n  .approval-count .count {\n    position: absolute;\n    right: 10px;\n    top: 15px;\n    font-size: 6em;\n    color: white; }\n  .approval-count .name {\n    position: absolute;\n    right: 10px;\n    bottom: 30px;\n    color: #e9e9e9;\n    font-size: 1.2em;\n    font-weight: 900; }\n  .approval-count .icon {\n    color: rgba(255, 255, 255, 0.06);\n    position: absolute;\n    bottom: 0px;\n    top: 40%;\n    left: 0px;\n    font-size: 9em; }\n  .approval-count .myCount {\n    position: absolute;\n    color: #e9e9e9;\n    top: 37px;\n    left: 15px; }\n  .approval-count .groupCount {\n    top: 12px;\n    left: 15px;\n    position: absolute;\n    color: #e9e9e9; }\n  .approval-count .sub {\n    font-weight: 900; }\n"
 
 /***/ },
 
 /***/ 1318:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block;\n  min-height: 100px; }\n"
+module.exports = ".approval-count {\n  height: 170px;\n  position: relative;\n  overflow: hidden; }\n  .approval-count .count {\n    position: absolute;\n    right: 10px;\n    top: 15px;\n    font-size: 6em;\n    color: white; }\n  .approval-count .name {\n    position: absolute;\n    right: 10px;\n    bottom: 30px;\n    color: #e9e9e9;\n    font-size: 1.2em;\n    font-weight: 900; }\n  .approval-count .icon {\n    color: rgba(255, 255, 255, 0.06);\n    position: absolute;\n    bottom: 0px;\n    top: 40%;\n    left: 0px;\n    font-size: 9em; }\n  .approval-count .myCount {\n    position: absolute;\n    color: #e9e9e9;\n    top: 37px;\n    left: 15px; }\n  .approval-count .groupCount {\n    top: 12px;\n    left: 15px;\n    position: absolute;\n    color: #e9e9e9; }\n  .approval-count .sub {\n    font-weight: 900; }\n"
 
 /***/ },
 
 /***/ 1319:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block; }\n  @media screen and (max-width: 768px) {\n    :host {\n      padding: 0px 15px;\n      display: block; } }\n\napp-approval-count {\n  margin-top: 20px;\n  margin-bottom: 10px;\n  cursor: pointer; }\n\n:host /deep/ app-approval-count.apps .approval-count {\n  background-color: #3598dc;\n  transition: all 0.2s ease-in; }\n  :host /deep/ app-approval-count.apps .approval-count:hover {\n    background-color: #2f87c4; }\n  :host /deep/ app-approval-count.apps .approval-count .breakdown {\n    color: #a7d8fa; }\n\n:host /deep/ app-approval-count.subs .approval-count {\n  background-color: #8E44AD;\n  transition: all 0.2s ease-in; }\n  :host /deep/ app-approval-count.subs .approval-count:hover {\n    background-color: #703588; }\n  :host /deep/ app-approval-count.subs .approval-count .breakdown {\n    color: #fb9db1; }\n"
+module.exports = ":host {\n  display: block;\n  min-height: 100px; }\n"
 
 /***/ },
 
 /***/ 1320:
 /***/ function(module, exports) {
 
+module.exports = ":host {\n  display: block; }\n  @media screen and (max-width: 768px) {\n    :host {\n      padding: 0px 15px;\n      display: block; } }\n\napp-approval-count {\n  margin-top: 20px;\n  margin-bottom: 10px;\n  cursor: pointer; }\n\n:host /deep/ app-approval-count.apps .approval-count {\n  background-color: #3598dc;\n  transition: all 0.2s ease-in; }\n  :host /deep/ app-approval-count.apps .approval-count:hover {\n    background-color: #2f87c4; }\n  :host /deep/ app-approval-count.apps .approval-count .breakdown {\n    color: #a7d8fa; }\n\n:host /deep/ app-approval-count.subs .approval-count {\n  background-color: #8E44AD;\n  transition: all 0.2s ease-in; }\n  :host /deep/ app-approval-count.subs .approval-count:hover {\n    background-color: #703588; }\n  :host /deep/ app-approval-count.subs .approval-count .breakdown {\n    color: #fb9db1; }\n"
+
+/***/ },
+
+/***/ 1321:
+/***/ function(module, exports) {
+
 module.exports = "app-approval-history-graph {\n  margin-top: 20px;\n  margin-bottom: 20px; }\n\napplication-data-table {\n  margin-top: 20px;\n  margin-bottom: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
-
-/***/ },
-
-/***/ 1333:
-/***/ function(module, exports) {
-
-module.exports = "<div class=\"approval-count\" >\n  <span class=\"breakdown myCount\">Assigned to Me ddd: <span class=\"sub\">{{myCount}}</span></span>\n  <span class=\"breakdown groupCount\">Assigned to Group : <span class=\"sub\">{{groupCount}}</span></span>\n  <span class=\"count\">{{totalCount}}</span>\n  <span class=\"name\">{{name}}</span>\n  <span class=\"icon glyphicon material-icons\">{{iconClass}}</span>\n</div>\n"
-
-/***/ },
-
-/***/ 1334:
-/***/ function(module, exports) {
-
-module.exports = "<div class=\"row\">\n    <div class=\"col-sm-6\">\n        <canvas baseChart\n                [datasets]=\"appCreationHistoryDataSet\"\n                [labels]=\"appCreationHistoryLabels\"\n                [options]=\"barChartOptionsApplications\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"chartType\"\n                [colors]=\"chartColors\"></canvas>\n    </div>\n    <div class=\"col-sm-6\">\n        <canvas baseChart\n                [datasets]=\"subscriptionHistoryDataSet\"\n                [labels]=\"subscriptionHistoryLabels\"\n                [options]=\"barChartOptionsSubscriptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"chartType\"></canvas>\n    </div>\n</div>\n\n\n"
 
 /***/ },
 
 /***/ 1335:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <app-approval-count class=\"col-sm-6 apps\"\n                      [totalCount]=\"appDetailsSummery?.totalAppCreations\"\n                      [myCount]=\"appDetailsSummery?.appCreationsForUser\"\n                      [groupCount]=\"appDetailsSummery?.appCreationsForGroup\"\n                      iconClass=\"apps\"\n                      name=\"Application Creations\"\n                      (click)=\"onCountClick('APPLICATIONS')\"></app-approval-count>\n\n  <app-approval-count class=\"col-sm-6 subs\"\n                      [totalCount]=\"appDetailsSummery?.totalSubCreations\"\n                      [myCount]=\"appDetailsSummery?.subCreationsForUser\"\n                      [groupCount]=\"appDetailsSummery?.subCreationsForGroup\"\n                      iconClass=\"subscriptions\"\n                      name=\"Subscription Creations\"\n                      (click)=\"onCountClick('SUBSCRIPTIONS')\"></app-approval-count>\n</div>\n"
+module.exports = "<div class=\"approval-count\" >\n  <span class=\"breakdown myCount\">Assigned to Me: <span class=\"sub\">{{myCount}}</span></span>\n  <span class=\"breakdown groupCount\">Assigned to Group : <span class=\"sub\">{{groupCount}}</span></span>\n  <span class=\"count\">{{totalCount}}</span>\n  <span class=\"name\">{{name}}</span>\n  <span class=\"icon glyphicon material-icons\">{{iconClass}}</span>\n</div>\n"
 
 /***/ },
 
 /***/ 1336:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"row\">\n    <div class=\"col-sm-6\">\n        <canvas baseChart\n                [datasets]=\"appCreationHistoryDataSet\"\n                [labels]=\"appCreationHistoryLabels\"\n                [options]=\"barChartOptionsApplications\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"chartType\"\n                [colors]=\"chartColors\"></canvas>\n    </div>\n    <div class=\"col-sm-6\">\n        <canvas baseChart\n                [datasets]=\"subscriptionHistoryDataSet\"\n                [labels]=\"subscriptionHistoryLabels\"\n                [options]=\"barChartOptionsSubscriptions\"\n                [legend]=\"barChartLegend\"\n                [chartType]=\"chartType\"></canvas>\n    </div>\n</div>\n\n\n"
+
+/***/ },
+
+/***/ 1337:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"row\">\n  <app-approval-count class=\"col-sm-6 apps\"\n                      [totalCount]=\"appDetailsSummery?.totalAppCreations\"\n                      [myCount]=\"appDetailsSummery?.appCreationsForUser\"\n                      [groupCount]=\"appDetailsSummery?.appCreationsForGroup\"\n                      iconClass=\"apps\"\n                      name=\"Application Creations\"\n                      (click)=\"onCountClick('APPLICATIONS')\"></app-approval-count>\n\n  <app-approval-count class=\"col-sm-6 subs\"\n                      [totalCount]=\"appDetailsSummery?.totalSubCreations\"\n                      [myCount]=\"appDetailsSummery?.subCreationsForUser\"\n                      [groupCount]=\"appDetailsSummery?.subCreationsForGroup\"\n                      iconClass=\"subscriptions\"\n                      name=\"Subscription Creations\"\n                      (click)=\"onCountClick('SUBSCRIPTIONS')\"></app-approval-count>\n</div>\n"
+
+/***/ },
+
+/***/ 1338:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"animated fadeInUp\" style=\"animation-delay: 0.3s\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-6\">\n      <app-approval-summery [appDetailsSummery]=\"dashboardData\"></app-approval-summery>\n    </div>\n    <div class=\"col-lg-6\">\n      <app-approval-history-graph></app-approval-history-graph>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [filter]=\"myApplicationFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"myApplications\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              class=\"my\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              [filter]=\"mySubscriptionFilter\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"myAppSubscriptionTask\"\n              (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"\n      ></application-data-table>\n    </div>\n  </div>\n\n\n  <div class=\"row\">\n    <div class=\"col-md-6\">\n      <application-data-table\n              [filter]=\"groupApplicationFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/applications\"\n              tableTitle=\"APPLICATION CREATIONS\"\n              [dataSource]=\"allApplications\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n\n    <div class=\"col-md-6\">\n      <application-data-table\n              [filter]=\"groupSubscriptionFilter\"\n              [summeryModeRecordLimit]=\"5\"\n              moreLinkPath=\"/approvals/subscriptions\"\n              tableTitle=\"SUBSCRIPTION CREATIONS\"\n              [dataSource]=\"allSubscriptions\"\n              (onAssignTask)=\"onAssignTaskHandler($event)\"\n              (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n  </div>\n\n\n</div>\n\n"

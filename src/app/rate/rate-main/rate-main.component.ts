@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
+import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {
     ApprovalRateFilter, ApprovalHistory,
     ApprovalHistoryDataset
-} from "../../commons/models/reporing-data-models";
+} from '../../commons/models/reporing-data-models';
 import {Validators, FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from 'ng2-formly';
+
 
 @Component({
     selector: 'app-rate-main',
@@ -16,17 +17,19 @@ export class RateMainComponent implements OnInit {
 
     private isSubcategory: boolean;
 
+
     constructor(private reportingService: ReportingRemoteDataService) {
+
     }
 
     private filter: ApprovalRateFilter;
 
-    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
+    private fieldSet = ['applicationId', 'applicationName', 'applicationDescription', 'status', 'approvedOn'];
 
     private approvalHistoryData: ApprovalHistoryDataset;
 
-    private totalItems: number = 0;
-    private currentPage: number = 1;
+    private totalItems = 0;
+    private currentPage = 1;
 
     user = {
         email: 'email@gmail.com',
@@ -131,6 +134,11 @@ export class RateMainComponent implements OnInit {
     onPageChanged(event) {
         this.filter.offset = (event.page - 1) * this.filter.count;
         this.reportingService.getApprovalHistory(this.filter);
+    }
+
+    showModal() {
+        console.log("clicked here");
+        this.isSubcategory=true;
     }
 
 }

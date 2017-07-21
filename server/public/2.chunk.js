@@ -47,11 +47,7 @@ var HistoryModule = (function () {
     ], HistoryModule);
     return HistoryModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/history.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -105,19 +101,15 @@ var HistoryMainComponent = (function () {
     HistoryMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-main',
-            template: __webpack_require__(1338),
-            styles: [__webpack_require__(1322)]
+            template: __webpack_require__(1340),
+            styles: [__webpack_require__(1323)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
     ], HistoryMainComponent);
     return HistoryMainComponent;
     var _a;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-main.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/history-main.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -213,19 +205,15 @@ var HistoryFilterComponent = (function () {
     HistoryFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-filter',
-            template: __webpack_require__(1337),
-            styles: [__webpack_require__(1321)]
+            template: __webpack_require__(1339),
+            styles: [__webpack_require__(1322)]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], HistoryFilterComponent);
     return HistoryFilterComponent;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-filter.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/history-filter.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -243,11 +231,7 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__["a" /* HistoryMainComponent */]
     }];
 var HistoryRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.routes.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/history.routes.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -275,18 +259,14 @@ var SearchPanelComponent = (function () {
     SearchPanelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-panel',
-            template: __webpack_require__(1339),
-            styles: [__webpack_require__(1323)]
+            template: __webpack_require__(1341),
+            styles: [__webpack_require__(1324)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchPanelComponent);
     return SearchPanelComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-panel.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/search-panel.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -314,39 +294,28 @@ var SearchResultsComponent = (function () {
     SearchResultsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-results',
-            template: __webpack_require__(1340),
-            styles: [__webpack_require__(1324)]
+            template: __webpack_require__(1342),
+            styles: [__webpack_require__(1325)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchResultsComponent);
     return SearchResultsComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-results.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/search-results.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
-
-/***/ },
-
-/***/ 1321:
-/***/ function(module, exports) {
-
-module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
 /***/ 1322:
 /***/ function(module, exports) {
 
-module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n"
+module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
 /***/ 1323:
 /***/ function(module, exports) {
 
-module.exports = ""
+module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n"
 
 /***/ },
 
@@ -357,28 +326,35 @@ module.exports = ""
 
 /***/ },
 
-/***/ 1337:
+/***/ 1325:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"history-filter\">\n\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"selectedApplication\"\n                  [typeaheadMinLength]=\"0\"\n                  typeaheadOptionField=\"name\"\n                  [typeahead]=\"applications\"\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\n                  placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"filter.operator\"\n                  [typeaheadMinLength]=\"0\"\n                  [typeahead]=\"operators\"\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\n                  placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-right\">\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\n        </div>\n    </div>\n</div>\n"
-
-/***/ },
-
-/***/ 1338:
-/***/ function(module, exports) {
-
-module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter\n                [filter]=\"filter\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n    <div class=\"col-sm-12 text-center\">\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"totalItems\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.count\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n\n    </div>\n</div>"
+module.exports = ""
 
 /***/ },
 
 /***/ 1339:
 /***/ function(module, exports) {
 
-module.exports = "<p>\n  search-panel works!\n</p>\n"
+module.exports = "<div class=\"history-filter\">\n\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"selectedApplication\"\n                  [typeaheadMinLength]=\"0\"\n                  typeaheadOptionField=\"name\"\n                  [typeahead]=\"applications\"\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\n                  placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"filter.operator\"\n                  [typeaheadMinLength]=\"0\"\n                  [typeahead]=\"operators\"\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\n                  placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-right\">\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\n        </div>\n    </div>\n</div>\n"
 
 /***/ },
 
 /***/ 1340:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter\n                [filter]=\"filter\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n    <div class=\"col-sm-12 text-center\">\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"totalItems\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.count\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n\n    </div>\n</div>"
+
+/***/ },
+
+/***/ 1341:
+/***/ function(module, exports) {
+
+module.exports = "<p>\n  search-panel works!\n</p>\n"
+
+/***/ },
+
+/***/ 1342:
 /***/ function(module, exports) {
 
 module.exports = "<p>\n  search-results works!\n</p>\n"

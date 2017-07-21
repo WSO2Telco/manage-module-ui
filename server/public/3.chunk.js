@@ -45,11 +45,7 @@ var ApprovalsModule = (function () {
     ], ApprovalsModule);
     return ApprovalsModule;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approvals.module.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approvals.module.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -120,19 +116,15 @@ var ApplicationsComponent = (function () {
     ApplicationsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-applications',
-            template: __webpack_require__(1331),
-            styles: [__webpack_require__(1314)]
+            template: __webpack_require__(1333),
+            styles: [__webpack_require__(1315)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], ApplicationsComponent);
     return ApplicationsComponent;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/applications.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/applications.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -161,17 +153,13 @@ var ApprovalMainComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-approval-main',
             template: "<router-outlet></router-outlet>",
-            styles: [__webpack_require__(1315)]
+            styles: [__webpack_require__(1316)]
         }), 
         __metadata('design:paramtypes', [])
     ], ApprovalMainComponent);
     return ApprovalMainComponent;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval-main.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval-main.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -242,19 +230,15 @@ var SubscriptionsComponent = (function () {
     SubscriptionsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-subscriptions',
-            template: __webpack_require__(1332),
-            styles: [__webpack_require__(1316)]
+            template: __webpack_require__(1334),
+            styles: [__webpack_require__(1317)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], SubscriptionsComponent);
     return SubscriptionsComponent;
     var _a, _b, _c;
 }());
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/subscriptions.component.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/subscriptions.component.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
 
 /***/ },
 
@@ -286,43 +270,39 @@ var routes = [
     }
 ];
 var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-<<<<<<< HEAD
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/approval.routes.js.map
-=======
-//# sourceMappingURL=E:/Git/manage-module-ui/src/approval.routes.js.map
->>>>>>> 8c025948d079c799f83fad3c33e9e3a6f2409541
-
-/***/ },
-
-/***/ 1314:
-/***/ function(module, exports) {
-
-module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
 
 /***/ },
 
 /***/ 1315:
 /***/ function(module, exports) {
 
-module.exports = ""
+module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
 
 /***/ },
 
 /***/ 1316:
 /***/ function(module, exports) {
 
+module.exports = ""
+
+/***/ },
+
+/***/ 1317:
+/***/ function(module, exports) {
+
 module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
 
 /***/ },
 
-/***/ 1331:
+/***/ 1333:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"animated fadeInUp row pad-r-15-im\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [filter]=\"userApplicationFilter\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [filter]=\"groupApplicationFilter\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
 
 /***/ },
 
-/***/ 1332:
+/***/ 1334:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"animated fadeInUp\">\n <div class=\"row\">\n   <div class=\"col-sm-6\">\n       <application-data-table\n               class=\"my\"\n               [filter]=\"mySubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"mySubscriptions\"\n               (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n   <div class=\"col-sm-6\">\n       <application-data-table\n               [filter]=\"groupSubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"allSubscriptions\"\n               (onAssignTask)=\"onAssignTaskHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n </div>\n</div>\n\n"

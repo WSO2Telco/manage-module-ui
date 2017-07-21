@@ -22,6 +22,7 @@
                 </select>
                 <span class="error" *ngIf="isCategoryEmpty">Category can not be empty</span>
             </div>
+            <div><a (click)="(showNewCategory)?showNewCategory=false:showNewCategory=true; ; type='Category';">Add New</a></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3">Sub Category:</label>
@@ -40,6 +41,7 @@
                 </select>
                 <span class="error" *ngIf="isSubcategoryEmpty">Sub Category can not be empty</span>
             </div>
+            <div><a (click)="(showNewSubCategory)?showNewSubCategory=false:showNewSubCategory=true; ; type='Sub Category';">Add New</a></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3">Tariff:</label>
@@ -58,8 +60,11 @@
                 </select>
                 <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
             </div>
+            <div><a (click)="(showNewTariff)?showNewTariff=false:showNewTariff=true; ; type='Tariff';">Add New</a></div>
         </div>
-
+        <app-newtype *ngIf="showNewTariff" type="Tariff"></app-newtype>
+        <app-newtype *ngIf="showNewCategory" type="Category"></app-newtype>
+        <app-newtype *ngIf="showNewSubCategory" type="Sub Category"></app-newtype>
         <div class="form-group">
             <div class="col-sm-1">
                 <button type="submit" class="btn btn-success">Add</button>
@@ -68,7 +73,6 @@
                 <button type="reset" class="btn btn-warning">Reset</button>
             </div>
         </div>
-
 
     </form>
 
