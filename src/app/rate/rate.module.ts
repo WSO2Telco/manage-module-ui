@@ -9,6 +9,7 @@ import {RateFilterComponent} from './rate-filter/rate-filter.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
         ReactiveFormsModule,
         FormlyModule.forRoot(),
         FormlyBootstrapModule,
+        ModalModule.forRoot()
     ],
     declarations: [SearchPanelComponent, SearchResultsComponent, RateMainComponent, RateFilterComponent, SubcategoryComponent]
 })
