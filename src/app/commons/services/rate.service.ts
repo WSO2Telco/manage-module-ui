@@ -5,7 +5,8 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {RateRemoteDataService} from '../../data-providers/rate_remote-data.service';
-import {SubCategory, LoginResponse} from '../models/common-data-models';
+import {SubCategory, LoginResponse, Currency} from '../models/common-data-models';
+import {log} from "util";
 
 
 @Injectable()
@@ -36,6 +37,20 @@ export class RateService {
             );
     }
 
-
+    addCurrency(code: string, description: string, callback: Function ) {
+        console.log(' ---adding currency -- ');
+        const model: Currency = new Currency();
+        model.currencycode = code;
+        model.currencydesc = description;
+        this._remoteService.addCurrency(model)
+            .subscribe(
+                (loginInfo : LoginResponse) => {
+                    console.log(' success');
+                },
+                (error: string) => {
+                    callback(error);
+                }
+            );
+    }
 }
 

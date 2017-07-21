@@ -34,4 +34,8 @@ export class SubCategory {
     tariff: string;
 }
 
+export class Currency {
+    currencycode: string;
+    currencydesc: string;
+}
 

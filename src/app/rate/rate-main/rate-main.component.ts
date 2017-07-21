@@ -6,6 +6,7 @@ import {
 } from "../../commons/models/reporing-data-models";
 import {Validators, FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from 'ng2-formly';
+import {RateService} from "../../commons/services/rate.service";
 
 @Component({
     selector: 'app-rate-main',
@@ -14,9 +15,14 @@ import {FormlyFieldConfig} from 'ng2-formly';
 })
 export class RateMainComponent implements OnInit {
 
+    // var for currency
+    currencycode: string;
+    currencydesc: string;
+
+    submissionError: string;
     private isSubcategory: boolean;
 
-    constructor(private reportingService: ReportingRemoteDataService) {
+    constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
     }
 
     private filter: ApprovalRateFilter;
@@ -122,6 +128,18 @@ export class RateMainComponent implements OnInit {
          this.reportingService.getOperators();
          this.reportingService.getApprovalHistory(this.filter); */
     }
+
+
+    onSubmit(currencyForm) {;
+            console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
+            this.rateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
+                this.submissionError = errorMsg;
+                setTimeout(() => {
+                    this.submissionError = null
+                }, 5000);
+            });
+    }
+
 
     onFilterChangeHandler(event: ApprovalRateFilter) {
         this.filter = event;
