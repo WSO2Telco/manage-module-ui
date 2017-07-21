@@ -4,7 +4,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SubCategory, LoginResponse, ServerResponse, NewType} from '../commons/models/common-data-models';
+import {SubCategory, Currency, ServerResponse, NewType} from '../commons/models/common-data-models';
+
 
 
 @Injectable()
@@ -17,6 +18,7 @@ export class RateRemoteDataService {
     private apiEndpoints: Object = {
         addsubcategory: this.apiContext + '/rate/addsubcategory',
         addnewtype: this.apiContext + '/rate/addnewtype',
+        addCurrency: this.apiContext + '/rate/addcurrency'
     };
 
     constructor(private http: Http) {
@@ -49,4 +51,16 @@ export class RateRemoteDataService {
 
 
 
+    /**
+     * Add a new currency
+     * @param data
+     * @returns {Observable<R>}
+     */
+    addCurrency(data: Currency): Observable<ServerResponse> {
+        console.log('currency service ---');
+        console.log(JSON.stringify(data)) ;
+        return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
 }

@@ -17,6 +17,15 @@ const validateAddSubcategoryRequest = function (request) {
     return false;
 };
 
+const validateAddCurrencyRequest = function (request) {
+    let param = request.payload;
+    if (!!param && param.currencycode && param.currencydesc) {
+        logger.log('INFO', 'REQUEST VALIDATED');
+        return true;
+    }
+    return false;
+};
+
 function rateService() {
 
     /**
@@ -42,7 +51,30 @@ function rateService() {
         };
 
         if (validateAddSubcategoryRequest(request)) {
-            rateRestService.Invoke(request).then(onSuccess, onFailture);
+            rateRestService.invokeAddSubCategoryRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+    };
+
+    let _addCurrency = function (request, callback) {
+
+        logger.log('INFO', "hit at rate service end point for currency");
+
+        request.server.log('info', 'ADD Currency REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (addSubcategoryResult) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub category created successfully"}));
+        };
+
+        let onFailture = function (addSubCategoryError) {
+            logger.log('ERROR', 'faliture');
+            callback(addSubCategoryError);
+        };
+
+        if (validateAddCurrencyRequest(request)) {
+            rateRestService.invokeAddCurrencyRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
         }
@@ -51,7 +83,8 @@ function rateService() {
     //add more rate services here
 
     return {
-        addSubcategory: _addSubcategory
+        addSubcategory: _addSubcategory,
+        addCurrency: _addCurrency
     };
 }
 

@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {RateRemoteDataService} from '../../data-providers/rate_remote-data.service';
-import {SubCategory, LoginResponse, ServerResponse, NewType} from '../models/common-data-models';
+import {SubCategory, LoginResponse, Currency, ServerResponse, NewType} from '../models/common-data-models';
 
 
 @Injectable()
@@ -42,7 +42,7 @@ export class RateService {
     }
 
     /**
-     * This method call the remote sevice to create a new category, subcategory or a tariff
+     * This method call the remote service to create a new category, subcategory or a tariff
      * @param type
      * @param name
      * @param code
@@ -65,9 +65,28 @@ export class RateService {
                     callback(error);
                 }
             );
-
     }
 
-
+    /**
+     * This method call the remote service to add new currency type
+     * @param code
+     * @param description
+     * @param callback
+     */
+    addCurrency(code: string, description: string, callback: Function ) {
+        console.log(' ---adding currency -- ');
+        const model: Currency = new Currency();
+        model.currencycode = code;
+        model.currencydesc = description;
+        this._remoteService.addCurrency(model)
+            .subscribe(
+                (response: ServerResponse) => {
+                    console.log('good response' + response.messsage);
+                },
+                (error: string) => {
+                    callback(error);
+                }
+            );
+    }
 }
 

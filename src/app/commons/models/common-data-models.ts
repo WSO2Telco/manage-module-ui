@@ -46,4 +46,8 @@ export class ServerResponse{
     messsage: string;
 }
 
+export class Currency {
+    currencycode: string;
+    currencydesc: string;
+}
 
