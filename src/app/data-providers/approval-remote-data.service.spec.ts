@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { ApprovalRomoteDataService } from './approval-remote-data.service';
+import { ApprovalRemoteDataService } from './approval-remote-data.service';
 
-describe('ApprovalRomoteDataService', () => {
+describe('ApprovalRemoteDataService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ApprovalRomoteDataService]
+      providers: [ApprovalRemoteDataService]
     });
   });
 
-  it('should ...', inject([ApprovalRomoteDataService], (service: ApprovalRomoteDataService) => {
+  it('should ...', inject([ApprovalRemoteDataService], (service: ApprovalRemoteDataService) => {
     expect(service).toBeTruthy();
   }));
 });

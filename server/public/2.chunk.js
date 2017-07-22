@@ -1,126 +1,38 @@
-webpackJsonp([2,9],{
+webpackJsonp([2],{
 
-/***/ 1253:
-/***/ function(module, exports, __webpack_require__) {
+/***/ "../../../../../src/app/history/history-filter/history-filter.component.html":
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(1264);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__(1282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__(1281);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(654);
-/* harmony export (binding) */ __webpack_require__.d(exports, "HistoryModule", function() { return HistoryModule; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
+module.exports = "<div class=\"history-filter\">\r\n\r\n   <div class=\"row fields-container\">\r\n      <div class=\"col-sm-3\">\r\n         <input type=\"text\" class=\"form-control\"\r\n                [(ngModel)]=\"filter.subscriber\"\r\n                [typeaheadMinLength]=\"0\"\r\n                [typeahead]=\"subscribers\"\r\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\r\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\r\n                placeholder=\"Service Provider\">\r\n      </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\"\r\n                  [(ngModel)]=\"selectedApplication\"\r\n                  [typeaheadMinLength]=\"0\"\r\n                  typeaheadOptionField=\"name\"\r\n                  [typeahead]=\"applications\"\r\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\r\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\r\n                  placeholder=\"Application\">\r\n       </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\"\r\n                  [(ngModel)]=\"filter.operator\"\r\n                  [typeaheadMinLength]=\"0\"\r\n                  [typeahead]=\"operators\"\r\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\r\n                  placeholder=\"Operator\">\r\n       </div>\r\n       <div class=\"col-sm-3\">\r\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\r\n       </div>\r\n   </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12 text-right\">\r\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\r\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/history-filter/history-filter.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
 
 
+// module
+exports.push([module.i, ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n", ""]);
+
+// exports
 
 
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
+/***/ }),
 
-
-
-var HistoryModule = (function () {
-    function HistoryModule() {
-    }
-    HistoryModule = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [
-                __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
-                __WEBPACK_IMPORTED_MODULE_5__history_routes__["a" /* HistoryRoutes */],
-                __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__["a" /* SharedModule */]
-            ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */], __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__["a" /* SearchResultsComponent */], __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__["a" /* HistoryMainComponent */], __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__["a" /* HistoryFilterComponent */]]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], HistoryModule);
-    return HistoryModule;
-}());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.module.js.map
-
-/***/ },
-
-/***/ 1264:
-/***/ function(module, exports, __webpack_require__) {
+/***/ "../../../../../src/app/history/history-filter/history-filter.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(653);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(656);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryMainComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var HistoryMainComponent = (function () {
-    function HistoryMainComponent(reportingService) {
-        this.reportingService = reportingService;
-        this.fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
-        this.totalItems = 0;
-        this.currentPage = 1;
-    }
-    HistoryMainComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.filter = new __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["b" /* ApprovalHistoryFilter */]();
-        this.filter.count = 10;
-        this.reportingService.ApprovalHistoryProvider.subscribe(function (history) {
-            _this.approvalHistoryData = history;
-            _this.totalItems = (_this.approvalHistoryData && _this.approvalHistoryData.noOfRecords) || _this.totalItems;
-        });
-        this.reportingService.getSubscribers();
-        this.reportingService.getOperators();
-        this.reportingService.getApprovalHistory(this.filter);
-    };
-    HistoryMainComponent.prototype.onFilterChangeHandler = function (event) {
-        this.filter = event;
-        this.reportingService.getApprovalHistory(this.filter);
-    };
-    HistoryMainComponent.prototype.onPageChanged = function (event) {
-        this.filter.offset = (event.page - 1) * this.filter.count;
-        this.reportingService.getApprovalHistory(this.filter);
-    };
-    HistoryMainComponent = __decorate([
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'app-history-main',
-            template: __webpack_require__(1340),
-            styles: [__webpack_require__(1323)]
-        }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
-    ], HistoryMainComponent);
-    return HistoryMainComponent;
-    var _a;
-}());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-main.component.js.map
-
-/***/ },
-
-/***/ 1281:
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(653);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__(656);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryFilterComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__("../../../../../src/app/data-providers/reporting-remote-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__("../../../../../src/app/commons/models/reporing-data-models.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HistoryFilterComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -205,25 +117,163 @@ var HistoryFilterComponent = (function () {
     HistoryFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-filter',
-            template: __webpack_require__(1339),
-            styles: [__webpack_require__(1322)]
+            template: __webpack_require__("../../../../../src/app/history/history-filter/history-filter.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/history/history-filter/history-filter.component.scss")]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], HistoryFilterComponent);
     return HistoryFilterComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history-filter.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history-filter.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 1282:
-/***/ function(module, exports, __webpack_require__) {
+/***/ "../../../../../src/app/history/history-main/history-main.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"animated fadeInUp row\">\r\n    <div class=\"col-sm-12\">\r\n        <app-history-filter\r\n                [filter]=\"filter\"\r\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\r\n    </div>\r\n    <div class=\"col-sm-12\">\r\n        <app-responsive-table\r\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\r\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\r\n    </div>\r\n    <div class=\"col-sm-12 text-center\">\r\n        <pagination\r\n                [boundaryLinks]=\"true\"\r\n                [totalItems]=\"totalItems\"\r\n                [(ngModel)]=\"currentPage\"\r\n                [itemsPerPage]=\"filter.count\"\r\n                [maxSize]=\"5\"\r\n                (pageChanged)=\"onPageChanged($event)\"\r\n                class=\"pagination-sm\"\r\n                previousText=\"&lsaquo;\"\r\n                nextText=\"&rsaquo;\"\r\n                firstText=\"&laquo;\"\r\n                lastText=\"&raquo;\"></pagination>\r\n\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/history-main/history-main.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/history-main/history-main.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(1264);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryRoutes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__("../../../../../src/app/data-providers/reporting-remote-data.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__ = __webpack_require__("../../../../../src/app/commons/models/reporing-data-models.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HistoryMainComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var HistoryMainComponent = (function () {
+    function HistoryMainComponent(reportingService) {
+        this.reportingService = reportingService;
+        this.fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
+        this.totalItems = 0;
+        this.currentPage = 1;
+    }
+    HistoryMainComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.filter = new __WEBPACK_IMPORTED_MODULE_2__commons_models_reporing_data_models__["b" /* ApprovalHistoryFilter */]();
+        this.filter.count = 10;
+        this.reportingService.ApprovalHistoryProvider.subscribe(function (history) {
+            _this.approvalHistoryData = history;
+            _this.totalItems = (_this.approvalHistoryData && _this.approvalHistoryData.noOfRecords) || _this.totalItems;
+        });
+        this.reportingService.getSubscribers();
+        this.reportingService.getOperators();
+        this.reportingService.getApprovalHistory(this.filter);
+    };
+    HistoryMainComponent.prototype.onFilterChangeHandler = function (event) {
+        this.filter = event;
+        this.reportingService.getApprovalHistory(this.filter);
+    };
+    HistoryMainComponent.prototype.onPageChanged = function (event) {
+        this.filter.offset = (event.page - 1) * this.filter.count;
+        this.reportingService.getApprovalHistory(this.filter);
+    };
+    HistoryMainComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'app-history-main',
+            template: __webpack_require__("../../../../../src/app/history/history-main/history-main.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/history/history-main/history-main.component.scss")]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
+    ], HistoryMainComponent);
+    return HistoryMainComponent;
+    var _a;
+}());
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history-main.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/history.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__("../../../../../src/app/history/search-panel/search-panel.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__("../../../../../src/app/history/search-results/search-results.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__("../../../../../src/app/history/history-main/history-main.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__("../../../../../src/app/history/history.routes.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__("../../../../../src/app/history/history-filter/history-filter.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__("../../../../../src/app/shared/shared.module.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HistoryModule", function() { return HistoryModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var HistoryModule = (function () {
+    function HistoryModule() {
+    }
+    HistoryModule = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["a" /* CommonModule */],
+                __WEBPACK_IMPORTED_MODULE_5__history_routes__["a" /* HistoryRoutes */],
+                __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__["a" /* SharedModule */]
+            ],
+            declarations: [__WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */], __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__["a" /* SearchResultsComponent */], __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__["a" /* HistoryMainComponent */], __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__["a" /* HistoryFilterComponent */]]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], HistoryModule);
+    return HistoryModule;
+}());
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/history.routes.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__("../../../router/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__("../../../../../src/app/history/history-main/history-main.component.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HistoryRoutes; });
 
 
 var routes = [{
@@ -231,16 +281,41 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__["a" /* HistoryMainComponent */]
     }];
 var HistoryRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/history.routes.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/history.routes.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 1283:
-/***/ function(module, exports, __webpack_require__) {
+/***/ "../../../../../src/app/history/search-panel/search-panel.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  search-panel works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/search-panel/search-panel.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/search-panel/search-panel.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SearchPanelComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchPanelComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -259,23 +334,48 @@ var SearchPanelComponent = (function () {
     SearchPanelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-panel',
-            template: __webpack_require__(1341),
-            styles: [__webpack_require__(1324)]
+            template: __webpack_require__("../../../../../src/app/history/search-panel/search-panel.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/history/search-panel/search-panel.component.scss")]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchPanelComponent);
     return SearchPanelComponent;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-panel.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/search-panel.component.js.map
 
-/***/ },
+/***/ }),
 
-/***/ 1284:
-/***/ function(module, exports, __webpack_require__) {
+/***/ "../../../../../src/app/history/search-results/search-results.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<p>\r\n  search-results works!\r\n</p>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/search-results/search-results.component.scss":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/history/search-results/search-results.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return SearchResultsComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/index.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SearchResultsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -294,72 +394,16 @@ var SearchResultsComponent = (function () {
     SearchResultsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-results',
-            template: __webpack_require__(1342),
-            styles: [__webpack_require__(1325)]
+            template: __webpack_require__("../../../../../src/app/history/search-results/search-results.component.html"),
+            styles: [__webpack_require__("../../../../../src/app/history/search-results/search-results.component.scss")]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchResultsComponent);
     return SearchResultsComponent;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/search-results.component.js.map
+//# sourceMappingURL=E:/Git/manage-module-ui/src/search-results.component.js.map
 
-/***/ },
-
-/***/ 1322:
-/***/ function(module, exports) {
-
-module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
-
-/***/ },
-
-/***/ 1323:
-/***/ function(module, exports) {
-
-module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n"
-
-/***/ },
-
-/***/ 1324:
-/***/ function(module, exports) {
-
-module.exports = ""
-
-/***/ },
-
-/***/ 1325:
-/***/ function(module, exports) {
-
-module.exports = ""
-
-/***/ },
-
-/***/ 1339:
-/***/ function(module, exports) {
-
-module.exports = "<div class=\"history-filter\">\n\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"selectedApplication\"\n                  [typeaheadMinLength]=\"0\"\n                  typeaheadOptionField=\"name\"\n                  [typeahead]=\"applications\"\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\n                  placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"filter.operator\"\n                  [typeaheadMinLength]=\"0\"\n                  [typeahead]=\"operators\"\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\n                  placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-right\">\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\n        </div>\n    </div>\n</div>\n"
-
-/***/ },
-
-/***/ 1340:
-/***/ function(module, exports) {
-
-module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter\n                [filter]=\"filter\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n    <div class=\"col-sm-12 text-center\">\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"totalItems\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.count\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n\n    </div>\n</div>"
-
-/***/ },
-
-/***/ 1341:
-/***/ function(module, exports) {
-
-module.exports = "<p>\n  search-panel works!\n</p>\n"
-
-/***/ },
-
-/***/ 1342:
-/***/ function(module, exports) {
-
-module.exports = "<p>\n  search-results works!\n</p>\n"
-
-/***/ }
+/***/ })
 
 });
-//# sourceMappingURL=2.bundle.map
+//# sourceMappingURL=2.chunk.js.map

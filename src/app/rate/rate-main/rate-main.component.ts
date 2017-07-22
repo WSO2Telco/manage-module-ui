@@ -134,13 +134,13 @@ export class RateMainComponent implements OnInit {
 
 
     onSubmit(currencyForm) {;
-            console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-            this.rateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
+            console.log('form submitted : ' + this.currencycode + '  ss' + this.currencydesc);
+            /*this.RateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
                 this.submissionError = errorMsg;
                 setTimeout(() => {
                     this.submissionError = null
                 }, 5000);
-            });
+            });*/
     }
 
 

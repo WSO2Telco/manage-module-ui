@@ -28,11 +28,13 @@
       "scripts": [
         "../node_modules/chart.js/dist/Chart.js"
       ],
-      "environments": {
-        "source": "environments/environment.ts",
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+	  
+      "environmentSource": "environments/environment.ts",
+			"environments": {
+			"dev": "environments/environment.ts",
+			"prod": "environments/environment.prod.ts"
+}
+
     }
   ],
   "addons": [],
