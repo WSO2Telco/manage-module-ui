@@ -7,16 +7,17 @@ webpackJsonp([0,9],{
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1290);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1291);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rate_subcategory_subcategory_component__ = __webpack_require__(1288);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rate_newtype_newtype_component__ = __webpack_require__(1287);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rate_main_rate_main_component__ = __webpack_require__(1266);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__rate_routes__ = __webpack_require__(1289);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__rate_filter_rate_filter_component__ = __webpack_require__(1286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1300);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rate_subcategory_subcategory_component__ = __webpack_require__(1298);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rate_newtype_newtype_component__ = __webpack_require__(1297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rate_main_rate_main_component__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__rate_routes__ = __webpack_require__(1299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__rate_filter_rate_filter_component__ = __webpack_require__(1296);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__shared_shared_module__ = __webpack_require__(654);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_formly__ = __webpack_require__(1297);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ng2_formly__ = __webpack_require__(1307);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_modal__ = __webpack_require__(1326);
 /* harmony export (binding) */ __webpack_require__.d(exports, "RateModule", function() { return RateModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27,6 +28,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -52,6 +54,7 @@ var RateModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_10__angular_forms__["b" /* ReactiveFormsModule */],
                 __WEBPACK_IMPORTED_MODULE_11_ng2_formly__["a" /* FormlyModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_11_ng2_formly__["b" /* FormlyBootstrapModule */],
+                __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_modal__["a" /* ModalModule */].forRoot()
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__["a" /* SearchPanelComponent */],
@@ -76,18 +79,18 @@ var RateModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_formly_form__ = __webpack_require__(1294);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_formly_field__ = __webpack_require__(1293);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_formly_attributes__ = __webpack_require__(1292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_formly_form__ = __webpack_require__(1304);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_formly_field__ = __webpack_require__(1303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_formly_attributes__ = __webpack_require__(1302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_formly_config__ = __webpack_require__(1258);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_formly_form_builder__ = __webpack_require__(1269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_formly_validation_messages__ = __webpack_require__(1295);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_formly_event_emitter__ = __webpack_require__(1268);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__templates_field__ = __webpack_require__(1259);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__templates_field_type__ = __webpack_require__(1271);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__templates_field_wrapper__ = __webpack_require__(1296);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_formly_group__ = __webpack_require__(1267);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_formly_single_focus_dispatcher__ = __webpack_require__(1270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__services_formly_form_builder__ = __webpack_require__(1271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_formly_validation_messages__ = __webpack_require__(1305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_formly_event_emitter__ = __webpack_require__(1270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__templates_field__ = __webpack_require__(1260);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__templates_field_type__ = __webpack_require__(1273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__templates_field_wrapper__ = __webpack_require__(1306);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_formly_group__ = __webpack_require__(1269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__services_formly_single_focus_dispatcher__ = __webpack_require__(1272);
 /* unused harmony reexport FormlyAttributes */
 /* unused harmony reexport FormlyFormBuilder */
 /* unused harmony reexport FormlyField */
@@ -350,7 +353,7 @@ function evalExpression(expression, thisArg, argVal) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_formly_group__ = __webpack_require__(1267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_formly_group__ = __webpack_require__(1269);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return FORMLY_CONFIG_TOKEN; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyConfig; });
@@ -502,6 +505,50 @@ var FormlyConfig = (function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return win; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return document; });
+/* unused harmony export location */
+/* unused harmony export gc */
+/* unused harmony export performance */
+/* unused harmony export Event */
+/* unused harmony export MouseEvent */
+/* unused harmony export KeyboardEvent */
+/* unused harmony export EventTarget */
+/* unused harmony export History */
+/* unused harmony export Location */
+/* unused harmony export EventListener */
+/*tslint:disable */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * JS version of browser APIs. This library can only run in the browser.
+ */
+var win = typeof window !== 'undefined' && window || {};
+
+var document = win.document;
+var location = win.location;
+var gc = win['gc'] ? function () { return win['gc'](); } : function () { return null; };
+var performance = win['performance'] ? win['performance'] : null;
+var Event = win['Event'];
+var MouseEvent = win['MouseEvent'];
+var KeyboardEvent = win['KeyboardEvent'];
+var EventTarget = win['EventTarget'];
+var History = win['History'];
+var Location = win['Location'];
+var EventListener = win['EventListener'];
+//# sourceMappingURL=browser.js.map
+
+/***/ },
+
+/***/ 1260:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return Field; });
 
@@ -558,13 +605,84 @@ var Field = (function () {
 
 /***/ },
 
-/***/ 1266:
+/***/ 1261:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modal_options_class__ = __webpack_require__(1280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_ng2_bootstrap_config__ = __webpack_require__(1284);
+/* unused harmony export ModalBackdropOptions */
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ModalBackdropComponent; });
+
+
+
+var ModalBackdropOptions = (function () {
+    function ModalBackdropOptions(options) {
+        this.animate = true;
+        Object.assign(this, options);
+    }
+    return ModalBackdropOptions;
+}());
+/** This component will be added as background layout for modals if enabled */
+var ModalBackdropComponent = (function () {
+    function ModalBackdropComponent(element, renderer) {
+        this._isShown = false;
+        this.element = element;
+        this.renderer = renderer;
+    }
+    Object.defineProperty(ModalBackdropComponent.prototype, "isAnimated", {
+        get: function () {
+            return this._isAnimated;
+        },
+        set: function (value) {
+            this._isAnimated = value;
+            this.renderer.setElementClass(this.element.nativeElement, "" + __WEBPACK_IMPORTED_MODULE_1__modal_options_class__["a" /* ClassName */].FADE, value);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ModalBackdropComponent.prototype, "isShown", {
+        get: function () {
+            return this._isShown;
+        },
+        set: function (value) {
+            this._isShown = value;
+            this.renderer.setElementClass(this.element.nativeElement, "" + __WEBPACK_IMPORTED_MODULE_1__modal_options_class__["a" /* ClassName */].IN, value);
+            if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_ng2_bootstrap_config__["a" /* isBs3 */])()) {
+                this.renderer.setElementClass(this.element.nativeElement, "" + __WEBPACK_IMPORTED_MODULE_1__modal_options_class__["a" /* ClassName */].SHOW, value);
+            }
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ModalBackdropComponent.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                    selector: 'bs-modal-backdrop',
+                    template: '',
+                    // tslint:disable-next-line
+                    host: { 'class': __WEBPACK_IMPORTED_MODULE_1__modal_options_class__["a" /* ClassName */].BACKDROP }
+                },] },
+    ];
+    /** @nocollapse */
+    ModalBackdropComponent.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
+    ]; };
+    return ModalBackdropComponent;
+}());
+//# sourceMappingURL=modal-backdrop.component.js.map
+
+/***/ },
+
+/***/ 1268:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__ = __webpack_require__(653);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_rate_service__ = __webpack_require__(657);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RateMainComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -578,9 +696,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RateMainComponent = (function () {
-    function RateMainComponent(reportingService) {
+    function RateMainComponent(reportingService, rateService) {
         this.reportingService = reportingService;
+        this.rateService = rateService;
         this.fieldSet = ['applicationId', 'applicationName', 'applicationDescription', 'status', 'approvedOn'];
         this.totalItems = 0;
         this.currentPage = 1;
@@ -675,6 +795,17 @@ var RateMainComponent = (function () {
          this.reportingService.getOperators();
          this.reportingService.getApprovalHistory(this.filter); */
     };
+    RateMainComponent.prototype.onSubmit = function (currencyForm) {
+        var _this = this;
+        ;
+        console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
+        this.rateService.addCurrency(this.currencycode, this.currencydesc, function (errorMsg) {
+            _this.submissionError = errorMsg;
+            setTimeout(function () {
+                _this.submissionError = null;
+            }, 5000);
+        });
+    };
     RateMainComponent.prototype.onFilterChangeHandler = function (event) {
         this.filter = event;
         this.reportingService.getApprovalHistory(this.filter);
@@ -690,24 +821,24 @@ var RateMainComponent = (function () {
     RateMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-rate-main',
-            template: __webpack_require__(1345),
-            styles: [__webpack_require__(1328)]
+            template: __webpack_require__(1362),
+            styles: [__webpack_require__(1345)]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_rate_service__["a" /* RateService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_rate_service__["a" /* RateService */]) === 'function' && _b) || Object])
     ], RateMainComponent);
     return RateMainComponent;
-    var _a;
+    var _a, _b;
 }());
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/rate-main.component.js.map
 
 /***/ },
 
-/***/ 1267:
+/***/ 1269:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templates_field_type__ = __webpack_require__(1271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__templates_field_type__ = __webpack_require__(1273);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyGroup; });
 var __extends = (this && this.__extends) || function (d, b) {
@@ -755,7 +886,7 @@ var FormlyGroup = (function (_super) {
 
 /***/ },
 
-/***/ 1268:
+/***/ 1270:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -803,7 +934,7 @@ var FormlyPubSub = (function () {
 
 /***/ },
 
-/***/ 1269:
+/***/ 1271:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1069,7 +1200,7 @@ var FormlyFormBuilder = (function () {
 
 /***/ },
 
-/***/ 1270:
+/***/ 1272:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1099,11 +1230,11 @@ var SingleFocusDispatcher = (function () {
 
 /***/ },
 
-/***/ 1271:
+/***/ 1273:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1260);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FieldType; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -1158,7 +1289,7 @@ var FieldType = (function (_super) {
 
 /***/ },
 
-/***/ 1272:
+/***/ 1274:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1216,16 +1347,16 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1273:
+/***/ 1275:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__checkbox__ = __webpack_require__(1301);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__multicheckbox__ = __webpack_require__(1303);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input__ = __webpack_require__(1302);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__radio__ = __webpack_require__(1304);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__textarea__ = __webpack_require__(1306);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__select__ = __webpack_require__(1305);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__checkbox__ = __webpack_require__(1311);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__multicheckbox__ = __webpack_require__(1313);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__input__ = __webpack_require__(1312);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__radio__ = __webpack_require__(1314);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__textarea__ = __webpack_require__(1316);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__select__ = __webpack_require__(1315);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "d", function() { return __WEBPACK_IMPORTED_MODULE_5__select__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_0__checkbox__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "f", function() { return __WEBPACK_IMPORTED_MODULE_1__multicheckbox__["a"]; });
@@ -1243,14 +1374,14 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1274:
+/***/ 1276:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fieldset__ = __webpack_require__(1312);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__label__ = __webpack_require__(1313);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__description__ = __webpack_require__(1311);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_validation__ = __webpack_require__(1314);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fieldset__ = __webpack_require__(1322);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__label__ = __webpack_require__(1323);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__description__ = __webpack_require__(1321);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__message_validation__ = __webpack_require__(1324);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "d", function() { return __WEBPACK_IMPORTED_MODULE_0__fieldset__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__label__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__description__["a"]; });
@@ -1264,7 +1395,795 @@ var FormlyValidationMessage = (function () {
 
 /***/ },
 
-/***/ 1286:
+/***/ 1277:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__content_ref_class__ = __webpack_require__(1279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_triggers__ = __webpack_require__(1330);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ComponentLoader; });
+
+
+
+var ComponentLoader = (function () {
+    /**
+     * Do not use this directly, it should be instanced via
+     * `ComponentLoadFactory.attach`
+     * @internal
+     * @param _viewContainerRef
+     * @param _elementRef
+     * @param _injector
+     * @param _renderer
+     * @param _componentFactoryResolver
+     * @param _ngZone
+     * @param _posService
+     */
+    // tslint:disable-next-line
+    function ComponentLoader(_viewContainerRef, _renderer, _elementRef, _injector, _componentFactoryResolver, _ngZone, _posService) {
+        this.onBeforeShow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onShown = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onBeforeHide = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this.onHidden = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        this._providers = [];
+        this._ngZone = _ngZone;
+        this._injector = _injector;
+        this._renderer = _renderer;
+        this._elementRef = _elementRef;
+        this._posService = _posService;
+        this._viewContainerRef = _viewContainerRef;
+        this._componentFactoryResolver = _componentFactoryResolver;
+    }
+    Object.defineProperty(ComponentLoader.prototype, "isShown", {
+        get: function () {
+            return !!this._componentRef;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ;
+    ComponentLoader.prototype.attach = function (compType) {
+        this._componentFactory = this._componentFactoryResolver
+            .resolveComponentFactory(compType);
+        return this;
+    };
+    // todo: add behaviour: to target element, `body`, custom element
+    ComponentLoader.prototype.to = function (container) {
+        this.container = container || this.container;
+        return this;
+    };
+    ComponentLoader.prototype.position = function (opts) {
+        this.attachment = opts.attachment || this.attachment;
+        this._elementRef = opts.target || this._elementRef;
+        return this;
+    };
+    ComponentLoader.prototype.provide = function (provider) {
+        this._providers.push(provider);
+        return this;
+    };
+    ComponentLoader.prototype.show = function (opts) {
+        if (opts === void 0) { opts = {}; }
+        this._subscribePositioning();
+        if (!this._componentRef) {
+            this.onBeforeShow.emit();
+            this._contentRef = this._getContentRef(opts.content);
+            var injector = __WEBPACK_IMPORTED_MODULE_0__angular_core__["ReflectiveInjector"].resolveAndCreate(this._providers, this._injector);
+            this._componentRef = this._viewContainerRef
+                .createComponent(this._componentFactory, 0, injector, this._contentRef.nodes);
+            this.instance = this._componentRef.instance;
+            Object.assign(this._componentRef.instance, opts);
+            if (this.container === 'body' && typeof document !== 'undefined') {
+                document.querySelector(this.container)
+                    .appendChild(this._componentRef.location.nativeElement);
+            }
+            // we need to manually invoke change detection since events registered
+            // via
+            // Renderer::listen() are not picked up by change detection with the
+            // OnPush strategy
+            this._componentRef.changeDetectorRef.markForCheck();
+            this.onShown.emit(this._componentRef.instance);
+        }
+        return this._componentRef;
+    };
+    ComponentLoader.prototype.hide = function () {
+        if (this._componentRef) {
+            this.onBeforeHide.emit(this._componentRef.instance);
+            this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._componentRef.hostView));
+            this._componentRef = null;
+            if (this._contentRef.viewRef) {
+                this._viewContainerRef.remove(this._viewContainerRef.indexOf(this._contentRef.viewRef));
+                this._contentRef = null;
+            }
+            this._componentRef = null;
+            this.onHidden.emit();
+        }
+        return this;
+    };
+    ComponentLoader.prototype.toggle = function () {
+        if (this.isShown) {
+            this.hide();
+            return;
+        }
+        this.show();
+    };
+    ComponentLoader.prototype.dispose = function () {
+        if (this.isShown) {
+            this.hide();
+        }
+        this._unsubscribePositioning();
+        if (this._unregisterListenersFn) {
+            this._unregisterListenersFn();
+        }
+    };
+    ComponentLoader.prototype.listen = function (listenOpts) {
+        var _this = this;
+        this.triggers = listenOpts.triggers || this.triggers;
+        listenOpts.target = listenOpts.target || this._elementRef;
+        listenOpts.show = listenOpts.show || (function () { return _this.show(); });
+        listenOpts.hide = listenOpts.hide || (function () { return _this.hide(); });
+        listenOpts.toggle = listenOpts.toggle || (function () { return _this.isShown
+            ? listenOpts.hide()
+            : listenOpts.show(); });
+        this._unregisterListenersFn = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_triggers__["a" /* listenToTriggers */])(this._renderer, listenOpts.target.nativeElement, this.triggers, listenOpts.show, listenOpts.hide, listenOpts.toggle);
+        return this;
+    };
+    ComponentLoader.prototype._subscribePositioning = function () {
+        var _this = this;
+        if (this._zoneSubscription || !this.attachment) {
+            return;
+        }
+        this._zoneSubscription = this._ngZone
+            .onStable.subscribe(function () {
+            if (!_this._componentRef) {
+                return;
+            }
+            _this._posService.position({
+                element: _this._componentRef.location,
+                target: _this._elementRef,
+                attachment: _this.attachment,
+                appendToBody: _this.container === 'body'
+            });
+        });
+    };
+    ComponentLoader.prototype._unsubscribePositioning = function () {
+        if (!this._zoneSubscription) {
+            return;
+        }
+        this._zoneSubscription.unsubscribe();
+        this._zoneSubscription = null;
+    };
+    ComponentLoader.prototype._getContentRef = function (content) {
+        if (!content) {
+            return new __WEBPACK_IMPORTED_MODULE_1__content_ref_class__["a" /* ContentRef */]([]);
+        }
+        if (content instanceof __WEBPACK_IMPORTED_MODULE_0__angular_core__["TemplateRef"]) {
+            var viewRef = this._viewContainerRef
+                .createEmbeddedView(content);
+            return new __WEBPACK_IMPORTED_MODULE_1__content_ref_class__["a" /* ContentRef */]([viewRef.rootNodes], viewRef);
+        }
+        return new __WEBPACK_IMPORTED_MODULE_1__content_ref_class__["a" /* ContentRef */]([[this._renderer.createText(null, "" + content)]]);
+    };
+    return ComponentLoader;
+}());
+//# sourceMappingURL=component-loader.class.js.map
+
+/***/ },
+
+/***/ 1278:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_loader_class__ = __webpack_require__(1277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__positioning__ = __webpack_require__(1282);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ComponentLoaderFactory; });
+
+
+
+var ComponentLoaderFactory = (function () {
+    function ComponentLoaderFactory(componentFactoryResolver, ngZone, injector, posService) {
+        this._ngZone = ngZone;
+        this._injector = injector;
+        this._posService = posService;
+        this._componentFactoryResolver = componentFactoryResolver;
+    }
+    /**
+     *
+     * @param _elementRef
+     * @param _viewContainerRef
+     * @param _renderer
+     * @returns {ComponentLoader}
+     */
+    ComponentLoaderFactory.prototype.createLoader = function (_elementRef, _viewContainerRef, _renderer) {
+        return new __WEBPACK_IMPORTED_MODULE_1__component_loader_class__["a" /* ComponentLoader */](_viewContainerRef, _renderer, _elementRef, this._injector, this._componentFactoryResolver, this._ngZone, this._posService);
+    };
+    ComponentLoaderFactory.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+    ];
+    /** @nocollapse */
+    ComponentLoaderFactory.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injector"], },
+        { type: __WEBPACK_IMPORTED_MODULE_2__positioning__["a" /* PositioningService */], },
+    ]; };
+    return ComponentLoaderFactory;
+}());
+//# sourceMappingURL=component-loader.factory.js.map
+
+/***/ },
+
+/***/ 1279:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ContentRef; });
+/**
+ * @copyright Valor Software
+ * @copyright Angular ng-bootstrap team
+ */
+var ContentRef = (function () {
+    function ContentRef(nodes, viewRef, componentRef) {
+        this.nodes = nodes;
+        this.viewRef = viewRef;
+        this.componentRef = componentRef;
+    }
+    return ContentRef;
+}());
+//# sourceMappingURL=content-ref.class.js.map
+
+/***/ },
+
+/***/ 1280:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return modalConfigDefaults; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ClassName; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return Selector; });
+var modalConfigDefaults = {
+    backdrop: true,
+    keyboard: true,
+    focus: true,
+    show: false,
+    ignoreBackdropClick: false
+};
+var ClassName = {
+    SCROLLBAR_MEASURER: 'modal-scrollbar-measure',
+    BACKDROP: 'modal-backdrop',
+    OPEN: 'modal-open',
+    FADE: 'fade',
+    IN: 'in',
+    SHOW: 'show' // bs4
+};
+var Selector = {
+    DIALOG: '.modal-dialog',
+    DATA_TOGGLE: '[data-toggle="modal"]',
+    DATA_DISMISS: '[data-dismiss="modal"]',
+    FIXED_CONTENT: '.navbar-fixed-top, .navbar-fixed-bottom, .is-fixed'
+};
+//# sourceMappingURL=modal-options.class.js.map
+
+/***/ },
+
+/***/ 1281:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__ = __webpack_require__(1259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_ng2_bootstrap_config__ = __webpack_require__(1284);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_utils_class__ = __webpack_require__(1331);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modal_backdrop_component__ = __webpack_require__(1261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modal_options_class__ = __webpack_require__(1280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__component_loader_component_loader_factory__ = __webpack_require__(1278);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ModalDirective; });
+/* tslint:disable:max-file-line-count */
+// todo: should we support enforce focus in?
+// todo: in original bs there are was a way to prevent modal from showing
+// todo: original modal had resize events
+
+
+
+
+
+
+
+
+var TRANSITION_DURATION = 300;
+var BACKDROP_TRANSITION_DURATION = 150;
+/** Mark any code with directive to show it's content in modal */
+var ModalDirective = (function () {
+    function ModalDirective(_element, _viewContainerRef, _renderer, clf) {
+        /** This event fires immediately when the `show` instance method is called. */
+        this.onShow = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        /** This event is fired when the modal has been made visible to the user (will wait for CSS transitions to complete) */
+        this.onShown = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        /** This event is fired immediately when the hide instance method has been called. */
+        this.onHide = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        /** This event is fired when the modal has finished being hidden from the user (will wait for CSS transitions to complete). */
+        this.onHidden = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+        // seems like an Options
+        this.isAnimated = true;
+        this._isShown = false;
+        this.isBodyOverflowing = false;
+        this.originalBodyPadding = 0;
+        this.scrollbarWidth = 0;
+        this.timerHideModal = 0;
+        this.timerRmBackDrop = 0;
+        this.isNested = false;
+        this._element = _element;
+        this._renderer = _renderer;
+        this._backdrop = clf.createLoader(_element, _viewContainerRef, _renderer);
+    }
+    Object.defineProperty(ModalDirective.prototype, "config", {
+        get: function () {
+            return this._config;
+        },
+        /** allows to set modal configuration via element property */
+        set: function (conf) {
+            this._config = this.getConfig(conf);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ModalDirective.prototype, "isShown", {
+        get: function () {
+            return this._isShown;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ModalDirective.prototype.onClick = function (event) {
+        if (this.config.ignoreBackdropClick || this.config.backdrop === 'static' || event.target !== this._element.nativeElement) {
+            return;
+        }
+        this.hide(event);
+    };
+    // todo: consider preventing default and stopping propagation
+    ModalDirective.prototype.onEsc = function () {
+        if (this.config.keyboard) {
+            this.hide();
+        }
+    };
+    ModalDirective.prototype.ngOnDestroy = function () {
+        this.config = void 0;
+        if (this._isShown) {
+            this._isShown = false;
+            this.hideModal();
+            this._backdrop.dispose();
+        }
+    };
+    ModalDirective.prototype.ngAfterViewInit = function () {
+        this._config = this._config || this.getConfig();
+        if (this._config.show) {
+            this.show();
+        }
+    };
+    /* Public methods */
+    /** Allows to manually toggle modal visibility */
+    ModalDirective.prototype.toggle = function () {
+        return this._isShown ? this.hide() : this.show();
+    };
+    /** Allows to manually open modal */
+    ModalDirective.prototype.show = function () {
+        var _this = this;
+        this.onShow.emit(this);
+        if (this._isShown) {
+            return;
+        }
+        clearTimeout(this.timerHideModal);
+        clearTimeout(this.timerRmBackDrop);
+        this._isShown = true;
+        this.checkScrollbar();
+        this.setScrollbar();
+        if (__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */] && __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body) {
+            if (__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.classList.contains(__WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].OPEN)) {
+                this.isNested = true;
+            }
+            else {
+                this._renderer.setElementClass(__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].OPEN, true);
+            }
+        }
+        this.showBackdrop(function () {
+            _this.showElement();
+        });
+    };
+    /** Allows to manually close modal */
+    ModalDirective.prototype.hide = function (event) {
+        var _this = this;
+        if (event) {
+            event.preventDefault();
+        }
+        this.onHide.emit(this);
+        // todo: add an option to prevent hiding
+        if (!this._isShown) {
+            return;
+        }
+        clearTimeout(this.timerHideModal);
+        clearTimeout(this.timerRmBackDrop);
+        this._isShown = false;
+        this._renderer.setElementClass(this._element.nativeElement, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].IN, false);
+        if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_ng2_bootstrap_config__["a" /* isBs3 */])()) {
+            this._renderer.setElementClass(this._element.nativeElement, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].SHOW, false);
+        }
+        // this._addClassIn = false;
+        if (this.isAnimated) {
+            this.timerHideModal = setTimeout(function () { return _this.hideModal(); }, TRANSITION_DURATION);
+        }
+        else {
+            this.hideModal();
+        }
+    };
+    /** Private methods @internal */
+    ModalDirective.prototype.getConfig = function (config) {
+        return Object.assign({}, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["b" /* modalConfigDefaults */], config);
+    };
+    /**
+     *  Show dialog
+     *  @internal
+     */
+    ModalDirective.prototype.showElement = function () {
+        var _this = this;
+        // todo: replace this with component loader usage
+        if (!this._element.nativeElement.parentNode ||
+            (this._element.nativeElement.parentNode.nodeType !== Node.ELEMENT_NODE)) {
+            // don't move modals dom position
+            if (__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */] && __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body) {
+                __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.appendChild(this._element.nativeElement);
+            }
+        }
+        this._renderer.setElementAttribute(this._element.nativeElement, 'aria-hidden', 'false');
+        this._renderer.setElementStyle(this._element.nativeElement, 'display', 'block');
+        this._renderer.setElementProperty(this._element.nativeElement, 'scrollTop', 0);
+        if (this.isAnimated) {
+            __WEBPACK_IMPORTED_MODULE_3__utils_utils_class__["a" /* Utils */].reflow(this._element.nativeElement);
+        }
+        // this._addClassIn = true;
+        this._renderer.setElementClass(this._element.nativeElement, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].IN, true);
+        if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__utils_ng2_bootstrap_config__["a" /* isBs3 */])()) {
+            this._renderer.setElementClass(this._element.nativeElement, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].SHOW, true);
+        }
+        var transitionComplete = function () {
+            if (_this._config.focus) {
+                _this._element.nativeElement.focus();
+            }
+            _this.onShown.emit(_this);
+        };
+        if (this.isAnimated) {
+            setTimeout(transitionComplete, TRANSITION_DURATION);
+        }
+        else {
+            transitionComplete();
+        }
+    };
+    /** @internal */
+    ModalDirective.prototype.hideModal = function () {
+        var _this = this;
+        this._renderer.setElementAttribute(this._element.nativeElement, 'aria-hidden', 'true');
+        this._renderer.setElementStyle(this._element.nativeElement, 'display', 'none');
+        this.showBackdrop(function () {
+            if (!_this.isNested) {
+                if (__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */] && __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body) {
+                    _this._renderer.setElementClass(__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body, __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].OPEN, false);
+                }
+                _this.resetScrollbar();
+            }
+            _this.resetAdjustments();
+            _this.onHidden.emit(_this);
+        });
+    };
+    // todo: original show was calling a callback when done, but we can use promise
+    /** @internal */
+    ModalDirective.prototype.showBackdrop = function (callback) {
+        var _this = this;
+        if (this._isShown && this.config.backdrop && (!this.backdrop || !this.backdrop.instance.isShown)) {
+            this.removeBackdrop();
+            this._backdrop
+                .attach(__WEBPACK_IMPORTED_MODULE_4__modal_backdrop_component__["a" /* ModalBackdropComponent */])
+                .to('body')
+                .show({ isAnimated: false });
+            this.backdrop = this._backdrop._componentRef;
+            if (this.isAnimated) {
+                this.backdrop.instance.isAnimated = this.isAnimated;
+                __WEBPACK_IMPORTED_MODULE_3__utils_utils_class__["a" /* Utils */].reflow(this.backdrop.instance.element.nativeElement);
+            }
+            this.backdrop.instance.isShown = true;
+            if (!callback) {
+                return;
+            }
+            if (!this.isAnimated) {
+                callback();
+                return;
+            }
+            setTimeout(callback, BACKDROP_TRANSITION_DURATION);
+        }
+        else if (!this._isShown && this.backdrop) {
+            this.backdrop.instance.isShown = false;
+            var callbackRemove = function () {
+                _this.removeBackdrop();
+                if (callback) {
+                    callback();
+                }
+            };
+            if (this.backdrop.instance.isAnimated) {
+                this.timerRmBackDrop = setTimeout(callbackRemove, BACKDROP_TRANSITION_DURATION);
+            }
+            else {
+                callbackRemove();
+            }
+        }
+        else if (callback) {
+            callback();
+        }
+    };
+    /** @internal */
+    ModalDirective.prototype.removeBackdrop = function () {
+        this._backdrop.hide();
+    };
+    /** Events tricks */
+    // no need for it
+    // protected setEscapeEvent():void {
+    //   if (this._isShown && this._config.keyboard) {
+    //     $(this._element).on(Event.KEYDOWN_DISMISS, (event) => {
+    //       if (event.which === 27) {
+    //         this.hide()
+    //       }
+    //     })
+    //
+    //   } else if (!this._isShown) {
+    //     $(this._element).off(Event.KEYDOWN_DISMISS)
+    //   }
+    // }
+    // protected setResizeEvent():void {
+    // console.log(this.renderer.listenGlobal('', Event.RESIZE));
+    // if (this._isShown) {
+    //   $(window).on(Event.RESIZE, $.proxy(this._handleUpdate, this))
+    // } else {
+    //   $(window).off(Event.RESIZE)
+    // }
+    // }
+    /** @internal */
+    ModalDirective.prototype.resetAdjustments = function () {
+        this._renderer.setElementStyle(this._element.nativeElement, 'paddingLeft', '');
+        this._renderer.setElementStyle(this._element.nativeElement, 'paddingRight', '');
+    };
+    /** Scroll bar tricks */
+    /** @internal */
+    ModalDirective.prototype.checkScrollbar = function () {
+        this.isBodyOverflowing = __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.clientWidth < __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["b" /* window */].innerWidth;
+        this.scrollbarWidth = this.getScrollbarWidth();
+    };
+    ModalDirective.prototype.setScrollbar = function () {
+        if (!__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */]) {
+            return;
+        }
+        var fixedEl = __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].querySelector(__WEBPACK_IMPORTED_MODULE_5__modal_options_class__["c" /* Selector */].FIXED_CONTENT);
+        if (!fixedEl) {
+            return;
+        }
+        var bodyPadding = parseInt(__WEBPACK_IMPORTED_MODULE_3__utils_utils_class__["a" /* Utils */].getStyles(fixedEl).paddingRight || 0, 10);
+        this.originalBodyPadding = parseInt(__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.style.paddingRight || 0, 10);
+        if (this.isBodyOverflowing) {
+            __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.style.paddingRight = (bodyPadding + this.scrollbarWidth) + "px";
+        }
+    };
+    ModalDirective.prototype.resetScrollbar = function () {
+        __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.style.paddingRight = this.originalBodyPadding;
+    };
+    // thx d.walsh
+    ModalDirective.prototype.getScrollbarWidth = function () {
+        var scrollDiv = this._renderer.createElement(__WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body, 'div', void 0);
+        scrollDiv.className = __WEBPACK_IMPORTED_MODULE_5__modal_options_class__["a" /* ClassName */].SCROLLBAR_MEASURER;
+        var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+        __WEBPACK_IMPORTED_MODULE_1__utils_facade_browser__["a" /* document */].body.removeChild(scrollDiv);
+        return scrollbarWidth;
+    };
+    ModalDirective.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Directive"], args: [{
+                    selector: '[bsModal]',
+                    exportAs: 'bs-modal'
+                },] },
+    ];
+    /** @nocollapse */
+    ModalDirective.ctorParameters = function () { return [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"], },
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Renderer"], },
+        { type: __WEBPACK_IMPORTED_MODULE_6__component_loader_component_loader_factory__["a" /* ComponentLoaderFactory */], },
+    ]; };
+    ModalDirective.propDecorators = {
+        'config': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+        'onShow': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+        'onShown': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+        'onHide': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+        'onHidden': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+        'onClick': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"], args: ['click', ['$event'],] },],
+        'onEsc': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["HostListener"], args: ['keydown.esc',] },],
+    };
+    return ModalDirective;
+}());
+//# sourceMappingURL=modal.component.js.map
+
+/***/ },
+
+/***/ 1282:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ng_positioning__ = __webpack_require__(1283);
+/* unused harmony reexport positionElements */
+/* unused harmony reexport Positioning */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__positioning_service__ = __webpack_require__(1328);
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__positioning_service__["a"]; });
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ },
+
+/***/ 1283:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* unused harmony export Positioning */
+/* harmony export (immutable) */ exports["a"] = positionElements;
+/**
+ * @copyright Valor Software
+ * @copyright Angular ng-bootstrap team
+ */
+// previous version:
+// https://github.com/angular-ui/bootstrap/blob/07c31d0731f7cb068a1932b8e01d2312b796b4ec/src/position/position.js
+// tslint:disable
+var Positioning = (function () {
+    function Positioning() {
+    }
+    Positioning.prototype.position = function (element, round) {
+        if (round === void 0) { round = true; }
+        var elPosition;
+        var parentOffset = { width: 0, height: 0, top: 0, bottom: 0, left: 0, right: 0 };
+        if (this.getStyle(element, 'position') === 'fixed') {
+            elPosition = element.getBoundingClientRect();
+        }
+        else {
+            var offsetParentEl = this.offsetParent(element);
+            elPosition = this.offset(element, false);
+            if (offsetParentEl !== document.documentElement) {
+                parentOffset = this.offset(offsetParentEl, false);
+            }
+            parentOffset.top += offsetParentEl.clientTop;
+            parentOffset.left += offsetParentEl.clientLeft;
+        }
+        elPosition.top -= parentOffset.top;
+        elPosition.bottom -= parentOffset.top;
+        elPosition.left -= parentOffset.left;
+        elPosition.right -= parentOffset.left;
+        if (round) {
+            elPosition.top = Math.round(elPosition.top);
+            elPosition.bottom = Math.round(elPosition.bottom);
+            elPosition.left = Math.round(elPosition.left);
+            elPosition.right = Math.round(elPosition.right);
+        }
+        return elPosition;
+    };
+    Positioning.prototype.offset = function (element, round) {
+        if (round === void 0) { round = true; }
+        var elBcr = element.getBoundingClientRect();
+        var viewportOffset = {
+            top: window.pageYOffset - document.documentElement.clientTop,
+            left: window.pageXOffset - document.documentElement.clientLeft
+        };
+        var elOffset = {
+            height: elBcr.height || element.offsetHeight,
+            width: elBcr.width || element.offsetWidth,
+            top: elBcr.top + viewportOffset.top,
+            bottom: elBcr.bottom + viewportOffset.top,
+            left: elBcr.left + viewportOffset.left,
+            right: elBcr.right + viewportOffset.left
+        };
+        if (round) {
+            elOffset.height = Math.round(elOffset.height);
+            elOffset.width = Math.round(elOffset.width);
+            elOffset.top = Math.round(elOffset.top);
+            elOffset.bottom = Math.round(elOffset.bottom);
+            elOffset.left = Math.round(elOffset.left);
+            elOffset.right = Math.round(elOffset.right);
+        }
+        return elOffset;
+    };
+    Positioning.prototype.positionElements = function (hostElement, targetElement, placement, appendToBody) {
+        var hostElPosition = appendToBody ? this.offset(hostElement, false) : this.position(hostElement, false);
+        var shiftWidth = {
+            left: hostElPosition.left,
+            center: hostElPosition.left + hostElPosition.width / 2 - targetElement.offsetWidth / 2,
+            right: hostElPosition.left + hostElPosition.width
+        };
+        var shiftHeight = {
+            top: hostElPosition.top,
+            center: hostElPosition.top + hostElPosition.height / 2 - targetElement.offsetHeight / 2,
+            bottom: hostElPosition.top + hostElPosition.height
+        };
+        var targetElBCR = targetElement.getBoundingClientRect();
+        var placementPrimary = placement.split(' ')[0] || 'top';
+        var placementSecondary = placement.split(' ')[1] || 'center';
+        var targetElPosition = {
+            height: targetElBCR.height || targetElement.offsetHeight,
+            width: targetElBCR.width || targetElement.offsetWidth,
+            top: 0,
+            bottom: targetElBCR.height || targetElement.offsetHeight,
+            left: 0,
+            right: targetElBCR.width || targetElement.offsetWidth
+        };
+        switch (placementPrimary) {
+            case 'top':
+                targetElPosition.top = hostElPosition.top - targetElement.offsetHeight;
+                targetElPosition.bottom += hostElPosition.top - targetElement.offsetHeight;
+                targetElPosition.left = shiftWidth[placementSecondary];
+                targetElPosition.right += shiftWidth[placementSecondary];
+                break;
+            case 'bottom':
+                targetElPosition.top = shiftHeight[placementPrimary];
+                targetElPosition.bottom += shiftHeight[placementPrimary];
+                targetElPosition.left = shiftWidth[placementSecondary];
+                targetElPosition.right += shiftWidth[placementSecondary];
+                break;
+            case 'left':
+                targetElPosition.top = shiftHeight[placementSecondary];
+                targetElPosition.bottom += shiftHeight[placementSecondary];
+                targetElPosition.left = hostElPosition.left - targetElement.offsetWidth;
+                targetElPosition.right += hostElPosition.left - targetElement.offsetWidth;
+                break;
+            case 'right':
+                targetElPosition.top = shiftHeight[placementSecondary];
+                targetElPosition.bottom += shiftHeight[placementSecondary];
+                targetElPosition.left = shiftWidth[placementPrimary];
+                targetElPosition.right += shiftWidth[placementPrimary];
+                break;
+        }
+        targetElPosition.top = Math.round(targetElPosition.top);
+        targetElPosition.bottom = Math.round(targetElPosition.bottom);
+        targetElPosition.left = Math.round(targetElPosition.left);
+        targetElPosition.right = Math.round(targetElPosition.right);
+        return targetElPosition;
+    };
+    Positioning.prototype.getStyle = function (element, prop) { return window.getComputedStyle(element)[prop]; };
+    Positioning.prototype.isStaticPositioned = function (element) {
+        return (this.getStyle(element, 'position') || 'static') === 'static';
+    };
+    Positioning.prototype.offsetParent = function (element) {
+        var offsetParentEl = element.offsetParent || document.documentElement;
+        while (offsetParentEl && offsetParentEl !== document.documentElement && this.isStaticPositioned(offsetParentEl)) {
+            offsetParentEl = offsetParentEl.offsetParent;
+        }
+        return offsetParentEl || document.documentElement;
+    };
+    return Positioning;
+}());
+var positionService = new Positioning();
+function positionElements(hostElement, targetElement, placement, appendToBody) {
+    var pos = positionService.positionElements(hostElement, targetElement, placement, appendToBody);
+    targetElement.style.top = pos.top + "px";
+    targetElement.style.left = pos.left + "px";
+}
+//# sourceMappingURL=ng-positioning.js.map
+
+/***/ },
+
+/***/ 1284:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__facade_browser__ = __webpack_require__(1259);
+/* harmony export (immutable) */ exports["a"] = isBs3;
+
+function isBs3() {
+    return __WEBPACK_IMPORTED_MODULE_0__facade_browser__["b" /* window */].__theme !== 'bs4';
+}
+//# sourceMappingURL=ng2-bootstrap-config.js.map
+
+/***/ },
+
+/***/ 1296:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1356,8 +2275,8 @@ var RateFilterComponent = (function () {
     RateFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-rate-filter',
-            template: __webpack_require__(1344),
-            styles: [__webpack_require__(1327)]
+            template: __webpack_require__(1361),
+            styles: [__webpack_require__(1344)]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], RateFilterComponent);
@@ -1368,7 +2287,7 @@ var RateFilterComponent = (function () {
 
 /***/ },
 
-/***/ 1287:
+/***/ 1297:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1434,8 +2353,8 @@ var NewtypeComponent = (function () {
     NewtypeComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-newtype',
-            template: __webpack_require__(1346),
-            styles: [__webpack_require__(1329)]
+            template: __webpack_require__(1363),
+            styles: [__webpack_require__(1346)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */]) === 'function' && _a) || Object])
     ], NewtypeComponent);
@@ -1446,7 +2365,7 @@ var NewtypeComponent = (function () {
 
 /***/ },
 
-/***/ 1288:
+/***/ 1298:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1513,8 +2432,8 @@ var SubcategoryComponent = (function () {
     SubcategoryComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-subcategory',
-            template: __webpack_require__(1347),
-            styles: [__webpack_require__(1330)]
+            template: __webpack_require__(1364),
+            styles: [__webpack_require__(1347)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__commons_services_rate_service__["a" /* RateService */]) === 'function' && _a) || Object])
     ], SubcategoryComponent);
@@ -1525,12 +2444,12 @@ var SubcategoryComponent = (function () {
 
 /***/ },
 
-/***/ 1289:
+/***/ 1299:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rate_main_rate_main_component__ = __webpack_require__(1266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__rate_main_rate_main_component__ = __webpack_require__(1268);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return RateRoutes; });
 
 
@@ -1543,7 +2462,7 @@ var RateRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModu
 
 /***/ },
 
-/***/ 1290:
+/***/ 1300:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1567,8 +2486,8 @@ var SearchPanelComponent = (function () {
     SearchPanelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-panel',
-            template: __webpack_require__(1348),
-            styles: [__webpack_require__(1331)]
+            template: __webpack_require__(1365),
+            styles: [__webpack_require__(1348)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchPanelComponent);
@@ -1578,7 +2497,7 @@ var SearchPanelComponent = (function () {
 
 /***/ },
 
-/***/ 1291:
+/***/ 1301:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1602,8 +2521,8 @@ var SearchResultsComponent = (function () {
     SearchResultsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-results',
-            template: __webpack_require__(1349),
-            styles: [__webpack_require__(1332)]
+            template: __webpack_require__(1366),
+            styles: [__webpack_require__(1349)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchResultsComponent);
@@ -1613,12 +2532,12 @@ var SearchResultsComponent = (function () {
 
 /***/ },
 
-/***/ 1292:
+/***/ 1302:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_single_focus_dispatcher__ = __webpack_require__(1270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_single_focus_dispatcher__ = __webpack_require__(1272);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyAttributes; });
 
 
@@ -1695,12 +2614,12 @@ var FormlyAttributes = (function () {
 
 /***/ },
 
-/***/ 1293:
+/***/ 1303:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_event_emitter__ = __webpack_require__(1268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_formly_event_emitter__ = __webpack_require__(1270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_config__ = __webpack_require__(1258);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1257);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(321);
@@ -1907,13 +2826,13 @@ var FormlyField = (function () {
 
 /***/ },
 
-/***/ 1294:
+/***/ 1304:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_forms__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_form_builder__ = __webpack_require__(1269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_formly_form_builder__ = __webpack_require__(1271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils__ = __webpack_require__(1257);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyForm; });
 
@@ -2046,7 +2965,7 @@ var FormlyForm = (function () {
 
 /***/ },
 
-/***/ 1295:
+/***/ 1305:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2087,11 +3006,11 @@ var FormlyValidationMessages = (function () {
 
 /***/ },
 
-/***/ 1296:
+/***/ 1306:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1259);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__field__ = __webpack_require__(1260);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FieldWrapper; });
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
@@ -2110,13 +3029,13 @@ var FieldWrapper = (function (_super) {
 
 /***/ },
 
-/***/ 1297:
+/***/ 1307:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_core__ = __webpack_require__(1256);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__core_core__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__ = __webpack_require__(1308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__ = __webpack_require__(1318);
 /* harmony namespace reexport (by used) */ __webpack_require__.d(exports, "b", function() { return __WEBPACK_IMPORTED_MODULE_1__ui_bootstrap_ui_bootstrap__["a"]; });
 
 
@@ -2124,7 +3043,7 @@ var FieldWrapper = (function (_super) {
 
 /***/ },
 
-/***/ 1298:
+/***/ 1308:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2145,7 +3064,7 @@ var TemplateAddons = (function () {
 
 /***/ },
 
-/***/ 1299:
+/***/ 1309:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2166,7 +3085,7 @@ var TemplateDescription = (function () {
 
 /***/ },
 
-/***/ 1300:
+/***/ 1310:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2187,7 +3106,7 @@ var TemplateValidation = (function () {
 
 /***/ },
 
-/***/ 1301:
+/***/ 1311:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2224,7 +3143,7 @@ var FormlyFieldCheckbox = (function (_super) {
 
 /***/ },
 
-/***/ 1302:
+/***/ 1312:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2263,7 +3182,7 @@ var FormlyFieldInput = (function (_super) {
 
 /***/ },
 
-/***/ 1303:
+/***/ 1313:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2304,7 +3223,7 @@ var FormlyFieldMultiCheckbox = (function (_super) {
 
 /***/ },
 
-/***/ 1304:
+/***/ 1314:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2336,7 +3255,7 @@ var FormlyFieldRadio = (function (_super) {
 
 /***/ },
 
-/***/ 1305:
+/***/ 1315:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2423,7 +3342,7 @@ var FormlyFieldSelect = (function (_super) {
 
 /***/ },
 
-/***/ 1306:
+/***/ 1316:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2455,16 +3374,16 @@ var FormlyFieldTextArea = (function (_super) {
 
 /***/ },
 
-/***/ 1307:
+/***/ 1317:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrappers_addons__ = __webpack_require__(1310);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__run_description__ = __webpack_require__(1299);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__run_validation__ = __webpack_require__(1300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__run_addon__ = __webpack_require__(1298);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__types_types__ = __webpack_require__(1273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__wrappers_wrappers__ = __webpack_require__(1274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__wrappers_addons__ = __webpack_require__(1320);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__run_description__ = __webpack_require__(1309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__run_validation__ = __webpack_require__(1310);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__run_addon__ = __webpack_require__(1308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__types_types__ = __webpack_require__(1275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__wrappers_wrappers__ = __webpack_require__(1276);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FIELD_TYPE_COMPONENTS; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return BOOTSTRAP_FORMLY_CONFIG; });
 
@@ -2536,17 +3455,17 @@ var BOOTSTRAP_FORMLY_CONFIG = {
 
 /***/ },
 
-/***/ 1308:
+/***/ 1318:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__types_types__ = __webpack_require__(1273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__types_types__ = __webpack_require__(1275);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrappers_wrappers__ = __webpack_require__(1274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrappers_wrappers__ = __webpack_require__(1276);
 /* unused harmony namespace reexport */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_validation_message__ = __webpack_require__(1272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__formly_validation_message__ = __webpack_require__(1274);
 /* unused harmony reexport FormlyValidationMessage */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__ = __webpack_require__(1309);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__ = __webpack_require__(1319);
 /* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__ui_bootstrap_module__["a"]; });
 
 
@@ -2556,7 +3475,7 @@ var BOOTSTRAP_FORMLY_CONFIG = {
 
 /***/ },
 
-/***/ 1309:
+/***/ 1319:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2564,8 +3483,8 @@ var BOOTSTRAP_FORMLY_CONFIG = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_core__ = __webpack_require__(1256);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_bootstrap_config__ = __webpack_require__(1307);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__formly_validation_message__ = __webpack_require__(1272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ui_bootstrap_config__ = __webpack_require__(1317);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__formly_validation_message__ = __webpack_require__(1274);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return FormlyBootstrapModule; });
 
 
@@ -2593,7 +3512,7 @@ var FormlyBootstrapModule = (function () {
 
 /***/ },
 
-/***/ 1310:
+/***/ 1320:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2638,7 +3557,7 @@ var FormlyWrapperAddons = (function (_super) {
 
 /***/ },
 
-/***/ 1311:
+/***/ 1321:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2673,7 +3592,7 @@ var FormlyWrapperDescription = (function (_super) {
 
 /***/ },
 
-/***/ 1312:
+/***/ 1322:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2708,7 +3627,7 @@ var FormlyWrapperFieldset = (function (_super) {
 
 /***/ },
 
-/***/ 1313:
+/***/ 1323:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2743,7 +3662,7 @@ var FormlyWrapperLabel = (function (_super) {
 
 /***/ },
 
-/***/ 1314:
+/***/ 1324:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2785,84 +3704,296 @@ var FormlyWrapperValidationMessages = (function (_super) {
 
 /***/ },
 
-/***/ 1327:
-/***/ function(module, exports) {
+/***/ 1325:
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__component_loader_class__ = __webpack_require__(1277);
+/* unused harmony reexport ComponentLoader */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__component_loader_factory__ = __webpack_require__(1278);
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_1__component_loader_factory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__content_ref_class__ = __webpack_require__(1279);
+/* unused harmony reexport ContentRef */
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ },
+
+/***/ 1326:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__modal_backdrop_component__ = __webpack_require__(1261);
+/* unused harmony reexport ModalBackdropComponent */
+/* unused harmony reexport ModalBackdropOptions */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modal_component__ = __webpack_require__(1281);
+/* unused harmony reexport ModalDirective */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_module__ = __webpack_require__(1327);
+/* harmony reexport (binding) */ __webpack_require__.d(exports, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__modal_module__["a"]; });
+
+
+
+//# sourceMappingURL=index.js.map
+
+/***/ },
+
+/***/ 1327:
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modal_backdrop_component__ = __webpack_require__(1261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_component__ = __webpack_require__(1281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__positioning__ = __webpack_require__(1282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__component_loader__ = __webpack_require__(1325);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ModalModule; });
+
+
+
+
+
+var ModalModule = (function () {
+    function ModalModule() {
+    }
+    ModalModule.forRoot = function () {
+        return { ngModule: ModalModule, providers: [__WEBPACK_IMPORTED_MODULE_4__component_loader__["a" /* ComponentLoaderFactory */], __WEBPACK_IMPORTED_MODULE_3__positioning__["a" /* PositioningService */]] };
+    };
+    ModalModule.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
+                    declarations: [__WEBPACK_IMPORTED_MODULE_1__modal_backdrop_component__["a" /* ModalBackdropComponent */], __WEBPACK_IMPORTED_MODULE_2__modal_component__["a" /* ModalDirective */]],
+                    exports: [__WEBPACK_IMPORTED_MODULE_1__modal_backdrop_component__["a" /* ModalBackdropComponent */], __WEBPACK_IMPORTED_MODULE_2__modal_component__["a" /* ModalDirective */]],
+                    entryComponents: [__WEBPACK_IMPORTED_MODULE_1__modal_backdrop_component__["a" /* ModalBackdropComponent */]]
+                },] },
+    ];
+    /** @nocollapse */
+    ModalModule.ctorParameters = function () { return []; };
+    return ModalModule;
+}());
+//# sourceMappingURL=modal.module.js.map
 
 /***/ },
 
 /***/ 1328:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\n.content-div {\n  background-color: #ffffff; }\n\n.rateInputContainer {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .rateInputContainer .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .rateInputContainer .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n\n.rateForm input {\n  background-color: #dde3ec;\n  height: 43px;\n  color: #8290a3;\n  border: 1px solid #dde3ec; }\n  .rateForm input:focus {\n    border: 1px solid #c3ccda; }\n"
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ng_positioning__ = __webpack_require__(1283);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return PositioningService; });
+
+
+var PositioningService = (function () {
+    function PositioningService() {
+    }
+    PositioningService.prototype.position = function (options) {
+        var element = options.element, target = options.target, attachment = options.attachment, appendToBody = options.appendToBody;
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__ng_positioning__["a" /* positionElements */])(this._getHtmlElement(target), this._getHtmlElement(element), attachment, appendToBody);
+    };
+    PositioningService.prototype._getHtmlElement = function (element) {
+        // it means that we got a selector
+        if (typeof element === 'string') {
+            return document.querySelector(element);
+        }
+        if (element instanceof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) {
+            return element.nativeElement;
+        }
+        return element;
+    };
+    PositioningService.decorators = [
+        { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+    ];
+    /** @nocollapse */
+    PositioningService.ctorParameters = function () { return []; };
+    return PositioningService;
+}());
+//# sourceMappingURL=positioning.service.js.map
 
 /***/ },
 
 /***/ 1329:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = ".newtypeContainer {\n  background-color: #3c763d;\n  padding: 5px;\n  font-size: 15px;\n  margin: 10px; }\n\n.btn {\n  margin: 5px; }\n"
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return Trigger; });
+/**
+ * @copyright Valor Software
+ * @copyright Angular ng-bootstrap team
+ */
+var Trigger = (function () {
+    function Trigger(open, close) {
+        this.open = open;
+        this.close = close || open;
+    }
+    Trigger.prototype.isManual = function () { return this.open === 'manual' || this.close === 'manual'; };
+    return Trigger;
+}());
+//# sourceMappingURL=trigger.class.js.map
 
 /***/ },
 
 /***/ 1330:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = ".subcategoryContainer {\n  background-color: #2e6da4;\n  padding: 5px;\n  font-size: 15px;\n  margin: 10px; }\n\n.btn {\n  margin: 5px; }\n"
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__trigger_class__ = __webpack_require__(1329);
+/* unused harmony export parseTriggers */
+/* harmony export (immutable) */ exports["a"] = listenToTriggers;
+
+var DEFAULT_ALIASES = {
+    hover: ['mouseenter', 'mouseleave'],
+    focus: ['focusin', 'focusout']
+};
+function parseTriggers(triggers, aliases) {
+    if (aliases === void 0) { aliases = DEFAULT_ALIASES; }
+    var trimmedTriggers = (triggers || '').trim();
+    if (trimmedTriggers.length === 0) {
+        return [];
+    }
+    var parsedTriggers = trimmedTriggers.split(/\s+/)
+        .map(function (trigger) { return trigger.split(':'); })
+        .map(function (triggerPair) {
+        var alias = aliases[triggerPair[0]] || triggerPair;
+        return new __WEBPACK_IMPORTED_MODULE_0__trigger_class__["a" /* Trigger */](alias[0], alias[1]);
+    });
+    var manualTriggers = parsedTriggers
+        .filter(function (triggerPair) { return triggerPair.isManual(); });
+    if (manualTriggers.length > 1) {
+        throw 'Triggers parse error: only one manual trigger is allowed';
+    }
+    if (manualTriggers.length === 1 && parsedTriggers.length > 1) {
+        throw 'Triggers parse error: manual trigger can\'t be mixed with other triggers';
+    }
+    return parsedTriggers;
+}
+function listenToTriggers(renderer, target, triggers, showFn, hideFn, toggleFn) {
+    var parsedTriggers = parseTriggers(triggers);
+    var listeners = [];
+    if (parsedTriggers.length === 1 && parsedTriggers[0].isManual()) {
+        return Function.prototype;
+    }
+    parsedTriggers.forEach(function (trigger) {
+        if (trigger.open === trigger.close) {
+            listeners.push(renderer.listen(target, trigger.open, toggleFn));
+            return;
+        }
+        listeners.push(renderer.listen(target, trigger.open, showFn), renderer.listen(target, trigger.close, hideFn));
+    });
+    return function () { listeners.forEach(function (unsubscribeFn) { return unsubscribeFn(); }); };
+}
+//# sourceMappingURL=triggers.js.map
 
 /***/ },
 
 /***/ 1331:
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = ""
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__facade_browser__ = __webpack_require__(1259);
+/* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return Utils; });
 
-/***/ },
-
-/***/ 1332:
-/***/ function(module, exports) {
-
-module.exports = ""
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.reflow = function (element) {
+        (function (bs) { return bs; })(element.offsetHeight);
+    };
+    // source: https://github.com/jquery/jquery/blob/master/src/css/var/getStyles.js
+    Utils.getStyles = function (elem) {
+        // Support: IE <=11 only, Firefox <=30 (#15098, #14150)
+        // IE throws on elements created in popups
+        // FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
+        var view = elem.ownerDocument.defaultView;
+        if (!view || !view.opener) {
+            view = __WEBPACK_IMPORTED_MODULE_0__facade_browser__["b" /* window */];
+        }
+        return view.getComputedStyle(elem);
+    };
+    return Utils;
+}());
+//# sourceMappingURL=utils.class.js.map
 
 /***/ },
 
 /***/ 1344:
 /***/ function(module, exports) {
 
-module.exports = "<p>working</p>"
+module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
 /***/ 1345:
 /***/ function(module, exports) {
 
-module.exports = "<button type=\"submit\" (click)=\"showModal()\">View Modal</button>\n<span class=\"filter\" tooltip=\"Filter\"><i class=\"material-icons\">arrow drop down circle</i></span>\n<div class=\"animated fadeInUp row\">\n\n    <div class=\"col-sm-12\">\n        <div class=\"rateInputContainer\">\n            <!--Form Container - START-->\n            <div class=\"form-container rateInputContainer\">\n                <!--login form START-->\n                <div class=\"tbl-header\">\n                    <h3>Create New Rate Card </h3>\n                </div>\n                <form class=\"form-horizontal\" action=\"\">\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"OperatorID\">Rate Name:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"text\" class=\"form-control\" id=\"ratename\" placeholder=\"Enter prefer rate name\"\n                                   name=\"id\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"code\">Rate Description:</label>\n                        <div class=\"col-sm-6\">\n                            <textarea class=\"form-control\" id=\"ratedec\" placeholder=\"Enter Code\" rows=\"3\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Create Date:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"datetime\" class=\"form-control\" id=\"cdate\" placeholder=\"Enter Create Date\"\n                                   name=\"Create Date\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Currency:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"currencyid\">\n                                <option>LKR</option>\n                                <option>USD</option>\n                                <option>INR</option>\n                                <option>JPY</option>\n                                <option>UKP</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Rate Type:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"ratetype\">\n                                <option>percentage</option>\n                                <option>quota</option>\n                                <option>constant</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Tariff:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"tariffid\">\n                                <option>cat35</option>\n                                <option>cat36</option>\n                                <option>cat38</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Add Sub Category:</label>\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-check\">\n                                <label class=\"form-check-label\">\n                                    <input type=\"checkbox\" class=\"form-check-input\"\n                                           (click)=\"(isSubcategory)?isSubcategory=false:isSubcategory=true\">\n                                </label>\n                            </div>\n                        </div>\n                    </div>\n                    <app-subcategory *ngIf=\"isSubcategory\"></app-subcategory>\n                    <div class=\"form-group\">\n                        <div class=\"col-sm-offset-2 col-sm-10\">\n                            <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n                        </div>\n                    </div>\n                </form>\n\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\n.content-div {\n  background-color: #ffffff; }\n\n.rateInputContainer {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .rateInputContainer .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .rateInputContainer .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n\n.rateForm input {\n  background-color: #dde3ec;\n  height: 43px;\n  color: #8290a3;\n  border: 1px solid #dde3ec; }\n  .rateForm input:focus {\n    border: 1px solid #c3ccda; }\n"
 
 /***/ },
 
 /***/ 1346:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"form-container newtypeContainer\">\n    <!--login form START-->\n    <div class=\"tbl-header\">\n        <h5>Create New {{type}} </h5>\n    </div>\n    <form #addNewForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(addNewForm)\">\n\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Name</label>\n            <div class=\"col-sm-4\">\n                <input class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Name\"\n                        name=\"name\"\n                        #nameRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"name\">\n                <span class=\"error\" *ngIf=\"isNameEmpty\">Name can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Code</label>\n            <div class=\"col-sm-4\">\n                <input class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Code\"\n                        name=\"code\"\n                        #codeRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"code\">\n                <span class=\"error\" *ngIf=\"isCodeEmpty\">Code can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Description</label>\n            <div class=\"col-sm-4\">\n                <textarea rows=\"4\" cols=\"50\" class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Description\"\n                        name=\"description\"\n                        #descriptionRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"description\">\n                </textarea>\n                <span class=\"error\" *ngIf=\"isDescriptionEmpty\">Description can not be empty</span>\n            </div>\n        </div>\n\n        <div class=\"form-group\">\n            <div class=\"col-sm-1\">\n                <button type=\"submit\" class=\"btn btn-success\">Add</button>\n            </div>\n            <div class=\"col-sm-1\">\n                <button type=\"reset\" class=\"btn btn-warning\">Cancel</button>\n            </div>\n        </div>\n\n\n    </form>\n\n</div>\n\n<div class=\"error-container animated bounceIn\" *ngIf=\"submissionError\">{{submissionError}}</div>\n\n\n\n\n\n\n\n"
+module.exports = ".newtypeContainer {\n  background-color: #3c763d;\n  padding: 5px;\n  font-size: 15px;\n  margin: 10px; }\n\n.btn {\n  margin: 5px; }\n"
 
 /***/ },
 
 /***/ 1347:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"form-container subcategoryContainer\">\n    <!--login form START-->\n    <div class=\"tbl-header\">\n        <h5>Create Sub Category </h5>\n    </div>\n    <form #subcategoryForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(subcategoryForm)\">\n\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Category\"\n                        name=\"category\"\n                        #categoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"category\">\n                    <option>GAME</option>\n                    <option>SONGS</option>\n                    <option>RINGTONE</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isCategoryEmpty\">Category can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewCategory)?showNewCategory=false:showNewCategory=true; ; type='Category';\">Add New</a></div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Sub Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Sub Category\"\n                        name=\"subcategory\"\n                        #subcategoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"subcategory\">\n                    <option>Action</option>\n                    <option>Racing</option>\n                    <option>Detective</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isSubcategoryEmpty\">Sub Category can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewSubCategory)?showNewSubCategory=false:showNewSubCategory=true; ; type='Sub Category';\">Add New</a></div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Tariff:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Tariff\"\n                        name=\"tariff\"\n                        #tariffRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"tariff\">\n                    <option>STV 123</option>\n                    <option>ABC 234</option>\n                    <option>IJK 345</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isTariffEmpty\">Tariff can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewTariff)?showNewTariff=false:showNewTariff=true; ; type='Tariff';\">Add New</a></div>\n        </div>\n        <app-newtype *ngIf=\"showNewTariff\" type=\"Tariff\"></app-newtype>\n        <app-newtype *ngIf=\"showNewCategory\" type=\"Category\"></app-newtype>\n        <app-newtype *ngIf=\"showNewSubCategory\" type=\"Sub Category\"></app-newtype>\n        <div class=\"form-group\">\n            <div class=\"col-sm-1\">\n                <button type=\"submit\" class=\"btn btn-success\">Add</button>\n            </div>\n            <div class=\"col-sm-1\">\n                <button type=\"reset\" class=\"btn btn-warning\">Reset</button>\n            </div>\n        </div>\n\n    </form>\n\n</div>\n\n<div class=\"error-container animated bounceIn\" *ngIf=\"submissionError\">{{submissionError}}</div>\n\n\n\n\n\n\n\n"
+module.exports = ".subcategoryContainer {\n  background-color: #2e6da4;\n  padding: 5px;\n  font-size: 15px;\n  margin: 10px; }\n\n.btn {\n  margin: 5px; }\n"
 
 /***/ },
 
 /***/ 1348:
 /***/ function(module, exports) {
 
-module.exports = "<p>\n  search-panel works!\n</p>\n"
+module.exports = ""
 
 /***/ },
 
 /***/ 1349:
+/***/ function(module, exports) {
+
+module.exports = ""
+
+/***/ },
+
+/***/ 1361:
+/***/ function(module, exports) {
+
+module.exports = "<p>working</p>"
+
+/***/ },
+
+/***/ 1362:
+/***/ function(module, exports) {
+
+module.exports = "<span class=\"filter\" tooltip=\"Filter\"><i class=\"material-icons\">arrow drop down circle</i></span>\n<div class=\"animated fadeInUp row\">\n\n    <div class=\"col-sm-12\">\n        <div class=\"rateInputContainer\">\n            <!--Form Container - START-->\n            <div class=\"form-container rateInputContainer\">\n                <!--login form START-->\n                <div class=\"tbl-header\">\n                    <h3>Create New Rate Card </h3>\n                </div>\n                <form class=\"form-horizontal\" action=\"\">\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"OperatorID\">Rate Name:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"text\" class=\"form-control\" id=\"ratename\" placeholder=\"Enter prefer rate name\"\n                                   name=\"id\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"code\">Rate Description:</label>\n                        <div class=\"col-sm-6\">\n                            <textarea class=\"form-control\" id=\"ratedec\" placeholder=\"Enter Code\" rows=\"3\"></textarea>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Create Date:</label>\n                        <div class=\"col-sm-6\">\n                            <input type=\"datetime\" class=\"form-control\" id=\"cdate\" placeholder=\"Enter Create Date\"\n                                   name=\"Create Date\">\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Currency:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"currencyid\">\n                                <option>LKR</option>\n                                <option>USD</option>\n                                <option>INR</option>\n                                <option>JPY</option>\n                                <option>UKP</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Rate Type:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"ratetype\">\n                                <option>percentage</option>\n                                <option>quota</option>\n                                <option>constant</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Tariff:</label>\n                        <div class=\"col-sm-4\">\n                            <select class=\"form-control\" id=\"tariffid\">\n                                <option>cat35</option>\n                                <option>cat36</option>\n                                <option>cat38</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"control-label col-sm-2\" for=\"pwd\">Add Sub Category:</label>\n                        <div class=\"col-sm-4\">\n                            <div class=\"form-check\">\n                                <label class=\"form-check-label\">\n                                    <input type=\"checkbox\" class=\"form-check-input\"\n                                           (click)=\"(isSubcategory)?isSubcategory=false:isSubcategory=true\">\n                                </label>\n                            </div>\n                        </div>\n                    </div>\n                    <app-subcategory *ngIf=\"isSubcategory\"></app-subcategory>\n                    <div class=\"form-group\">\n                        <div class=\"col-sm-offset-2 col-sm-10\">\n                            <button type=\"submit\" class=\"btn btn-default\">Submit</button>\n                        </div>\n                    </div>\n                </form>\n\n            </div>\n\n\n            <form #currencyForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(currencyForm)\">\n\n                <div class=\"form-group\">\n                    <label class=\"control-label col-sm-3\">Currency code:</label>\n                    <input [(ngModel)]=\"currencycode\" name=\"currencycode\">\n                </div>\n\n                <div class=\"form-group\">\n                    <label class=\"control-label col-sm-3\">Currency desc:</label>\n                    <input [(ngModel)]=\"currencydesc\" name=\"currencydesc\">\n                </div>\n\n                <div class=\"form-group\">\n                    <div class=\"col-sm-1\">\n                        <button type=\"submit\" class=\"btn btn-success\">Add</button>\n                    </div>\n                </div>\n            </form>\n        </div>\n    </div>\n</div>"
+
+/***/ },
+
+/***/ 1363:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"form-container newtypeContainer\">\n    <!--login form START-->\n    <div class=\"tbl-header\">\n        <h5>Create New {{type}} </h5>\n    </div>\n    <form #addNewForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(addNewForm)\">\n\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Name</label>\n            <div class=\"col-sm-4\">\n                <input class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Name\"\n                        name=\"name\"\n                        #nameRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"name\">\n                <span class=\"error\" *ngIf=\"isNameEmpty\">Name can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Code</label>\n            <div class=\"col-sm-4\">\n                <input class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Code\"\n                        name=\"code\"\n                        #codeRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"code\">\n                <span class=\"error\" *ngIf=\"isCodeEmpty\">Code can not be empty</span>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">{{type}} Description</label>\n            <div class=\"col-sm-4\">\n                <textarea rows=\"4\" cols=\"50\" class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Description\"\n                        name=\"description\"\n                        #descriptionRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"description\">\n                </textarea>\n                <span class=\"error\" *ngIf=\"isDescriptionEmpty\">Description can not be empty</span>\n            </div>\n        </div>\n\n        <div class=\"form-group\">\n            <div class=\"col-sm-1\">\n                <button type=\"submit\" class=\"btn btn-success\">Add</button>\n            </div>\n            <div class=\"col-sm-1\">\n                <button type=\"reset\" class=\"btn btn-warning\">Cancel</button>\n            </div>\n        </div>\n\n\n    </form>\n\n</div>\n\n<div class=\"error-container animated bounceIn\" *ngIf=\"submissionError\">{{submissionError}}</div>\n\n\n\n\n\n\n\n"
+
+/***/ },
+
+/***/ 1364:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"form-container subcategoryContainer\">\n    <!--login form START-->\n    <div class=\"tbl-header\">\n        <h5>Create Sub Category </h5>\n    </div>\n    <form #subcategoryForm=\"ngForm\" novalidate (ngSubmit)=\"onSubmit(subcategoryForm)\">\n\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Category\"\n                        name=\"category\"\n                        #categoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"category\">\n                    <option>GAME</option>\n                    <option>SONGS</option>\n                    <option>RINGTONE</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isCategoryEmpty\">Category can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewCategory)?showNewCategory=false:showNewCategory=true; ; type='Category';\">Add New</a></div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Sub Category:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Sub Category\"\n                        name=\"subcategory\"\n                        #subcategoryRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"subcategory\">\n                    <option>Action</option>\n                    <option>Racing</option>\n                    <option>Detective</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isSubcategoryEmpty\">Sub Category can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewSubCategory)?showNewSubCategory=false:showNewSubCategory=true; ; type='Sub Category';\">Add New</a></div>\n        </div>\n        <div class=\"form-group\">\n            <label class=\"control-label col-sm-3\">Tariff:</label>\n            <div class=\"col-sm-4\">\n                <select class=\"form-control\"\n                        type=\"text\"\n                        autocomplete=\"off\"\n                        placeholder=\"Tariff\"\n                        name=\"tariff\"\n                        #tariffRef=\"ngModel\"\n                        required\n                        [(ngModel)]=\"tariff\">\n                    <option>STV 123</option>\n                    <option>ABC 234</option>\n                    <option>IJK 345</option>\n                </select>\n                <span class=\"error\" *ngIf=\"isTariffEmpty\">Tariff can not be empty</span>\n            </div>\n            <div><a (click)=\"(showNewTariff)?showNewTariff=false:showNewTariff=true; ; type='Tariff';\">Add New</a></div>\n        </div>\n        <app-newtype *ngIf=\"showNewTariff\" type=\"Tariff\"></app-newtype>\n        <app-newtype *ngIf=\"showNewCategory\" type=\"Category\"></app-newtype>\n        <app-newtype *ngIf=\"showNewSubCategory\" type=\"Sub Category\"></app-newtype>\n        <div class=\"form-group\">\n            <div class=\"col-sm-1\">\n                <button type=\"submit\" class=\"btn btn-success\">Add</button>\n            </div>\n            <div class=\"col-sm-1\">\n                <button type=\"reset\" class=\"btn btn-warning\">Reset</button>\n            </div>\n        </div>\n\n    </form>\n\n</div>\n\n<div class=\"error-container animated bounceIn\" *ngIf=\"submissionError\">{{submissionError}}</div>\n\n\n\n\n\n\n\n"
+
+/***/ },
+
+/***/ 1365:
+/***/ function(module, exports) {
+
+module.exports = "<p>\n  search-panel works!\n</p>\n"
+
+/***/ },
+
+/***/ 1366:
 /***/ function(module, exports) {
 
 module.exports = "<p>\n  search-results works!\n</p>\n"

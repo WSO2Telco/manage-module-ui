@@ -26,6 +26,15 @@ const validateAddCurrencyRequest = function (request) {
     return false;
 };
 
+const validateAddNewTypeRequest = function (request) {
+    let param = request.payload;
+    if (!!param && param.name && param.code && param.description && param.type) {
+        logger.log('INFO', 'REQUEST VALIDATED');
+        return true;
+    }
+    return false;
+};
+
 function rateService() {
 
     /**
@@ -57,6 +66,12 @@ function rateService() {
         }
     };
 
+    /**
+     * Add currency action
+     * @param request
+     * @param callback
+     * @private
+     */
     let _addCurrency = function (request, callback) {
 
         logger.log('INFO', "hit at rate service end point for currency");
@@ -80,11 +95,46 @@ function rateService() {
         }
     };
 
+
+    let _addNewType = function (request, callback) {
+
+        logger.log('INFO', "hit at rate service new type end point");
+
+        request.server.log('info', 'ADD NEW TYPE REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (addSubcategoryResult) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub name created successfully"}));
+        };
+
+        let onFailture = function (addSubCategoryError) {
+            logger.log('ERROR', 'faliture');
+            callback(addSubCategoryError);
+        };
+
+        if (validateAddSubcategoryRequest(request)) {
+            if(request.payload.type == "category"){
+
+            }else if(request.payload.type == "subcategory"){
+
+            }else if(request.payload.type == 'tariff'){
+
+            }else{
+                callback(boom.badRequest(Messages['BAD_REQUEST']));
+            }
+
+            rateRestService.invokeAddSubCategoryRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+    };
+
     //add more rate services here
 
     return {
         addSubcategory: _addSubcategory,
-        addCurrency: _addCurrency
+        addCurrency: _addCurrency,
+        addNewType: _addNewType
     };
 }
 

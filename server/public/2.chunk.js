@@ -7,11 +7,11 @@ webpackJsonp([2,9],{
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1283);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1284);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(1264);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__(1282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__(1281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search_panel_search_panel_component__ = __webpack_require__(1293);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__search_results_search_results_component__ = __webpack_require__(1294);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__history_main_history_main_component__ = __webpack_require__(1266);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__history_routes__ = __webpack_require__(1292);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__history_filter_history_filter_component__ = __webpack_require__(1291);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_shared_module__ = __webpack_require__(654);
 /* harmony export (binding) */ __webpack_require__.d(exports, "HistoryModule", function() { return HistoryModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -51,7 +51,7 @@ var HistoryModule = (function () {
 
 /***/ },
 
-/***/ 1264:
+/***/ 1266:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -101,8 +101,8 @@ var HistoryMainComponent = (function () {
     HistoryMainComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-main',
-            template: __webpack_require__(1340),
-            styles: [__webpack_require__(1323)]
+            template: __webpack_require__(1357),
+            styles: [__webpack_require__(1340)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _a) || Object])
     ], HistoryMainComponent);
@@ -113,7 +113,7 @@ var HistoryMainComponent = (function () {
 
 /***/ },
 
-/***/ 1281:
+/***/ 1291:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -205,8 +205,8 @@ var HistoryFilterComponent = (function () {
     HistoryFilterComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-history-filter',
-            template: __webpack_require__(1339),
-            styles: [__webpack_require__(1322)]
+            template: __webpack_require__(1356),
+            styles: [__webpack_require__(1339)]
         }), 
         __metadata('design:paramtypes', [(typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__data_providers_reporting_remote_data_service__["a" /* ReportingRemoteDataService */]) === 'function' && _c) || Object])
     ], HistoryFilterComponent);
@@ -217,12 +217,12 @@ var HistoryFilterComponent = (function () {
 
 /***/ },
 
-/***/ 1282:
+/***/ 1292:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(1264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__history_main_history_main_component__ = __webpack_require__(1266);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return HistoryRoutes; });
 
 
@@ -235,7 +235,7 @@ var HistoryRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterM
 
 /***/ },
 
-/***/ 1283:
+/***/ 1293:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -259,8 +259,8 @@ var SearchPanelComponent = (function () {
     SearchPanelComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-panel',
-            template: __webpack_require__(1341),
-            styles: [__webpack_require__(1324)]
+            template: __webpack_require__(1358),
+            styles: [__webpack_require__(1341)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchPanelComponent);
@@ -270,7 +270,7 @@ var SearchPanelComponent = (function () {
 
 /***/ },
 
-/***/ 1284:
+/***/ 1294:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -294,8 +294,8 @@ var SearchResultsComponent = (function () {
     SearchResultsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search-results',
-            template: __webpack_require__(1342),
-            styles: [__webpack_require__(1325)]
+            template: __webpack_require__(1359),
+            styles: [__webpack_require__(1342)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchResultsComponent);
@@ -305,56 +305,56 @@ var SearchResultsComponent = (function () {
 
 /***/ },
 
-/***/ 1322:
+/***/ 1339:
 /***/ function(module, exports) {
 
 module.exports = ":host {\n  display: block; }\n\n.history-filter {\n  min-height: 100px;\n  padding: 10px;\n  background-color: white;\n  border: solid 1px whitesmoke; }\n  .history-filter .fields-container div[class^=\"col-\"] {\n    padding-bottom: 10px; }\n  .history-filter .title {\n    font-size: 1.2em;\n    font-weight: 600;\n    color: gray;\n    padding-bottom: 5px; }\n"
 
 /***/ },
 
-/***/ 1323:
+/***/ 1340:
 /***/ function(module, exports) {
 
 module.exports = ":host {\n  display: block;\n  margin-top: 20px; }\n\napp-history-filter {\n  margin-bottom: 10px; }\n"
 
 /***/ },
 
-/***/ 1324:
+/***/ 1341:
 /***/ function(module, exports) {
 
 module.exports = ""
 
 /***/ },
 
-/***/ 1325:
+/***/ 1342:
 /***/ function(module, exports) {
 
 module.exports = ""
 
 /***/ },
 
-/***/ 1339:
+/***/ 1356:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"history-filter\">\n\n   <div class=\"row fields-container\">\n      <div class=\"col-sm-3\">\n         <input type=\"text\" class=\"form-control\"\n                [(ngModel)]=\"filter.subscriber\"\n                [typeaheadMinLength]=\"0\"\n                [typeahead]=\"subscribers\"\n                (typeaheadNoResults)=\"onNoSubscriberSelected($event)\"\n                (typeaheadOnSelect)=\"onSubscriberChange()\"\n                placeholder=\"Service Provider\">\n      </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"selectedApplication\"\n                  [typeaheadMinLength]=\"0\"\n                  typeaheadOptionField=\"name\"\n                  [typeahead]=\"applications\"\n                  (typeaheadOnSelect)=\"onApplicationChange($event)\"\n                  (typeaheadNoResults)=\"onNoApplicationSelected($event)\"\n                  placeholder=\"Application\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\"\n                  [(ngModel)]=\"filter.operator\"\n                  [typeaheadMinLength]=\"0\"\n                  [typeahead]=\"operators\"\n                  (typeaheadOnSelect)=\"onOperatorChange()\"\n                  placeholder=\"Operator\">\n       </div>\n       <div class=\"col-sm-3\">\n           <input type=\"text\" class=\"form-control\" placeholder=\"Status\">\n       </div>\n   </div>\n    <div class=\"row\">\n        <div class=\"col-sm-12 text-right\">\n            <button class=\"btn btn-default btn-sm\" (click)=\"onClearFilter()\">Clear</button>\n            <button class=\"btn btn-primary btn-sm\" (click)=\"onFilterCriteriaChange()\">Search</button>\n        </div>\n    </div>\n</div>\n"
 
 /***/ },
 
-/***/ 1340:
+/***/ 1357:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"animated fadeInUp row\">\n    <div class=\"col-sm-12\">\n        <app-history-filter\n                [filter]=\"filter\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></app-history-filter>\n    </div>\n    <div class=\"col-sm-12\">\n        <app-responsive-table\n                [dataSource]=\"approvalHistoryData?.recordsCol\"\n                [fieldSet]=\"fieldSet\"></app-responsive-table>\n    </div>\n    <div class=\"col-sm-12 text-center\">\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"totalItems\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.count\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n\n    </div>\n</div>"
 
 /***/ },
 
-/***/ 1341:
+/***/ 1358:
 /***/ function(module, exports) {
 
 module.exports = "<p>\n  search-panel works!\n</p>\n"
 
 /***/ },
 
-/***/ 1342:
+/***/ 1359:
 /***/ function(module, exports) {
 
 module.exports = "<p>\n  search-results works!\n</p>\n"

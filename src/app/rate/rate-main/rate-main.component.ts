@@ -23,9 +23,7 @@ export class RateMainComponent implements OnInit {
     submissionError: string;
     private isSubcategory: boolean;
 
-
-
-    constructor(private reportingService: ReportingRemoteDataService) {
+    constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
     }
 
     private filter: ApprovalRateFilter;

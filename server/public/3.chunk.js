@@ -7,10 +7,10 @@ webpackJsonp([3,9],{
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_applications_component__ = __webpack_require__(1260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__ = __webpack_require__(1262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_routes__ = __webpack_require__(1275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__ = __webpack_require__(1261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__applications_applications_component__ = __webpack_require__(1262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__subscriptions_subscriptions_component__ = __webpack_require__(1264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_routes__ = __webpack_require__(1285);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__approval_main_approval_main_component__ = __webpack_require__(1263);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__shared_shared_module__ = __webpack_require__(654);
 /* harmony export (binding) */ __webpack_require__.d(exports, "ApprovalsModule", function() { return ApprovalsModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -49,7 +49,7 @@ var ApprovalsModule = (function () {
 
 /***/ },
 
-/***/ 1260:
+/***/ 1262:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -116,8 +116,8 @@ var ApplicationsComponent = (function () {
     ApplicationsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-applications',
-            template: __webpack_require__(1333),
-            styles: [__webpack_require__(1315)]
+            template: __webpack_require__(1350),
+            styles: [__webpack_require__(1332)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], ApplicationsComponent);
@@ -128,7 +128,7 @@ var ApplicationsComponent = (function () {
 
 /***/ },
 
-/***/ 1261:
+/***/ 1263:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -153,7 +153,7 @@ var ApprovalMainComponent = (function () {
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-approval-main',
             template: "<router-outlet></router-outlet>",
-            styles: [__webpack_require__(1316)]
+            styles: [__webpack_require__(1333)]
         }), 
         __metadata('design:paramtypes', [])
     ], ApprovalMainComponent);
@@ -163,7 +163,7 @@ var ApprovalMainComponent = (function () {
 
 /***/ },
 
-/***/ 1262:
+/***/ 1264:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -230,8 +230,8 @@ var SubscriptionsComponent = (function () {
     SubscriptionsComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-subscriptions',
-            template: __webpack_require__(1334),
-            styles: [__webpack_require__(1317)]
+            template: __webpack_require__(1351),
+            styles: [__webpack_require__(1334)]
         }), 
         __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], SubscriptionsComponent);
@@ -242,14 +242,14 @@ var SubscriptionsComponent = (function () {
 
 /***/ },
 
-/***/ 1275:
+/***/ 1285:
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__ = __webpack_require__(1260);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__ = __webpack_require__(1262);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__ = __webpack_require__(1261);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__applications_applications_component__ = __webpack_require__(1262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__subscriptions_subscriptions_component__ = __webpack_require__(1264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__approval_main_approval_main_component__ = __webpack_require__(1263);
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return ApprovalRoutes; });
 
 
@@ -274,21 +274,7 @@ var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* Router
 
 /***/ },
 
-/***/ 1315:
-/***/ function(module, exports) {
-
-module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
-
-/***/ },
-
-/***/ 1316:
-/***/ function(module, exports) {
-
-module.exports = ""
-
-/***/ },
-
-/***/ 1317:
+/***/ 1332:
 /***/ function(module, exports) {
 
 module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
@@ -298,11 +284,25 @@ module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep
 /***/ 1333:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"animated fadeInUp row pad-r-15-im\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [filter]=\"userApplicationFilter\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [filter]=\"groupApplicationFilter\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
+module.exports = ""
 
 /***/ },
 
 /***/ 1334:
+/***/ function(module, exports) {
+
+module.exports = "application-data-table {\n  margin-top: 20px; }\n\n:host /deep/ application-data-table.my .tbl-header {\n  color: #E19131;\n  font-weight: 900; }\n\n:host /deep/ application-data-table.my .header {\n  background-color: #E19131 !important; }\n"
+
+/***/ },
+
+/***/ 1350:
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"animated fadeInUp row pad-r-15-im\">\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"my\"\n                [filter]=\"userApplicationFilter\"\n                tableTitle=\"MY APPLICATIONS\"\n                [dataSource]=\"myApplications\"\n                (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n    <div class=\"col-sm-6\">\n        <application-data-table\n                class=\"group\"\n                [filter]=\"groupApplicationFilter\"\n                tableTitle=\"All APPLICATIONS\"\n                [dataSource]=\"allApplications\"\n                (onAssignTask)=\"onAssignTaskHandler($event)\"\n                (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n    </div>\n</div>\n\n"
+
+/***/ },
+
+/***/ 1351:
 /***/ function(module, exports) {
 
 module.exports = "<div class=\"animated fadeInUp\">\n <div class=\"row\">\n   <div class=\"col-sm-6\">\n       <application-data-table\n               class=\"my\"\n               [filter]=\"mySubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"mySubscriptions\"\n               (onApproveRejectTask)=\"onApproveRejectHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n   <div class=\"col-sm-6\">\n       <application-data-table\n               [filter]=\"groupSubscriptionFilter\"\n               tableTitle=\"SUBSCRIPTION CREATIONS\"\n               [dataSource]=\"allSubscriptions\"\n               (onAssignTask)=\"onAssignTaskHandler($event)\"\n               (onFilterChange)=\"onFilterChangeHandler($event)\"></application-data-table>\n   </div>\n </div>\n</div>\n\n"

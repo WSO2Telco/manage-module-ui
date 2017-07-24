@@ -316,7 +316,7 @@ var AuthenticationService = (function () {
     }
     AuthenticationService.prototype.doLogin = function (userName, password, callback) {
         var _this = this;
-        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["d" /* User */]();
+        var user = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["e" /* User */]();
         user.userName = userName;
         user.password = password;
         console.log(user.userName);
@@ -561,11 +561,12 @@ var LoginRemoteDataService = (function () {
 "use strict";
 /* unused harmony export MenuItem */
 /* harmony export (binding) */ __webpack_require__.d(exports, "a", function() { return TableDataType; });
-/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return User; });
+/* harmony export (binding) */ __webpack_require__.d(exports, "e", function() { return User; });
 /* unused harmony export LoginResponse */
 /* harmony export (binding) */ __webpack_require__.d(exports, "b", function() { return SubCategory; });
 /* harmony export (binding) */ __webpack_require__.d(exports, "c", function() { return NewType; });
 /* unused harmony export ServerResponse */
+/* harmony export (binding) */ __webpack_require__.d(exports, "d", function() { return Currency; });
 var MenuItem = (function () {
     function MenuItem() {
     }
@@ -602,6 +603,11 @@ var ServerResponse = (function () {
     function ServerResponse() {
     }
     return ServerResponse;
+}());
+var Currency = (function () {
+    function Currency() {
+    }
+    return Currency;
 }());
 //# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manage-module-ui/src/common-data-models.js.map
 
@@ -817,6 +823,7 @@ var RateRemoteDataService = (function () {
         this.apiEndpoints = {
             addsubcategory: this.apiContext + '/rate/addsubcategory',
             addnewtype: this.apiContext + '/rate/addnewtype',
+            addCurrency: this.apiContext + '/rate/addcurrency'
         };
     }
     /**
@@ -838,6 +845,18 @@ var RateRemoteDataService = (function () {
     RateRemoteDataService.prototype.addNewType = function (data) {
         console.log('hit in the rate remote data service');
         return this.http.post(this.apiEndpoints['addnewtype'], data, this.options)
+            .map(function (response) { return response.json(); })
+            .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs__["Observable"].throw(error.json().message); });
+    };
+    /**
+     * Add a new currency
+     * @param data
+     * @returns {Observable<R>}
+     */
+    RateRemoteDataService.prototype.addCurrency = function (data) {
+        console.log('currency service ---');
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_1_rxjs__["Observable"].throw(error.json().message); });
     };
@@ -1362,7 +1381,7 @@ var RateService = (function () {
         });
     };
     /**
-     * This method call the remote sevice to create a new category, subcategory or a tariff
+     * This method call the remote service to create a new category, subcategory or a tariff
      * @param type
      * @param name
      * @param code
@@ -1377,6 +1396,24 @@ var RateService = (function () {
         model.code = code;
         model.description = description;
         this._remoteService.addNewType(model)
+            .subscribe(function (response) {
+            console.log('good response' + response.messsage);
+        }, function (error) {
+            callback(error);
+        });
+    };
+    /**
+     * This method call the remote service to add new currency type
+     * @param code
+     * @param description
+     * @param callback
+     */
+    RateService.prototype.addCurrency = function (code, description, callback) {
+        console.log(' ---adding currency -- ');
+        var model = new __WEBPACK_IMPORTED_MODULE_4__models_common_data_models__["d" /* Currency */]();
+        model.currencycode = code;
+        model.currencydesc = description;
+        this._remoteService.addCurrency(model)
             .subscribe(function (response) {
             console.log('good response' + response.messsage);
         }, function (error) {
