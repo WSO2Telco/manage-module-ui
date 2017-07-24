@@ -2,8 +2,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap'
-
+import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
+import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
 import {CommonsModule} from "./commons/commons.module";
@@ -47,6 +47,7 @@ import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data
         TooltipModule.forRoot(),
         ToastyModule.forRoot(),
         TypeaheadModule.forRoot(),
+        ModalModule.forRoot()
     ],
     providers: [
         AppGuard,

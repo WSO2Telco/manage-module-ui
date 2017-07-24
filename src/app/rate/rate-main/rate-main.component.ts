@@ -28,12 +28,12 @@ export class RateMainComponent implements OnInit {
 
     private filter: ApprovalRateFilter;
 
-    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "status", "approvedOn"];
+    private fieldSet = ['applicationId', 'applicationName', 'applicationDescription', 'status', 'approvedOn'];
 
     private approvalHistoryData: ApprovalHistoryDataset;
 
-    private totalItems: number = 0;
-    private currentPage: number = 1;
+    private totalItems = 0;
+    private currentPage = 1;
 
     user = {
         email: 'email@gmail.com',
@@ -161,6 +161,11 @@ export class RateMainComponent implements OnInit {
         }else {
             this.isValidCurrency = false;
         }
+    }
+
+    showModal() {
+        console.log("clicked here");
+        this.isSubcategory=true;
     }
 
 }

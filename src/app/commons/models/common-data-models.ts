@@ -34,6 +34,18 @@ export class SubCategory {
     tariff: string;
 }
 
+export class NewType {
+    type: string;
+    name: string;
+    code: string;
+    description: string;
+}
+
+export class ServerResponse{
+    success: boolean;
+    messsage: string;
+}
+
 export class Currency {
     currencycode: string;
     currencydesc: string;

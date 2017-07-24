@@ -4,8 +4,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SubCategory, LoginResponse, Currency} from '../commons/models/common-data-models';
-import {log} from "util";
+import {SubCategory, Currency, ServerResponse, NewType} from '../commons/models/common-data-models';
+
 
 
 @Injectable()
@@ -17,7 +17,7 @@ export class RateRemoteDataService {
 
     private apiEndpoints: Object = {
         addsubcategory: this.apiContext + '/rate/addsubcategory',
-        logout: this.apiContext + '/authentication/logout',
+        addnewtype: this.apiContext + '/rate/addnewtype',
         addCurrency: this.apiContext + '/rate/addcurrency'
     };
 
@@ -26,11 +26,11 @@ export class RateRemoteDataService {
 
 
     /**
-     *
+     * To add new sub category tariff relationship
      * @param data
-     * @returns {Observable<SubCategory>}
+     * @returns {Observable<ServerResponse>}
      */
-    addSubcategory(data: SubCategory): Observable<LoginResponse> {
+    addSubcategory(data: SubCategory): Observable<ServerResponse> {
         console.log('hit in the rate remote data service');
         return this.http.post(this.apiEndpoints['addsubcategory'], data, this.options)
             .map((response: Response) => response.json())
@@ -38,11 +38,25 @@ export class RateRemoteDataService {
     }
 
     /**
+     * To add new category, subcategory or a tariff
+     * @param data
+     * @returns {Observable<ServerResponse>}
+     */
+    addNewType(data: NewType): Observable<ServerResponse> {
+        console.log('hit in the rate remote data service');
+        return this.http.post(this.apiEndpoints['addnewtype'], data, this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
+
+
+
+    /**
      * Add a new currency
      * @param data
      * @returns {Observable<R>}
      */
-    addCurrency(data: Currency): Observable<LoginResponse> {
+    addCurrency(data: Currency): Observable<ServerResponse> {
         console.log('currency service ---');
         console.log(JSON.stringify(data)) ;
         return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
