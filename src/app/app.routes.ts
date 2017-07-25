@@ -20,6 +20,12 @@ const routes = [
   {
     path: 'rate',
     loadChildren: 'app/rate/rate.module#RateModule',
+    canActivate : [AppGuard]
+  },
+  {
+    path: 'quotacap',
+    loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
+    canActivate : [AppGuard]
   },
   {
     path: 'approvals',

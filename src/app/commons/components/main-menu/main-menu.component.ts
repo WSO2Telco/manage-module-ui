@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from '../../models/common-data-models';
-import {AppCommonService} from "../../services/app-common.service";
-import {Router, NavigationEnd} from "@angular/router";
+import {AppCommonService} from '../../services/app-common.service';
+import {Router, NavigationEnd} from '@angular/router';
 
 @Component({
     selector: 'app-main-menu',
@@ -11,14 +11,15 @@ import {Router, NavigationEnd} from "@angular/router";
 export class MainMenuComponent implements OnInit {
 
     private selectedMenu: MenuItem;
-    private isExpand: boolean = false;
+    private isExpand = false;
 
     private menuSource: MenuItem[] = [
         {id: 1, route: '/home', name: 'Home', iconName: 'home'},
         {id: 2, route: '/approvals/applications', name: 'Approve Applications', iconName: 'apps'},
         {id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'subscriptions'},
-        {id: 4, route: '/rate', name: 'Rate', iconName: 'apps'},
-        {id: 5, route: '/history', name: 'History', iconName: 'history'}
+        {id: 4, route: '/history', name: 'History', iconName: 'history'},
+        {id: 5, route: '/rate', name: 'Rate', iconName: 'grade'},
+        {id: 6, route: '/quotacap', name: 'Quota Cap', iconName: 'assignment'}
     ];
 
     constructor(private _appCommonService: AppCommonService,
@@ -27,8 +28,8 @@ export class MainMenuComponent implements OnInit {
 
     ngOnInit() {
         this._router.events.subscribe((event) => {
-            if(event instanceof NavigationEnd){
-                this.selectedMenu = this.menuSource.filter((menu)=>menu.route == event.url)[0];
+            if (event instanceof NavigationEnd){
+                this.selectedMenu = this.menuSource.filter((menu) => menu.route == event.url)[0];
             }
         });
 

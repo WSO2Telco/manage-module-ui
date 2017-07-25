@@ -6,7 +6,7 @@ import {
 } from '../../commons/models/reporing-data-models';
 import {Validators, FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from 'ng2-formly';
-import {RateService} from "../../commons/services/rate.service";
+import {RateService} from '../../commons/services/rate.service';
 
 
 @Component({
@@ -132,11 +132,11 @@ export class RateMainComponent implements OnInit {
 
 
     onSubmit(currencyForm) {;
-            console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
+            console.log('form submitted : ' + this.currencycode + '  ss' + this.currencydesc);
             this.rateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
                 this.submissionError = errorMsg;
                 setTimeout(() => {
-                    this.submissionError = null
+                    this.submissionError = null;
                 }, 5000);
             });
     }
@@ -152,9 +152,7 @@ export class RateMainComponent implements OnInit {
         this.reportingService.getApprovalHistory(this.filter);
     }
 
-    showModal() {
-        console.log("clicked here");
-        this.isSubcategory=true;
-    }
+
+    //commet 2
 
 }

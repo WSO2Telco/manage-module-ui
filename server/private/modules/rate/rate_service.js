@@ -136,6 +136,8 @@ function rateService() {
         addCurrency: _addCurrency,
         addNewType: _addNewType
     };
+
+    //commet 22
 }
 
 module.exports = rateService();
