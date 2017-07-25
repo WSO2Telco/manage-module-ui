@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Router} from "@angular/router";
-import {BehaviorSubject} from "rxjs";
-import {LoginRemoteDataService} from "../../data-providers/login_remote-data.service";
-import {User, LoginResponse} from "../models/common-data-models";
+import {Router} from '@angular/router';
+import {BehaviorSubject} from 'rxjs';
+import {LoginRemoteDataService} from '../../data-providers/login_remote-data.service';
+import {User, LoginResponse} from '../models/common-data-models';
 
 
 @Injectable()
@@ -11,12 +11,13 @@ export class AuthenticationService {
   loginUserInfo: BehaviorSubject<LoginResponse> = new BehaviorSubject(null);
 
   constructor(private _router: Router, private _remoteService: LoginRemoteDataService) {
-    let _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
+    const _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
+    console.log("_loginUserInfo"+_loginUserInfo);
     this.loginUserInfo.next(_loginUserInfo);
   }
 
-  doLogin(userName: string, password: string,callback:Function) {
-    let user: User = new User();
+  doLogin(userName: string, password: string, callback: Function) {
+    const user: User = new User();
     user.userName = userName;
     user.password = password;
     console.log(user.userName);
@@ -28,13 +29,13 @@ export class AuthenticationService {
           this._router.navigate(['home']);
         },
         (error: string) => {
-          callback(error)
+          callback(error);
         }
       );
   }
 
   doLogout() {
-    let user = JSON.parse(sessionStorage.getItem('loginUserInfo'));
+    const user = JSON.parse(sessionStorage.getItem('loginUserInfo'));
     if (!!user) {
       this._remoteService.logout(user.userName);
       sessionStorage.setItem('loginUserInfo', null);
@@ -48,7 +49,7 @@ export class AuthenticationService {
   }
 
   isLoggedIn() {
-    let loginInfo =  this.loginUserInfo && this.loginUserInfo.getValue();
+    const loginInfo =  this.loginUserInfo && this.loginUserInfo.getValue();
     return !!loginInfo;
   }
 

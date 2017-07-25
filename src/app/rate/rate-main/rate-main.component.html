@@ -15,72 +15,124 @@
         </div>
     </div>
 </div>
+
+<button type="button" class="btn btn-primary" (click)="staticModal.show()">test modal</button>
+
 <div class="animated fadeInUp row">
 
     <div class="col-sm-12">
         <div class="rateInputContainer">
             <!--Form Container - START-->
             <div class="form-container rateInputContainer">
-                <!--login form START-->
                 <div class="tbl-header">
                     <h3>Create New Rate Card </h3>
-                    <button type="button" class="btn btn-primary" (click)="staticModal.show()">test modal</button>
                 </div>
-                <form class="form-horizontal" action="">
+
+                <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="OperatorID">Rate Name:</label>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control" id="ratename" placeholder="Enter prefer rate name"
-                                   name="id">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="code">Rate Description:</label>
-                        <div class="col-sm-6">
-                            <textarea class="form-control" id="ratedec" placeholder="Enter Code" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Create Date:</label>
-                        <div class="col-sm-6">
-                            <input type="datetime" class="form-control" id="cdate" placeholder="Enter Create Date"
-                                   name="Create Date">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Currency:</label>
+                        <label class="control-label col-sm-3">Rate Name:</label>
                         <div class="col-sm-4">
-                            <select class="form-control" id="currencyid">
+                            <input class="form-control"
+                                   type="text"
+                                   autocomplete="off"
+                                   placeholder="Name"
+                                   name="name"
+                                   #nameRef="ngModel"
+                                   required
+                                   [(ngModel)]="name">
+                            <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Rate Description</label>
+                        <div class="col-sm-4">
+                            <textarea rows="4" cols="50" class="form-control"
+                                      type="text"
+                                      autocomplete="off"
+                                      placeholder="Description"
+                                      name="description"
+                                      #descriptionRef="ngModel"
+                                      required
+                                      [(ngModel)]="description">
+                            </textarea>
+                            <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Create Date</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="date"
+                                   autocomplete="off"
+                                   placeholder="Date"
+                                   name="date"
+                                   #codeRef="ngModel"
+                                   required
+                                   [(ngModel)]="date">
+                            <span class="error" *ngIf="isDateEmpty">Date can not be empty</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Currency:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Currency"
+                                    name="currency"
+                                    #currencyRef="ngModel"
+                                    required
+                                    [(ngModel)]="currency">
                                 <option>LKR</option>
                                 <option>USD</option>
                                 <option>INR</option>
                                 <option>JPY</option>
                                 <option>UKP</option>
                             </select>
+                            <span class="error" *ngIf="isCurrencyEmpty">Currency can not be empty</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Rate Type:</label>
+                        <label class="control-label col-sm-3">Rate Type:</label>
                         <div class="col-sm-4">
-                            <select class="form-control" id="ratetype">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Rate Type"
+                                    name="rateType"
+                                    #rateTypeRef="ngModel"
+                                    required
+                                    [(ngModel)]="rateType">
                                 <option>percentage</option>
                                 <option>quota</option>
                                 <option>constant</option>
                             </select>
+                            <span class="error" *ngIf="isRateTypeEmpty">Rate Type can not be empty</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Tariff:</label>
+                        <label class="control-label col-sm-3">Tariff:</label>
                         <div class="col-sm-4">
-                            <select class="form-control" id="tariffid">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Tariff"
+                                    name="tariff"
+                                    #tariffRef="ngModel"
+                                    required
+                                    [(ngModel)]="tariff">
                                 <option>cat35</option>
                                 <option>cat36</option>
                                 <option>cat38</option>
                             </select>
+                            <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="pwd">Add Sub Category:</label>
+                        <label class="control-label col-sm-3">Add Sub Category:</label>
                         <div class="col-sm-4">
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -99,9 +151,7 @@
                 </form>
 
             </div>
-
             <app-currency></app-currency>
-
         </div>
     </div>
 </div>

@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
-import {
-    ApprovalRateFilter, ApprovalHistory,
-    ApprovalHistoryDataset
-} from "../../commons/models/reporing-data-models";
-import {Validators, FormGroup} from '@angular/forms';
-import {FormlyFieldConfig} from 'ng2-formly';
-import {RateService} from "../../commons/services/rate.service";
+import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
+import {RateService} from '../../commons/services/rate.service';
 
 @Component({
     selector: 'app-rate-main',
@@ -16,89 +10,24 @@ import {RateService} from "../../commons/services/rate.service";
 export class RateMainComponent implements OnInit {
 
     submissionError: string;
+
     private isSubcategory: boolean;
+    private isValidCurrency: boolean;
+    private isDescriptionEmpty: boolean;
+    private isNameEmpty: boolean;
+    private isDateEmpty: boolean;
+    private isCurrencyEmpty: boolean;
+    private isRateTypeEmpty: boolean;
+    private isTariffEmpty: boolean;
+
+    private name: string;
+    private description: string;
+    private date: string;
+    private currency: string;
+    private rateType: string;
+    private tariff: string;
 
     constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
-    }
-
-    private filter: ApprovalRateFilter;
-
-    private fieldSet = ['applicationId', 'applicationName', 'applicationDescription', 'status', 'approvedOn'];
-
-    private approvalHistoryData: ApprovalHistoryDataset;
-
-    private totalItems = 0;
-    private currentPage = 1;
-
-    user = {
-        email: 'email@gmail.com',
-        checked: false
-    };
-
-    form: FormGroup = new FormGroup({});
-    userFields: FormlyFieldConfig = [{
-        className: 'row',
-        fieldGroup: [
-            {
-                className: 'col-xs-6',
-                key: 'rateName',
-                type: 'input',
-                defaultValue: 'defaultrate',
-                templateOptions: {
-                    label: 'Rate Name',
-                    placeholder: 'Enter Rate name',
-                },
-                validators: {
-                    validation: Validators.compose([Validators.required])
-                }
-            }, {
-                className: 'col-xs-6',
-                key: 'rateDes',
-                type: 'input',
-                defaultValue: 'defaultdesc',
-                templateOptions: {
-                    label: 'Rate Description',
-                    placeholder: 'Enter Rate description',
-                },
-                validators: {
-                    validation: Validators.compose([Validators.required])
-                }
-            }, {
-                className: 'col-xs-6',
-                key: 'curreny',
-                type: 'select',
-                defaultValue: '0',
-                templateOptions: {
-                    label: 'Currency',
-                    options: [
-                        {label: 'LKR', value: '0'},
-                        {label: 'USD', value: '1'},
-                        {label: 'INR', value: '2'}
-                    ]
-                },
-                validators: {
-                    validation: Validators.compose([Validators.required])
-                }
-            }, {
-                className: 'col-xs-6',
-                key: 'curreny',
-                type: 'select',
-                defaultValue: '0',
-                templateOptions: {
-                    label: 'Currency',
-                    options: [
-                        {label: 'LKR', value: '0'},
-                        {label: 'USD', value: '1'},
-                        {label: 'INR', value: '2'}
-                    ]
-                }, validators: {
-                    validation: Validators.compose([Validators.required])
-                }
-            }]
-    }];
-
-    submit(user) {
-        console.log(user);
     }
 
     viewSubcategory() {
@@ -109,36 +38,72 @@ export class RateMainComponent implements OnInit {
         }
     }
 
+    onRateCardSubmit(ratecardForm) {
+
+        this.clearErrors();
+
+        if (!this.isEmpty()) {
+            console.log('submited rate card form ' + this.name + ':' + this.description
+                + ':' + this.date + ':' + this.currency + ':' + this.rateType + ':' + this.tariff);
+            this.rateService.addNewRateCard(this.name, this.description, this.date, this.currency,
+                this.rateType, this.tariff, (errorMsg) => {
+                this.submissionError = errorMsg;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+            });
+        } else {
+            console.log('invalid fields');
+            if (this.name.length == 0) {
+                this.isNameEmpty = true;
+            }
+            if (this.description.length == 0) {
+                this.isDescriptionEmpty = true;
+            }
+            if (this.date.length == 0) {
+                this.isDateEmpty = true;
+            }
+            if (this.currency.length == 0) {
+                this.isCurrencyEmpty = true;
+            }
+            if (this.rateType.length == 0) {
+                this.isRateTypeEmpty = true;
+            }
+            if(this.tariff.length == 0){
+                this.isTariffEmpty =true;
+            }
+        }
+
+
+    }
+
 
     ngOnInit() {
         this.isSubcategory = false;
-        /*  this.filter = new ApprovalRateFilter();
-         this.filter.count = 10;
+        this.clearErrors();
 
-         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
-         this.approvalHistoryData = history;
-         this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.noOfRecords) || this.totalItems;
-         });
-
-         this.reportingService.getSubscribers();
-         this.reportingService.getOperators();
-         this.reportingService.getApprovalHistory(this.filter); */
+        this.name = '';
+        this.description = '';
+        this.date = '';
+        this.currency = '';
+        this.rateType = '';
+        this.tariff = '';
     }
 
-
-    onFilterChangeHandler(event: ApprovalRateFilter) {
-        this.filter = event;
-        this.reportingService.getApprovalHistory(this.filter);
+    clearErrors() {
+        this.isDateEmpty = false;
+        this.isDescriptionEmpty = false;
+        this.isNameEmpty = false;
+        this.isCurrencyEmpty = false;
+        this.isRateTypeEmpty = false;
+        this.isTariffEmpty = false;
     }
 
-    onPageChanged(event) {
-        this.filter.offset = (event.page - 1) * this.filter.count;
-        this.reportingService.getApprovalHistory(this.filter);
+    isEmpty() : boolean{
+        if (this.name.length != 0 && this.description.length != 0 &&
+            this.date.length != 0 && this.currency.length != 0 && this.rateType.length != 0 && this.tariff.length != 0)
+            return false;
+        else
+            return true;
     }
-
-    showModal() {
-        console.log("clicked here");
-        this.isSubcategory=true;
-    }
-
 }
