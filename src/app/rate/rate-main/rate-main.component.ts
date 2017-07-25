@@ -7,7 +7,6 @@ import {
 import {Validators, FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from 'ng2-formly';
 import {RateService} from "../../commons/services/rate.service";
-const currencyCodes = require('./currencies');
 
 @Component({
     selector: 'app-rate-main',
@@ -15,10 +14,6 @@ const currencyCodes = require('./currencies');
     styleUrls: ['./rate-main.component.scss']
 })
 export class RateMainComponent implements OnInit {
-
-    // var for currency
-    currencycode: string;
-    currencydesc: string;
 
     submissionError: string;
     private isSubcategory: boolean;
@@ -131,17 +126,6 @@ export class RateMainComponent implements OnInit {
     }
 
 
-    onSubmit(currencyForm) {
-            console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-            this.rateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
-                this.submissionError = errorMsg;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            });
-    }
-
-
     onFilterChangeHandler(event: ApprovalRateFilter) {
         this.filter = event;
         this.reportingService.getApprovalHistory(this.filter);
@@ -150,17 +134,6 @@ export class RateMainComponent implements OnInit {
     onPageChanged(event) {
         this.filter.offset = (event.page - 1) * this.filter.count;
         this.reportingService.getApprovalHistory(this.filter);
-    }
-
-    private isValidCurrency: boolean;
-
-    isCountryCode(name) {
-
-        if (currencyCodes.indexOf(name) < 0) {
-            this.isValidCurrency = true;
-        }else {
-            this.isValidCurrency = false;
-        }
     }
 
     showModal() {

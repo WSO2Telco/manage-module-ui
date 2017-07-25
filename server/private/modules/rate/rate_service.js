@@ -57,6 +57,12 @@ function rateService() {
         }
     };
 
+    /**
+     * Add new currency
+     * @param request
+     * @param callback
+     * @private
+     */
     let _addCurrency = function (request, callback) {
 
         logger.log('INFO', "hit at rate service end point for currency");
@@ -79,6 +85,17 @@ function rateService() {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
         }
     };
+
+    /**
+     *  Return available currency list
+     * @param request
+     * @param callback
+     * @private
+     */
+    let _getCurrency = function (request, callback) {
+        logger.log('INFO', "get currency at rate service end point");
+
+    }
 
     //add more rate services here
 

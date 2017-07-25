@@ -63,4 +63,14 @@ export class RateRemoteDataService {
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message));
     }
+
+    /**
+     * To DO api endpoint
+     * @returns {Observable<R>}
+     */
+    getCurrency(): Observable<ServerResponse> {
+        return this.http.get(this.apiEndpoints[''])
+            .map((response: Response) => response.json().success)
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
 }

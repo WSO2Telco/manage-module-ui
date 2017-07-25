@@ -11,6 +11,7 @@ import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {CurrencyComponent} from './rate-currency/currency.component';
 
 @NgModule({
     imports: [
@@ -29,7 +30,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         RateMainComponent,
         RateFilterComponent,
         SubcategoryComponent,
-        NewtypeComponent]
+        NewtypeComponent,
+        CurrencyComponent
+    ]
 })
 export class RateModule {
 }
