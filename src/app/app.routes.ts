@@ -27,6 +27,10 @@ const routes = [
     canActivate : [AppGuard]
   },
   {
+    path: 'blacklist',
+    loadChildren: 'app/blacklist/blacklist.module#BlackListModule'
+  },
+  {
     path : '',
     redirectTo : '/home',
     pathMatch : 'full'

@@ -4,7 +4,7 @@
         <label class="control-label col-sm-3">Currency code:</label>
 
         <input (input)="isCurrencyCode($event.target.value)"
-               [(ngModel)]="currencycode" name="currencycode" #inputc type="text" required="true">
+               [(ngModel)]="currencycode" name="currencycode" #inputc type="text" required="required">
     </div>
 
     <!--Throw error if currency validator fails-->
@@ -12,7 +12,7 @@
 
     <div class="form-group">
         <label class="control-label col-sm-3">Currency desc:</label>
-        <input [(ngModel)]="currencydesc" name="currencydesc">
+        <input [(ngModel)]="currencydesc" name="currencydesc" required="required">
     </div>
 
     <div class="form-group" *ngIf="!isValidCurrency">
