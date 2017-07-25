@@ -4,8 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SubCategory, Currency, ServerResponse, NewType} from '../commons/models/common-data-models';
-
+import {SubCategory, Currency, ServerResponse, NewType, RateCard} from '../commons/models/common-data-models';
 
 
 @Injectable()
@@ -16,6 +15,7 @@ export class RateRemoteDataService {
     private options: RequestOptions = new RequestOptions({headers: this.headers});
 
     private apiEndpoints: Object = {
+        addRateCard: this.apiContext + '/rate/addratecard',
         addsubcategory: this.apiContext + '/rate/addsubcategory',
         addnewtype: this.apiContext + '/rate/addnewtype',
         addCurrency: this.apiContext + '/rate/addcurrency'
@@ -23,7 +23,6 @@ export class RateRemoteDataService {
 
     constructor(private http: Http) {
     }
-
 
     /**
      * To add new sub category tariff relationship
@@ -50,15 +49,27 @@ export class RateRemoteDataService {
     }
 
 
-
     /**
      * Add a new currency
      * @param data
-     * @returns {Observable<R>}
+     * @returns {Observable<ServerResponse>}
      */
     addCurrency(data: Currency): Observable<ServerResponse> {
         console.log('currency service ---');
-        console.log(JSON.stringify(data)) ;
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
+
+
+    /**
+     * Add new rate card
+     * @param data
+     * @returns {Observable<ServerResponse>}
+     */
+    addNewRateCard(data: RateCard): Observable<ServerResponse> {
+        console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message));

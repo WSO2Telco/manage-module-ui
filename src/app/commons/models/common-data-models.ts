@@ -41,6 +41,15 @@ export class NewType {
     description: string;
 }
 
+export class RateCard {
+    name: string;
+    description: string;
+    date: string;
+    currency: string;
+    rateType: string;
+    tariff: string;
+}
+
 export class ServerResponse{
     success: boolean;
     messsage: string;
