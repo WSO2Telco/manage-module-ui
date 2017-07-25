@@ -1,0 +1,29 @@
+<div class="form-container subcategoryContainer">
+    <!--login form START-->
+    <div class="tbl-header">
+        <h5>Create New Currency</h5>
+    </div>
+    <form #currencyForm="ngForm" novalidate (ngSubmit)="onCurrencyValueSubmit(currencyForm)">
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Currency code:</label>
+
+            <input (input)="isCurrencyCode($event.target.value)"
+                   [(ngModel)]="currencycode" name="currencycode" #inputc type="text" required="true">
+        </div>
+
+        <!--Throw error if currency validator fails-->
+        <div *ngIf="isValidCurrency">Not a Valid Currency Type</div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Currency desc:</label>
+            <input [(ngModel)]="currencydesc" name="currencydesc">
+        </div>
+
+        <div class="form-group" *ngIf="!isValidCurrency">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+        </div>
+    </form>
+</div>

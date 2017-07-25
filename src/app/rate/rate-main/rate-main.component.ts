@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {RateService} from '../../commons/services/rate.service';
-const currencyCodes = require('./currencies');
-
 
 @Component({
     selector: 'app-rate-main',
@@ -11,11 +9,7 @@ const currencyCodes = require('./currencies');
 })
 export class RateMainComponent implements OnInit {
 
-    // var for currency
-    currencycode: string;
-    currencydesc: string;
     submissionError: string;
-
 
     private isSubcategory: boolean;
     private isValidCurrency: boolean;
@@ -112,31 +106,4 @@ export class RateMainComponent implements OnInit {
         else
             return true;
     }
-
-
-    onSubmit(currencyForm) {
-        console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-
-        this.rateService.addCurrency(this.currencycode, this.currencydesc, (errorMsg) => {
-            this.submissionError = errorMsg;
-            setTimeout(() => {
-                this.submissionError = null;
-            }, 5000);
-        });
-    }
-
-    isCountryCode(name) {
-
-        if (currencyCodes.indexOf(name) < 0) {
-            this.isValidCurrency = true;
-        } else {
-            this.isValidCurrency = false;
-        }
-    }
-
-    showModal() {
-        console.log('clicked here');
-        this.isSubcategory = true;
-    }
-
 }

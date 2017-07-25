@@ -15,6 +15,9 @@
         </div>
     </div>
 </div>
+
+<button type="button" class="btn btn-primary" (click)="staticModal.show()">test modal</button>
+
 <div class="animated fadeInUp row">
 
     <div class="col-sm-12">
@@ -23,9 +26,7 @@
             <div class="form-container rateInputContainer">
                 <div class="tbl-header">
                     <h3>Create New Rate Card </h3>
-                    <button type="button" class="btn btn-primary" (click)="staticModal.show()">test modal</button>
                 </div>
-
 
                 <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
                     <div class="form-group">
@@ -75,7 +76,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Currency:</label>
+                        <label class="control-label col-sm-3">Currency:</label>
                         <div class="col-sm-4">
                             <select class="form-control"
                                     type="text"
@@ -95,7 +96,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Rate Type:</label>
+                        <label class="control-label col-sm-3">Rate Type:</label>
                         <div class="col-sm-4">
                             <select class="form-control"
                                     type="text"
@@ -113,7 +114,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Tariff:</label>
+                        <label class="control-label col-sm-3">Tariff:</label>
                         <div class="col-sm-4">
                             <select class="form-control"
                                     type="text"
@@ -131,7 +132,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2">Add Sub Category:</label>
+                        <label class="control-label col-sm-3">Add Sub Category:</label>
                         <div class="col-sm-4">
                             <div class="form-check">
                                 <label class="form-check-label">
@@ -150,31 +151,7 @@
                 </form>
 
             </div>
-
-
-            <form #currencyForm="ngForm" novalidate (ngSubmit)="onSubmit(currencyForm)">
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Currency code:</label>
-
-                    <input (input)="isCountryCode($event.target.value)"
-                           [(ngModel)]="currencycode" name="currencycode" #inputc type="text" required="true">
-
-                </div>
-
-                <div *ngIf="isValidCurrency">Not a Valid Currency Type</div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-3">Currency desc:</label>
-                    <input [(ngModel)]="currencydesc" name="currencydesc">
-                </div>
-
-                <div class="form-group" *ngIf="!isValidCurrency">
-                    <div class="col-sm-1">
-                        <button type="submit" class="btn btn-success">Add</button>
-                    </div>
-                </div>
-            </form>
+            <app-currency></app-currency>
         </div>
     </div>
 </div>
