@@ -19,7 +19,8 @@ export class MainMenuComponent implements OnInit {
         {id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'subscriptions'},
         {id: 4, route: '/history', name: 'History', iconName: 'history'},
         {id: 5, route: '/rate', name: 'Rate', iconName: 'grade'},
-        {id: 6, route: '/quotacap', name: 'Quota Cap', iconName: 'assignment'}
+        {id: 6, route: '/quotacap', name: 'Quota Cap', iconName: 'assignment'},
+        {id: 7, route: '/whitelist', name: 'Whitelist', iconName: 'assignment'}
     ];
 
     constructor(private _appCommonService: AppCommonService,

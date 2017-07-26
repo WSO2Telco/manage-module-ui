@@ -28,6 +28,11 @@ const routes = [
     canActivate : [AppGuard]
   },
   {
+    path: 'whitelist',
+    loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
+    canActivate : [AppGuard]
+  },
+  {
     path: 'approvals',
     loadChildren: 'app/approvals/approvals.module#ApprovalsModule',
     canActivate : [AppGuard]
