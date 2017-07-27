@@ -4,10 +4,12 @@
 import {NgModule} from '@angular/core';
 import {BlackListRoutes} from './blacklist.routes';
 import {BlacklistMainComponent} from './blacklist-main/blacklist-main.component';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
 
     imports: [
+        CommonModule,
         BlackListRoutes
     ],
 

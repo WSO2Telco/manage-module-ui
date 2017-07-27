@@ -3,6 +3,9 @@
  */
 const Q = require('q');
 const wreck = require('wreck');
+const config = require('../../config/application_config');
+const boom = require('boom');
+const Messages = require('../common/messages');
 
 /**
  * Rest for get api lists
@@ -10,7 +13,9 @@ const wreck = require('wreck');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetApiListRest = function (request) {
+const _invokeGetApiListRest = function ( ) {
+
+    console.log("blacklist rest end point call")
 
     let deferred = Q.defer();
 
@@ -32,7 +37,8 @@ const _invokeGetApiListRest = function (request) {
             console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
+            console.log("response success : " + JSON.stringify(payload));
+
     deferred.resolve(payload);
          }
     });

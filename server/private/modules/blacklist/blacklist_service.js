@@ -3,6 +3,7 @@
  */
 'use strict';
 const logger=require('../../config/logger');
+const blackListRestService = require('./blacklist_rest_service');
 
 logger.debugLevel = 'warn';
 
@@ -24,6 +25,9 @@ function blacklistService() {
             logger.log('ERROR', 'faliture');
             callback(getResponseError);
         };
+
+        blackListRestService.invokeGetApiListRest( ).then(onSuccess, onFailture);
+
     };
 
     return {

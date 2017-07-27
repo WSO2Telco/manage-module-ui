@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlackListService} from '../../commons/services/blacklist.service';
 
+
 @Component({
   selector: 'app-blacklist-main',
   templateUrl: './blacklist-main.component.html',
@@ -18,7 +19,6 @@ export class BlacklistMainComponent implements OnInit {
   ngOnInit() {
 
       this.submissionError = '';
-
   }
 
   loadApis() {
