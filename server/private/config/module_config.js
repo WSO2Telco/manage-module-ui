@@ -75,6 +75,12 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./blacklist"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./common"
             },
             "options": getOptions({}, true)
@@ -91,5 +97,6 @@ module.exports = {
             },
             "options": getOptions({}, true)
         }
+
     ]
 };

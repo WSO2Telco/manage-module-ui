@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BlackListRemoteDataService} from '../../data-providers/blacklist_remote-data.service';
 
 @Component({
   selector: 'app-blacklist-main',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlacklistMainComponent implements OnInit {
 
-  constructor() { }
+  apis  = {};
+  api = {};
+  constructor(private blackListService: BlackListRemoteDataService) { }
 
   ngOnInit() {
+
+    this.api = this.blackListService.getApiList();
+    console.log(this.api);
+
+  }
+
+  loadApis() {
+    this.blackListService.getApiList();
   }
 
 }

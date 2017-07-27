@@ -13,6 +13,7 @@ var appConfig = {
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',
     allowedRoles: process.env.wm_allowed_roles || "admin,subscriber,operator1-admin-role,operator2-admin-role,operator2-cc-role",
+    apiListURL: process.env.wm_reporting_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
     apiContext: 'api'
 
 };
