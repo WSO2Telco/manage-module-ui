@@ -60,3 +60,7 @@ export class Currency {
     currencydesc: string;
 }
 
+export class ApiList {
+    user: string;
+    api: string;
+}

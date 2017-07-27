@@ -22,6 +22,7 @@ import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data
 import {ApprovalHelperService} from "./approvals/approval-helper.service";
 import {SharedModule} from "./shared/shared.module";
 import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data.service";
+import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data.service';
 
 @NgModule({
     declarations: [
@@ -57,6 +58,7 @@ import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data
         ReportingRemoteDataService,
         RateRemoteDataService,
         ApprovalHelperService,
+        BlackListRemoteDataService,
         {
             provide : 'API_CONTEXT',
             useValue : 'api'

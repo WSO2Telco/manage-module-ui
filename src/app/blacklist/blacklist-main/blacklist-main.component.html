@@ -1,3 +1,81 @@
-<div>
-  BlackList Component
+<div class="col-sm-12">
+  <h3>APIwise BlackList </h3>
+
+  <div class="form-group">
+    <label class="control-label col-sm-3">API:</label>
+    <div class="col-sm-4">
+      <select class="form-control"
+              type="text"
+              autocomplete="off"
+              placeholder="Rate Type">
+        <option>Credit</option>
+        <option>payment</option>
+        <option>wallet</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="btn-primary">view</button>
+
+  <br><br><br>
+  <h5>BlackList subscribers - 0</h5>
+  <br><br><br>
+
+  <form class="form-horizontal">
+    <div class="col-sm-4">
+      <input class="form-control"
+             type="text"
+             autocomplete="off"
+             placeholder="Name"
+             name="name"
+             required>
+    </div>
+
+    <button type="submit" class="btn-primary"> (+)Add</button>
+  </form>
+
+  <br><br>
+  <h6>Subscriber</h6>
+
+  <table>
+    <thead>
+    <tr><th style="width: 550px;"></th>
+      <th style="width: 200px; vertical-align: top;"></th>
+    </tr></thead>
+    <tbody>
+    <tr>
+      <td>
+        <input id="subscriber_black_list" type="text" placeholder="e.g.94777333100,94777333105 (Comma seperated entries)" class="resource_url_pattern form-control" style="width: 535px;">
+      </td>
+      <td style="vertical-align: top;">
+        <button class="btn btn-primary" style="margin-left: 15px; margin-top: 3px;" id="add-blacklist">
+										<span class="icon fw-stack" style="font-size:10px">
+											<i class="fw fw-add fw-stack-1x"></i>
+											<i class="fw fw-circle-outline fw-stack-2x"></i>
+										</span>&nbsp;Add</button>
+      </td>
+
+    </tr>
+    <tr>
+      <td>
+        <table class="table borderless" style="width: 350px;">
+          <thead>
+          <tr>
+            <th style="width: 300px;">Subscriber</th>
+            <th style="width: 50px;"></th>
+          </tr>
+          </thead>
+        </table>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <div>
+    <button (click)="loadApis()">Load Currencies</button>
+    {{ apis  }}
+  </div>
+
+
 </div>
