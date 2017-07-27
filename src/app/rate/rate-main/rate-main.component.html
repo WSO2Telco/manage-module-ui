@@ -94,7 +94,10 @@
                             </select>
                             <span class="error" *ngIf="isCurrencyEmpty">Currency can not be empty</span>
                         </div>
+                        <div><a (click)="(showAddCurrency)?showAddCurrency=false:showAddCurrency=true">Add New</a></div>
                     </div>
+                    <app-currency *ngIf="showAddCurrency"></app-currency>
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">Rate Type:</label>
                         <div class="col-sm-4">
@@ -113,6 +116,7 @@
                             <span class="error" *ngIf="isRateTypeEmpty">Rate Type can not be empty</span>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">Tariff:</label>
                         <div class="col-sm-4">
@@ -130,28 +134,35 @@
                             </select>
                             <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
                         </div>
+                        <div><a (click)="(showAddTariff)?showAddTariff=false:showAddTariff=true">Add New</a></div>
                     </div>
+                    <app-addtariff *ngIf="showAddTariff"></app-addtariff>
+
                     <div class="form-group">
                         <label class="control-label col-sm-3">Add Sub Category:</label>
                         <div class="col-sm-4">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     <input type="checkbox" class="form-check-input"
-                                           (click)="(isSubcategory)?isSubcategory=false:isSubcategory=true">
+                                           (click)="(showSubcategory)?showSubcategory=false:showSubcategory=true">
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <app-subcategory *ngIf="isSubcategory"></app-subcategory>
+                    <app-subcategory *ngIf="showSubcategory"></app-subcategory>
+
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                        <div class="col-sm-1">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="reset" class="btn btn-warning">Cancel</button>
                         </div>
                     </div>
+
                 </form>
 
             </div>
-            <app-currency></app-currency>
         </div>
     </div>
 </div>

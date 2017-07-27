@@ -1,1 +1,119 @@
-<h1>Whitelist</h1>
+<div class="animated fadeInUp row">
+
+        <div class="col-sm-12">
+            <div class="tbl-header">
+                <h3>Whitelist subscribers</h3>
+            </div>
+            <div class="form-container">
+                <table>
+                    <thead>
+                    <th style="width: 250px;"></th>
+                    <th style="width: 200px; vertical-align: left;"></th>
+
+                    </thead>
+                    <tbody>
+
+
+                    <tr id="listRow3">
+                        <td>
+                            <span>Subscriber: </span>
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Rate Type"
+                                    name="rateType">
+                                <option [(ngModel)]="option1" value="option1"></option>
+                                <option [(ngModel)]="option2">operator1</option>
+                                <option [(ngModel)]="option2">operator2</option>
+                            </select>
+                        </td>
+                        <td style="vertical-align: top;width:500px;">
+                            <span>Application: </span>
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Rate Type"
+                                    name="rateType">
+                                <option>Application1</option>
+                                <option>Application2</option>
+                                <option>Application3</option>
+                            </select>
+                        </td>
+                        <td>
+                            <span>&nbsp;&nbsp;API:</span>
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Rate Type"
+                                    name="rateType">
+                                <option>API1</option>
+                                <option>API2</option>
+                            </select>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="form-container rateInputContainer">
+                <div class="tbl-header">
+                    <h5>Numbers list configuration </h5>
+                </div>
+
+                <form class="form-horizontal" #numberlistForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(numberlistForm)">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Number:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="manualNumber" id="manualNumber"
+                                   placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
+                            <button class="btn btn-primary"
+                                    type="submit">
+                                <span class="icon fw-stack" style="font-size:10px">
+											<i class="fw fw-add fw-stack-1x"></i>
+											<i class="fw fw-circle-outline fw-stack-2x"></i>
+										</span>&nbsp;Upload Number
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+            <div class="form-container rateInputContainer">
+                <div class="tbl-header">
+                    <h5>Numbers Range configuration </h5>
+                </div>
+
+                <form class="form-horizontal" #numberrangeForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(numberrangeForm)">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Min number:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="manualNumber">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Max number:</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="manualNumber">
+                        </div>
+                    </div>
+                    <label style="color:grey;">e.g.94777333100 to 94777333200</label>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" style="margin-left: 15px; margin-top: 3px;" id="add-range">
+                            Upload Numbers List
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+</div>

@@ -20,7 +20,9 @@ export class MainMenuComponent implements OnInit {
         {id: 4, route: '/history', name: 'History', iconName: 'history'},
         {id: 5, route: '/rate', name: 'Rate', iconName: 'grade'},
         {id: 6, route: '/quotacap', name: 'Quota Cap', iconName: 'assignment'},
-        {id: 7, route: '/whitelist', name: 'Whitelist', iconName: 'assignment'}
+        {id: 7, route: '/blacklist', name: 'Blacklist', iconName: 'apps'},
+        {id: 8, route: '/whitelist', name: 'Whitelist', iconName: 'accessibility'}
+
     ];
 
     constructor(private _appCommonService: AppCommonService,

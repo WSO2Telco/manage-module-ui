@@ -11,8 +11,6 @@ export class RateMainComponent implements OnInit {
 
     submissionError: string;
 
-    private isSubcategory: boolean;
-    private isValidCurrency: boolean;
     private isDescriptionEmpty: boolean;
     private isNameEmpty: boolean;
     private isDateEmpty: boolean;
@@ -27,15 +25,11 @@ export class RateMainComponent implements OnInit {
     private rateType: string;
     private tariff: string;
 
-    constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
-    }
+    private showSubcategory: boolean;
+    private showAddCurrency: boolean;
+    private showAddTariff: boolean;
 
-    viewSubcategory() {
-        if (this.isSubcategory) {
-            this.isSubcategory = false;
-        } else {
-            this.isSubcategory = false;
-        }
+    constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
     }
 
     onRateCardSubmit(ratecardForm) {
@@ -79,7 +73,9 @@ export class RateMainComponent implements OnInit {
 
 
     ngOnInit() {
-        this.isSubcategory = false;
+        this.showSubcategory = false;
+        this.showAddCurrency = false;
+        this.showAddTariff = false;
         this.clearErrors();
 
         this.name = '';

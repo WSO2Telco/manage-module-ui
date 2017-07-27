@@ -1,0 +1,60 @@
+<div class="form-container tariffContainer">
+    <!--login form START-->
+    <div class="tbl-header">
+        <h5>Create New Tariff </h5>
+    </div>
+    <form #addTariffForm="ngForm" novalidate (ngSubmit)="onSubmit(addTariffForm)">
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Tariff Name</label>
+            <div class="col-sm-4">
+                <input class="form-control"
+                        type="text"
+                        autocomplete="off"
+                        placeholder="Name"
+                        name="name"
+                        #nameRef="ngModel"
+                        required
+                        [(ngModel)]="name">
+                <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3">Tariff Description</label>
+            <div class="col-sm-4">
+                <textarea rows="2" cols="50" class="form-control"
+                        type="text"
+                        autocomplete="off"
+                        placeholder="Description"
+                        name="description"
+                        #descriptionRef="ngModel"
+                        required
+                        [(ngModel)]="description">
+                </textarea>
+                <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+            <div class="col-sm-1">
+                <button type="reset" class="btn btn-warning">Cancel</button>
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+
+<div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
+
+
+
+
+
+
+

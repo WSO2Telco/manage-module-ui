@@ -3,7 +3,8 @@ import {CommonModule} from '@angular/common';
 import {SearchPanelComponent} from './search-panel/search-panel.component';
 import {SearchResultsComponent} from './search-results/search-results.component';
 import {SubcategoryComponent} from './rate-subcategory/subcategory.component';
-import {NewtypeComponent} from './rate-newtype/newtype.component'
+import {NewtypeComponent} from './rate-newtype/newtype.component';
+import {TariffComponent} from './rate-tariff/tariff.component';
 import {RateMainComponent} from './rate-main/rate-main.component';
 import {RateRoutes} from './rate.routes';
 import {RateFilterComponent} from './rate-filter/rate-filter.component';
@@ -31,7 +32,8 @@ import {CurrencyComponent} from './rate-currency/currency.component';
         RateFilterComponent,
         SubcategoryComponent,
         NewtypeComponent,
-        CurrencyComponent
+        CurrencyComponent,
+        TariffComponent
     ]
 })
 export class RateModule {
