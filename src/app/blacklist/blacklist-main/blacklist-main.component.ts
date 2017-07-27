@@ -1,26 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import {BlackListRemoteDataService} from '../../data-providers/blacklist_remote-data.service';
+import { BlackListService} from '../../commons/services/blacklist.service';
 
 @Component({
   selector: 'app-blacklist-main',
   templateUrl: './blacklist-main.component.html',
   styleUrls: ['./blacklist-main.component.scss']
 })
+
+
 export class BlacklistMainComponent implements OnInit {
 
-  apis  = {};
-  api = {};
-  constructor(private blackListService: BlackListRemoteDataService) { }
+  private submissionError: string;
+  constructor(private blackListService: BlackListService) {
+
+  }
 
   ngOnInit() {
 
-    this.api = this.blackListService.getApiList();
-    console.log(this.api);
+      this.submissionError = '';
 
   }
 
   loadApis() {
-    this.blackListService.getApiList();
+    this.blackListService.getApiList((errorMsg) => {
+          this.submissionError = errorMsg;
+          setTimeout(() => {
+            this.submissionError = null;
+          }, 5000);
+        });
   }
 
 }

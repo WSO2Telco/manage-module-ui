@@ -22,13 +22,13 @@ export class WhitelistMainComponent implements OnInit {
 
     onSubmit(){
 
-        this.rateService.addNewRateCard(this.name, this.description, this.date, this.currency,
-            this.rateType, this.tariff, (errorMsg) => {
-                this.submissionError = errorMsg;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            });
+        // this.rateService.addNewRateCard(this.name, this.description, this.date, this.currency,
+        //     this.rateType, this.tariff, (errorMsg) => {
+        //         this.submissionError = errorMsg;
+        //         setTimeout(() => {
+        //             this.submissionError = null;
+        //         }, 5000);
+        //     });
     }
 
 }

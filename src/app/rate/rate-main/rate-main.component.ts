@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {RateService} from '../../commons/services/rate.service';
 
 @Component({
@@ -29,7 +28,7 @@ export class RateMainComponent implements OnInit {
     private showAddCurrency: boolean;
     private showAddTariff: boolean;
 
-    constructor(private reportingService: ReportingRemoteDataService, private rateService: RateService) {
+    constructor(private rateService: RateService) {
     }
 
     onRateCardSubmit(ratecardForm) {

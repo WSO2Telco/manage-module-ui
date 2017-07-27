@@ -2,18 +2,14 @@
  * Created by manoj on 7/19/17.
  */
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
 import {RateRemoteDataService} from '../../data-providers/rate_remote-data.service';
-import {SubCategory, LoginResponse, Currency, ServerResponse, NewType, RateCard} from '../models/common-data-models';
+import {SubCategory, Currency, ServerResponse, NewType, RateCard} from '../models/common-data-models';
 
 
 @Injectable()
 export class RateService {
 
-    loginUserInfo: BehaviorSubject<LoginResponse> = new BehaviorSubject(null);
-
-    constructor(private _router: Router, private _remoteService: RateRemoteDataService) {
+    constructor(private _remoteService: RateRemoteDataService) {
     }
 
 
