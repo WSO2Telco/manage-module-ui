@@ -74,7 +74,7 @@ function rateService() {
      */
     let _addCurrency = function (request, callback) {
 
-        logger.log('INFO', "hit at rate service end point for currency");
+        logger.log('INFO', "hit at rate service end point for currency- Rk");
 
         request.server.log('info', 'ADD Currency REQUEST : ' + request.payload && JSON.stringify(request.payload));
 

@@ -5,6 +5,7 @@ import {RateService} from './services/rate.service';
 import {LoginRemoteDataService} from "../data-providers/login_remote-data.service";
 import {AppCommonService} from "./services/app-common.service";
 import {MessageService} from "./services/message.service";
+import {BlackListService} from './services/blacklist.service';
 
 
 @NgModule({
@@ -12,7 +13,7 @@ import {MessageService} from "./services/message.service";
         CommonModule
     ],
     declarations: [],
-    providers: [AuthenticationService, LoginRemoteDataService, AppCommonService, MessageService, RateService],
+    providers: [AuthenticationService, LoginRemoteDataService, AppCommonService, MessageService, RateService, BlackListService],
     exports: []
 })
 export class CommonsModule {

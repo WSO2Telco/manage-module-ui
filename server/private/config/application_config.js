@@ -9,11 +9,11 @@ var appConfig = {
     authServerURL: process.env.wm_auth_server_url || 'https://localhost:9443/services',
     rateServiceURL: process.env.wm_rate_service_url || 'http://localhost:7080/provisionAPI/test',
     reportingUrl : process.env.wm_reporting_url || 'https://localhost:9443/apihostobject',
+    apiListURL: process.env.wm_blacklist_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
     businessProcessEngineBaseUrl: process.env.wm_business_process_engine_url || 'http://localhost:9763/activiti-rest/service',
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',
     allowedRoles: process.env.wm_allowed_roles || "admin,subscriber,operator1-admin-role,operator2-admin-role,operator2-cc-role",
-    apiListURL: process.env.wm_reporting_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
     apiContext: 'api'
 
 };
