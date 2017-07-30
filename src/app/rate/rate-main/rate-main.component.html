@@ -1,52 +1,51 @@
-<!--span class="filter" tooltip="Filter"><i class="material-icons">arrow drop down circle</i></span-->
-<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
-     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title pull-left">op modal</h4>
-                <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+                <h4 class="modal-title pull-left">{{dialogactionTitile}}</h4>
+                <button type="button" class="close pull-right"
+                        (click)="lgModal.hide();showAddCurrency=false;showAddTariff=false;" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <app-subcategory></app-subcategory>
+                <app-currency *ngIf="showAddCurrency"></app-currency>
+                <app-addtariff *ngIf="showAddTariff"></app-addtariff>
             </div>
         </div>
     </div>
 </div>
 
-<button type="button" class="btn btn-primary" (click)="staticModal.show()">test modal</button>
-
 <div class="animated fadeInUp row">
 
     <div class="col-sm-12">
-        <div class="rateInputContainer">
-            <!--Form Container - START-->
-            <div class="form-container rateInputContainer">
-                <div class="tbl-header">
-                    <h3>Create New Rate Card </h3>
+        <!--Form Container - START-->
+        <div class="form-container rateInputContainer">
+            <div class="tbl-header">
+                <h3>Create New Rate Card </h3>
+                <br> <br>
+            </div>
+
+            <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Rate Name:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               type="text"
+                               autocomplete="off"
+                               placeholder="Name"
+                               name="name"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="name">
+                        <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+                    </div>
                 </div>
 
-                <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Rate Name:</label>
-                        <div class="col-sm-4">
-                            <input class="form-control"
-                                   type="text"
-                                   autocomplete="off"
-                                   placeholder="Name"
-                                   name="name"
-                                   #nameRef="ngModel"
-                                   required
-                                   [(ngModel)]="name">
-                            <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Rate Description</label>
-                        <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Rate Description</label>
+                    <div class="col-sm-4">
                             <textarea rows="4" cols="50" class="form-control"
                                       type="text"
                                       autocomplete="off"
@@ -56,113 +55,106 @@
                                       required
                                       [(ngModel)]="description">
                             </textarea>
-                            <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
-                        </div>
+                        <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Create Date</label>
-                        <div class="col-sm-4">
-                            <input class="form-control"
-                                   type="date"
-                                   autocomplete="off"
-                                   placeholder="Date"
-                                   name="date"
-                                   #codeRef="ngModel"
-                                   required
-                                   [(ngModel)]="date">
-                            <span class="error" *ngIf="isDateEmpty">Date can not be empty</span>
-                        </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Create Date</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               type="date"
+                               autocomplete="off"
+                               placeholder="Date"
+                               name="date"
+                               #codeRef="ngModel"
+                               required
+                               [(ngModel)]="date">
+                        <span class="error" *ngIf="isDateEmpty">Date can not be empty</span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Currency:</label>
-                        <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Currency"
-                                    name="currency"
-                                    #currencyRef="ngModel"
-                                    required
-                                    [(ngModel)]="currency">
-                                <option>LKR</option>
-                                <option>USD</option>
-                                <option>INR</option>
-                                <option>JPY</option>
-                                <option>UKP</option>
-                            </select>
-                            <span class="error" *ngIf="isCurrencyEmpty">Currency can not be empty</span>
-                        </div>
-                        <div><a (click)="(showAddCurrency)?showAddCurrency=false:showAddCurrency=true">Add New</a></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Currency:</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="selected"
+                               [typeahead]="currencyList"
+                               [typeaheadMinLength]="0"
+                               placeholder="Currency"
+                               name="typecurrency"
+                               class="form-control"
+                               required
+                        >
+                        <span class="error" *ngIf="isCurrencyEmpty">Currency can not be empty</span>
                     </div>
-                    <app-currency *ngIf="showAddCurrency"></app-currency>
+                    <span class="glyphicon glyphicon-plus info-tooltip"
+                          tooltip="Click here to Add a new currency to the list" placement="right"
+                          (click)="showAddCurrency=true;changeDialogTitle();lgModal.show();"></span>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Rate Type:</label>
-                        <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Rate Type"
-                                    name="rateType"
-                                    #rateTypeRef="ngModel"
-                                    required
-                                    [(ngModel)]="rateType">
-                                <option>percentage</option>
-                                <option>quota</option>
-                                <option>constant</option>
-                            </select>
-                            <span class="error" *ngIf="isRateTypeEmpty">Rate Type can not be empty</span>
-                        </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Rate Type:</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="rateType"
+                               [typeahead]="rateTypeList"
+                               [typeaheadMinLength]="0"
+                               autocomplete="off"
+                               placeholder="Rate Type"
+                               name="rateType"
+                               #rateTypeRef="ngModel"
+                               class="form-control"
+                               required
+                        >
+                        <span class="error" *ngIf="isRateTypeEmpty">Rate Type can not be empty</span>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Tariff:</label>
-                        <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Tariff"
-                                    name="tariff"
-                                    #tariffRef="ngModel"
-                                    required
-                                    [(ngModel)]="tariff">
-                                <option>cat35</option>
-                                <option>cat36</option>
-                                <option>cat38</option>
-                            </select>
-                            <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
-                        </div>
-                        <div><a (click)="(showAddTariff)?showAddTariff=false:showAddTariff=true">Add New</a></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Tariff:</label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="tariff"
+                               [typeahead]="tariffList"
+                               [typeaheadMinLength]="0"
+                               autocomplete="off"
+                               placeholder="Tariff"
+                               name="tariff"
+                               #tariffRef="ngModel"
+                               required
+                               class="form-control"
+                               required
+                        >
+                        <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
                     </div>
-                    <app-addtariff *ngIf="showAddTariff"></app-addtariff>
+                    <span class="glyphicon glyphicon-plus info-tooltip"
+                          tooltip="Click here to Add a new currency to the list" placement="right"
+                          (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
+                </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Add Sub Category:</label>
-                        <div class="col-sm-4">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                    <input type="checkbox" class="form-check-input"
-                                           (click)="(showSubcategory)?showSubcategory=false:showSubcategory=true">
-                                </label>
-                            </div>
-                        </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Add Sub Category:</label>
+                    <div class="col-sm-4">
+                        <label class="switch">
+                            <input type="checkbox"
+                                   (change)="(showSubcategory)?showSubcategory=false:showSubcategory=true">
+                            <span class="slider round"></span>
+                        </label>
+                        &nbsp;&nbsp; <span class="glyphicon glyphicon-question-sign info-tooltip"
+                                           tooltip="Please enable this option In oder to add subcategories"
+                                           placement="right"></span>
                     </div>
-                    <app-subcategory *ngIf="showSubcategory"></app-subcategory>
+                </div>
+                <app-subcategory *ngIf="showSubcategory"></app-subcategory>
 
-                    <div class="form-group">
-                        <div class="col-sm-1">
-                            <button type="submit" class="btn btn-success">Add</button>
-                        </div>
-                        <div class="col-sm-1">
-                            <button type="reset" class="btn btn-warning">Cancel</button>
-                        </div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-3">
+                        <br> <br>
+                        <button type="submit" class="btn btn-success">Add</button>&nbsp;
+                        <button type="reset" class="btn btn-warning">Cancel</button>
                     </div>
+                </div>
 
-                </form>
+            </form>
 
-            </div>
         </div>
     </div>
 </div>
