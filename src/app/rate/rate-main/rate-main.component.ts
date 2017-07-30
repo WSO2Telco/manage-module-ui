@@ -40,11 +40,11 @@ export class RateMainComponent implements OnInit {
                 + ':' + this.date + ':' + this.currency + ':' + this.rateType + ':' + this.tariff);
             this.rateService.addNewRateCard(this.name, this.description, this.date, this.currency,
                 this.rateType, this.tariff, (errorMsg) => {
-                this.submissionError = errorMsg;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            });
+                    this.submissionError = errorMsg;
+                    setTimeout(() => {
+                        this.submissionError = null;
+                    }, 5000);
+                });
         } else {
             console.log('invalid fields');
             if (this.name.length == 0) {
@@ -62,8 +62,8 @@ export class RateMainComponent implements OnInit {
             if (this.rateType.length == 0) {
                 this.isRateTypeEmpty = true;
             }
-            if(this.tariff.length == 0){
-                this.isTariffEmpty =true;
+            if (this.tariff.length == 0) {
+                this.isTariffEmpty = true;
             }
         }
 
@@ -94,11 +94,48 @@ export class RateMainComponent implements OnInit {
         this.isTariffEmpty = false;
     }
 
-    isEmpty() : boolean{
+    isEmpty(): boolean {
         if (this.name.length != 0 && this.description.length != 0 &&
             this.date.length != 0 && this.currency.length != 0 && this.rateType.length != 0 && this.tariff.length != 0)
             return false;
         else
             return true;
     }
+
+    private dialogactionTitile: string;
+
+    changeDialogTitle() {
+        if (this.showAddCurrency)
+            return this.dialogactionTitile = 'Add new Currency code';
+        else
+            return this.dialogactionTitile = 'Add new Tariff code';
+    }
+
+    public currencyList: string[] = [
+        'AED',
+        'AFN',
+        'ALL',
+        'AMD',
+        'ANG',
+        'AOA',
+        'ARS',
+        'AUD',
+        'AWG',
+        'AZN',
+    ];
+
+    public tariffList: string[] = [
+        'TR064',
+        'TR034',
+        'TR074',
+        'TR044',
+        'TR030',
+    ];
+
+    public rateTypeList: string[] = [
+        'Constant',
+        'Precentage',
+        'Commis',
+        'Annual'
+    ];
 }
