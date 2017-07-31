@@ -9,5 +9,10 @@ module.exports = [
         method: 'GET',
         path: '/api/blacklist/list',
         handler: blacklistService.getApiList
+    },
+    {
+        method : 'POST',
+        path : '/api/blacklist/list/{id}',
+        handler : blacklistService.getBlackListNumberList
     }
 ];

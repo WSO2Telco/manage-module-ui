@@ -45,6 +45,39 @@ const _invokeGetApiListRest = function ( ) {
     return deferred.promise;
 };
 
+const _invokeGetBlackListNumbers = function () {
+
+    console.log("blacklist Number rest endpoint");
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.blacklistPerApiURL;
+    }
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {}
+        };
+    };
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+       if (error) {
+           console.log("response failed");
+           deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+       } else {
+            console.log("response success : " + JSON.stringify(payload));
+    deferred.resolve(payload);
+
+     }
+   });
+
+    return deferred.promise;
+};
+
+
 module.exports = {
-    invokeGetApiListRest: _invokeGetApiListRest
+    invokeGetApiListRest: _invokeGetApiListRest,
+    invokeGetBlackListNumberRest: _invokeGetBlackListNumbers
 };

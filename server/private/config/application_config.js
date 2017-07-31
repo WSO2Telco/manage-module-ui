@@ -10,6 +10,7 @@ var appConfig = {
     rateServiceURL: process.env.wm_rate_service_url || 'http://localhost:7080/provisionAPI/test',
     reportingUrl : process.env.wm_reporting_url || 'https://localhost:9443/apihostobject',
     apiListURL: process.env.wm_blacklist_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
+    blacklistPerApiURL: process.env.wm_blacklist_numbers_url || 'http://localhost:9763/blacklist-whitelist-service/queries/GetBlacklistPerApi',
     businessProcessEngineBaseUrl: process.env.wm_business_process_engine_url || 'http://localhost:9763/activiti-rest/service',
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',

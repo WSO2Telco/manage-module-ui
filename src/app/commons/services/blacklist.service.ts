@@ -21,4 +21,10 @@ export class BlackListService {
                 }
             );
     }
+
+    getBlackListNumberList(callback: Function) {
+        console.log('get blacklist Number Lists');
+        // this._remoteService
+    }
+
 }

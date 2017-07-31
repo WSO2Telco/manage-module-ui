@@ -29,5 +29,10 @@ export class BlackListRemoteDataService {
              })
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
+
+    getBlackListNumberList(id) {
+        console.log('hit the blacklist remote number data service');
+        // return this.http.post()
+    }
 }
 
