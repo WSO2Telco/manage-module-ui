@@ -81,6 +81,12 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./whitelist"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./common"
             },
             "options": getOptions({}, true)

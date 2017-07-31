@@ -64,3 +64,8 @@ export class ApiList {
     user: string;
     api: string;
 }
+
+export class Application {
+    id: string;
+    name: string;
+}
