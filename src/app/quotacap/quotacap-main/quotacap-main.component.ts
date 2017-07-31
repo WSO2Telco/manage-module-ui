@@ -10,9 +10,73 @@ import {Component, OnInit, } from '@angular/core';
 })
 export class QuotaCapMainComponent implements OnInit {
 
+    private isNameEmpty: boolean;
+    private name: string;
+
     ngOnInit() {
+        this.name = '';
+    }
+
+    clearErrors() {
+        this.isNameEmpty = false;
+    }
+
+    isEmpty(): boolean {
+        if (this.name.length != 0) {
+            return false; }
+        else {
+            return true; }
+    }
+
+    onquotacapFormSubmit(quotacapForm) {
+
+        this.clearErrors();
+
+        if (!this.isEmpty()) {
+            console.log('submited rate card form ' + this.name );
+            /* this.rateService.addNewRateCard(this.name, this.description, this.date, this.currency,
+                this.rateType, this.tariff, (errorMsg) => {
+                    this.submissionError = errorMsg;
+                    setTimeout(() => {
+                        this.submissionError = null;
+                    }, 5000);
+                }); */
+        } else {
+            console.log('invalid fields');
+            if (this.name.length == 0) {
+                this.isNameEmpty = true;
+            }
+        }
+
 
     }
+
+    public operatorList: string[] = [
+        'SB',
+        'NB'
+    ];
+
+    public spList: string[] = [
+        'Dialog',
+        'Mobitel',
+        'Hutch',
+        'Etisalata',
+        'Airtel',
+    ];
+
+    public AppList: string[] = [
+        'APP1',
+        'Test1',
+        'Test2',
+        'Test3'
+    ];
+
+    public ApiList: string[] = [
+        'SMS',
+        'Billing',
+        'Charge',
+        'Voting'
+    ];
 
 }
 
