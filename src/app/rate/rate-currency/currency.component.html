@@ -1,30 +1,54 @@
-<div class="form-container currencyContainer">
-    <!--login form START-->
-    <div class="tbl-header">
-        <h5>Create New Currency Type </h5>
-    </div>
+<div class="animated fadeInUp" style="animation-delay: 0.1s">
 
-    <form #currencyForm="ngForm" novalidate (ngSubmit)="onCurrencyValueSubmit(currencyForm)">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-container currencyContainer">
+                <form #currencyForm="ngForm" class="form-horizontal" novalidate
+                      (ngSubmit)="onCurrencyValueSubmit(currencyForm)">
 
-        <div class="form-group">
-            <label class="control-label col-sm-3">Currency code:</label>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Currency code:</label>
+                        <div class="col-sm-4">
+                            <input (input)="isCurrencyCode($event.target.value)"
+                                   [(ngModel)]="currencycode"
+                                   class="form-control"
+                                   name="currencycode"
+                                   #inputc
+                                   type="text"
+                                   placeholder="Currency code"
+                                   required="required">
+                        </div>
+                    </div>
 
-            <input (input)="isCurrencyCode($event.target.value)"
-                   [(ngModel)]="currencycode" name="currencycode" #inputc type="text" required="required">
-        </div>
+                    <!--Throw error if currency validator fails-->
+                    <div *ngIf="isValidCurrency">Not a Valid Currency Type</div>
 
-        <!--Throw error if currency validator fails-->
-        <div *ngIf="isValidCurrency">Not a Valid Currency Type</div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Currency desc:</label>
+                        <div class="col-sm-4">
+                             <textarea rows="2" cols="50"
+                                       class="form-control"
+                                       type="text"
+                                       autocomplete="off"
+                                       placeholder="Description"
+                                       [(ngModel)]="currencydesc"
+                                       name="currencydesc"
+                                       required="required"
+                             >
+                             </textarea>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label class="control-label col-sm-3">Currency desc:</label>
-            <input [(ngModel)]="currencydesc" name="currencydesc" required="required">
-        </div>
-
-        <div class="form-group" *ngIf="!isValidCurrency">
-            <div class="col-sm-1">
-                <button type="submit" class="btn btn-success">Add</button>
+                    <div class="form-group" *ngIf="!isValidCurrency">
+                        <div class="col-sm-1 col-sm-offset-3">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="reset" class="btn btn-warning">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
+    </div>
 </div>
