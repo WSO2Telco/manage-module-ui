@@ -10,8 +10,9 @@ import {RateRoutes} from './rate.routes';
 import {RateFilterComponent} from './rate-filter/rate-filter.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import {CurrencyComponent} from './rate-currency/currency.component';
 
 @NgModule({
@@ -21,9 +22,9 @@ import {CurrencyComponent} from './rate-currency/currency.component';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        FormlyModule.forRoot(),
-        FormlyBootstrapModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        TypeaheadModule.forRoot(),
+        TooltipModule.forRoot()
     ],
     declarations: [
         SearchPanelComponent,
@@ -37,4 +38,5 @@ import {CurrencyComponent} from './rate-currency/currency.component';
     ]
 })
 export class RateModule {
+
 }

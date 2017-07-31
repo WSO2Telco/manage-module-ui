@@ -1,86 +1,91 @@
-<div class="form-container subcategoryContainer">
-    <!--login form START-->
-    <div class="tbl-header">
-        <h5>Create Sub Category </h5>
+<div class="animated fadeInUp" style="animation-delay: 0.2s">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-container subcategoryContainer">
+                <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)">
+                    <br><br>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Category:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Category"
+                                    name="category"
+                                    #categoryRef="ngModel"
+                                    required
+                                    [(ngModel)]="category">
+                                <option>GAME</option>
+                                <option>SONGS</option>
+                                <option>RINGTONE</option>
+                            </select>
+                            <span class="error" *ngIf="isCategoryEmpty">Category can not be empty</span>
+                        </div>
+                        <div>
+                            <a (click)="(showNewCategory)?showNewCategory=false:showNewCategory=true; ; type='Category';">Add
+                                New</a></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Sub Category:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Sub Category"
+                                    name="subcategory"
+                                    #subcategoryRef="ngModel"
+                                    required
+                                    [(ngModel)]="subcategory">
+                                <option>Action</option>
+                                <option>Racing</option>
+                                <option>Detective</option>
+                            </select>
+                            <span class="error" *ngIf="isSubcategoryEmpty">Sub Category can not be empty</span>
+                        </div>
+                        <div>
+                            <a (click)="(showNewSubCategory)?showNewSubCategory=false:showNewSubCategory=true; ; type='Sub Category';">Add
+                                New</a></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Tariff:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control"
+                                    type="text"
+                                    autocomplete="off"
+                                    placeholder="Tariff"
+                                    name="tariff"
+                                    #tariffRef="ngModel"
+                                    required
+                                    [(ngModel)]="tariff">
+                                <option>STV 123</option>
+                                <option>ABC 234</option>
+                                <option>IJK 345</option>
+                            </select>
+                            <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
+                        </div>
+                        <div><a (click)="(showNewTariff)?showNewTariff=false:showNewTariff=true; ; type='Tariff';">Add
+                            New</a></div>
+                    </div>
+                    <app-newtype *ngIf="showNewTariff" type="Tariff"></app-newtype>
+                    <app-newtype *ngIf="showNewCategory" type="Category"></app-newtype>
+                    <app-newtype *ngIf="showNewSubCategory" type="Sub Category"></app-newtype>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button type="submit" class="btn btn-success">Add</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+            <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
+
+        </div>
     </div>
-    <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)">
-
-        <div class="form-group">
-            <label class="control-label col-sm-3">Category:</label>
-            <div class="col-sm-4">
-                <select class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Category"
-                        name="category"
-                        #categoryRef="ngModel"
-                        required
-                        [(ngModel)]="category">
-                    <option>GAME</option>
-                    <option>SONGS</option>
-                    <option>RINGTONE</option>
-                </select>
-                <span class="error" *ngIf="isCategoryEmpty">Category can not be empty</span>
-            </div>
-            <div><a (click)="(showNewCategory)?showNewCategory=false:showNewCategory=true; ; type='Category';">Add New</a></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Sub Category:</label>
-            <div class="col-sm-4">
-                <select class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Sub Category"
-                        name="subcategory"
-                        #subcategoryRef="ngModel"
-                        required
-                        [(ngModel)]="subcategory">
-                    <option>Action</option>
-                    <option>Racing</option>
-                    <option>Detective</option>
-                </select>
-                <span class="error" *ngIf="isSubcategoryEmpty">Sub Category can not be empty</span>
-            </div>
-            <div><a (click)="(showNewSubCategory)?showNewSubCategory=false:showNewSubCategory=true; ; type='Sub Category';">Add New</a></div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">Tariff:</label>
-            <div class="col-sm-4">
-                <select class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Tariff"
-                        name="tariff"
-                        #tariffRef="ngModel"
-                        required
-                        [(ngModel)]="tariff">
-                    <option>STV 123</option>
-                    <option>ABC 234</option>
-                    <option>IJK 345</option>
-                </select>
-                <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
-            </div>
-            <div><a (click)="(showNewTariff)?showNewTariff=false:showNewTariff=true; ; type='Tariff';">Add New</a></div>
-        </div>
-        <app-newtype *ngIf="showNewTariff" type="Tariff"></app-newtype>
-        <app-newtype *ngIf="showNewCategory" type="Category"></app-newtype>
-        <app-newtype *ngIf="showNewSubCategory" type="Sub Category"></app-newtype>
-        <div class="form-group">
-            <div class="col-sm-1">
-                <button type="submit" class="btn btn-success">Add</button>
-            </div>
-            <div class="col-sm-1">
-                <button type="reset" class="btn btn-warning">Reset</button>
-            </div>
-        </div>
-
-    </form>
-
 </div>
-
-<div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
-
-
 
 
 
