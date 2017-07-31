@@ -18,7 +18,7 @@ function blacklistService() {
         let onSuccess = function (getResponse) {
             logger.log('INFO', 'success');
             console.log('here');
-            callback(Object.assign({}, getResponse, {success: true, message:"get api lists successfully"}));
+            callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {

@@ -20,11 +20,14 @@ export class BlackListRemoteDataService {
     constructor(private http: Http) {
     }
 
-    getApiList(): Observable<ServerResponse> {
+    getApiList() {
         console.log('hit in the rate remote data service');
         return this.http.get(this.apiEndpoints['getApis'], this.options)
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .map((response: Response) => {
+            const result = response.json();
+            return result;
+             })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 }
 

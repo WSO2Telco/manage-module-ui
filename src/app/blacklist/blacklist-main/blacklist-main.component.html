@@ -8,10 +8,13 @@
               type="text"
               autocomplete="off"
               placeholder="Rate Type">
-        <option>Credit</option>
-        <option>payment</option>
-        <option>wallet</option>
+
+        <option *ngFor="let api of apis">
+          <!--{{  api }} Provided by {{ apis.operator }} -->
+            {{ api }}
+          </option>
       </select>
+
     </div>
   </div>
 
@@ -21,20 +24,6 @@
   <h5>BlackList subscribers - 0</h5>
   <br><br><br>
 
-  <form class="form-horizontal">
-    <div class="col-sm-4">
-      <input class="form-control"
-             type="text"
-             autocomplete="off"
-             placeholder="Name"
-             name="name"
-             required>
-    </div>
-
-    <button type="submit" class="btn-primary"> (+)Add</button>
-  </form>
-
-  <br><br>
   <h6>Subscriber</h6>
 
   <table>
@@ -43,9 +32,14 @@
       <th style="width: 200px; vertical-align: top;"></th>
     </tr></thead>
     <tbody>
+    <form class="form-horizontal">
     <tr>
       <td>
-        <input id="subscriber_black_list" type="text" placeholder="e.g.94777333100,94777333105 (Comma seperated entries)" class="resource_url_pattern form-control" style="width: 535px;">
+        <input id="subscriber_black_list"
+               type="text" placeholder="e.g.94777333100,94777333105 (Comma seperated entries)"
+               class="resource_url_pattern form-control" style="width: 535px;"
+               name="blacklist"
+               required>
       </td>
       <td style="vertical-align: top;">
         <button class="btn btn-primary" style="margin-left: 15px; margin-top: 3px;" id="add-blacklist">
@@ -56,6 +50,7 @@
       </td>
 
     </tr>
+    </form>
     <tr>
       <td>
         <table class="table borderless" style="width: 350px;">
@@ -76,5 +71,12 @@
     <button (click)="loadApis()">Load Currencies</button>
   </div>
 
+  <hr>
+  <div *ngFor="let api of apiArray">
+
+    {{ apiId }}
+    <br>
+
+  </div>
 
 </div>
