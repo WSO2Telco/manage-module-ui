@@ -69,3 +69,10 @@ export class Application {
     id: string;
     name: string;
 }
+
+export class Api{
+    id: string;
+    name: string;
+    provider: string;
+    version: string;
+}
