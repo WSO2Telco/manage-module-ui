@@ -18,12 +18,12 @@
   border: solid 1px whitesmoke;
 }
 
-.searchFilter{
-/*overflow: hidden;
-padding: 10px;
-background-color: white;
-border: solid 1px whitesmoke;
-  background-color: #E19131;*/
+.searchFilter {
+  /*overflow: hidden;
+  padding: 10px;
+  background-color: white;
+  border: solid 1px whitesmoke;
+    background-color: #E19131;*/
 
   min-height: 78px;
   padding: 19px;
@@ -37,6 +37,13 @@ border: solid 1px whitesmoke;
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+
+.searchFilter {
+  div[class^="col-"] {
+    padding-bottom: 10px;
+  }
+}
+
 
 .open{overflow: visible; z-index: 100000;}
 

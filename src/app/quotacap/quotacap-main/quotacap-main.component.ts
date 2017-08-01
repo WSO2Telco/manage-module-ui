@@ -36,7 +36,6 @@ export class QuotaCapMainComponent implements OnInit {
 
         this.reportingService.ApplicationsProvider.subscribe((apps) => {
             this.applications = apps;
-            this.selectedApplication = null;
         });
     }
 
