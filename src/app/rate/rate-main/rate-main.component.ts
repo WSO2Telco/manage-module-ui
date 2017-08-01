@@ -28,6 +28,10 @@ export class RateMainComponent implements OnInit {
     private showAddCurrency: boolean;
     private showAddTariff: boolean;
 
+    private showChildNewCategory: boolean;
+    private showChildNewSubCategory: boolean;
+    private showChildNewTariff: boolean;
+
     constructor(private rateService: RateService) {
     }
 
@@ -75,6 +79,9 @@ export class RateMainComponent implements OnInit {
         this.showSubcategory = false;
         this.showAddCurrency = false;
         this.showAddTariff = false;
+        this.showChildNewTariff = false;
+        this.showChildNewSubCategory = false;
+        this.showChildNewCategory = false;
         this.clearErrors();
 
         this.name = '';
@@ -107,8 +114,10 @@ export class RateMainComponent implements OnInit {
     changeDialogTitle() {
         if (this.showAddCurrency)
             return this.dialogactionTitile = 'Add new Currency code';
-        else
+        else if (this.showAddTariff || this.showChildNewTariff)
             return this.dialogactionTitile = 'Add new Tariff code';
+        else if (this.showChildNewCategory || this.showChildNewSubCategory)
+            return this.dialogactionTitile = 'Add new Category';
     }
 
     public currencyList: string[] = [
@@ -138,4 +147,24 @@ export class RateMainComponent implements OnInit {
         'Commis',
         'Annual'
     ];
+
+    onmodalfireHandler(event: string) {
+        if (event === 'addNewCategory') {
+            this.showChildNewCategory = true;
+        } else if (event === 'addNewSubCategory') {
+            this.showChildNewSubCategory = true;
+        } else {
+            this.showChildNewTariff = true;
+        }
+
+    }
+
+    clearModalContent() {
+        this.showAddCurrency = false;
+        this.showAddTariff = false;
+        this.showChildNewTariff = false;
+        this.showChildNewSubCategory = false;
+        this.showChildNewCategory = false;
+    }
+
 }
