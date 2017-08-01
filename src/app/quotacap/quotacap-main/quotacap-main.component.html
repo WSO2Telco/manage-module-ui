@@ -1,1 +1,80 @@
-<h1>Quota cap</h1>
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                <h3>Assign quota cap </h3>
+                <br> <br>
+            </div>
+
+
+            <div class="searchFilter">
+                <div class="col-sm-3 ">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Operator"
+                           [(ngModel)]="selectedOP"
+                           [typeahead]="operatorList"
+                           [typeaheadMinLength]="0"
+                           name="typecurrency"
+                           class="form-control"
+                    >
+                </div>
+                <div class="col-sm-3">
+                    <input [(ngModel)]="selectedSP"
+                           [typeahead]="spList"
+                           [typeaheadMinLength]="0"
+                           type="text"
+                           class="form-control"
+                           placeholder="Select ServiceProvider">
+                </div>
+                <div class="col-sm-3">
+                    <input [(ngModel)]="selectedApp"
+                           [typeahead]="AppList"
+                           [typeaheadMinLength]="0"
+                           type="text"
+                           type="text"
+                           class="form-control"
+                           placeholder="Select Application">
+                </div>
+                <div class="col-sm-3">
+                    <input [(ngModel)]="selectedApi"
+                           [typeahead]="ApiList"
+                           [typeaheadMinLength]="0"
+                           type="text"
+                           class="form-control"
+                           placeholder="Select API">
+                </div>
+            </div>
+
+            <form class="form-horizontal" #quotacapForm="ngForm" novalidate
+                  (ngSubmit)="onquotacapFormSubmit(quotacapForm)">
+                <div class="form-group">
+                    <br><br>
+                    <label class="control-label col-sm-2">Quota Value</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               type="text"
+                               autocomplete="off"
+                               placeholder="Enter Quota Value"
+                               name="name"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="name">
+                        <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <br> <br>
+                        <button type="submit" class="btn btn-success">Add</button>&nbsp;
+                        <button type="reset" class="btn btn-warning">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

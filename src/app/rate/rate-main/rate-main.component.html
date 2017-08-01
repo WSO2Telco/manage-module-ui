@@ -29,7 +29,7 @@
 
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Name:</label>
+                    <label class="control-label col-sm-2">Rate Name:</label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="text"
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Description</label>
+                    <label class="control-label col-sm-2">Rate Description</label>
                     <div class="col-sm-4">
                             <textarea rows="4" cols="50" class="form-control"
                                       type="text"
@@ -60,7 +60,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Create Date</label>
+                    <label class="control-label col-sm-2">Create Date</label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="date"
@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Currency:</label>
+                    <label class="control-label col-sm-2">Currency:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="selected"
                                [typeahead]="currencyList"
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Type:</label>
+                    <label class="control-label col-sm-2">Rate Type:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
                                [typeahead]="rateTypeList"
@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Tariff:</label>
+                    <label class="control-label col-sm-2">Tariff:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
@@ -131,7 +131,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Add Sub Category:</label>
+                    <label class="control-label col-sm-2">Add Sub Category:</label>
                     <div class="col-sm-4">
                         <label class="switch">
                             <input type="checkbox"
