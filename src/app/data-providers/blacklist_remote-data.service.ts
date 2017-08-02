@@ -14,7 +14,8 @@ export class BlackListRemoteDataService {
 
 
     private apiEndpoints: Object = {
-        getApis: this.apiContext + '/blacklist/list'
+        getApis: this.apiContext + '/blacklist/list',
+        getBlackListNumbers: this.apiContext + '/blacklist/list/{id}'
     };
 
     constructor(private http: Http) {
@@ -25,6 +26,7 @@ export class BlackListRemoteDataService {
         return this.http.get(this.apiEndpoints['getApis'], this.options)
             .map((response: Response) => {
             const result = response.json();
+            console.log( result);
             return result;
              })
             .catch((error: Response) => Observable.throw(error.json().message()));
@@ -32,7 +34,13 @@ export class BlackListRemoteDataService {
 
     getBlackListNumberList(id) {
         console.log('hit the blacklist remote number data service');
-        // return this.http.post()
+
+        return this.http.post(this.apiEndpoints['getApis'] + '/' + id, this.options)
+            .map((response: Response) => {
+            const result = response.json();
+            return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 }
 

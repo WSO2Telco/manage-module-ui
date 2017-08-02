@@ -47,7 +47,7 @@ export class PaginationInfo{
 
 export class ApplicationTaskResult {
     applicationTasks: ApplicationTask[];
-    meteData: MetaData
+    meteData: MetaData;
 }
 
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
@@ -57,7 +57,7 @@ export class ApplicationTaskSearchParam {
     processType: PROCESS_TYPE;
     assignee: string;
     start:number;
-    size: number
+    size: number;
 }
 
 export class AssignApplicationTaskParam {

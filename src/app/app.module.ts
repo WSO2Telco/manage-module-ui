@@ -6,23 +6,24 @@ import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadMo
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
-import {CommonsModule} from "./commons/commons.module";
-import {AppGuard, LoginGuard} from "./app.guard";
-import {HeaderComponent} from "./commons/components/header/header.component";
-import {HamburgerMenuComponent} from "./commons/components/hamburger-menu/hamburger-menu.component";
-import {UserAvatarComponent} from "./commons/components/user-avatar/user-avatar.component";
-import {MainMenuComponent} from "./commons/components/main-menu/main-menu.component";
-import {BreadcrumbsComponent} from "./commons/components/breadcrumbs/breadcrumbs.component";
-import {ChartsModule} from "ng2-charts";
-import {DataProvidersModule} from "./data-providers/data-providers.module";
-import {ToastyModule} from "ng2-toasty";
-import {ApprovalRemoteDataService} from "./data-providers/approval-remote-data.service";
-import {RateRemoteDataService} from "./data-providers/rate_remote-data.service";
-import {DashboardRemoteDataService} from "./data-providers/dashboard-remote-data.service";
-import {ApprovalHelperService} from "./approvals/approval-helper.service";
-import {SharedModule} from "./shared/shared.module";
-import {ReportingRemoteDataService} from "./data-providers/reporting-remote-data.service";
+import {CommonsModule} from './commons/commons.module';
+import {AppGuard, LoginGuard} from './app.guard';
+import {HeaderComponent} from './commons/components/header/header.component';
+import {HamburgerMenuComponent} from './commons/components/hamburger-menu/hamburger-menu.component';
+import {UserAvatarComponent} from './commons/components/user-avatar/user-avatar.component';
+import {MainMenuComponent} from './commons/components/main-menu/main-menu.component';
+import {BreadcrumbsComponent} from './commons/components/breadcrumbs/breadcrumbs.component';
+import {ChartsModule} from 'ng2-charts';
+import {DataProvidersModule} from './data-providers/data-providers.module';
+import {ToastyModule} from 'ng2-toasty';
+import {ApprovalRemoteDataService} from './data-providers/approval-remote-data.service';
+import {RateRemoteDataService} from './data-providers/rate_remote-data.service';
+import {DashboardRemoteDataService} from './data-providers/dashboard-remote-data.service';
+import {ApprovalHelperService} from './approvals/approval-helper.service';
+import {SharedModule} from './shared/shared.module';
+import {ReportingRemoteDataService} from './data-providers/reporting-remote-data.service';
 import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data.service';
+import {WhitelistRemoteDataService} from './data-providers/whitelist_remote-data.service';
 
 @NgModule({
     declarations: [
@@ -59,6 +60,7 @@ import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data
         RateRemoteDataService,
         ApprovalHelperService,
         BlackListRemoteDataService,
+        WhitelistRemoteDataService,
         {
             provide : 'API_CONTEXT',
             useValue : 'api'

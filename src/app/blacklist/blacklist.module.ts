@@ -5,12 +5,22 @@ import {NgModule} from '@angular/core';
 import {BlackListRoutes} from './blacklist.routes';
 import {BlacklistMainComponent} from './blacklist-main/blacklist-main.component';
 import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
 
     imports: [
         CommonModule,
-        BlackListRoutes
+        BlackListRoutes,
+        FormsModule,
+        ReactiveFormsModule,
+        FormlyModule.forRoot(),
+        FormlyBootstrapModule,
+        SharedModule,
+        ModalModule.forRoot()
     ],
 
     declarations: [

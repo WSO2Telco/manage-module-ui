@@ -4,21 +4,26 @@
   <div class="form-group">
     <label class="control-label col-sm-3">API:</label>
     <div class="col-sm-4">
-      <select class="form-control"
-              type="text"
-              autocomplete="off"
-              placeholder="Rate Type">
 
-        <option *ngFor="let api of apis">
-          <!--{{  api }} Provided by {{ apis.operator }} -->
-            {{ api }}
-          </option>
-      </select>
 
     </div>
   </div>
 
-  <button class="btn-primary">view</button>
+  <div>
+
+    <input type="text" class="form-control"
+           [(ngModel)]="api"
+           [typeaheadMinLength]="0"
+           container="body"
+           [typeahead]="apiList"
+           typeaheadOptionField="apiId"
+           (typeaheadOnSelect)="onApiSelected($event)"
+           placeholder="Id">
+
+
+
+  </div>
+
 
   <br><br><br>
   <h5>BlackList subscribers - 0</h5>
@@ -57,7 +62,11 @@
           <thead>
           <tr>
             <th style="width: 300px;">Subscriber</th>
-            <th style="width: 50px;"></th>
+
+            <div *ngIf="onApiSelected">
+                <li>  {{ Numbers }} </li>
+            </div>
+
           </tr>
           </thead>
         </table>
@@ -66,17 +75,5 @@
     </tr>
     </tbody>
   </table>
-
-  <div>
-    <button (click)="loadApis()">Load Currencies</button>
-  </div>
-
-  <hr>
-  <div *ngFor="let api of apiArray">
-
-    {{ apiId }}
-    <br>
-
-  </div>
 
 </div>

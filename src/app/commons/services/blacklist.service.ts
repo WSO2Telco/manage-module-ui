@@ -22,9 +22,17 @@ export class BlackListService {
             );
     }
 
-    getBlackListNumberList(callback: Function) {
+    getBlackListNumberList(id: string, callback: Function) {
         console.log('get blacklist Number Lists');
-        // this._remoteService
+        this._remoteService.getBlackListNumberList(id)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
     }
 
 }

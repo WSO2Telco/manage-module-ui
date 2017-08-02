@@ -45,29 +45,31 @@ const _invokeGetApiListRest = function ( ) {
     return deferred.promise;
 };
 
-const _invokeGetBlackListNumbers = function () {
+const _invokeGetBlackListNumbers = function (id) {
 
-    console.log("blacklist Number rest endpoint");
+    console.log("blacklist Number rest endpoint rk");
 
     let deferred = Q.defer();
 
-    let getEndpointUrl = function () {
-        return config.blacklistPerApiURL;
+    let getEndpointUrl = function (id) {
+        console.log(config.removeBlacklistURL + '/' + id);
+        return config.blacklistPerApiURL + '/' + id ;
     }
 
     let getRequestOptions = function () {
         return {
+            rejectUnauthorized: false,
             json: true,
             headers: {}
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    wreck.post(getEndpointUrl(id), getRequestOptions(), (error, res, payload) => {
        if (error) {
            console.log("response failed");
            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
        } else {
-            console.log("response success : " + JSON.stringify(payload));
+            console.log("response success : " + payload);
     deferred.resolve(payload);
 
      }
@@ -77,7 +79,81 @@ const _invokeGetBlackListNumbers = function () {
 };
 
 
+const _invokeRemoveBlackListNumber = function (request, msisdn) {
+
+    console.log("blacklist Number rest endpoint");
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.removeBlacklistURL + '/' +msisdn;
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+    wreck.post(getEndpointUrl(msisdn), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : " + payload);
+            deferred.resolve(payload);
+
+}
+});
+
+    return deferred.promise;
+
+};
+
+/**
+ *  rest request to add new BlackList Number/s
+ * @param request
+ * @returns {Promise<T>}
+ * @private
+ */
+const _invokeAddNewBlackListNumber = function (request) {
+
+    console.log("ADD New BlackList Number Endpoint ");
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.addNewToBlacklistURL;
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : " + payload);
+    deferred.resolve(payload);
+
+    }
+});
+    return deferred.promise;
+
+};
+
+
 module.exports = {
     invokeGetApiListRest: _invokeGetApiListRest,
-    invokeGetBlackListNumberRest: _invokeGetBlackListNumbers
+    invokeGetBlackListNumberRest: _invokeGetBlackListNumbers,
+    invokeRemoveBlackListNumberRest: _invokeRemoveBlackListNumber,
+    invokeAddBlackListNumbersRest: _invokeAddNewBlackListNumber
 };
