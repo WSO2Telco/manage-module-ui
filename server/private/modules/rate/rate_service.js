@@ -19,7 +19,7 @@ const validateAddSubcategoryRequest = function (request) {
 
 const validateAddCurrencyRequest = function (request) {
     let param = request.payload;
-    if (!!param && param.currencycode && param.currencydesc) {
+    if (!!param && param.currencyCode && param.currencyDescription) {
         logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
@@ -74,7 +74,7 @@ function rateService() {
      */
     let _addCurrency = function (request, callback) {
 
-        logger.log('INFO', "hit at rate service end point for currency- Rk");
+        logger.log('INFO', "hit at rate service end point add new currency");
 
         request.server.log('info', 'ADD Currency REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
@@ -173,14 +173,88 @@ function rateService() {
     };
 
     /**
-     *  Return available currency list
+     * get tariff list
      * @param request
      * @param callback
      * @private
      */
-    let _getCurrency = function (request, callback) {
-        logger.log('INFO', "get currency at rate service end point");
+    let _getTariffList = function (request, callback) {
+        logger.log('INFO', "hit at rate get tariff service end point");
 
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetTariffListRest( ).then(onSuccess, onFailture);
+    }
+
+    /**
+     * get currency list
+     * @param request
+     * @param callback
+     * @private
+     */
+    let _getCurrencyList = function (request, callback) {
+        logger.log('INFO', "hit at rate get currency service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetCurrencyListRest( ).then(onSuccess, onFailture);
+    }
+
+    let _getRateTypeList = function (request, callback) {
+        logger.log('INFO', "hit at rate get rate type service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetRateTypeListRest( ).then(onSuccess, onFailture);
+    }
+
+    let _getCategoryList = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get categories service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetCategoryListRest( ).then(onSuccess, onFailture);
     }
 
     //add more rate services here
@@ -189,7 +263,11 @@ function rateService() {
         addSubcategory: _addSubcategory,
         addCurrency: _addCurrency,
         addNewType: _addNewType,
-        addRateCard: _addRateCard
+        addRateCard: _addRateCard,
+        getTariffList: _getTariffList,
+        getCurrencyList: _getCurrencyList,
+        getRateTypeList: _getRateTypeList,
+        getCategoryList: _getCategoryList
     };
 
     //commet 22

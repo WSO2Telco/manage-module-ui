@@ -36,6 +36,12 @@ export class TariffComponent implements OnInit {
 
         if (this.name.length != 0 && this.description.length != 0) {
             console.log('form submitted : ' + this.name + '  ' + this.description);
+            // this.rateService.addNewTariff(this.name, this.description, response => {
+            //     const result = response;
+            //     console.log(JSON.stringify(result));
+            //     this.getWhitelist();
+            // });
+
         } else {
             if (this.name.length == 0) {
                 this.isNameEmpty = true;

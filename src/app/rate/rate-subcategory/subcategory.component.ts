@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 
 @Component({
@@ -8,21 +8,30 @@ import {RateService} from '../../commons/services/rate.service';
 })
 export class SubcategoryComponent implements OnInit {
 
-    category: string;
-    subcategory: string;
-    tariff: string;
-    type: string;
+    private category: string;
+    private subcategory: string;
+    private tariff: string;
+    private type: string;
 
-    submissionError: string;
+    private submissionError: string;
 
-    isCategoryEmpty: boolean;
-    isSubcategoryEmpty: boolean;
-    isTariffEmpty: boolean;
+    private isCategoryEmpty: boolean;
+    private isSubcategoryEmpty: boolean;
+    private isTariffEmpty: boolean;
 
-    isSubmitted: boolean;
-    showNewCategory: boolean;
-    showNewSubCategory: boolean;
-    showNewTariff: boolean;
+    private isSubmitted: boolean;
+    private showNewCategory: boolean;
+    private showNewSubCategory: boolean;
+    private showNewTariff: boolean;
+
+    @Input()
+    private categoryList: string[];
+
+    @Input()
+    private tariffList: string[];
+
+    @Output()
+    private modalfire: EventEmitter<string> = new EventEmitter();
 
     constructor(private rateService: RateService) {
     }
@@ -66,6 +75,10 @@ export class SubcategoryComponent implements OnInit {
             }
         }
 
+    }
+
+    onAddNewModalFire(actionName: string) {
+        this.modalfire.emit(actionName);
     }
 
     clearErrors() {

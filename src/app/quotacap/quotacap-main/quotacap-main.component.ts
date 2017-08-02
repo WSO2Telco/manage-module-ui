@@ -2,6 +2,8 @@
  * Created by manoj on 7/24/17.
  */
 import {Component, OnInit, } from '@angular/core';
+import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
+import {ApprovalHistoryFilter, Application} from '../../commons/models/reporing-data-models';
 
 @Component({
     selector: 'app-quotacap-main',
@@ -10,11 +12,31 @@ import {Component, OnInit, } from '@angular/core';
 })
 export class QuotaCapMainComponent implements OnInit {
 
+    private subscribers: string[];
+    private operators: string[];
+    private applications: Application[];
+
+    constructor(private reportingService: ReportingRemoteDataService) {
+    }
+
+
     private isNameEmpty: boolean;
     private name: string;
 
     ngOnInit() {
         this.name = '';
+
+        this.reportingService.SubscribersProvider.subscribe((subscribers) => {
+            this.subscribers = subscribers;
+        });
+
+        this.reportingService.OperatorsProvider.subscribe((operators) => {
+            this.operators = operators;
+        });
+
+        this.reportingService.ApplicationsProvider.subscribe((apps) => {
+            this.applications = apps;
+        });
     }
 
     clearErrors() {

@@ -30,7 +30,14 @@ export class RateMainComponent implements OnInit {
 
     private dialogactionTitile: string;
 
-    public tariffList: string[];
+    private tariffList: string[];
+    private currencyList: string[];
+    private rateTypeList: string[];
+    private categoryList: string[];
+
+    private showChildNewCategory: boolean;
+    private showChildNewSubCategory: boolean;
+    private showChildNewTariff: boolean;
 
     constructor(private rateService: RateService) {
     }
@@ -39,6 +46,9 @@ export class RateMainComponent implements OnInit {
         this.showSubcategory = false;
         this.showAddCurrency = false;
         this.showAddTariff = false;
+        this.showChildNewTariff = false;
+        this.showChildNewSubCategory = false;
+        this.showChildNewCategory = false;
         this.clearErrors();
 
         this.name = '';
@@ -48,11 +58,94 @@ export class RateMainComponent implements OnInit {
         this.rateType = '';
         this.tariff = '';
 
-        this.tariffList[];
-        this.getTarifList();
+        this.tariffList = [];
+        this.currencyList = [];
+        this.rateTypeList = [];
+        this.categoryList = [];
+
+        this.getTariffList();
+        this.getCurrencyList();
+        this.getRateTypeList();
+        this.getCategoryList();
     }
 
-    getTarifList(){
+    getTariffList() {
+        this.rateService.getTariffList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.tariffList[count] = response[count].tariffName;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getCurrencyList() {
+        this.rateService.getCurrencyList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.currencyList[count] = response[count].currencyCode;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getRateTypeList(){
+        this.rateService.getRateTypeList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.rateTypeList[count] = response[count].rateTypeCode;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getCategoryList(){
+        this.rateService.getCategoryList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.categoryList[count] = response[count].categoryName;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
 
     }
 
@@ -115,28 +208,40 @@ export class RateMainComponent implements OnInit {
     changeDialogTitle() {
         if (this.showAddCurrency)
             return this.dialogactionTitile = 'Add new Currency code';
-        else
+        else if (this.showAddTariff || this.showChildNewTariff)
             return this.dialogactionTitile = 'Add new Tariff code';
+        else if (this.showChildNewCategory || this.showChildNewSubCategory)
+            return this.dialogactionTitile = 'Add new Category';
     }
 
-    public currencyList: string[] = [
-        'AED',
-        'AFN',
-        'ALL',
-        'AMD',
-        'ANG',
-        'AOA',
-        'ARS',
-        'AUD',
-        'AWG',
-        'AZN',
-    ];
+    onmodalfireHandler(event: string) {
+        if (event === 'addNewCategory') {
+            this.showChildNewCategory = true;
+        } else if (event === 'addNewSubCategory') {
+            this.showChildNewSubCategory = true;
+        } else {
+            this.showChildNewTariff = true;
+        }
 
+    }
 
-    public rateTypeList: string[] = [
-        'Constant',
-        'Precentage',
-        'Commis',
-        'Annual'
-    ];
+    clearModalContent() {
+        this.showAddCurrency = false;
+        this.showAddTariff = false;
+        this.showChildNewTariff = false;
+        this.showChildNewSubCategory = false;
+        this.showChildNewCategory = false;
+    }
+
+    /**
+     * event handler method which is triggered when a new currency is added
+     * @param event
+     */
+    onAddCurrencyHandler(event: boolean){
+        console.log('add event called');
+        if (event) {
+            this.getCurrencyList();
+        }
+    }
+
 }

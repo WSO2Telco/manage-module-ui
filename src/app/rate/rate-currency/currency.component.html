@@ -17,14 +17,15 @@
                                    type="text"
                                    placeholder="Currency code"
                                    required="required">
+                            <!--Throw error if currency validator fails-->
+                            <span class="error" *ngIf="isValidCurrency">{{currencyCodeError}}</span>
                         </div>
                     </div>
 
-                    <!--Throw error if currency validator fails-->
-                    <div *ngIf="isValidCurrency">Not a Valid Currency Type</div>
+
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">Currency desc:</label>
+                        <label class="control-label col-sm-3">Currency description:</label>
                         <div class="col-sm-4">
                              <textarea rows="2" cols="50"
                                        class="form-control"

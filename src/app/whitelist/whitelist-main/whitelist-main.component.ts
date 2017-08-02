@@ -206,7 +206,7 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onDeleteHandler(event: boolean): void {
-        console.log('delete evelt called baby');
+        console.log('delete event called');
         if (event) {
             this.getWhitelist();
         }

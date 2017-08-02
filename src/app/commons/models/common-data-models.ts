@@ -56,8 +56,8 @@ export class ServerResponse{
 }
 
 export class Currency {
-    currencycode: string;
-    currencydesc: string;
+    currencyCode: string;
+    currencyDescription: string;
 }
 
 export class ApiList {

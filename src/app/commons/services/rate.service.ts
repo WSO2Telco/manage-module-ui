@@ -71,17 +71,17 @@ export class RateService {
      * @param callback
      */
     addCurrency(code: string, description: string, callback: Function) {
-        console.log(' ---adding currency -- ');
+        console.log('add new currency service called');
         const model: Currency = new Currency();
-        model.currencycode = code;
-        model.currencydesc = description;
+        model.currencyCode = code;
+        model.currencyDescription = description;
         this._remoteService.addCurrency(model)
             .subscribe(
-                (response: ServerResponse) => {
-                    console.log('good response' + response.messsage);
+                data => {
+                    callback(data, true);
                 },
-                (error: string) => {
-                    callback(error);
+                error => {
+                    callback(error, false);
                 }
             );
     }
@@ -117,5 +117,60 @@ export class RateService {
                 }
             );
     }
+
+
+    getTariffList(callback: Function) {
+        console.log('get list of tariff service called');
+        this._remoteService.getTariffList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+    getCurrencyList(callback: Function) {
+        console.log('get list of currency service called');
+        this._remoteService.getCurrencyList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+    getRateTypeList(callback: Function) {
+        console.log('get list of rate types service called');
+        this._remoteService.getRateTypeList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+    getCategoryList(callback: Function) {
+        console.log('get list of category types service called');
+        this._remoteService.getCategoryList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+
 }
 
