@@ -28,7 +28,32 @@ export class RateMainComponent implements OnInit {
     private showAddCurrency: boolean;
     private showAddTariff: boolean;
 
+    private dialogactionTitile: string;
+
+    public tariffList: string[];
+
     constructor(private rateService: RateService) {
+    }
+
+    ngOnInit() {
+        this.showSubcategory = false;
+        this.showAddCurrency = false;
+        this.showAddTariff = false;
+        this.clearErrors();
+
+        this.name = '';
+        this.description = '';
+        this.date = '';
+        this.currency = '';
+        this.rateType = '';
+        this.tariff = '';
+
+        this.tariffList[];
+        this.getTarifList();
+    }
+
+    getTarifList(){
+
     }
 
     onRateCardSubmit(ratecardForm) {
@@ -70,21 +95,6 @@ export class RateMainComponent implements OnInit {
 
     }
 
-
-    ngOnInit() {
-        this.showSubcategory = false;
-        this.showAddCurrency = false;
-        this.showAddTariff = false;
-        this.clearErrors();
-
-        this.name = '';
-        this.description = '';
-        this.date = '';
-        this.currency = '';
-        this.rateType = '';
-        this.tariff = '';
-    }
-
     clearErrors() {
         this.isDateEmpty = false;
         this.isDescriptionEmpty = false;
@@ -101,8 +111,6 @@ export class RateMainComponent implements OnInit {
         else
             return true;
     }
-
-    private dialogactionTitile: string;
 
     changeDialogTitle() {
         if (this.showAddCurrency)
@@ -124,13 +132,6 @@ export class RateMainComponent implements OnInit {
         'AZN',
     ];
 
-    public tariffList: string[] = [
-        'TR064',
-        'TR034',
-        'TR074',
-        'TR044',
-        'TR030',
-    ];
 
     public rateTypeList: string[] = [
         'Constant',
