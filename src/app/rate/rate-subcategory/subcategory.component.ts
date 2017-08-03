@@ -33,6 +33,9 @@ export class SubcategoryComponent implements OnInit {
     @Output()
     private modalfire: EventEmitter<string> = new EventEmitter();
 
+    @Output()
+    private modalClose: EventEmitter<boolean> = new EventEmitter();
+
     constructor(private rateService: RateService) {
     }
 

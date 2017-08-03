@@ -24,9 +24,13 @@ export class CurrencyComponent implements OnInit {
     @Output()
     private onAddTask: EventEmitter<boolean> = new EventEmitter();
 
+    @Output()
+    private modalClose: EventEmitter<boolean> = new EventEmitter();
+
     private currencyCodeError: string;
 
-    constructor(private rateService: RateService){}
+    constructor(private rateService: RateService) {
+    }
 
     ngOnInit() {
         this.currencyCodeError = '';
@@ -45,6 +49,7 @@ export class CurrencyComponent implements OnInit {
                 const result = response;
                 console.log(JSON.stringify(result));
                 this.onAddTask.emit(true);
+                this.modalClose.emit(true);
             } else {
                 this.submissionError = response;
                 setTimeout(() => {
@@ -64,15 +69,19 @@ export class CurrencyComponent implements OnInit {
             console.log("here");
             this.isValidCurrency = true;
             this.currencyCodeError = 'Not a Valid Currency Type';
-        }else {
-            for(const entry of this.existingCodes){
-                if(name == entry){
-                    this.isValidCurrency = true;
-                    this.currencyCodeError = 'Currency Type Already Existing';
-                }else{
-                    this.isValidCurrency = false;
-                    this.currencyCodeError = '';
+        } else {
+            let state = false
+            for (const entry of this.existingCodes) {
+                if (name == entry) {
+                    state = true;
                 }
+            }
+            if (state) {
+                this.isValidCurrency = true;
+                this.currencyCodeError = 'Currency Type Already Existing';
+            } else {
+                this.isValidCurrency = false;
+                this.currencyCodeError = '';
             }
         }
     }

@@ -9,6 +9,16 @@ module.exports = [
     },
     {
         method: 'POST',
+        path: '/api/rate/addcategory',
+        handler: rateService.addCategory
+    },
+    {
+        method: 'POST',
+        path: '/api/rate/addtariff',
+        handler: rateService.addTariff
+    },
+    {
+        method: 'POST',
         path: '/api/rate/addcurrency',
         handler: rateService.addCurrency
     },

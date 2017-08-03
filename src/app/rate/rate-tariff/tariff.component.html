@@ -14,34 +14,169 @@
                                    name="name"
                                    #nameRef="ngModel"
                                    required
-                                   [(ngModel)]="name">
-                            <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+                                   [(ngModel)]="tariff.tariffName"
+                                   (input)="isNameUnique($event.target.value)">
+                            <span class="error" *ngIf="isNameError">{{nameError}}</span>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">Tariff Description</label>
                         <div class="col-sm-4">
-                <textarea rows="2" cols="50"
-                          class="form-control"
-                          type="text"
-                          autocomplete="off"
-                          placeholder="Description"
-                          name="description"
-                          #descriptionRef="ngModel"
-                          required
-                          [(ngModel)]="description">
-                </textarea>
-                            <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+                            <textarea rows="1" cols="50"
+                                      class="form-control"
+                                      type="text"
+                                      autocomplete="off"
+                                      placeholder="Description"
+                                      name="description"
+                                      #descriptionRef="ngModel"
+                                      required
+                                      [(ngModel)]="tariff.tariffDesc">
+                            </textarea>
+                            <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                         </div>
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label col-sm-3">Default Value</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Default Value"
+                                   name="tariffDefaultVal"
+                                   #tariffDefaultValRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffDefaultVal">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Max Count</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Max Count"
+                                   name="maxCount"
+                                   #maxCountRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffMaxCount">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Excess Rate</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Excess Rate"
+                                   name="excessRate"
+                                   #excessRateRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffExcessRate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Def Rate</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Def Rate"
+                                   name="defRate"
+                                   #defRateRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffDefRate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">SP Commission</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="SP Commission"
+                                   name="spCommission"
+                                   #spCommissionRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffSPCommission">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Ads Commission</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Ads Commission"
+                                   name="adsCommission"
+                                   #adsCommissionRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffAdsCommission">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Opco Commission</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Opco Commission"
+                                   name="opcoCommission"
+                                   #opcoCommissionRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffOpcoCommission">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Sur Charge Value</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Sur Charge Value"
+                                   name="surChargeval"
+                                   #surChargevalRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffSurChargeval">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Sur Charge Ads</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Sur Charge Ads"
+                                   name="surChargeAds"
+                                   #surChargeAdsRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffSurChargeAds">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Sur Charge Opco</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="number"
+                                   autocomplete="off"
+                                   placeholder="Sur Charge Opco"
+                                   name="surChargeOpco"
+                                   #surChargeOpcoRef="ngModel"
+                                   required
+                                   [(ngModel)]="tariff.tariffSurChargeOpco">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" *ngIf="!isNameError">
                         <div class="col-sm-offset-3 col-sm-1">
                             <button type="submit" class="btn btn-success">Add</button>
                         </div>
                         <div class="col-sm-2">
-                            <button type="reset" class="btn btn-warning">Cancel</button>
+                            <button type="reset" class="btn btn-warning">Clear</button>
                         </div>
                     </div>
 

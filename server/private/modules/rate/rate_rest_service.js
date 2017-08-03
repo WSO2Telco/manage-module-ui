@@ -6,6 +6,71 @@ const wreck = require('wreck');
 
 
 /**
+ * rest request to add category
+ * @param request
+ * @returns {Promise<T>}
+ * @private
+ */
+const _invokeAddCategoryRest = function (request) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'categories';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success");
+            deferred.resolve(payload);
+        }
+    });
+    return deferred.promise;
+};
+
+
+const _invokeAddTariffRest = function (request) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'tariffs';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success");
+            deferred.resolve(payload);
+        }
+    });
+    return deferred.promise;
+};
+
+
+/**
  * rest request to add a new sub category
  * @param request
  * @returns {Promise<T>}
@@ -235,14 +300,16 @@ const _invokeGetCategoryListRest = function ( ) {
 };
 
 
-
 module.exports = {
+    invokeAddCategoryRest: _invokeAddCategoryRest,
     invokeAddSubCategoryRest: _invokeAddSubCategoryRest,
     invokeAddCurrencyRest: _invokeAddCurrencyRest,
     invokeAddRateCardRest: _invokeAddRateCardRest,
+    invokeAddTariffRest: _invokeAddTariffRest,
     invokeGetTariffListRest: _invokeGetTariffListRest,
     invokeGetCurrencyListRest: _invokeGetCurrencyListRest,
     invokeGetRateTypeListRest: _invokeGetRateTypeListRest,
     invokeGetCategoryListRest: _invokeGetCategoryListRest
+
 
 };

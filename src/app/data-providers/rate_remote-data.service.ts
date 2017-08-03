@@ -4,7 +4,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SubCategory, Currency, ServerResponse, NewType, RateCard} from '../commons/models/common-data-models';
+import {SubCategory, Currency, ServerResponse, Category, RateCard, Tariff} from '../commons/models/common-data-models';
 
 
 @Injectable()
@@ -17,8 +17,9 @@ export class RateRemoteDataService {
     private apiEndpoints: Object = {
         addRateCard: this.apiContext + '/rate/addratecard',
         addSubcategory: this.apiContext + '/rate/addsubcategory',
-        addNewType: this.apiContext + '/rate/addnewtype',
+        addCategory: this.apiContext + '/rate/addcategory',
         addCurrency: this.apiContext + '/rate/addcurrency',
+        addTariff: this.apiContext + '/rate/addtariff',
         getTariffList: this.apiContext + '/rate/gettarifflist',
         getCurrencyList: this.apiContext + '/rate/getcurrencylist',
         getRateTypeList: this.apiContext + '/rate/getratetypelist',
@@ -41,17 +42,36 @@ export class RateRemoteDataService {
     }
 
     /**
-     * To add new category, subcategory or a tariff
+     * To add new category or subcategory
      * @param data
-     * @returns {Observable<ServerResponse>}
+     * @returns {Observable<R>}
      */
-    addNewType(data: NewType): Observable<ServerResponse> {
-        console.log('hit in the rate remote data service');
-        return this.http.post(this.apiEndpoints['addNewType'], data, this.options)
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message));
+    addCategory(data: Category) {
+        console.log('hit in the rate remote data service to add category');
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addCategory'], JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
+    /**
+     * To add new tariff
+     * @param data
+     * @returns {Observable<R>}
+     */
+    addTariff(data: Tariff) {
+        console.log('hit in the rate remote data service to add tariff');
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addTariff'], JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
 
     /**
      * Add a new currency

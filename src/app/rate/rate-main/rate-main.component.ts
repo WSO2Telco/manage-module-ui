@@ -34,6 +34,7 @@ export class RateMainComponent implements OnInit {
     private currencyList: string[];
     private rateTypeList: string[];
     private categoryList: string[];
+    private categoryCodeList: string[];
 
     private showChildNewCategory: boolean;
     private showChildNewSubCategory: boolean;
@@ -62,6 +63,7 @@ export class RateMainComponent implements OnInit {
         this.currencyList = [];
         this.rateTypeList = [];
         this.categoryList = [];
+        this.categoryCodeList = [];
 
         this.getTariffList();
         this.getCurrencyList();
@@ -135,6 +137,7 @@ export class RateMainComponent implements OnInit {
                 let count = 0;
                 for (const entry of response) {
                     this.categoryList[count] = response[count].categoryName;
+                    this.categoryCodeList[count] = response[count].categoryCode;
                     count++;
                 }
 
@@ -238,9 +241,31 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddCurrencyHandler(event: boolean){
-        console.log('add event called');
+        console.log('add currency event called');
         if (event) {
             this.getCurrencyList();
+        }
+    }
+
+    /**
+     * event handler method which is triggered when a new category added, to refresh list
+     * @param event
+     */
+    onAddCategoryHandler(event: boolean){
+        console.log('add category event called');
+        if (event) {
+            this.getCategoryList();
+        }
+    }
+
+    /**
+     * event handler method which is triggered when a new tariff added, to refresh list
+     * @param event
+     */
+    onAddTariffHandler(event :boolean){
+        console.log('add tariff event called');
+        if (event) {
+            this.getTariffList();
         }
     }
 

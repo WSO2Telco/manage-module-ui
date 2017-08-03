@@ -34,11 +34,10 @@ export class SubCategory {
     tariff: string;
 }
 
-export class NewType {
-    type: string;
-    name: string;
-    code: string;
-    description: string;
+export class Category {
+    categoryName: string;
+    categoryCode: string;
+    categoryDesc: string;
 }
 
 export class RateCard {
@@ -70,9 +69,24 @@ export class Application {
     name: string;
 }
 
-export class Api{
+export class Api {
     id: string;
     name: string;
     provider: string;
     version: string;
+}
+
+export class Tariff {
+    tariffName: string;
+    tariffDesc: string;
+    tariffDefaultVal: number;
+    tariffMaxCount: number
+    tariffExcessRate: number
+    tariffDefRate: number;
+    tariffSPCommission: number;
+    tariffAdsCommission: number;
+    tariffOpcoCommission: number;
+    tariffSurChargeval: number;
+    tariffSurChargeAds: number;
+    tariffSurChargeOpco: number;
 }

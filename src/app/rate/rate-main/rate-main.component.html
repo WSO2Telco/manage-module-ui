@@ -10,14 +10,31 @@
                 </button>
             </div>
             <div class="modal-body">
+
                 <app-currency
                         *ngIf="showAddCurrency"
                         [existingCodes]="currencyList"
-                        (onAddTask)="onAddCurrencyHandler($event)"></app-currency>
-                <app-addtariff *ngIf="showAddTariff"></app-addtariff>
-                <app-newtype *ngIf="showChildNewTariff" type="Tariff"></app-newtype>
-                <app-newtype *ngIf="showChildNewCategory" type="Category"></app-newtype>
-                <app-newtype *ngIf="showChildNewSubCategory" type="Sub Category"></app-newtype>
+                        (onAddTask)="onAddCurrencyHandler($event)"
+                        (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
+
+                <app-addtariff *ngIf="showAddTariff"
+                               [existingNames]="tariffList"
+                               (onAddTask)="onAddTariffHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+
+                <app-addtariff *ngIf="showChildNewTariff"></app-addtariff>
+
+                <app-category *ngIf="showChildNewCategory"
+                              type="Category"
+                              [existingNames]="categoryList"
+                              [existingCodes]="categoryCodeList"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+
+                <app-category *ngIf="showChildNewSubCategory"
+                              type="Sub Category"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
             </div>
         </div>
     </div>
