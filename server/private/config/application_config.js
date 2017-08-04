@@ -9,6 +9,7 @@ var appConfig = {
     authServerURL: process.env.wm_auth_server_url || 'https://localhost:9443/services',
     rateServiceURL: process.env.wm_rate_service_url || 'http://localhost:7080/provisionAPI/test',
     reportingUrl : process.env.wm_reporting_url || 'https://localhost:9443/apihostobject',
+    blacklistWhitelistServiceURL: process.env.wm_blacklist_whitelist_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/',
     apiListURL: process.env.wm_blacklist_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
     blacklistPerApiURL: process.env.wm_blacklist_numbers_url || 'http://localhost:9763/blacklist-whitelist-service/queries/GetBlacklistPerApi',
     removeBlacklistURL: process.env.wm_blacklist_remove_url || 'http://localhost:9763/blacklist-whitelist-service/queries/RemoveFromBlacklist',

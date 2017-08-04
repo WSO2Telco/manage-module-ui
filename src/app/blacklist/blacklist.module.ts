@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormlyModule, FormlyBootstrapModule} from 'ng2-formly';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {SharedModule} from '../shared/shared.module';
+import { BlacklistListComponent } from '../blacklist/blacklist-list/blacklist-list.component';
 
 @NgModule({
 
@@ -24,7 +25,8 @@ import {SharedModule} from '../shared/shared.module';
     ],
 
     declarations: [
-        BlacklistMainComponent
+        BlacklistMainComponent,
+        BlacklistListComponent
     ]
 
 })

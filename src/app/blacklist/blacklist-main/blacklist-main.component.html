@@ -1,79 +1,54 @@
 <div class="col-sm-12">
-  <h3>APIwise BlackList </h3>
+    <h3>APIwise BlackList </h3>
 
-  <div class="form-group">
-    <label class="control-label col-sm-3">API:</label>
-    <div class="col-sm-4">
-
-
+    <div>
+        <input type="text" class="form-control"
+               [(ngModel)]="api"
+               [typeaheadMinLength]="0"
+               container="body"
+               [typeahead]="apiList"
+               typeaheadOptionField="apiId"
+               (typeaheadOnSelect)="onApiSelected($event)"
+               placeholder="Id">
     </div>
-  </div>
 
-  <div>
-
-    <input type="text" class="form-control"
-           [(ngModel)]="api"
-           [typeaheadMinLength]="0"
-           container="body"
-           [typeahead]="apiList"
-           typeaheadOptionField="apiId"
-           (typeaheadOnSelect)="onApiSelected($event)"
-           placeholder="Id">
+    <br><br>
+    <form class="form-horizontal" #numberlistForm="ngForm" novalidate
+          (ngSubmit)="onUploadNumber(numberlistForm)">
 
 
+        <h5>BlackList subscribers {{ count }}</h5>
 
-  </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3">Number:</label>
+            <div class="col-sm-6">
+                <input class="form-control"
+                       autocomplete="off"
+                       #nameRef="ngModel"
+                       required="required"
+                       [(ngModel)]="msisdn"
+                       type="text"
+                       name="manualNumber"
+                       placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
+                <span class="error" *ngIf="isDublicate">{{ dublicate }}</span>
+                <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                <span class="error" *ngIf="islong">{{long}}</span>
 
-
-  <br><br><br>
-  <h5>BlackList subscribers - 0</h5>
-  <br><br><br>
-
-  <h6>Subscriber</h6>
-
-  <table>
-    <thead>
-    <tr><th style="width: 550px;"></th>
-      <th style="width: 200px; vertical-align: top;"></th>
-    </tr></thead>
-    <tbody>
-    <form class="form-horizontal">
-    <tr>
-      <td>
-        <input id="subscriber_black_list"
-               type="text" placeholder="e.g.94777333100,94777333105 (Comma seperated entries)"
-               class="resource_url_pattern form-control" style="width: 535px;"
-               name="blacklist"
-               required>
-      </td>
-      <td style="vertical-align: top;">
-        <button class="btn btn-primary" style="margin-left: 15px; margin-top: 3px;" id="add-blacklist">
-										<span class="icon fw-stack" style="font-size:10px">
-											<i class="fw fw-add fw-stack-1x"></i>
-											<i class="fw fw-circle-outline fw-stack-2x"></i>
-										</span>&nbsp;Add</button>
-      </td>
-
-    </tr>
-    </form>
-    <tr>
-      <td>
-        <table class="table borderless" style="width: 350px;">
-          <thead>
-          <tr>
-            <th style="width: 300px;">Subscriber</th>
-
-            <div *ngIf="onApiSelected">
-                <li>  {{ Numbers }} </li>
             </div>
+            <button class="btn btn-primary">
+                ADD
+            </button>
+        </div>
 
-          </tr>
-          </thead>
-        </table>
-      </td>
 
-    </tr>
-    </tbody>
-  </table>
+    </form>
+
+
+    <br><br><br>
+
+    <app-blacklist-list
+            [datasource]="blackListList" [apiId]="numberId" (onDeleteTask)="onDeleteHandler($event, numberId)">
+    </app-blacklist-list>
+
 
 </div>

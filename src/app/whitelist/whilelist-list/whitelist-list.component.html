@@ -1,0 +1,27 @@
+<div class="section" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tbl-header">
+                    <h5>Whitelisted subscribers </h5>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Msisdn</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody class="whitelist"  >
+                    <ng-container *ngFor="let item of dataSource">
+                        <tr >
+                            <td>{{item}}</td>
+                            <td><button class="btn" (click)="onDelete(item)"><i class="material-icons">delete</i></button></td>
+                        </tr>
+                    </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

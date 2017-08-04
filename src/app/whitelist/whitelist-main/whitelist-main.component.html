@@ -1,114 +1,140 @@
 <div class="animated fadeInUp row">
 
-        <div class="col-sm-12">
-            <div class="tbl-header">
-                <h3>Whitelist subscribers</h3>
-            </div>
-            <div class="form-container">
-                <table>
-                    <thead>
-                    <th style="width: 250px;"></th>
-                    <th style="width: 200px; vertical-align: left;"></th>
-
-                    </thead>
-                    <tbody>
-
-
-                    <tr id="listRow3">
-                        <td>
-                            <span>Subscriber: </span>
-                            <input type="text" class="form-control"
-                                    [(ngModel)]="subscriber"
-                                    [typeaheadMinLength]="0"
-                                    container="body"
-                                    [typeahead]="subscriberList"
-                                    typeaheadOptionField="id"
-                                    (typeaheadOnSelect)="onSubscriberSelected($event)"
-                                    placeholder="Id">
-                        </td>
-                        <td>
-                            <span>Application: </span>
-                            <input type="text" class="form-control"
-                                   [(ngModel)]="app"
-                                   [typeaheadMinLength]="0"
-                                   container="body"
-                                   [typeahead]="applicationList"
-                                   typeaheadOptionField="id"
-                                   (typeaheadOnSelect)="onAppSelected($event)"
-                                   placeholder="Id">
-                        </td>
-                        <td>
-                            <span>&nbsp;&nbsp;API:</span>
-                            <input type="text" class="form-control"
-                                   [(ngModel)]="api"
-                                   [typeaheadMinLength]="0"
-                                   container="body"
-                                   [typeahead]="apiList"
-                                   typeaheadOptionField="id"
-                                   (typeaheadOnSelect)="onApiSelected($event)"
-                                   placeholder="Id">
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="form-container rateInputContainer">
-                <div class="tbl-header">
-                    <h5>Numbers list configuration </h5>
-                </div>
-
-                <form class="form-horizontal" #numberlistForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(numberlistForm)">
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Number:</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="manualNumber" id="manualNumber"
-                                   placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
-                            <button class="btn btn-primary"
-                                    type="submit">
-                                <span class="icon fw-stack" style="font-size:10px">
-											<i class="fw fw-add fw-stack-1x"></i>
-											<i class="fw fw-circle-outline fw-stack-2x"></i>
-										</span>&nbsp;Upload Number
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-            </div>
-
-            <div class="form-container rateInputContainer">
-                <div class="tbl-header">
-                    <h5>Numbers Range configuration </h5>
-                </div>
-
-                <form class="form-horizontal" #numberrangeForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(numberrangeForm)">
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Min number:</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="manualNumber">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">Max number:</label>
-                        <div class="col-sm-4">
-                            <input type="text" name="manualNumber">
-                        </div>
-                    </div>
-                    <label style="color:grey;">e.g.94777333100 to 94777333200</label>
-
-                    <div class="form-group">
-                        <button class="btn btn-primary" style="margin-left: 15px; margin-top: 3px;" id="add-range">
-                            Upload Numbers List
-                        </button>
-                    </div>
-
-                </form>
-
-            </div>
+    <div class="col-sm-12">
+        <div class="tbl-header">
+            <h3>Whitelist subscribers</h3>
         </div>
+        <div class="form-container">
+            <table>
+                <thead>
+                <th style="width: 250px;"></th>
+                <th style="width: 200px; vertical-align: left;"></th>
+
+                </thead>
+                <tbody>
+
+
+                <tr id="listRow3">
+                    <td>
+                        <span>Subscriber: </span>
+                        <input type="text" class="form-control"
+                               [(ngModel)]="subscriber"
+                               [typeaheadMinLength]="0"
+                               container="body"
+                               [typeahead]="subscriberList"
+                               typeaheadOptionField="id"
+                               (typeaheadOnSelect)="onSubscriberSelected($event)"
+                               placeholder="Id">
+                    </td>
+                    <td>
+                        <span>Application: </span>
+                        <input type="text" class="form-control"
+                               [(ngModel)]="app"
+                               [typeaheadMinLength]="0"
+                               container="body"
+                               [typeahead]="applicationList"
+                               typeaheadOptionField="id"
+                               (typeaheadOnSelect)="onAppSelected($event)"
+                               placeholder="Id">
+                    </td>
+                    <td>
+                        <span>&nbsp;&nbsp;API:</span>
+                        <input type="text" class="form-control"
+                               [(ngModel)]="api"
+                               [typeaheadMinLength]="0"
+                               container="body"
+                               [typeahead]="apiList"
+                               typeaheadOptionField="id"
+                               (typeaheadOnSelect)="onApiSelected($event)"
+                               placeholder="Id">
+                    </td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="form-container rateInputContainer">
+            <div class="tbl-header">
+                <h5>Numbers list configuration </h5>
+            </div>
+
+            <form class="form-horizontal" #numberlistForm="ngForm" novalidate
+                  (ngSubmit)="onUploadNumber(numberlistForm)">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Number:</label>
+                    <div class="col-sm-6">
+                        <input class="form-control"
+                               autocomplete="off"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="msisdn"
+                               type="text"
+                               name="manualNumber"
+                               placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
+                        <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">
+                        Upload Numbers List
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <div class="form-container rateInputContainer">
+            <div class="tbl-header">
+                <h5>Numbers Range configuration </h5>
+            </div>
+
+            <form class="form-horizontal" #numberrangeForm="ngForm" novalidate
+                  (ngSubmit)="onUploadNumberRange(numberrangeForm)">
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Min number:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               autocomplete="off"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="msisdnMin"
+                               type="number"
+                               name="manualNumber">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3">Max number:</label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               autocomplete="off"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="msisdnMax"
+                               type="number"
+                               name="manualNumber">
+                    </div>
+                </div>
+                <label style="color:grey;">e.g.94777333100 to 94777333200</label>
+                <span class="error" *ngIf="ismsisdnRangeError">{{msisdnRangeError}}</span>
+                <div class="form-group">
+                    <button class="btn btn-primary">
+                        Upload Numbers List
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <app-whitelist-list
+            [dataSource]="whitelistList"
+            (onDeleteTask)="onDeleteHandler($event)" ></app-whitelist-list>
+
+    <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 </div>

@@ -70,6 +70,13 @@ export class Application {
     name: string;
 }
 
+export class Api{
+    id: string;
+    name: string;
+    provider: string;
+    version: string;
+}
+
 export class BlackListNumbers {
     id: string;
     name: string;

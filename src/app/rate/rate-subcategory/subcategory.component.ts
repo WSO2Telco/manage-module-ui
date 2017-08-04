@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 
 @Component({
@@ -23,6 +23,9 @@ export class SubcategoryComponent implements OnInit {
     showNewCategory: boolean;
     showNewSubCategory: boolean;
     showNewTariff: boolean;
+
+    @Output()
+    private modalfire: EventEmitter<string> = new EventEmitter();
 
     constructor(private rateService: RateService) {
     }
@@ -66,6 +69,10 @@ export class SubcategoryComponent implements OnInit {
             }
         }
 
+    }
+
+    onAddNewModalFire(actionName: string) {
+        this.modalfire.emit(actionName);
     }
 
     clearErrors() {

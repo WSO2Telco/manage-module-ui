@@ -20,7 +20,7 @@ const _invokeGetApiListRest = function ( ) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.apiListURL;
+        return config.blacklistWhitelistServiceURL + 'apis';
     };
 
     let getRequestOptions = function () {

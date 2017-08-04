@@ -1,10 +1,18 @@
-.subcategoryContainer{
+.subcategoryContainer {
   background-color: #f1f3f5;
   padding: 5px;
   font-size: 15px;
   margin: 10px;
 }
 
-.btn{
+.btn {
   margin: 5px;
+}
+
+.info-tooltip {
+  font-size: 1.5em;
+  color: #8E44AD;
+  vertical-align: top;
+  margin-top: 0.3em;
+  cursor: pointer;
 }

@@ -1,69 +1,74 @@
-<div class="form-container newtypeContainer">
-    <!--login form START-->
-    <div class="tbl-header">
-        <h5>Create New {{type}} </h5>
-    </div>
-    <form #addNewForm="ngForm" novalidate (ngSubmit)="onSubmit(addNewForm)">
+<div class="animated fadeInUp" style="animation-delay: 0.2s">
 
-        <div class="form-group">
-            <label class="control-label col-sm-3">{{type}} Name</label>
-            <div class="col-sm-4">
-                <input class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Name"
-                        name="name"
-                        #nameRef="ngModel"
-                        required
-                        [(ngModel)]="name">
-                <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">{{type}} Code</label>
-            <div class="col-sm-4">
-                <input class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Code"
-                        name="code"
-                        #codeRef="ngModel"
-                        required
-                        [(ngModel)]="code">
-                <span class="error" *ngIf="isCodeEmpty">Code can not be empty</span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-3">{{type}} Description</label>
-            <div class="col-sm-4">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-container newtypeContainer">
+
+                <form class="form-horizontal" #addNewForm="ngForm" novalidate (ngSubmit)="onSubmit(addNewForm)">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{type}} Name</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="text"
+                                   autocomplete="off"
+                                   placeholder="Name"
+                                   name="name"
+                                   #nameRef="ngModel"
+                                   required
+                                   [(ngModel)]="name">
+                            <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{type}} Code</label>
+                        <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="text"
+                                   autocomplete="off"
+                                   placeholder="Code"
+                                   name="code"
+                                   #codeRef="ngModel"
+                                   required
+                                   [(ngModel)]="code">
+                            <span class="error" *ngIf="isCodeEmpty">Code can not be empty</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">{{type}} Description</label>
+                        <div class="col-sm-4">
                 <textarea rows="4" cols="50" class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        placeholder="Description"
-                        name="description"
-                        #descriptionRef="ngModel"
-                        required
-                        [(ngModel)]="description">
+                          type="text"
+                          autocomplete="off"
+                          placeholder="Description"
+                          name="description"
+                          #descriptionRef="ngModel"
+                          required
+                          [(ngModel)]="description">
                 </textarea>
-                <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+                            <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-1 col-sm-offset-3">
+                            <button type="submit" class="btn btn-success">Add</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button type="reset" class="btn btn-warning">Cancel</button>
+                        </div>
+                    </div>
+
+
+                </form>
+
             </div>
+
+            <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
+
         </div>
-
-        <div class="form-group">
-            <div class="col-sm-1">
-                <button type="submit" class="btn btn-success">Add</button>
-            </div>
-            <div class="col-sm-1">
-                <button type="reset" class="btn btn-warning">Cancel</button>
-            </div>
-        </div>
-
-
-    </form>
-
+    </div>
 </div>
-
-<div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 
 
 

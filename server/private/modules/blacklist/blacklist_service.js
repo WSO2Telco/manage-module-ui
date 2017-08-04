@@ -5,7 +5,7 @@
 const logger=require('../../config/logger');
 const blackListRestService = require('./blacklist_rest_service');
 const boom = require('boom');
-
+const Messages = require('../common/messages');
 logger.debugLevel = 'warn';
 
 const validateGetNumbersRequest = function (request) {

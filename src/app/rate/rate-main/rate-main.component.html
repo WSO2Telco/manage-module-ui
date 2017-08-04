@@ -5,13 +5,16 @@
             <div class="modal-header">
                 <h4 class="modal-title pull-left">{{dialogactionTitile}}</h4>
                 <button type="button" class="close pull-right"
-                        (click)="lgModal.hide();showAddCurrency=false;showAddTariff=false;" aria-label="Close">
+                        (click)="lgModal.hide(); clearModalContent()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <app-currency *ngIf="showAddCurrency"></app-currency>
                 <app-addtariff *ngIf="showAddTariff"></app-addtariff>
+                <app-newtype *ngIf="showChildNewTariff" type="Tariff"></app-newtype>
+                <app-newtype *ngIf="showChildNewCategory" type="Category"></app-newtype>
+                <app-newtype *ngIf="showChildNewSubCategory" type="Sub Category"></app-newtype>
             </div>
         </div>
     </div>
@@ -29,7 +32,7 @@
 
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Name:</label>
+                    <label class="control-label col-sm-2">Rate Name:</label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="text"
@@ -44,7 +47,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Description</label>
+                    <label class="control-label col-sm-2">Rate Description</label>
                     <div class="col-sm-4">
                             <textarea rows="4" cols="50" class="form-control"
                                       type="text"
@@ -60,7 +63,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Create Date</label>
+                    <label class="control-label col-sm-2">Create Date</label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="date"
@@ -75,7 +78,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Currency:</label>
+                    <label class="control-label col-sm-2">Currency:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="selected"
                                [typeahead]="currencyList"
@@ -93,7 +96,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Rate Type:</label>
+                    <label class="control-label col-sm-2">Rate Type:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
                                [typeahead]="rateTypeList"
@@ -110,7 +113,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Tariff:</label>
+                    <label class="control-label col-sm-2">Tariff:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
@@ -131,7 +134,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-3">Add Sub Category:</label>
+                    <label class="control-label col-sm-2">Add Sub Category:</label>
                     <div class="col-sm-4">
                         <label class="switch">
                             <input type="checkbox"
@@ -143,10 +146,11 @@
                                            placement="right"></span>
                     </div>
                 </div>
-                <app-subcategory *ngIf="showSubcategory"></app-subcategory>
+                <app-subcategory *ngIf="showSubcategory"
+                                 (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"></app-subcategory>
 
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-3">
+                    <div class="col-sm-4 col-sm-offset-2">
                         <br> <br>
                         <button type="submit" class="btn btn-success">Add</button>&nbsp;
                         <button type="reset" class="btn btn-warning">Cancel</button>
