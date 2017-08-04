@@ -1,18 +1,19 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
-import {Tariff} from '../../commons/models/common-data-models';
 
 @Component({
-    selector: 'app-addtariff',
-    templateUrl: './tariff.component.html',
-    styleUrls: ['./tariff.component.scss']
+    selector: 'app-category',
+    templateUrl: './category.component.html',
+    styleUrls: ['./category.component.scss']
 })
-export class TariffComponent implements OnInit {
+export class CategoryComponent implements OnInit {
 
-    private tariff: Tariff;
+    name: string;
+    code: string;
+    description: string;
 
     @Input()
-    private existingNames: string[];
+    private type: string;
 
     @Output()
     private onAddTask: EventEmitter<boolean> = new EventEmitter();
@@ -23,40 +24,38 @@ export class TariffComponent implements OnInit {
     private submissionError: string;
 
     private isNameError: boolean;
+    private isCodeError: boolean;
     private isDescriptionError: boolean;
 
     private nameError: string;
+    private codeError: string;
     private descriptionError: string;
+
+    @Input()
+    private existingNames: string[];
+
+    @Input()
+    private existingCodes: string[];
 
     constructor(private rateService: RateService) {
     }
 
     ngOnInit() {
-
-        this.tariff = new Tariff();
-
-        this.tariff.tariffName = '';
-        this.tariff.tariffDesc = '';
-        this.tariff.tariffDefaultVal = 0;
-        this.tariff.tariffAdsCommission = 0;
-        this.tariff.tariffSPCommission = 0;
-        this.tariff.tariffSurChargeAds = 0;
-        this.tariff.tariffSurChargeOpco = 0;
-        this.tariff.tariffSurChargeval = 0;
-        this.tariff.tariffOpcoCommission = 0;
-        this.tariff.tariffMaxCount = 0;
-        this.tariff.tariffExcessRate = 0;
-        this.tariff.tariffDefRate = 0;
-
+        console.log('Sub name window loaded');
+        this.name = '';
+        this.code = '';
+        this.description = '';
         this.clearErrors();
+        // this.type = '';
     }
 
 
-    onSubmit(addTariffForm) {
+    onSubmit(addCategoryForm) {
         this.clearErrors();
 
-        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDesc.length != 0) {
-            this.rateService.addTariff(this.tariff, (response, status) => {
+        if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0) {
+            console.log('form submitted : ' + this.name + '  ' + this.code + '  ' + this.description);
+            this.rateService.addCategory(this.name, this.code, this.description, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
@@ -68,13 +67,16 @@ export class TariffComponent implements OnInit {
 
                 }
             });
-
         } else {
-            if (this.tariff.tariffName.length == 0) {
+            if (this.name.length == 0) {
                 this.isNameError = true;
                 this.nameError = 'Name can not be empty';
             }
-            if (this.tariff.tariffDesc.length == 0) {
+            if (this.code.length == 0) {
+                this.isCodeError = true;
+                this.codeError = 'Code can not be empty';
+            }
+            if (this.description.length == 0) {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
             }
@@ -83,9 +85,12 @@ export class TariffComponent implements OnInit {
     }
 
     clearErrors() {
+        this.isCodeError = false;
         this.isNameError = false;
         this.isDescriptionError = false;
-        this.nameError = '';
+
+        this.nameError= '';
+        this.codeError = '';
         this.descriptionError = '';
     }
 
@@ -103,6 +108,23 @@ export class TariffComponent implements OnInit {
             this.isNameError = false;
             this.nameError = '';
         }
+    }
+
+    isCodeUnique(code) {
+        let state = false;
+        for (const entry of this.existingCodes) {
+            if (code == entry) {
+                state = true;
+            }
+        }
+        if (state) {
+            this.isCodeError = true;
+            this.codeError = 'Code Already Existing';
+        } else {
+            this.isCodeError = false;
+            this.codeError = '';
+        }
+
     }
 
 }

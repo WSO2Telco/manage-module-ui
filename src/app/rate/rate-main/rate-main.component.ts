@@ -28,11 +28,128 @@ export class RateMainComponent implements OnInit {
     private showAddCurrency: boolean;
     private showAddTariff: boolean;
 
+    private dialogactionTitile: string;
+
+    private tariffList: string[];
+    private currencyList: string[];
+    private rateTypeList: string[];
+    private categoryList: string[];
+    private categoryCodeList: string[];
+
     private showChildNewCategory: boolean;
     private showChildNewSubCategory: boolean;
     private showChildNewTariff: boolean;
 
     constructor(private rateService: RateService) {
+    }
+
+    ngOnInit() {
+        this.showSubcategory = false;
+        this.showAddCurrency = false;
+        this.showAddTariff = false;
+        this.showChildNewTariff = false;
+        this.showChildNewSubCategory = false;
+        this.showChildNewCategory = false;
+        this.clearErrors();
+
+        this.name = '';
+        this.description = '';
+        this.date = '';
+        this.currency = '';
+        this.rateType = '';
+        this.tariff = '';
+
+        this.tariffList = [];
+        this.currencyList = [];
+        this.rateTypeList = [];
+        this.categoryList = [];
+        this.categoryCodeList = [];
+
+        this.getTariffList();
+        this.getCurrencyList();
+        this.getRateTypeList();
+        this.getCategoryList();
+    }
+
+    getTariffList() {
+        this.rateService.getTariffList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.tariffList[count] = response[count].tariffName;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getCurrencyList() {
+        this.rateService.getCurrencyList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.currencyList[count] = response[count].currencyCode;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getRateTypeList(){
+        this.rateService.getRateTypeList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.rateTypeList[count] = response[count].rateTypeCode;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
+    }
+
+    getCategoryList(){
+        this.rateService.getCategoryList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
+                    this.categoryList[count] = response[count].categoryName;
+                    this.categoryCodeList[count] = response[count].categoryCode;
+                    count++;
+                }
+
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+
     }
 
     onRateCardSubmit(ratecardForm) {
@@ -74,24 +191,6 @@ export class RateMainComponent implements OnInit {
 
     }
 
-
-    ngOnInit() {
-        this.showSubcategory = false;
-        this.showAddCurrency = false;
-        this.showAddTariff = false;
-        this.showChildNewTariff = false;
-        this.showChildNewSubCategory = false;
-        this.showChildNewCategory = false;
-        this.clearErrors();
-
-        this.name = '';
-        this.description = '';
-        this.date = '';
-        this.currency = '';
-        this.rateType = '';
-        this.tariff = '';
-    }
-
     clearErrors() {
         this.isDateEmpty = false;
         this.isDescriptionEmpty = false;
@@ -109,8 +208,6 @@ export class RateMainComponent implements OnInit {
             return true;
     }
 
-    private dialogactionTitile: string;
-
     changeDialogTitle() {
         if (this.showAddCurrency)
             return this.dialogactionTitile = 'Add new Currency code';
@@ -119,34 +216,6 @@ export class RateMainComponent implements OnInit {
         else if (this.showChildNewCategory || this.showChildNewSubCategory)
             return this.dialogactionTitile = 'Add new Category';
     }
-
-    public currencyList: string[] = [
-        'AED',
-        'AFN',
-        'ALL',
-        'AMD',
-        'ANG',
-        'AOA',
-        'ARS',
-        'AUD',
-        'AWG',
-        'AZN',
-    ];
-
-    public tariffList: string[] = [
-        'TR064',
-        'TR034',
-        'TR074',
-        'TR044',
-        'TR030',
-    ];
-
-    public rateTypeList: string[] = [
-        'Constant',
-        'Precentage',
-        'Commis',
-        'Annual'
-    ];
 
     onmodalfireHandler(event: string) {
         if (event === 'addNewCategory') {
@@ -165,6 +234,39 @@ export class RateMainComponent implements OnInit {
         this.showChildNewTariff = false;
         this.showChildNewSubCategory = false;
         this.showChildNewCategory = false;
+    }
+
+    /**
+     * event handler method which is triggered when a new currency is added
+     * @param event
+     */
+    onAddCurrencyHandler(event: boolean){
+        console.log('add currency event called');
+        if (event) {
+            this.getCurrencyList();
+        }
+    }
+
+    /**
+     * event handler method which is triggered when a new category added, to refresh list
+     * @param event
+     */
+    onAddCategoryHandler(event: boolean){
+        console.log('add category event called');
+        if (event) {
+            this.getCategoryList();
+        }
+    }
+
+    /**
+     * event handler method which is triggered when a new tariff added, to refresh list
+     * @param event
+     */
+    onAddTariffHandler(event :boolean){
+        console.log('add tariff event called');
+        if (event) {
+            this.getTariffList();
+        }
     }
 
 }

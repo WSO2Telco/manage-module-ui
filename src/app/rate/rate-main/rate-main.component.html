@@ -10,11 +10,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <app-currency *ngIf="showAddCurrency"></app-currency>
-                <app-addtariff *ngIf="showAddTariff"></app-addtariff>
-                <app-newtype *ngIf="showChildNewTariff" type="Tariff"></app-newtype>
-                <app-newtype *ngIf="showChildNewCategory" type="Category"></app-newtype>
-                <app-newtype *ngIf="showChildNewSubCategory" type="Sub Category"></app-newtype>
+
+                <app-currency
+                        *ngIf="showAddCurrency"
+                        [existingCodes]="currencyList"
+                        (onAddTask)="onAddCurrencyHandler($event)"
+                        (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
+
+                <app-addtariff *ngIf="showAddTariff"
+                               [existingNames]="tariffList"
+                               (onAddTask)="onAddTariffHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+
+                <app-addtariff *ngIf="showChildNewTariff"></app-addtariff>
+
+                <app-category *ngIf="showChildNewCategory"
+                              type="Category"
+                              [existingNames]="categoryList"
+                              [existingCodes]="categoryCodeList"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+
+                <app-category *ngIf="showChildNewSubCategory"
+                              type="Sub Category"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
             </div>
         </div>
     </div>
@@ -59,21 +79,6 @@
                                       [(ngModel)]="description">
                             </textarea>
                         <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Create Date</label>
-                    <div class="col-sm-4">
-                        <input class="form-control"
-                               type="date"
-                               autocomplete="off"
-                               placeholder="Date"
-                               name="date"
-                               #codeRef="ngModel"
-                               required
-                               [(ngModel)]="date">
-                        <span class="error" *ngIf="isDateEmpty">Date can not be empty</span>
                     </div>
                 </div>
 
@@ -147,6 +152,8 @@
                     </div>
                 </div>
                 <app-subcategory *ngIf="showSubcategory"
+                                 [categoryList]="categoryList"
+                                 [tariffList]="tariffList"
                                  (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"></app-subcategory>
 
                 <div class="form-group">

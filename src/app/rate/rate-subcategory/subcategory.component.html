@@ -8,18 +8,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Category:</label>
                         <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Category"
-                                    name="category"
-                                    #categoryRef="ngModel"
-                                    required
-                                    [(ngModel)]="category">
-                                <option>GAME</option>
-                                <option>SONGS</option>
-                                <option>RINGTONE</option>
-                            </select>
+                            <input [(ngModel)]="category"
+                                   [typeahead]="categoryList"
+                                   [typeaheadMinLength]="0"
+                                   placeholder="Category"
+                                   name="typeCategory"
+                                   class="form-control"
+                                   required >
                             <span class="error" *ngIf="isCategoryEmpty">Category can not be empty</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"
@@ -29,18 +24,13 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Sub Category:</label>
                         <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Sub Category"
-                                    name="subcategory"
-                                    #subcategoryRef="ngModel"
-                                    required
-                                    [(ngModel)]="subcategory">
-                                <option>Action</option>
-                                <option>Racing</option>
-                                <option>Detective</option>
-                            </select>
+                            <input [(ngModel)]="subcategory"
+                                   [typeahead]="categoryList"
+                                   [typeaheadMinLength]="0"
+                                   placeholder="Sub Category"
+                                   name="typeCaSubtegory"
+                                   class="form-control"
+                                   required >
                             <span class="error" *ngIf="isSubcategoryEmpty">Sub Category can not be empty</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"
@@ -50,18 +40,14 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Tariff:</label>
                         <div class="col-sm-4">
-                            <select class="form-control"
-                                    type="text"
-                                    autocomplete="off"
-                                    placeholder="Tariff"
-                                    name="tariff"
-                                    #tariffRef="ngModel"
-                                    required
-                                    [(ngModel)]="tariff">
-                                <option>STV 123</option>
-                                <option>ABC 234</option>
-                                <option>IJK 345</option>
-                            </select>
+                            <input [(ngModel)]="tariff"
+                                   [typeahead]="tariffList"
+                                   [typeaheadMinLength]="0"
+                                   placeholder="Tariff"
+                                   name="typeTariff"
+                                   class="form-control"
+                                   required
+                            >
                             <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"

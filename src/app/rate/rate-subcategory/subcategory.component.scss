@@ -16,3 +16,8 @@
   margin-top: 0.3em;
   cursor: pointer;
 }
+
+#scrollable-dropdown-menu .dropdown-menu {
+  max-height: 20px;
+  overflow-y: auto;
+}

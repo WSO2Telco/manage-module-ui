@@ -17,18 +17,27 @@ const validateAddSubcategoryRequest = function (request) {
     return false;
 };
 
-const validateAddCurrencyRequest = function (request) {
+const validateAddTariffRequest = function (request) {
     let param = request.payload;
-    if (!!param && param.currencycode && param.currencydesc) {
+    if (!!param) {
         logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
 };
 
-const validateAddNewTypeRequest = function (request) {
+const validateAddCurrencyRequest = function (request) {
     let param = request.payload;
-    if (!!param && param.name && param.code && param.description && param.type) {
+    if (!!param && param.currencyCode && param.currencyDescription) {
+        logger.log('INFO', 'REQUEST VALIDATED');
+        return true;
+    }
+    return false;
+};
+
+const validateAddCategoryRequest = function (request) {
+    let param = request.payload;
+    if (!!param && param.categoryName && param.categoryCode && param.categoryDesc) {
         logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
@@ -74,13 +83,13 @@ function rateService() {
      */
     let _addCurrency = function (request, callback) {
 
-        logger.log('INFO', "hit at rate service end point for currency- Rk");
+        logger.log('INFO', "hit at rate service end point add new currency");
 
         request.server.log('info', 'ADD Currency REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub category created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"currency added successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -97,20 +106,20 @@ function rateService() {
 
 
     /**
-     * Add new category, tariff or sub category
+     * Add new category or sub category
      * @param request
      * @param callback
      * @private
      */
-    let _addNewType = function (request, callback) {
+    let _addCategory = function (request, callback) {
 
-        logger.log('INFO', "hit at rate service new type end point");
+        logger.log('INFO', "hit at rate service add category end point");
 
-        request.server.log('info', 'ADD NEW TYPE REQUEST : ' + request.payload && JSON.stringify(request.payload));
+        request.server.log('info', 'ADD CATEGORY REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub name created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"category created successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -118,24 +127,31 @@ function rateService() {
             callback(addSubCategoryError);
         };
 
-        if (validateAddNewTypeRequest(request)) {
-            if(request.payload.type == "category"){
+        if (validateAddCategoryRequest(request)) {
+            rateRestService.invokeAddCategoryRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+    };
 
-                //write service
+    let _addTariff = function (request, callback) {
 
-            }else if(request.payload.type == "subcategory"){
+        logger.log('INFO', "hit at rate service add category end point");
 
-                //write service
+        request.server.log('info', 'ADD CATEGORY REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
-            }else if(request.payload.type == 'tariff'){
+        let onSuccess = function (addSubcategoryResult) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"category created successfully"}));
+        };
 
-                //write service
+        let onFailture = function (addSubCategoryError) {
+            logger.log('ERROR', 'faliture');
+            callback(addSubCategoryError);
+        };
 
-            }else{
-                callback(boom.badRequest(Messages['BAD_REQUEST']));
-            }
-
-            rateRestService.invokeAddSubCategoryRest(request).then(onSuccess, onFailture);
+        if (validateAddTariffRequest(request)) {
+            rateRestService.invokeAddTariffRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
         }
@@ -155,7 +171,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub name created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"rate card created successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -173,14 +189,88 @@ function rateService() {
     };
 
     /**
-     *  Return available currency list
+     * get tariff list
      * @param request
      * @param callback
      * @private
      */
-    let _getCurrency = function (request, callback) {
-        logger.log('INFO', "get currency at rate service end point");
+    let _getTariffList = function (request, callback) {
+        logger.log('INFO', "hit at rate get tariff service end point");
 
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetTariffListRest( ).then(onSuccess, onFailture);
+    }
+
+    /**
+     * get currency list
+     * @param request
+     * @param callback
+     * @private
+     */
+    let _getCurrencyList = function (request, callback) {
+        logger.log('INFO', "hit at rate get currency service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetCurrencyListRest( ).then(onSuccess, onFailture);
+    }
+
+    let _getRateTypeList = function (request, callback) {
+        logger.log('INFO', "hit at rate get rate type service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetRateTypeListRest( ).then(onSuccess, onFailture);
+    }
+
+    let _getCategoryList = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get categories service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetCategoryListRest( ).then(onSuccess, onFailture);
     }
 
     //add more rate services here
@@ -188,8 +278,13 @@ function rateService() {
     return {
         addSubcategory: _addSubcategory,
         addCurrency: _addCurrency,
-        addNewType: _addNewType,
-        addRateCard: _addRateCard
+        addCategory: _addCategory,
+        addRateCard: _addRateCard,
+        addTariff: _addTariff,
+        getTariffList: _getTariffList,
+        getCurrencyList: _getCurrencyList,
+        getRateTypeList: _getRateTypeList,
+        getCategoryList: _getCategoryList
     };
 
     //commet 22
