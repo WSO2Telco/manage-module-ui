@@ -9,39 +9,43 @@
 
 
             <div class="searchFilter">
+
+                <div class="col-sm-3">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="NB">
+                </div>
+
                 <div class="col-sm-3 ">
                     <input type="text"
                            class="form-control"
-                           placeholder="Operator"
-                           [(ngModel)]="selectedOP"
-                           [typeahead]="operatorList"
+                           [(ngModel)]="subscriber"
+                           [typeahead]="subscriberList"
                            [typeaheadMinLength]="0"
-                           name="typecurrency"
-                           class="form-control"
+                           typeaheadOptionField="id"
+                           (typeaheadOnSelect)="onSubscriberSelected($event)"
+                           placeholder="Operator"
                     >
                 </div>
                 <div class="col-sm-3">
-                    <input [(ngModel)]="selectedSP"
-                           [typeahead]="spList"
-                           [typeaheadMinLength]="0"
-                           type="text"
+                    <input type="text"
                            class="form-control"
-                           placeholder="Select ServiceProvider">
+                           [(ngModel)]="app"
+                           [typeaheadMinLength]="0"
+                           container="body"
+                           [typeahead]="applicationList"
+                           typeaheadOptionField="id"
+                           (typeaheadOnSelect)="onAppSelected($event)"
+                           placeholder="Select Application"
+                    >
                 </div>
                 <div class="col-sm-3">
-                    <input [(ngModel)]="selectedApp"
-                           [typeahead]="AppList"
+                    <input [(ngModel)]="api"
                            [typeaheadMinLength]="0"
-                           type="text"
-                           type="text"
-                           class="form-control"
-                           placeholder="Select Application">
-                </div>
-                <div class="col-sm-3">
-                    <input [(ngModel)]="selectedApi"
-                           [typeahead]="ApiList"
-                           [typeaheadMinLength]="0"
-                           type="text"
+                           container="body"
+                           [typeahead]="apiList"
+                           typeaheadOptionField="id"
+                           (typeaheadOnSelect)="onApiSelected($event)"
                            class="form-control"
                            placeholder="Select API">
                 </div>
@@ -60,7 +64,9 @@
                                name="name"
                                #nameRef="ngModel"
                                required
-                               [(ngModel)]="name">
+                               [(ngModel)]="quotaInputValue"
+                               [(disabled)]="is_edit"
+                        >
                         <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>
                     </div>
                 </div>
@@ -68,7 +74,7 @@
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                         <br> <br>
-                        <button type="submit" class="btn btn-success">Add</button>&nbsp;
+                        <button type="submit" class="btn btn-success" [(disabled)]="is_edit">Add</button>&nbsp;
                         <button type="reset" class="btn btn-warning">Cancel</button>
                     </div>
                 </div>
