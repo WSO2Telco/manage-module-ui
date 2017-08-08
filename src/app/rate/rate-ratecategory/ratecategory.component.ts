@@ -1,12 +1,13 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
+import {Mapping} from '../../commons/models/common-data-models';
 
 @Component({
-    selector: 'app-subcategory',
-    templateUrl: './subcategory.component.html',
-    styleUrls: ['./subcategory.component.scss']
+    selector: 'app-ratecategory',
+    templateUrl: './ratecategory.component.html',
+    styleUrls: ['./ratecategory.component.scss']
 })
-export class SubcategoryComponent implements OnInit {
+export class RateCategoryComponent implements OnInit {
 
     private category: string;
     private subcategory: string;
@@ -34,7 +35,7 @@ export class SubcategoryComponent implements OnInit {
     private modalfire: EventEmitter<string> = new EventEmitter();
 
     @Output()
-    private modalClose: EventEmitter<boolean> = new EventEmitter();
+    private rateCatetgorySubmition: EventEmitter<Mapping> = new EventEmitter();
 
     constructor(private rateService: RateService) {
     }
@@ -54,24 +55,21 @@ export class SubcategoryComponent implements OnInit {
 
     onSubmit(subcategoryForm) {
 
-        console.log("on submit" + this.category.length+ ":" +this.subcategory.length+":"+this.tariff.length);
         this.clearErrors();
 
-        if (this.category.length != 0 && this.subcategory.length != 0 && this.tariff.length != 0) {
-            console.log('form submitted : ' + this.category + '  ' + this.subcategory + '  ' + this.tariff);
-            this.rateService.addSubcategory(this.category, this.subcategory, this.tariff, (errorMsg) => {
-                this.submissionError = errorMsg;
-                setTimeout(() => {
-                    this.submissionError = null
-                }, 5000);
-            });
+        if (this.category.length != 0 && this.tariff.length != 0) {
+            let mapping = new Mapping();
+            mapping.category= this.category;
+            if(this.subcategory){
+                mapping.subcategory = this.subcategory;
+            }
+            mapping.tariff = this.tariff;
+            this.rateCatetgorySubmition.emit(mapping);
+
         } else {
-            console.log("invalid fields");
+            console.log('invalid fields');
             if (this.category.length == 0) {
                 this.isCategoryEmpty = true;
-            }
-            if (this.subcategory.length == 0) {
-                this.isSubcategoryEmpty = true;
             }
             if (this.tariff.length == 0) {
                 this.isTariffEmpty = true;

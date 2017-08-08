@@ -13,26 +13,29 @@
 
                 <app-currency
                         *ngIf="showAddCurrency"
-                        [existingCodes]="currencyList"
+                        [existingCodes]="currencyCodeList"
                         (onAddTask)="onAddCurrencyHandler($event)"
                         (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
 
                 <app-addtariff *ngIf="showAddTariff"
-                               [existingNames]="tariffList"
+                               [existingNames]="tariffNameList"
                                (onAddTask)="onAddTariffHandler($event)"
                                (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
-                <app-addtariff *ngIf="showChildNewTariff"></app-addtariff>
+                <app-addtariff *ngIf="showChildNewTariff"
+                               [existingNames]="tariffNameList"
+                               (onAddTask)="onAddTariffHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
                 <app-category *ngIf="showChildNewCategory"
                               type="Category"
-                              [existingNames]="categoryList"
-                              [existingCodes]="categoryCodeList"
+                              [existingCategories]="categoryList"
                               (onAddTask)="onAddCategoryHandler($event)"
                               (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
 
                 <app-category *ngIf="showChildNewSubCategory"
                               type="Sub Category"
+                              [existingCategories]="categoryList"
                               (onAddTask)="onAddCategoryHandler($event)"
                               (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
             </div>
@@ -50,7 +53,7 @@
                 <br> <br>
             </div>
 
-            <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmit(ratecardForm)">
+            <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmition(ratecardForm)">
                 <div class="form-group">
                     <label class="control-label col-sm-2">Rate Name:</label>
                     <div class="col-sm-4">
@@ -61,22 +64,23 @@
                                name="name"
                                #nameRef="ngModel"
                                required
-                               [(ngModel)]="name">
-                        <span class="error" *ngIf="isNameEmpty">Name can not be empty</span>
+                               [(ngModel)]="rateDefName"
+                               (input)="isNameUnique($event.target.value)">
+                        <span class="error" *ngIf="isNameError">{{nameError}}</span>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-sm-2">Rate Description</label>
                     <div class="col-sm-4">
-                            <textarea rows="4" cols="50" class="form-control"
+                            <textarea rows="2" cols="50" class="form-control"
                                       type="text"
                                       autocomplete="off"
                                       placeholder="Description"
                                       name="description"
                                       #descriptionRef="ngModel"
                                       required
-                                      [(ngModel)]="description">
+                                      [(ngModel)]="rateDefDesc">
                             </textarea>
                         <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
                     </div>
@@ -85,8 +89,8 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Currency:</label>
                     <div class="col-sm-4">
-                        <input [(ngModel)]="selected"
-                               [typeahead]="currencyList"
+                        <input [(ngModel)]="currency"
+                               [typeahead]="currencyCodeList"
                                [typeaheadMinLength]="0"
                                placeholder="Currency"
                                name="typecurrency"
@@ -104,7 +108,7 @@
                     <label class="control-label col-sm-2">Rate Type:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
-                               [typeahead]="rateTypeList"
+                               [typeahead]="rateTypeCodeList"
                                [typeaheadMinLength]="0"
                                autocomplete="off"
                                placeholder="Rate Type"
@@ -121,7 +125,7 @@
                     <label class="control-label col-sm-2">Tariff:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
-                               [typeahead]="tariffList"
+                               [typeahead]="tariffNameList"
                                [typeaheadMinLength]="0"
                                autocomplete="off"
                                placeholder="Tariff"
@@ -151,10 +155,11 @@
                                            placement="right"></span>
                     </div>
                 </div>
-                <app-subcategory *ngIf="showSubcategory"
-                                 [categoryList]="categoryList"
-                                 [tariffList]="tariffList"
-                                 (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"></app-subcategory>
+                <app-ratecategory *ngIf="showSubcategory"
+                                 [categoryList]="categoryNameList"
+                                 [tariffList]="tariffNameList"
+                                 (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
+                                  (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">

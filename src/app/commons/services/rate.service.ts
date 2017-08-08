@@ -3,7 +3,10 @@
  */
 import {Injectable} from '@angular/core';
 import {RateRemoteDataService} from '../../data-providers/rate_remote-data.service';
-import {SubCategory, Currency, ServerResponse, Category, RateCard, Tariff} from '../models/common-data-models';
+import {
+    SubCategory, Currency, ServerResponse, Category, Tariff, Rate,
+    RateCategory
+} from '../models/common-data-models';
 
 
 @Injectable()
@@ -20,20 +23,15 @@ export class RateService {
      * @param tariff
      * @param callback
      */
-    addSubcategory(category: string, subcategory: string, tariff: string, callback: Function) {
-        console.log('add sub category service called');
-        const model: SubCategory = new SubCategory();
-        model.category = category;
-        model.subcategory = subcategory;
-        model.tariff = tariff;
-        console.log(model.category);
-        this._remoteService.addSubcategory(model)
+    addRateCategory(rateCategory: RateCategory, id: number, callback: Function) {
+        console.log('add rate category service called');
+        this._remoteService.addRateCategory(rateCategory, id)
             .subscribe(
-                (response: ServerResponse) => {
-                    console.log('good response');
+                data => {
+                    callback(data, true);
                 },
-                (error: string) => {
-                    callback(error);
+                error => {
+                    callback(error, false);
                 }
             );
     }
@@ -106,31 +104,18 @@ export class RateService {
 
     /**
      * This method call the remote service to add new rate card
-     * @param name
-     * @param description
-     * @param date
-     * @param currency
-     * @param rateType
-     * @param tariff
+     * @param rateCard
      * @param callback
      */
-    addNewRateCard(name: string, description: string, date: string,
-                   currency: string, rateType: string, tariff: string, callback: Function) {
+    addNewRateCard(rateCard: Rate, callback: Function) {
         console.log('add new rate card service called');
-        const model: RateCard = new RateCard();
-        model.name = name;
-        model.description = description;
-        model.date = date;
-        model.currency = currency;
-        model.rateType = rateType;
-        model.tariff = tariff;
-        this._remoteService.addNewRateCard(model)
+        this._remoteService.addNewRateCard(rateCard)
             .subscribe(
-                (response: ServerResponse) => {
-                    console.log('good response' + response.messsage);
+                data => {
+                    callback(data, true);
                 },
-                (error: string) => {
-                    callback(error);
+                error => {
+                    callback(error, false);
                 }
             );
     }
@@ -178,6 +163,19 @@ export class RateService {
     getCategoryList(callback: Function) {
         console.log('get list of category types service called');
         this._remoteService.getCategoryList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+    getRateDefinitionList(callback: Function) {
+        console.log('get list of rate definitions service called');
+        this._remoteService.getRateDefinitionList()
             .subscribe(
                 data => {
                     callback(data, true);

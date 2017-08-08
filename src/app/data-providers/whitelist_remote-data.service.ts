@@ -5,7 +5,6 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {AuthenticationService} from '../commons/services/authentication.service';
-import {SubCategory, Currency, ServerResponse, Category, RateCard} from '../commons/models/common-data-models';
 
 
 @Injectable()

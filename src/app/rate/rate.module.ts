@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SearchPanelComponent} from './search-panel/search-panel.component';
 import {SearchResultsComponent} from './search-results/search-results.component';
-import {SubcategoryComponent} from './rate-subcategory/subcategory.component';
+import {RateCategoryComponent} from './rate-ratecategory/ratecategory.component';
 import {CategoryComponent} from './rate-category/category.component';
 import {TariffComponent} from './rate-tariff/tariff.component';
 import {RateMainComponent} from './rate-main/rate-main.component';
@@ -31,7 +31,7 @@ import {CurrencyComponent} from './rate-currency/currency.component';
         SearchResultsComponent,
         RateMainComponent,
         RateFilterComponent,
-        SubcategoryComponent,
+        RateCategoryComponent,
         CategoryComponent,
         CurrencyComponent,
         TariffComponent

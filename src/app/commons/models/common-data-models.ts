@@ -34,27 +34,13 @@ export class SubCategory {
     tariff: string;
 }
 
-export class Category {
-    categoryName: string;
-    categoryCode: string;
-    categoryDesc: string;
-}
-
-export class RateCard {
-    name: string;
-    description: string;
-    date: string;
-    currency: string;
-    rateType: string;
-    tariff: string;
-}
-
-export class ServerResponse{
+export class ServerResponse {
     success: boolean;
     messsage: string;
 }
 
 export class Currency {
+    currencyId: number;
     currencyCode: string;
     currencyDescription: string;
 }
@@ -77,11 +63,12 @@ export class Api {
 }
 
 export class Tariff {
+    tariffId: number;
     tariffName: string;
     tariffDesc: string;
     tariffDefaultVal: number;
-    tariffMaxCount: number
-    tariffExcessRate: number
+    tariffMaxCount: number;
+    tariffExcessRate: number;
     tariffDefRate: number;
     tariffSPCommission: number;
     tariffAdsCommission: number;
@@ -89,4 +76,42 @@ export class Tariff {
     tariffSurChargeval: number;
     tariffSurChargeAds: number;
     tariffSurChargeOpco: number;
+}
+
+export class RateType {
+    rateTypeId: number;
+    rateTypeCode: string;
+    rateTypeDesc: string;
+}
+
+
+export class Rate {
+    rateDefId: number;
+    rateDefName: string;
+    rateDefDesc: string;
+    rateDefDefault: number;
+    currency: Currency;
+    rateType: RateType;
+    rateDefCategoryBase: number;
+    tariff: Tariff;
+}
+
+export class Category {
+    categoryId: number;
+    categoryName: string;
+    categoryCode: string;
+    categoryDesc: string;
+}
+
+export class RateCategory {
+    rateDefinition: Rate;
+    category: Category;
+    subCategory: Category;
+    tariff: Tariff;
+}
+
+export class Mapping {
+    category: string;
+    subcategory: string;
+    tariff: string;
 }

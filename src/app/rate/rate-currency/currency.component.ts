@@ -3,6 +3,7 @@
  */
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
+import {Currency} from "../../commons/models/common-data-models";
 const currencyCodes = require('./currencies');
 
 @Component({

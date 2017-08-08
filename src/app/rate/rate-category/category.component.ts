@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
+import {Category} from "../../commons/models/common-data-models";
 
 @Component({
     selector: 'app-category',
@@ -32,10 +33,7 @@ export class CategoryComponent implements OnInit {
     private descriptionError: string;
 
     @Input()
-    private existingNames: string[];
-
-    @Input()
-    private existingCodes: string[];
+    private existingCategories: Category[];
 
     constructor(private rateService: RateService) {
     }
@@ -46,7 +44,6 @@ export class CategoryComponent implements OnInit {
         this.code = '';
         this.description = '';
         this.clearErrors();
-        // this.type = '';
     }
 
 
@@ -96,8 +93,8 @@ export class CategoryComponent implements OnInit {
 
     isNameUnique(name) {
         let state = false;
-        for (const entry of this.existingNames) {
-            if (name == entry) {
+        for (const entry of this.existingCategories) {
+            if (name == entry.categoryName) {
                 state = true;
             }
         }
@@ -112,8 +109,8 @@ export class CategoryComponent implements OnInit {
 
     isCodeUnique(code) {
         let state = false;
-        for (const entry of this.existingCodes) {
-            if (code == entry) {
+        for (const entry of this.existingCategories) {
+            if (code == entry.categoryCode) {
                 state = true;
             }
         }

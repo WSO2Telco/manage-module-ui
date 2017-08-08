@@ -8,16 +8,7 @@ const logger=require('../../config/logger');
 
 logger.debugLevel = 'warn';
 
-const validateAddSubcategoryRequest = function (request) {
-    let param = request.payload;
-    if (!!param && param.category && param.subcategory && param.tariff) {
-        logger.log('INFO', 'REQUEST VALIDATED');
-        return true;
-    }
-    return false;
-};
-
-const validateAddTariffRequest = function (request) {
+const validateAddRequest = function (request) {
     let param = request.payload;
     if (!!param) {
         logger.log('INFO', 'REQUEST VALIDATED');
@@ -52,7 +43,7 @@ function rateService() {
      * @param callback
      * @private
      */
-    let _addSubcategory = function (request, callback) {
+    let _addRateCategory = function (request, callback) {
 
         logger.log('INFO', "hit at rate service end point");
 
@@ -68,8 +59,8 @@ function rateService() {
             callback(addSubCategoryError);
         };
 
-        if (validateAddSubcategoryRequest(request)) {
-            rateRestService.invokeAddSubCategoryRest(request).then(onSuccess, onFailture);
+        if (validateAddRequest(request)) {
+            rateRestService.invokeAddRateCategoryRest(request, request.params.id).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
         }
@@ -150,7 +141,7 @@ function rateService() {
             callback(addSubCategoryError);
         };
 
-        if (validateAddTariffRequest(request)) {
+        if (validateAddRequest(request)) {
             rateRestService.invokeAddTariffRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
@@ -179,7 +170,7 @@ function rateService() {
             callback(addSubCategoryError);
         };
 
-        if (validateAddNewTypeRequest(request)) {
+        if (validateAddRequest(request)) {
             rateRestService.invokeAddRateCardRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
@@ -273,10 +264,27 @@ function rateService() {
         rateRestService.invokeGetCategoryListRest( ).then(onSuccess, onFailture);
     }
 
-    //add more rate services here
+    let _getRateDefinitionList = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get categories service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetRateDefinitionListRest( ).then(onSuccess, onFailture);
+    }
 
     return {
-        addSubcategory: _addSubcategory,
+        addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
         addCategory: _addCategory,
         addRateCard: _addRateCard,
@@ -284,7 +292,8 @@ function rateService() {
         getTariffList: _getTariffList,
         getCurrencyList: _getCurrencyList,
         getRateTypeList: _getRateTypeList,
-        getCategoryList: _getCategoryList
+        getCategoryList: _getCategoryList,
+        getRateDefinitionList: _getRateDefinitionList
     };
 
     //commet 22

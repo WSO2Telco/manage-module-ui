@@ -4,7 +4,10 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {SubCategory, Currency, ServerResponse, Category, RateCard, Tariff} from '../commons/models/common-data-models';
+import {
+    SubCategory, Currency, ServerResponse, Category, Tariff,
+    Rate, RateCategory
+} from '../commons/models/common-data-models';
 
 
 @Injectable()
@@ -16,29 +19,34 @@ export class RateRemoteDataService {
 
     private apiEndpoints: Object = {
         addRateCard: this.apiContext + '/rate/addratecard',
-        addSubcategory: this.apiContext + '/rate/addsubcategory',
+        addRateCategory: this.apiContext + '/rate/addratecategory/',
         addCategory: this.apiContext + '/rate/addcategory',
         addCurrency: this.apiContext + '/rate/addcurrency',
         addTariff: this.apiContext + '/rate/addtariff',
         getTariffList: this.apiContext + '/rate/gettarifflist',
         getCurrencyList: this.apiContext + '/rate/getcurrencylist',
         getRateTypeList: this.apiContext + '/rate/getratetypelist',
-        getCategoryList: this.apiContext + '/rate/getcategorylist'
+        getCategoryList: this.apiContext + '/rate/getcategorylist',
+        getRateDefinitionList: this.apiContext + '/rate/getratedefinitionList'
     };
 
     constructor(private http: Http) {
     }
 
     /**
-     * To add new sub category tariff relationship
+     * To add new rate category tariff relationship
      * @param data
-     * @returns {Observable<ServerResponse>}
+     * @returns {Observable<R>}
      */
-    addSubcategory(data: SubCategory): Observable<ServerResponse> {
-        console.log('hit in the rate remote data service');
-        return this.http.post(this.apiEndpoints['addSubCategory'], data, this.options)
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message));
+    addRateCategory(data: RateCategory, id: number) {
+        console.log('hit in the rate remote data service to add rate-category');
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addRateCategory'] + id, JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -95,11 +103,15 @@ export class RateRemoteDataService {
      * @param data
      * @returns {Observable<ServerResponse>}
      */
-    addNewRateCard(data: RateCard): Observable<ServerResponse> {
+    addNewRateCard(data: Rate){
+        console.log('hit in the rate remote data service to add new rate card');
         console.log(JSON.stringify(data));
-        return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message));
+        return this.http.post(this.apiEndpoints['addRateCard'], JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -151,6 +163,17 @@ export class RateRemoteDataService {
         const data = {};
         console.log('hit in the rate remote data service to get categories');
         return this.http.get(this.apiEndpoints['getCategoryList'])
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    getRateDefinitionList() {
+        const data = {};
+        console.log('hit in the rate remote data service to get rate definitions');
+        return this.http.get(this.apiEndpoints['getRateDefinitionList'])
             .map((response: Response) => {
                 const result = response.json();
                 return result;
