@@ -73,6 +73,7 @@ export class WhitelistRemoteDataService {
         return this.http.post(this.apiEndpoints['getApis'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
+                console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message()));

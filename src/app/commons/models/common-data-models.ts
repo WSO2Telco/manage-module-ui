@@ -115,3 +115,8 @@ export class Mapping {
     subcategory: string;
     tariff: string;
 }
+
+export class BlackListNumbers {
+    id: string;
+    name: string;
+}

@@ -110,7 +110,7 @@ export class WhitelistMainComponent implements OnInit {
     }
 
     /**
-     * to load the APIs of the application of the subscriber
+     * to loaonDeleteTask d the APIs of the application of the subscriber
      * @param appName
      */
     getApis(appName: string) {

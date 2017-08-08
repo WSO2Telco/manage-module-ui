@@ -3,8 +3,7 @@
  */
 import {Injectable} from '@angular/core';
 import {BlackListRemoteDataService} from '../../data-providers/blacklist_remote-data.service';
-import {ServerResponse} from '../models/common-data-models';
-
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
 @Injectable()
 export class BlackListService {
@@ -15,10 +14,49 @@ export class BlackListService {
         console.log('get apilist called');
         this._remoteService.getApiList()
             .subscribe(
-                (response: ServerResponse) => {
-                    console.log('good response' + response.messsage);
+                data => {
+                    callback(data);
                 },
-                (error: string) => {
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getBlackListNumberList(id: string, callback: Function) {
+        console.log('get blacklist Number Lists');
+        this._remoteService.getBlackListNumberList(id)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    removeBlackListNumber(msisdn, id, callback: Function) {
+        console.log('remove blackList Number ');
+        this._remoteService.removeFromBlackList(msisdn, id)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    addNewToBlackListList(apiId: string, apiName: string, msisdnList: string[], callback: Function) {
+        console.log('Add new Blacklist number service ');
+        this._remoteService.addNewBlackListList(apiId, apiName, msisdnList)
+            .subscribe(
+                data => {
+                   callback(data);
+                },
+                error => {
                     callback(error);
                 }
             );
