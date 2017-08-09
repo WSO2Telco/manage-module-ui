@@ -17,7 +17,6 @@ export class UserLoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('eees');
     }
 
     onLoginClick(loginForm) {

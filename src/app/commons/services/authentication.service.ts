@@ -12,7 +12,6 @@ export class AuthenticationService {
 
   constructor(private _router: Router, private _remoteService: LoginRemoteDataService) {
     const _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
-    console.log("_loginUserInfo"+_loginUserInfo);
     this.loginUserInfo.next(_loginUserInfo);
   }
 
@@ -20,13 +19,24 @@ export class AuthenticationService {
     const user: User = new User();
     user.userName = userName;
     user.password = password;
-    console.log(user.userName);
     this._remoteService.login(user)
       .subscribe(
         (loginInfo: LoginResponse) => {
-          this.loginUserInfo.next(loginInfo);
-          sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
-          this._router.navigate(['home']);
+          let status = false;
+          for(const entry of loginInfo.roles){
+            if(entry == 'admin' || entry == 'operator1-admin-role' ){
+              status = true;
+            }
+          }
+          if(status){
+            this.loginUserInfo.next(loginInfo);
+            sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
+            this._router.navigate(['home']);
+
+          }else {
+            this._remoteService.logout(loginInfo.userName);
+            callback('user do not have privilege to login');
+          }
         },
         (error: string) => {
           callback(error);
