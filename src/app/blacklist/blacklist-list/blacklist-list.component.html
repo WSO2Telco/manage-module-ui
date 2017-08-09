@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tbl-header">
-                    <h5>subscribers</h5>
+                    <h5>Subscriber list</h5>
                 </div>
                 <table class="table">
                     <thead>
@@ -17,7 +17,7 @@
                     <ng-container *ngFor="let item of datasource">
                         <tr >
                             <td>{{item.replace('tel3A+','')}}</td>
-                            <td><button class="btn" (click)="onDelete(item.replace('tel3A+',''), apiId.toString())"><i class="material-icons">delete</i></button></td>
+                            <td><button class="btn btn-danger" (click)="onDelete(item.replace('tel3A+',''), apiId.toString())"><i class="material-icons">delete</i></button></td>
                         </tr>
                     </ng-container>
                     </tbody>

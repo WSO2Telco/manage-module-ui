@@ -1,54 +1,66 @@
-<div class="col-sm-12">
-    <h3>APIwise BlackList </h3>
-
-    <div>
-        <input type="text" class="form-control"
-               [(ngModel)]="api"
-               [typeaheadMinLength]="0"
-               container="body"
-               [typeahead]="apiList"
-               typeaheadOptionField="apiId"
-               (typeaheadOnSelect)="onApiSelected($event)"
-               placeholder="Id">
-    </div>
-
-    <br><br>
-    <form class="form-horizontal" #numberlistForm="ngForm" novalidate
-          (ngSubmit)="onUploadNumber(numberlistForm)">
-
-
-        <h5>BlackList subscribers {{ count }}</h5>
-
-        <div class="form-group">
-            <label class="control-label col-sm-3">Number:</label>
-            <div class="col-sm-6">
-                <input class="form-control"
-                       autocomplete="off"
-                       #nameRef="ngModel"
-                       required="required"
-                       [(ngModel)]="msisdn"
-                       type="text"
-                       name="manualNumber"
-                       placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
-                <span class="error" *ngIf="isDublicate">{{ dublicate }}</span>
-                <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
-                <span class="error" *ngIf="islong">{{long}}</span>
-
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                <h3>APIwise BlackList </h3>
+                <br> <br>
             </div>
-            <button class="btn btn-primary">
-                ADD
-            </button>
+            <div class="bs-callout bs-callout-info">
+                <div class="form-group form-horizontal">
+                    <label class="control-label col-sm-1">API:</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"
+                               [(ngModel)]="api"
+                               [typeaheadMinLength]="0"
+                               container="body"
+                               [typeahead]="apiList"
+                               typeaheadOptionField="apiId"
+                               (typeaheadOnSelect)="onApiSelected($event)"
+                               placeholder="Select the API">
+                    </div>
+                    <div class="col-sm-4"><h4>BlackList subscribers count : &nbsp; <span
+                            class="label label-info">{{ count }}</span>
+                    </h4>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
+            <form class="form-horizontal" #numberlistForm="ngForm" novalidate
+                  (ngSubmit)="onUploadNumber(numberlistForm)">
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Number:</label>
+                    <div class="col-sm-6">
+                        <input class="form-control"
+                               autocomplete="off"
+                               #nameRef="ngModel"
+                               required="required"
+                               [(ngModel)]="msisdn"
+                               type="text"
+                               name="manualNumber"
+                               placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
+                        <span class="error" *ngIf="isDublicate">{{ dublicate }}</span>
+                        <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                        <span class="error" *ngIf="islong">{{long}}</span>
+
+                    </div>
+                    <button class="btn btn-primary">
+                        <span class="glyphicon glyphicon-plus-sign"> ADD</span>
+                    </button>
+                </div>
+
+
+            </form>
+
+
+            <br><br>
+
+            <app-blacklist-list
+                    [datasource]="blackListList" [apiId]="numberId" (onDeleteTask)="onDeleteHandler($event, numberId)">
+            </app-blacklist-list>
+
+
         </div>
-
-
-    </form>
-
-
-    <br><br><br>
-
-    <app-blacklist-list
-            [datasource]="blackListList" [apiId]="numberId" (onDeleteTask)="onDeleteHandler($event, numberId)">
-    </app-blacklist-list>
-
-
-</div>
+    </div>
