@@ -7,7 +7,8 @@ import {BlackListService} from '../../commons/services/blacklist.service';
 
 @Component({
     selector: 'app-blacklist-list',
-    templateUrl: './blacklist-list.component.html'
+    templateUrl: './blacklist-list.component.html',
+    styleUrls: ['../blacklist-main/blacklist-main.component.scss']
 })
 
 export class BlacklistListComponent implements OnInit {
