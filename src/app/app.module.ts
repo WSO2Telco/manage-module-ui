@@ -24,6 +24,7 @@ import {SharedModule} from './shared/shared.module';
 import {ReportingRemoteDataService} from './data-providers/reporting-remote-data.service';
 import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data.service';
 import {WhitelistRemoteDataService} from './data-providers/whitelist_remote-data.service';
+import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.service';
 
 @NgModule({
     declarations: [
@@ -60,6 +61,7 @@ import {WhitelistRemoteDataService} from './data-providers/whitelist_remote-data
         RateRemoteDataService,
         ApprovalHelperService,
         BlackListRemoteDataService,
+        QuotacapRemoteDataService,
         WhitelistRemoteDataService,
         {
             provide : 'API_CONTEXT',

@@ -4,6 +4,7 @@ import {AuthenticationService} from './services/authentication.service';
 import {RateService} from './services/rate.service';
 import {BlackListService} from './services/blacklist.service';
 import {WhitelistService} from './services/whitelist.service';
+import {QuotaService} from './services/quotacap.service';
 import {LoginRemoteDataService} from '../data-providers/login_remote-data.service';
 import {AppCommonService} from './services/app-common.service';
 import {MessageService} from './services/message.service';
@@ -21,7 +22,8 @@ import {MessageService} from './services/message.service';
         MessageService,
         RateService,
         BlackListService,
-        WhitelistService],
+        WhitelistService,
+        QuotaService],
     exports: []
 })
 export class CommonsModule {

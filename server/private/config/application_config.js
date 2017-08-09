@@ -17,6 +17,7 @@ var appConfig = {
     apiSubscriberURL: process.env.wm_whitelist_subscribers_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/subscribers',
     apiAppsURL: process.env.wm_whitelist_apps_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apps',
     apiApisURL: process.env.wm_whitelist_apis_service_url || 'http://localhost:9763/blacklist-whitelist-service/queries/apis',
+    quotaServiceUrl: process.env.wm_quota_service_url || 'http://localhost:9763/quota-service/services/',
     businessProcessEngineBaseUrl: process.env.wm_business_process_engine_url || 'http://localhost:9763/activiti-rest/service',
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',

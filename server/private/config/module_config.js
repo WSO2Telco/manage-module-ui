@@ -99,6 +99,12 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./quotacap"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./reports"
             },
             "options": getOptions({}, true)
