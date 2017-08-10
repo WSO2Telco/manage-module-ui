@@ -56,6 +56,7 @@ export class BlacklistMainComponent implements OnInit {
       this.long = '';
       this.isDublicate = false;
       this.dublicate = '';
+      this.count = '0';
   }
 
     /**
