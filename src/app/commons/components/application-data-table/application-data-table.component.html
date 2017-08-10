@@ -132,7 +132,7 @@
                                 <div class="col-xs-6 field-name">Operator</div>
                                 <div class="col-xs-6 field-value">{{item.operators}}</div>
                             </div>
-                            <div class="row more-row">
+                            <div class="row more-row"  *ngIf="showTiers">
                                 <div class="col-xs-6 field-name">Tier</div>
                                 <div class="col-xs-6 field-value">
                                     <select class="form-control" (change)="onOptionChange($event,item)">

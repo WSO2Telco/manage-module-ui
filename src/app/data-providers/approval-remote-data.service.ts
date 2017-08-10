@@ -285,12 +285,18 @@ export class ApprovalRemoteDataService {
         return this.modifiedApplicationTaskIDs;
     }
 
+    /**
+     * this function will be called when we approve a application
+     * */
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     }
 
+    /**
+     * this function will be called when we approve a subscription
+     **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
             .map((response: Response) => response.json())

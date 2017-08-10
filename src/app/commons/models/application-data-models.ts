@@ -72,6 +72,7 @@ export class ApproveApplicationCreationTaskParam {
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
+    role: boolean;
 
     toString() {
         return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;
@@ -85,6 +86,7 @@ export class ApproveSubscriptionCreationTaskParam {
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
+    role: boolean;
 }
 
 export class ApprovalEvent {

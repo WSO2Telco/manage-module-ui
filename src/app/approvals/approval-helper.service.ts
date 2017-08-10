@@ -17,6 +17,12 @@ export class ApprovalHelperService {
     }
 
 
+    /**
+     * this function is used to assign applications/ subscriptions to the logged in user.
+     * @param dataType
+     * @param taskId
+     * @param callBack
+     */
     assignApplicationTask(dataType: string, taskId: number,callBack):void {
 
         this.slimLoadingBarService.start();
@@ -39,19 +45,41 @@ export class ApprovalHelperService {
         );
     }
 
+
+    /**
+     * this function is used to approve or reject applications and subscriptions
+     * @param dataType
+     * @param appTask
+     * @param status
+     */
     approveRejectTask(dataType:TableDataType,appTask:ApplicationTask,status):void{
+
+        const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
+        let role = false;
+
+        /** for loop will set the user role */
+        for (const entry of roleList){
+            if (entry == 'manage-app-admin'){
+                role = true;
+            }
+        }
 
         this.slimLoadingBarService.start();
 
+        /**
+         * for applications approval or rejections
+         * @param status
+         */
         let applicationActions = (status:'APPROVED' | 'REJECTED') => {
 
             let param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
             param.taskId = appTask.id;
-            param.description = appTask.toString();
+            param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
             param.user = 'admin';
-            param.taskType = "application";
+            param.taskType = 'application';
+            param.role = role;
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {
@@ -73,14 +101,19 @@ export class ApprovalHelperService {
             );
         };
 
-        let subscriptionActions = (status:'APPROVED' | 'REJECTED') => {
+        /**
+         * for subscription approval or rejection.
+         * @param status
+         */
+        let subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
             let param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
             param.description = appTask.toString();
             param.selectedTier = appTask.tier;
             param.status = status;
             param.user = 'admin';
-            param.taskType = "subscription";
+            param.taskType = 'subscription';
+            param.role = role;
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 () => {

@@ -2,12 +2,12 @@ import {Component, OnInit, Input, Output, EventEmitter, SimpleChanges} from '@an
 import {
     ApplicationTask, ApproveApplicationCreationTaskParam,
     ApproveSubscriptionCreationTaskParam, ApprovalEvent, ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo
-} from "../../models/application-data-models";
-import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
-import {MessageService} from "../../services/message.service";
-import {TableDataType} from "../../models/common-data-models";
-import {Router} from "@angular/router";
-import {TypeaheadMatch} from "ng2-bootstrap";
+} from '../../models/application-data-models';
+import {ApprovalRemoteDataService} from '../../../data-providers/approval-remote-data.service';
+import {MessageService} from '../../services/message.service';
+import {TableDataType} from '../../models/common-data-models';
+import {Router} from '@angular/router';
+import {TypeaheadMatch} from 'ng2-bootstrap';
 
 @Component({
     selector: 'application-data-table',
@@ -49,26 +49,40 @@ export class ApplicationDataTableComponent implements OnInit {
     private filterFromDate: string;
     private filterToDate: string;
 
-    //Flag to determine whether to filtering is active or not
-    private isFilterActivated: boolean = false;
+    // Flag to determine whether to filtering is active or not
+    private isFilterActivated = false;
 
-    //Flag to determine whether to show or hide filtering panel
-    private isFilterVisible: boolean = false;
+    // Flag to determine whether to show or hide filtering panel
+    private isFilterVisible = false;
 
-    private currentPage: number = 1;
+    private currentPage = 1;
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
                 private _router: Router) {
+
     }
 
+    private showTiers: boolean;
+
+    private roleList: string[];
+
     ngOnInit() {
+        this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
+        this.showTiers = false;
+
+        for (const entry of this.roleList){
+            if (entry == 'manage-app-admin'){
+                this.showTiers = true;
+            }
+        }
+
 
     }
 
     ngOnChanges(changeObj: SimpleChanges) {
         if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
-            let res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
+            const res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
             this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
         }
     }
@@ -91,6 +105,7 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
+
         switch (actionType) {
             case 'ASSIGN' : {
                 this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
@@ -110,7 +125,7 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     onFilterItemAdded(event: TypeaheadMatch, type: string) {
-        let task: ApplicationTask = <ApplicationTask>event.item;
+        const task: ApplicationTask = <ApplicationTask>event.item;
         this.isFilterActivated = true;
 
         switch (type) {

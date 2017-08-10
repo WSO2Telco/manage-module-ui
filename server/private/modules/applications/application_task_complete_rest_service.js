@@ -56,6 +56,7 @@ function invokeApplicationCompleteTask(params) {
 
 
     let getRequestOptions = function (params) {
+
         return {
             rejectUnauthorized: false,
             json: true,
@@ -65,6 +66,8 @@ function invokeApplicationCompleteTask(params) {
             },
         };
     };
+
+    console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
 
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {

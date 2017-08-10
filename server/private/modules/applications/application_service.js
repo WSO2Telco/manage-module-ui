@@ -275,7 +275,14 @@ const _approveApplicationCreation = function (request, reply) {
 
     if (validateRequest(request)) {
         let param = request.payload;
-        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+
+
+
+        if(param.role){
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
+        }else{
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+        }
 
         applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
     } else {
@@ -308,7 +315,12 @@ const _approveSubscriptionCreation = function (request, reply) {
 
     if (validateRequest(request)) {
         let param = request.payload;
-        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+
+        if(param.role){
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
+        }else{
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+        }
 
         //Invoke the Same Service as Application Creation approval coz same backend implementation
         //If requirement change, plug another Invoker here

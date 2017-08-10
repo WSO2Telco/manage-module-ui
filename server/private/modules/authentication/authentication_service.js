@@ -4,6 +4,7 @@ const boom = require('boom');
 const Messages = require('../common/messages');
 const loginWebService = require('./login_webservice');
 const roleWebService = require('./role_webservice');
+const config = require('../../config/application_config');
 
 const validateLoginRequest = function (request) {
   let param = request.payload;
@@ -26,7 +27,22 @@ function authenticationService() {
     let loginResult;
 
     let onRoleSuccess = function (roleResults) {
-        callback(Object.assign({},loginResult,roleResults,{userName:request.payload.userName}));
+
+       // console.log("roles" + JSON.stringify(roleResults));
+        let status = false;
+        for (const entry of roleResults.roles) {
+            for(const role of config.allowedRoles){
+                if (entry == role) {
+                    status = true;
+                }
+            }
+        }
+        if (status) {
+            callback(Object.assign({},loginResult,roleResults,{userName:request.payload.userName, success: true, message:"user verified successfully"}));
+        } else {
+            callback(Object.assign({userName:request.payload.userName, success: false, message:'user do not have privilege to login'}));
+        }
+
     };
 
     let onRoleError = function (roleError) {

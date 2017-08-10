@@ -23,6 +23,8 @@ export class User {
 }
 
 export class LoginResponse {
+    success: boolean;
+    message: string;
     userName: string;
     isLoggedIn: boolean;
     roles: string[];

@@ -51,7 +51,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"sub name created successfully"}));
+            callback(Object.assign(addSubcategoryResult, {success: true, message:"sub name created successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
