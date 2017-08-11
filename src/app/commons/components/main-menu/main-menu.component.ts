@@ -14,14 +14,15 @@ export class MainMenuComponent implements OnInit {
     private isExpand = false;
 
     private menuSource: MenuItem[] = [
-        {id: 1, route: '/home', name: 'Home', iconName: 'home'},
-        {id: 2, route: '/approvals/applications', name: 'Approve Applications', iconName: 'apps'},
-        {id: 3, route: '/approvals/subscriptions', name: 'Approve Subscriptions', iconName: 'subscriptions'},
-        {id: 4, route: '/history', name: 'History', iconName: 'history'},
-        {id: 5, route: '/rate', name: 'Rate', iconName: 'grade'},
-        {id: 6, route: '/quotacap', name: 'Quota Cap', iconName: 'assignment'},
-        {id: 7, route: '/blacklist', name: 'Blacklist', iconName: 'apps'},
-        {id: 8, route: '/whitelist', name: 'Whitelist', iconName: 'accessibility'}
+        {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
+        {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
+        {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
+        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
+        {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
+        {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
+        {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
+        {id: 8, route: '/blacklist', name: 'Blacklist', position: 'parent', iconName: 'phonelink_erase'},
+        {id: 9, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
 
     ];
 
