@@ -87,7 +87,7 @@ export class QuotacapRemoteDataService {
      * @param quoatavalue
      * @returns {Observable<R>}
      */
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string) {
+    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, fromDate: string, toDate: string) {
 
         if (appId.length == 0) {
             appId = null;
@@ -103,7 +103,9 @@ export class QuotacapRemoteDataService {
             'serviceProvider': subscriberID + '@carbon.super',
             'applicationName': appId,
             'apiName': apiId,
-            'quotaLimit': quotaValue
+            'quotaLimit': quotaValue,
+            'fromDate': fromDate,
+            'toDate': toDate
         };
 
         console.log(JSON.stringify(data));
@@ -177,14 +179,56 @@ export class QuotacapRemoteDataService {
 
 
     /**
-     * to get validityperiod related to the selected SUBSCRIBER
+     * to get validity related to the selected SUBSCRIBER
      * @param id
      * @returns {Observable<R>}
      */
-    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string ) {
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string) {
         const data = {
             'byFlag': 'byServiceProvider',
             'info': subscriberID + '@carbon.super',
+            'fromDate': fromDate,
+            'toDate': toDate
+        };
+        console.log(data);
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    /**
+     * to get validity related to the selected App
+     * @param id
+     * @returns {Observable<R>}
+     */
+    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string) {
+        const data = {
+            'byFlag': 'byApplication',
+            'info': appID,
+            'fromDate': fromDate,
+            'toDate': toDate
+        };
+        console.log(data);
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    /**
+     * to get validity related to the selected API
+     * @param id
+     * @returns {Observable<R>}
+     */
+    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string) {
+        const data = {
+            'byFlag': 'byApi',
+            'info': apiID,
             'fromDate': fromDate,
             'toDate': toDate
         };
