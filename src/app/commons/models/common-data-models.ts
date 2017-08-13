@@ -124,3 +124,9 @@ export class BlackListNumbers {
     id: string;
     name: string;
 }
+
+export class QuotaList {
+    quotaLimit: string;
+    fromDate: string;
+    toDate: string;
+}

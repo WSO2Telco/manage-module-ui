@@ -21,7 +21,8 @@ export class QuotacapRemoteDataService {
         getApps: this.apiContext + '/quotacap/getapps',
         getApis: this.apiContext + '/quotacap/getapis',
         getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
-        addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit'
+        addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit',
+        getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod'
 
     };
 
@@ -167,6 +168,28 @@ export class QuotacapRemoteDataService {
         };
         console.log('hit in the quota remote data service');
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+
+    /**
+     * to get validityperiod related to the selected SUBSCRIBER
+     * @param id
+     * @returns {Observable<R>}
+     */
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string ) {
+        const data = {
+            'byFlag': 'byServiceProvider',
+            'info': subscriberID + '@carbon.super',
+            'fromDate': fromDate,
+            'toDate': toDate
+        };
+        console.log(data);
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
                 return result;

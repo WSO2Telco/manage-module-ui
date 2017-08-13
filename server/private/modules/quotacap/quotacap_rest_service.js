@@ -172,6 +172,44 @@ const _invokeGetQoutalistRest = function (request) {
     return deferred.promise;
 };
 
+
+const _invokegetValidityPeriodRest = function (request) {
+
+    console.log("Quota validity end point call>>>>>" + JSON.stringify(request.payload));
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.quotaServiceUrl + 'checkIfDatesOverlap';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : " + JSON.stringify(payload));
+    deferred.resolve(payload);
+}
+});
+    return deferred.promise;
+};
+
+
+
+
+
+
+
 const _invokeAddNewQuotaLimit = function (request) {
 
     console.log("QuotaLimit add QuotaLimit rest end point call")
@@ -242,5 +280,6 @@ module.exports = {
     invokeGetWhitelistRest: _invokeGetWhitelistRest,
     invokeAddNewQuotaLimit: _invokeAddNewQuotaLimit,
     invokeRemoveFromWhitelistRest: _invokeRemoveFromWhitelistRest,
-    invokeGetQoutalistRest: _invokeGetQoutalistRest
+    invokeGetQoutalistRest: _invokeGetQoutalistRest,
+    invokegetValidityPeriodRest: _invokegetValidityPeriodRest
 };

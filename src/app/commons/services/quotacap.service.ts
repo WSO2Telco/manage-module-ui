@@ -100,7 +100,42 @@ export class QuotaService {
     }
 
     getQuotaLimitInfoApi(apiID: string, callback: Function) {
-        console.log('get quotalimit of subscriber service called');
+        this._remoteService.getQuotaLimitInfoApi(apiID)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, callback: Function) {
+        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForApp(appID: string, callback: Function) {
+        this._remoteService.getQuotaLimitInfoApi(appID)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForApi(apiID: string, callback: Function) {
         this._remoteService.getQuotaLimitInfoApi(apiID)
             .subscribe(
                 data => {
