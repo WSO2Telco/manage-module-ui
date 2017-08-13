@@ -144,6 +144,29 @@ function quotaCapService() {
         }
     };
 
+    let _getValidityPeriod = function (request, callback) {
+
+        logger.log('INFO', "hit at Quotaservice validity period service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        if (validateGetQuotaLimitInfoRequest(request)) {
+            quotaCapRestService.invokegetValidityPeriodRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+    };
+
     let _getWhitelist = function (request, callback) {
 
         logger.log('INFO', "hit at whitelist get whitelist service end point");
@@ -218,7 +241,8 @@ function quotaCapService() {
         getWhitelist: _getWhitelist,
         getQuotaLimitInfo: _getQuotaLimitInfo,
         addNewQuotaLimit: _addNewQuotaLimit,
-        removeFromWhitelist: _removeFromWhitelist
+        removeFromWhitelist: _removeFromWhitelist,
+        getValidityPeriod: _getValidityPeriod
     }
 }
 

@@ -2,20 +2,19 @@
 @import "../../../../styles/mixing";
 @import "../../../../styles/varibles";
 
-
-:host{
+:host {
   display: block;
   background-color: $primary-color_menu;
   height: 100%;
 }
 
-ul{
+ul {
   list-style: none;
   padding: 0px;
   width: $main-menu-default-width;
   @include transition(width 0.3s ease-in-out);
 
-  li{
+  li {
     cursor: pointer;
     width: 100%;
     height: $main-menu-icon-height;
@@ -23,11 +22,11 @@ ul{
     position: relative;
     @include transition(all 0.3s ease-in);
 
-    &:hover{
-      background-color:$primary-color_main ;
+    &:hover {
+      background-color: $primary-color_main;
     }
 
-    &:after{
+    &:after {
       content: '';
       width: 0px;
       height: 0px;
@@ -36,49 +35,63 @@ ul{
       border-bottom: solid 10px transparent;
       position: absolute;
       right: 0px;
-      top : 14px;
+      top: 14px;
       display: none;
     }
 
-    .icon{
+    .icon {
       display: inline-block;
       text-align: center;
       width: 100%;
       line-height: $main-menu-icon-height;
-      color : #adadad;
+      color: #adadad;
       font-size: 1.6em;
     }
 
-    .menu-name{
+    .menu-name {
       -webkit-animation-delay: 0.3s;
       -moz-animation-delay: 0.3s;
       -o-animation-delay: 0.3s;
       animation-delay: 0.3s;
-      color : #afafaf;
+      color: #afafaf;
     }
 
-    &.selected{
+    &.selected {
       background-color: $secondary_color;
-      .icon{
-        color:white;
+      .icon {
+        color: white;
       }
-      .menu-name{
-        color : white;
+      .menu-name {
+        color: white;
       }
 
-      &:after{
+      &:after {
         display: block;
       }
     }
   }
 
-  &.is-expand{
+  &.is-expand {
     width: $main-menu-expanded-width;
 
-    li{
+    li {
       .icon {
-        width : 50px;
+        width: 50px;
       }
     }
   }
+}
+
+li.child {
+  padding-left: 8%;
+}
+
+.is-expand .has-child {
+  display: block;
+  pointer-events: none;
+  cursor: default;
+}
+
+li.has-child {
+  display: none;
 }

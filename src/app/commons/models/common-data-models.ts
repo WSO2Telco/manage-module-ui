@@ -2,7 +2,9 @@ export class MenuItem {
     id: number;
     route: string;
     name: string;
+    position: string;
     iconName: string;
+
 }
 
 export class TableDataType {
@@ -121,4 +123,10 @@ export class Mapping {
 export class BlackListNumbers {
     id: string;
     name: string;
+}
+
+export class QuotaList {
+    quotaLimit: string;
+    fromDate: string;
+    toDate: string;
 }
