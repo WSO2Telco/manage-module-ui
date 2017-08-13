@@ -70,7 +70,13 @@
                         <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Validity period</label>
+                    <div class="col-sm-4">
+                        <ngx-daterangepicker (ngModelChange)="getpickval=$event" [(ngModel)]="datepickvalue" [options]="options" name="datepicker"></ngx-daterangepicker>
+                    </div>
+                    <label ng-change="getpickval()">{{ datepickvalue}}</label>
+                </div>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                         <br> <br>

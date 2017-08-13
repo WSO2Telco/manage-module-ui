@@ -7,6 +7,7 @@ import {QuotaService} from '../../commons/services/quotacap.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
+import {NgxDateRangePickerOptions} from 'ngx-daterangepicker';
 
 @Component({
     selector: 'app-quotacap-main',
@@ -37,6 +38,9 @@ export class QuotaCapMainComponent implements OnInit {
     private is_edit: boolean;
     private is_addSuccess: boolean;
     private appID: string;
+    private datepickvalue: string;
+
+    options: NgxDateRangePickerOptions;
 
     constructor(private reportingService: ReportingRemoteDataService,
                 private quotaService: QuotaService,
@@ -62,6 +66,25 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaInputValue = '';
         this.is_edit = false;
         this.appID = '';
+        this.options = {
+            theme: 'default',
+            range: 'td', // The alias of item menu
+            labels: ['Start Date', 'End Date'],
+            dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            menu: [
+                {alias: 'td', text: 'Today', operation: '0d'},
+                {alias: 'tm', text: 'This Month', operation: '0m'},
+                {alias: 'lm', text: 'Last Month', operation: '-1m'},
+                {alias: 'tw', text: 'This Week', operation: '0w'},
+                {alias: 'lw', text: 'Last Week', operation: '-1w'},
+                {alias: 'ty', text: 'This Month', operation: '0y'},
+                {alias: 'ly', text: 'Last Year', operation: '-1y'},
+            ],
+            dateFormat: 'yMd',
+            outputFormat: 'DD/MM/YYYY',
+            outputType: 'string',
+            startOfWeek: 0
+        };
     }
 
 
@@ -318,6 +341,11 @@ export class QuotaCapMainComponent implements OnInit {
         this.app = '';
         this.api = '';
         this.quotaInputValue = '';
+    }
+
+    getpickval() {
+      // console.log(this.datepickvalue);
+        console.log('calendar fired');
     }
 
 }
