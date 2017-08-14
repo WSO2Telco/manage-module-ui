@@ -28,10 +28,10 @@ export class BlackListService {
         this._remoteService.getBlackListNumberList(id)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
