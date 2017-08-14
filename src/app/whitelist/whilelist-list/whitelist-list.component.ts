@@ -12,7 +12,6 @@ import {WhitelistService} from '../../commons/services/whitelist.service';
 
 export class WhitelistListComponent implements OnInit {
 
-
     @Input()
     private dataSource: string[];
 
@@ -30,15 +29,13 @@ export class WhitelistListComponent implements OnInit {
     }
 
     onDelete(msisdn: string) {
-        if(msisdn.length != 0) {
+        if (msisdn.length != 0) {
 
             this.whitelistService.removeFromWhiteList(msisdn, (response, status) => {
                 if (status) {
-                    console.log('here manoj');
                     this.onDeleteTask.emit(true);
                 } else {
                     console.log('error occured while deleting');
-
                 }
             });
         }
