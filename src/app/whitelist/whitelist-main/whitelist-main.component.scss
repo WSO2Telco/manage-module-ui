@@ -1,9 +1,21 @@
-//.btn {
-//  margin-left: 10px;
-//  margin-top: 5x;
-//  vertical-align: top;
-//}
+:host {
+  display: block;
+  margin-top: 20px;
+}
 
+.content-div {
+  background-color: #ffffff;
+}
+
+.searchFilter {
+  div[class^="col-"] {
+    padding-bottom: 10px;
+  }
+}
+
+.tbl-header {
+  color: #E19131;
+}
 
 .addbtn{
 
@@ -46,4 +58,15 @@
 }
 
 .open{overflow: visible; z-index: 100000;}
+
+.subtitle{ color: #E19132;}
+
+.info-tooltip {
+  font-size: 1.5em;
+  color: #8E44AD;
+  vertical-align: top;
+  margin-top: 0.3em;
+  cursor: pointer;
+}
+
 
