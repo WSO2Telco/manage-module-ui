@@ -65,7 +65,12 @@ export class ApplicationDataTableComponent implements OnInit {
 
     private showTiers: boolean;
 
+    @Input()
+    private showRates: boolean;
+
     private roleList: string[];
+
+    private array = ['admin', 'subscriber', 'operator1', 'operator2'];
 
     ngOnInit() {
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
@@ -76,7 +81,6 @@ export class ApplicationDataTableComponent implements OnInit {
                 this.showTiers = true;
             }
         }
-
 
     }
 

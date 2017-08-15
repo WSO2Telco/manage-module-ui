@@ -210,6 +210,8 @@ export class ApprovalRemoteDataService {
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
+                        console.log('$$$$$$$ ' + JSON.stringify(result));
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -312,6 +314,21 @@ export class ApprovalRemoteDataService {
 
     getFilteredResult(filter: ApplicationTaskFilter): void {
         this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
+    }
+
+    /**
+     * get list of available currency values
+     * @returns {Observable<R>}
+     */
+    getOperationrates() {
+        const data = {};
+        console.log('hit in the rate remote data service to get currency');
+        return this.http.get(this.apiEndpoints['getCurrencyList'])
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
 }

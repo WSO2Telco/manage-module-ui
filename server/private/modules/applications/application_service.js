@@ -65,6 +65,7 @@ const _getApplications = function (request, reply) {
                 return {
                     id: task.id,
                     assignee: task.assignee,
+                    apiName: details['apiName'] || '',
                     createTime: {
                         date: (isValidDate && moCreated.format('DD-MMM-YYYY') ) || '',
                         time: (isValidDate && moCreated.format('HH:mm:ss') ) || '',
@@ -90,10 +91,24 @@ const _getApplications = function (request, reply) {
     };
 
     let onAppDetailSuccess = function (appsDetails) {
+
+        console.log('$$$$$$$$$$$$' + JSON.stringify(appsDetails));
+
         reply(responseAdaptor(appTaskResult, appsDetails));
     };
 
+
     let onAppDetailsError = function (appDetailsError) {
+        reply(appDetailsError);
+    };
+
+    let onOperationRatesSuccess = function (appsDetails) {
+
+        reply(responseAdaptor(appTaskResult, appsDetails));
+    };
+
+
+    let onOperationRatesError = function (appDetailsError) {
         reply(appDetailsError);
     };
 
@@ -282,6 +297,7 @@ const _approveApplicationCreation = function (request, reply) {
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
         }else{
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+            param.selectedTier = null;
         }
 
         applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
@@ -317,10 +333,15 @@ const _approveSubscriptionCreation = function (request, reply) {
         let param = request.payload;
 
         if(param.role){
+            console.log("HUB_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
         }else{
+            console.log("OPERATOR_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+            param.selectedTier = null;
         }
+
+        console.log('>>>>>>' + param.taskId);
 
         //Invoke the Same Service as Application Creation approval coz same backend implementation
         //If requirement change, plug another Invoker here

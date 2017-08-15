@@ -102,13 +102,13 @@ export class ApprovalHelperService {
         };
 
         /**
-         * for subscription approval or rejection.
+         * for subscription approval or rejection
          * @param status
          */
         let subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
             let param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
-            param.description = appTask.toString();
+            param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
             param.user = 'admin';
@@ -139,6 +139,20 @@ export class ApprovalHelperService {
         approveActions['SUBSCRIPTION'] = subscriptionActions;
 
         approveActions[dataType.dataType] && approveActions[dataType.dataType](status);
+    }
+
+
+    getOperationrates(callback: Function) {
+        console.log('get list of currency service called');
+        this.approvalService.getOperationrates()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
     }
 
 }

@@ -9,6 +9,7 @@ export class DateTimeInfo {
 export class ApplicationTask {
     id: number;
     assignee: string;
+    apiName: string;
     createTime: DateTimeInfo;
     taskDescription: string;
     applicationId: number;
@@ -21,10 +22,16 @@ export class ApplicationTask {
     isModified: boolean;
     status: string;
     comment: string;
+    relevantRates: RelevantRates [];
 
     toString() {
         return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
     }
+}
+
+export class RelevantRates {
+    apiOperation: string;
+    rateDefName: string;
 }
 
 export class MetaData {

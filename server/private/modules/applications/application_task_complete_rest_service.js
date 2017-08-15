@@ -12,46 +12,82 @@ function invokeApplicationCompleteTask(params) {
     };
 
     let getPayload = function (params) {
-        return {
-            action: "complete",
-            variables: [
-                {
-                    name: params.adminApprovalLevel,
-                    value: params.status,
-                    type: "string"
-                },
-                {
-                    name: params.selectedTier,
-                    value: params.selectedTier,
-                    type: "string"
-                },
-                {
-                    name: 'completedByUser',
-                    value: params.user,
-                    type: "string"
-                },
-                {
-                    name: 'status',
-                    value: params.status,
-                    type: "string"
-                },
-                {
-                    name: 'completedOn',
-                    value: new Date(),
-                    type: "string"
-                },
-                {
-                    name: 'description',
-                    value: params.description,
-                    type: "string"
-                },
-                {
-                    name: 'selectedTier',
-                    value: params.selectedTier,
-                    type: "string"
-                }
-            ]
+
+        if(params.selectedTier){
+            return {
+                action: "complete",
+                variables: [
+                    {
+                        name: params.adminApprovalLevel,
+                        value: params.status,
+                        type: "string"
+                    },
+                    {
+                        name: params.selectedTier,
+                        value: params.selectedTier,
+                        type: "string"
+                    },
+                    {
+                        name: 'completedByUser',
+                        value: params.user,
+                        type: "string"
+                    },
+                    {
+                        name: 'status',
+                        value: params.status,
+                        type: "string"
+                    },
+                    {
+                        name: 'completedOn',
+                        value: new Date(),
+                        type: "string"
+                    },
+                    {
+                        name: 'description',
+                        value: params.description,
+                        type: "string"
+                    },
+                    {
+                        name: 'selectedTier',
+                        value: params.selectedTier,
+                        type: "string"
+                    }
+                ]
+            }
+
+        }else {
+            return {
+                action: "complete",
+                variables: [
+                    {
+                        name: params.adminApprovalLevel,
+                        value: params.status,
+                        type: "string"
+                    },
+                    {
+                        name: 'completedByUser',
+                        value: params.user,
+                        type: "string"
+                    },
+                    {
+                        name: 'status',
+                        value: params.status,
+                        type: "string"
+                    },
+                    {
+                        name: 'completedOn',
+                        value: new Date(),
+                        type: "string"
+                    },
+                    {
+                        name: 'description',
+                        value: params.description,
+                        type: "string"
+                    }
+                ]
+            }
         }
+
     };
 
 

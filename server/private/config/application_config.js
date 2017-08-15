@@ -21,7 +21,6 @@ var appConfig = {
     businessProcessEngineBaseUrl: process.env.wm_business_process_engine_url || 'http://localhost:9763/activiti-rest/service',
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',
-    //allowedRoles: process.env.wm_allowed_roles || "admin,subscriber,operator1-admin-role,operator2-admin-role,operator2-cc-role",
     apiContext: 'api',
     allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber', 'operator1-admin-role', 'operator2-admin-role', 'operator2-cc-role']
 

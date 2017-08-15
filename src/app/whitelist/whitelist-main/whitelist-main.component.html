@@ -111,9 +111,11 @@
 
     </div>
 
-    <app-whitelist-list
-            [dataSource]="whitelistList"
-            (onDeleteTask)="onDeleteHandler($event)"></app-whitelist-list>
+
 
     <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 </div>
+
+<app-whitelist-list
+        [dataSource]="whitelistList"
+        (onDeleteTask)="onDeleteHandler($event)"></app-whitelist-list>
