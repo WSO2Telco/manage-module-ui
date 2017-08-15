@@ -15,6 +15,12 @@ app-approval-count{
   cursor: pointer;
 }
 
+app-approval-whitelist-blacklist{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
 :host /deep/ app-approval-count.apps .approval-count{
   background-color: #3598dc;
   @include transition(all 0.2s ease-in);
@@ -37,6 +43,34 @@ app-approval-count{
 
   .breakdown{
     color: #fb9db1;
+  }
+;
+}
+
+:host /deep/ app-approval-whitelist-blacklist.whitelist .approval-count{
+  background-color: #5cb85c;
+
+  @include transition(all 0.2s ease-in);
+  &:hover{
+    background-color: #2f9e44;
+  }
+
+  .breakdown{
+    color: #66d9e8;
+  }
+;
+}
+
+:host /deep/ app-approval-whitelist-blacklist.blacklist .approval-count{
+  background-color: #dd0d0d;
+
+  @include transition(all 0.2s ease-in);
+  &:hover{
+    background-color: #bf0d0d;
+  }
+
+  .breakdown{
+    color: #f4f2c9;
   }
 ;
 }

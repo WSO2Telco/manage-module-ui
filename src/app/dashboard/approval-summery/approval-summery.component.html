@@ -1,5 +1,5 @@
 <div class="row">
-  <app-approval-count class="col-sm-6 apps"
+  <app-approval-count class="col-sm-3 apps"
                       [totalCount]="appDetailsSummery?.totalAppCreations"
                       [myCount]="appDetailsSummery?.appCreationsForUser"
                       [groupCount]="appDetailsSummery?.appCreationsForGroup"
@@ -7,11 +7,21 @@
                       name="Application Creations"
                       (click)="onCountClick('APPLICATIONS')"></app-approval-count>
 
-  <app-approval-count class="col-sm-6 subs"
+  <app-approval-count class="col-sm-3 subs"
                       [totalCount]="appDetailsSummery?.totalSubCreations"
                       [myCount]="appDetailsSummery?.subCreationsForUser"
                       [groupCount]="appDetailsSummery?.subCreationsForGroup"
                       iconClass="subscriptions"
                       name="Subscription Creations"
                       (click)="onCountClick('SUBSCRIPTIONS')"></app-approval-count>
+
+  <app-approval-whitelist-blacklist class="col-sm-3 whitelist"
+                      iconClass="phonelink_ring"
+                      name="Total Whitelist Numbers"
+                      ></app-approval-whitelist-blacklist>
+
+  <app-approval-whitelist-blacklist class="col-sm-3 blacklist"
+                      iconClass="phonelink_erase"
+                      name="Total Blacklist Numbers"
+                      ></app-approval-whitelist-blacklist>
 </div>
