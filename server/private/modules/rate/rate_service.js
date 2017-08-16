@@ -283,6 +283,26 @@ function rateService() {
         rateRestService.invokeGetRateDefinitionListRest( ).then(onSuccess, onFailture);
     }
 
+    let _getTaxList = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get Taxes service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetRateTaxListRest().then(onSuccess, onFailture);
+
+    }
+
     return {
         addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
@@ -293,7 +313,8 @@ function rateService() {
         getCurrencyList: _getCurrencyList,
         getRateTypeList: _getRateTypeList,
         getCategoryList: _getCategoryList,
-        getRateDefinitionList: _getRateDefinitionList
+        getRateDefinitionList: _getRateDefinitionList,
+        getTaxList:_getTaxList
     };
 
     //commet 22
