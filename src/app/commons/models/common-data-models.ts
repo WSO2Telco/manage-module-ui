@@ -27,6 +27,8 @@ export class User {
 export class LoginResponse {
     success: boolean;
     message: string;
+    isAdmin: boolean;
+    operator: string;
     userName: string;
     isLoggedIn: boolean;
     roles: string[];

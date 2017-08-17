@@ -111,6 +111,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
+                isAdimin: loginInfo.isAdmin,
+                operator: '',
                 size: 100,
                 start: 0,
                 processType: "APPLICATION_CREATION",
@@ -128,6 +130,8 @@ export class ApprovalRemoteDataService {
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
+                        // console.log('@@@@@ ' + JSON.stringify(result));
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -153,6 +157,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
+                isAdimin: loginInfo.isAdmin,
+                operator: '',
                 processType: "APPLICATION_CREATION",
                 size: 100,
                 start: 0,
@@ -192,6 +198,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
+                isAdimin: loginInfo.isAdmin,
+                operator: loginInfo.operator,
                 size: 100,
                 start: 0,
                 processType: "SUBSCRIPTION_CREATION",
@@ -210,6 +218,8 @@ export class ApprovalRemoteDataService {
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
+                        //console.log('$$$$$$$ ' + JSON.stringify(result));
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -231,6 +241,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
+                isAdimin: loginInfo.isAdmin,
+                operator: loginInfo.operator,
                 size: 100,
                 start: 0,
                 processType: "SUBSCRIPTION_CREATION",
@@ -249,6 +261,7 @@ export class ApprovalRemoteDataService {
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }

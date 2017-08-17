@@ -18,11 +18,9 @@ export class BlacklistMainComponent implements OnInit {
   private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
   private apiId: string;
-  private Numbers: string[];
   private apiList: string[];
   private applications: BlackListNumbers[];
   private api;
-  public  selected: string;
   private msisdnList: string[];
   private blackListList: string[];
   private msisdn: string;
@@ -46,7 +44,6 @@ export class BlacklistMainComponent implements OnInit {
       this.submissionError = '';
       this.apiList = [];
       this.applications = [];
-      this.Numbers = [];
       this.api = '';
       this.apiId = '';
       this.msisdn = '';
@@ -97,16 +94,23 @@ export class BlacklistMainComponent implements OnInit {
      *  Get The List of api's
      */
     getApis() {
-        this.blackListService.getApiList((response) => {
-            this.apiList = response;
-            let count = 0;
-            for (const entry of this.apiList){
-                const splitted = entry.split(':', 4);
-                this.applications[count] = new BlackListNumbers;
-                this.applications[count].id = splitted[3];
-                this.applications[count].name =  splitted[1];
-                this.apiList[count] = splitted[1] + ' - ' + splitted[2] + ' Provided by ' + splitted[0] + ' ' + splitted[3];
-                count +=  1;
+        this.blackListService.getApiList((response, status) => {
+            if (status) {
+                this.apiList = response;
+                let count = 0;
+                for (const entry of this.apiList) {
+                    const splitted = entry.split(':', 4);
+                    this.applications[count] = new BlackListNumbers;
+                    this.applications[count].id = splitted[3];
+                    this.applications[count].name = splitted[1];
+                    this.apiList[count] = splitted[1] + ' - ' + splitted[2] + ' Provided by ' + splitted[0] + ' ' + splitted[3];
+                    count += 1;
+                }
+            }else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
             }
         });
     }

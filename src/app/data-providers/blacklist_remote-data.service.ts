@@ -37,7 +37,7 @@ export class BlackListRemoteDataService {
             console.log( result);
             return result;
              })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 
     /**
@@ -53,13 +53,13 @@ export class BlackListRemoteDataService {
             const result = response.json();
             return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 
     /**
      * Remove BlackListed Numbers
      * @param apiId
-     * @param mssidn
+     * @param mssidns
      * @returns {Observable<R>}
      */
     removeFromBlackList(mssidn, apiId) {
@@ -74,7 +74,7 @@ export class BlackListRemoteDataService {
                     const result = response.json();
                     return result;
                 })
-                .catch((error: Response) => Observable.throw(error.json().message()));
+                .catch((error: Response) => Observable.throw(error.json().message));
     };
 
     /**
@@ -98,7 +98,7 @@ export class BlackListRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw(error.json().messages));
     }
 }
 

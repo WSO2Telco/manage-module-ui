@@ -9,6 +9,7 @@ export class DateTimeInfo {
 export class ApplicationTask {
     id: number;
     assignee: string;
+    apiName: string;
     createTime: DateTimeInfo;
     taskDescription: string;
     applicationId: number;
@@ -21,10 +22,22 @@ export class ApplicationTask {
     isModified: boolean;
     status: string;
     comment: string;
+    relevantRates: RelevantRates[];
+    selectedRate: string;
 
     toString() {
         return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
     }
+}
+
+export class RelevantRates {
+    apiOperation: string;
+    rateDefinitions: OperationRateDefinitions[];
+}
+
+export class OperationRateDefinitions{
+    rateDefName: string;
+    rateDefId: number;
 }
 
 export class MetaData {
@@ -56,6 +69,8 @@ export class ApplicationTaskSearchParam {
     candidateGroups: string;
     processType: PROCESS_TYPE;
     assignee: string;
+    isAdimin: boolean;
+    operator: string;
     start:number;
     size: number;
 }
@@ -87,6 +102,7 @@ export class ApproveSubscriptionCreationTaskParam {
     status: 'APPROVED' | 'REJECTED';
     description: string;
     role: boolean;
+    selectedRate: string;
 }
 
 export class ApprovalEvent {
