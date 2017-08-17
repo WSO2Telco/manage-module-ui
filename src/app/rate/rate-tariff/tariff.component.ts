@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {Tariff} from '../../commons/models/common-data-models';
+import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-addtariff',
@@ -28,15 +29,15 @@ export class TariffComponent implements OnInit {
     private nameError: string;
     private descriptionError: string;
 
-    constructor(private rateService: RateService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
-
+        const loginInfo = this.authService.loginUserInfo.getValue();
         this.tariff = new Tariff();
 
         this.tariff.tariffName = '';
-        this.tariff.tariffDesc = '';
+        this.tariff.tariffDescription = '';
         this.tariff.tariffDefaultVal = 0;
         this.tariff.tariffAdsCommission = 0;
         this.tariff.tariffSPCommission = 0;
@@ -47,7 +48,7 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffMaxCount = 0;
         this.tariff.tariffExcessRate = 0;
         this.tariff.tariffDefRate = 0;
-
+        this.tariff.createdBy = loginInfo.userName;
         this.clearErrors();
     }
 
@@ -55,7 +56,7 @@ export class TariffComponent implements OnInit {
     onSubmit(addTariffForm) {
         this.clearErrors();
 
-        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDesc.length != 0) {
+        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0) {
             this.rateService.addTariff(this.tariff, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
@@ -74,7 +75,7 @@ export class TariffComponent implements OnInit {
                 this.isNameError = true;
                 this.nameError = 'Name can not be empty';
             }
-            if (this.tariff.tariffDesc.length == 0) {
+            if (this.tariff.tariffDescription.length == 0) {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
             }

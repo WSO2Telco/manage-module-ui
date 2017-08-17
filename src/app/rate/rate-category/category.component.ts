@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {Category} from "../../commons/models/common-data-models";
+import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-category',
@@ -35,7 +36,7 @@ export class CategoryComponent implements OnInit {
     @Input()
     private existingCategories: Category[];
 
-    constructor(private rateService: RateService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -49,10 +50,10 @@ export class CategoryComponent implements OnInit {
 
     onSubmit(addCategoryForm) {
         this.clearErrors();
-
+        const loginInfo = this.authService.loginUserInfo.getValue();
         if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0) {
             console.log('form submitted : ' + this.name + '  ' + this.code + '  ' + this.description);
-            this.rateService.addCategory(this.name, this.code, this.description, (response, status) => {
+            this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);

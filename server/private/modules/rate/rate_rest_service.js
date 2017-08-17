@@ -363,6 +363,38 @@ const _invokeGetRateTaxListRest = function () {
 
 };
 
+const _invokeAddRateCardsRest = function (request) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'ratecards';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success");
+    deferred.resolve(payload);
+}
+});
+    return deferred.promise;
+};
+
+
+
+
 module.exports = {
     invokeAddCategoryRest: _invokeAddCategoryRest,
     invokeAddRateCategoryRest: _invokeAddRateCategoryRest,
@@ -374,7 +406,8 @@ module.exports = {
     invokeGetRateTypeListRest: _invokeGetRateTypeListRest,
     invokeGetCategoryListRest: _invokeGetCategoryListRest,
     invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
-    invokeGetRateTaxListRest: _invokeGetRateTaxListRest
+    invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
+    invokeAddRateRateCardsRest : _invokeAddRateCardsRest
 
 
 };

@@ -28,7 +28,7 @@ const validateAddCurrencyRequest = function (request) {
 
 const validateAddCategoryRequest = function (request) {
     let param = request.payload;
-    if (!!param && param.categoryName && param.categoryCode && param.categoryDesc) {
+    if (!!param && param.categoryName && param.categoryCode && param.categoryDescription && param.createdBy) {
         logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
@@ -303,6 +303,31 @@ function rateService() {
 
     }
 
+
+    let _addRateCards = function (request, callback) {
+        logger.log('INFO', "--------- RK add Rate cards rate_service ");
+
+        request.server.log('info', 'RK add Rate cards rate_service: ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (addRateCards) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addRateCards, {success: true, message:"rate card created successfully"}));
+        };
+
+        let onFailture = function (addRateCards) {
+            logger.log('ERROR', 'faliture');
+            callback(addRateCards);
+        };
+
+        if (validateAddRequest(request)) {
+            rateRestService.invokeAddRateRateCardsRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+
+
+    };
+
     return {
         addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
@@ -314,7 +339,8 @@ function rateService() {
         getRateTypeList: _getRateTypeList,
         getCategoryList: _getCategoryList,
         getRateDefinitionList: _getRateDefinitionList,
-        getTaxList:_getTaxList
+        getTaxList:_getTaxList,
+        addRateCards:_addRateCards
     };
 
     //commet 22
