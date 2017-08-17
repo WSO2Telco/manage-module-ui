@@ -53,7 +53,8 @@
                 <br> <br>
             </div>
 
-            <form class="form-horizontal" #ratecardForm="ngForm" novalidate (ngSubmit)="onRateCardSubmition(ratecardForm)">
+            <form class="form-horizontal" #ratecardForm="ngForm" novalidate
+                  (ngSubmit)="onRateCardSubmition(ratecardForm)">
                 <div class="form-group">
                     <label class="control-label col-sm-2">Rate Name:</label>
                     <div class="col-sm-4">
@@ -143,6 +144,27 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="control-label col-sm-2">Tax:</label>
+                    <div class="col-sm-4">
+                        <select multiple
+                                [(ngModel)]="taxname"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist">
+                            <option>VAT</option>
+                            <option>NBT</option>
+                            <option>COB</option>
+                            <option>NVT</option>
+                        </select>
+                        <span class="error" *ngIf="isTaxEmpty">Tax can not be empty</span>
+                    </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="Press CTR and click to select multiple tax item" placement="right"
+                    ></span>
+                </div>
+
+                <div class="form-group">
                     <label class="control-label col-sm-2">Add Sub Category:</label>
                     <div class="col-sm-4">
                         <label class="switch">
@@ -156,9 +178,9 @@
                     </div>
                 </div>
                 <app-ratecategory *ngIf="showSubcategory"
-                                 [categoryList]="categoryNameList"
-                                 [tariffList]="tariffNameList"
-                                 (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
+                                  [categoryList]="categoryNameList"
+                                  [tariffList]="tariffNameList"
+                                  (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
                 <div class="form-group">

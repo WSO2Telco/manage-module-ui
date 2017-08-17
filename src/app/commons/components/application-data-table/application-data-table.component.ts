@@ -8,6 +8,7 @@ import {MessageService} from '../../services/message.service';
 import {TableDataType} from '../../models/common-data-models';
 import {Router} from '@angular/router';
 import {TypeaheadMatch} from 'ng2-bootstrap';
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
     selector: 'application-data-table',
@@ -59,7 +60,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
-                private _router: Router) {
+                private _router: Router,
+                private authService: AuthenticationService) {
 
     }
 
@@ -72,6 +74,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     ngOnInit() {
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
+        // let loginInfo = this.authService.loginUserInfo.getValue();
+        // console.log('$$$$$' + loginInfo.isAdmin + ' ' + loginInfo.operator);
         this.showTiers = false;
 
         for (const entry of this.roleList){

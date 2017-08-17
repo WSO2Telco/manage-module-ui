@@ -1,7 +1,3 @@
-/**
- * Created by rajithk on 8/2/17.
- */
-
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {BlackListService} from '../../commons/services/blacklist.service';
 

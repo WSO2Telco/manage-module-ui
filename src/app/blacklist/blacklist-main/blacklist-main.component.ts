@@ -18,11 +18,9 @@ export class BlacklistMainComponent implements OnInit {
   private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
   private apiId: string;
-  private Numbers: string[];
   private apiList: string[];
   private applications: BlackListNumbers[];
   private api;
-  public  selected: string;
   private msisdnList: string[];
   private blackListList: string[];
   private msisdn: string;
@@ -46,7 +44,6 @@ export class BlacklistMainComponent implements OnInit {
       this.submissionError = '';
       this.apiList = [];
       this.applications = [];
-      this.Numbers = [];
       this.api = '';
       this.apiId = '';
       this.msisdn = '';
@@ -64,10 +61,22 @@ export class BlacklistMainComponent implements OnInit {
      * @param Id
      */
     getBlackListNumbers(Id: string) {
-        this.blackListService.getBlackListNumberList( Id , (response) => {
-            this.blackListList = response.Success.variables;
-            this.count = this.blackListList.length;
+        this.blackListService.getBlackListNumberList( Id , (response, status) => {
 
+            if (status) {
+                this.blackListList = response.Success.variables;
+                if (this.blackListList != null) {
+                    this.count = this.blackListList.length;
+                } else {
+                    this.blackListList = response.Success.variables;
+                    this.count = 0;
+                }
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+            }
         });
     }
 
@@ -85,16 +94,23 @@ export class BlacklistMainComponent implements OnInit {
      *  Get The List of api's
      */
     getApis() {
-        this.blackListService.getApiList((response) => {
-            this.apiList = response;
-            let count = 0;
-            for (const entry of this.apiList){
-                const splitted = entry.split(':', 4);
-                this.applications[count] = new BlackListNumbers;
-                this.applications[count].id = splitted[3];
-                this.applications[count].name =  splitted[1];
-                this.apiList[count] = splitted[1] + ' - ' + splitted[2] + ' Provided by ' + splitted[0] + ' ' + splitted[3];
-                count +=  1;
+        this.blackListService.getApiList((response, status) => {
+            if (status) {
+                this.apiList = response;
+                let count = 0;
+                for (const entry of this.apiList) {
+                    const splitted = entry.split(':', 4);
+                    this.applications[count] = new BlackListNumbers;
+                    this.applications[count].id = splitted[3];
+                    this.applications[count].name = splitted[1];
+                    this.apiList[count] = splitted[1] + ' - ' + splitted[2] + ' Provided by ' + splitted[0] + ' ' + splitted[3];
+                    count += 1;
+                }
+            }else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
             }
         });
     }
@@ -108,7 +124,6 @@ export class BlacklistMainComponent implements OnInit {
         const list = /\d+(?=\D*$)/;
         const regexp = new RegExp(list);
         this.numberId = regexp.exec(this.api);
-
         let id = '';
         let count = 0;
         for (const entry of this.applications) {
@@ -130,7 +145,7 @@ export class BlacklistMainComponent implements OnInit {
         const list = /\d+(?=\D*$)/;
         const regexp = new RegExp(list);
 
-         this.numberId = regexp.exec(this.api);
+        this.numberId = regexp.exec(this.api);
 
         if (this.msisdnList.length != 0) {
             let apiId = '';
@@ -148,8 +163,9 @@ export class BlacklistMainComponent implements OnInit {
             let countd = 0;
 
             if (apiId.length != 0 && apiName.length != 0) {
-                // console.log(this.msisdnList);
             this.isDublicate = false;
+
+            if (this.blackListList != null) {
 
                 for (const entry of this.blackListList.toString()) {
 
@@ -159,11 +175,11 @@ export class BlacklistMainComponent implements OnInit {
                     }
                     countd++;
                 }
+            }
 
                 if (this.isDublicate == true) {
                     this.dublicate = 'This MSISDN already exists';
                 } else {
-                    console.log('inside ELSE ' + this.isDublicate );
                     this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, response => {
                         const result = response;
                         console.log(JSON.stringify(result));
@@ -190,12 +206,10 @@ export class BlacklistMainComponent implements OnInit {
 
                 for (const entry of msisdnList) {
 
-                    console.log('before is validation  ' + this.isValidMobileNumber(entry));
                     if (this.isValidMobileNumber(entry)) {
                         this.msisdnList[count] = 'tel3A+' + Number(entry);
                         this.islong = false;
                     }else {
-                        console.log("ERROR", this.isValidMobileNumber(entry));
                         this.islong = true;
                     }
                         count++;

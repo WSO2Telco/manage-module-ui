@@ -54,10 +54,10 @@ export class QuotaService {
             );
     }
 
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, callback: Function) {
+    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
         console.log('Add new quotalimit service called');
         this.slimLoadingBarService.start();
-        this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, quotaValue)
+        this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, quotaValue, fromDate, toDate)
             .subscribe(
                 data => {
                     this.message.success('Successfully added new Quota');
@@ -100,8 +100,43 @@ export class QuotaService {
     }
 
     getQuotaLimitInfoApi(apiID: string, callback: Function) {
-        console.log('get quotalimit of subscriber service called');
         this._remoteService.getQuotaLimitInfoApi(apiID)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, callback: Function) {
+        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string, callback: Function) {
+        this._remoteService.getValidityPeriodForApp(appID, fromDate, toDate)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string, callback: Function) {
+        this._remoteService.getValidityPeriodForApi(apiID, fromDate, toDate)
             .subscribe(
                 data => {
                     callback(data);

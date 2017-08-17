@@ -4,10 +4,10 @@
         <div class="form-container whitelistInputContainer">
 
             <div class="tbl-header">
-                <h3>Whitelist subscribers </h3>
-                <br> <br>
+                <h3>APIwise Whitelist</h3>
+                <br>
             </div>
-
+            <h4>Whitelist subscribers</h4>
             <div class="searchFilter">
                 <div class="col-sm-4">
                     <input [(ngModel)]="subscriber"
@@ -37,16 +37,15 @@
                            placeholder="Api">
                 </div>
             </div>
-
-            <div class="tbl-header">
-                <h5>Numbers list configuration </h5>
-            </div>
-
+            <br>
             <form class="form-horizontal" #numberlistForm="ngForm" novalidate
                   (ngSubmit)="onUploadNumber(numberlistForm)">
-
-                <div class="form-group col-sm-12">
-                    <label class="control-label col-sm-3">Number:</label>
+                <div class="form-group">
+                    <label class="col-sm-2"></label>
+                    <label class="col-sm-4 subtitle">Numbers list configuration </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Number:</label>
                     <div class="col-sm-6">
                         <input class="form-control"
                                autocomplete="off"
@@ -59,23 +58,24 @@
                         <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
                     </div>
                     <div class="col-sm-3">
-                        <button type="submit" class="addbtn">
-                            <i class="material-icons">add_circle_outline</i>Add
+                        <button type="submit" class="btn btn-primary animated fadeIn">
+                            Add
                         </button>
                     </div>
                 </div>
             </form>
 
-            <div class="tbl-header">
-                <h5>Numbers Range configuration </h5>
-            </div>
-
             <form class="form-horizontal" #numberrangeForm="ngForm" novalidate
                   (ngSubmit)="onUploadNumberRange(numberrangeForm)">
 
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-6">Min number:</label>
-                    <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-sm-2"></label>
+                    <label class="col-sm-4 subtitle">Numbers Range configuration</label>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Min number:</label>
+                    <div class="col-sm-4">
                         <input class="form-control"
                                autocomplete="off"
                                #nameRef="ngModel"
@@ -86,9 +86,9 @@
                     </div>
                 </div>
 
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-6">Max number:</label>
-                    <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Max number:</label>
+                    <div class="col-sm-4">
                         <input class="form-control"
                                autocomplete="off"
                                #nameRef="ngModel"
@@ -96,26 +96,31 @@
                                [(ngModel)]="msisdnMax"
                                type="number"
                                name="manualNumber">
+                        <span class="error" *ngIf="ismsisdnRangeError">{{msisdnRangeError}}</span>
                     </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="e.g.94777333100 to 94777333200" placement="right"
+                    ></span>
                 </div>
-                <label style="color:grey;">e.g.94777333100 to 94777333200</label>
-                <span class="error" *ngIf="ismsisdnRangeError">{{msisdnRangeError}}</span>
-                <div class="form-group col-sm-12">
+
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2"></label>
                     <button class="btn btn-primary">
                         Upload Numbers List
                     </button>
                 </div>
 
             </form>
+            <br><br>
+            <app-whitelist-list
+                    [dataSource]="whitelistList"
+                    (onDeleteTask)="onDeleteHandler($event)"></app-whitelist-list>
+
+            <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
+
         </div>
 
     </div>
-
-
-
-    <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 </div>
 
-<app-whitelist-list
-        [dataSource]="whitelistList"
-        (onDeleteTask)="onDeleteHandler($event)"></app-whitelist-list>

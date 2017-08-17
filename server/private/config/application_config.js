@@ -3,6 +3,7 @@
  */
 'use strict';
 
+
 var appConfig = {
     applicationContext: process.env.wm_context || 'manage',
     serverPort: process.env.wm_server_port || '3060',

@@ -5,8 +5,9 @@ import {Component, OnInit,} from '@angular/core';
 import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {QuotaService} from '../../commons/services/quotacap.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
-import {Api, Application} from '../../commons/models/common-data-models';
+import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
+import {NgxDateRangePickerOptions} from 'ngx-daterangepicker';
 
 @Component({
     selector: 'app-quotacap-main',
@@ -27,16 +28,27 @@ export class QuotaCapMainComponent implements OnInit {
 
     private applications: Application[];
     private apis: Api[];
+    private quotalist: QuotaList[];
 
     private submissionError: string;
     private msisdnError: string;
     private msisdnRangeError: string;
 
-    private quotaValue: string;
+    private quotaValue: string[];
     private quotaInputValue: string;
     private is_edit: boolean;
+    private is_valid_period: boolean;
     private is_addSuccess: boolean;
+    private isSubscriberSelect: boolean;
+    private isAppSelect: boolean;
+    private isApiSelect: boolean;
+    private isCalenderEnable: boolean;
     private appID: string;
+    private datepickvalue: string;
+    private fromdate: string;
+    private todate: string;
+
+    options: NgxDateRangePickerOptions;
 
     constructor(private reportingService: ReportingRemoteDataService,
                 private quotaService: QuotaService,
@@ -54,14 +66,38 @@ export class QuotaCapMainComponent implements OnInit {
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
+        this.quotalist = [];
         this.apis = [];
         this.subscriber = '';
         this.app = '';
         this.api = '';
-        this.quotaValue = '';
+        this.quotaValue = [];
         this.quotaInputValue = '';
         this.is_edit = false;
+        this.is_valid_period = false;
+        this.isSubscriberSelect = false;
+        this.isAppSelect = false;
+        this.isApiSelect = false;
+        this.isCalenderEnable = true;
         this.appID = '';
+        this.options = {
+            theme: 'default',
+            range: 'td', // The alias of item menu
+            labels: ['Start Date', 'End Date'],
+            dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            menu: [
+                {alias: 'td', text: 'Today', operation: '0d'},
+                {alias: 'tm', text: 'This Month', operation: '0m'},
+                {alias: 'tw', text: 'This Week', operation: '0w'},
+                {alias: 'ty', text: 'This Year', operation: '0y'},
+            ],
+            dateFormat: 'yMd',
+            outputFormat: 'YYYY/MM/DD',
+            outputType: 'string',
+            startOfWeek: 0
+        };
+        this.fromdate = '';
+        this.todate = '';
     }
 
 
@@ -97,6 +133,7 @@ export class QuotaCapMainComponent implements OnInit {
             if (entry == this.subscriber) {
                 this.getAppsofSubscriber(this.subscriber);
                 this.getQuotaofSubscriber(this.subscriber);
+                this.isSubscriberSelect = true;
             }
         }
     }
@@ -128,13 +165,19 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getQuotaofSubscriber(subscriberID: string) {
         this.clearErrors();
+        this.quotalist = [];
         this.quotaService.getQuotaLimitInfo(subscriberID, (response) => {
             if (response.Success.text.length != 0) {
-                this.quotaValue = response.Success.text[0].quotaLimit;
-                this.setquotaValuetoInputBox(this.quotaValue);
-            } else {
 
-                this.emptyquotaValuetoInputBox();
+                const count = response.Success.text.length;
+                for (let i = 0; i < count; i++) {
+                    this.quotalist[i] = new QuotaList();
+                    this.quotalist[i].quotaLimit = response.Success.text[i].quotaLimit;
+                    this.quotalist[i].fromDate = response.Success.text[i].fromDate;
+                    this.quotalist[i].toDate = response.Success.text[i].toDate;
+                }
+
+            } else {
                 console.log('--------- no entry for this subscriber');
             }
         });
@@ -146,10 +189,19 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getQuotaofApp(appID: string) {
         this.clearErrors();
+        this.quotalist = [];
         this.quotaService.getQuotaLimitInfoApp(appID, (response) => {
             if (response.Success.text.length != 0) {
-                this.quotaValue = response.Success.text[0].quotaLimit;
-                this.setquotaValuetoInputBox(this.quotaValue);
+
+                const count = response.Success.text.length;
+                for (let i = 0; i < count; i++) {
+                    this.quotalist[i] = new QuotaList();
+                    this.quotalist[i].quotaLimit = response.Success.text[i].quotaLimit;
+                    this.quotalist[i].fromDate = response.Success.text[i].fromDate;
+                    this.quotalist[i].toDate = response.Success.text[i].toDate;
+                }
+
+
             } else {
 
                 this.emptyquotaValuetoInputBox();
@@ -165,12 +217,17 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getQuotaofApi(apiID: string) {
         this.clearErrors();
+        this.quotalist = [];
         this.quotaService.getQuotaLimitInfoApi(apiID, (response) => {
             if (response.Success.text.length != 0) {
-                this.quotaValue = response.Success.text[0].quotaLimit;
-                this.setquotaValuetoInputBox(this.quotaValue);
+                const count = response.Success.text.length;
+                for (let i = 0; i < count; i++) {
+                    this.quotalist[i] = new QuotaList();
+                    this.quotalist[i].quotaLimit = response.Success.text[i].quotaLimit;
+                    this.quotalist[i].fromDate = response.Success.text[i].fromDate;
+                    this.quotalist[i].toDate = response.Success.text[i].toDate;
+                }
             } else {
-                this.emptyquotaValuetoInputBox();
                 console.log('--------- no entry for this API');
             }
         });
@@ -181,9 +238,10 @@ export class QuotaCapMainComponent implements OnInit {
      * Assign quota value to input box
      * @param quotavalue
      */
-    setquotaValuetoInputBox(quotaValue: string) {
-        this.quotaInputValue = quotaValue;
+    setquotaValuetoInputBox(quotaValue: string[]) {
+        //   this.quotaInputValue = quotaValue;
         this.is_edit = true;
+        console.log(this.quotaValue);
     }
 
     /**
@@ -215,8 +273,10 @@ export class QuotaCapMainComponent implements OnInit {
         for (const entry of this.applications) {
             if (entry.name == this.app) {
                 this.appID = entry.id;
-                console.log('relevant app id' + this.appID);
+                this.isAppSelect = true;
+                this.isSubscriberSelect = false;
                 this.getQuotaofApp(this.appID);
+
             }
         }
 
@@ -278,7 +338,7 @@ export class QuotaCapMainComponent implements OnInit {
         if (!this.isEmpty()) {
 
             console.log(this.subscriber + '-' + this.appID + '-' + this.api + '-' + this.quotaInputValue);
-            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.quotaInputValue, (errorMsg) => {
+            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
                 this.submissionError = errorMsg;
                 setTimeout(() => {
                     this.submissionError = null;
@@ -300,12 +360,14 @@ export class QuotaCapMainComponent implements OnInit {
      * @param event
      */
     onApiSelected(event: TypeaheadMatch) {
-        console.log('api selected');
         for (const entry of this.applicationList) {
             if (entry == this.app) {
+                this.isSubscriberSelect = false;
+                this.isAppSelect = false;
+                this.isApiSelect = true;
                 this.getApis(this.app);
                 this.getQuotaofApi(this.api);
-                console.log('--selected----' + this.api);
+
             }
         }
         this.message.info('You have selected the following combination <br> <center><b>' + this.subscriber +
@@ -319,6 +381,56 @@ export class QuotaCapMainComponent implements OnInit {
         this.api = '';
         this.quotaInputValue = '';
     }
+
+    onDateRangeSelected(event) {
+        //  console.log('changed', this.datepickvalue, event);
+        this.datepickvalue = event;
+        this.fromdate = this.datepickvalue.substring(0, 10);
+        this.todate = this.datepickvalue.substring(11, this.datepickvalue.length);
+
+        this.clearErrors();
+        if (this.isSubscriberSelect) {
+            this.quotaService.getValidityPeriodForSubscriober(this.subscriber, this.fromdate, this.todate, (response) => {
+                if (!response.Success.text.isEmpty) {
+                    if (response.Success.text == 'true') {
+                        this.is_valid_period = true;
+                    } else {
+                        this.is_valid_period = false;
+                    }
+                } else {
+                    //   this.emptyquotaValuetoInputBox();
+                    console.log('--------- hit sub');
+                }
+            });
+        } else if (this.isAppSelect) {
+            this.quotaService.getValidityPeriodForApp(this.appID, this.fromdate, this.todate, (response) => {
+                if (!response.Success.text.isEmpty) {
+                    if (response.Success.text == 'true') {
+                        this.is_valid_period = true;
+                    } else {
+                        this.is_valid_period = false;
+                    }
+                } else {
+                    //   this.emptyquotaValuetoInputBox();
+                    console.log('--------- hit app');
+                }
+            });
+        } else if (this.isApiSelect) {
+            this.quotaService.getValidityPeriodForApi(this.api, this.fromdate, this.todate, (response) => {
+                if (!response.Success.text.isEmpty) {
+                    if (response.Success.text == 'true') {
+                        this.is_valid_period = true;
+                    } else {
+                        this.is_valid_period = false;
+                    }
+                } else {
+                    //   this.emptyquotaValuetoInputBox();
+                    console.log('--------- hit API');
+                }
+            });
+        }
+    }
+
 
 }
 

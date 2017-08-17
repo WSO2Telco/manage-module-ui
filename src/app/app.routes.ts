@@ -39,7 +39,8 @@ const routes = [
   },
   {
     path: 'blacklist',
-    loadChildren: 'app/blacklist/blacklist.module#BlackListModule'
+    loadChildren: 'app/blacklist/blacklist.module#BlackListModule',
+    canActivate: [AppGuard]
   },
   {
     path : '',
