@@ -167,11 +167,9 @@ function quotaCapService() {
         }
     };
 
-    let _getWhitelist = function (request, callback) {
+    let _getOperatorList = function (request, callback) {
 
-        logger.log('INFO', "hit at whitelist get whitelist service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+        logger.log('INFO', "hit get operator service end point");
 
         let onSuccess = function (getResponse) {
             logger.log('INFO', 'success');
@@ -183,7 +181,7 @@ function quotaCapService() {
             callback(getResponseError);
         };
 
-        quotaCapRestService.invokeGetWhitelistRest().then(onSuccess, onFailture);
+        quotaCapRestService.invokegetOperatorListRest().then(onSuccess, onFailture);
 
     };
 
@@ -238,11 +236,11 @@ function quotaCapService() {
         getSubscribers: _getSubscribers,
         getApps: _getApps,
         getApis: _getApis,
-        getWhitelist: _getWhitelist,
         getQuotaLimitInfo: _getQuotaLimitInfo,
         addNewQuotaLimit: _addNewQuotaLimit,
         removeFromWhitelist: _removeFromWhitelist,
-        getValidityPeriod: _getValidityPeriod
+        getValidityPeriod: _getValidityPeriod,
+        getOperatorList: _getOperatorList,
     }
 }
 

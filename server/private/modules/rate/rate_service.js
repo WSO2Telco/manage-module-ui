@@ -2,7 +2,6 @@
 
 const boom = require('boom');
 const Messages = require('../common/messages');
-const rateWebService = require('./rate_webservice');  //if a soap service is required
 const rateRestService = require('./rate_rest_service');
 const logger=require('../../config/logger');
 

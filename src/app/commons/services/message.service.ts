@@ -7,6 +7,14 @@ export class MessageService {
     constructor(private toast: ToastyService) {
     }
 
+    private toastconf: ToastyConfig = {
+        limit: 1,
+        showClose: true,
+        timeout: 1,
+        position: 'top-right',
+        theme: 'material'
+    }
+
     private toastOptions: ToastOptions = {
         title: '',
         msg: '',

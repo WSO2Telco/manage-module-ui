@@ -4,7 +4,7 @@ const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
 
-function invokeApplicationCompleteTask(params) {
+function invokeSubscriptionCompleteTask(params) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (params) {
@@ -51,6 +51,11 @@ function invokeApplicationCompleteTask(params) {
                         name: 'selectedTier',
                         value: params.selectedTier,
                         type: "string"
+                    },
+                    {
+                        name: 'selectedRate',
+                        value: params.selectedRate,
+                        type: "string"
                     }
                 ]
             }
@@ -83,6 +88,11 @@ function invokeApplicationCompleteTask(params) {
                         name: 'description',
                         value: params.description,
                         type: "string"
+                    },
+                    {
+                        "name" : 'selectedRate',
+                        "value" : params.selectedRate,
+                        "type" : "string"
                     }
                 ]
             }
@@ -103,7 +113,6 @@ function invokeApplicationCompleteTask(params) {
         };
     };
 
-    console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
 
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {
@@ -124,5 +133,5 @@ function invokeApplicationCompleteTask(params) {
 }
 
 module.exports = {
-    Invoke: invokeApplicationCompleteTask
+    Invoke: invokeSubscriptionCompleteTask
 };

@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {
     ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
-    ApplicationTaskResult
-} from "../../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
-import {MessageService} from "../../commons/services/message.service";
-import {ApprovalHelperService} from "../approval-helper.service";
-import {TableDataType} from "../../commons/models/common-data-models";
+    ApplicationTaskResult, RelevantRates
+} from '../../commons/models/application-data-models';
+import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
+import {MessageService} from '../../commons/services/message.service';
+import {ApprovalHelperService} from '../approval-helper.service';
+import {TableDataType} from '../../commons/models/common-data-models';
 
 @Component({
     selector: 'app-subscriptions',
@@ -35,22 +35,82 @@ export class SubscriptionsComponent implements OnInit {
         this.approvalService.MySubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
                 this.mySubscriptions = subs;
+                if(this.mySubscriptions != null){
+                    this.setDefaultOperationRates();
+                }
             },
             (error) => {
-                this.message.error(error)
+                this.message.error(error);
             }
         );
 
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
                 this.allSubscriptions = subs;
+                if(this.allSubscriptions != null){
+                    this.setDefaultAllOperationRates();
+                }
             },
             (error) => {
-                this.message.error(error)
+                this.message.error(error);
             }
         );
 
         this.getData();
+
+
+
+
+    }
+
+    setDefaultOperationRates() {
+        if(this.mySubscriptions != null){
+            let count = 0;
+            for(const entry of this.mySubscriptions.applicationTasks){
+                let selectedRate = '';
+                for(const entry2 of entry.relevantRates){
+                    if(entry2.rateDefinitions.length > 0){
+                        let id = entry2.rateDefinitions[0].rateDefId;
+
+                        if(selectedRate.length == 0){
+                            selectedRate += id;
+                        }else{
+                            selectedRate += '-' + id;
+                        }
+                    }
+                }
+                this.mySubscriptions.applicationTasks[count].selectedRate = selectedRate;
+                count++;
+            }
+        }
+
+
+    }
+
+    setDefaultAllOperationRates() {
+
+        if(this.allSubscriptions != null){
+            let count = 0;
+            for(const entry of this.allSubscriptions.applicationTasks){
+                let selectedRate = '';
+                for(const entry2 of entry.relevantRates){
+                    if(entry2.rateDefinitions.length > 0){
+                        let id= entry2.rateDefinitions[0].rateDefId;
+
+                        if(selectedRate.length == 0){
+                            selectedRate += id;
+                        }else{
+                            selectedRate += '-' + id;
+                        }
+                    }
+
+                }
+                this.allSubscriptions.applicationTasks[count].selectedRate = selectedRate;
+                count++;
+            }
+        }
+
+
     }
 
     private getData() {

@@ -47,9 +47,9 @@ export class WhitelistMainComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.subscriberList = [];
         this.getSubscribersOfProvider();
         this.getWhitelist();
-        this.subscriberList = [];
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
@@ -352,4 +352,3 @@ export class WhitelistMainComponent implements OnInit {
         }
     }
 }
-

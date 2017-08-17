@@ -86,6 +86,19 @@ export class QuotaService {
             );
     }
 
+    getOperatorList(callback: Function) {
+        console.log('get operator list');
+        this._remoteService.getOperatorList()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
     getQuotaLimitInfoApp(appID: string, callback: Function) {
         console.log('get quotalimit of subscriber service called');
         this._remoteService.getQuotaLimitInfoApp(appID)

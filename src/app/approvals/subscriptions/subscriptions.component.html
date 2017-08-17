@@ -6,6 +6,7 @@
                [filter]="mySubscriptionFilter"
                tableTitle="SUBSCRIPTION CREATIONS"
                [dataSource]="mySubscriptions"
+               [isSubscription]="true"
                (onApproveRejectTask)="onApproveRejectHandler($event)"
                (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
    </div>
@@ -13,6 +14,7 @@
        <application-data-table
                [filter]="groupSubscriptionFilter"
                tableTitle="SUBSCRIPTION CREATIONS"
+               [isSubscription]="true"
                [dataSource]="allSubscriptions"
                (onAssignTask)="onAssignTaskHandler($event)"
                (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
