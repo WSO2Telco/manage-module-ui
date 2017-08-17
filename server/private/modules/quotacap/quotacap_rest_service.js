@@ -109,14 +109,14 @@ const _invokeGetApisRest = function (request) {
 };
 
 
-const _invokeGetWhitelistRest = function ( ) {
+const _invokegetOperatorListRest = function ( ) {
 
-    console.log("whitelist get whitelist rest end point call")
+    console.log("get operator list rest end point call")
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'GetWhiteList';
+        return config.rateServiceURL + 'operators';
     };
 
     let getRequestOptions = function () {
@@ -127,7 +127,7 @@ const _invokeGetWhitelistRest = function ( ) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
             console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
@@ -277,9 +277,9 @@ module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,
     invokeGetAppsRest: _invokeGetAppsRest,
     invokeGetApisRest: _invokeGetApisRest,
-    invokeGetWhitelistRest: _invokeGetWhitelistRest,
     invokeAddNewQuotaLimit: _invokeAddNewQuotaLimit,
     invokeRemoveFromWhitelistRest: _invokeRemoveFromWhitelistRest,
     invokeGetQoutalistRest: _invokeGetQoutalistRest,
-    invokegetValidityPeriodRest: _invokegetValidityPeriodRest
+    invokegetValidityPeriodRest: _invokegetValidityPeriodRest,
+    invokegetOperatorListRest: _invokegetOperatorListRest
 };

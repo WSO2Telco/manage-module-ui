@@ -6026,6 +6026,11 @@
       "integrity": "sha1-MHXOk7whuPq0PhvE2n6BFe0ee6s=",
       "dev": true
     },
+    "mydaterangepicker": {
+      "version": "4.1.9",
+      "resolved": "https://registry.npmjs.org/mydaterangepicker/-/mydaterangepicker-4.1.9.tgz",
+      "integrity": "sha1-2aj/wityotcRl2VEIJ3O4Z+wM/U="
+    },
     "nan": {
       "version": "2.6.2",
       "resolved": "https://registry.npmjs.org/nan/-/nan-2.6.2.tgz",

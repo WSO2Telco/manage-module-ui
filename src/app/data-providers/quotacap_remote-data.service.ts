@@ -22,7 +22,8 @@ export class QuotacapRemoteDataService {
         getApis: this.apiContext + '/quotacap/getapis',
         getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
         addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit',
-        getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod'
+        getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod',
+        getOperatorList: this.apiContext + '/quotacap/getoperatorlist'
 
     };
 
@@ -45,6 +46,22 @@ export class QuotacapRemoteDataService {
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
+
+    /**
+     * to get all operator
+     * @returns {Observable<R>}
+     */
+    getOperatorList() {
+        const data = {};
+        console.log('hit in the quota remote data service');
+        return this.http.get(this.apiEndpoints['getOperatorList'], this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
 
     /**
      * To get all the apps of the subscriber

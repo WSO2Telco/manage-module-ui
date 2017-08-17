@@ -19,6 +19,7 @@
   padding: 10px;
   background-color: white;
   border: solid 1px whitesmoke;
+  overflow: initial;
 }
 
 .searchFilter {
@@ -713,5 +714,9 @@ fieldset[disabled] .btn {
   }
 }
 
+h3{ text-transform: uppercase;}
 
+.subtitle{
+  color: #E19132;
+}
 
