@@ -95,20 +95,6 @@ export class RateType {
     rateTypeDesc: string;
 }
 
-
-// export class Rate {
-//     rateDefId: number;
-//     rateDefName: string;
-//     rateDefDesc: string;
-//     rateDefDefault: number;
-//     currency: Currency;
-//     rateType: RateType;
-//     rateDefCategoryBase: number;
-//     tariff: Tariff;
-//     rateCategories: Category;
-//     rateTaxes: RateTax;
-// }
-
 export class Rate {
     rateDefinition: RateDefinition;
     rateCategories: RateCategory[];
@@ -118,7 +104,6 @@ export class Rate {
 
 
 export class RateDefinition {
-    // rateDefId: number;
     rateDefName: string;
     rateDefDescription: string;
     rateDefDefault: number;
