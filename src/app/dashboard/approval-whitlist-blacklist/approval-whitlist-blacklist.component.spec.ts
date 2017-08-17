@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ApprovalCountComponent } from './approval-count.component';
+import { ApprovalWhitelistBlacklistCountComponent } from './approval-whitlist-blacklist.component';
 
 describe('ApprovalCountComponent', () => {
-  let component: ApprovalCountComponent;
-  let fixture: ComponentFixture<ApprovalCountComponent>;
+  let component: ApprovalWhitelistBlacklistCountComponent;
+  let fixture: ComponentFixture<ApprovalWhitelistBlacklistCountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApprovalCountComponent ]
+      declarations: [ ApprovalWhitelistBlacklistCountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ApprovalCountComponent);
+    fixture = TestBed.createComponent(ApprovalWhitelistBlacklistCountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

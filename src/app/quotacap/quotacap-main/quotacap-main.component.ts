@@ -7,7 +7,7 @@ import {QuotaService} from '../../commons/services/quotacap.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
-import {NgxDateRangePickerOptions} from 'ngx-daterangepicker';
+import {IMyDrpOptions} from 'mydaterangepicker';
 
 @Component({
     selector: 'app-quotacap-main',
@@ -20,7 +20,6 @@ export class QuotaCapMainComponent implements OnInit {
     private app;
     private api;
 
-    private operators: string[];
     private subscriberList;
     private applicationList: string[];
     private apiList: string[];
@@ -31,13 +30,11 @@ export class QuotaCapMainComponent implements OnInit {
     private quotalist: QuotaList[];
 
     private submissionError: string;
-    private msisdnError: string;
-    private msisdnRangeError: string;
 
     private quotaValue: string[];
     private quotaInputValue: string;
     private is_edit: boolean;
-    private is_valid_period: boolean;
+    private is_invalid_period: boolean;
     private is_addSuccess: boolean;
     private isSubscriberSelect: boolean;
     private isAppSelect: boolean;
@@ -48,21 +45,62 @@ export class QuotaCapMainComponent implements OnInit {
     private fromdate: string;
     private todate: string;
 
-    options: NgxDateRangePickerOptions;
+    private operatorsList;
+    private selectedoperator;
+    private ISoperatordisable: boolean;
+    public states: string[];
+
+    private isNameEmpty: boolean;
+    private name: string;
+    private isSpEmpty: boolean;
+    private isCalendarEmpty: boolean;
+
+    private date = new Date();
+
+    /***/
+    private loggeduser: string;
+
+    private myDateRangePickerOptions: IMyDrpOptions = {
+        // other options...
+        dateFormat: 'yyyy/mm/dd',
+        sunHighlight: true,
+        indicateInvalidDateRange: true,
+        markCurrentDay: true,
+        disableUntil: {
+            year: this.date.getFullYear(),
+            month: this.date.getMonth() + 1,
+            day: this.date.getDate() - 1
+        },
+        editableDateRangeField: false,
+        showClearDateRangeBtn: false
+    };
+
+    private defaultcalval: string;
+
+    private model: Object = {
+        beginDate: {
+            year: this.date.getFullYear(),
+            month: this.date.getMonth() + 1,
+            day: this.date.getDate()
+        },
+        endDate: {
+            year: this.date.getFullYear() + 200,
+            month: 1,
+            day: 1
+        }
+    };
 
     constructor(private reportingService: ReportingRemoteDataService,
                 private quotaService: QuotaService,
                 private message: MessageService) {
     }
 
-
-    private isNameEmpty: boolean;
-    private name: string;
-
     ngOnInit() {
         this.getSubscribersOfProvider();
+        this.getOperatorList();
         this.name = '';
         this.subscriberList = [];
+        this.operatorsList = ['All'];
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
@@ -74,30 +112,32 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaValue = [];
         this.quotaInputValue = '';
         this.is_edit = false;
-        this.is_valid_period = false;
         this.isSubscriberSelect = false;
         this.isAppSelect = false;
         this.isApiSelect = false;
         this.isCalenderEnable = true;
         this.appID = '';
-        this.options = {
-            theme: 'default',
-            range: 'td', // The alias of item menu
-            labels: ['Start Date', 'End Date'],
-            dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            menu: [
-                {alias: 'td', text: 'Today', operation: '0d'},
-                {alias: 'tm', text: 'This Month', operation: '0m'},
-                {alias: 'tw', text: 'This Week', operation: '0w'},
-                {alias: 'ty', text: 'This Year', operation: '0y'},
-            ],
-            dateFormat: 'yMd',
-            outputFormat: 'YYYY/MM/DD',
-            outputType: 'string',
-            startOfWeek: 0
-        };
         this.fromdate = '';
         this.todate = '';
+        this.defaultcalval = '';
+        this.loggeduser = 'DIALOG';
+    }
+
+
+    /**
+     * Change operator list based on SP
+     */
+    setOperatorofSP() {
+
+        let index = 0;
+        for (const entry of this.operatorsList) {
+            if (entry == this.loggeduser) {
+                this.selectedoperator = entry;
+                this.ISoperatordisable = true;
+            }
+            index++;
+        }
+
     }
 
 
@@ -108,8 +148,32 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getSubscribers((response, status) => {
             if (status) {
                 this.subscriberList = response;
-                console.log(this.subscriberList);
+                console.log('>>>>>>>>>>>>>>>>>>>>>>' + this.subscriberList);
             } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+
+            }
+        });
+    }
+
+    /**
+     * to load the Operator list
+     */
+    getOperatorList() {
+        this.quotaService.getOperatorList((response, status) => {
+            if (status) {
+                let count = 1;
+                for (const entry of response) {
+
+                    this.operatorsList[count] = entry.operatorName;
+                    count += 1;
+                }
+                this.setOperatorofSP();
+            } else {
+                console.log('else<<<<<<<<<<<<<<<<<<<<');
                 this.submissionError = response;
                 setTimeout(() => {
                     this.submissionError = null;
@@ -127,6 +191,8 @@ export class QuotaCapMainComponent implements OnInit {
         this.app = '';
         this.api = '';
         this.appID = '';
+        this.isCalenderEnable = false;
+        this.isSpEmpty = false;
         this.clearErrors();
         this.message.info('<center>You have selected &nbsp;<b>' + this.subscriber + '</b></center>');
         for (const entry of this.subscriberList) {
@@ -260,13 +326,13 @@ export class QuotaCapMainComponent implements OnInit {
     onAppSelected(event: TypeaheadMatch) {
         this.api = '';
         this.appID = '';
+        this.isCalenderEnable = false;
         for (const entry of this.applicationList) {
             if (entry == this.app) {
                 this.getApis(this.app);
 
             }
         }
-
         this.message.info('You have selected the following combination <br> <center><b>' + this.subscriber +
             '&nbsp;> &nbsp;' + this.app + '</b></center>');
 
@@ -320,36 +386,41 @@ export class QuotaCapMainComponent implements OnInit {
 
     clearErrors() {
         this.isNameEmpty = false;
+        this.isCalendarEmpty = false;
+        this.isSpEmpty = false;
     }
 
     isEmpty(): boolean {
-        if (this.quotaInputValue.length != 0) {
+        if ((this.quotaInputValue.length != 0) && ( this.defaultcalval.length != 0 ) && (this.subscriber.length != 0) && !this.is_invalid_period) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
 
     onquotacapFormSubmit(quotacapForm) {
-
         this.clearErrors();
-
         if (!this.isEmpty()) {
-
             console.log(this.subscriber + '-' + this.appID + '-' + this.api + '-' + this.quotaInputValue);
             this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
                 this.submissionError = errorMsg;
+                this.resetdefault();
                 setTimeout(() => {
                     this.submissionError = null;
-                    this.resetdefault();
                 }, 5000);
             });
         } else {
-            console.log('invalid fields');
-            if (this.name.length == 0) {
+            if (this.quotaInputValue.length == 0) {
                 this.isNameEmpty = true;
             }
+            if (this.subscriber.length == 0) {
+                this.isSpEmpty = true;
+            }
+
+            if (this.defaultcalval.length == 0) {
+                this.isCalendarEmpty = true;
+            }
+
         }
 
 
@@ -362,6 +433,7 @@ export class QuotaCapMainComponent implements OnInit {
     onApiSelected(event: TypeaheadMatch) {
         for (const entry of this.applicationList) {
             if (entry == this.app) {
+                this.isCalenderEnable = false;
                 this.isSubscriberSelect = false;
                 this.isAppSelect = false;
                 this.isApiSelect = true;
@@ -380,22 +452,26 @@ export class QuotaCapMainComponent implements OnInit {
         this.app = '';
         this.api = '';
         this.quotaInputValue = '';
+        this.defaultcalval = '';
+        this.subscriber = '';
+        this.quotalist = [];
     }
 
-    onDateRangeSelected(event) {
-        //  console.log('changed', this.datepickvalue, event);
-        this.datepickvalue = event;
+    onDateRangeChanged(event) {
+        //    console.log('onDateRangeChanged(): Begin date: ', event.beginDate, ' End date: ', event.endDate);
+        this.datepickvalue = event.formatted;
         this.fromdate = this.datepickvalue.substring(0, 10);
-        this.todate = this.datepickvalue.substring(11, this.datepickvalue.length);
+        this.todate = this.datepickvalue.substring(13, this.datepickvalue.length);
+        console.log('from', this.fromdate, 'todate', this.todate);
 
         this.clearErrors();
         if (this.isSubscriberSelect) {
             this.quotaService.getValidityPeriodForSubscriober(this.subscriber, this.fromdate, this.todate, (response) => {
                 if (!response.Success.text.isEmpty) {
                     if (response.Success.text == 'true') {
-                        this.is_valid_period = true;
+                        this.is_invalid_period = true;
                     } else {
-                        this.is_valid_period = false;
+                        this.is_invalid_period = false;
                     }
                 } else {
                     //   this.emptyquotaValuetoInputBox();
@@ -406,9 +482,9 @@ export class QuotaCapMainComponent implements OnInit {
             this.quotaService.getValidityPeriodForApp(this.appID, this.fromdate, this.todate, (response) => {
                 if (!response.Success.text.isEmpty) {
                     if (response.Success.text == 'true') {
-                        this.is_valid_period = true;
+                        this.is_invalid_period = true;
                     } else {
-                        this.is_valid_period = false;
+                        this.is_invalid_period = false;
                     }
                 } else {
                     //   this.emptyquotaValuetoInputBox();
@@ -419,9 +495,9 @@ export class QuotaCapMainComponent implements OnInit {
             this.quotaService.getValidityPeriodForApi(this.api, this.fromdate, this.todate, (response) => {
                 if (!response.Success.text.isEmpty) {
                     if (response.Success.text == 'true') {
-                        this.is_valid_period = true;
+                        this.is_invalid_period = true;
                     } else {
-                        this.is_valid_period = false;
+                        this.is_invalid_period = false;
                     }
                 } else {
                     //   this.emptyquotaValuetoInputBox();
@@ -430,7 +506,6 @@ export class QuotaCapMainComponent implements OnInit {
             });
         }
     }
-
 
 }
 
