@@ -70,6 +70,7 @@ export class ApplicationTaskSearchParam {
     processType: PROCESS_TYPE;
     assignee: string;
     isAdimin: boolean;
+    operator: string;
     start:number;
     size: number;
 }

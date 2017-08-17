@@ -146,7 +146,11 @@ const _getApplications = function (request, reply) {
 
                 // console.log('$$$$$$$$$$$$   '+ index + ' $$$$$$$$$$ '  + details['apiName']);
                 if (details['apiName']) {
-                    return operationRatesREST.Invoke(details['apiName']);
+                    if(request.payload.isAdmin){
+                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName']);
+                    }else {
+                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request.payload.operator);
+                    }
                 } else {
                     reply(responseAdaptor(appTaskResult, appsDetails, null));
                 }

@@ -117,7 +117,7 @@ export class ApplicationDataTableComponent implements OnInit {
             count++;
         }
 
-        console.log('$$' + item.selectedRate);
+       // console.log('$$' + item.selectedRate);
     }
 
 
@@ -132,7 +132,7 @@ export class ApplicationDataTableComponent implements OnInit {
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
 
-        console.log('$$$$$' + JSON.stringify(appTask));
+        //console.log('$$$$$' + JSON.stringify(appTask));
         switch (actionType) {
             case 'ASSIGN' : {
                 this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));

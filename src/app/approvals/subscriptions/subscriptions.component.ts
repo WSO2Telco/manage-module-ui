@@ -49,7 +49,6 @@ export class SubscriptionsComponent implements OnInit {
                 this.allSubscriptions = subs;
                 if(this.allSubscriptions != null){
                     this.setDefaultAllOperationRates();
-                    console.log('$$$$$$$$' + JSON.stringify(this.allSubscriptions));
                 }
             },
             (error) => {
