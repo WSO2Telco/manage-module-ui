@@ -30,15 +30,38 @@ function authenticationService() {
 
        // console.log("roles" + JSON.stringify(roleResults));
         let status = false;
+        let isAdmin = false;
+        let operator = '';
+
         for (const entry of roleResults.roles) {
             for(const role of config.allowedRoles){
                 if (entry == role) {
                     status = true;
                 }
             }
+
         }
+
+
+        for (const entry of roleResults.roles) {
+            if(!isAdmin){
+                if(entry == 'manage-app-admin'){
+                    operator = '';
+                    isAdmin = true;
+                }
+                if(entry == 'operator1-admin-role'){
+                    operator = 'Operator1';
+
+                }
+                if(entry == 'operator2-admin-role'){
+                    operator = 'Operator2';
+                }
+            }
+        }
+
+
         if (status) {
-            callback(Object.assign({},loginResult,roleResults,{userName:request.payload.userName, success: true, message:"user verified successfully"}));
+            callback(Object.assign({},loginResult,roleResults,{userName:request.payload.userName, isAdmin: isAdmin, operator:operator, success: true, message:"user verified successfully"}));
         } else {
             callback(Object.assign({userName:request.payload.userName, success: false, message:'user do not have privilege to login'}));
         }

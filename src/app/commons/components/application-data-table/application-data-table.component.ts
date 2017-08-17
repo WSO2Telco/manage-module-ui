@@ -66,11 +66,9 @@ export class ApplicationDataTableComponent implements OnInit {
     private showTiers: boolean;
 
     @Input()
-    private showRates: boolean;
+    private isSubscription: boolean;
 
     private roleList: string[];
-
-    private array = ['admin', 'subscriber', 'operator1', 'operator2'];
 
     ngOnInit() {
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
@@ -81,8 +79,8 @@ export class ApplicationDataTableComponent implements OnInit {
                 this.showTiers = true;
             }
         }
-
     }
+
 
     ngOnChanges(changeObj: SimpleChanges) {
         if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
@@ -101,6 +99,29 @@ export class ApplicationDataTableComponent implements OnInit {
         item.tier = event.target.value;
     }
 
+    onOperationRateChange(event, item, apiOperation) {
+
+        let count =0;
+        for(const entry of item.relevantRates){
+            if(entry.apiOperation == apiOperation){
+                let id;
+                for(const entry2 of entry.rateDefinitions){
+                    if(entry2.rateDefName == event.target.value){
+                        id = entry2.rateDefId;
+                    }
+                }
+                const splitted = item.selectedRate.split('-');
+                splitted[count] = id;
+                item.selectedRate = splitted.join('-');
+            }
+            count++;
+        }
+
+        console.log('$$' + item.selectedRate);
+    }
+
+
+
     onToggleFilter() {
         this.isFilterVisible = !this.isFilterVisible;
         if (!this.isFilterVisible) {
@@ -110,6 +131,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
+
+        console.log('$$$$$' + JSON.stringify(appTask));
         switch (actionType) {
             case 'ASSIGN' : {
                 this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
@@ -198,6 +221,11 @@ export class ApplicationDataTableComponent implements OnInit {
     onPageChanged(event) {
         this.filter.startRecordNumber = (<number>event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
         this.onFilterChange.emit(this.filter);
+    }
+
+
+    displayu(){
+        console.log(JSON.stringify(this.dataSource));
     }
 
 }

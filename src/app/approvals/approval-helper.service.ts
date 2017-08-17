@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ApprovalRemoteDataService} from "../data-providers/approval-remote-data.service";
-import {MessageService} from "../commons/services/message.service";
+import {ApprovalRemoteDataService} from '../data-providers/approval-remote-data.service';
+import {MessageService} from '../commons/services/message.service';
 import {
     ApproveApplicationCreationTaskParam,
     ApproveSubscriptionCreationTaskParam, ApplicationTask
-} from "../commons/models/application-data-models";
-import {TableDataType} from "../commons/models/common-data-models";
-import {SlimLoadingBarService} from "ng2-slim-loading-bar";
+} from '../commons/models/application-data-models';
+import {TableDataType} from '../commons/models/common-data-models';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 @Injectable()
 export class ApprovalHelperService {
@@ -23,15 +23,15 @@ export class ApprovalHelperService {
      * @param taskId
      * @param callBack
      */
-    assignApplicationTask(dataType: string, taskId: number,callBack):void {
+    assignApplicationTask(dataType: string, taskId: number, callBack): void {
 
         this.slimLoadingBarService.start();
 
         this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
             () => {
-                if (dataType == "APPLICATION") {
+                if (dataType == 'APPLICATION') {
                     this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                } else if (dataType == "SUBSCRIPTION") {
+                } else if (dataType == 'SUBSCRIPTION') {
                     this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
                 }
                 callBack();
@@ -39,7 +39,7 @@ export class ApprovalHelperService {
             (error) => {
                 this.message.error(error);
             },
-            ()=>{
+            () => {
                 this.slimLoadingBarService.complete();
             }
         );
@@ -52,7 +52,7 @@ export class ApprovalHelperService {
      * @param appTask
      * @param status
      */
-    approveRejectTask(dataType:TableDataType,appTask:ApplicationTask,status):void{
+    approveRejectTask(dataType: TableDataType, appTask: ApplicationTask, status): void{
 
         const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         let role = false;
@@ -70,9 +70,9 @@ export class ApprovalHelperService {
          * for applications approval or rejections
          * @param status
          */
-        let applicationActions = (status:'APPROVED' | 'REJECTED') => {
+        const applicationActions = (status: 'APPROVED' | 'REJECTED') => {
 
-            let param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
+            const param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
             param.taskId = appTask.id;
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
@@ -84,7 +84,7 @@ export class ApprovalHelperService {
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {
 
-                    if(status == 'APPROVED'){
+                    if (status == 'APPROVED'){
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
                     }else{
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
@@ -95,7 +95,7 @@ export class ApprovalHelperService {
                 (error) => {
                     this.message.error(error);
                 },
-                ()=>{
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );
@@ -105,8 +105,8 @@ export class ApprovalHelperService {
          * for subscription approval or rejection
          * @param status
          */
-        let subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
-            let param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
+        const subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
+            const param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
@@ -114,10 +114,11 @@ export class ApprovalHelperService {
             param.user = 'admin';
             param.taskType = 'subscription';
             param.role = role;
+            param.selectedRate = appTask.selectedRate;
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 () => {
-                    if(status == 'APPROVED'){
+                    if (status == 'APPROVED'){
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
                     }else{
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
@@ -128,31 +129,17 @@ export class ApprovalHelperService {
                 (error) => {
                     this.message.error(error);
                 },
-                ()=>{
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );
         };
 
-        let approveActions = {};
+        const approveActions = {};
         approveActions['APPLICATION'] = applicationActions;
         approveActions['SUBSCRIPTION'] = subscriptionActions;
 
         approveActions[dataType.dataType] && approveActions[dataType.dataType](status);
-    }
-
-
-    getOperationrates(callback: Function) {
-        console.log('get list of currency service called');
-        this.approvalService.getOperationrates()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
     }
 
 }

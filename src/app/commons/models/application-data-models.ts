@@ -22,7 +22,8 @@ export class ApplicationTask {
     isModified: boolean;
     status: string;
     comment: string;
-    relevantRates: RelevantRates [];
+    relevantRates: RelevantRates[];
+    selectedRate: string;
 
     toString() {
         return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
@@ -31,7 +32,12 @@ export class ApplicationTask {
 
 export class RelevantRates {
     apiOperation: string;
+    rateDefinitions: OperationRateDefinitions[];
+}
+
+export class OperationRateDefinitions{
     rateDefName: string;
+    rateDefId: number;
 }
 
 export class MetaData {
@@ -63,6 +69,7 @@ export class ApplicationTaskSearchParam {
     candidateGroups: string;
     processType: PROCESS_TYPE;
     assignee: string;
+    isAdimin: boolean;
     start:number;
     size: number;
 }
@@ -94,6 +101,7 @@ export class ApproveSubscriptionCreationTaskParam {
     status: 'APPROVED' | 'REJECTED';
     description: string;
     role: boolean;
+    selectedRate: string;
 }
 
 export class ApprovalEvent {
