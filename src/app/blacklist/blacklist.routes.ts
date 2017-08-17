@@ -1,9 +1,9 @@
-import {BlacklistMainComponent} from './blacklist-main/blacklist-main.component';
+import {ApiBlacklistMainComponent} from './apiblacklist/apiblacklist-main/apiblacklist-main.component';
 import {RouterModule} from '@angular/router';
 
 const routes = [{
     path : '',
-    component : BlacklistMainComponent
+    component : ApiBlacklistMainComponent
 }];
 
 export const BlackListRoutes = RouterModule.forChild(routes);

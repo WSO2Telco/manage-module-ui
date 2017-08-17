@@ -49,6 +49,9 @@ function authenticationService() {
                     operator = '';
                     isAdmin = true;
                 }
+                if(entry == 'dialog-admin-role'){
+                    operator = 'DIALOG';
+                }
                 if(entry == 'operator1-admin-role'){
                     operator = 'Operator1';
 
@@ -56,6 +59,7 @@ function authenticationService() {
                 if(entry == 'operator2-admin-role'){
                     operator = 'Operator2';
                 }
+
             }
         }
 

@@ -1,11 +1,12 @@
 import {NgModule} from '@angular/core';
 import {BlackListRoutes} from './blacklist.routes';
-import {BlacklistMainComponent} from './blacklist-main/blacklist-main.component';
+import {ApiBlacklistMainComponent} from './apiblacklist/apiblacklist-main/apiblacklist-main.component';
+import {SpBlacklistMainComponent} from './spblacklist/spblacklist-main/spblacklist-main.component'
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {SharedModule} from '../shared/shared.module';
-import { BlacklistListComponent } from '../blacklist/blacklist-list/blacklist-list.component';
+import { ApiBlacklistListComponent } from './apiblacklist/apiblacklist-list/apiblacklist-list.component';
 
 @NgModule({
 
@@ -19,8 +20,9 @@ import { BlacklistListComponent } from '../blacklist/blacklist-list/blacklist-li
     ],
 
     declarations: [
-        BlacklistMainComponent,
-        BlacklistListComponent
+        ApiBlacklistMainComponent,
+        ApiBlacklistListComponent,
+        SpBlacklistMainComponent
     ]
 
 })

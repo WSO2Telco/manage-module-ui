@@ -1,0 +1,57 @@
+:host {
+  display: block;
+  margin-top: 20px;
+}
+
+.content-div {
+  background-color: #ffffff;
+}
+
+.tbl-header {
+  color: #E19131;
+}
+
+.quotaInputContainer {
+  min-height: 100px;
+  padding: 10px;
+  background-color: white;
+  border: solid 1px whitesmoke;
+}
+
+.bs-callout-info {
+  background-color: #E19131;
+  border: 1px solid #e3e3e3;
+}
+
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.label-info {
+  background-color: #5bc0de;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}
+
+.table {
+  width: 70% !important;
+  background-color: #f9f9f9;
+}
+
+
