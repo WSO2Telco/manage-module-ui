@@ -16,8 +16,9 @@
                                    #inputc
                                    type="text"
                                    placeholder="Currency code"
-                                   required="required">
+                                   required />
                             <!--Throw error if currency validator fails-->
+                            <span class="error" *ngIf="isEmpty">{{currencyError}}</span>
                             <span class="error" *ngIf="isValidCurrency">{{currencyCodeError}}</span>
                         </div>
                     </div>
@@ -25,16 +26,17 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Currency description:</label>
                         <div class="col-sm-4">
-                             <textarea rows="2" cols="50"
+                             <textarea (input)="checkForError($event.target.value)"
+                                       rows="2" cols="50"
                                        class="form-control"
                                        type="text"
                                        autocomplete="off"
                                        placeholder="Description"
                                        [(ngModel)]="currencydesc"
                                        name="currencydesc"
-                                       required="required"
-                             >
+                                       required>
                              </textarea>
+                            <span class="error" *ngIf="isDesEmpty">{{desError}}</span>
                         </div>
                     </div>
 
