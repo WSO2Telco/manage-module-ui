@@ -1,14 +1,14 @@
-import {ApiBlacklistMainComponent} from './apiblacklist/apiblacklist-main/apiblacklist-main.component';
-import {SpBlacklistMainComponent} from './spblacklist/spblacklist-main/spblacklist-main.component';
+import {ApiBlacklistMainComponent} from './apiwise/apiblacklist-main/apiblacklist-main.component';
+import {SpBlacklistMainComponent} from './spwise/spblacklist-main/spblacklist-main.component';
 import {RouterModule} from '@angular/router';
 
 const routes = [
     {
-        path : 'apiblacklist',
+        path : 'apiwise',
         component : ApiBlacklistMainComponent
     },
     {
-        path : 'spblacklist',
+        path : 'spwise',
         component : SpBlacklistMainComponent
     },
 ];
