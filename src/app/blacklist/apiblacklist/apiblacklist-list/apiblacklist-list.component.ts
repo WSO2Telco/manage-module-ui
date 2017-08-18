@@ -1,13 +1,13 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {BlackListService} from '../../commons/services/blacklist.service';
+import {BlackListService} from '../../../commons/services/blacklist.service';
 
 @Component({
     selector: 'app-blacklist-list',
-    templateUrl: './blacklist-list.component.html',
-    styleUrls: ['../blacklist-main/blacklist-main.component.scss']
+    templateUrl: './apiblacklist-list.component.html',
+    styleUrls: ['../apiblacklist-main/apiblacklist-main.component.scss']
 })
 
-export class BlacklistListComponent implements OnInit {
+export class ApiBlacklistListComponent implements OnInit {
 
     @Input()
     private  datasource: string[];

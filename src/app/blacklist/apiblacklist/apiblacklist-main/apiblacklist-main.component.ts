@@ -1,16 +1,16 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { BlackListService} from '../../commons/services/blacklist.service';
-import {BlackListNumbers} from '../../commons/models/common-data-models';
+import { BlackListService} from '../../../commons/services/blacklist.service';
+import {BlackListNumbers} from '../../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 
 @Component({
   selector: 'app-blacklist-main',
-  templateUrl: './blacklist-main.component.html',
-  styleUrls: ['./blacklist-main.component.scss']
+  templateUrl: './apiblacklist-main.component.html',
+  styleUrls: ['./apiblacklist-main.component.scss']
 })
 
 
-export class BlacklistMainComponent implements OnInit {
+export class ApiBlacklistMainComponent implements OnInit {
 
   private submissionError: string;
 
