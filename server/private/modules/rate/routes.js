@@ -56,11 +56,6 @@ module.exports = [
         method: 'GET',
         path: '/api/rate/getTaxList',
         handler: rateService.getTaxList
-    },
-    {
-        method: 'POST',
-        path: '/api/rate/addRateCards',
-        handler: rateService.addRateCards
     }
 
 ];

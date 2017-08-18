@@ -15,7 +15,7 @@
                                    name="typeCategory"
                                    class="form-control"
                                    required >
-                            <span class="error" *ngIf="isCategoryEmpty">Category can not be empty</span>
+                            <span class="error" *ngIf="isCategoryError">{{categoryError}}</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"
                               tooltip="Click here to Add a new Category to the list" placement="right"
@@ -31,7 +31,7 @@
                                    name="typeCaSubtegory"
                                    class="form-control"
                                    required >
-                            <span class="error" *ngIf="isSubcategoryEmpty">Sub Category can not be empty</span>
+                            <span class="error" *ngIf="isSubcategoryError">{{subcategoryError}}</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"
                               tooltip="Click here to Add a new Sub Category to the list" placement="right"
@@ -48,7 +48,7 @@
                                    class="form-control"
                                    required
                             >
-                            <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
+                            <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
                         </div>
                         <span class="glyphicon glyphicon-plus info-tooltip"
                               tooltip="Click here to Add a new tariff to the list" placement="right"
@@ -64,6 +64,25 @@
                     </div>
 
                 </form>
+
+                <div *ngIf="isMappigError">
+                    <p class="error">Invalid Mapping</p>
+                </div>
+
+                <div>
+                    <table>
+                        <tr>
+                            <td><b>Category</b></td>
+                            <td><b>Sub Category</b></td>
+                            <td><b>Tariff</b></td>
+                        </tr>
+                        <tr *ngFor="let opt of rateCategories">
+                            <td>{{opt.category}}</td>
+                            <td>{{opt.subcategory}}</td>
+                            <td>{{opt.tariff}}</td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
 

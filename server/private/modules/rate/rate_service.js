@@ -302,31 +302,6 @@ function rateService() {
 
     }
 
-
-    let _addRateCards = function (request, callback) {
-        logger.log('INFO', "--------- RK add Rate cards rate_service ");
-
-        request.server.log('info', 'RK add Rate cards rate_service: ' + request.payload && JSON.stringify(request.payload));
-
-        let onSuccess = function (addRateCards) {
-            logger.log('INFO', 'success');
-            callback(Object.assign({}, addRateCards, {success: true, message:"rate card created successfully"}));
-        };
-
-        let onFailture = function (addRateCards) {
-            logger.log('ERROR', 'faliture');
-            callback(addRateCards);
-        };
-
-        if (validateAddRequest(request)) {
-            rateRestService.invokeAddRateRateCardsRest(request).then(onSuccess, onFailture);
-        } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
-        }
-
-
-    };
-
     return {
         addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
@@ -339,7 +314,6 @@ function rateService() {
         getCategoryList: _getCategoryList,
         getRateDefinitionList: _getRateDefinitionList,
         getTaxList:_getTaxList,
-        addRateCards:_addRateCards
     };
 
     //commet 22

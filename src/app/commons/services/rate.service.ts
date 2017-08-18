@@ -122,23 +122,6 @@ export class RateService {
             );
     }
 
-    /**
-     * Duplicate Method to add Rate cards
-     * @param {Function} callback
-     */
-    addNewRateCards(rateCard: Rate, callback: Function) {
-        console.log('Rajith add Rate Card Service Called .. ');
-        this._remoteService.addNewRateCards(rateCard)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
 
     getTariffList(callback: Function) {
         console.log('get list of tariff service called');

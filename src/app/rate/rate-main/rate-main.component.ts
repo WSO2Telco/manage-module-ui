@@ -44,6 +44,7 @@ export class RateMainComponent implements OnInit {
     private rateTypeList: RateType[];
     private categoryList: Category[];
     private rateCategory: RateCategory;
+    private rateCategories: RateCategory[];
     private rateTaxList: RateTax[];
 
     private categoryNameList: string[];
@@ -62,7 +63,7 @@ export class RateMainComponent implements OnInit {
     private subcategoryId: number;
     private tariffId: number;
 
-    constructor(private rateService: RateService,  private authService: AuthenticationService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -94,6 +95,7 @@ export class RateMainComponent implements OnInit {
         this.rateDefNameList = [];
         this.rateTaxList = [];
         this.taxidlist = '';
+        this.rateCategories = [];
 
         this.getTariffList();
         this.getCurrencyList();
@@ -183,22 +185,22 @@ export class RateMainComponent implements OnInit {
 
 
     getRateTaxList() {
-        this.rateService.getRateTaxList( (response, status) => {
-           if (status) {
-               let count = 0;
-               for (const entry of response) {
+        this.rateService.getRateTaxList((response, status) => {
+            if (status) {
+                let count = 0;
+                for (const entry of response) {
                     this.rateTaxList[count] = new RateTax();
                     this.rateTaxList[count].taxId = response[count].taxId;
                     this.rateTaxList[count].taxName = response[count].taxName;
                     count++;
-               }
-           }else {
-               this.submissionError = response;
-               setTimeout(() => {
-                   this.submissionError = null;
-               }, 5000);
+                }
+            } else {
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
 
-           }
+            }
         });
     }
 
@@ -267,6 +269,8 @@ export class RateMainComponent implements OnInit {
         let currency: Currency;
         let tariff: Tariff;
         let rateType: RateType;
+        let rateTaxes: RateTax[] = [];
+
         let rateCard: Rate;
         let rateDefCategoryBase: number;
         let category: Category;
@@ -301,20 +305,19 @@ export class RateMainComponent implements OnInit {
             }
         }
 
-        let rateTaxes: RateTax[] = [];
-
         let count2 = 0;
-        for (const item of this.rateTax){
+        /** for loop to assign rate tax values*/
+        for (const item of this.rateTax) {
             let temp = new RateTax();
             let temTax = new Tax();
 
             temTax.taxId = Number(item);
             temp.tax = temTax;
             rateTaxes[count2] = temp;
-            count2 ++;
+            count2++;
         }
 
-
+        /** assign value to rateDefCategoryBase */
         rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
 
         if (!this.isEmpty() && tariff != null && currency != null && rateType != null) {
@@ -322,55 +325,32 @@ export class RateMainComponent implements OnInit {
             rateCard = new Rate();
 
             ratedefinition = new RateDefinition();
+            /** assign values for the rate definition */
+            ratedefinition.rateDefName = this.rateDefName;
+            ratedefinition.rateDefDescription = this.rateDefDescription;
+            ratedefinition.rateDefDefault = 0;
+            ratedefinition.currency = currency;
+            ratedefinition.rateType = rateType;
+            ratedefinition.rateDefCategoryBase = rateDefCategoryBase;
+            ratedefinition.tariff = tariff;
 
             rateCard.rateDefinition = ratedefinition;
-            ratedefinition.rateDefName = this.rateDefName;
-            rateCard.rateDefinition.rateDefName = this.rateDefName;
-            rateCard.rateDefinition.rateDefDescription = this.rateDefDescription;
-            rateCard.rateDefinition.rateDefDefault = 0;
-
-            rateCard.rateDefinition.currency = currency;
-            rateCard.rateDefinition.rateType = rateType;
-            rateCard.rateDefinition.rateDefCategoryBase = rateDefCategoryBase;
-
-            rateCard.rateDefinition.tariff = tariff;
 
             if (rateDefCategoryBase == 0) {
-                rateCategory = [ new RateCategory() ];
-                rateCard.rateCategories = [];
-
+                rateCard.rateCategories = null;
             } else {
-                rateCategory = [ new RateCategory() ];
-
-                rateCard.rateCategories = rateCategory;
-
-                category = new Category();
-                subcategory = new Category();
-
-                for (const entry of rateCard.rateCategories) {
-
-                    entry.category = category;
-                    entry.subCategory = subcategory;
-                    entry.tariff = tariff;
-                    category.categoryId = this.categoryId;
-                    if (this.subcategoryId != null ) {
-                        subcategory.categoryId = this.subcategoryId;
-                    } else {
-                        subcategory.categoryId = null;
-                    }
-                    tariff.tariffId = this.tariffId;
-
-                }
-
+                rateCard.rateCategories = this.rateCategories;
             }
 
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            this.rateService.addNewRateCards(rateCard, (response, status) => {
+            console.log('#######  ' + JSON.stringify(rateCard));
 
-                if (status) { /** when rate card is submitted successfully subit the rate category*/
-                   this.successMgs = 'RateCard Added SuccessFully';
+            this.rateService.addNewRateCard(rateCard, (response, status) => {
+
+                if (status) {
+                    this.successMgs = 'RateCard Added SuccessFully';
                 } else {
                     this.submissionError = response;
                     setTimeout(() => {
@@ -409,10 +389,12 @@ export class RateMainComponent implements OnInit {
      * @returns {boolean}
      */
     isEmpty(): boolean {
-        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0)
+        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0) {
             return false;
-        else
+        } else {
             return true;
+        }
+
     }
 
     /**
@@ -485,31 +467,57 @@ export class RateMainComponent implements OnInit {
      * event handler mehod which assign category, sub category and tariff values.
      * @param event
      */
-    onRateCategorySubmitionHandler(event: Mapping) {
+    onRateCategorySubmitionHandler(event: Mapping[]) {
 
-        /** for loop to assign category id */
-        for (const entry of this.categoryList) {
-            if (entry.categoryName == event.category) {
-                this.categoryId = entry.categoryId;
-            }
-        }
+        let count = 0;
 
-        if (event.subcategory) {
-            /** for loop to assign sub category id */
+        for (const maping of event) {
+
+            let rateCategory = new RateCategory();
+
+            /** for loop to assign category id */
             for (const entry of this.categoryList) {
-                if (entry.categoryName == event.subcategory) {
-                    this.subcategoryId = entry.categoryId;
+                if (entry.categoryName == maping.category) {
+                    const category = new Category();
+                    category.categoryId = entry.categoryId;
+                    rateCategory.category = category
                 }
             }
-        }
 
-        /** for loop to assign tariff id */
-        for (const entry of this.tariffList) {
-            if (entry.tariffName == event.tariff) {
-                this.tariffId = entry.tariffId;
+
+            /** for loop to assign sub category id */
+            for (const entry of this.categoryList) {
+                if (maping.subcategory) {
+                    if (entry.categoryName == maping.subcategory) {
+                        const subcategory = new Category();
+                        subcategory.categoryId = entry.categoryId;
+                        rateCategory.subCategory = subcategory;
+                    }
+                } else {
+                    const subcategory = new Category();
+                    subcategory.categoryId = null;
+                    rateCategory.subCategory = subcategory;
+
+                }
+
             }
+
+
+            /** for loop to assign tariff id */
+            for (const entry of this.tariffList) {
+                if (entry.tariffName == maping.tariff) {
+                    const tariff = new Tariff();
+                    tariff.tariffId = entry.tariffId;
+                    rateCategory.tariff = tariff;
+                }
+            }
+
+            this.rateCategories[count] = rateCategory;
+
+            count++;
         }
 
+        //  console.log("%%%%%%%%%%%%%%" + JSON.stringify(this.rateCategories));
     }
 
     /**
