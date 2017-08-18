@@ -9,17 +9,17 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/api/rate/addcategory',
+        path: '/api/rate/categories',
         handler: rateService.addCategory
     },
     {
         method: 'POST',
-        path: '/api/rate/addtariff',
+        path: '/api/rate/tariffs',
         handler: rateService.addTariff
     },
     {
         method: 'POST',
-        path: '/api/rate/addcurrency',
+        path: '/api/rate/currencies',
         handler: rateService.addCurrency
     },
     {
@@ -34,7 +34,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/getcurrencylist',
+        path: '/api/rate/currencies',
         handler: rateService.getCurrencyList
     },
     {
@@ -44,13 +44,23 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/getcategorylist',
+        path: '/api/rate/categories',
         handler: rateService.getCategoryList
     },
     {
         method: 'GET',
         path: '/api/rate/getratedefinitionList',
         handler: rateService.getRateDefinitionList
+    },
+    {
+        method: 'GET',
+        path: '/api/rate/getTaxList',
+        handler: rateService.getTaxList
+    },
+    {
+        method: 'POST',
+        path: '/api/rate/addRateCards',
+        handler: rateService.addRateCards
     }
 
 ];

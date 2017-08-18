@@ -27,7 +27,7 @@ const validateAddCurrencyRequest = function (request) {
 
 const validateAddCategoryRequest = function (request) {
     let param = request.payload;
-    if (!!param && param.categoryName && param.categoryCode && param.categoryDesc) {
+    if (!!param && param.categoryName && param.categoryCode && param.categoryDescription && param.createdBy) {
         logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
@@ -282,6 +282,51 @@ function rateService() {
         rateRestService.invokeGetRateDefinitionListRest( ).then(onSuccess, onFailture);
     }
 
+    let _getTaxList = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get Taxes service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetRateTaxListRest().then(onSuccess, onFailture);
+
+    }
+
+
+    let _addRateCards = function (request, callback) {
+        logger.log('INFO', "--------- RK add Rate cards rate_service ");
+
+        request.server.log('info', 'RK add Rate cards rate_service: ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (addRateCards) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addRateCards, {success: true, message:"rate card created successfully"}));
+        };
+
+        let onFailture = function (addRateCards) {
+            logger.log('ERROR', 'faliture');
+            callback(addRateCards);
+        };
+
+        if (validateAddRequest(request)) {
+            rateRestService.invokeAddRateRateCardsRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+
+
+    };
+
     return {
         addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
@@ -292,7 +337,9 @@ function rateService() {
         getCurrencyList: _getCurrencyList,
         getRateTypeList: _getRateTypeList,
         getCategoryList: _getCategoryList,
-        getRateDefinitionList: _getRateDefinitionList
+        getRateDefinitionList: _getRateDefinitionList,
+        getTaxList:_getTaxList,
+        addRateCards:_addRateCards
     };
 
     //commet 22

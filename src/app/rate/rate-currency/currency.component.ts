@@ -3,7 +3,7 @@
  */
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
-import {Currency} from "../../commons/models/common-data-models";
+import {AuthenticationService} from '../../commons/services/authentication.service';
 const currencyCodes = require('./currencies');
 
 @Component({
@@ -30,7 +30,7 @@ export class CurrencyComponent implements OnInit {
 
     private currencyCodeError: string;
 
-    constructor(private rateService: RateService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -38,14 +38,14 @@ export class CurrencyComponent implements OnInit {
         this.isValidCurrency = false;
     }
 
-
     /**
      * when form submitted
      * @param currencyForm
      */
     onCurrencyValueSubmit(currencyForm) {
+        const loginInfo = this.authService.loginUserInfo.getValue();
         console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-        this.rateService.addCurrency(this.currencycode, this.currencydesc, (response, status) => {
+        this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
             if (status) {
                 const result = response;
                 console.log(JSON.stringify(result));
