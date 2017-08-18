@@ -21,8 +21,9 @@ export class MainMenuComponent implements OnInit {
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
         {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
         {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
-        {id: 8, route: '/blacklist', name: 'Blacklist', position: 'parent', iconName: 'phonelink_erase'},
-        {id: 9, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
+        {id: 8, route: '/blacklist/apiblacklist', name: 'Api Blacklist', position: 'parent', iconName: 'phonelink_erase'},
+        {id: 9, route: '/blacklist/spblacklist', name: 'Sp Blacklist', position: 'parent', iconName: 'phonelink_erase'},
+        {id: 10, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
 
     ];
 
