@@ -36,6 +36,11 @@ module.exports = [
         method: 'POST',
         path: '/api/quotacap/getvalidityperiod',
         handler: quotaCapService.getValidityPeriod
+    },
+    {
+        method: 'GET',
+        path: '/api/quotacap/getoperatorlist',
+        handler: quotaCapService.getOperatorList
     }
 
 ];

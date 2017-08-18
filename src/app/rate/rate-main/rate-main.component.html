@@ -81,7 +81,7 @@
                                       name="description"
                                       #descriptionRef="ngModel"
                                       required
-                                      [(ngModel)]="rateDefDesc">
+                                      [(ngModel)]="rateDefDescription">
                             </textarea>
                         <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
                     </div>
@@ -147,15 +147,15 @@
                     <label class="control-label col-sm-2">Tax:</label>
                     <div class="col-sm-4">
                         <select multiple
-                                [(ngModel)]="taxname"
+                                [(ngModel)]="rateTax"
                                 class="form-control"
                                 name="tax"
                                 required
                                 id="taxlist">
-                            <option>VAT</option>
-                            <option>NBT</option>
-                            <option>COB</option>
-                            <option>NVT</option>
+                            <option
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}</option>
+
                         </select>
                         <span class="error" *ngIf="isTaxEmpty">Tax can not be empty</span>
                     </div>

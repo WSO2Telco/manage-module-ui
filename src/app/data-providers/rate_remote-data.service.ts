@@ -20,14 +20,16 @@ export class RateRemoteDataService {
     private apiEndpoints: Object = {
         addRateCard: this.apiContext + '/rate/addratecard',
         addRateCategory: this.apiContext + '/rate/addratecategory/',
-        addCategory: this.apiContext + '/rate/addcategory',
-        addCurrency: this.apiContext + '/rate/addcurrency',
-        addTariff: this.apiContext + '/rate/addtariff',
+        addCategory: this.apiContext + '/rate/categories',
+        addCurrency: this.apiContext + '/rate/currencies',
+        addTariff: this.apiContext + '/rate/tariffs',
         getTariffList: this.apiContext + '/rate/gettarifflist',
-        getCurrencyList: this.apiContext + '/rate/getcurrencylist',
+        getCurrencyList: this.apiContext + '/rate/currencies',
         getRateTypeList: this.apiContext + '/rate/getratetypelist',
-        getCategoryList: this.apiContext + '/rate/getcategorylist',
-        getRateDefinitionList: this.apiContext + '/rate/getratedefinitionList'
+        getCategoryList: this.apiContext + '/rate/categories',
+        getRateDefinitionList: this.apiContext + '/rate/getratedefinitionList',
+        getRateTaxList: this.apiContext + '/rate/getTaxList',
+        addRateCards: this.apiContext + '/rate/addRateCards'
     };
 
     constructor(private http: Http) {
@@ -115,6 +117,23 @@ export class RateRemoteDataService {
     }
 
     /**
+     * Duplicate Method for add Ratecards
+     */
+
+    addNewRateCards(data: Rate) {
+        console.log('rate_remote-data ............. add New Rate Card Remote');
+        console.log(JSON.stringify(data));
+        return this.http.post(this.apiEndpoints['addRateCards'], JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                console.log(result);
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+
+    /**
      * get list of tariff values
      * @returns {Observable<R>}
      */
@@ -179,5 +198,17 @@ export class RateRemoteDataService {
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    getRateTax() {
+        const data = {};
+        console.log('hit in the rate taxes');
+        return this.http.get(this.apiEndpoints['getRateTaxList'])
+            .map((response: Response) => {
+                const result = response.json();
+                console.log(result);
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 }

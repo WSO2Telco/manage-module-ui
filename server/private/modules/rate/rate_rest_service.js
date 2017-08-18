@@ -331,6 +331,70 @@ const _invokeGetRateDefinitionListRest = function ( ) {
 };
 
 
+const _invokeGetRateTaxListRest = function () {
+
+    console.log("rate get rate Taxes list rest end point call")
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'taxes';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+            if(error) {
+                console.log("response failed");
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            } else {
+            console.log("response success : "+ payload);
+            deferred.resolve(payload);
+        }
+    });
+
+    return deferred.promise;
+
+};
+
+const _invokeAddRateCardsRest = function (request) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'ratecards';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success");
+    deferred.resolve(payload);
+}
+});
+    return deferred.promise;
+};
+
+
+
+
 module.exports = {
     invokeAddCategoryRest: _invokeAddCategoryRest,
     invokeAddRateCategoryRest: _invokeAddRateCategoryRest,
@@ -341,7 +405,9 @@ module.exports = {
     invokeGetCurrencyListRest: _invokeGetCurrencyListRest,
     invokeGetRateTypeListRest: _invokeGetRateTypeListRest,
     invokeGetCategoryListRest: _invokeGetCategoryListRest,
-    invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest
+    invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
+    invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
+    invokeAddRateRateCardsRest : _invokeAddRateCardsRest
 
 
 };

@@ -1,3 +1,6 @@
+import * as moment from "moment";
+import _date = moment.unitOfTime._date;
+
 export class MenuItem {
     id: number;
     route: string;
@@ -49,6 +52,7 @@ export class Currency {
     currencyId: number;
     currencyCode: string;
     currencyDescription: string;
+    createdBy: string;
 }
 
 export class ApiList {
@@ -71,7 +75,7 @@ export class Api {
 export class Tariff {
     tariffId: number;
     tariffName: string;
-    tariffDesc: string;
+    tariffDescription: string;
     tariffDefaultVal: number;
     tariffMaxCount: number;
     tariffExcessRate: number;
@@ -82,6 +86,7 @@ export class Tariff {
     tariffSurChargeval: number;
     tariffSurChargeAds: number;
     tariffSurChargeOpco: number;
+    createdBy: string;
 }
 
 export class RateType {
@@ -90,11 +95,17 @@ export class RateType {
     rateTypeDesc: string;
 }
 
-
 export class Rate {
-    rateDefId: number;
+    rateDefinition: RateDefinition;
+    rateCategories: RateCategory[];
+    rateTaxes: RateTax [];
+    createdBy: string;
+}
+
+
+export class RateDefinition {
     rateDefName: string;
-    rateDefDesc: string;
+    rateDefDescription: string;
     rateDefDefault: number;
     currency: Currency;
     rateType: RateType;
@@ -102,15 +113,31 @@ export class Rate {
     tariff: Tariff;
 }
 
+export class Tax {
+    taxId: number;
+}
+
+export class RateTax {
+    tax: Tax;
+    taxId: number;
+    taxCode: string;
+    taxName: string;
+    createdBy: string;
+    createdDate: string;
+    updatedBy: string;
+    updatedDate: string;
+}
+
+
 export class Category {
     categoryId: number;
     categoryName: string;
     categoryCode: string;
-    categoryDesc: string;
+    categoryDescription: string;
+    createdBy: string;
 }
 
 export class RateCategory {
-    rateDefinition: Rate;
     category: Category;
     subCategory: Category;
     tariff: Tariff;
@@ -132,3 +159,4 @@ export class QuotaList {
     fromDate: string;
     toDate: string;
 }
+

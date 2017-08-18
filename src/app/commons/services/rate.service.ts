@@ -62,12 +62,13 @@ export class RateService {
      * @param description
      * @param callback
      */
-    addCategory(name: string, code: string, description: string, callback: Function) {
+    addCategory(name: string, code: string, description: string, created :string,  callback: Function) {
         console.log('add new category service called');
         const model: Category = new Category();
         model.categoryName = name;
         model.categoryCode = code;
-        model.categoryDesc = description;
+        model.categoryDescription = description;
+        model.createdBy = created;
         this._remoteService.addCategory(model)
             .subscribe(
                 data => {
@@ -85,11 +86,12 @@ export class RateService {
      * @param description
      * @param callback
      */
-    addCurrency(code: string, description: string, callback: Function) {
+    addCurrency(code: string, description: string, createdby: string, callback: Function) {
         console.log('add new currency service called');
         const model: Currency = new Currency();
         model.currencyCode = code;
         model.currencyDescription = description;
+        model.createdBy = createdby;
         this._remoteService.addCurrency(model)
             .subscribe(
                 data => {
@@ -110,6 +112,23 @@ export class RateService {
     addNewRateCard(rateCard: Rate, callback: Function) {
         console.log('add new rate card service called');
         this._remoteService.addNewRateCard(rateCard)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+    /**
+     * Duplicate Method to add Rate cards
+     * @param {Function} callback
+     */
+    addNewRateCards(rateCard: Rate, callback: Function) {
+        console.log('Rajith add Rate Card Service Called .. ');
+        this._remoteService.addNewRateCards(rateCard)
             .subscribe(
                 data => {
                     callback(data, true);
@@ -186,6 +205,18 @@ export class RateService {
             );
     }
 
+    getRateTaxList(callback: Function) {
+        console.log('get list of tax List service called');
+        this._remoteService.getRateTax()
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
 
 }
 
