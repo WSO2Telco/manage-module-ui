@@ -17,7 +17,7 @@
   color: #E19131;
 }
 
-.addbtn{
+.addbtn {
 
 }
 
@@ -26,7 +26,7 @@
   color: #f96565;
 }
 
-.whitelistInputContainer{
+.whitelistInputContainer {
   min-height: 100px;
   padding: 10px;
   background-color: white;
@@ -37,7 +37,7 @@
   color: #E19131;
 }
 
-.searchFilter{
+.searchFilter {
   /*overflow: hidden;
   padding: 10px;
   background-color: white;
@@ -57,9 +57,14 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.open{overflow: visible; z-index: 100000;}
+.open {
+  overflow: visible;
+  z-index: 100000;
+}
 
-.subtitle{ color: #E19132;}
+.subtitle {
+  color: #E19132;
+}
 
 .info-tooltip {
   font-size: 1.5em;

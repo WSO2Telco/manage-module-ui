@@ -2,28 +2,27 @@
     <div class="col-sm-12">
         <div class="form-container quotaInputContainer">
             <div class="tbl-header">
-                <h3>APIwise BlackList </h3>
-                <br> <br>
+                <h3>APIwise Blacklist</h3>
+                <br>
             </div>
-            <div class="bs-callout bs-callout-info">
-                <div class="form-group form-horizontal">
-                    <label class="control-label col-sm-1">API:</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control"
-                               [(ngModel)]="api"
-                               [typeaheadMinLength]="0"
-                               container="body"
-                               [typeahead]="apiList"
-                               typeaheadOptionField="apiId"
-                               (typeaheadOnSelect)="onApiSelected($event)"
-                               placeholder="Select the API"
-                        >
-                    </div>
-                    <div class="col-sm-4"><h4>BlackList subscribers count : &nbsp; <span
-                            class="label label-info">{{ count }}</span>
-                    </h4>
-                    </div>
+            <div class="searchFilter">
+                <h4 class="control-label col-sm-1">API :</h4>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="api"
+                           [typeaheadMinLength]="0"
+                           container="body"
+                           [typeahead]="apiList"
+                           typeaheadOptionField="apiId"
+                           (typeaheadOnSelect)="onApiSelected($event)"
+                           placeholder="Select the API"
+                    >
                 </div>
+                <div class="col-sm-4"><h4>BlackListed subscribers count : &nbsp; <span
+                        class="label label-info">{{ count }}</span>
+                </h4>
+                </div>
+
             </div>
 
             <br><br>

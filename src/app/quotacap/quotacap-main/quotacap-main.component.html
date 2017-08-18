@@ -79,6 +79,7 @@
                                        autocomplete="off"
                                        placeholder="Enter Quota Value"
                                        name="name"
+                                       min="0"
                                        #nameRef="ngModel"
                                        type="number"
                                        required
@@ -106,7 +107,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-4">
-                                <br> <br>
+                                <br>
                                 <button type="submit" class="btn btn-success" [(disabled)]="is_edit">Add</button>&nbsp;
                                 <button type="reset" class="btn btn-warning">Cancel</button>
                             </div>

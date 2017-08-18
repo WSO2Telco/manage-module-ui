@@ -3,8 +3,8 @@ const quotaCapService = require('./quotacap_service');
 
 module.exports = [
     {
-        method: 'POST',
-        path: '/api/quotacap/getsubscribers',
+        method: 'GET',
+        path: '/api/quotacap/getsubscribers/{operator}',
         handler: quotaCapService.getSubscribers
     },
     {
@@ -41,6 +41,11 @@ module.exports = [
         method: 'GET',
         path: '/api/quotacap/getoperatorlist',
         handler: quotaCapService.getOperatorList
+    },
+    {
+        method: 'GET',
+        path: '/api/quotacap/getoperatorlistbysubscriber/{subscribers}',
+        handler: quotaCapService.getOperatorlistBysubscriber
     }
 
 ];

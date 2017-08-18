@@ -15,9 +15,9 @@ export class QuotaService {
                 private slimLoadingBarService: SlimLoadingBarService) {
     }
 
-    getSubscribers(callback: Function) {
+    getSubscribers(operatorName: string, callback: Function) {
         console.log('get subscribers of provider service called');
-        this._remoteService.getSubscribers()
+        this._remoteService.getSubscribers(operatorName)
             .subscribe(
                 data => {
                     callback(data, true);
