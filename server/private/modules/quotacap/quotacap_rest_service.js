@@ -10,14 +10,14 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetSubscribersRest = function ( ) {
+const _invokeGetSubscribersRest = function (operator ) {
 
-    console.log("whitelist get subscribers rest end point call")
+    console.log("get subscribers rest end point call")
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'subscribers';
+        return config.quotaServiceUrl + 'getSubscribersByOperator?operatorName='+operator ;
     };
 
     let getRequestOptions = function () {
@@ -28,7 +28,7 @@ const _invokeGetSubscribersRest = function ( ) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
             console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
@@ -41,6 +41,36 @@ const _invokeGetSubscribersRest = function ( ) {
     return deferred.promise;
 };
 
+const _invokegetOperatorlistBysubscriber = function (subscribers ) {
+
+    console.log("get opereatorlist rest end point call")
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName='+subscribers ;
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : " + JSON.stringify(payload));
+
+    deferred.resolve(payload);
+}
+});
+    return deferred.promise;
+};
 
 
 const _invokeGetAppsRest = function (request) {
@@ -275,6 +305,7 @@ const _invokeRemoveFromWhitelistRest = function (request) {
 
 module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,
+    invokegetOperatorlistBysubscriber: _invokegetOperatorlistBysubscriber,
     invokeGetAppsRest: _invokeGetAppsRest,
     invokeGetApisRest: _invokeGetApisRest,
     invokeAddNewQuotaLimit: _invokeAddNewQuotaLimit,

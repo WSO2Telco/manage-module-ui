@@ -4,6 +4,7 @@
 import {Component, OnInit,} from '@angular/core';
 import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {QuotaService} from '../../commons/services/quotacap.service';
+import {AuthenticationService} from '../../commons/services/authentication.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
@@ -92,11 +93,11 @@ export class QuotaCapMainComponent implements OnInit {
 
     constructor(private reportingService: ReportingRemoteDataService,
                 private quotaService: QuotaService,
-                private message: MessageService) {
+                private message: MessageService,
+                private authService: AuthenticationService) {
     }
 
     ngOnInit() {
-        this.getSubscribersOfProvider();
         this.getOperatorList();
         this.name = '';
         this.subscriberList = [];
@@ -120,32 +121,17 @@ export class QuotaCapMainComponent implements OnInit {
         this.fromdate = '';
         this.todate = '';
         this.defaultcalval = '';
-        this.loggeduser = 'DIALOG';
     }
 
 
-    /**
-     * Change operator list based on SP
-     */
-    setOperatorofSP() {
-
-        let index = 0;
-        for (const entry of this.operatorsList) {
-            if (entry == this.loggeduser) {
-                this.selectedoperator = entry;
-                this.ISoperatordisable = true;
-            }
-            index++;
-        }
-
-    }
 
 
     /**
      * to load the subscriber details
      */
-    getSubscribersOfProvider() {
-        this.quotaService.getSubscribers((response, status) => {
+    getSubscribersOfProvider(operatorName: string) {
+        console.log('getSubscribersOfProvider ' + this.loggeduser);
+        this.quotaService.getSubscribers(operatorName, (response , status)  => {
             if (status) {
                 this.subscriberList = response;
                 console.log('>>>>>>>>>>>>>>>>>>>>>>' + this.subscriberList);
@@ -171,9 +157,10 @@ export class QuotaCapMainComponent implements OnInit {
                     this.operatorsList[count] = entry.operatorName;
                     count += 1;
                 }
-                this.setOperatorofSP();
+         this.GetLoggedUser();
+
             } else {
-                console.log('else<<<<<<<<<<<<<<<<<<<<');
+
                 this.submissionError = response;
                 setTimeout(() => {
                     this.submissionError = null;
@@ -181,6 +168,41 @@ export class QuotaCapMainComponent implements OnInit {
 
             }
         });
+    }
+
+
+
+    /**
+     * Change operator list based on SP
+     */
+    GetLoggedUser() {
+
+        let loginInfo = this.authService.loginUserInfo.getValue();
+        console.log('###insidequota' + loginInfo.isAdmin + ' ' + loginInfo.operator.toUpperCase());
+
+        if (loginInfo.isAdmin) {
+        } else {
+            this.loggeduser = loginInfo.operator;
+            this.setOperatorofSP();
+            this.getSubscribersOfProvider(this.loggeduser.toUpperCase());
+        }
+
+    }
+
+    /**
+     * Change operator list based on SP
+     */
+    setOperatorofSP() {
+        let index = 0;
+        for (const entry of this.operatorsList) {
+            if (entry == this.loggeduser.toUpperCase()) {
+
+                this.selectedoperator = entry;
+                this.ISoperatordisable = true;
+            }
+            index++;
+        }
+
     }
 
     /**

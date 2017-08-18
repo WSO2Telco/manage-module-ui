@@ -36,10 +36,10 @@ export class QuotacapRemoteDataService {
      * to get all available subscribers of provider
      * @returns {Observable<R>}
      */
-    getSubscribers() {
+    getSubscribers(operatorName: string) {
         const data = {};
         console.log('hit in the quota remote data service');
-        return this.http.post(this.apiEndpoints['getSubscribers'], data, this.options)
+        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName , this.options)
             .map((response: Response) => {
                 const result = response.json();
                 return result;
