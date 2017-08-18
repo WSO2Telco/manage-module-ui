@@ -23,7 +23,7 @@ var appConfig = {
     businessProcessEngineUserName : process.env.wm_business_process_engine_user || 'kermit',
     businessProcessEnginePassword : process.env.wm_business_process_engine_password || 'kermit',
     apiContext: 'api',
-    allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber', 'operator1-admin-role', 'operator2-admin-role']
+    allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber', 'operator1-admin-role', 'operator2-admin-role', 'dialog-admin-role']
 
 };
 
