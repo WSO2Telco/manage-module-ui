@@ -44,8 +44,8 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/quotacap/getoperatorlistbysubscriber/{subscribers}',
-        handler: quotaCapService.getOperatorlistBysubscriber
+        path: '/api/quotacap/getoperatorofsubscriber/{subscriberID}',
+        handler: quotaCapService.getOperatorOfsubscriber
     }
 
 ];
