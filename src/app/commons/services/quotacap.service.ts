@@ -16,7 +16,6 @@ export class QuotaService {
     }
 
     getSubscribers(operatorName: string, callback: Function) {
-        console.log('get subscribers of provider service called');
         this._remoteService.getSubscribers(operatorName)
             .subscribe(
                 data => {
@@ -28,8 +27,19 @@ export class QuotaService {
             );
     }
 
+    getOperatorOfsubscriber(subscriberID: string, callback: Function) {
+        this._remoteService.getOperatorOfsubscriber(subscriberID)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
     getApps(subscriberID: string, callback: Function) {
-        console.log('get apps of subscriber service called');
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
@@ -42,7 +52,6 @@ export class QuotaService {
     }
 
     getApis(id: string, callback: Function) {
-        console.log('get apis of subscriber service called');
         this._remoteService.getApis(id)
             .subscribe(
                 data => {
@@ -55,7 +64,6 @@ export class QuotaService {
     }
 
     addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
-        console.log('Add new quotalimit service called');
         this.slimLoadingBarService.start();
         this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, quotaValue, fromDate, toDate)
             .subscribe(
@@ -74,7 +82,6 @@ export class QuotaService {
     }
 
     getQuotaLimitInfo(subscriberID: string, callback: Function) {
-        console.log('get quotalimit of subscriber service called');
         this._remoteService.getQuotaLimitInfo(subscriberID)
             .subscribe(
                 data => {
@@ -87,7 +94,6 @@ export class QuotaService {
     }
 
     getOperatorList(callback: Function) {
-        console.log('get operator list');
         this._remoteService.getOperatorList()
             .subscribe(
                 data => {
@@ -100,7 +106,6 @@ export class QuotaService {
     }
 
     getQuotaLimitInfoApp(appID: string, callback: Function) {
-        console.log('get quotalimit of subscriber service called');
         this._remoteService.getQuotaLimitInfoApp(appID)
             .subscribe(
                 data => {

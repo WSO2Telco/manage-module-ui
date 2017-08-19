@@ -41,14 +41,14 @@ const _invokeGetSubscribersRest = function (operator ) {
     return deferred.promise;
 };
 
-const _invokegetOperatorlistBysubscriber = function (subscribers ) {
+const _invokegetOperatorOfsubscriber = function (subscriberID ) {
 
     console.log("get opereatorlist rest end point call")
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName='+subscribers ;
+        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName='+subscriberID ;
     };
 
     let getRequestOptions = function () {
@@ -305,7 +305,7 @@ const _invokeRemoveFromWhitelistRest = function (request) {
 
 module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,
-    invokegetOperatorlistBysubscriber: _invokegetOperatorlistBysubscriber,
+    invokegetOperatorOfsubscriber: _invokegetOperatorOfsubscriber,
     invokeGetAppsRest: _invokeGetAppsRest,
     invokeGetApisRest: _invokeGetApisRest,
     invokeAddNewQuotaLimit: _invokeAddNewQuotaLimit,
