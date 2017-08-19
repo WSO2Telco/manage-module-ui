@@ -4,6 +4,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {Currency} from "../../commons/models/common-data-models";
 const currencyCodes = require('./currencies');
 
 @Component({
@@ -14,10 +15,18 @@ const currencyCodes = require('./currencies');
 
 export class CurrencyComponent implements OnInit {
 
+    private currency: Currency;
+
     private currencycode: string;
     private currencydesc: string;
     private submissionError: string;
     private isValidCurrency: boolean;
+
+    private isEmpty: boolean;
+    private currencyError: string;
+
+    private desError: string;
+    private isDesEmpty: boolean;
 
     @Input()
     private existingCodes: string[];
@@ -34,8 +43,12 @@ export class CurrencyComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.currencyCodeError = '';
         this.isValidCurrency = false;
+        this.isEmpty = false;
+        this.isDesEmpty = false;
+        this.clearErrors();
     }
 
     /**
@@ -43,21 +56,35 @@ export class CurrencyComponent implements OnInit {
      * @param currencyForm
      */
     onCurrencyValueSubmit(currencyForm) {
+        this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
-        console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-        this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
-            if (status) {
-                const result = response;
-                console.log(JSON.stringify(result));
-                this.onAddTask.emit(true);
-                this.modalClose.emit(true);
-            } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            }
-        });
+
+        if (this.currencycode != null && this.currencydesc != null) {
+
+            this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
+                if (status) {
+                    const result = response;
+                    console.log(JSON.stringify(result));
+                    this.onAddTask.emit(true);
+                    this.modalClose.emit(true);
+                } else {
+                    this.submissionError = response;
+                    setTimeout(() => {
+                        this.submissionError = null;
+                    }, 5000);
+                }
+            });
+        } else {
+                if (this.currencycode == null ) {
+                    this.isEmpty = true;
+                    this.currencyError = 'This field is Required';
+                }
+                if (this.currencydesc == null ) {
+                    this.isDesEmpty = true;
+                    this.desError = 'This field is Required';
+                }
+
+        }
     }
 
 
@@ -67,7 +94,7 @@ export class CurrencyComponent implements OnInit {
      */
     isCurrencyCode(name) {
         if (currencyCodes.indexOf(name) < 0) {
-            console.log("here");
+            this.clearErrors();
             this.isValidCurrency = true;
             this.currencyCodeError = 'Not a Valid Currency Type';
         } else {
@@ -84,6 +111,23 @@ export class CurrencyComponent implements OnInit {
                 this.isValidCurrency = false;
                 this.currencyCodeError = '';
             }
+        }
+    }
+
+
+    clearErrors() {
+        this.isEmpty = false;
+        this.isValidCurrency = false;
+        this.currencyCodeError = '';
+        this.currencyError = '';
+        this.isDesEmpty = false;
+        this.desError = '';
+    }
+
+    checkForError() {
+        if (this.currencydesc != null) {
+            this.isDesEmpty = false;
+            this.desError = '';
         }
     }
 }
