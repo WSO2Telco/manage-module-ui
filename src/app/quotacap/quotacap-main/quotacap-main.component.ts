@@ -491,7 +491,6 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaInputValue = '';
         this.defaultcalval = '';
         this.subscriber = '';
-        this.selectedoperator = '';
         this.quotalist = [];
     }
 
