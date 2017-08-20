@@ -18,6 +18,7 @@ export class QuotacapRemoteDataService {
 
     private apiEndpoints: Object = {
         getSubscribers: this.apiContext + '/quotacap/getsubscribers',
+        getOperatorOfsubscriber: this.apiContext + '/quotacap/getoperatorofsubscriber',
         getApps: this.apiContext + '/quotacap/getapps',
         getApis: this.apiContext + '/quotacap/getapis',
         getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
@@ -38,8 +39,7 @@ export class QuotacapRemoteDataService {
      */
     getSubscribers(operatorName: string) {
         const data = {};
-        console.log('hit in the quota remote data service');
-        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName , this.options)
+        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.options)
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -47,13 +47,28 @@ export class QuotacapRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
+
+    /**
+     * to get all available subscribers of provider
+     * @returns {Observable<R>}
+     */
+    getOperatorOfsubscriber(subscriberID: string) {
+        const data = {};
+        return this.http.get(this.apiEndpoints['getOperatorOfsubscriber'] + '/' + subscriberID, this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+
     /**
      * to get all operator
      * @returns {Observable<R>}
      */
     getOperatorList() {
         const data = {};
-        console.log('hit in the quota remote data service');
         return this.http.get(this.apiEndpoints['getOperatorList'], this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -70,7 +85,6 @@ export class QuotacapRemoteDataService {
      */
     getApps(subscriberID: string) {
         const data = {id: subscriberID};
-        console.log('hit in the quota remote data service');
         return this.http.post(this.apiEndpoints['getApps'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -86,7 +100,6 @@ export class QuotacapRemoteDataService {
      */
     getApis(id: string) {
         const data = {id: id};
-        console.log('hit in the quota remote data service');
         return this.http.post(this.apiEndpoints['getApis'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -113,7 +126,6 @@ export class QuotacapRemoteDataService {
             apiId = null;
         }
 
-        console.log('appid,api-----' + apiId, appId);
 
         const data = {
             'operator': 'DIALOG',
@@ -125,8 +137,6 @@ export class QuotacapRemoteDataService {
             'toDate': toDate
         };
 
-        console.log(JSON.stringify(data));
-        console.log('hit in the quota remote data service');
         return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -146,7 +156,7 @@ export class QuotacapRemoteDataService {
             'byFlag': 'byServiceProvider',
             'info': subscriberID + '@carbon.super'
         };
-        console.log('hit in the quota remote data service');
+
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -165,7 +175,7 @@ export class QuotacapRemoteDataService {
             'byFlag': 'byApplication',
             'info': appID
         };
-        console.log('hit in the quota remote data service');
+
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -185,7 +195,7 @@ export class QuotacapRemoteDataService {
             'byFlag': 'byApi',
             'info': apiID
         };
-        console.log('hit in the quota remote data service');
+
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -207,7 +217,7 @@ export class QuotacapRemoteDataService {
             'fromDate': fromDate,
             'toDate': toDate
         };
-        console.log(data);
+
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -228,7 +238,7 @@ export class QuotacapRemoteDataService {
             'fromDate': fromDate,
             'toDate': toDate
         };
-        console.log(data);
+
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -249,7 +259,7 @@ export class QuotacapRemoteDataService {
             'fromDate': fromDate,
             'toDate': toDate
         };
-        console.log(data);
+
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();

@@ -11,7 +11,7 @@
                     <form class="form-horizontal" #quotacapForm="ngForm" novalidate
                           (ngSubmit)="onquotacapFormSubmit(quotacapForm)">
 
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{'has-danger': isSpEmpty}">
                             <label class="control-label col-sm-4">Service Provider</label>
                             <div class="col-sm-6 ">
                                 <input type="text"
@@ -44,7 +44,7 @@
                                 >
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group ">
                             <label class="control-label col-sm-4">API</label>
                             <div class="col-sm-6">
                                 <input [(ngModel)]="api"
@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{'has-danger': (isNameEmpty || isInvalidquota)}">
                             <label class="control-label col-sm-4">Quota Value</label>
                             <div class="col-sm-6">
                                 <input class="form-control"
@@ -83,12 +83,14 @@
                                        #nameRef="ngModel"
                                        type="number"
                                        required
-                                       [(ngModel)]="quotaInputValue"
+                                       [ngModel]="quotaInputValue"
+                                       (ngModelChange)="quotaInputValuechange($event)"
                                 >
                                 <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>
+                                <span class="error" *ngIf="isInvalidquota">Cannot add negative quota</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" [ngClass]="{'has-danger': (is_invalid_period || isCalendarEmpty)}">
                             <label class="control-label col-sm-4">Validity period</label>
                             <div class="col-sm-8">
                                 <my-date-range-picker name="mydaterange"

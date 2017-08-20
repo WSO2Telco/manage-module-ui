@@ -73,7 +73,7 @@ function quotaCapService() {
 
     };
 
-    let _getOperatorlistBysubscriber = function (request, callback) {
+    let _getOperatorOfsubscriber = function (request, callback) {
 
         logger.log('INFO', "hit at get operetor service end point");
 
@@ -89,7 +89,7 @@ function quotaCapService() {
             callback(getResponseError);
         };
 
-        quotaCapRestService.invokegetOperatorlistBysubscriber(request.params.subscribers).then(onSuccess, onFailture);
+        quotaCapRestService.invokegetOperatorOfsubscriber(request.params.subscriberID).then(onSuccess, onFailture);
 
     };
 
@@ -261,7 +261,7 @@ function quotaCapService() {
         removeFromWhitelist: _removeFromWhitelist,
         getValidityPeriod: _getValidityPeriod,
         getOperatorList: _getOperatorList,
-        getOperatorlistBysubscriber: _getOperatorlistBysubscriber
+        getOperatorOfsubscriber: _getOperatorOfsubscriber
     }
 }
 

@@ -5,6 +5,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
 import {MessageService} from "../../commons/services/message.service";
+import {Currency} from "../../commons/models/common-data-models";
 const currencyCodes = require('./currencies');
 
 @Component({
@@ -15,6 +16,8 @@ const currencyCodes = require('./currencies');
 
 export class CurrencyComponent implements OnInit {
 
+    private currency: Currency;
+
     private currencycode: string;
     private currencydesc: string;
 
@@ -23,6 +26,12 @@ export class CurrencyComponent implements OnInit {
 
     private currencyDescError: string;
     private currencyCodeError: string;
+
+    private isEmpty: boolean;
+    private currencyError: string;
+
+    private desError: string;
+    private isDesEmpty: boolean;
 
     @Input()
     private existingCodes: string[];
@@ -41,6 +50,7 @@ export class CurrencyComponent implements OnInit {
     ngOnInit() {
         this.currencycode = '';
         this.currencydesc = '';
+
         this.clearErrors();
     }
 
@@ -49,6 +59,7 @@ export class CurrencyComponent implements OnInit {
      * @param currencyForm
      */
     onCurrencyValueSubmit(currencyForm) {
+        this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
         console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
         this.clearErrors();
@@ -73,7 +84,6 @@ export class CurrencyComponent implements OnInit {
                 this.isCurrencyDescError = true;
             }
         }
-
     }
 
 
@@ -102,12 +112,6 @@ export class CurrencyComponent implements OnInit {
             }
         }
     }
-
-    // reloadPage(){
-    //     this.currencycode = '';
-    //     this.currencydesc = '';
-    //     this.clearErrors();
-    // }
 
     clearErrors(){
         this.currencyCodeError = '';
