@@ -5,6 +5,8 @@ import {
     Tariff, Tax
 } from '../../commons/models/common-data-models';
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {MessageService} from "../../commons/services/message.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -14,8 +16,6 @@ import {AuthenticationService} from '../../commons/services/authentication.servi
 })
 export class RateMainComponent implements OnInit {
 
-    submissionError: string;
-    successMgs: string;
     private isDescriptionEmpty: boolean;
     private isNameError: boolean;
     private isDateEmpty: boolean;
@@ -43,9 +43,9 @@ export class RateMainComponent implements OnInit {
     public currencyList: Currency[];
     private rateTypeList: RateType[];
     private categoryList: Category[];
-    private rateCategory: RateCategory;
     private rateCategories: RateCategory[];
     private rateTaxList: RateTax[];
+    private mappingList: Mapping[];
 
     private categoryNameList: string[];
     private currencyCodeList: string[];
@@ -60,10 +60,9 @@ export class RateMainComponent implements OnInit {
 
 
     private categoryId: number;
-    private subcategoryId: number;
     private tariffId: number;
 
-    constructor(private rateService: RateService, private authService: AuthenticationService) {
+    constructor(private rateService: RateService, private _router: Router, private authService: AuthenticationService, private message: MessageService) {
     }
 
     ngOnInit() {
@@ -87,6 +86,7 @@ export class RateMainComponent implements OnInit {
         this.currencyList = [];
         this.rateTypeList = [];
         this.categoryList = [];
+        this.mappingList = [];
 
         this.categoryNameList = [];
         this.currencyCodeList = [];
@@ -121,11 +121,7 @@ export class RateMainComponent implements OnInit {
                 }
 
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
 
@@ -147,11 +143,7 @@ export class RateMainComponent implements OnInit {
                 }
 
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
 
@@ -173,17 +165,16 @@ export class RateMainComponent implements OnInit {
                 }
 
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
 
     }
 
 
+    /**
+     * this function will load the existing rate taxes list
+     */
     getRateTaxList() {
         this.rateService.getRateTaxList((response, status) => {
             if (status) {
@@ -195,11 +186,7 @@ export class RateMainComponent implements OnInit {
                     count++;
                 }
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
     }
@@ -222,11 +209,7 @@ export class RateMainComponent implements OnInit {
                 }
 
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
 
@@ -245,11 +228,7 @@ export class RateMainComponent implements OnInit {
                 }
 
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error(response);
             }
         });
 
@@ -270,16 +249,10 @@ export class RateMainComponent implements OnInit {
         let tariff: Tariff;
         let rateType: RateType;
         let rateTaxes: RateTax[] = [];
-
         let rateCard: Rate;
         let rateDefCategoryBase: number;
-        let category: Category;
-        let subcategory: Category;
         let ratedefinition: RateDefinition;
-        let tax: Tax;
-        let rateTax: RateTax[];
-        let rateCategory: RateCategory[];
-        let rateTaxx: RateTax;
+
 
         /** for loop to assign currency id */
         for (const entry of this.currencyList) {
@@ -345,18 +318,15 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            console.log('#######  ' + JSON.stringify(rateCard));
+           // console.log('#######  ' + JSON.stringify(rateCard));
 
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 
                 if (status) {
-                    this.successMgs = 'RateCard Added SuccessFully';
+                    this.message.success(response.message);
+                    this.reloadPage();
                 } else {
-                    this.submissionError = response;
-                    setTimeout(() => {
-                        this.submissionError = null;
-                    }, 5000);
-
+                    this.message.error(response);
                 }
             });
 
@@ -549,7 +519,38 @@ export class RateMainComponent implements OnInit {
             this.isNameError = false;
             this.nameError = '';
         }
+    }
 
+    showit(){
+        //this._router.navigate(['/rate']);
+        this.reloadPage();
+    }
+
+    reloadPage(){
+
+        /** reinitialize all the variables */
+
+        this.rateDefName = '';
+        this.rateDefDescription = '';
+        this.currency = '';
+        this.rateType = '';
+        this.tariff = '';
+        this.rateTax = '';
+        this.taxId = 0;
+        this.rateCategories = [];
+        this.mappingList = [];
+
+      //  this.showSubcategory = false;
+
+
+        this.getTariffList();
+        this.getCurrencyList();
+        this.getRateTypeList();
+        this.getCategoryList();
+        this.getRateDefinitionList();
+        this.getRateTaxList();
+
+        this.clearErrors();
 
     }
 

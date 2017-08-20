@@ -180,6 +180,7 @@
                 <app-ratecategory *ngIf="showSubcategory"
                                   [categoryList]="categoryNameList"
                                   [tariffList]="tariffNameList"
+                                  [rateCategories] = "mappingList"
                                   (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
@@ -195,4 +196,5 @@
 
         </div>
     </div>
+    <!--<button (click)="showit()">show</button>-->
 </div>

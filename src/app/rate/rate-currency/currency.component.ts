@@ -4,6 +4,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {MessageService} from "../../commons/services/message.service";
 const currencyCodes = require('./currencies');
 
 @Component({
@@ -16,8 +17,12 @@ export class CurrencyComponent implements OnInit {
 
     private currencycode: string;
     private currencydesc: string;
-    private submissionError: string;
-    private isValidCurrency: boolean;
+
+    private isCurrencyError: boolean;
+    private isCurrencyDescError: boolean;
+
+    private currencyDescError: string;
+    private currencyCodeError: string;
 
     @Input()
     private existingCodes: string[];
@@ -28,14 +33,15 @@ export class CurrencyComponent implements OnInit {
     @Output()
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private currencyCodeError: string;
 
-    constructor(private rateService: RateService, private authService: AuthenticationService) {
+
+    constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }
 
     ngOnInit() {
-        this.currencyCodeError = '';
-        this.isValidCurrency = false;
+        this.currencycode = '';
+        this.currencydesc = '';
+        this.clearErrors();
     }
 
     /**
@@ -45,19 +51,29 @@ export class CurrencyComponent implements OnInit {
     onCurrencyValueSubmit(currencyForm) {
         const loginInfo = this.authService.loginUserInfo.getValue();
         console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
-        this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
-            if (status) {
-                const result = response;
-                console.log(JSON.stringify(result));
-                this.onAddTask.emit(true);
-                this.modalClose.emit(true);
-            } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
+        this.clearErrors();
+
+        if(this.currencycode.length != 0 && this.currencydesc.length != 0){
+            this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
+                if (status) {
+                    this.onAddTask.emit(true);
+                    this.modalClose.emit(true);
+                    this.message.success(response.message);
+                } else {
+                    this.message.error(response);
+                }
+            });
+        }else{
+            if(this.currencycode.length == 0){
+                this.currencyCodeError = 'Currency Cannot Be Empty';
+                this.isCurrencyError = true;
             }
-        });
+            if(this.currencydesc.length == 0){
+                this.currencyDescError = 'Currency Description Cannot Be Empty';
+                this.isCurrencyDescError = true;
+            }
+        }
+
     }
 
 
@@ -68,7 +84,7 @@ export class CurrencyComponent implements OnInit {
     isCurrencyCode(name) {
         if (currencyCodes.indexOf(name) < 0) {
             console.log("here");
-            this.isValidCurrency = true;
+            this.isCurrencyError = true;
             this.currencyCodeError = 'Not a Valid Currency Type';
         } else {
             let state = false
@@ -78,12 +94,26 @@ export class CurrencyComponent implements OnInit {
                 }
             }
             if (state) {
-                this.isValidCurrency = true;
+                this.isCurrencyError = true;
                 this.currencyCodeError = 'Currency Type Already Existing';
             } else {
-                this.isValidCurrency = false;
+                this.isCurrencyError = false;
                 this.currencyCodeError = '';
             }
         }
+    }
+
+    // reloadPage(){
+    //     this.currencycode = '';
+    //     this.currencydesc = '';
+    //     this.clearErrors();
+    // }
+
+    clearErrors(){
+        this.currencyCodeError = '';
+        this.currencyDescError = '';
+
+        this.isCurrencyError = false;
+        this.isCurrencyDescError = false;
     }
 }

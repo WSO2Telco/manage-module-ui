@@ -29,10 +29,10 @@ export class WhitelistService {
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -42,10 +42,10 @@ export class WhitelistService {
         this._remoteService.getApis(id)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -81,10 +81,10 @@ export class WhitelistService {
         this._remoteService.addNewToWhitelist(appId, apiId, msisdnList)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }

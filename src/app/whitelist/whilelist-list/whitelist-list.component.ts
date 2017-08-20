@@ -3,6 +3,7 @@
  */
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {WhitelistService} from '../../commons/services/whitelist.service';
+import {MessageService} from "../../commons/services/message.service";
 
 @Component({
     selector: 'app-whitelist-list',
@@ -20,7 +21,7 @@ export class WhitelistListComponent implements OnInit {
     private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
 
-    constructor(private whitelistService: WhitelistService) {
+    constructor(private whitelistService: WhitelistService, private message: MessageService) {
 
     }
 
@@ -34,8 +35,9 @@ export class WhitelistListComponent implements OnInit {
             this.whitelistService.removeFromWhiteList(msisdn, (response, status) => {
                 if (status) {
                     this.onDeleteTask.emit(true);
+                    this.message.success('MSISDN Removed Successfully');
                 } else {
-                    console.log('error occured while deleting');
+                    this.message.error(response.message);
                 }
             });
         }

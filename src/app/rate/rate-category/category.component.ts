@@ -2,6 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {Category} from "../../commons/models/common-data-models";
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {MessageService} from "../../commons/services/message.service";
 
 @Component({
     selector: 'app-category',
@@ -36,7 +37,7 @@ export class CategoryComponent implements OnInit {
     @Input()
     private existingCategories: Category[];
 
-    constructor(private rateService: RateService, private authService: AuthenticationService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }
 
     ngOnInit() {
@@ -57,12 +58,9 @@ export class CategoryComponent implements OnInit {
                 if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
+                    this.message.success(response.message);
                 } else {
-                    this.submissionError = response;
-                    setTimeout(() => {
-                        this.submissionError = null;
-                    }, 5000);
-
+                    this.message.error(response);
                 }
             });
         } else {

@@ -30,6 +30,7 @@ export class RateCategoryComponent implements OnInit {
     private showNewSubCategory: boolean;
     private showNewTariff: boolean;
 
+    @Input()
     private rateCategories: Mapping[];
 
     @Input()
@@ -57,7 +58,6 @@ export class RateCategoryComponent implements OnInit {
         this.showNewSubCategory = false;
         this.showNewTariff = false;
         this.clearErrors();
-        this.rateCategories = [];
     }
 
 

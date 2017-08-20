@@ -79,7 +79,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"currency added successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Currency Added Successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -109,7 +109,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"category created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Category Created Successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -161,7 +161,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"rate card created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"Rate Card Created Successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {

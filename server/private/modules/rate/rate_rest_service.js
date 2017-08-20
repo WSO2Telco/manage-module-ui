@@ -162,9 +162,6 @@ const _invokeAddRateCardRest = function (request) {
         };
     };
 
-    console.log('$$$$'+JSON.stringify(request.payload));
-
-
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
             console.log("response failed");
