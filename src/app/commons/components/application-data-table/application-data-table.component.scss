@@ -92,7 +92,7 @@
       }
 
       &.open {
-        height: 158px;
+        height: 203px;
         background-color: #f4f2c9;
 
         .action {
@@ -101,7 +101,7 @@
         }
 
         &.A,&.R{
-          height: 243px;
+          height: 281px;
         }
       }
 
@@ -111,13 +111,13 @@
         position: absolute;
         left: 10px;
         right: 11px;
-        height: 105px;
+        height: 150px;
         margin-top: 53px;
         border:solid 1px #d0d0d0;
         @include box-shadow( inset 0px 10px 10px -9px rgba(209,209,209,1));
 
         &.A,&.R{
-          height: 190px;
+          height: 228px;
         }
 
         .more-row{

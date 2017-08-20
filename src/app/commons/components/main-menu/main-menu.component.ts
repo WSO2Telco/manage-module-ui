@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MenuItem} from '../../models/common-data-models';
 import {AppCommonService} from '../../services/app-common.service';
 import {Router, NavigationEnd} from '@angular/router';
+import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
     selector: 'app-main-menu',
@@ -12,12 +13,19 @@ export class MainMenuComponent implements OnInit {
 
     private selectedMenu: MenuItem;
     private isExpand = false;
+    private isAdmin: boolean;
 
-    private menuSource: MenuItem[] = [
+    private menuSourceIfAdmin: MenuItem[] = [
         {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
         {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
         {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
-        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
+        {
+            id: 4,
+            route: '/approvals/subscriptions',
+            position: 'child',
+            name: 'Approve Subscriptions',
+            iconName: 'subscriptions'
+        },
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
         {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
         {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
@@ -28,18 +36,52 @@ export class MainMenuComponent implements OnInit {
 
     ];
 
+    private menuSourceIfOp: MenuItem[] = [
+        {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
+        {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
+        {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
+        {
+            id: 4,
+            route: '/approvals/subscriptions',
+            position: 'child',
+            name: 'Approve Subscriptions',
+            iconName: 'subscriptions'
+        },
+        {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
+        {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
+        {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
+
+    ];
+
     constructor(private _appCommonService: AppCommonService,
-                private _router: Router) {
+                private _router: Router,
+                private authService: AuthenticationService) {
     }
 
     ngOnInit() {
-        this._router.events.subscribe((event) => {
-            if (event instanceof NavigationEnd){
-                this.selectedMenu = this.menuSource.filter((menu) => menu.route == event.url)[0];
-            }
-        });
 
-        this.selectedMenu = this.menuSource[0];
+        let loginInfo = this.authService.loginUserInfo.getValue();
+
+        if (loginInfo.isAdmin) {
+            this.isAdmin = true;
+            this._router.events.subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.selectedMenu = this.menuSourceIfAdmin.filter((menu) => menu.route == event.url)[0];
+                }
+            });
+
+            this.selectedMenu = this.menuSourceIfAdmin[0];
+        } else {
+            this.isAdmin = false;
+            this._router.events.subscribe((event) => {
+                if (event instanceof NavigationEnd) {
+                    this.selectedMenu = this.menuSourceIfOp.filter((menu) => menu.route == event.url)[0];
+                }
+            });
+
+            this.selectedMenu = this.menuSourceIfOp[0];
+        }
+
         this._appCommonService.menuToggleStream.subscribe((flag) => this.isExpand = flag);
     }
 
