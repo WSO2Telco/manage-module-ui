@@ -49,13 +49,12 @@
         <!--Form Container - START-->
         <div class="form-container rateInputContainer">
             <div class="tbl-header">
-                <h3>Create New Rate Card </h3>
-                <br> <br>
+                Create New Rate Card
             </div>
 
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate
                   (ngSubmit)="onRateCardSubmition(ratecardForm)">
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-sm-2">Rate Name:</label>
                     <div class="col-sm-4">
                         <input class="form-control"
@@ -71,7 +70,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
                     <label class="control-label col-sm-2">Rate Description</label>
                     <div class="col-sm-4">
                             <textarea rows="2" cols="50" class="form-control"
@@ -87,7 +86,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isCurrencyEmpty}">
                     <label class="control-label col-sm-2">Currency:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="currency"
@@ -105,7 +104,7 @@
                           (click)="showAddCurrency=true;changeDialogTitle();lgModal.show();"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isRateTypeEmpty}">
                     <label class="control-label col-sm-2">Rate Type:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
@@ -122,7 +121,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isTariffEmpty}">
                     <label class="control-label col-sm-2">Tariff:</label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
@@ -143,7 +142,7 @@
                           (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': isTaxEmpty}">
                     <label class="control-label col-sm-2">Tax:</label>
                     <div class="col-sm-4">
                         <select multiple
@@ -154,7 +153,8 @@
                                 id="taxlist">
                             <option
                                     *ngFor="let c of rateTaxList"
-                                    [ngValue]="c.taxId">{{c.taxName}}</option>
+                                    [ngValue]="c.taxId">{{c.taxName}}
+                            </option>
 
                         </select>
                         <span class="error" *ngIf="isTaxEmpty">Tax can not be empty</span>
@@ -186,9 +186,8 @@
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
-                        <br> <br>
                         <button type="submit" class="btn btn-success">Add</button>&nbsp;
-                        <button type="reset" class="btn btn-warning">Cancel</button>
+                        <button class="btn btn-warning">Cancel</button>
                     </div>
                 </div>
 

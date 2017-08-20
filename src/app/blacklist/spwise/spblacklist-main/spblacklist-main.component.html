@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="form-container quotaInputContainer">
             <div class="tbl-header">
-                <h3>SPwise Blacklist</h3>
+                SPwise Blacklist
                 <br>
             </div>
             <div class="searchFilter">
@@ -25,7 +25,28 @@
 
             </div>
 
-            <br><br>
+            <form class="form-horizontal" #numberlistForm="ngForm" novalidate>
+                <br>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Selected service provider :</label>
+                    <div class="col-sm-6">
+                        <label class="slectedlabel control-label col-sm-3">No SP selected</label>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="form-group">
+                    <label class="control-label col-sm-2"></label>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary animated fadeIn">
+                        Add
+                    </button>
+                    <button type="submit" class="btn btn-warning animated fadeIn">
+                        Reset
+                    </button>
+                </div>
+                </div>
+            </form>
 
         </div>
     </div>

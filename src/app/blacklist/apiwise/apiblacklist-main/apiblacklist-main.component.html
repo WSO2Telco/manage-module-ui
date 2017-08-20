@@ -2,7 +2,7 @@
     <div class="col-sm-12">
         <div class="form-container quotaInputContainer">
             <div class="tbl-header">
-                <h3>APIwise Blacklist</h3>
+                APIwise Blacklist
                 <br>
             </div>
             <div class="searchFilter">
@@ -30,7 +30,7 @@
                   (ngSubmit)="onUploadNumber(numberlistForm)">
 
 
-                <div class="form-group">
+                <div class="form-group" [ngClass]="{'has-danger': (isDublicate || ismsisdnError || islong)}">
                     <label class="control-label col-sm-2">Number:</label>
                     <div class="col-sm-6">
                         <input class="form-control"
