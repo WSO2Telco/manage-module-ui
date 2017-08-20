@@ -78,15 +78,15 @@ export class RateCategoryComponent implements OnInit {
                 this.categoryError = 'Not a valid category';
             }
 
-            if (this.subcategory.length > 0){
-                if(this.checkCategory(this.subcategory)) {
+            if (this.subcategory.length > 0) {
+                if (this.checkCategory(this.subcategory)) {
                     mapping.subcategory = this.subcategory;
                 } else {
                     status = false;
                     this.isSubcategoryError = true;
                     this.subcategoryError = 'Not a valid category';
                 }
-            }else{
+            } else {
                 mapping.subcategory = null;
             }
 
@@ -104,8 +104,8 @@ export class RateCategoryComponent implements OnInit {
                     this.category = '';
                     this.subcategory = '';
                     this.tariff = '';
-                }else {
-                    this.isMappigError =true;
+                } else {
+                    this.isMappigError = true;
                 }
             }
 
@@ -157,25 +157,32 @@ export class RateCategoryComponent implements OnInit {
         return status;
     }
 
+    clearCatSelection() {
+        this.isMappigError = false;
+        this.isTariffError = false;
+        this.isSubcategoryError = false;
+        this.isCategoryError = false;
+        this.rateCategories = [];
+    }
+
     /**
      * this function will validate the mapping
      * @returns {boolean}
      */
     checkSimilarMapping(): boolean {
-        console.log('$$$$$$$$$$$$$$$$$$$$$$$$' + JSON.stringify(this.rateCategories));
         if (this.rateCategories.length > 0) {
             for (const entry of this.rateCategories) {
 
-                if(this.subcategory.length > 0){
+                if (this.subcategory.length > 0) {
                     if (this.category == entry.category) {
-                        if (this.subcategory == entry.subcategory){
+                        if (this.subcategory == entry.subcategory) {
                             console.log('Error');
                             this.isSubcategoryError = true;
                             this.subcategoryError = 'Category Sub-Category mapping already exists';
                             return false;
                         }
                     }
-                }else{
+                } else {
                     if (this.category == entry.category && entry.subcategory == null) {
                         this.isTariffError = true;
                         this.tariffError = 'Cannot add new Tariff to Existing Category' + this.subcategory.length;
@@ -184,7 +191,7 @@ export class RateCategoryComponent implements OnInit {
                 }
             }
             return true;
-        }else {
+        } else {
             return true;
         }
     }

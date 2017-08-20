@@ -81,3 +81,23 @@
   }
 }
 
+.tbl-header {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.3em;
+  padding: 5px 0px 15px;
+  color: #E19131;
+  text-transform: uppercase;
+}
+
+.error {
+  font-size: 0.9em;
+  color: #f96565;
+}
+
+.has-danger .form-control{
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+
