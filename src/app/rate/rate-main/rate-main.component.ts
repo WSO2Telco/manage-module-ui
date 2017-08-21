@@ -321,7 +321,7 @@ export class RateMainComponent implements OnInit {
             rateCard.rateDefinition = ratedefinition;
 
             if (rateDefCategoryBase == 0) {
-                rateCard.rateCategories = null;
+                rateCard.rateCategories = [];
             } else {
                 rateCard.rateCategories = this.rateCategories;
             }
@@ -329,7 +329,7 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            // console.log('#######  ' + JSON.stringify(rateCard));
+            console.log('#######  ' + JSON.stringify(rateCard));
 
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 

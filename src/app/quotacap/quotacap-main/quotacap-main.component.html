@@ -25,7 +25,7 @@
                                 >
                             </div>
                             <span class="error col-sm-offset-4 col-sm-8"
-                                  *ngIf="isSpEmpty">Service Provider cannot be empty</span>
+                                  *ngIf="isSubscriberError">{{subscriberError}}</span>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Application</label>
@@ -42,6 +42,8 @@
                                        name="app"
                                 >
                             </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isApplicationError">{{applicationError}}</span>
                         </div>
                         <div class="form-group ">
                             <label class="control-label col-sm-4">API</label>
@@ -56,6 +58,8 @@
                                        name="api"
                                        placeholder="Select API">
                             </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isApiError">{{apiError}}</span>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Operators</label>
@@ -68,6 +72,8 @@
                                        placeholder="Select Operator"
                                        [(disabled)]="ISoperatordisable">
                             </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isOperatorError">{{operatorError}}</span>
                         </div>
 
                         <div class="form-group" [ngClass]="{'has-danger': (isNameEmpty || isInvalidquota)}">
