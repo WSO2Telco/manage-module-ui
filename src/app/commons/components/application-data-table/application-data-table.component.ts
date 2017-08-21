@@ -74,8 +74,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     ngOnInit() {
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
-        let loginInfo = this.authService.loginUserInfo.getValue();
-        console.log('###' + loginInfo.isAdmin + ' ' + loginInfo.operator);
+        // let loginInfo = this.authService.loginUserInfo.getValue();
+        // console.log('###' + loginInfo.isAdmin + ' ' + loginInfo.operator);
         this.showTiers = false;
 
         for (const entry of this.roleList){

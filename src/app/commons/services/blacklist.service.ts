@@ -36,10 +36,10 @@ export class BlackListService {
         this._remoteService.removeFromBlackList(msisdn, id)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }

@@ -1,13 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {SearchPanelComponent} from './search-panel/search-panel.component';
-import {SearchResultsComponent} from './search-results/search-results.component';
 import {RateCategoryComponent} from './rate-ratecategory/ratecategory.component';
 import {CategoryComponent} from './rate-category/category.component';
 import {TariffComponent} from './rate-tariff/tariff.component';
 import {RateMainComponent} from './rate-main/rate-main.component';
 import {RateRoutes} from './rate.routes';
-import {RateFilterComponent} from './rate-filter/rate-filter.component';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -27,10 +24,7 @@ import {CurrencyComponent} from './rate-currency/currency.component';
         TooltipModule.forRoot()
     ],
     declarations: [
-        SearchPanelComponent,
-        SearchResultsComponent,
         RateMainComponent,
-        RateFilterComponent,
         RateCategoryComponent,
         CategoryComponent,
         CurrencyComponent,

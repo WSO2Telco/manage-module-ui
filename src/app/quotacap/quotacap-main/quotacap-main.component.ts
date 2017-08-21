@@ -494,6 +494,19 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotalist = [];
     }
 
+    clearForm(){
+        this.clearErrors();
+
+        this.subscriber = '';
+        this.app = '';
+        this.api = '';
+        this.selectedoperator = '';
+        this.quotaInputValue = '';
+        this.isCalenderEnable = true;
+        this.defaultcalval = '';
+        this.quotalist = [];
+    }
+
     onDateRangeChanged(event) {
         this.datepickvalue = event.formatted;
         this.fromdate = this.datepickvalue.substring(0, 10);
@@ -535,6 +548,9 @@ export class QuotaCapMainComponent implements OnInit {
             });
         }
     }
+
+
+
 
 }
 

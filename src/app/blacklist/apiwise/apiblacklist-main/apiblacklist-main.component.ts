@@ -1,67 +1,67 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { BlackListService} from '../../../commons/services/blacklist.service';
+import {BlackListService} from '../../../commons/services/blacklist.service';
 import {BlackListNumbers} from '../../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 
 @Component({
-  selector: 'app-blacklist-main',
-  templateUrl: './apiblacklist-main.component.html',
-  styleUrls: ['./apiblacklist-main.component.scss']
+    selector: 'app-blacklist-main',
+    templateUrl: './apiblacklist-main.component.html',
+    styleUrls: ['./apiblacklist-main.component.scss']
 })
 
 
 export class ApiBlacklistMainComponent implements OnInit {
 
-  private submissionError: string;
+    private submissionError: string;
 
-  @Output()
-  private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
+    @Output()
+    private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
-  private apiId: string;
-  private apiList: string[];
-  private applications: BlackListNumbers[];
-  private api;
-  private msisdnList: string[];
-  private blackListList: string[];
-  private msisdn: string;
-  private numberId: string[];
-  private msisdnError: string;
-  private long: string;
-  private ismsisdnError: boolean;
-  private islong: boolean;
-  private count;
-  private isDublicate: boolean;
-  private dublicate: string;
+    private apiId: string;
+    private apiList: string[];
+    private applications: BlackListNumbers[];
+    private api;
+    private msisdnList: string[];
+    private blackListList: string[];
+    private msisdn: string;
+    private numberId: string[];
+    private msisdnError: string;
+    private long: string;
+    private ismsisdnError: boolean;
+    private islong: boolean;
+    private count;
+    private isDublicate: boolean;
+    private dublicate: string;
 
-  constructor(private blackListService: BlackListService) {
+    constructor(private blackListService: BlackListService) {
 
 
-  }
+    }
 
-  ngOnInit() {
+    ngOnInit() {
 
-      this.getApis();
-      this.submissionError = '';
-      this.apiList = [];
-      this.applications = [];
-      this.api = '';
-      this.apiId = '';
-      this.msisdn = '';
-      this.ismsisdnError = false;
-      this.islong = false;
-      this.msisdnError = '';
-      this.long = '';
-      this.isDublicate = false;
-      this.dublicate = '';
-      this.count = '0';
-  }
+        this.getApis();
+        this.submissionError = '';
+        this.apiList = [];
+        this.applications = [];
+        this.api = '';
+        this.apiId = '';
+        this.msisdn = '';
+        this.ismsisdnError = false;
+        this.islong = false;
+        this.msisdnError = '';
+        this.long = '';
+        this.isDublicate = false;
+        this.dublicate = '';
+        this.count = '0';
+    }
 
     /**
      *  Get All Blacklisted numbers
      * @param Id
      */
     getBlackListNumbers(Id: string) {
-        this.blackListService.getBlackListNumberList( Id , (response, status) => {
+        this.blackListService.getBlackListNumberList(Id, (response, status) => {
 
             if (status) {
                 this.blackListList = response.Success.variables;
@@ -106,7 +106,7 @@ export class ApiBlacklistMainComponent implements OnInit {
                     this.apiList[count] = splitted[1] + ' - ' + splitted[2] + ' Provided by ' + splitted[0] + ' ' + splitted[3];
                     count += 1;
                 }
-            }else {
+            } else {
                 this.submissionError = response;
                 setTimeout(() => {
                     this.submissionError = null;
@@ -133,7 +133,7 @@ export class ApiBlacklistMainComponent implements OnInit {
             }
         }
 
-        if(id.length != 0){
+        if (id.length != 0) {
             this.getBlackListNumbers(id);
         }
     }
@@ -163,19 +163,19 @@ export class ApiBlacklistMainComponent implements OnInit {
             let countd = 0;
 
             if (apiId.length != 0 && apiName.length != 0) {
-            this.isDublicate = false;
+                this.isDublicate = false;
 
-            if (this.blackListList != null) {
+                if (this.blackListList != null) {
 
-                for (const entry of this.blackListList.toString()) {
+                    for (const entry of this.blackListList.toString()) {
 
-                    if (this.blackListList.toString().includes(this.msisdnList[countd])) {
-                        this.dublicate = 'This MSISDN already exists';
-                        this.isDublicate = true;
+                        if (this.blackListList.toString().includes(this.msisdnList[countd])) {
+                            this.dublicate = 'This MSISDN already exists';
+                            this.isDublicate = true;
+                        }
+                        countd++;
                     }
-                    countd++;
                 }
-            }
 
                 if (this.isDublicate == true) {
                     this.dublicate = 'This MSISDN already exists';
@@ -199,6 +199,7 @@ export class ApiBlacklistMainComponent implements OnInit {
 
         this.msisdnList = [];
 
+        if(this.api.length != 0){
             if (this.isValid(this.msisdn)) {
                 this.ismsisdnError = false;
                 const msisdnList = this.msisdn.split(',');
@@ -209,10 +210,10 @@ export class ApiBlacklistMainComponent implements OnInit {
                     if (this.isValidMobileNumber(entry)) {
                         this.msisdnList[count] = 'tel3A+' + Number(entry);
                         this.islong = false;
-                    }else {
+                    } else {
                         this.islong = true;
                     }
-                        count++;
+                    count++;
                 }
 
                 if (this.islong == true) {
@@ -227,10 +228,15 @@ export class ApiBlacklistMainComponent implements OnInit {
                     this.msisdnError = 'Empty List';
                     this.ismsisdnError = true;
                 } else {
-                    this.msisdnError = 'Wrong input please enter Comma seperated valid mobile numbers ';
+                    this.msisdnError = 'Wrong input please enter Comma separated valid mobile numbers ';
                     this.ismsisdnError = true;
                 }
             }
+        }else {
+            this.msisdnError = 'Select an API first';
+            this.ismsisdnError = true;
+        }
+
 
 
 
@@ -242,9 +248,9 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @param id
      */
     onDeleteHandler(event: boolean, id) {
-            if (event) {
-                this.getBlackListNumbers(id);
-            }
+        if (event) {
+            this.getBlackListNumbers(id);
+        }
     }
 
     /**

@@ -4,8 +4,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
-import {MessageService} from "../../commons/services/message.service";
-import {Currency} from "../../commons/models/common-data-models";
+import {MessageService} from '../../commons/services/message.service';
+import {Currency} from '../../commons/models/common-data-models';
 const currencyCodes = require('./currencies');
 
 @Component({
@@ -43,7 +43,6 @@ export class CurrencyComponent implements OnInit {
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
 
-
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }
 
@@ -64,7 +63,7 @@ export class CurrencyComponent implements OnInit {
         console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
         this.clearErrors();
 
-        if(this.currencycode.length != 0 && this.currencydesc.length != 0){
+        if (this.currencycode.length != 0 && this.currencydesc.length != 0) {
             this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
@@ -74,12 +73,12 @@ export class CurrencyComponent implements OnInit {
                     this.message.error(response);
                 }
             });
-        }else{
-            if(this.currencycode.length == 0){
+        } else {
+            if (this.currencycode.length == 0) {
                 this.currencyCodeError = 'Currency Cannot Be Empty';
                 this.isCurrencyError = true;
             }
-            if(this.currencydesc.length == 0){
+            if (this.currencydesc.length == 0) {
                 this.currencyDescError = 'Currency Description Cannot Be Empty';
                 this.isCurrencyDescError = true;
             }
@@ -93,7 +92,6 @@ export class CurrencyComponent implements OnInit {
      */
     isCurrencyCode(name) {
         if (currencyCodes.indexOf(name) < 0) {
-            console.log("here");
             this.isCurrencyError = true;
             this.currencyCodeError = 'Not a Valid Currency Type';
         } else {
@@ -113,11 +111,23 @@ export class CurrencyComponent implements OnInit {
         }
     }
 
-    clearErrors(){
+    /**
+     * clear error fields
+     */
+    clearErrors() {
         this.currencyCodeError = '';
         this.currencyDescError = '';
 
         this.isCurrencyError = false;
         this.isCurrencyDescError = false;
+    }
+
+    /**
+     * clear all the fields in the form
+     */
+    clearForm() {
+        this.currencycode = '';
+        this.currencydesc = '';
+        this.clearErrors();
     }
 }

@@ -97,7 +97,7 @@
                                class="form-control"
                                required
                         >
-                        <span class="error" *ngIf="isCurrencyEmpty">Currency can not be empty</span>
+                        <span class="error" *ngIf="isCurrencyError">{{currencyError}}</span>
                     </div>
                     <span class="glyphicon glyphicon-plus info-tooltip"
                           tooltip="Click here to Add a new currency to the list" placement="right"
@@ -117,7 +117,7 @@
                                class="form-control"
                                required
                         >
-                        <span class="error" *ngIf="isRateTypeEmpty">Rate Type can not be empty</span>
+                        <span class="error" *ngIf="isRateTypeError">{{rateTypeError}}</span>
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
                                class="form-control"
                                required
                         >
-                        <span class="error" *ngIf="isTariffEmpty">Tariff can not be empty</span>
+                        <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
                     </div>
                     <span class="glyphicon glyphicon-plus info-tooltip"
                           tooltip="Click here to Add a new tariff to the list" placement="right"
@@ -187,7 +187,7 @@
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                         <button type="submit" class="btn btn-primary animated fadeIn">Add</button>&nbsp;
-                        <button class="btn btn-warning">Cancel</button>
+                        <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                     </div>
                 </div>
 

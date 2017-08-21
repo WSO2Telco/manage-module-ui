@@ -14,8 +14,6 @@ export class RateCategoryComponent implements OnInit {
     private tariff: string;
     private type: string;
 
-    private submissionError: string;
-
     private isCategoryError: boolean;
     private isSubcategoryError: boolean;
     private isTariffError: boolean;
@@ -63,7 +61,7 @@ export class RateCategoryComponent implements OnInit {
 
     onSubmit(subcategoryForm) {
 
-        console.log('$$on submit' + this.category + ' ' + this.subcategory + ' ' + this.tariff)
+        console.log('on submit' + this.category + ' ' + this.subcategory + ' ' + this.tariff)
 
         this.clearErrors();
 
@@ -158,10 +156,10 @@ export class RateCategoryComponent implements OnInit {
     }
 
     clearCatSelection() {
-        this.isMappigError = false;
-        this.isTariffError = false;
-        this.isSubcategoryError = false;
-        this.isCategoryError = false;
+        this.category = '';
+        this.subcategory = '';
+        this.tariff = '';
+        this.clearErrors();
         this.rateCategories = [];
     }
 
@@ -207,7 +205,7 @@ export class RateCategoryComponent implements OnInit {
         this.isTariffError = false;
         this.isMappigError = false;
         this.categoryError = '';
-        this.submissionError = '';
+        this.subcategoryError = '';
         this.tariffError = '';
     }
 

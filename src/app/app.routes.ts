@@ -1,5 +1,5 @@
 import {RouterModule} from "@angular/router";
-import {AppGuard, LoginGuard} from "./app.guard";
+import {AppGuard, LoginGuard, AdminGuard} from "./app.guard";
 
 const routes = [
   {
@@ -30,7 +30,7 @@ const routes = [
   {
     path: 'whitelist',
     loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
-    canActivate : [AppGuard]
+    canActivate : [AdminGuard]
   },
   {
     path: 'approvals',
@@ -40,7 +40,7 @@ const routes = [
   {
     path: 'blacklist',
     loadChildren: 'app/blacklist/blacklist.module#BlackListModule',
-    canActivate: [AppGuard]
+    canActivate: [AdminGuard]
   },
   {
     path : '',

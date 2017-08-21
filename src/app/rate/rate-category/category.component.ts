@@ -41,7 +41,6 @@ export class CategoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Sub name window loaded');
         this.name = '';
         this.code = '';
         this.description = '';
@@ -49,6 +48,10 @@ export class CategoryComponent implements OnInit {
     }
 
 
+    /**
+     * add button is clicked and on form submission
+     * @param addCategoryForm
+     */
     onSubmit(addCategoryForm) {
         this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
@@ -80,6 +83,9 @@ export class CategoryComponent implements OnInit {
 
     }
 
+    /**
+     * clear all the error fields
+     */
     clearErrors() {
         this.isCodeError = false;
         this.isNameError = false;
@@ -90,6 +96,10 @@ export class CategoryComponent implements OnInit {
         this.descriptionError = '';
     }
 
+    /**
+     * check for duplicate category names
+     * @param name
+     */
     isNameUnique(name) {
         let state = false;
         for (const entry of this.existingCategories) {
@@ -106,6 +116,10 @@ export class CategoryComponent implements OnInit {
         }
     }
 
+    /**
+     * check for duplicate category codes
+     * @param code
+     */
     isCodeUnique(code) {
         let state = false;
         for (const entry of this.existingCategories) {
@@ -121,6 +135,16 @@ export class CategoryComponent implements OnInit {
             this.codeError = '';
         }
 
+    }
+
+    /**
+     * clear all the fields in the form
+     */
+    clearForm() {
+        this.name = '';
+        this.code = '';
+        this.description = '';
+        this.clearErrors();
     }
 
 }

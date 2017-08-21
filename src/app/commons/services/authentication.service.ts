@@ -57,4 +57,9 @@ export class AuthenticationService {
         return !!loginInfo;
     }
 
+    isAdmin(){
+        const loginInfo = this.loginUserInfo && this.loginUserInfo.getValue();
+        return loginInfo.isAdmin;
+    }
+
 }

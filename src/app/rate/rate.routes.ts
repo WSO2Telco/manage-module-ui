@@ -1,7 +1,7 @@
-import {RouterModule} from "@angular/router";
-import {RateMainComponent} from "./rate-main/rate-main.component";
+import {RouterModule} from '@angular/router';
+import {RateMainComponent} from './rate-main/rate-main.component';
 
-const routes =[{
+const routes = [{
   path : '',
   component : RateMainComponent
 }];

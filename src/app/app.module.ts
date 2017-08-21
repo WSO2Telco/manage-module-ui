@@ -7,7 +7,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
 import {CommonsModule} from './commons/commons.module';
-import {AppGuard, LoginGuard} from './app.guard';
+import {AppGuard, LoginGuard, AdminGuard} from './app.guard';
 import {HeaderComponent} from './commons/components/header/header.component';
 import {HamburgerMenuComponent} from './commons/components/hamburger-menu/hamburger-menu.component';
 import {UserAvatarComponent} from './commons/components/user-avatar/user-avatar.component';
@@ -55,6 +55,7 @@ import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.s
     providers: [
         AppGuard,
         LoginGuard,
+        AdminGuard,
         ApprovalRemoteDataService,
         DashboardRemoteDataService,
         ReportingRemoteDataService,

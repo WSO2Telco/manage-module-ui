@@ -19,9 +19,13 @@ export class RateMainComponent implements OnInit {
     private isDescriptionEmpty: boolean;
     private isNameError: boolean;
     private isDateEmpty: boolean;
-    private isCurrencyEmpty: boolean;
-    private isRateTypeEmpty: boolean;
-    private isTariffEmpty: boolean;
+    private isCurrencyError: boolean;
+    private isRateTypeError: boolean;
+    private isTariffError: boolean;
+
+    private currencyError: string;
+    private rateTypeError: string;
+    private tariffError: string;
 
     private nameError: string;
 
@@ -253,12 +257,17 @@ export class RateMainComponent implements OnInit {
         let rateDefCategoryBase: number;
         let ratedefinition: RateDefinition;
 
+        let validCurrency = false;
+        let validTariff = false;
+        let validRateType = false;
+
 
         /** for loop to assign currency id */
         for (const entry of this.currencyList) {
             if (entry.currencyCode == this.currency) {
                 currency = new Currency();
                 currency.currencyId = entry.currencyId;
+                validCurrency = true;
             }
         }
 
@@ -267,6 +276,7 @@ export class RateMainComponent implements OnInit {
             if (entry.rateTypeCode == this.rateType) {
                 rateType = new RateType();
                 rateType.rateTypeId = entry.rateTypeId;
+                validRateType = true;
             }
         }
 
@@ -275,6 +285,7 @@ export class RateMainComponent implements OnInit {
             if (entry.tariffName == this.tariff) {
                 tariff = new Tariff();
                 tariff.tariffId = entry.tariffId;
+                validTariff = true;
             }
         }
 
@@ -293,7 +304,7 @@ export class RateMainComponent implements OnInit {
         /** assign value to rateDefCategoryBase */
         rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
 
-        if (!this.isEmpty() && tariff != null && currency != null && rateType != null) {
+        if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
             console.log('submitted rate card form ');
             rateCard = new Rate();
 
@@ -318,7 +329,7 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-           // console.log('#######  ' + JSON.stringify(rateCard));
+            // console.log('#######  ' + JSON.stringify(rateCard));
 
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 
@@ -340,15 +351,31 @@ export class RateMainComponent implements OnInit {
             if (this.rateDefDescription.length == 0) {
                 this.isDescriptionEmpty = true;
             }
+            if (!validRateType) {
+                this.isRateTypeError = true;
+                this.rateTypeError = 'Invalid Rate Type';
+            }
+            if (!validTariff) {
+                this.isTariffError = true;
+                this.tariffError = 'Invalid Tariff';
+            }
+            if (!validCurrency) {
+                this.isCurrencyError = true;
+                this.currencyError = 'Invalid Currency';
+            }
             if (this.currency.length == 0) {
-                this.isCurrencyEmpty = true;
+                this.isCurrencyError = true;
+                this.currencyError = 'Currency can not be empty';
             }
             if (this.rateType.length == 0) {
-                this.isRateTypeEmpty = true;
+                this.isRateTypeError = true;
+                this.rateTypeError = 'Rate Type can not be empty';
             }
             if (this.tariff.length == 0) {
-                this.isTariffEmpty = true;
+                this.isTariffError = true;
+                this.tariffError = 'Tariff can not be empty';
             }
+
         }
 
 
@@ -374,9 +401,13 @@ export class RateMainComponent implements OnInit {
         this.isDateEmpty = false;
         this.isDescriptionEmpty = false;
         this.isNameError = false;
-        this.isCurrencyEmpty = false;
-        this.isRateTypeEmpty = false;
-        this.isTariffEmpty = false;
+        this.isCurrencyError = false;
+        this.isRateTypeError = false;
+        this.isTariffError = false;
+
+        this.currencyError = '';
+        this.rateTypeError = '';
+        this.tariffError = '';
     }
 
     changeDialogTitle() {
@@ -521,12 +552,11 @@ export class RateMainComponent implements OnInit {
         }
     }
 
-    showit(){
-        //this._router.navigate(['/rate']);
+    showit() {
         this.reloadPage();
     }
 
-    reloadPage(){
+    reloadPage() {
 
         /** reinitialize all the variables */
 
@@ -540,9 +570,8 @@ export class RateMainComponent implements OnInit {
         this.rateCategories = [];
         this.mappingList = [];
 
-      //  this.showSubcategory = false;
 
-
+        /** reload all the service values */
         this.getTariffList();
         this.getCurrencyList();
         this.getRateTypeList();
