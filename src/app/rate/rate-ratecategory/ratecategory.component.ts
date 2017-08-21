@@ -47,7 +47,7 @@ export class RateCategoryComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('Sub name window loaded');
+       // console.log('Sub name window loaded');
         this.category = '';
         this.subcategory = '';
         this.tariff = '';
@@ -61,7 +61,7 @@ export class RateCategoryComponent implements OnInit {
 
     onSubmit(subcategoryForm) {
 
-        console.log('on submit' + this.category + ' ' + this.subcategory + ' ' + this.tariff)
+       // console.log('on submit' + this.category + ' ' + this.subcategory + ' ' + this.tariff)
 
         this.clearErrors();
 
@@ -109,7 +109,7 @@ export class RateCategoryComponent implements OnInit {
 
 
         } else {
-            console.log('invalid fields');
+           // console.log('invalid fields');
             if (this.category.length == 0) {
                 this.isCategoryError = true;
                 this.categoryError = 'Category can not be empty';
@@ -174,7 +174,7 @@ export class RateCategoryComponent implements OnInit {
                 if (this.subcategory.length > 0) {
                     if (this.category == entry.category) {
                         if (this.subcategory == entry.subcategory) {
-                            console.log('Error');
+                           // console.log('Error');
                             this.isSubcategoryError = true;
                             this.subcategoryError = 'Category Sub-Category mapping already exists';
                             return false;

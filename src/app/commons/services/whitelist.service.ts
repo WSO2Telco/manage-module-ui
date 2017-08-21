@@ -12,7 +12,7 @@ export class WhitelistService {
     }
 
     getSubscribers(callback: Function) {
-        console.log('get subscribers of provider service called');
+       // console.log('get subscribers of provider service called');
         this._remoteService.getSubscribers()
             .subscribe(
                 data => {
@@ -25,7 +25,7 @@ export class WhitelistService {
     }
 
     getApps(subscriberID: string, callback: Function) {
-        console.log('get apps of subscriber service called');
+       // console.log('get apps of subscriber service called');
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
@@ -38,7 +38,7 @@ export class WhitelistService {
     }
 
     getApis(id: string, callback: Function) {
-        console.log('get apps of subscriber service called');
+      //  console.log('get apps of subscriber service called');
         this._remoteService.getApis(id)
             .subscribe(
                 data => {
@@ -51,7 +51,7 @@ export class WhitelistService {
     }
 
     getWhitelist(callback: Function) {
-        console.log('get list of white list service called');
+       // console.log('get list of white list service called');
         this._remoteService.getWhitelist()
             .subscribe(
                 data => {
@@ -64,7 +64,7 @@ export class WhitelistService {
     }
 
     removeFromWhiteList(msisdn: string, callback: Function) {
-        console.log('remove white list service called');
+       // console.log('remove white list service called');
         this._remoteService.removeFromWhiteList(msisdn)
             .subscribe(
                 data => {
@@ -77,7 +77,7 @@ export class WhitelistService {
     }
 
     addNewToWhitelist(appId: string, apiId: string, msisdnList: string[], callback: Function) {
-        console.log('get apps of subscriber service called');
+      //  console.log('get apps of subscriber service called');
         this._remoteService.addNewToWhitelist(appId, apiId, msisdnList)
             .subscribe(
                 data => {

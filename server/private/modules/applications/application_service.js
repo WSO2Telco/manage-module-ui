@@ -68,7 +68,8 @@ const _getApplications = function (request, reply) {
                         for (const entry2 of entry.rates) {
                             rateDefinitions[count2] = {
                                 rateDefId: entry2.rateDefId,
-                                rateDefName: entry2.rateDefName
+                                rateDefName: entry2.rateDefName,
+                                rateDefDescription: entry2.rateDefDescription
                             }
                             count2++;
                         }

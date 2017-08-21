@@ -30,7 +30,7 @@ export class BlackListRemoteDataService {
      * @returns {Observable<R>}
      */
     getApiList() {
-        console.log('hit in the rate remote data service');
+        // console.log('hit in the rate remote data service');
         return this.http.get(this.apiEndpoints['getApis'], this.options)
             .map((response: Response) => {
             const result = response.json();
@@ -46,7 +46,7 @@ export class BlackListRemoteDataService {
      * @returns {Observable<R>}
      */
     getBlackListNumberList(id) {
-        console.log('hit the blacklist remote number data service');
+        // console.log('hit the blacklist remote number data service');
 
         return this.http.post(this.apiEndpoints['getApis'] + '/' + id, this.options)
             .map((response: Response) => {
@@ -66,9 +66,9 @@ export class BlackListRemoteDataService {
             const data = {
                 'apiId': apiId
             };
-            console.log('hit in the BlackList remove data service');
-            console.log(JSON.stringify(data));
-            console.log(this.apiEndpoints['removeBlackListNumber'] + '/' , data);
+            // console.log('hit in the BlackList remove data service');
+            // console.log(JSON.stringify(data));
+            // console.log(this.apiEndpoints['removeBlackListNumber'] + '/' , data);
             return this.http.post(this.apiEndpoints['removeBlackListNumber'] + '/' + mssidn, data, this.options)
                 .map((response: Response) => {
                     const result = response.json();
@@ -91,8 +91,8 @@ export class BlackListRemoteDataService {
             'userID' : this.loginInfo.userName,
             'msisdnList': msisdnList
         };
-        console.log(JSON.stringify(data));
-        console.log('hit in the blackList Number/s add remote data service');
+        // console.log(JSON.stringify(data));
+        // console.log('hit in the blackList Number/s add remote data service');
         return this.http.post(this.apiEndpoints['addBlackListNumbers'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();

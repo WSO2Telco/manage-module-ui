@@ -56,7 +56,7 @@ export class CategoryComponent implements OnInit {
         this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
         if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0) {
-            console.log('form submitted : ' + this.name + '  ' + this.code + '  ' + this.description);
+           // console.log('form submitted : ' + this.name + '  ' + this.code + '  ' + this.description);
             this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);

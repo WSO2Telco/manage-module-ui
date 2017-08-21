@@ -182,7 +182,7 @@ export class ApiBlacklistMainComponent implements OnInit {
                 } else {
                     this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, response => {
                         const result = response;
-                        console.log(JSON.stringify(result));
+                        // console.log(JSON.stringify(result));
                         this.getBlackListNumbers(apiId);
                     });
                 }

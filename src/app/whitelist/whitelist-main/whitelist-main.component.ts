@@ -129,7 +129,7 @@ export class WhitelistMainComponent implements OnInit {
         for (const entry of this.applications) {
             if (entry.name == appName) {
                 id = this.subscriber + '|' + entry.id;
-                console.log('created id is: ' + id);
+               // console.log('created id is: ' + id);
             }
             index++;
         }
@@ -232,7 +232,7 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onDeleteHandler(event: boolean): void {
-        console.log('delete event called');
+        //console.log('delete event called');
         if (event) {
             this.getWhitelist();
         }
@@ -271,7 +271,7 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onApiSelected(event: TypeaheadMatch) {
-        console.log('api selected');
+       // console.log('api selected');
         for (const entry of this.applicationList) {
             if (entry == this.app) {
                 this.getApis(this.app);
@@ -368,7 +368,7 @@ export class WhitelistMainComponent implements OnInit {
         if (regexp.test(inputtxt)) {
             return true;
         } else {
-            console.log('Not a valid input');
+           // console.log('Not a valid input');
             return false;
         }
     }
@@ -384,7 +384,7 @@ export class WhitelistMainComponent implements OnInit {
         if (regexp.test(msisdn)) {
             return true;
         } else {
-            console.log('Not a valid input');
+           // console.log('Not a valid input');
             return false;
         }
     }

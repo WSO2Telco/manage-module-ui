@@ -37,7 +37,7 @@ export class WhitelistRemoteDataService {
      */
     getSubscribers() {
         const data = {};
-        console.log('hit in the whitelist remote data service');
+       // console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['getSubscribers'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -53,7 +53,7 @@ export class WhitelistRemoteDataService {
      */
     getApps(subscriberID: string) {
         const data = { id: subscriberID};
-        console.log('hit in the whitelist remote data service');
+       // console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['getApps'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -69,7 +69,7 @@ export class WhitelistRemoteDataService {
      */
     getApis(id: string) {
         const data = { id: id};
-        console.log('hit in the whitelist remote data service');
+       // console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['getApis'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -86,7 +86,7 @@ export class WhitelistRemoteDataService {
      */
     getWhitelist() {
         const data = {};
-        console.log('hit in the whitelist remote data service');
+       // console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['getWhitelist'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -102,7 +102,7 @@ export class WhitelistRemoteDataService {
      */
     removeFromWhiteList(msisdn: string) {
         const data = {msisdn : msisdn};
-        console.log('hit in the whitelist remote data service');
+      //  console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['removeFromWhiteList'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -127,8 +127,8 @@ export class WhitelistRemoteDataService {
             'msisdnList': msisdnList
         };
 
-        console.log(JSON.stringify(data));
-        console.log('hit in the whitelist remote data service');
+      //  console.log(JSON.stringify(data));
+      //  console.log('hit in the whitelist remote data service');
         return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();

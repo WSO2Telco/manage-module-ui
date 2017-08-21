@@ -38,6 +38,7 @@ export class RelevantRates {
 export class OperationRateDefinitions{
     rateDefName: string;
     rateDefId: number;
+    rateDefDescription: string;
 }
 
 export class MetaData {

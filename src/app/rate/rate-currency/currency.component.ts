@@ -60,7 +60,7 @@ export class CurrencyComponent implements OnInit {
     onCurrencyValueSubmit(currencyForm) {
         this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
-        console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
+       // console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
         this.clearErrors();
 
         if (this.currencycode.length != 0 && this.currencydesc.length != 0) {

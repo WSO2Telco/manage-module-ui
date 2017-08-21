@@ -305,7 +305,7 @@ export class RateMainComponent implements OnInit {
         rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
 
         if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
-            console.log('submitted rate card form ');
+          //  console.log('submitted rate card form ');
             rateCard = new Rate();
 
             ratedefinition = new RateDefinition();
@@ -329,7 +329,7 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            console.log('#######  ' + JSON.stringify(rateCard));
+           // console.log('#######  ' + JSON.stringify(rateCard));
 
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 
@@ -343,7 +343,7 @@ export class RateMainComponent implements OnInit {
 
 
         } else {
-            console.log('invalid fields');
+           // console.log('invalid fields');
             if (this.rateDefName.length == 0) {
                 this.isNameError = true;
                 this.nameError = 'Name Cannot be Empty'
@@ -447,7 +447,7 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddCurrencyHandler(event: boolean) {
-        console.log('add currency event called');
+       // console.log('add currency event called');
         if (event) {
             this.getCurrencyList();
         }
@@ -458,7 +458,7 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddCategoryHandler(event: boolean) {
-        console.log('add category event called');
+       // console.log('add category event called');
         if (event) {
             this.getCategoryList();
         }
@@ -526,7 +526,7 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddTariffHandler(event: boolean) {
-        console.log('add tariff event called');
+      //  console.log('add tariff event called');
         if (event) {
             this.getTariffList();
         }

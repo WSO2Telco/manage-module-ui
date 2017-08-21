@@ -32,7 +32,7 @@ export class BlackListService {
     }
 
     removeBlackListNumber(msisdn, id, callback: Function) {
-        console.log('remove blackList Number ');
+       // console.log('remove blackList Number ');
         this._remoteService.removeFromBlackList(msisdn, id)
             .subscribe(
                 data => {
@@ -45,7 +45,7 @@ export class BlackListService {
     }
 
     addNewToBlackListList(apiId: string, apiName: string, msisdnList: string[], callback: Function) {
-        console.log('Add new Blacklist number service ');
+       // console.log('Add new Blacklist number service ');
         this._remoteService.addNewBlackListList(apiId, apiName, msisdnList)
             .subscribe(
                 data => {
