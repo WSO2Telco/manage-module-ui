@@ -1,27 +1,36 @@
-<div class="section" >
+<div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6 col-md-offset-1">
                 <div class="tbl-header">
-                    <h5>Subscriber list</h5>
+                    <label class="subtitle">Subscriber list</label>
                 </div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>MSISDN</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="scrollit">
+                    <div class="table">
 
-                    <ng-container *ngFor="let item of datasource">
-                        <tr >
-                            <td>{{item.replace('tel3A+','')}}</td>
-                            <td><button class="btn btn-danger" (click)="onDelete(item.replace('tel3A+',''), apiId.toString())"><i class="material-icons">delete</i></button></td>
-                        </tr>
-                    </ng-container>
-                    </tbody>
-                </table>
+                        <div class="tbl-row header">
+                            <div class="tbl-cell">MSISDN</div>
+                            <div class="tbl-cell text-right pad-r-15-im">Action</div>
+                        </div>
+
+                        <ng-container *ngFor="let item of datasource">
+                            <div class="tbl-row">
+                                <div class="tbl-cell">{{item.replace('tel3A+','')}}</div>
+                                <div class="tbl-cell text-right">
+                                    <button class="btn btn-danger"
+                                            (click)="onDelete(item.replace('tel3A+',''), apiId.toString())"><i
+                                            class="material-icons">delete</i></button>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <div class="no-rec-row tbl-row" *ngIf="datasource.length == 0">
+                            <span class="no-rec">No Records..</span>
+                        </div>
+                        <br><br><br>
+                    </div>
+                </div> <!--TABLE END-->
+
             </div>
         </div>
     </div>
