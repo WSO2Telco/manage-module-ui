@@ -112,7 +112,11 @@
                                            name="spCommission"
                                            #spCommissionRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffSPCommission">
+                                           [ngModel]="tariff.tariffSPCommission"
+                                           (ngModelChange)="tariffSPCommission($event)">
+
+                                    <span class="error" *ngIf="IsInvalidspCommission">Range should between 0 - 100 </span>
+                                    <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
                                 </div>
                             </div>
 
@@ -129,7 +133,10 @@
                                            name="adsCommission"
                                            #adsCommissionRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffAdsCommission">
+                                           [ngModel]="tariff.tariffAdsCommission"
+                                           (ngModelChange)="tariffAdsCommission($event)">
+                                    <span class="error" *ngIf="IsInvalidadsCommission">Range should between 0 - 100 </span>
+                                    <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -144,7 +151,10 @@
                                            name="opcoCommission"
                                            #opcoCommissionRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffOpcoCommission">
+                                           [ngModel]="tariff.tariffOpcoCommission"
+                                           (ngModelChange)="tariffOpcoCommission($event)">
+                                    <span class="error" *ngIf="IsInvalidopcoCommission">Range should between 0 - 100 </span>
+                                    <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -174,7 +184,9 @@
                                            name="surChargeAds"
                                            #surChargeAdsRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffSurChargeAds">
+                                           [ngModel]="tariff.tariffSurChargeAds"
+                                           (ngModelChange)="tariffSurChargeAds($event)">
+                                    <span class="error" *ngIf="IsInvalidtariffSurChargeAds">Range should between 0 - 100</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -189,7 +201,9 @@
                                            name="surChargeOpco"
                                            #surChargeOpcoRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffSurChargeOpco">
+                                           [ngModel]="tariff.tariffSurChargeOpco"
+                                           (ngModelChange)="tariffSurChargeOpco($event)">
+                                    <span class="error" *ngIf="IsInvalidtariffSurChargeOpco">Range should between 0 - 100 </span>
                                 </div>
                             </div>
                         </div>
