@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {BlackListService} from '../../../commons/services/blacklist.service';
 import {BlackListNumbers} from '../../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
+import {MessageService} from '../../../commons/services/message.service';
 
 @Component({
     selector: 'app-blacklist-main',
@@ -33,7 +34,7 @@ export class ApiBlacklistMainComponent implements OnInit {
     private isDublicate: boolean;
     private dublicate: string;
 
-    constructor(private blackListService: BlackListService) {
+    constructor(private blackListService: BlackListService, private message: MessageService) {
 
 
     }
@@ -180,10 +181,14 @@ export class ApiBlacklistMainComponent implements OnInit {
                 if (this.isDublicate == true) {
                     this.dublicate = 'This MSISDN already exists';
                 } else {
-                    this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, response => {
-                        const result = response;
-                        // console.log(JSON.stringify(result));
-                        this.getBlackListNumbers(apiId);
+                    this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, (response, status) => {
+                        if (status) {
+                            this.message.success('Added Successfully');
+                            this.getBlackListNumbers(apiId);
+                            this.msisdn = '';
+                        } else {
+                            this.message.error(response.message);
+                        }
                     });
                 }
             }
@@ -199,47 +204,56 @@ export class ApiBlacklistMainComponent implements OnInit {
 
         this.msisdnList = [];
 
-        if(this.api.length != 0){
-            if (this.isValid(this.msisdn)) {
-                this.ismsisdnError = false;
-                const msisdnList = this.msisdn.split(',');
-                let count = 0;
+        let validApi = false;
 
-                for (const entry of msisdnList) {
-
-                    if (this.isValidMobileNumber(entry)) {
-                        this.msisdnList[count] = 'tel3A+' + Number(entry);
-                        this.islong = false;
-                    } else {
-                        this.islong = true;
-                    }
-                    count++;
-                }
-
-                if (this.islong == true) {
-                    this.long = 'Not a Valid MSISDN';
-                    this.islong = true;
-                } else {
-                    this.addNewBlackListnumbers();
-                }
-
-            } else {
-                if (this.msisdn.length == 0) {
-                    this.msisdnError = 'Empty List';
-                    this.ismsisdnError = true;
-                } else {
-                    this.msisdnError = 'Wrong input please enter Comma separated valid mobile numbers ';
-                    this.ismsisdnError = true;
-                }
+        for (const entry of this.apiList) {
+            if (entry == this.api) {
+                validApi = true;
             }
-        }else {
-            this.msisdnError = 'Select an API first';
-            this.ismsisdnError = true;
         }
 
+        if (validApi) {
+            if (this.api.length != 0) {
+                if (this.isValid(this.msisdn)) {
+                    this.ismsisdnError = false;
+                    const msisdnList = this.msisdn.split(',');
+                    let count = 0;
 
+                    for (const entry of msisdnList) {
 
+                        if (this.isValidMobileNumber(entry)) {
+                            this.msisdnList[count] = 'tel3A+' + Number(entry);
+                            this.islong = false;
+                        } else {
+                            this.islong = true;
+                        }
+                        count++;
+                    }
 
+                    if (this.islong == true) {
+                        this.long = 'Not a Valid MSISDN';
+                        this.islong = true;
+                    } else {
+                        this.addNewBlackListnumbers();
+                    }
+
+                } else {
+                    if (this.msisdn.length == 0) {
+                        this.msisdnError = 'Empty List';
+                        this.ismsisdnError = true;
+                    } else {
+                        this.msisdnError = 'Wrong input please enter Comma separated valid mobile numbers ';
+                        this.ismsisdnError = true;
+                    }
+                }
+            } else {
+                this.msisdnError = 'Select an API first';
+                this.ismsisdnError = true;
+            }
+        } else {
+            this.msisdnError = 'Please Select Valid API';
+            this.ismsisdnError = true;
+        }
     }
 
     /**

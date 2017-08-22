@@ -49,10 +49,10 @@ export class BlackListService {
         this._remoteService.addNewBlackListList(apiId, apiName, msisdnList)
             .subscribe(
                 data => {
-                   callback(data);
+                   callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
