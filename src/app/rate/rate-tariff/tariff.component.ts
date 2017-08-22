@@ -126,7 +126,10 @@ export class TariffComponent implements OnInit {
         if ((Number(this.tariff.tariffSPCommission) < 0 ) || (Number(this.tariff.tariffSPCommission) > 100)) {
             this.IsInvalidspCommission = true;
             this.IsExceedCommision = false;
-        } else if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
+        } else {
+            this.IsInvalidspCommission = false;
+        }
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
             this.IsExceedCommision = true;
             this.IsInvalidspCommission = false;
         } else {
@@ -139,7 +142,10 @@ export class TariffComponent implements OnInit {
         if ((Number(this.tariff.tariffAdsCommission) < 0 ) || (Number(this.tariff.tariffAdsCommission) > 100)) {
             this.IsInvalidadsCommission = true;
             this.IsExceedCommision = false;
-        } else if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
+        } else {
+            this.IsInvalidadsCommission = false;
+        }
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
             this.IsExceedCommision = true;
             this.IsInvalidadsCommission = false;
         } else {
@@ -149,10 +155,13 @@ export class TariffComponent implements OnInit {
 
     tariffOpcoCommission(val) {
         this.tariff.tariffOpcoCommission = val;
-        if ((Number(this.tariff.tariffOpcoCommission) < 0 ) || (Number(this.tariff.tariffOpcoCommission) > 100)) {
+        if ((Number(this.tariff.tariffSurChargeOpco) < 0 ) || (Number(this.tariff.tariffSurChargeOpco) > 100)) {
             this.IsInvalidopcoCommission = true;
             this.IsExceedCommision = false;
-        } else if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
+        } else {
+            this.IsInvalidopcoCommission = false;
+        }
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission)) > 100) {
             this.IsExceedCommision = true;
             this.IsInvalidopcoCommission = false;
         } else {
