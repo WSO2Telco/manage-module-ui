@@ -50,6 +50,7 @@ export class RateMainComponent implements OnInit {
     private rateCategories: RateCategory[];
     private rateTaxList: RateTax[];
     private mappingList: Mapping[];
+    private rateDefinitions: RateDefinition [];
 
     private categoryNameList: string[];
     private currencyCodeList: string[];
@@ -91,6 +92,7 @@ export class RateMainComponent implements OnInit {
         this.rateTypeList = [];
         this.categoryList = [];
         this.mappingList = [];
+        this.rateDefinitions = [];
 
         this.categoryNameList = [];
         this.currencyCodeList = [];
@@ -225,6 +227,7 @@ export class RateMainComponent implements OnInit {
     getRateDefinitionList() {
         this.rateService.getRateDefinitionList((response, status) => {
             if (status) {
+                this.rateDefinitions = response;
                 let count = 0;
                 for (const entry of response) {
                     this.rateDefNameList[count] = response[count].rateDefName;

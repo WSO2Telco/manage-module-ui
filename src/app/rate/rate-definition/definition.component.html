@@ -1,0 +1,54 @@
+<!--<div class="animated fadeInUp row">-->
+
+    <!--<div class="col-sm-12">-->
+        <!--&lt;!&ndash;Form Container - START&ndash;&gt;-->
+        <!--<div class="form-container rateInputContainer">-->
+            <!--<div class="tbl-header">-->
+                <!--Rate Definitions-->
+            <!--</div>-->
+            <!--<div class="searchFilter">-->
+                <!--<div class="col-sm-4">-->
+                    <!--<input type="text" class="form-control"-->
+                           <!--[(ngModel)]="selectedRate"-->
+                           <!--[typeaheadMinLength]="0"-->
+                           <!--container="body"-->
+                           <!--[typeahead]="rateDefNames"-->
+                           <!--typeaheadOptionField="apiId"-->
+                           <!--(typeaheadOnSelect)="onRateSelected($event)"-->
+                           <!--placeholder="Select the Rate">-->
+                <!--</div>-->
+
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div *ngFor="let item of rateDfinitions">&ndash;&gt;-->
+                <!--&lt;!&ndash;<label>Name: {{item.rateDefName}}</label>&ndash;&gt;-->
+                <!--&lt;!&ndash;<label>Description: {{item.rateDefDescription}}</label>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                Rate Definitions
+                <br>
+            </div>
+            <div class="searchFilter">
+                <div class="col-sm-4">
+                    <input type="text" class="form-control"
+                           [(ngModel)]="selectedRate"
+                           [typeaheadMinLength]="0"
+                           container="body"
+                           [typeahead]="rateDefNames"
+                           typeaheadOptionField="apiId"
+                           (typeaheadOnSelect)="onRateSelected($event)"
+                           placeholder="Select the Rate">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

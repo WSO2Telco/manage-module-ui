@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RateCategoryComponent} from './rate-ratecategory/ratecategory.component';
 import {CategoryComponent} from './rate-category/category.component';
+import {DefinitionComponent} from './rate-definition/definition.component';
 import {TariffComponent} from './rate-tariff/tariff.component';
 import {RateMainComponent} from './rate-main/rate-main.component';
 import {RateRoutes} from './rate.routes';
@@ -28,7 +29,8 @@ import {CurrencyComponent} from './rate-currency/currency.component';
         RateCategoryComponent,
         CategoryComponent,
         CurrencyComponent,
-        TariffComponent
+        TariffComponent,
+        DefinitionComponent
     ]
 })
 export class RateModule {
