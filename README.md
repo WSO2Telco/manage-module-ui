@@ -1,4 +1,4 @@
-# Workflow UI
+# Manage Application
 
 ## Setting up Dev Environment
 install nodejs
