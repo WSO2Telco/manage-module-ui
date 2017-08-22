@@ -188,7 +188,7 @@ export class RateRemoteDataService {
         return this.http.get(this.apiEndpoints['getRateTaxList'])
             .map((response: Response) => {
                 const result = response.json();
-                console.log(result);
+             //   console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));
