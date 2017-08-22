@@ -102,7 +102,7 @@ export class TariffComponent implements OnInit {
      */
     tariffSurChargeAds(val) {
         this.tariff.tariffSurChargeAds = val;
-        if ((Number(this.tariff.tariffSurChargeAds) < 0) || (Number(this.tariff.tariffSurChargeAds) > 100)) {
+        if ((Number(this.tariff.tariffSurChargeAds) < 0) || (Number(this.tariff.tariffSurChargeAds) > 100) || (this.tariff.tariffSurChargeAds == null)) {
             this.IsInvalidtariffSurChargeAds = true;
         } else {
             this.IsInvalidtariffSurChargeAds = false;
@@ -112,7 +112,7 @@ export class TariffComponent implements OnInit {
 
     tariffSurChargeOpco(val) {
         this.tariff.tariffSurChargeOpco = val;
-        if ((Number(this.tariff.tariffSurChargeOpco) < 0 ) || (Number(this.tariff.tariffSurChargeOpco) > 100)) {
+        if ((Number(this.tariff.tariffSurChargeOpco) < 0 ) || (Number(this.tariff.tariffSurChargeOpco) > 100) || (this.tariff.tariffSurChargeOpco == null)) {
             this.IsInvalidtariffSurChargeOpco = true;
         } else {
             this.IsInvalidtariffSurChargeOpco = false;
@@ -123,7 +123,7 @@ export class TariffComponent implements OnInit {
 
     tariffSPCommission(val) {
         this.tariff.tariffSPCommission = val;
-        if ((Number(this.tariff.tariffSPCommission) < 0 ) || (Number(this.tariff.tariffSPCommission) > 100)) {
+        if ((Number(this.tariff.tariffSPCommission) < 0 ) || (Number(this.tariff.tariffSPCommission) > 100) || (this.tariff.tariffSPCommission == null)) {
             this.IsInvalidspCommission = true;
             this.IsExceedCommision = false;
         } else {
@@ -139,7 +139,7 @@ export class TariffComponent implements OnInit {
 
     tariffAdsCommission(val) {
         this.tariff.tariffAdsCommission = val;
-        if ((Number(this.tariff.tariffAdsCommission) < 0 ) || (Number(this.tariff.tariffAdsCommission) > 100)) {
+        if ((Number(this.tariff.tariffAdsCommission) < 0 ) || (Number(this.tariff.tariffAdsCommission) > 100) ||  (this.tariff.tariffAdsCommission == null)) {
             this.IsInvalidadsCommission = true;
             this.IsExceedCommision = false;
         } else {
@@ -155,7 +155,7 @@ export class TariffComponent implements OnInit {
 
     tariffOpcoCommission(val) {
         this.tariff.tariffOpcoCommission = val;
-        if ((Number(this.tariff.tariffSurChargeOpco) < 0 ) || (Number(this.tariff.tariffSurChargeOpco) > 100)) {
+        if ((Number(this.tariff.tariffOpcoCommission) < 0 ) || (Number(this.tariff.tariffOpcoCommission) > 100) || (this.tariff.tariffOpcoCommission == null)) {
             this.IsInvalidopcoCommission = true;
             this.IsExceedCommision = false;
         } else {
