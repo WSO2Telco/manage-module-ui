@@ -63,7 +63,8 @@ export class TariffComponent implements OnInit {
     onSubmit(addTariffForm) {
         this.clearErrors();
 
-        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0) {
+        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
+            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision) {
             this.rateService.addTariff(this.tariff, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
@@ -139,7 +140,7 @@ export class TariffComponent implements OnInit {
 
     tariffAdsCommission(val) {
         this.tariff.tariffAdsCommission = val;
-        if ((Number(this.tariff.tariffAdsCommission) < 0 ) || (Number(this.tariff.tariffAdsCommission) > 100) ||  (this.tariff.tariffAdsCommission == null)) {
+        if ((Number(this.tariff.tariffAdsCommission) < 0 ) || (Number(this.tariff.tariffAdsCommission) > 100) || (this.tariff.tariffAdsCommission == null)) {
             this.IsInvalidadsCommission = true;
             this.IsExceedCommision = false;
         } else {
