@@ -12,7 +12,8 @@ import {MessageService} from "../../services/message.service";
 export class BreadcrumbsComponent implements OnInit {
 
     private activeView: any;
-    private url:string;
+    private url: string;
+
 
     constructor(private _router: Router,
                 private approval: ApprovalRemoteDataService,
@@ -23,7 +24,7 @@ export class BreadcrumbsComponent implements OnInit {
         this._router.events
             .filter((event: any) => event instanceof NavigationEnd)
             .subscribe((event: NavigationEnd) => {
-                this.activeView = event.url.replace('/', '').split('/')
+                this.activeView = event.url.replace('/', '').split('/');
             });
     }
 
