@@ -493,7 +493,8 @@ export class QuotaCapMainComponent implements OnInit {
         }
 
 
-        if (!this.isEmpty() && this.subscriber.length != 0 && !this.is_invalid_period && this.subscriber.length != 0 && this.api.length != 0 && this.selectedoperator.length != 0 && this.app.length != 0) {
+        if (!this.isEmpty() && this.subscriber.length != 0 && !this.is_invalid_period && this.subscriber.length != 0
+            && (this.app.length == 0 || validApplication ) && (this.api.length == 0 || validApi ) && (this.selectedoperator.length == 0 || validOperator )) {
             this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api,
                 this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
                     this.submissionError = errorMsg;
@@ -507,33 +508,21 @@ export class QuotaCapMainComponent implements OnInit {
                 this.isSubscriberError = true;
                 this.subscriberError = 'Invalid Subscriber';
             }
-            if (!validApplication) {
+            if (!validApplication && !(this.app.length == 0)) {
                 this.isApplicationError = true;
                 this.applicationError = 'Invalid Application';
             }
-            if (!validApi) {
+            if (!validApi && !(this.api.length == 0)) {
                 this.isApiError = true;
                 this.apiError = 'Invalid API';
             }
-            if (!validOperator) {
+            if (!validOperator && !(this.selectedoperator.length == 0)) {
                 this.isOperatorError = true;
                 this.operatorError = 'Invalid Operator';
             }
             if (this.subscriber.length == 0) {
                 this.isSubscriberError = true;
                 this.subscriberError = 'Empty Subscriber';
-            }
-            if (this.app.length == 0) {
-                this.isApplicationError = true;
-                this.applicationError = 'Empty Application';
-            }
-            if (this.api.length == 0) {
-                this.isApiError = true;
-                this.apiError = 'Empty API';
-            }
-            if (this.selectedoperator.length == 0) {
-                this.isOperatorError = true;
-                this.operatorError = 'Empty Operator';
             }
             if (this.quotaInputValue == null || this.quotaInputValue.length == 0 || this.quotaInputValue == '') {
                 this.isNameEmpty = true;
@@ -543,18 +532,6 @@ export class QuotaCapMainComponent implements OnInit {
             if (this.subscriber.length == 0) {
                 this.isSubscriberError = true;
                 this.subscriberError = 'Service Provider cannot be empty';
-            }
-            if (this.app.length == 0) {
-                this.isApplicationError = true;
-                this.applicationError = 'Application cannot be empty';
-            }
-            if (this.api.length == 0) {
-                this.isApiError = true;
-                this.apiError = 'API cannot be empty';
-            }
-            if (this.selectedoperator.length == 0) {
-                this.isOperatorError = true;
-                this.operatorError = 'Operator cannot be empty';
             }
             if (this.defaultcalval.length == 0) {
                 this.isCalendarEmpty = true;

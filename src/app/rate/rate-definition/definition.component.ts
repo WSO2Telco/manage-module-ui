@@ -2,9 +2,6 @@
  * Created by rajithk on 7/25/17.
  */
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RateService} from '../../commons/services/rate.service';
-import {AuthenticationService} from '../../commons/services/authentication.service';
-import {MessageService} from '../../commons/services/message.service';
 import {RateDefinition} from '../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 
@@ -22,7 +19,7 @@ export class DefinitionComponent implements OnInit {
 
 
     @Input()
-    private rateDfinitions: RateDefinition[];
+    private rateDefinitions: RateDefinition[];
 
     @Input()
     private rateDefNames: string[];
@@ -34,7 +31,7 @@ export class DefinitionComponent implements OnInit {
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
 
-    constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
+    constructor() {
     }
 
     ngOnInit() {
@@ -43,9 +40,10 @@ export class DefinitionComponent implements OnInit {
     }
 
     onRateSelected(event: TypeaheadMatch) {
-        for(const entry of this.rateDfinitions){
-            if(entry.rateDefName == this.selectedRate){
+        for (const entry of this.rateDefinitions) {
+            if (entry.rateDefName == this.selectedRate) {
                 this.rateDefinition = entry;
+                this.showRateDef = true;
             }
         }
     }

@@ -20,10 +20,6 @@
 
             <!--</div>-->
 
-            <!--&lt;!&ndash;<div *ngFor="let item of rateDfinitions">&ndash;&gt;-->
-                <!--&lt;!&ndash;<label>Name: {{item.rateDefName}}</label>&ndash;&gt;-->
-                <!--&lt;!&ndash;<label>Description: {{item.rateDefDescription}}</label>&ndash;&gt;-->
-            <!--&lt;!&ndash;</div>&ndash;&gt;-->
         <!--</div>-->
     <!--</div>-->
 <!--</div>-->
@@ -48,6 +44,15 @@
                 </div>
 
             </div>
+
+            <div *ngIf="showRateDef">
+                <label>Name: {{rateDefinition.rateDefName}}</label><br>
+                <label>Description: {{rateDefinition.rateDefDescription}}</label><br>
+                <label>Currency : {{rateDefinition.currency.currencyCode}}</label><br>
+                <label>Rate Type: {{rateDefinition.rateType.rateTypeCode}}</label><br>
+                <label>Tariff: {{rateDefinition.tariff.tariffName}}</label>
+            </div>
+
 
         </div>
     </div>
