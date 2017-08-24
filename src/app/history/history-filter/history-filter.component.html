@@ -29,13 +29,8 @@
                   placeholder="Operator">
        </div>
        <div class="col-sm-3">
-           <input type="text" class="form-control" placeholder="Status">
+           <button class="btn btn-default " (click)="onClearFilter()">Clear</button>
+           <button class="btn btn-primary " (click)="onFilterCriteriaChange()">Search</button>
        </div>
    </div>
-    <div class="row">
-        <div class="col-sm-12 text-right">
-            <button class="btn btn-default btn-sm" (click)="onClearFilter()">Clear</button>
-            <button class="btn btn-primary btn-sm" (click)="onFilterCriteriaChange()">Search</button>
-        </div>
-    </div>
 </div>
