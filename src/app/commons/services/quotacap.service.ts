@@ -63,9 +63,9 @@ export class QuotaService {
             );
     }
 
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
+    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
         this.slimLoadingBarService.start();
-        this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, quotaValue, fromDate, toDate)
+        this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, operatorname, quotaValue, fromDate, toDate)
             .subscribe(
                 data => {
                     this.message.success('Successfully added new Quota');
@@ -81,8 +81,8 @@ export class QuotaService {
             );
     }
 
-    getQuotaLimitInfo(subscriberID: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfo(subscriberID)
+    getQuotaLimitInfo(subscriberID: string, operatorname: string, callback: Function) {
+        this._remoteService.getQuotaLimitInfo(subscriberID, operatorname)
             .subscribe(
                 data => {
                     callback(data);
@@ -105,8 +105,8 @@ export class QuotaService {
             );
     }
 
-    getQuotaLimitInfoApp(appID: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfoApp(appID)
+    getQuotaLimitInfoApp(appID: string, operatorname: string,  callback: Function) {
+        this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
             .subscribe(
                 data => {
                     callback(data);
@@ -117,8 +117,8 @@ export class QuotaService {
             );
     }
 
-    getQuotaLimitInfoApi(apiID: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfoApi(apiID)
+    getQuotaLimitInfoApi(apiID: string, operatorname: string, callback: Function) {
+        this._remoteService.getQuotaLimitInfoApi(apiID, operatorname)
             .subscribe(
                 data => {
                     callback(data);
@@ -129,8 +129,8 @@ export class QuotaService {
             );
     }
 
-    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, callback: Function) {
-        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate)
+    getQuotaLimitInfoOperator(operatorname: string, subscriberID: string, callback: Function) {
+        this._remoteService.getQuotaLimitInfoOperator(operatorname, subscriberID)
             .subscribe(
                 data => {
                     callback(data);
@@ -141,8 +141,9 @@ export class QuotaService {
             );
     }
 
-    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string, callback: Function) {
-        this._remoteService.getValidityPeriodForApp(appID, fromDate, toDate)
+
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
+        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate, operatorname)
             .subscribe(
                 data => {
                     callback(data);
@@ -153,8 +154,20 @@ export class QuotaService {
             );
     }
 
-    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string, callback: Function) {
-        this._remoteService.getValidityPeriodForApi(apiID, fromDate, toDate)
+    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
+        this._remoteService.getValidityPeriodForApp(appID, fromDate, toDate, operatorname)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
+        this._remoteService.getValidityPeriodForApi(apiID, fromDate, toDate, operatorname)
             .subscribe(
                 data => {
                     callback(data);
