@@ -527,8 +527,7 @@ export class QuotaCapMainComponent implements OnInit {
 
         if (!this.isEmpty() && this.subscriber.length != 0 && !this.is_invalid_period && this.subscriber.length != 0
             && (this.app.length == 0 || validApplication ) && (this.api.length == 0 || validApi ) && (this.selectedoperator.length == 0 || validOperator )) {
-            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api,
-                this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
+            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
                     this.submissionError = errorMsg;
                     this.resetdefault();
                     setTimeout(() => {

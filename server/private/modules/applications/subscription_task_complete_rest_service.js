@@ -13,7 +13,7 @@ function invokeSubscriptionCompleteTask(params) {
 
     let getPayload = function (params) {
 
-        console.log("Operator ID " +  params.user);
+        //console.log("Operator ID " +  params.user);
 
         if(params.selectedTier){
             if(params.selectedRate.length == 0){

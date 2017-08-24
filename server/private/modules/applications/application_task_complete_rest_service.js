@@ -103,7 +103,7 @@ function invokeApplicationCompleteTask(params) {
         };
     };
 
-    console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
+   // console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
 
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {

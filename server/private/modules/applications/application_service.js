@@ -58,15 +58,15 @@ const _getApplications = function (request, reply) {
                 let relevantRates = [];
 
                 if (operationReatesDetails && operationReatesDetails[index].api) {
-                    // console.log("WHAT+=========================");
+
                     let operationRates = operationReatesDetails[index].api.operations;
                     let count = 0;
                     for (const entry of operationRates) {
-                       // console.log('>>' + entry.apiOperationName);
+
                         let count2 = 0;
                         let rateDefinitions = []
                         for (const entry2 of entry.rates) {
-                          //  console.log("WHAT+=========================" + entry2.operationRateId);
+
                             rateDefinitions[count2] = {
                                 rateDefId: entry2.operationRateId,
                                 rateDefName: entry2.rateDefName,
@@ -84,7 +84,7 @@ const _getApplications = function (request, reply) {
                     }
                 }
 
-                //console.log('here ######' + JSON.stringify(relevantRates));
+
 
                 let moCreated;
                 let isValidDate = false;
@@ -127,7 +127,7 @@ const _getApplications = function (request, reply) {
     };
 
     let onOperationReatesSuccess = function (operationReatesDetails) {
-       //console.log("WWWWWWWWWW" + JSON.stringify(operationReatesDetails));
+
         reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
 
@@ -136,7 +136,7 @@ const _getApplications = function (request, reply) {
     };
 
     let onAppDetailSuccess = function (appsDetails) {
-        //console.log("SUCCESS " + JSON.stringify(appsDetails));
+
         let OperationReatesPromises;
         if (appsDetails) {
             appsDetailsResult = appsDetails;
@@ -146,13 +146,13 @@ const _getApplications = function (request, reply) {
                     return pre;
                 }, {});
 
-                // console.log('$$$$$$$$$$$$   '+ index + ' $$$$$$$$$$ '  + details['apiName']);
+
                 if (details['apiName']) {
                     if(request.payload.isAdmin){
-                       // console.log("%%%admin call");
+
                         return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName']);
                     }else {
-                       // console.log("%%%operator  call is " + request.payload.isAdmin );
+
                         return operationRatesREST.invokeOperationRatesRest(details['apiName'], request.payload.operator);
                     }
                 } else {
@@ -166,7 +166,7 @@ const _getApplications = function (request, reply) {
             reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
         }
 
-        //reply(responseAdaptor(appTaskResult, appsDetails));
+
     };
 
 
@@ -177,12 +177,12 @@ const _getApplications = function (request, reply) {
 
     let onApplicationSuccess = function (applicationTasksResult) {
 
-       // console.log('@@@@@@Application successs' + JSON.stringify(applicationTasksResult));
+
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;
             appDetailsPromises = applicationTasksResult.data.map((appTask) => {
-                // console.log('$$$$$$$$$$$$' + JSON.stringify(appTask));
+
                 return applicationDetailsREST.Invoke(appTask.id);
             });
 
@@ -261,7 +261,7 @@ const _getAppStat = function (request, reply) {
 
 
     if (requestValidator(request)) {
-        //Application Creations for user
+        /**Application Creations for user */
         promises.push(applicationREST.Invoke({
             assignee: param.assignee,
             candidateGroups: null,
@@ -407,7 +407,6 @@ const _approveSubscriptionCreation = function (request, reply) {
             param.selectedTier = null;
         }
 
-      //  console.log('>>>>>>' + param.taskId);
 
         subscriptionCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
     } else {
