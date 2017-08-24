@@ -58,7 +58,7 @@
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate
                   (ngSubmit)="onRateCardSubmition(ratecardForm)">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
-                    <label class="control-label col-sm-2">Rate Name:</label>
+                    <label class="control-label col-sm-2">Rate Name  <span>*</span></label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="text"
@@ -74,7 +74,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
-                    <label class="control-label col-sm-2">Rate Description</label>
+                    <label class="control-label col-sm-2">Rate Description  <span>*</span></label>
                     <div class="col-sm-4">
                             <textarea rows="2" cols="50" class="form-control"
                                       type="text"
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isCurrencyEmpty}">
-                    <label class="control-label col-sm-2">Currency:</label>
+                    <label class="control-label col-sm-2">Currency <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="currency"
                                [typeahead]="currencyCodeList"
@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isRateTypeEmpty}">
-                    <label class="control-label col-sm-2">Rate Type:</label>
+                    <label class="control-label col-sm-2">Rate Type <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
                                [typeahead]="rateTypeCodeList"
@@ -125,7 +125,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isTariffEmpty}">
-                    <label class="control-label col-sm-2">Tariff:</label>
+                    <label class="control-label col-sm-2">Tariff <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffNameList"
@@ -146,7 +146,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isTaxEmpty}">
-                    <label class="control-label col-sm-2">Tax:</label>
+                    <label class="control-label col-sm-2">Tax</label>
                     <div class="col-sm-4">
                         <select multiple
                                 [(ngModel)]="rateTax"

@@ -59,6 +59,7 @@ export class QuotaCapMainComponent implements OnInit {
     private isNameEmpty: boolean;
     private isInvalidquota: boolean;
     private name: string;
+    private resultLabel: string;
 
 
     private isSubscriberError: boolean;
@@ -164,12 +165,14 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getOperatorOfsubscriber(subscriberID: string) {
         if (this.isAdmin) {
+            console.log('calles ######################')
             this.quotaService.getOperatorOfsubscriber(subscriberID, (response, status) => {
                 if (status) {
                     if (response.result === 'undefined' || response.result === 'empty') {
                         this.operatorsList = ['All'];
                     } else {
                         this.operatorsList = response;
+                        this.operatorsList.splice(0, 0, 'All');
                     }
                 } else {
                     this.submissionError = response;
@@ -247,20 +250,24 @@ export class QuotaCapMainComponent implements OnInit {
      * this method is triggered when a subscriber is selected
      * @param event
      */
-    onSubscriberSelected(event: TypeaheadMatch) {
+    onSubscriberSelected(val) {
+        this.subscriber = val;
         this.app = '';
         this.api = '';
         this.appID = '';
         this.isCalenderEnable = false;
         this.isSubscriberError = false;
         this.clearErrors();
-        this.message.info('<center>You have selected &nbsp;<b>' + this.subscriber + '</b></center>');
         for (const entry of this.subscriberList) {
             if (entry == this.subscriber) {
                 this.getAppsofSubscriber(this.subscriber);
                 this.getQuotaofSubscriber(this.subscriber);
                 this.getOperatorOfsubscriber(this.subscriber);
                 this.isSubscriberSelect = true;
+            } else {
+                this.SetQuotaResultLabel();
+                this.quotalist = [];
+                this.applicationList = [];
             }
         }
     }
@@ -291,6 +298,7 @@ export class QuotaCapMainComponent implements OnInit {
      * @param subscriberID
      */
     getQuotaofSubscriber(subscriberID: string) {
+        this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
         this.quotaService.getQuotaLimitInfo(subscriberID, (response) => {
@@ -314,6 +322,7 @@ export class QuotaCapMainComponent implements OnInit {
      * @param appID
      */
     getQuotaofApp(appID: string) {
+        this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
         this.quotaService.getQuotaLimitInfoApp(appID, (response) => {
@@ -340,6 +349,7 @@ export class QuotaCapMainComponent implements OnInit {
      * @param apiID
      */
     getQuotaofApi(apiID: string) {
+        this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
         this.quotaService.getQuotaLimitInfoApi(apiID, (response) => {
@@ -356,22 +366,40 @@ export class QuotaCapMainComponent implements OnInit {
         });
     }
 
+    SetQuotaResultLabel() {
+        if (this.subscriber != '') {
+            this.resultLabel = 'for Service provider';
+        }
+        if (this.subscriber != '' && this.app != '') {
+            this.resultLabel = 'for Service provider > APP';
+        }
+        if (this.subscriber != '' && this.app != '' && this.api != '') {
+            this.resultLabel = 'for Service provider > APP > API';
+        }
+        if (this.subscriber == '' && this.app == '' && this.api == '') {
+            this.resultLabel = '';
+        }
+
+    }
+
     /**
      * this method is triggered when an application is selected
      * @param event
      */
-    onAppSelected(event: TypeaheadMatch) {
+    onAppSelected(val) {
         this.api = '';
         this.appID = '';
+        this.app = val;
+        this.SetQuotaResultLabel();
+
         this.isCalenderEnable = false;
         for (const entry of this.applicationList) {
             if (entry == this.app) {
                 this.getApis(this.app);
-
+            } else {
+                this.apiList = [];
             }
         }
-        this.message.info('You have selected the following combination <br> <center><b>' + this.subscriber +
-            '&nbsp;> &nbsp;' + this.app + '</b></center>');
 
         for (const entry of this.applications) {
             if (entry.name == this.app) {
@@ -379,7 +407,11 @@ export class QuotaCapMainComponent implements OnInit {
                 this.isAppSelect = true;
                 this.isSubscriberSelect = false;
                 this.getQuotaofApp(this.appID);
+            } else {
 
+                this.SetQuotaResultLabel();
+                this.appID = '';
+                this.quotalist = [];
             }
         }
 
@@ -546,20 +578,29 @@ export class QuotaCapMainComponent implements OnInit {
      * when and API value is selected form drop down
      * @param event
      */
-    onApiSelected(event: TypeaheadMatch) {
+    onApiSelected(val) {
+        this.api = val;
+        this.SetQuotaResultLabel();
         for (const entry of this.applicationList) {
             if (entry == this.app) {
                 this.isCalenderEnable = false;
                 this.isSubscriberSelect = false;
                 this.isAppSelect = false;
                 this.isApiSelect = true;
-                this.getApis(this.app);
-                this.getQuotaofApi(this.api);
+                //  this.getApis(this.app);
+                // this.getQuotaofApi(this.api);
 
             }
         }
-        this.message.info('You have selected the following combination <br> <center><b>' + this.subscriber +
-            '&nbsp;>&nbsp;' + this.app + '&nbsp;>&nbsp;' + this.api + '</b></center>');
+
+        for (const entry of this.apiList) {
+            if (entry == this.api) {
+                this.getQuotaofApi(this.api);
+            } else {
+                this.SetQuotaResultLabel();
+                this.quotalist = [];
+            }
+        }
     }
 
 
@@ -571,6 +612,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.defaultcalval = '';
         this.subscriber = '';
         this.quotalist = [];
+        this.resultLabel = '';
     }
 
     clearForm() {
