@@ -34,10 +34,12 @@ export class WhitelistMainComponent implements OnInit {
 
     private ismsisdnError: boolean;
     private ismsisdnRangeError: boolean;
+    private isInvalidFieldError: boolean;
 
     private submissionError: string;
     private msisdnError: string;
     private msisdnRangeError: string;
+    private invalidFieldError: string
 
 
     private whitelistList: string[];
@@ -64,9 +66,11 @@ export class WhitelistMainComponent implements OnInit {
 
         this.msisdnError = '';
         this.msisdnRangeError = '';
+        this.invalidFieldError = '';
 
         this.ismsisdnError = false;
         this.ismsisdnRangeError = false;
+        this.isInvalidFieldError = false;
     }
 
 
@@ -286,9 +290,11 @@ export class WhitelistMainComponent implements OnInit {
     onUploadNumber(numberlistForm) {
 
         this.msisdnError = '';
+        this.invalidFieldError = '';
         this.ismsisdnError = false;
+        this.isInvalidFieldError = false;
 
-        if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0) {
+        if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0 && this.isValidInputs()) {
             this.ismsisdnError = false;
             this.msisdnList = [];
             if (this.isValid(this.msisdn)) {
@@ -310,10 +316,50 @@ export class WhitelistMainComponent implements OnInit {
                 }
             }
         } else {
-            this.msisdnError = 'Select the relevant Subscriber, Application and API first';
+            this.msisdnError = 'Select valid Subscriber, Application and API first';
             this.ismsisdnError = true;
         }
 
+
+    }
+
+    isValidInputs() {
+        let validSubscriber = false;
+        let validApp = false;
+        let validApi = false;
+
+        for(const entry of this.subscriberList){
+            if(this.subscriber == entry){
+                validSubscriber = true;
+            }
+        }
+
+        for(const entry of this.applicationList){
+            if(this.app == entry){
+                validApp = true;
+            }
+        }
+
+        for(const entry of this.apiList){
+            if(this.api == entry){
+                validApi = true;
+            }
+        }
+
+        if(!validApi){
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid Api Name';
+        }
+        if(!validApp){
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid Application Name';
+        }
+        if(!validSubscriber){
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid Subscriber Name';
+        }
+
+        return (validApp && validSubscriber && validApi);
 
     }
 
@@ -326,7 +372,7 @@ export class WhitelistMainComponent implements OnInit {
         this.msisdnRangeError = '';
         this.ismsisdnRangeError = false;
 
-        if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0) {
+        if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0 && this.isValidInputs()) {
 
             if (this.isValidMobileNumber(this.msisdnMin.toString()) && this.isValidMobileNumber(this.msisdnMax.toString())) {
                 const diff = (this.msisdnMax - this.msisdnMin);
@@ -352,7 +398,7 @@ export class WhitelistMainComponent implements OnInit {
                 this.ismsisdnRangeError = true;
             }
         } else {
-            this.msisdnRangeError = 'Select the relevant Subscriber, Application and API first';
+            this.msisdnRangeError = 'Select valid Subscriber, Application and API first';
             this.ismsisdnRangeError = true;
         }
     }

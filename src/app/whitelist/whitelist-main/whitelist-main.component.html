@@ -37,6 +37,7 @@
                            placeholder="Select API">
                 </div>
             </div>
+            <div><span class="error" *ngIf="isInvalidFieldError">{{invalidFieldError}}</span></div>
             <br>
             <form class="form-horizontal" #numberlistForm="ngForm" novalidate
                   (ngSubmit)="onUploadNumber(numberlistForm)">
