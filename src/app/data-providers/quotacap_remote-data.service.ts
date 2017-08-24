@@ -117,7 +117,7 @@ export class QuotacapRemoteDataService {
      * @param quoatavalue
      * @returns {Observable<R>}
      */
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, quotaValue: string, fromDate: string, toDate: string) {
+    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string, quotaValue: string, fromDate: string, toDate: string) {
 
         if (appId.length == 0) {
             appId = null;
@@ -126,9 +126,13 @@ export class QuotacapRemoteDataService {
             apiId = null;
         }
 
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
 
         const data = {
-            'operator': 'DIALOG',
+            'operator': operatorname,
             'serviceProvider': subscriberID + '@carbon.super',
             'applicationName': appId,
             'apiName': apiId,
@@ -151,10 +155,15 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfo(subscriberID: string) {
+    getQuotaLimitInfo(subscriberID: string, operatorname: string) {
+
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
         const data = {
             'byFlag': 'byServiceProvider',
-            'info': subscriberID + '@carbon.super'
+            'info': subscriberID + '@carbon.super',
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -170,10 +179,15 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApp(appID: string) {
+    getQuotaLimitInfoApp(appID: string,  operatorname: string) {
+
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
         const data = {
             'byFlag': 'byApplication',
-            'info': appID
+            'info': appID,
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -190,10 +204,39 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApi(apiID: string) {
+    getQuotaLimitInfoApi(apiID: string,  operatorname: string) {
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
         const data = {
             'byFlag': 'byApi',
-            'info': apiID
+            'info': apiID,
+            'operator': operatorname
+        };
+
+        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    /**
+     * to get quota value related to the selected operator
+     * @param id
+     * @returns {Observable<R>}
+     */
+    getQuotaLimitInfoOperator(operatorname: string, subscriberID: string) {
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
+        const data = {
+            'byFlag': 'byServiceProvider',
+            'info': subscriberID + '@carbon.super',
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -210,12 +253,18 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string) {
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, operatorname: string) {
+
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
         const data = {
             'byFlag': 'byServiceProvider',
             'info': subscriberID + '@carbon.super',
             'fromDate': fromDate,
-            'toDate': toDate
+            'toDate': toDate,
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
@@ -231,12 +280,18 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string) {
+    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string, operatorname: string) {
+
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
         const data = {
             'byFlag': 'byApplication',
             'info': appID,
             'fromDate': fromDate,
-            'toDate': toDate
+            'toDate': toDate,
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
@@ -252,12 +307,18 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string) {
+    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string, operatorname: string) {
+
+        if (operatorname == '' || operatorname == 'All') {
+            operatorname = '_All_';
+        }
+
         const data = {
             'byFlag': 'byApi',
             'info': apiID,
             'fromDate': fromDate,
-            'toDate': toDate
+            'toDate': toDate,
+            'operator': operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
