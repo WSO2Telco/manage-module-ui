@@ -13,89 +13,185 @@ function invokeSubscriptionCompleteTask(params) {
 
     let getPayload = function (params) {
 
+        console.log("Operator ID " +  params.user);
+
         if(params.selectedTier){
-            return {
-                action: "complete",
-                variables: [
-                    {
-                        name: params.adminApprovalLevel,
-                        value: params.status,
-                        type: "string"
-                    },
-                    {
-                        name: params.selectedTier,
-                        value: params.selectedTier,
-                        type: "string"
-                    },
-                    {
-                        name: 'completedByUser',
-                        value: params.user,
-                        type: "string"
-                    },
-                    {
-                        name: 'status',
-                        value: params.status,
-                        type: "string"
-                    },
-                    {
-                        name: 'completedOn',
-                        value: new Date(),
-                        type: "string"
-                    },
-                    {
-                        name: 'description',
-                        value: params.description,
-                        type: "string"
-                    },
-                    {
-                        name: 'selectedTier',
-                        value: params.selectedTier,
-                        type: "string"
-                    },
-                    {
-                        name: 'selectedRate',
-                        value: params.selectedRate,
-                        type: "string"
-                    }
-                ]
+            if(params.selectedRate.length == 0){
+                //console.log("no rates$$$$$$$$$$$$$$$$$$$$$4");
+                return {
+                    action: "complete",
+                    variables: [
+                        {
+                            name: params.adminApprovalLevel,
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: params.selectedTier,
+                            value: params.selectedTier,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedByUser',
+                            value: params.user,
+                            type: "string"
+                        },
+                        {
+                            name: 'status',
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedOn',
+                            value: new Date(),
+                            type: "string"
+                        },
+                        {
+                            name: 'description',
+                            value: params.description,
+                            type: "string"
+                        },
+                        {
+                            name: 'selectedTier',
+                            value: params.selectedTier,
+                            type: "string"
+                        },
+                        {
+                            name: 'selectedRate',
+                            value: "",
+                            type: "string"
+                        }
+                    ]
+                }
+
+            }else{
+                return {
+                    action: "complete",
+                    variables: [
+                        {
+                            name: params.adminApprovalLevel,
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: params.selectedTier,
+                            value: params.selectedTier,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedByUser',
+                            value: params.user,
+                            type: "string"
+                        },
+                        {
+                            name: 'status',
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedOn',
+                            value: new Date(),
+                            type: "string"
+                        },
+                        {
+                            name: 'description',
+                            value: params.description,
+                            type: "string"
+                        },
+                        {
+                            name: 'selectedTier',
+                            value: params.selectedTier,
+                            type: "string"
+                        },
+                        {
+                            name: 'selectedRate',
+                            value: params.selectedRate,
+                            type: "string"
+                        }
+                    ]
+                }
+
             }
 
+
         }else {
-            return {
-                action: "complete",
-                variables: [
-                    {
-                        name: params.adminApprovalLevel,
-                        value: params.status,
-                        type: "string"
-                    },
-                    {
-                        name: 'completedByUser',
-                        value: params.user,
-                        type: "string"
-                    },
-                    {
-                        name: 'status',
-                        value: params.status,
-                        type: "string"
-                    },
-                    {
-                        name: 'completedOn',
-                        value: new Date(),
-                        type: "string"
-                    },
-                    {
-                        name: 'description',
-                        value: params.description,
-                        type: "string"
-                    },
-                    {
-                        "name" : 'selectedRate',
-                        "value" : params.selectedRate,
-                        "type" : "string"
-                    }
-                ]
+
+            if(params.selectedRate.length == 0){
+                return {
+                    action: "complete",
+                    variables: [
+                        {
+                            name: params.adminApprovalLevel,
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedByUser',
+                            value: params.user,
+                            type: "string"
+                        },
+                        {
+                            name: 'status',
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedOn',
+                            value: new Date(),
+                            type: "string"
+                        },
+                        {
+                            name: 'description',
+                            value: params.description,
+                            type: "string"
+                        },
+                        {
+                            "name" : 'selectedRate',
+                            "value" : "",
+                            "type" : "string"
+                        }
+                    ]
+                }
+
+            }else{
+                return {
+                    action: "complete",
+                    variables: [
+                        {
+                            name: params.adminApprovalLevel,
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedByUser',
+                            value: params.user,
+                            type: "string"
+                        },
+                        {
+                            name: 'status',
+                            value: params.status,
+                            type: "string"
+                        },
+                        {
+                            name: 'completedOn',
+                            value: new Date(),
+                            type: "string"
+                        },
+                        {
+                            name: 'description',
+                            value: params.description,
+                            type: "string"
+                        },
+                        {
+                            "name" : 'selectedRate',
+                            "value" : params.selectedRate,
+                            "type" : "string"
+                        }
+                    ]
+                }
+
             }
+
         }
 
     };

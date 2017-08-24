@@ -58,16 +58,17 @@ const _getApplications = function (request, reply) {
                 let relevantRates = [];
 
                 if (operationReatesDetails && operationReatesDetails[index].api) {
-                    //console.log("WHAT+=========================");
+                    // console.log("WHAT+=========================");
                     let operationRates = operationReatesDetails[index].api.operations;
                     let count = 0;
                     for (const entry of operationRates) {
-                        console.log('>>' + entry.apiOperationName);
+                       // console.log('>>' + entry.apiOperationName);
                         let count2 = 0;
                         let rateDefinitions = []
                         for (const entry2 of entry.rates) {
+                          //  console.log("WHAT+=========================" + entry2.operationRateId);
                             rateDefinitions[count2] = {
-                                rateDefId: entry2.rateDefId,
+                                rateDefId: entry2.operationRateId,
                                 rateDefName: entry2.rateDefName,
                                 rateDefDescription: entry2.rateDefDescription
                             }
@@ -126,7 +127,7 @@ const _getApplications = function (request, reply) {
     };
 
     let onOperationReatesSuccess = function (operationReatesDetails) {
-       // console.log("WWWWWWWWWW" + JSON.stringify(operationReatesDetails));
+       //console.log("WWWWWWWWWW" + JSON.stringify(operationReatesDetails));
         reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
 
@@ -135,7 +136,7 @@ const _getApplications = function (request, reply) {
     };
 
     let onAppDetailSuccess = function (appsDetails) {
-        // console.log("SUCCESS " + JSON.stringify(appsDetails));
+        //console.log("SUCCESS " + JSON.stringify(appsDetails));
         let OperationReatesPromises;
         if (appsDetails) {
             appsDetailsResult = appsDetails;
@@ -148,9 +149,11 @@ const _getApplications = function (request, reply) {
                 // console.log('$$$$$$$$$$$$   '+ index + ' $$$$$$$$$$ '  + details['apiName']);
                 if (details['apiName']) {
                     if(request.payload.isAdmin){
+                       // console.log("%%%admin call");
                         return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName']);
                     }else {
-                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request.payload.operator);
+                       // console.log("%%%operator  call is " + request.payload.isAdmin );
+                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request.payload.operator);
                     }
                 } else {
                     reply(responseAdaptor(appTaskResult, appsDetails, null));
@@ -174,7 +177,7 @@ const _getApplications = function (request, reply) {
 
     let onApplicationSuccess = function (applicationTasksResult) {
 
-        //console.log('@@@@@@' + JSON.stringify(applicationTasksResult));
+       // console.log('@@@@@@Application successs' + JSON.stringify(applicationTasksResult));
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;
@@ -378,7 +381,7 @@ const _approveApplicationCreation = function (request, reply) {
 const _approveSubscriptionCreation = function (request, reply) {
     let validateRequest = function (request) {
         let data = request.payload;
-        if (data && data.taskId && data.selectedTier && data.status && data.description) {
+        if (data && data.taskId && data.selectedTier && data.status) {
             return true;
         }
         return false;
@@ -396,15 +399,15 @@ const _approveSubscriptionCreation = function (request, reply) {
         let param = request.payload;
 
         if (param.role) {
-            console.log("HUB_ADMIN_APPROVAL");
+           // console.log("HUB_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
         } else {
-            console.log("OPERATOR_ADMIN_APPROVAL");
+           // console.log("OPERATOR_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
         }
 
-        console.log('>>>>>>' + param.taskId);
+      //  console.log('>>>>>>' + param.taskId);
 
         subscriptionCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
     } else {

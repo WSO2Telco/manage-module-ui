@@ -127,15 +127,16 @@
                                     <div class="col-xs-6 field-name">Description</div>
                                     <div class="col-xs-6 field-value"> {{item.applicationDescription}}</div>
                                 </div>
+
+                            </div>
+                            <div class="col-xs-6">
+                                <!--<div class="row more-row">-->
+                                    <!--<div class="col-xs-6 field-name">Operator</div>-->
+                                    <!--<div class="col-xs-6 field-value">{{item.operators}}</div>-->
+                                <!--</div>-->
                                 <div class="row more-row" *ngIf="isSubscription">
                                     <div class="col-xs-6 field-name">API</div>
                                     <div class="col-xs-6 field-value"> {{item.apiName}}</div>
-                                </div>
-                            </div>
-                            <div class="col-xs-6">
-                                <div class="row more-row">
-                                    <div class="col-xs-6 field-name">Operator</div>
-                                    <div class="col-xs-6 field-value">{{item.operators}}</div>
                                 </div>
                                 <div class="row more-row" *ngIf="showTiers">
                                     <div class="col-xs-6 field-name">Tier</div>
@@ -150,7 +151,7 @@
                                 <div class="row more-row" *ngIf="!showTiers"></div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="isSubscription">
+                        <div class="row" *ngIf="item.relevantRates.length != 0">
                             <div class="col-xs-12">
                                 <div class="row more-row">
                                     <div class="col-xs-7 rate-field-name">Rate card Details</div>
@@ -166,9 +167,9 @@
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control"
                                                 (change)="onOperationRateChange($event,item,entry.apiOperation)">
-                                            <option  *ngFor="let opt of entry.rateDefinitions">
-                                              {{opt.rateDefName}} - {{opt.rateDefDescription}}
-                                            </option>
+                                                <option  title="ABCD" *ngFor="let opt of entry.rateDefinitions">
+                                                    {{opt.rateDefName}}
+                                                </option>
                                         </select>
                                     </div>
                                 </div>

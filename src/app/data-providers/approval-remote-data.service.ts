@@ -111,7 +111,7 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
-                isAdimin: loginInfo.isAdmin,
+                isAdmin: loginInfo.isAdmin,
                 operator: '',
                 size: 100,
                 start: 0,
@@ -157,7 +157,7 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
-                isAdimin: loginInfo.isAdmin,
+                isAdmin: loginInfo.isAdmin,
                 operator: '',
                 processType: "APPLICATION_CREATION",
                 size: 100,
@@ -198,7 +198,7 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: loginInfo.userName,
-                isAdimin: loginInfo.isAdmin,
+                isAdmin: loginInfo.isAdmin,
                 operator: loginInfo.operator,
                 size: 100,
                 start: 0,
@@ -241,7 +241,7 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
-                isAdimin: loginInfo.isAdmin,
+                isAdmin: loginInfo.isAdmin,
                 operator: loginInfo.operator,
                 size: 100,
                 start: 0,
@@ -261,6 +261,8 @@ export class ApprovalRemoteDataService {
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
+                        //console.log('$$$$$$$ ' + JSON.stringify(result));
 
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
@@ -311,6 +313,8 @@ export class ApprovalRemoteDataService {
      * this function will be called when we approve a subscription
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
+
+       // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))

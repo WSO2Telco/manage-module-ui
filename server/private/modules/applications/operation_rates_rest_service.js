@@ -21,12 +21,11 @@ function  _invokeOperationRatesRestAdmin(apiName) {
         };
     };
 
-    console.log("here==========");
-
     wreck.get(getEndpointUrl(apiName), getRequestOptions(), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
+           // console.log('##############333' + JSON.stringify(payload));
             deferred.resolve(payload);
         }
     });
@@ -47,7 +46,7 @@ function  _invokeOperationRatesRest(apiName, operator) {
         };
     };
 
-    console.log("here==========");
+  //  console.log("operator rates imported==========");
 
     wreck.get(getEndpointUrl(apiName), getRequestOptions(), (error, res, payload) => {
         if (error) {

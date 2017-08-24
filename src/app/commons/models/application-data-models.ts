@@ -70,7 +70,7 @@ export class ApplicationTaskSearchParam {
     candidateGroups: string;
     processType: PROCESS_TYPE;
     assignee: string;
-    isAdimin: boolean;
+    isAdmin: boolean;
     operator: string;
     start:number;
     size: number;

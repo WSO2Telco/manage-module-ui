@@ -57,6 +57,8 @@ export class ApprovalHelperService {
         const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         let role = false;
 
+        const completedByUser = JSON.parse(sessionStorage.getItem('loginUserInfo')).userName;
+
         /** for loop will set the user role */
         for (const entry of roleList){
             if (entry == 'manage-app-admin'){
@@ -77,7 +79,7 @@ export class ApprovalHelperService {
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
-            param.user = 'admin';
+            param.user = completedByUser;
             param.taskType = 'application';
             param.role = role;
 
@@ -111,7 +113,7 @@ export class ApprovalHelperService {
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
-            param.user = 'admin';
+            param.user = completedByUser;
             param.taskType = 'subscription';
             param.role = role;
             param.selectedRate = appTask.selectedRate;

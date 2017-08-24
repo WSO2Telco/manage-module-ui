@@ -105,6 +105,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onOperationRateChange(event, item, apiOperation) {
 
+       // console.log('event occured');
+
         let count =0;
         for(const entry of item.relevantRates){
             if(entry.apiOperation == apiOperation){
@@ -136,7 +138,7 @@ export class ApplicationDataTableComponent implements OnInit {
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
 
-        //console.log('$$$$$' + JSON.stringify(appTask));
+       // console.log('$$$$$' + JSON.stringify(appTask));
         switch (actionType) {
             case 'ASSIGN' : {
                 this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
