@@ -3,6 +3,7 @@
  */
 'use strict';
 
+//require('dotenv').config();
 
 var appConfig = {
     applicationContext: process.env.wm_context || 'manage',

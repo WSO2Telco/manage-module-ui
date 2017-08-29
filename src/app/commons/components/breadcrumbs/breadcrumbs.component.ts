@@ -3,6 +3,7 @@ import {Router, NavigationEnd, ActivatedRoute} from "@angular/router";
 import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
 import {ToastyService, ToastOptions} from "ng2-toasty";
 import {MessageService} from "../../services/message.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
     selector: 'app-breadcrumbs',
@@ -12,8 +13,6 @@ import {MessageService} from "../../services/message.service";
 export class BreadcrumbsComponent implements OnInit {
 
     private activeView: any;
-    private url: string;
-
 
     constructor(private _router: Router,
                 private approval: ApprovalRemoteDataService,

@@ -5,6 +5,7 @@ import {SharedModule} from '../shared/shared.module';
 import {QuotaCapMainComponent} from './quotacap-main/quotacap-main.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
         FormsModule,
         ReactiveFormsModule,
         MyDateRangePickerModule,
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        TooltipModule.forRoot()
     ],
     declarations: [
         QuotaCapMainComponent

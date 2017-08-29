@@ -1,9 +1,14 @@
 <div>
     <div>
         <span class="url-part" *ngFor="let path of activeView">{{path}}</span>
+        <span class="url-part" *ngIf="!activeView">home</span>
     </div>
     <span  *ngIf="activeView == 'home'" class="animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh"
           tooltip="Reload"
           placement="bottom"
           (click)="onReload()"></span>
+    <span  *ngIf="!activeView" class="animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh"
+           tooltip="Reload"
+           placement="bottom"
+           (click)="onReload()"></span>
 </div>
