@@ -179,7 +179,7 @@
 
                     <div class="col-sm-12" *ngIf="item.actionType !== 'MORE'">
                         <div class="col-xs-3 field-name">Comment</div>
-                        <div class="col-xs-9 field-value"><input type="text" class="form-control"></div>
+                        <div class="col-xs-9 field-value"><input [(ngModel)]="comment" type="text" class="form-control"><span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span></div>
                     </div>
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">

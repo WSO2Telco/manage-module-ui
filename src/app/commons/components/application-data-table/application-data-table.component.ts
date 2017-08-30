@@ -72,6 +72,9 @@ export class ApplicationDataTableComponent implements OnInit {
 
     private roleList: string[];
 
+    private comment: string;
+    private isCommentEmpty: boolean;
+
     ngOnInit() {
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         // let loginInfo = this.authService.loginUserInfo.getValue();
@@ -83,6 +86,9 @@ export class ApplicationDataTableComponent implements OnInit {
                 this.showTiers = true;
             }
         }
+
+        this.comment = '';
+        this.isCommentEmpty = false;
     }
 
 
@@ -137,24 +143,28 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
+        if(this.comment.length != 0){
+            switch (actionType) {
+                case 'ASSIGN' : {
+                    this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
+                    break;
+                }
 
-       // console.log('$$$$$' + JSON.stringify(appTask));
-        switch (actionType) {
-            case 'ASSIGN' : {
-                this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
-                break;
-            }
+                case 'APPROVE' : {
+                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
+                    break;
+                }
 
-            case 'APPROVE' : {
-                this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
-                break;
+                case 'REJECT' : {
+                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                    break;
+                }
             }
-
-            case 'REJECT' : {
-                this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
-                break;
-            }
+            this.comment = '';
+        }else {
+            this.isCommentEmpty = true;
         }
+
     }
 
     onFilterItemAdded(event: TypeaheadMatch, type: string) {

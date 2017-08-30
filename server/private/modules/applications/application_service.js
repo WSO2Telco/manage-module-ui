@@ -345,6 +345,16 @@ const _approveApplicationCreation = function (request, reply) {
         return false;
     };
 
+    let onRefIdSuccess = function (result) {
+        console.log('####### ' + JSON.stringify(result));
+        let param = request.payload;
+        applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
+    };
+
+    let onRefIdError = function (error) {
+        reply(error);
+    };
+
     let onApproveSuccess = function (result) {
         reply(result);
     };
@@ -355,18 +365,20 @@ const _approveApplicationCreation = function (request, reply) {
 
 
     if (validateRequest(request)) {
+
         let param = request.payload;
 
         if (param.role) {
+            /** if hub admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
+            applicationDetailsREST.invokeGetWorkflowRefId(param.taskId).then(onRefIdSuccess, onRefIdError);
         } else {
+            /** if operator admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
+            applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
         }
 
-
-
-        applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }

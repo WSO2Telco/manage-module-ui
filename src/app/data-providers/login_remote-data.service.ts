@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {Http, Headers, RequestOptions, Response} from "@angular/http";
-import {User, LoginResponse} from "../commons/models/common-data-models";
+import {Observable} from 'rxjs';
+import {Http, Headers, RequestOptions, Response} from '@angular/http';
+import {User, LoginResponse} from '../commons/models/common-data-models';
 
 
 @Injectable()

@@ -4,7 +4,7 @@ const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
 
-function invokeApplicationCompleteTask(params) {
+function _invokeApplicationCompleteTask(params) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (params) {
@@ -103,7 +103,7 @@ function invokeApplicationCompleteTask(params) {
         };
     };
 
-   // console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
+    // console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
 
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {
@@ -124,5 +124,5 @@ function invokeApplicationCompleteTask(params) {
 }
 
 module.exports = {
-    Invoke: invokeApplicationCompleteTask
+    invokeApplicationCompleteTask: _invokeApplicationCompleteTask
 };
