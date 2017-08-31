@@ -9,14 +9,16 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">Currency code<span>*</span></label>
                         <div class="col-sm-4">
-                            <input (input)="isCurrencyCode($event.target.value)"
-                                   [(ngModel)]="currencycode"
+                            <input  [ngModel]="currencycode"
+                                    (input)="isCurrencyCode($event.target.value)"
+                                   (ngModelChange)="isCurrencyCode($event)"
+                                   [typeahead]="list"
+                                   [typeaheadMinLength]="1"
+                                   placeholder="Currency"
+                                   name="typecurrency"
                                    class="form-control"
-                                   name="currencycode"
-                                   #inputc
-                                   type="text"
-                                   placeholder="Currency code"
-                                   required />
+                                   required
+                            >
                             <!--Throw error if currency validator fails-->
                             <span class="error" *ngIf="isCurrencyError">{{currencyCodeError}}</span>
                         </div>

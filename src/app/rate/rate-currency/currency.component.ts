@@ -32,6 +32,7 @@ export class CurrencyComponent implements OnInit {
 
     private desError: string;
     private isDesEmpty: boolean;
+    private list: string[];
 
     @Input()
     private existingCodes: string[];
@@ -47,6 +48,7 @@ export class CurrencyComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.list = currencyCodes;
         this.currencycode = '';
         this.currencydesc = '';
 
@@ -90,14 +92,15 @@ export class CurrencyComponent implements OnInit {
      *  Check currency code against valid currency list
      * @param name
      */
-    isCurrencyCode(name) {
-        if (currencyCodes.indexOf(name) < 0) {
+    isCurrencyCode(val) {
+        this.currencycode = val;
+        if (currencyCodes.indexOf(this.currencycode) < 0) {
             this.isCurrencyError = true;
             this.currencyCodeError = 'Not a Valid Currency Type';
         } else {
             let state = false
             for (const entry of this.existingCodes) {
-                if (name == entry) {
+                if (this.currencycode == entry) {
                     state = true;
                 }
             }
