@@ -305,7 +305,12 @@ export class RateMainComponent implements OnInit {
         }
 
         /** assign value to rateDefCategoryBase */
-        rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
+        // rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
+        if(this.showSubcategory && this.rateCategories.length > 0 ) {
+            rateDefCategoryBase = 1;
+        }else {
+            rateDefCategoryBase = 0;
+        }
 
         if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
           //  console.log('submitted rate card form ');
@@ -332,7 +337,7 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-           // console.log('#######  ' + JSON.stringify(rateCard));
+           console.log('#######  ' + rateDefCategoryBase);
 
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 
@@ -555,8 +560,17 @@ export class RateMainComponent implements OnInit {
         }
     }
 
-    showit() {
-        this.reloadPage();
+
+    /**
+     * when sub category check box is changed
+     */
+    onCheckBox() {
+        if(this.showSubcategory){
+            this.showSubcategory = false;
+            this.mappingList = [];
+        }else {
+            this.showSubcategory = true;
+        }
     }
 
     reloadPage() {

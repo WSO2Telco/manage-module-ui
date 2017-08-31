@@ -132,7 +132,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"category created successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Tariff Created Successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {

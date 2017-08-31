@@ -7,7 +7,7 @@
                 <form class="form-horizontal" #addCategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(addCategoryForm)">
 
                     <div class="form-group">
-                        <label class="control-label col-sm-3">{{type}} Name</label>
+                        <label class="control-label col-sm-3">{{type}} Name <span>*</span></label>
                         <div class="col-sm-4">
                             <input class="form-control"
                                    type="text"
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">{{type}} Code</label>
+                        <label class="control-label col-sm-3">{{type}} Code <span>*</span></label>
                         <div class="col-sm-4">
                             <input class="form-control"
                                    type="text"
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">{{type}} Description</label>
+                        <label class="control-label col-sm-3">{{type}} Description<span>*</span></label>
                         <div class="col-sm-4">
                 <textarea rows="4" cols="50" class="form-control"
                           type="text"

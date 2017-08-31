@@ -14,6 +14,7 @@ export class LoginRemoteDataService {
   private apiEndpoints: Object = {
     login: this.apiContext + '/authentication/login',
     logout: this.apiContext + '/authentication/logout',
+    getUserDetails: this.apiContext + '/authentication/userdetails'
   };
 
   constructor(private http: Http) {
@@ -39,6 +40,17 @@ export class LoginRemoteDataService {
     return this.http.get(this.apiEndpoints['logout'] + '/' + userId)
       .map((response: Response) => response.json().success)
       .catch((error: Response) => Observable.throw(error.json().message))
+  }
+
+  getUserDetails(userName: string) {
+    const data = {};
+    // console.log('hit in the rate remote data service to get currency');
+    return this.http.get(this.apiEndpoints['getUserDetails'] + '/' + userName)
+        .map((response: Response) => {
+          const result = response.json();
+          return result;
+        })
+        .catch((error: Response) => Observable.throw(error.json().message()));
   }
 
 }

@@ -95,6 +95,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
+                <!--<div class="tbl-cell"><a (click)="getUserDetails(item.userName || item.subscriber)">{{item.userName || item.subscriber}}</a></div>-->
                 <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
@@ -120,8 +121,8 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="row more-row">
-                                    <div class="col-xs-6 field-name">Application Id</div>
-                                    <div class="col-xs-6 field-value"> {{item.applicationId}}</div>
+                                    <div class="col-xs-7 field-name">Application Id</div>
+                                    <div class="col-xs-5 field-value"> {{item.applicationId}}</div>
                                 </div>
                                 <div class="row more-row" *ngIf="isSubscription">
                                     <div class="col-xs-6 field-name">API</div>
@@ -130,12 +131,12 @@
                             </div>
                             <div class="col-xs-6">
                                 <!--<div class="row more-row">-->
-                                    <!--<div class="col-xs-6 field-name">Operator</div>-->
-                                    <!--<div class="col-xs-6 field-value">{{item.operators}}</div>-->
+                                <!--<div class="col-xs-6 field-name">Operator</div>-->
+                                <!--<div class="col-xs-6 field-value">{{item.operators}}</div>-->
                                 <!--</div>-->
                                 <div class="row more-row">
                                     <div class="col-xs-6 field-name">Description</div>
-                                    <div class="col-xs-6 field-value"> {{item.applicationDescription}}</div>
+                                    <div class="col-xs-6 field-value"><pre> {{item.applicationDescription}}</pre></div>
                                 </div>
                                 <div class="row more-row" *ngIf="showTiers">
                                     <div class="col-xs-6 field-name">Tier</div>
@@ -166,9 +167,9 @@
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control"
                                                 (change)="onOperationRateChange($event,item,entry.apiOperation)">
-                                                <option  title="ABCD" *ngFor="let opt of entry.rateDefinitions">
-                                                    {{opt.rateDefName}}
-                                                </option>
+                                            <option  title="ABCD" *ngFor="let opt of entry.rateDefinitions">
+                                                {{opt.rateDefName}}
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
@@ -179,7 +180,7 @@
 
                     <div class="col-sm-12" *ngIf="item.actionType !== 'MORE'">
                         <div class="col-xs-3 field-name">Comment</div>
-                        <div class="col-xs-9 field-value"><input [(ngModel)]="comment" type="text" class="form-control"><span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span></div>
+                        <div class="col-xs-9 field-value"><input [(ngModel)]="item.comment" type="text" class="form-control"><span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span></div>
                     </div>
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">

@@ -143,7 +143,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
-        if(this.comment.length != 0){
+       // console.log('###' + JSON.stringify(appTask))
+
             switch (actionType) {
                 case 'ASSIGN' : {
                     this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
@@ -151,7 +152,12 @@ export class ApplicationDataTableComponent implements OnInit {
                 }
 
                 case 'APPROVE' : {
-                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
+                    if(appTask.comment){
+                        this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
+                    }else {
+                        this.isCommentEmpty = true;
+                    }
+
                     break;
                 }
 
@@ -160,10 +166,6 @@ export class ApplicationDataTableComponent implements OnInit {
                     break;
                 }
             }
-            this.comment = '';
-        }else {
-            this.isCommentEmpty = true;
-        }
 
     }
 
@@ -237,6 +239,20 @@ export class ApplicationDataTableComponent implements OnInit {
     onPageChanged(event) {
         this.filter.startRecordNumber = (<number>event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
         this.onFilterChange.emit(this.filter);
+    }
+
+    /**
+     * this function load the details of the specific user.
+     * @param event
+     */
+    getUserDetails(event) {
+        this.authService.getUserDetails(event, (response, status) => {
+            if (status) {
+                console.log(JSON.stringify(response));
+            } else {
+                this.message.error(response);
+            }
+        });
     }
 
 

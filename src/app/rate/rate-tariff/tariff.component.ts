@@ -2,6 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {RateService} from '../../commons/services/rate.service';
 import {Tariff} from '../../commons/models/common-data-models';
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {MessageService} from "../../commons/services/message.service";
 
 @Component({
     selector: 'app-addtariff',
@@ -36,13 +37,17 @@ export class TariffComponent implements OnInit {
     private IsInvalidopcoCommission: boolean;
     private IsExceedCommision: boolean;
 
-    constructor(private rateService: RateService, private authService: AuthenticationService) {
+    constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }
 
     ngOnInit() {
         const loginInfo = this.authService.loginUserInfo.getValue();
         this.tariff = new Tariff();
+        this.clearForm();
+        this.tariff.createdBy = loginInfo.userName;
+    }
 
+    clearForm(){
         this.tariff.tariffName = '';
         this.tariff.tariffDescription = '';
         this.tariff.tariffDefaultVal = 0;
@@ -55,7 +60,6 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffMaxCount = 0;
         this.tariff.tariffExcessRate = 0;
         this.tariff.tariffDefRate = 0;
-        this.tariff.createdBy = loginInfo.userName;
         this.clearErrors();
     }
 
@@ -69,6 +73,7 @@ export class TariffComponent implements OnInit {
                 if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
+                    this.message.success(response.message);
                 } else {
                     this.submissionError = response;
                     setTimeout(() => {

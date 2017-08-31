@@ -62,4 +62,19 @@ export class AuthenticationService {
         return loginInfo.isAdmin;
     }
 
+    getUserDetails(userName: string, callback: Function) {
+        // console.log('get list of currency service called');
+        this._remoteService.getUserDetails(userName)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
+
+
 }
