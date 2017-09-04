@@ -5,7 +5,7 @@ const config = require('../../config/application_config');
 const wreck = require('wreck');
 const moment = require('moment');
 
-const historyREST = function(type){
+const historyREST = function(type, user){
 
     let last6Months  = [];
     let promiseCol = [];
@@ -25,7 +25,7 @@ const historyREST = function(type){
 
         let process = (type == 'applications') ? 'application_creation_approval_process' : 'subscription_approval_process';
 
-        return config.businessProcessEngineBaseUrl + '/history/historic-task-instances?taskCreatedAfter='+month.start.format()+'&taskCreatedBefore='+month.end.format()+'&processDefinitionKey='+process;
+        return config.businessProcessEngineBaseUrl + '/history/historic-task-instances?taskCreatedAfter='+month.start.format()+'&taskCreatedBefore='+month.end.format()+'&processDefinitionKey='+process+ '&taskAssignee='+user;
     };
 
     let getRequestOptions = function () {
@@ -41,6 +41,7 @@ const historyREST = function(type){
     let responseAdaptor = function (responseCol) {
         if(!!responseCol){
             responseCol.forEach((response,key)=>{
+                console.log('$$' + response.total)
                 adapted.graphData[0].data.push(response.total || 0);
             });
         }
@@ -63,6 +64,7 @@ const historyREST = function(type){
             if(error){
                 monthDeferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }else{
+              //  console.log('>>>>   ' + JSON.stringify(getEndpointUrl(month)) + '===' + JSON.stringify(payload));
                 monthDeferred.resolve(payload);
             }
         });

@@ -5,6 +5,7 @@ import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from "../
 import {ApprovalRemoteDataService} from "./approval-remote-data.service";
 import {ApplicationTask, ApplicationTaskResult} from "../commons/models/application-data-models";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
+import {AuthenticationService} from "../commons/services/authentication.service";
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -13,13 +14,13 @@ export class DashboardRemoteDataService {
      * Application Creation History Graph Data Stream
      * @type {BehaviorSubject<HistoryBarGraphData>}
      */
-    public ApplicationCreationHistoryDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    public ApplicationCreationHistoryDataProvider: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     /**
      * Subscription Creation History Graph Data Stream
      * @type {BehaviorSubject<HistoryBarGraphData>}
      */
-    public SubscriptionCreationHistoryDataProvider:BehaviorSubject<any> = new BehaviorSubject<any>([]);
+    public SubscriptionCreationHistoryDataProvider: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
     private options: RequestOptions = new RequestOptions({headers: this.headers});
@@ -30,10 +31,11 @@ export class DashboardRemoteDataService {
         graph: this.apiContext + '/applications/graph',
     };
 
-    constructor(private http: Http, 
-                @Inject('API_CONTEXT')private apiContext:string,
+    constructor(private http: Http,
+                @Inject('API_CONTEXT') private apiContext: string,
                 private approvalService: ApprovalRemoteDataService,
-                private slimLoadingBarService: SlimLoadingBarService) {
+                private slimLoadingBarService: SlimLoadingBarService,
+                private authenticationService: AuthenticationService) {
 
         approvalService.MyApplicationCreationTasksProvider.subscribe(
             (result) => {
@@ -73,32 +75,33 @@ export class DashboardRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message))
     };
 
-    updateDashboardData(result:ApplicationTaskResult, type: string): void {
+    updateDashboardData(result: ApplicationTaskResult, type: string): void {
         let changeObj = {};
         changeObj[type] = (result && result.applicationTasks && result.applicationTasks.length) || 0;
-        this._dashboardStatisticsData = Object.assign({},this._dashboardStatisticsData,changeObj);
+        this._dashboardStatisticsData = Object.assign({}, this._dashboardStatisticsData, changeObj);
         this._dashboardStatisticsData.totalAppCreations = this._dashboardStatisticsData.appCreationsForGroup + this._dashboardStatisticsData.appCreationsForUser;
         this._dashboardStatisticsData.totalSubCreations = this._dashboardStatisticsData.subCreationsForGroup + this._dashboardStatisticsData.subCreationsForUser;
 
         this.DashboardDataProvider.next(this._dashboardStatisticsData);
     }
 
-    getCreationHistoryGraphData(type:string):void{
+    getCreationHistoryGraphData(type: string): void {
         this.slimLoadingBarService.start();
 
-        this.http.get(this.apiEndpoints['graph']+'/'+type,this.options)
+        const user = this.authenticationService.loginUserInfo.getValue().userName;
+        this.http.get(this.apiEndpoints['graph'] + '/' + type + '/' + user, this.options)
             .map((response: Response) => response.json())
             .subscribe(
-                (graphData)=>{
-                    if(type == 'applications'){
+                (graphData) => {
+                    if (type == 'applications') {
                         this.ApplicationCreationHistoryDataProvider.next(graphData);
-                    }else if(type == 'subscriptions'){
+                    } else if (type == 'subscriptions') {
                         this.SubscriptionCreationHistoryDataProvider.next(graphData);
                     }
 
                 },
                 (error: Response) => Observable.throw(error.json().message),
-                ()=>{
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );

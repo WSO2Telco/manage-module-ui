@@ -346,7 +346,7 @@ const _approveApplicationCreation = function (request, reply) {
     };
 
     let onRefIdSuccess = function (result) {
-        console.log('####### ' + JSON.stringify(result));
+        // console.log('####### ' + JSON.stringify(result));
         let param = request.payload;
         applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
     };
@@ -434,6 +434,7 @@ const _getGraphData = function (request, reply) {
         request.params.type &&
         (request.params.type == 'applications' || request.params.type == 'subscriptions' )) {
         let onSuccess = function (result) {
+            // console.log("***************" + JSON.stringify(result))
             reply(result);
         };
 
@@ -441,7 +442,7 @@ const _getGraphData = function (request, reply) {
             reply(error);
         };
 
-        applicationHistoryREST.Invoke(request.params.type).then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type, request.params.user).then(onSuccess, onError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }

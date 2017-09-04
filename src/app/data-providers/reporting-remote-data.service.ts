@@ -123,7 +123,6 @@ export class ReportingRemoteDataService {
             filter.operator = '__ALL__';
         }
 
-
         this.http.post(this.apiEndpoints['approvalHistory'], filter,this.options)
             .map((response: Response) => response.json())
             .flatMap((res)=>{return Observable.from(res)})
