@@ -179,7 +179,7 @@ export class TariffComponent implements OnInit {
     isNameUnique(name) {
         let state = false;
         for (const entry of this.existingNames) {
-            if (name == entry) {
+            if (name.trim() == entry.trim()) {
                 state = true;
             }
         }

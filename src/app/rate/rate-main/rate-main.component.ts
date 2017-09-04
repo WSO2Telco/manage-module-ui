@@ -547,7 +547,7 @@ export class RateMainComponent implements OnInit {
     isNameUnique(name) {
         let state = false;
         for (const entry of this.rateDefNameList) {
-            if (name == entry) {
+            if (name.trim() == entry.trim()) {
                 state = true;
             }
         }
