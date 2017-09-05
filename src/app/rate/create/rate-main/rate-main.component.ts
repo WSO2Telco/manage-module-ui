@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {RateService} from '../../commons/services/rate.service';
+import {RateService} from '../../../commons/services/rate.service';
 import {
     Category, Currency, Mapping, Rate, RateCategory, RateDefinition, RateTax, RateType,
     Tariff, Tax
-} from '../../commons/models/common-data-models';
-import {AuthenticationService} from '../../commons/services/authentication.service';
-import {MessageService} from "../../commons/services/message.service";
-import {Router} from "@angular/router";
+} from '../../../commons/models/common-data-models';
+import {AuthenticationService} from '../../../commons/services/authentication.service';
+import {MessageService} from '../../../commons/services/message.service';
+import {Router} from '@angular/router';
 
 
 @Component({

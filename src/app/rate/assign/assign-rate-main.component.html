@@ -1,0 +1,67 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container assignRateContainer">
+            <div class="tbl-header">
+                Assign Rate
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <form class="form-horizontal" novalidate>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">API</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Select API"
+                                       name="app"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">APIOperation</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Select API Operation"
+                                       name="app"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Operator</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="Select Operator"
+                                       name="app"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-2">Assign Rate</label>
+                            <div class="col-sm-8">
+                                <ng2-dual-list-box [data]="items" valueField="id" textField="name"
+                                                   (onAvailableItemSelected)="log($event)"
+                                                   (onSelectedItemsSelected)="log($event)"
+                                                   (onItemsMoved)="log($event)"></ng2-dual-list-box>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <br>
+                                <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="is_edit">
+                                    Assign
+                                </button>&nbsp;
+                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

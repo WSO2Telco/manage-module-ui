@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {RateService} from '../../commons/services/rate.service';
-import {Category} from "../../commons/models/common-data-models";
-import {AuthenticationService} from '../../commons/services/authentication.service';
-import {MessageService} from "../../commons/services/message.service";
+import {RateService} from '../../../commons/services/rate.service';
+import {Category} from '../../../commons/models/common-data-models';
+import {AuthenticationService} from '../../../commons/services/authentication.service';
+import {MessageService} from '../../../commons/services/message.service';
 
 @Component({
     selector: 'app-category',

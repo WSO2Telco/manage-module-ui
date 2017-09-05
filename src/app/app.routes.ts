@@ -23,11 +23,6 @@ const routes = [
     canActivate : [AppGuard]
   },
   {
-     path: 'assign-rate',
-     loadChildren: 'app/assign-rate/assign-rate.module#AssignRateModule',
-     canActivate : [AppGuard]
-  },
-  {
     path: 'quotacap',
     loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
     canActivate : [AppGuard]

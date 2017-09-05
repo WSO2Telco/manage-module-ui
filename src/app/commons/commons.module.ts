@@ -8,11 +8,13 @@ import {QuotaService} from './services/quotacap.service';
 import {LoginRemoteDataService} from '../data-providers/login_remote-data.service';
 import {AppCommonService} from './services/app-common.service';
 import {MessageService} from './services/message.service';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        TooltipModule.forRoot()
     ],
     declarations: [],
     providers: [

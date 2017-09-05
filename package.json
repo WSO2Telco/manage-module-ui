@@ -44,6 +44,7 @@
     "mydaterangepicker": "^4.1.9",
     "ng2-bootstrap": "^1.2.6",
     "ng2-charts": "^1.5.0",
+    "ng2-dual-list-box": "^1.0.5",
     "ng2-slim-loading-bar": "^2.3.0",
     "ng2-toasty": "^2.3.0",
     "ngx-bootstrap": "^1.8.0",

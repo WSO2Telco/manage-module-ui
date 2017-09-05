@@ -19,21 +19,16 @@ export class MainMenuComponent implements OnInit {
         {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
         {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
         {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
-        {
-            id: 4,
-            route: '/approvals/subscriptions',
-            position: 'child',
-            name: 'Approve Subscriptions',
-            iconName: 'subscriptions'
-        },
+        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
-        {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
-        {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
-        {id: 8, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase'},
-        {id: 9, route: '/blacklist/apiwise', name: 'API Wise', position: 'child', iconName: 'developer_board'},
-        {id: 10, route: '/blacklist/spwise', name: 'Sp Wise', position: 'child', iconName: 'dns'},
-        {id: 11, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'},
-        {id: 12, route: '/assign-rate', name: 'Assign-Rate', position: 'parent', iconName: 'dns'}
+        {id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear'},
+        {id: 7, route: '/rate/create', name: 'Create Rate', position: 'child', iconName: 'assignment'},
+        {id: 8, route: '/rate/assign', name: 'Assign Rate', position: 'child', iconName: 'assignment_turned_in'},
+        {id: 9, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
+        {id: 10, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase'},
+        {id: 11, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board'},
+        {id: 12, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns'},
+        {id: 13, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
     ];
 
     private menuSourceIfOp: MenuItem[] = [
