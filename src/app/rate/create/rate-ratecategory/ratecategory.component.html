@@ -8,7 +8,7 @@
                         <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)">
                             <br><br>
                             <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
-                                <label class="control-label col-sm-3">Category <span>*</span></label>
+                                <label class="control-label col-sm-4">Category <span>*</span></label>
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="category"
                                            [typeahead]="categoryList"
@@ -24,7 +24,7 @@
                                       (click)='onAddNewModalFire("addNewCategory")' type="category"></span>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-3">Sub Category</label>
+                                <label class="control-label col-sm-4">Sub Category</label>
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="subcategory"
                                            [typeahead]="categoryList"
@@ -40,7 +40,7 @@
                                       (click)='onAddNewModalFire("addNewSubCategory")' type='Sub Category'></span>
                             </div>
                             <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
-                                <label class="control-label col-sm-3">Tariff<span>*</span></label>
+                                <label class="control-label col-sm-4">Tariff<span>*</span></label>
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="tariff"
                                            [typeahead]="tariffList"
@@ -58,7 +58,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-sm-6 col-sm-offset-3">
+                                <div class="col-sm-6 col-sm-offset-4">
                                     <button type="submit" class="btn btn-primary animated fadeIn">Add Combination</button>
                                     <a class="btn btn-danger" (click)="clearCatSelection()">Clear</a>
                                     <div *ngIf="isMappigError">
