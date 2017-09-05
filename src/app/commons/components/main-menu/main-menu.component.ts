@@ -35,16 +35,11 @@ export class MainMenuComponent implements OnInit {
         {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
         {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
         {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
-        {
-            id: 4,
-            route: '/approvals/subscriptions',
-            position: 'child',
-            name: 'Approve Subscriptions',
-            iconName: 'subscriptions'
-        },
+        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
-        {id: 6, route: '/rate', name: 'Rate', position: 'parent', iconName: 'assessment'},
-        {id: 7, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
+        {id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear'},
+        {id: 7, route: '/rate/create', name: 'View Rate', position: 'child', iconName: 'assignment'},
+        {id: 8, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
 
     ];
 

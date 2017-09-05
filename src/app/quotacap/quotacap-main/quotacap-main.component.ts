@@ -606,12 +606,12 @@ export class QuotaCapMainComponent implements OnInit {
         if (!this.isEmpty() && this.subscriber.length != 0 && !this.is_invalid_period && this.subscriber.length != 0
             && (this.app.length == 0 || validApplication ) && (this.api.length == 0 || validApi ) && (this.selectedoperator.length == 0 || validOperator )) {
             this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.selectedoperator, this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
-                    this.submissionError = errorMsg;
-                    this.resetdefault();
-                    setTimeout(() => {
-                        this.submissionError = null;
-                    }, 5000);
-                });
+                this.submissionError = errorMsg;
+                this.resetdefault();
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
+            });
         } else {
             if (!validSubscriber) {
                 this.isSubscriberError = true;
@@ -700,6 +700,9 @@ export class QuotaCapMainComponent implements OnInit {
         this.subscriber = '';
         this.quotalist = [];
         this.resultLabel = '';
+        if (!this.ISoperatordisable) {
+            this.selectedoperator = '';
+        }
     }
 
     clearForm() {
