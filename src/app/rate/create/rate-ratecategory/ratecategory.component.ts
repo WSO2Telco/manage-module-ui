@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import {RateService} from '../../commons/services/rate.service';
-import {Mapping, RateCategory} from '../../commons/models/common-data-models';
+import {RateService} from '../../../commons/services/rate.service';
+import {Mapping, RateCategory} from '../../../commons/models/common-data-models';
 
 @Component({
     selector: 'app-ratecategory',

@@ -2,7 +2,7 @@
  * Created by rajithk on 7/25/17.
  */
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {RateDefinition} from '../../commons/models/common-data-models';
+import {RateDefinition} from '../../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 
 @Component({
