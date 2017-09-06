@@ -2,10 +2,10 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RateCategoryComponent} from './create/rate-ratecategory/ratecategory.component';
 import {CategoryComponent} from './create/rate-category/category.component';
-import {DefinitionComponent} from './create/rate-definition/definition.component';
 import {TariffComponent} from './create/rate-tariff/tariff.component';
 import {RateMainComponent} from './create/rate-main/rate-main.component';
 import {AssignRateMainComponent} from './assign/assign-rate-main.component';
+import {ViewRateMainComponent} from './view/view-rate-main.component';
 import {RateRoutes} from './rate.routes';
 import {SharedModule} from '../shared/shared.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -33,8 +33,8 @@ import { DualListBoxModule } from 'ng2-dual-list-box';
         CategoryComponent,
         CurrencyComponent,
         TariffComponent,
-        DefinitionComponent,
-        AssignRateMainComponent
+        AssignRateMainComponent,
+        ViewRateMainComponent
     ]
 })
 export class RateModule {
