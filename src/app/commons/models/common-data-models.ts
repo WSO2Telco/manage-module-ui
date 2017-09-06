@@ -160,3 +160,14 @@ export class QuotaList {
     toDate: string;
 }
 
+export class Operator {
+    operatorId: number;
+    operatorName: string;
+    operatorDescription: string;
+}
+
+export class APIOperation {
+    api_operationid: number;
+    api_operation: string;
+}
+

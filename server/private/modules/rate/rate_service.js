@@ -3,7 +3,7 @@
 const boom = require('boom');
 const Messages = require('../common/messages');
 const rateRestService = require('./rate_rest_service');
-const logger=require('../../config/logger');
+const logger = require('../../config/logger');
 
 logger.debugLevel = 'warn';
 
@@ -36,6 +36,9 @@ const validateAddCategoryRequest = function (request) {
 
 function rateService() {
 
+
+    let rateDefinitionResult;
+
     /**
      * Addd SubCategory tariff relationship Action
      * @param request
@@ -50,7 +53,7 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign(addSubcategoryResult, {success: true, message:"sub name created successfully"}));
+            callback(Object.assign(addSubcategoryResult, {success: true, message: "sub name created successfully"}));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -79,7 +82,10 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Currency Added Successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {
+                success: true,
+                message: "New Currency Added Successfully"
+            }));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -109,7 +115,10 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Category Created Successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {
+                success: true,
+                message: "New Category Created Successfully"
+            }));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -132,7 +141,10 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"New Tariff Created Successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {
+                success: true,
+                message: "New Tariff Created Successfully"
+            }));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -161,7 +173,10 @@ function rateService() {
 
         let onSuccess = function (addSubcategoryResult) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {success: true, message:"Rate Card Created Successfully"}));
+            callback(Object.assign({}, addSubcategoryResult, {
+                success: true,
+                message: "Rate Card Created Successfully"
+            }));
         };
 
         let onFailture = function (addSubCategoryError) {
@@ -199,7 +214,7 @@ function rateService() {
             callback(getResponseError);
         };
 
-        rateRestService.invokeGetTariffListRest( ).then(onSuccess, onFailture);
+        rateRestService.invokeGetTariffListRest().then(onSuccess, onFailture);
     }
 
     /**
@@ -223,7 +238,7 @@ function rateService() {
             callback(getResponseError);
         };
 
-        rateRestService.invokeGetCurrencyListRest( ).then(onSuccess, onFailture);
+        rateRestService.invokeGetCurrencyListRest().then(onSuccess, onFailture);
     }
 
     let _getRateTypeList = function (request, callback) {
@@ -241,7 +256,7 @@ function rateService() {
             callback(getResponseError);
         };
 
-        rateRestService.invokeGetRateTypeListRest( ).then(onSuccess, onFailture);
+        rateRestService.invokeGetRateTypeListRest().then(onSuccess, onFailture);
     }
 
     let _getCategoryList = function (request, callback) {
@@ -260,7 +275,7 @@ function rateService() {
             callback(getResponseError);
         };
 
-        rateRestService.invokeGetCategoryListRest( ).then(onSuccess, onFailture);
+        rateRestService.invokeGetCategoryListRest().then(onSuccess, onFailture);
     }
 
     let _getRateDefinitionList = function (request, callback) {
@@ -279,7 +294,7 @@ function rateService() {
             callback(getResponseError);
         };
 
-        rateRestService.invokeGetRateDefinitionListRest( ).then(onSuccess, onFailture);
+        rateRestService.invokeGetRateDefinitionListRest().then(onSuccess, onFailture);
     }
 
     let _getTaxList = function (request, callback) {
@@ -302,6 +317,50 @@ function rateService() {
 
     }
 
+    let _getAPIOperationRates = function (request, callback) {
+
+       // logger.log('INFO', "hit at Get Rates for API Operation service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (rateDefinitions) {
+            rateDefinitionResult = rateDefinitions;
+            logger.log('INFO', 'success');
+            if(request.params.operatorId){
+                rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator-assign').then(onAssignSuccess, onAssignFailture);
+            }else {
+                rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin-assign').then(onAssignSuccess, onAssignFailture);
+            }
+            callback(getResponse);
+        };
+
+        let onAssignSuccess = function (operationRates) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, rateDefinitionResult, operationRates ));
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        let onAssignFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+        console.log('%%%%>>' + request.params.operatorId);
+
+        if(request.params.operatorId != null){
+            rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
+        }else {
+            console.log('%%%%>>' + request.params.operatorId);
+            rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
+        }
+
+
+
+    }
+
     return {
         addRateCategory: _addRateCategory,
         addCurrency: _addCurrency,
@@ -313,10 +372,9 @@ function rateService() {
         getRateTypeList: _getRateTypeList,
         getCategoryList: _getCategoryList,
         getRateDefinitionList: _getRateDefinitionList,
-        getTaxList:_getTaxList,
+        getTaxList: _getTaxList,
+        getAPIOperationRates: _getAPIOperationRates
     };
-
-    //commet 22
 }
 
 module.exports = rateService();

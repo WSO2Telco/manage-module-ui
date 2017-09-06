@@ -201,5 +201,19 @@ export class RateService {
             );
     }
 
+    getRatesForAPIOperation(apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
+        console.log('get list of xxx service called');
+        this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+
+    }
+
 }
 

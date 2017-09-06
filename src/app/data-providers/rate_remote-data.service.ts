@@ -27,8 +27,9 @@ export class RateRemoteDataService {
         getCurrencyList: this.apiContext + '/rate/currencies',
         getRateTypeList: this.apiContext + '/rate/getratetypelist',
         getCategoryList: this.apiContext + '/rate/categories',
-        getRateDefinitionList: this.apiContext + '/rate/getratedefinitionList',
+        getRateDefinitionList: this.apiContext + '/rate/getratedefinitionlist',
         getRateTaxList: this.apiContext + '/rate/getTaxList',
+        getAPIOperationRates: this.apiContext + '/rate/getapioperationrates'
     };
 
     constructor(private http: Http) {
@@ -40,8 +41,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     addRateCategory(data: RateCategory, id: number) {
-       // console.log('hit in the rate remote data service to add rate-category');
-       // console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addRateCategory'] + id, JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -56,8 +55,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     addCategory(data: Category) {
-       // console.log('hit in the rate remote data service to add category');
-      //  console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addCategory'], JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -72,8 +69,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     addTariff(data: Tariff) {
-        // console.log('hit in the rate remote data service to add tariff');
-        // console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addTariff'], JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -88,8 +83,6 @@ export class RateRemoteDataService {
      * @returns {Observable<ServerResponse>}
      */
     addCurrency(data: Currency) {
-        // console.log('hit in the rate remote data service to add currency');
-        // console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -104,8 +97,6 @@ export class RateRemoteDataService {
      * @returns {Observable<ServerResponse>}
      */
     addNewRateCard(data: Rate) {
-        // console.log('hit in the rate remote data service to add rate card');
-        // console.log(JSON.stringify(data));
         return this.http.post(this.apiEndpoints['addRateCard'], JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
@@ -120,8 +111,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getTariffList() {
-        const data = {};
-        // console.log('hit in the rate remote data service to get tariff');
         return this.http.get(this.apiEndpoints['getTariffList'])
             .map((response: Response) => {
                 const result = response.json();
@@ -135,8 +124,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getCurrencyList() {
-        const data = {};
-        // console.log('hit in the rate remote data service to get currency');
         return this.http.get(this.apiEndpoints['getCurrencyList'])
             .map((response: Response) => {
                 const result = response.json();
@@ -150,8 +137,6 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getRateTypeList() {
-        const data = {};
-        // console.log('hit in the rate remote data service to get rate type');
         return this.http.get(this.apiEndpoints['getRateTypeList'])
             .map((response: Response) => {
                 const result = response.json();
@@ -161,8 +146,6 @@ export class RateRemoteDataService {
     }
 
     getCategoryList() {
-        const data = {};
-        // console.log('hit in the rate remote data service to get categories');
         return this.http.get(this.apiEndpoints['getCategoryList'])
             .map((response: Response) => {
                 const result = response.json();
@@ -172,8 +155,6 @@ export class RateRemoteDataService {
     }
 
     getRateDefinitionList() {
-        const data = {};
-        // console.log('hit in the rate remote data service to get rate definitions');
         return this.http.get(this.apiEndpoints['getRateDefinitionList'])
             .map((response: Response) => {
                 const result = response.json();
@@ -183,12 +164,32 @@ export class RateRemoteDataService {
     }
 
     getRateTax() {
+        return this.http.get(this.apiEndpoints['getRateTaxList'])
+            .map((response: Response) => {
+                const result = response.json();
+                //   console.log(result);
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
+
+    getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
+        return this.http.get(this.apiEndpoints['getAPIOperationRates'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId )
+            .map((response: Response) => {
+                const result = response.json();
+                //   console.log(result);
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
+    }
+
+    getAdminAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
         const data = {};
         // console.log('hit in the rate taxes');
         return this.http.get(this.apiEndpoints['getRateTaxList'])
             .map((response: Response) => {
                 const result = response.json();
-             //   console.log(result);
+                //   console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));

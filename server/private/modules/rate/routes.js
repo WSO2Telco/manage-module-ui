@@ -49,13 +49,18 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/getratedefinitionList',
+        path: '/api/rate/getratedefinitionlist',
         handler: rateService.getRateDefinitionList
     },
     {
         method: 'GET',
         path: '/api/rate/getTaxList',
         handler: rateService.getTaxList
+    },
+    {
+        method: 'GET',
+        path: '/api/rate/getapioperationrates/{apiName}/{apiOperationId}/{operatorId}',
+        handler: rateService.getAPIOperationRates
     }
 
 ];

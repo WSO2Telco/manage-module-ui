@@ -12,40 +12,56 @@
                         <div class="form-group">
                             <label class="control-label col-sm-2">API</label>
                             <div class="col-sm-6">
-                                <input type="text"
-                                       class="form-control"
+                                <input [(ngModel)]="api"
+                                       [typeahead]="apiList"
+                                       [typeaheadMinLength]="0"
                                        placeholder="Select API"
-                                       name="app"
-                                >
+                                       name="typeapi"
+                                       class="form-control"
+                                       (ngModelChange)="onValueSelected($event)"
+                                       required>
+                                <span class="error" *ngIf="invalidApi">Invalid API</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">APIOperation</label>
                             <div class="col-sm-6">
-                                <input type="text"
-                                       class="form-control"
+                                <input [(ngModel)]="apiOperation"
+                                       [typeahead]="apiOperationList"
+                                       [typeaheadMinLength]="0"
                                        placeholder="Select API Operation"
-                                       name="app"
-                                >
+                                       name="typeapioperation"
+                                       class="form-control"
+                                       (ngModelChange)="onValueSelected($event)"
+                                       typeaheadOptionField="api_operation"
+                                       required>
+                                <span class="error" *ngIf="invalidapiOperation">Invalid API Operation</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Operator</label>
                             <div class="col-sm-6">
-                                <input type="text"
-                                       class="form-control"
+                                <input [(ngModel)]="operator"
+                                       [typeahead]="operatorList"
+                                       [typeaheadMinLength]="0"
                                        placeholder="Select Operator"
-                                       name="app"
-                                >
+                                       name="typeoperator"
+                                       class="form-control"
+                                       (ngModelChange)="onValueSelected($event)"
+                                       typeaheadOptionField="operatorName"
+                                       required>
+                                <span class="error" *ngIf="invalidOperator">Invalid Operator</span>
                             </div>
                         </div>
                         <div class="form-group ">
                             <label class="control-label col-sm-2">Assign Rate</label>
                             <div class="col-sm-8">
-                                <ng2-dual-list-box [data]="items" valueField="id" textField="name"
-                                                   (onAvailableItemSelected)="log($event)"
-                                                   (onSelectedItemsSelected)="log($event)"
-                                                   (onItemsMoved)="log($event)"></ng2-dual-list-box>
+                                <!--<ng2-dual-list-box [data]="operatorNameList" valueField="id" textField="name"-->
+                                                   <!--(onAvailableItemSelected)="log($event)"-->
+                                                   <!--(onSelectedItemsSelected)="log($event)"-->
+                                                   <!--(onItemsMoved)="log($event)"></ng2-dual-list-box>-->
+
+                                <dual-list [source]="operatorList" [(destination)]="apiList"></dual-list>
                             </div>
                         </div>
 
