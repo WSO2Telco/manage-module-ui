@@ -371,13 +371,46 @@ const _invokeGetAPIOperationRates = function (apiName,apiOperationId, operatorId
     let getEndpointUrl = function () {
         switch (type){
             case 'admin':
-                return config.rateServiceURL + '/apis/'+apiName + '/operations/' +apiOperationId +'/ratedefinitions';
+                return config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/ratedefinitions';
                 break;
             case 'admin-assign':
-                return config.rateServiceURL + '/apis/'+apiName + '/operations/' +apiOperationId +'/operationrates';
+                console.log("INSIDE >>" + config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/operationrates');
+                return config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/operationrates';
                 break;
         }
 
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if(error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : "+ payload);
+            deferred.resolve(payload);
+        }
+    });
+
+    return deferred.promise;
+
+};
+
+const _invokeGetApiOperationsRest = function (api) {
+
+    console.log("rate Get Api Operations Rest end point call")
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'apis/' + api + '/operations';
     };
 
     let getRequestOptions = function () {
@@ -414,5 +447,6 @@ module.exports = {
     invokeGetCategoryListRest: _invokeGetCategoryListRest,
     invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
     invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
-    invokeGetAPIOperationRates: _invokeGetAPIOperationRates
+    invokeGetAPIOperationRates: _invokeGetAPIOperationRates,
+    invokeGetApiOperationsRest: _invokeGetApiOperationsRest
 };

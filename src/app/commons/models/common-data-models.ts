@@ -104,6 +104,7 @@ export class Rate {
 
 
 export class RateDefinition {
+    rateDefId: number;
     rateDefName: string;
     rateDefDescription: string;
     rateDefDefault: number;
@@ -167,7 +168,15 @@ export class Operator {
 }
 
 export class APIOperation {
-    api_operationid: number;
-    api_operation: string;
+    apiOperationId: number;
+    apiOperation: string;
+    apiOperationCode: string;
+}
+
+export class AssignRates {
+    operator: Operator;
+    apiOperation: APIOperation;
+    rateDefinition: RateDefinition;
+    createdBy: string;
 }
 

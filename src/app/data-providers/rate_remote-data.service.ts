@@ -23,12 +23,14 @@ export class RateRemoteDataService {
         addCategory: this.apiContext + '/rate/categories',
         addCurrency: this.apiContext + '/rate/currencies',
         addTariff: this.apiContext + '/rate/tariffs',
+        assignRatesForAPIOperation: this.apiContext + '/rate/assignrates',
         getTariffList: this.apiContext + '/rate/gettarifflist',
         getCurrencyList: this.apiContext + '/rate/currencies',
         getRateTypeList: this.apiContext + '/rate/getratetypelist',
         getCategoryList: this.apiContext + '/rate/categories',
         getRateDefinitionList: this.apiContext + '/rate/getratedefinitionlist',
         getRateTaxList: this.apiContext + '/rate/getTaxList',
+        getApiOperations: this.apiContext + '/rate/getapioperations',
         getAPIOperationRates: this.apiContext + '/rate/getapioperationrates'
     };
 
@@ -103,6 +105,15 @@ export class RateRemoteDataService {
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    assignRatesForAPIOperation(data, operatorId: number){
+        return this.http.post(this.apiEndpoints['assignRatesForAPIOperation'] + '/' + operatorId, JSON.stringify(data), this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 
 
@@ -183,13 +194,10 @@ export class RateRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message));
     }
 
-    getAdminAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
-        const data = {};
-        // console.log('hit in the rate taxes');
-        return this.http.get(this.apiEndpoints['getRateTaxList'])
+    getApiOperations(api: string){
+        return this.http.get(this.apiEndpoints['getApiOperations'] + '/' + api)
             .map((response: Response) => {
                 const result = response.json();
-                //   console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));

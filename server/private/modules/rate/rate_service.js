@@ -159,6 +159,32 @@ function rateService() {
         }
     };
 
+    let _assignRates = function (request, callback) {
+
+        logger.log('INFO', "hit at rate service add category end point");
+
+        request.server.log('info', 'ADD CATEGORY REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (addSubcategoryResult) {
+            logger.log('INFO', 'success');
+            callback(Object.assign({}, addSubcategoryResult, {
+                success: true,
+                message: "New Tariff Created Successfully"
+            }));
+        };
+
+        let onFailture = function (addSubCategoryError) {
+            logger.log('ERROR', 'faliture');
+            callback(addSubCategoryError);
+        };
+
+        if (validateAddRequest(request)) {
+            rateRestService.invokeAddTariffRest(request).then(onSuccess, onFailture);
+        } else {
+            callback(boom.badRequest(Messages['BAD_REQUEST']));
+        }
+    };
+
 
     /**
      * Add new rate card
@@ -319,24 +345,28 @@ function rateService() {
 
     let _getAPIOperationRates = function (request, callback) {
 
-       // logger.log('INFO', "hit at Get Rates for API Operation service end point");
+        // logger.log('INFO', "hit at Get Rates for API Operation service end point");
 
         request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
         let onSuccess = function (rateDefinitions) {
             rateDefinitionResult = rateDefinitions;
             logger.log('INFO', 'success');
-            if(request.params.operatorId){
+            if (request.params.operatorId != 'null') {
                 rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator-assign').then(onAssignSuccess, onAssignFailture);
-            }else {
+            } else {
                 rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin-assign').then(onAssignSuccess, onAssignFailture);
             }
-            callback(getResponse);
         };
 
         let onAssignSuccess = function (operationRates) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, rateDefinitionResult, operationRates ));
+            callback(
+                {
+                    source: rateDefinitionResult,
+                    destination: operationRates
+                }
+            );
         };
 
         let onFailture = function (getResponseError) {
@@ -348,17 +378,34 @@ function rateService() {
             logger.log('ERROR', 'failure');
             callback(getResponseError);
         };
-        console.log('%%%%>>' + request.params.operatorId);
 
-        if(request.params.operatorId != null){
+        if (request.params.operatorId != 'null') {
             rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
-        }else {
+        } else {
             console.log('%%%%>>' + request.params.operatorId);
             rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
         }
 
 
+    }
 
+    let _getApiOperations = function (request, callback) {
+
+        logger.log('INFO', "hit at rate get Api Operations service end point");
+
+        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
+        let onSuccess = function (getResponse) {
+            logger.log('INFO', 'success');
+            callback(getResponse);
+        };
+
+        let onFailture = function (getResponseError) {
+            logger.log('ERROR', 'failure');
+            callback(getResponseError);
+        };
+
+        rateRestService.invokeGetApiOperationsRest(request.params.api).then(onSuccess, onFailture);
     }
 
     return {
@@ -367,13 +414,15 @@ function rateService() {
         addCategory: _addCategory,
         addRateCard: _addRateCard,
         addTariff: _addTariff,
+        assignRates: _assignRates,
         getTariffList: _getTariffList,
         getCurrencyList: _getCurrencyList,
         getRateTypeList: _getRateTypeList,
         getCategoryList: _getCategoryList,
         getRateDefinitionList: _getRateDefinitionList,
         getTaxList: _getTaxList,
-        getAPIOperationRates: _getAPIOperationRates
+        getApiOperations: _getApiOperations,
+        getAPIOperationRates: _getAPIOperationRates,
     };
 }
 

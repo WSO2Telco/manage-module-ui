@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 import {RateRemoteDataService} from '../../data-providers/rate_remote-data.service';
 import {
     SubCategory, Currency, ServerResponse, Category, Tariff, Rate,
-    RateCategory
+    RateCategory, AssignRates
 } from '../models/common-data-models';
 
 
@@ -62,7 +62,7 @@ export class RateService {
      * @param description
      * @param callback
      */
-    addCategory(name: string, code: string, description: string, created :string,  callback: Function) {
+    addCategory(name: string, code: string, description: string, created : string,  callback: Function) {
        // console.log('add new category service called');
         const model: Category = new Category();
         model.categoryName = name;
@@ -201,9 +201,36 @@ export class RateService {
             );
     }
 
+    getApiOperations(api: string, callback: Function) {
+        // console.log('get list of tax List service called');
+        this._remoteService.getApiOperations(api)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
     getRatesForAPIOperation(apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
-        console.log('get list of xxx service called');
+        // console.log('get list of xxx service called');
         this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+
+    }
+
+    assignRatesForAPIOperation(data, operatorId: number, callback: Function) {
+        // console.log('get list of xxx service called');
+        this._remoteService.assignRatesForAPIOperation(data, operatorId)
             .subscribe(
                 data => {
                     callback(data, true);

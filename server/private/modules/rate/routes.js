@@ -28,6 +28,11 @@ module.exports = [
         handler: rateService.addRateCard
     },
     {
+        method: 'POST',
+        path: '/api/rate/assignrates',
+        handler: rateService.assignRates
+    },
+    {
         method: 'GET',
         path: '/api/rate/gettarifflist',
         handler: rateService.getTariffList
@@ -61,6 +66,11 @@ module.exports = [
         method: 'GET',
         path: '/api/rate/getapioperationrates/{apiName}/{apiOperationId}/{operatorId}',
         handler: rateService.getAPIOperationRates
+    },
+    {
+        method: 'GET',
+        path: '/api/rate/getapioperations/{api}',
+        handler: rateService.getApiOperations
     }
 
 ];
