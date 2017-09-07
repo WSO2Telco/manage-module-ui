@@ -93,6 +93,7 @@ export class ApprovalRemoteDataService {
     private getFilteredObservable(appTask: ApplicationTask[], filter: ApplicationTaskFilter): ApplicationTask[] {
         if (appTask && filter) {
             return appTask
+                .filter((task: ApplicationTask) => filter.apiNames.length ==0 || filter.apiNames.indexOf(task.apiName) >= 0)
                 .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
                 .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
                 .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
