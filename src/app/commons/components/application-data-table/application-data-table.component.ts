@@ -168,7 +168,11 @@ export class ApplicationDataTableComponent implements OnInit {
                 }
 
                 case 'REJECT' : {
-                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                    if (appTask.comment) {
+                        this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                    } else {
+                        this.isCommentEmpty = true;
+                    }
                     break;
                 }
             }
