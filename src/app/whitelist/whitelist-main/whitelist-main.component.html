@@ -15,7 +15,8 @@
                            [typeaheadMinLength]="0"
                            type="text"
                            class="form-control"
-                           (typeaheadOnSelect)="onSubscriberSelected($event)"
+                           (typeaheadOnSelect)="onSubscriberSelected()"
+                           (input)="onSubscriberSelected()"
                            placeholder="Select Subscriber">
                 </div>
                 <div class="col-sm-4">
@@ -24,7 +25,8 @@
                            [typeaheadMinLength]="0"
                            type="text"
                            class="form-control"
-                           (typeaheadOnSelect)="onAppSelected($event)"
+                           (typeaheadOnSelect)="onAppSelected()"
+                           (input)="onAppSelected()"
                            placeholder="Select Application">
                 </div>
                 <div class="col-sm-4">
@@ -33,7 +35,8 @@
                            [typeaheadMinLength]="0"
                            type="text"
                            class="form-control"
-                           (typeaheadOnSelect)="onApiSelected($event)"
+                           (typeaheadOnSelect)="onApiSelected()"
+                           (input)="onApiSelected()"
                            placeholder="Select API">
                 </div>
             </div>
@@ -119,8 +122,6 @@
             <app-whitelist-list
                     [dataSource]="whitelistList"
                     (onDeleteTask)="onDeleteHandler($event)"></app-whitelist-list>
-
-            <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 
         </div>
 

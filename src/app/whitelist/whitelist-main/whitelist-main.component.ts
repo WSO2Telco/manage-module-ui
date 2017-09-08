@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
 import {WhitelistService} from '../../commons/services/whitelist.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application} from '../../commons/models/common-data-models';
-import {MessageService} from "../../commons/services/message.service";
+import {MessageService} from '../../commons/services/message.service';
 
 @Component({
     selector: 'app-whitelist-main',
@@ -36,7 +36,6 @@ export class WhitelistMainComponent implements OnInit {
     private ismsisdnRangeError: boolean;
     private isInvalidFieldError: boolean;
 
-    private submissionError: string;
     private msisdnError: string;
     private msisdnRangeError: string;
     private invalidFieldError: string
@@ -86,11 +85,7 @@ export class WhitelistMainComponent implements OnInit {
             if (status) {
                 this.subscriberList = response;
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-
+                this.message.error('Failed to load subscribers');
             }
         });
     }
@@ -113,17 +108,14 @@ export class WhitelistMainComponent implements OnInit {
                     count += 1;
                 }
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
+                this.message.error('Unable to load applications of subscriber');
             }
 
         });
     }
 
     /**
-     * to loaonDeleteTask d the APIs of the application of the subscriber
+     * to load the APIs of the application of the subscriber
      * @param appName
      */
     getApis(appName: string) {
@@ -133,7 +125,6 @@ export class WhitelistMainComponent implements OnInit {
         for (const entry of this.applications) {
             if (entry.name == appName) {
                 id = this.subscriber + '|' + entry.id;
-               // console.log('created id is: ' + id);
             }
             index++;
         }
@@ -156,10 +147,7 @@ export class WhitelistMainComponent implements OnInit {
                         count += 1;
                     }
                 } else {
-                    this.submissionError = response;
-                    setTimeout(() => {
-                        this.submissionError = null;
-                    }, 5000);
+                    this.message.error('Unable to load APIs');
                 }
             });
 
@@ -176,10 +164,8 @@ export class WhitelistMainComponent implements OnInit {
             if (status) {
                 this.whitelistList = response.Success.variables;
             } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
+                this.whitelistList = [];
+                this.message.error('Failed to load whitelist numbers');
 
             }
         });
@@ -218,10 +204,7 @@ export class WhitelistMainComponent implements OnInit {
                         this.msisdnMax = 0;
                         this.getWhitelist();
                     } else {
-                        this.submissionError = response;
-                        setTimeout(() => {
-                            this.submissionError = null;
-                        }, 5000);
+                        this.message.error(response.message);
                     }
                 });
             }
@@ -236,7 +219,6 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onDeleteHandler(event: boolean): void {
-        //console.log('delete event called');
         if (event) {
             this.getWhitelist();
         }
@@ -244,16 +226,27 @@ export class WhitelistMainComponent implements OnInit {
 
 
     /**
-     * this method is triggered when a subscriber is selected
+     * this method is triggered when a subscriber is selected or input field is changed
      * @param event
      */
-    onSubscriberSelected(event: TypeaheadMatch) {
+    onSubscriberSelected() {
         this.app = '';
         this.api = '';
+        this.applicationList = [];
+        this.apiList = [];
+
+        let invalid = true;
+        this.isInvalidFieldError = false;
         for (const entry of this.subscriberList) {
             if (entry == this.subscriber) {
                 this.getAppsofSubscriber(this.subscriber);
+                invalid = false;
             }
+        }
+
+        if (invalid) {
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid subscriber';
         }
     }
 
@@ -261,12 +254,22 @@ export class WhitelistMainComponent implements OnInit {
      * this method is triggered when an application is selected
      * @param event
      */
-    onAppSelected(event: TypeaheadMatch) {
+    onAppSelected() {
         this.api = '';
+        this.apiList = [];
+
+        let invalid = true;
+        this.isInvalidFieldError = false;
         for (const entry of this.applicationList) {
             if (entry == this.app) {
                 this.getApis(this.app);
+                invalid = false;
             }
+        }
+
+        if (invalid) {
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid Application';
         }
     }
 
@@ -274,12 +277,17 @@ export class WhitelistMainComponent implements OnInit {
      * when and API value is selected form drop down
      * @param event
      */
-    onApiSelected(event: TypeaheadMatch) {
-       // console.log('api selected');
-        for (const entry of this.applicationList) {
-            if (entry == this.app) {
-                this.getApis(this.app);
+    onApiSelected() {
+        let invalid = true;
+        this.isInvalidFieldError = false;
+        for (const entry of this.apiList) {
+            if (entry == this.api) {
+                invalid = false;
             }
+        }
+        if (invalid) {
+            this.isInvalidFieldError = true;
+            this.invalidFieldError = 'Invalid Api Name';
         }
     }
 
@@ -328,33 +336,33 @@ export class WhitelistMainComponent implements OnInit {
         let validApp = false;
         let validApi = false;
 
-        for(const entry of this.subscriberList){
-            if(this.subscriber == entry){
+        for (const entry of this.subscriberList) {
+            if (this.subscriber == entry) {
                 validSubscriber = true;
             }
         }
 
-        for(const entry of this.applicationList){
-            if(this.app == entry){
+        for (const entry of this.applicationList) {
+            if (this.app == entry) {
                 validApp = true;
             }
         }
 
-        for(const entry of this.apiList){
-            if(this.api == entry){
+        for (const entry of this.apiList) {
+            if (this.api == entry) {
                 validApi = true;
             }
         }
 
-        if(!validApi){
+        if (!validApi) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Api Name';
         }
-        if(!validApp){
+        if (!validApp) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Application Name';
         }
-        if(!validSubscriber){
+        if (!validSubscriber) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Subscriber Name';
         }
@@ -414,7 +422,6 @@ export class WhitelistMainComponent implements OnInit {
         if (regexp.test(inputtxt)) {
             return true;
         } else {
-           // console.log('Not a valid input');
             return false;
         }
     }
@@ -430,7 +437,6 @@ export class WhitelistMainComponent implements OnInit {
         if (regexp.test(msisdn)) {
             return true;
         } else {
-           // console.log('Not a valid input');
             return false;
         }
     }

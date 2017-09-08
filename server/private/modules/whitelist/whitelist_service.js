@@ -1,14 +1,11 @@
 'use strict';
-const logger=require('../../config/logger');
 const whiteListRestService = require('./whitelist_rest_service');
 
-logger.debugLevel = 'warn';
 
 
 const validateGetAppsRequest = function (request) {
     let param = request.payload;
     if (!!param && param.id) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
@@ -18,7 +15,6 @@ const validateGetAppsRequest = function (request) {
 const validateAddNewWhitelistRequest = function (request) {
     let param = request.payload;
     if (!!param && param.appId && param.apiId && param.userID) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
@@ -27,7 +23,6 @@ const validateAddNewWhitelistRequest = function (request) {
 const validateRemoveWhitelistRequest = function (request) {
     let param = request.payload;
     if (!!param && param.msisdn) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
@@ -37,17 +32,11 @@ function whitelistService() {
 
     let _getSubscribers = function (request, callback) {
 
-        logger.log('INFO', "hit at whitelist get subscriber service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
             callback(getResponseError);
         };
 
@@ -58,17 +47,11 @@ function whitelistService() {
 
     let _getApps = function (request, callback) {
 
-        logger.log('INFO', "hit at whitelist get apps service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
             callback(getResponseError);
         };
 
@@ -82,17 +65,11 @@ function whitelistService() {
 
     let _getApis = function (request, callback) {
 
-        logger.log('INFO', "hit at whitelist get apis service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
             callback(getResponseError);
         };
 
@@ -105,17 +82,11 @@ function whitelistService() {
 
     let _getWhitelist = function (request, callback) {
 
-        logger.log('INFO', "hit at whitelist get whitelist service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
             callback(getResponseError);
         };
 
@@ -125,19 +96,17 @@ function whitelistService() {
 
 
     let _addNewWhitelist = function (request, callback) {
-
-        logger.log('INFO', "hit at whitelist add whitelist service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
+        
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
-            callback(getResponseError);
+            callback({
+                error:getResponseError,
+                success: false,
+                message: 'Error Adding New Whitelist'
+            });
         };
 
         if (validateAddNewWhitelistRequest(request)) {
@@ -148,19 +117,18 @@ function whitelistService() {
     };
 
     let _removeFromWhitelist = function (request, callback) {
-
-        logger.log('INFO', "hit at whitelist remove whitelist service end point");
-
-        request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
-
+        
         let onSuccess = function (getResponse) {
-            logger.log('INFO', 'success');
             callback(getResponse);
         };
 
         let onFailture = function (getResponseError) {
-            logger.log('ERROR', 'failure');
-            callback(getResponseError);
+            callback(
+                {
+                    error:getResponseError,
+                    success: false,
+                    message: 'Error Removing MSISDN From Whitelist'
+                });
         };
 
         if (validateRemoveWhitelistRequest(request)) {
