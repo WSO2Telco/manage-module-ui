@@ -81,7 +81,7 @@ const _invokeAddRateCategoryRest = function (request, id) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratedefinitions/' + id +'/ratecategories';
+        return config.rateServiceURL + 'ratedefinitions/' + id + '/ratecategories';
     };
 
     let getRequestOptions = function () {
@@ -174,7 +174,7 @@ const _invokeAddRateCardRest = function (request) {
     return deferred.promise;
 };
 
-const _invokeGetTariffListRest = function ( ) {
+const _invokeGetTariffListRest = function () {
 
     console.log("rate get tariff list rest end point call")
 
@@ -205,7 +205,7 @@ const _invokeGetTariffListRest = function ( ) {
     return deferred.promise;
 };
 
-const _invokeGetCurrencyListRest = function ( ) {
+const _invokeGetCurrencyListRest = function () {
 
     console.log("rate get tariff list rest end point call")
 
@@ -236,7 +236,7 @@ const _invokeGetCurrencyListRest = function ( ) {
     return deferred.promise;
 };
 
-const _invokeGetRateTypeListRest = function ( ) {
+const _invokeGetRateTypeListRest = function () {
 
     console.log("rate get rate type list rest end point call")
 
@@ -267,7 +267,7 @@ const _invokeGetRateTypeListRest = function ( ) {
     return deferred.promise;
 };
 
-const _invokeGetCategoryListRest = function ( ) {
+const _invokeGetCategoryListRest = function () {
 
     console.log("rate get category list rest end point call")
 
@@ -298,7 +298,7 @@ const _invokeGetCategoryListRest = function ( ) {
     return deferred.promise;
 };
 
-const _invokeGetRateDefinitionListRest = function ( ) {
+const _invokeGetRateDefinitionListRest = function () {
 
     console.log("rate get rate definition list rest end point call")
 
@@ -349,11 +349,11 @@ const _invokeGetRateTaxListRest = function () {
     };
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-            if(error) {
-                console.log("response failed");
-                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-            } else {
-            console.log("response success : "+ payload);
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success : " + payload);
             deferred.resolve(payload);
         }
     });
@@ -362,20 +362,65 @@ const _invokeGetRateTaxListRest = function () {
 
 };
 
-const _invokeGetAPIOperationRates = function (apiName,apiOperationId, operatorId, type) {
+const _invokeAssignRatesRest = function (request, apiName, apiOperationId, operatorId, type) {
+
+    console.log("Assign API Operation Rates Rest end point call");
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        switch (type) {
+            case 'admin':
+                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/operationrates';
+                break;
+            case 'operator':
+                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
+                break;
+        }
+    };
+
+    let getRequestOptions = function () {
+        return {
+            json: true,
+            headers: {},
+            payload: request.payload
+        };
+    };
+
+
+    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            console.log("response failed");
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            console.log("response success");
+            deferred.resolve(payload);
+        }
+    });
+
+    return deferred.promise;
+
+};
+
+const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, operatorId, type) {
 
     console.log("Get Rates for API Operation rest end point call")
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        switch (type){
+        switch (type) {
             case 'admin':
-                return config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/ratedefinitions';
+                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
+                break;
+            case 'operator':
+                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
                 break;
             case 'admin-assign':
-                console.log("INSIDE >>" + config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/operationrates');
-                return config.rateServiceURL + 'apis/'+apiName + '/operations/' +apiOperationId +'/operationrates';
+                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/operationrates';
+                break;
+            case 'operator-assign':
+                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
                 break;
         }
 
@@ -390,11 +435,11 @@ const _invokeGetAPIOperationRates = function (apiName,apiOperationId, operatorId
     };
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if(error) {
+        if (error) {
             console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : "+ payload);
+            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -422,11 +467,11 @@ const _invokeGetApiOperationsRest = function (api) {
     };
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if(error) {
+        if (error) {
             console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : "+ payload);
+            console.log("response success : " + payload);
             deferred.resolve(payload);
         }
     });
@@ -447,6 +492,7 @@ module.exports = {
     invokeGetCategoryListRest: _invokeGetCategoryListRest,
     invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
     invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
-    invokeGetAPIOperationRates: _invokeGetAPIOperationRates,
-    invokeGetApiOperationsRest: _invokeGetApiOperationsRest
+    invokeGetAPIOperationRatesRest: _invokeGetAPIOperationRatesRest,
+    invokeGetApiOperationsRest: _invokeGetApiOperationsRest,
+    invokeAssignRatesRest: _invokeAssignRatesRest
 };

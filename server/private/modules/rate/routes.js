@@ -29,7 +29,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/api/rate/assignrates',
+        path: '/api/rate/assignrates/{apiName}/{apiOperationId}/{operatorId}',
         handler: rateService.assignRates
     },
     {

@@ -60,17 +60,12 @@
                         <div class="form-group ">
                             <label class="control-label col-sm-2">Assign Rate</label>
                             <div class="col-sm-8">
-                                <!--<ng2-dual-list-box [data]="operatorNameList" valueField="id" textField="name"-->
-                                                   <!--(onAvailableItemSelected)="log($event)"-->
-                                                   <!--(onSelectedItemsSelected)="log($event)"-->
-                                                   <!--(onItemsMoved)="log($event)"></ng2-dual-list-box>-->
-
-                                <!--<dual-list [source]="sourceList" [(destination)]="destinationList"></dual-list>-->
                                 <dual-list
                                         [source]="sourceList"
                                         [destination]="destinationList"
                                         [display]="display"
                                         [key] = "key"
+                                        [format] = "format"
                                 ></dual-list>
                             </div>
                         </div>
@@ -78,7 +73,7 @@
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-2">
                                 <button type="submit" class="btn btn-primary animated fadeIn">Assign</button>&nbsp;
-                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                                <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                             </div>
 
                         </div>

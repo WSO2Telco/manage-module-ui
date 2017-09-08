@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BlackListService} from '../../commons/services/blacklist.service';
 import {MessageService} from '../../commons/services/message.service';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {QuotaService} from '../../commons/services/quotacap.service';
 import {APIOperation, AssignRates, Operator, RateDefinition} from '../../commons/models/common-data-models';
 import {RateService} from '../../commons/services/rate.service';
@@ -30,6 +29,7 @@ export class AssignRateMainComponent implements OnInit {
     private loginInfo;
     private display: string;
     private key: string;
+    private format;
 
     private invalidApiOperation: boolean;
     private invalidOperator: boolean;
@@ -42,26 +42,13 @@ export class AssignRateMainComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.apiList = [];
-        this.operatorList = [];
-        this.apiOperationList = [];
-
         this.display = 'rateDefName';
         this.key = 'rateDefId';
-
-        this.api = '';
-        this.operator = '';
-        this.apiOperation = '';
-
-        this.sourceList = [];
-        this.destinationList = [];
-        this.assignedList = [];
+        this.format =  { add: 'Assign', remove: 'Remove', all: 'Select All', none: 'Select None', direction: 'left-to-right' }
 
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
-        this.getApis();
-        this.getOperators();
-        this.clearErrors();
+        this.reloadPage();
     }
 
     /**
@@ -149,6 +136,7 @@ export class AssignRateMainComponent implements OnInit {
                         if (status) {
                             this.sourceList = response.source;
                             this.assignedList = response.destination;
+                            this.destinationList = [];
                         } else {
                             this.message.error(response);
                         }
@@ -210,10 +198,10 @@ export class AssignRateMainComponent implements OnInit {
             }
 
             if (data.length > 0){
-                this.rateService.assignRatesForAPIOperation(data, operatorId, (response, status) => {
+                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response, status) => {
                     if (status) {
-                        this.sourceList = response.source;
-                        this.assignedList = response.destination;
+                        this.message.success(response.message);
+                        this.reloadPage();
                     } else {
                         this.message.error(response);
                     }
@@ -223,7 +211,23 @@ export class AssignRateMainComponent implements OnInit {
         }
     }
 
-    clearForm(){
+    reloadPage(){
+
+        this.apiList = [];
+        this.operatorList = [];
+        this.apiOperationList = [];
+
+        this.api = '';
+        this.operator = '';
+        this.apiOperation = '';
+
+        this.sourceList = [];
+        this.destinationList = [];
+        this.assignedList = [];
+
+        this.getApis();
+        this.getOperators();
+        this.clearErrors();
 
     }
 
@@ -326,6 +330,9 @@ export class AssignRateMainComponent implements OnInit {
         }
     }
 
+    /**
+     * clear error fields
+     */
     clearErrors() {
         this.invalidApiOperation = false;
         this.invalidOperator = false;

@@ -133,6 +133,12 @@ function rateService() {
         }
     };
 
+    /**
+     * Add new tariff
+     * @param request
+     * @param callback
+     * @private
+     */
     let _addTariff = function (request, callback) {
 
         logger.log('INFO', "hit at rate service add category end point");
@@ -159,17 +165,23 @@ function rateService() {
         }
     };
 
+    /**
+     * assign api operation rates
+     * @param request
+     * @param callback
+     * @private
+     */
     let _assignRates = function (request, callback) {
 
         logger.log('INFO', "hit at rate service add category end point");
 
         request.server.log('info', 'ADD CATEGORY REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
-        let onSuccess = function (addSubcategoryResult) {
+        let onSuccess = function (result) {
             logger.log('INFO', 'success');
-            callback(Object.assign({}, addSubcategoryResult, {
+            callback(Object.assign({}, result, {
                 success: true,
-                message: "New Tariff Created Successfully"
+                message: 'Rate Values Assigned Successfully'
             }));
         };
 
@@ -179,7 +191,12 @@ function rateService() {
         };
 
         if (validateAddRequest(request)) {
-            rateRestService.invokeAddTariffRest(request).then(onSuccess, onFailture);
+            if (request.params.operatorId != 'null') {
+                rateRestService.invokeAssignRatesRest(request, request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
+            } else {
+                console.log('%%%%>>' + request.params.operatorId);
+                rateRestService.invokeAssignRatesRest(request, request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
+            }
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
         }
@@ -345,7 +362,7 @@ function rateService() {
 
     let _getAPIOperationRates = function (request, callback) {
 
-        // logger.log('INFO', "hit at Get Rates for API Operation service end point");
+         logger.log('INFO', "hit at Get Rates for API Operation service end point");
 
         request.server.log('info', 'REQUEST : ' + request.payload && JSON.stringify(request.payload));
 
@@ -353,9 +370,9 @@ function rateService() {
             rateDefinitionResult = rateDefinitions;
             logger.log('INFO', 'success');
             if (request.params.operatorId != 'null') {
-                rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator-assign').then(onAssignSuccess, onAssignFailture);
+                rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator-assign').then(onAssignSuccess, onAssignFailture);
             } else {
-                rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin-assign').then(onAssignSuccess, onAssignFailture);
+                rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin-assign').then(onAssignSuccess, onAssignFailture);
             }
         };
 
@@ -364,7 +381,7 @@ function rateService() {
             callback(
                 {
                     source: rateDefinitionResult,
-                    destination: operationRates
+                    destination: operationRates,
                 }
             );
         };
@@ -380,13 +397,10 @@ function rateService() {
         };
 
         if (request.params.operatorId != 'null') {
-            rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
+            rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
         } else {
-            console.log('%%%%>>' + request.params.operatorId);
-            rateRestService.invokeGetAPIOperationRates(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
+            rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
         }
-
-
     }
 
     let _getApiOperations = function (request, callback) {

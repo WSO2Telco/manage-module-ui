@@ -107,8 +107,9 @@ export class RateRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
-    assignRatesForAPIOperation(data, operatorId: number){
-        return this.http.post(this.apiEndpoints['assignRatesForAPIOperation'] + '/' + operatorId, JSON.stringify(data), this.options)
+    assignRatesForAPIOperation(data, apiName: string, apiOperationId: number,  operatorId: number){
+        return this.http.post(this.apiEndpoints['assignRatesForAPIOperation'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId ,
+            JSON.stringify(data), this.options)
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -178,7 +179,6 @@ export class RateRemoteDataService {
         return this.http.get(this.apiEndpoints['getRateTaxList'])
             .map((response: Response) => {
                 const result = response.json();
-                //   console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));
@@ -188,7 +188,6 @@ export class RateRemoteDataService {
         return this.http.get(this.apiEndpoints['getAPIOperationRates'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId )
             .map((response: Response) => {
                 const result = response.json();
-                //   console.log(result);
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));
