@@ -160,7 +160,6 @@ export class RateCategoryComponent implements OnInit {
         this.subcategory = '';
         this.tariff = '';
         this.clearErrors();
-        this.rateCategories = [];
     }
 
     /**
@@ -207,6 +206,15 @@ export class RateCategoryComponent implements OnInit {
         this.categoryError = '';
         this.subcategoryError = '';
         this.tariffError = '';
+    }
+
+    /**
+     * Remove subcategory
+     * @param {number} index
+     */
+    onDelete(index: number) {
+        this.rateCategories.splice(index, 1);
+        this.rateCatetgorySubmition.emit(this.rateCategories);
     }
 
 }

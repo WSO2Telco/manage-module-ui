@@ -82,12 +82,18 @@
                                         <div class="tbl-cell">Category</div>
                                         <div class="tbl-cell">Sub Category</div>
                                         <div class="tbl-cell text-right pad-r-15-im">Tariff</div>
+                                        <div class="tbl-cell text-right pad-r-15-im">X</div>
                                     </div>
-                                    <ng-container *ngFor="let opt of rateCategories">
+                                    <ng-container *ngFor="let opt of rateCategories; let i=index">
                                         <div class="tbl-row">
                                             <div class="tbl-cell">{{opt.category}}</div>
                                             <div class="tbl-cell">{{opt.subcategory}}</div>
                                             <div class="tbl-cell text-right">{{opt.tariff}}</div>
+                                            <div class="tbl-cell text-right pad-r-15-im">
+                                                <button class="btn btn-danger" type="button"
+                                                        (click)="onDelete(i)"><i
+                                                        class="material-icons">delete</i></button>
+                                            </div>
                                         </div>
                                     </ng-container>
                                     <div class="no-rec-row tbl-row" *ngIf="rateCategories.length == 0">
