@@ -43,9 +43,6 @@ export class RateCategoryComponent implements OnInit {
     @Output()
     private rateCatetgorySubmition: EventEmitter<Mapping[]> = new EventEmitter();
 
-    @Output()
-    private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
-
     constructor(private rateService: RateService) {
     }
 
