@@ -43,6 +43,9 @@ export class RateCategoryComponent implements OnInit {
     @Output()
     private rateCatetgorySubmition: EventEmitter<Mapping[]> = new EventEmitter();
 
+    @Output()
+    private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
+
     constructor(private rateService: RateService) {
     }
 
@@ -160,7 +163,6 @@ export class RateCategoryComponent implements OnInit {
         this.subcategory = '';
         this.tariff = '';
         this.clearErrors();
-        this.rateCategories = [];
     }
 
     /**
@@ -207,6 +209,15 @@ export class RateCategoryComponent implements OnInit {
         this.categoryError = '';
         this.subcategoryError = '';
         this.tariffError = '';
+    }
+
+    /**
+     * Remove subcategory
+     * @param {number} index
+     */
+    onDelete(index: number) {
+        this.rateCategories.splice(index, 1);
+        this.rateCatetgorySubmition.emit(this.rateCategories);
     }
 
 }

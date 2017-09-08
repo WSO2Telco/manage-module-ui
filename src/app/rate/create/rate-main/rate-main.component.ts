@@ -479,6 +479,7 @@ export class RateMainComponent implements OnInit {
     onRateCategorySubmitionHandler(event: Mapping[]) {
 
         let count = 0;
+        this.rateCategories = [];
 
         for (const maping of event) {
 
