@@ -69,42 +69,6 @@ const _invokeAddTariffRest = function (request) {
     return deferred.promise;
 };
 
-
-/**
- * rest request to add a new sub category
- * @param request
- * @returns {Promise<T>}
- * @private
- */
-const _invokeAddRateCategoryRest = function (request, id) {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratedefinitions/' + id + '/ratecategories';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            json: true,
-            headers: {},
-            payload: request.payload
-        };
-    };
-
-
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            console.log("response failed");
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            console.log("response success");
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
 /**
  * rest request to add new currency
  * @param request
@@ -482,7 +446,6 @@ const _invokeGetApiOperationsRest = function (api) {
 
 module.exports = {
     invokeAddCategoryRest: _invokeAddCategoryRest,
-    invokeAddRateCategoryRest: _invokeAddRateCategoryRest,
     invokeAddCurrencyRest: _invokeAddCurrencyRest,
     invokeAddRateCardRest: _invokeAddRateCardRest,
     invokeAddTariffRest: _invokeAddTariffRest,

@@ -13,17 +13,17 @@
 
                 <app-currency
                         *ngIf="showAddCurrency"
-                        [existingCodes]="currencyCodeList"
+                        [existingCurrencyList]="currencyList"
                         (onAddTask)="onAddCurrencyHandler($event)"
                         (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
 
                 <app-addtariff *ngIf="showAddTariff"
-                               [existingNames]="tariffNameList"
+                               [existingTariffList]="tariffList"
                                (onAddTask)="onAddTariffHandler($event)"
                                (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
                 <app-addtariff *ngIf="showChildNewTariff"
-                               [existingNames]="tariffNameList"
+                               [existingTariffList]="tariffList"
                                (onAddTask)="onAddTariffHandler($event)"
                                (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
@@ -90,7 +90,8 @@
                     <label class="control-label col-sm-2">Currency <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="currency"
-                               [typeahead]="currencyCodeList"
+                               [typeahead]="currencyList"
+                               typeaheadOptionField="currencyCode"
                                [typeaheadMinLength]="0"
                                placeholder="Currency"
                                name="typecurrency"
@@ -108,7 +109,8 @@
                     <label class="control-label col-sm-2">Rate Type <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
-                               [typeahead]="rateTypeCodeList"
+                               [typeahead]="rateTypeList"
+                               typeaheadOptionField="rateTypeCode"
                                [typeaheadMinLength]="0"
                                autocomplete="off"
                                placeholder="Rate Type"
@@ -125,8 +127,9 @@
                     <label class="control-label col-sm-2">Tariff <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
-                               [typeahead]="tariffNameList"
+                               [typeahead]="tariffList"
                                [typeaheadMinLength]="0"
+                               typeaheadOptionField="tariffName"
                                autocomplete="off"
                                placeholder="Tariff"
                                name="tariff"
@@ -178,8 +181,8 @@
                     </div>
                 </div>
                 <app-ratecategory *ngIf="showSubcategory"
-                                  [categoryList]="categoryNameList"
-                                  [tariffList]="tariffNameList"
+                                  [categoryList]="categoryList"
+                                  [tariffList]="tariffList"
                                   [rateCategories] = "mappingList"
                                   (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>

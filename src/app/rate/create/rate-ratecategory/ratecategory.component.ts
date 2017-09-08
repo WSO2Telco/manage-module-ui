@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {RateService} from '../../../commons/services/rate.service';
-import {Mapping, RateCategory} from '../../../commons/models/common-data-models';
+import {Category, Mapping, RateCategory, Tariff} from '../../../commons/models/common-data-models';
 
 @Component({
     selector: 'app-ratecategory',
@@ -32,10 +32,10 @@ export class RateCategoryComponent implements OnInit {
     private rateCategories: Mapping[];
 
     @Input()
-    private categoryList: string[];
+    private categoryList: Category[];
 
     @Input()
-    private tariffList: string[];
+    private tariffList: Tariff[];
 
     @Output()
     private modalfire: EventEmitter<string> = new EventEmitter();
@@ -61,9 +61,7 @@ export class RateCategoryComponent implements OnInit {
 
     onSubmit(subcategoryForm) {
 
-       // console.log('on submit' + this.category + ' ' + this.subcategory + ' ' + this.tariff)
-
-        this.clearErrors();
+       this.clearErrors();
 
         if (this.category.length != 0 && this.tariff.length != 0) {
             let status = true;
@@ -109,7 +107,6 @@ export class RateCategoryComponent implements OnInit {
 
 
         } else {
-           // console.log('invalid fields');
             if (this.category.length == 0) {
                 this.isCategoryError = true;
                 this.categoryError = 'Category can not be empty';
@@ -131,7 +128,7 @@ export class RateCategoryComponent implements OnInit {
         let status = false;
 
         for (const entry of this.categoryList) {
-            if (entry == category) {
+            if (entry.categoryName == category) {
                 status = true;
             }
         }
@@ -148,7 +145,7 @@ export class RateCategoryComponent implements OnInit {
         let status = false;
 
         for (const entry of this.tariffList) {
-            if (entry == tariff) {
+            if (entry.tariffName == tariff) {
                 status = true;
             }
         }
@@ -173,7 +170,6 @@ export class RateCategoryComponent implements OnInit {
                 if (this.subcategory.length > 0) {
                     if (this.category == entry.category) {
                         if (this.subcategory == entry.subcategory) {
-                           // console.log('Error');
                             this.isSubcategoryError = true;
                             this.subcategoryError = 'Category Sub-Category mapping already exists';
                             return false;

@@ -52,23 +52,12 @@ export class RateMainComponent implements OnInit {
     private mappingList: Mapping[];
     private rateDefinitions: RateDefinition [];
 
-    private categoryNameList: string[];
-    private currencyCodeList: string[];
-    private rateTypeCodeList: string[];
-    private tariffNameList: string[];
-    private rateDefNameList: string[];
-    private taxidlist: string;
-
     private showChildNewCategory: boolean;
     private showChildNewSubCategory: boolean;
     private showChildNewTariff: boolean;
 
-
-    private categoryId: number;
-    private tariffId: number;
-
-    constructor(private rateService: RateService, private _router: Router, private authService: AuthenticationService, private message: MessageService) {
-    }
+    constructor(private rateService: RateService, private _router: Router,
+                private authService: AuthenticationService, private message: MessageService) {}
 
     ngOnInit() {
         this.showSubcategory = false;
@@ -93,14 +82,7 @@ export class RateMainComponent implements OnInit {
         this.categoryList = [];
         this.mappingList = [];
         this.rateDefinitions = [];
-
-        this.categoryNameList = [];
-        this.currencyCodeList = [];
-        this.rateTypeCodeList = [];
-        this.tariffNameList = [];
-        this.rateDefNameList = [];
         this.rateTaxList = [];
-        this.taxidlist = '';
         this.rateCategories = [];
 
         this.getTariffList();
@@ -117,17 +99,9 @@ export class RateMainComponent implements OnInit {
     getTariffList() {
         this.rateService.getTariffList((response, status) => {
             if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    this.tariffList[count] = new Tariff();
-                    this.tariffList[count].tariffId = response[count].tariffId;
-                    this.tariffList[count].tariffName = response[count].tariffName;
-                    this.tariffNameList[count] = response[count].tariffName;
-                    count++;
-                }
-
+                this.tariffList = response;
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
 
@@ -139,17 +113,9 @@ export class RateMainComponent implements OnInit {
     getCurrencyList() {
         this.rateService.getCurrencyList((response, status) => {
             if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    this.currencyList[count] = new Currency();
-                    this.currencyList[count].currencyId = response[count].currencyId;
-                    this.currencyList[count].currencyCode = response[count].currencyCode;
-                    this.currencyCodeList[count] = response[count].currencyCode;
-                    count++;
-                }
-
+                this.currencyList = response;
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
 
@@ -161,22 +127,13 @@ export class RateMainComponent implements OnInit {
     getRateTypeList() {
         this.rateService.getRateTypeList((response, status) => {
             if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    this.rateTypeList[count] = new RateType();
-                    this.rateTypeList[count].rateTypeId = response[count].rateTypeId;
-                    this.rateTypeList[count].rateTypeCode = response[count].rateTypeCode;
-                    this.rateTypeCodeList[count] = response[count].rateTypeCode;
-                    count++;
-                }
-
+                this.rateTypeList = response;
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
 
     }
-
 
     /**
      * this function will load the existing rate taxes list
@@ -184,19 +141,12 @@ export class RateMainComponent implements OnInit {
     getRateTaxList() {
         this.rateService.getRateTaxList((response, status) => {
             if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    this.rateTaxList[count] = new RateTax();
-                    this.rateTaxList[count].taxId = response[count].taxId;
-                    this.rateTaxList[count].taxName = response[count].taxName;
-                    count++;
-                }
+                this.rateTaxList = response;
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
     }
-
 
     /**
      * this function will load the available categories
@@ -204,18 +154,9 @@ export class RateMainComponent implements OnInit {
     getCategoryList() {
         this.rateService.getCategoryList((response, status) => {
             if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    this.categoryList[count] = new Category();
-                    this.categoryList[count].categoryId = response[count].categoryId;
-                    this.categoryList[count].categoryName = response[count].categoryName;
-                    this.categoryList[count].categoryCode = response[count].categoryCode;
-                    this.categoryNameList[count] = response[count].categoryName;
-                    count++;
-                }
-
+                this.categoryList = response;
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
 
@@ -228,14 +169,8 @@ export class RateMainComponent implements OnInit {
         this.rateService.getRateDefinitionList((response, status) => {
             if (status) {
                 this.rateDefinitions = response;
-                let count = 0;
-                for (const entry of response) {
-                    this.rateDefNameList[count] = response[count].rateDefName;
-                    count++;
-                }
-
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
 
@@ -305,15 +240,13 @@ export class RateMainComponent implements OnInit {
         }
 
         /** assign value to rateDefCategoryBase */
-        // rateDefCategoryBase = (this.showSubcategory) ? 1 : 0;
-        if(this.showSubcategory && this.rateCategories.length > 0 ) {
+        if (this.showSubcategory && this.rateCategories.length > 0) {
             rateDefCategoryBase = 1;
-        }else {
+        } else {
             rateDefCategoryBase = 0;
         }
 
         if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
-          //  console.log('submitted rate card form ');
             rateCard = new Rate();
 
             ratedefinition = new RateDefinition();
@@ -349,7 +282,6 @@ export class RateMainComponent implements OnInit {
 
 
         } else {
-           // console.log('invalid fields');
             if (this.rateDefName.length == 0) {
                 this.isNameError = true;
                 this.nameError = 'Name Cannot be Empty'
@@ -453,7 +385,7 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddCurrencyHandler(event: boolean) {
-       // console.log('add currency event called');
+        // console.log('add currency event called');
         if (event) {
             this.getCurrencyList();
         }
@@ -464,7 +396,7 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddCategoryHandler(event: boolean) {
-       // console.log('add category event called');
+        // console.log('add category event called');
         if (event) {
             this.getCategoryList();
         }
@@ -524,8 +456,6 @@ export class RateMainComponent implements OnInit {
 
             count++;
         }
-
-        //  console.log("%%%%%%%%%%%%%%" + JSON.stringify(this.rateCategories));
     }
 
     /**
@@ -533,7 +463,6 @@ export class RateMainComponent implements OnInit {
      * @param event
      */
     onAddTariffHandler(event: boolean) {
-      //  console.log('add tariff event called');
         if (event) {
             this.getTariffList();
         }
@@ -545,8 +474,8 @@ export class RateMainComponent implements OnInit {
      */
     isNameUnique(name) {
         let state = false;
-        for (const entry of this.rateDefNameList) {
-            if (name.trim() == entry.trim()) {
+        for (const entry of this.rateDefinitions) {
+            if (name.trim() == entry.rateDefName.trim()) {
                 state = true;
             }
         }
@@ -564,10 +493,10 @@ export class RateMainComponent implements OnInit {
      * when sub category check box is changed
      */
     onCheckBox() {
-        if(this.showSubcategory){
+        if (this.showSubcategory) {
             this.showSubcategory = false;
             this.mappingList = [];
-        }else {
+        } else {
             this.showSubcategory = true;
         }
     }
@@ -585,7 +514,6 @@ export class RateMainComponent implements OnInit {
         this.taxId = 0;
         this.rateCategories = [];
         this.mappingList = [];
-
 
         /** reload all the service values */
         this.getTariffList();

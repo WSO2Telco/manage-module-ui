@@ -4,11 +4,6 @@ const rateService = require('./rate_service');
 module.exports = [
     {
         method: 'POST',
-        path: '/api/rate/addratecategory/{id}',
-        handler: rateService.addRateCategory
-    },
-    {
-        method: 'POST',
         path: '/api/rate/categories',
         handler: rateService.addCategory
     },

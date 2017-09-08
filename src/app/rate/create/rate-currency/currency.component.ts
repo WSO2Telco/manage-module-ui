@@ -35,7 +35,7 @@ export class CurrencyComponent implements OnInit {
     private list: string[];
 
     @Input()
-    private existingCodes: string[];
+    private existingCurrencyList: Currency[];
 
     @Output()
     private onAddTask: EventEmitter<boolean> = new EventEmitter();
@@ -99,8 +99,8 @@ export class CurrencyComponent implements OnInit {
             this.currencyCodeError = 'Not a Valid Currency Type';
         } else {
             let state = false
-            for (const entry of this.existingCodes) {
-                if (this.currencycode == entry) {
+            for (const entry of this.existingCurrencyList) {
+                if (this.currencycode == entry.currencyCode) {
                     state = true;
                 }
             }

@@ -14,7 +14,7 @@ export class TariffComponent implements OnInit {
     private tariff: Tariff;
 
     @Input()
-    private existingNames: string[];
+    private existingTariffList: Tariff[];
 
     @Output()
     private onAddTask: EventEmitter<boolean> = new EventEmitter();
@@ -178,8 +178,8 @@ export class TariffComponent implements OnInit {
 
     isNameUnique(name) {
         let state = false;
-        for (const entry of this.existingNames) {
-            if (name.trim() == entry.trim()) {
+        for (const entry of this.existingTariffList) {
+            if (name.trim() == entry.tariffName.trim()) {
                 state = true;
             }
         }

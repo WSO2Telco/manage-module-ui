@@ -12,6 +12,7 @@
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="category"
                                            [typeahead]="categoryList"
+                                           typeaheadOptionField="categoryName"
                                            [typeaheadMinLength]="0"
                                            placeholder="Category"
                                            name="typeCategory"
@@ -28,6 +29,7 @@
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="subcategory"
                                            [typeahead]="categoryList"
+                                           typeaheadOptionField="categoryName"
                                            [typeaheadMinLength]="0"
                                            placeholder="Sub Category"
                                            name="typeCaSubtegory"
@@ -44,6 +46,7 @@
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="tariff"
                                            [typeahead]="tariffList"
+                                           typeaheadOptionField="tariffName"
                                            [typeaheadMinLength]="0"
                                            placeholder="Tariff"
                                            name="typeTariff"
