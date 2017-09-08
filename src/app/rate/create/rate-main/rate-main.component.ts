@@ -337,8 +337,6 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-           console.log('#######  ' + rateDefCategoryBase);
-
             this.rateService.addNewRateCard(rateCard, (response, status) => {
 
                 if (status) {

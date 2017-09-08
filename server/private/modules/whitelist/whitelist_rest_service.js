@@ -10,9 +10,7 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetSubscribersRest = function ( ) {
-
-    console.log("whitelist get subscribers rest end point call")
+const _invokeGetSubscribersRest = function () {
 
     let deferred = Q.defer();
 
@@ -30,22 +28,16 @@ const _invokeGetSubscribersRest = function ( ) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
-    deferred.resolve(payload);
-         }
+            deferred.resolve(payload);
+        }
     });
     return deferred.promise;
 };
 
 
-
 const _invokeGetAppsRest = function (request) {
-
-    console.log("whitelist get apps rest end point call")
 
     let deferred = Q.defer();
 
@@ -64,11 +56,8 @@ const _invokeGetAppsRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -77,8 +66,6 @@ const _invokeGetAppsRest = function (request) {
 
 
 const _invokeGetApisRest = function (request) {
-
-    console.log("whitelist get apis rest end point call")
 
     let deferred = Q.defer();
 
@@ -97,11 +84,8 @@ const _invokeGetApisRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -109,9 +93,7 @@ const _invokeGetApisRest = function (request) {
 };
 
 
-const _invokeGetWhitelistRest = function ( ) {
-
-    console.log("whitelist get whitelist rest end point call")
+const _invokeGetWhitelistRest = function () {
 
     let deferred = Q.defer();
 
@@ -129,11 +111,8 @@ const _invokeGetWhitelistRest = function ( ) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -141,8 +120,6 @@ const _invokeGetWhitelistRest = function ( ) {
 };
 
 const _invokeAddNewWhitelist = function (request) {
-
-    console.log("whitelist add whitelist rest end point call")
 
     let deferred = Q.defer();
 
@@ -161,11 +138,8 @@ const _invokeAddNewWhitelist = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -173,8 +147,6 @@ const _invokeAddNewWhitelist = function (request) {
 };
 
 const _invokeRemoveFromWhitelistRest = function (request) {
-
-    console.log("whitelist remove whitelist rest end point call")
 
     let deferred = Q.defer();
 
@@ -192,11 +164,8 @@ const _invokeRemoveFromWhitelistRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });

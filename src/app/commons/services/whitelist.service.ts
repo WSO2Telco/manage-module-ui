@@ -38,7 +38,6 @@ export class WhitelistService {
     }
 
     getApis(id: string, callback: Function) {
-      //  console.log('get apps of subscriber service called');
         this._remoteService.getApis(id)
             .subscribe(
                 data => {
