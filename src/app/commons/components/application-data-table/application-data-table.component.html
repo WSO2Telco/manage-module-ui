@@ -13,13 +13,14 @@
             <div class="row">
                 <div class="form-group col-xs-4">
                     <input type="text" class="form-control"
-                           [(ngModel)]="filterId"
+                           *ngIf="showApiName('/approvals/subscriptions')"
+                           [(ngModel)]="filterApiName"
                            [typeaheadMinLength]="0"
                            container="body"
                            [typeahead]="FilterFieldsDataSource"
-                           typeaheadOptionField="id"
+                           typeaheadOptionField="apiName"
                            (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
-                           placeholder="Id">
+                           placeholder="Api Name">
                 </div>
                 <div class="form-group col-xs-4">
                     <input type="text"
@@ -45,10 +46,11 @@
 
             <div class="row">
                 <div class="col-xs-4">
-                    <div class="filter-val-container id" *ngIf="filter?.ids.length > 0">
-                        <div class="sec-head">ID</div>
+
+                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
+                        <div class="sec-head">Api Name</div>
                         <span class="close material-icons" (click)="onClear('ID')">close</span>
-                        <span class="filter-val ids" *ngFor="let id of filter.ids">{{id}}</span>
+                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -74,6 +76,7 @@
         <div class="tbl-row header">
             <div class="tbl-cell">ID</div>
             <div class="tbl-cell">APP NAME</div>
+            <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">API NAME</div>
             <div class="tbl-cell">USER</div>
             <div class="tbl-cell">CREATED ON</div>
             <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
@@ -95,6 +98,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
+                <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">{{ item.apiName }}</div>
                 <!--<div class="tbl-cell"><a (click)="getUserDetails(item.userName || item.subscriber)">{{item.userName || item.subscriber}}</a></div>-->
                 <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
@@ -179,7 +183,7 @@
                     </div>
 
                     <div class="col-sm-12" *ngIf="item.actionType !== 'MORE'">
-                        <div class="col-xs-3 field-name">Comment</div>
+                        <div class="col-xs-3 field-name">Comment <span>*</span></div>
                         <div class="col-xs-9 field-value"><input [(ngModel)]="item.comment" type="text" class="form-control"><span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span></div>
                     </div>
 

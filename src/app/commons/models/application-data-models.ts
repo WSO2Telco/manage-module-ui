@@ -121,6 +121,7 @@ export class ApprovalEvent {
 export class ApplicationTaskFilter {
     ids: number[] = [];
     appNames: string[] = [];
+    apiNames: string[] = [];
     users: string[] = [];
     fromDate: string;
     toDate: string;

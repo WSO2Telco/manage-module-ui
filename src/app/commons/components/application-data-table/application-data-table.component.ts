@@ -44,11 +44,17 @@ export class ApplicationDataTableComponent implements OnInit {
 
     private FilterFieldsDataSource: ApplicationTask[];
 
+    @Input()
+    private apiName: string;
+
     private filterId: number;
     private filterAppName: string;
     private filterUser: string;
     private filterFromDate: string;
     private filterToDate: string;
+    private  filterApiName: string;
+    private  apis: string;
+    private arr: string[];
 
     // Flag to determine whether to filtering is active or not
     private isFilterActivated = false;
@@ -76,6 +82,7 @@ export class ApplicationDataTableComponent implements OnInit {
     private isCommentEmpty: boolean;
 
     ngOnInit() {
+        this.arr = [];
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         // let loginInfo = this.authService.loginUserInfo.getValue();
         // console.log('###' + loginInfo.isAdmin + ' ' + loginInfo.operator);
@@ -86,7 +93,6 @@ export class ApplicationDataTableComponent implements OnInit {
                 this.showTiers = true;
             }
         }
-
         this.comment = '';
         this.isCommentEmpty = false;
     }
@@ -162,7 +168,11 @@ export class ApplicationDataTableComponent implements OnInit {
                 }
 
                 case 'REJECT' : {
-                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                    if (appTask.comment) {
+                        this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                    } else {
+                        this.isCommentEmpty = true;
+                    }
                     break;
                 }
             }
@@ -175,10 +185,12 @@ export class ApplicationDataTableComponent implements OnInit {
 
         switch (type) {
             case 'ID' : {
-                if (this.filter.ids.indexOf(task.id) < 0) {
-                    this.filter.ids.push(task.id);
+
+                if (this.filter.apiNames.indexOf(task.apiName) < 0) {
+                    this.filter.apiNames.push(task.apiName);
                 }
-                this.filterId = null;
+
+                this.filterApiName = null;
                 break;
             }
 
@@ -204,8 +216,8 @@ export class ApplicationDataTableComponent implements OnInit {
     onClear(type: string) {
         switch (type) {
             case 'ID': {
-                this.filter.ids.length = 0;
-                this.filterId = null;
+                this.filter.apiNames.length = 0;
+                this.filterApiName = null;
                 break;
             }
             case 'NAME': {
@@ -229,7 +241,7 @@ export class ApplicationDataTableComponent implements OnInit {
             }
         }
 
-        if (this.filter.ids.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0) {
+        if (this.filter.apiNames.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0) {
             this.isFilterActivated = false;
         }
 
@@ -260,4 +272,16 @@ export class ApplicationDataTableComponent implements OnInit {
         console.log(JSON.stringify(this.dataSource));
     }
 
+    /**
+     * Display API Name in Subscriptions page
+     * @param val
+     * @returns {boolean}
+     */
+    showApiName(val) {
+        if (this._router.url === val) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
