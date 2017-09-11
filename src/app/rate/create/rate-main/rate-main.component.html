@@ -55,7 +55,7 @@
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate
                   (ngSubmit)="onRateCardSubmition(ratecardForm)">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
-                    <label class="control-label col-sm-2">Rate Name  <span>*</span></label>
+                    <label class="control-label col-sm-2">Rate Name <span>*</span></label>
                     <div class="col-sm-4">
                         <input class="form-control"
                                type="text"
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
-                    <label class="control-label col-sm-2">Rate Description  <span>*</span></label>
+                    <label class="control-label col-sm-2">Rate Description <span>*</span></label>
                     <div class="col-sm-4">
                             <textarea rows="2" cols="50" class="form-control"
                                       type="text"
@@ -80,13 +80,14 @@
                                       name="description"
                                       #descriptionRef="ngModel"
                                       required
-                                      [(ngModel)]="rateDefDescription">
+                                      [(ngModel)]="rateDefDescription"
+                                      (input)="descriptionEmpty($event.target.value)">
                             </textarea>
                         <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
                     </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isCurrencyEmpty}">
+                <div class="form-group" [ngClass]="{'has-danger': isCurrencyError}">
                     <label class="control-label col-sm-2">Currency <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="currency"
@@ -97,7 +98,8 @@
                                name="typecurrency"
                                class="form-control"
                                required
-                        >
+                               (typeaheadOnSelect)="isCurrencyValid()"
+                               (input)="isCurrencyValid()">
                         <span class="error" *ngIf="isCurrencyError">{{currencyError}}</span>
                     </div>
                     <span class="glyphicon glyphicon-plus info-tooltip"
@@ -105,7 +107,7 @@
                           (click)="showAddCurrency=true;changeDialogTitle();lgModal.show();"></span>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isRateTypeEmpty}">
+                <div class="form-group" [ngClass]="{'has-danger': isRateTypeError}">
                     <label class="control-label col-sm-2">Rate Type <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="rateType"
@@ -118,12 +120,13 @@
                                #rateTypeRef="ngModel"
                                class="form-control"
                                required
-                        >
+                               (typeaheadOnSelect)= "isRateTypeValid()"
+                               (input)="isRateTypeValid()">
                         <span class="error" *ngIf="isRateTypeError">{{rateTypeError}}</span>
                     </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isTariffEmpty}">
+                <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
                     <label class="control-label col-sm-2">Tariff <span>*</span></label>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
@@ -137,7 +140,8 @@
                                required
                                class="form-control"
                                required
-                        >
+                               (typeaheadOnSelect)="isTariffValid()"
+                               (input)="isTariffValid()">
                         <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
                     </div>
                     <span class="glyphicon glyphicon-plus info-tooltip"
@@ -145,7 +149,7 @@
                           (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isTaxEmpty}">
+                <div class="form-group">
                     <label class="control-label col-sm-2">Tax</label>
                     <div class="col-sm-4">
                         <select multiple
@@ -158,9 +162,7 @@
                                     *ngFor="let c of rateTaxList"
                                     [ngValue]="c.taxId">{{c.taxName}}
                             </option>
-
                         </select>
-                        <span class="error" *ngIf="isTaxEmpty">Tax can not be empty</span>
                     </div>
                     <span class="glyphicon glyphicon-question-sign info-tooltip"
                           tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"
@@ -183,7 +185,7 @@
                 <app-ratecategory *ngIf="showSubcategory"
                                   [categoryList]="categoryList"
                                   [tariffList]="tariffList"
-                                  [rateCategories] = "mappingList"
+                                  [rateCategories]="mappingList"
                                   (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 

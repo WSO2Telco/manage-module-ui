@@ -57,7 +57,8 @@ export class RateMainComponent implements OnInit {
     private showChildNewTariff: boolean;
 
     constructor(private rateService: RateService, private _router: Router,
-                private authService: AuthenticationService, private message: MessageService) {}
+                private authService: AuthenticationService, private message: MessageService) {
+    }
 
     ngOnInit() {
         this.showSubcategory = false;
@@ -487,6 +488,61 @@ export class RateMainComponent implements OnInit {
             this.nameError = '';
         }
     }
+
+    descriptionEmpty(description) {
+        if (description.length == 0) {
+            this.isDescriptionEmpty = true;
+        } else {
+            this.isDescriptionEmpty = false;
+        }
+    }
+
+    isCurrencyValid() {
+        let invalid = true;
+        this.isCurrencyError = false;
+        for (const item of this.currencyList) {
+            if (item.currencyCode == this.currency) {
+                invalid = false;
+            }
+        }
+
+        if (invalid) {
+            this.isCurrencyError = true;
+            this.currencyError = 'Invalid Currency';
+        }
+    }
+
+    isRateTypeValid() {
+        let invalid = true;
+        this.isRateTypeError = false;
+        for (const item of this.rateTypeList) {
+            if (item.rateTypeCode == this.rateType) {
+                invalid = false;
+            }
+        }
+
+        if (invalid) {
+            this.isRateTypeError = true;
+            this.rateTypeError = 'Invalid Rate Type';
+        }
+    }
+
+    isTariffValid() {
+        let invalid = true;
+        this.isTariffError = false;
+        for (const item of this.tariffList) {
+            if (item.tariffName == this.tariff) {
+                invalid = false;
+            }
+        }
+
+        if (invalid) {
+            this.isTariffError = true;
+            this.tariffError = 'Invalid Tariff';
+        }
+    }
+
+
 
 
     /**
