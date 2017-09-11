@@ -236,7 +236,7 @@ export class QuotaCapMainComponent implements OnInit {
     setOperatorofSP() {
         let index = 0;
         for (const entry of this.operatorsList) {
-            if (entry == this.loggeduser.toUpperCase()) {
+            if (entry.toLowerCase() === this.loggeduser.toLowerCase()) {
 
                 this.selectedoperator = entry;
                 this.ISoperatordisable = true;
