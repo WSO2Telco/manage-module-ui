@@ -56,6 +56,7 @@ export class ApplicationDataTableComponent implements OnInit {
     private  apis: string;
     private arr: string[];
 
+    private apiNamesList: string[] = [''];
     // Flag to determine whether to filtering is active or not
     private isFilterActivated = false;
 
@@ -102,6 +103,13 @@ export class ApplicationDataTableComponent implements OnInit {
         if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
             const res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
             this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
+
+            for (const appTask of this.FilterFieldsDataSource){
+                if (this.apiNamesList.indexOf(appTask.apiName) === -1) {
+                    this.apiNamesList.push(appTask.apiName);
+                }
+            }
+
         }
     }
 
@@ -185,11 +193,9 @@ export class ApplicationDataTableComponent implements OnInit {
 
         switch (type) {
             case 'ID' : {
-
-                if (this.filter.apiNames.indexOf(task.apiName) < 0) {
-                    this.filter.apiNames.push(task.apiName);
+                if (this.filter.apiNames.indexOf(this.filterApiName) < 0) {
+                    this.filter.apiNames.push(this.filterApiName);
                 }
-
                 this.filterApiName = null;
                 break;
             }

@@ -12,17 +12,6 @@
             <div class="head">Filter<span class="clear" (click)="onClear('ALL')">Clear All</span></div>
             <div class="row">
                 <div class="form-group col-xs-4">
-                    <input type="text" class="form-control"
-                           *ngIf="showApiName('/approvals/subscriptions')"
-                           [(ngModel)]="filterApiName"
-                           [typeaheadMinLength]="0"
-                           container="body"
-                           [typeahead]="FilterFieldsDataSource"
-                           typeaheadOptionField="apiName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
-                           placeholder="Api Name">
-                </div>
-                <div class="form-group col-xs-4">
                     <input type="text"
                            [(ngModel)]="filterAppName"
                            container="body"
@@ -42,17 +31,20 @@
                            (typeaheadOnSelect)="onFilterItemAdded($event,'USER')"
                            class="form-control" placeholder="User">
                 </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control"
+                           *ngIf="showApiName('/approvals/subscriptions')"
+                           [(ngModel)]="filterApiName"
+                           [typeaheadMinLength]="0"
+                           container="body"
+                           [typeahead]="apiNamesList"
+                           typeaheadOptionField="apiName"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
+                           placeholder="Api Name">
+                </div>
             </div>
 
             <div class="row">
-                <div class="col-xs-4">
-
-                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
-                        <div class="sec-head">Api Name</div>
-                        <span class="close material-icons" (click)="onClear('ID')">close</span>
-                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
-                    </div>
-                </div>
                 <div class="col-xs-4">
                     <div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">
                         <div class="sec-head">App Name</div>
@@ -65,6 +57,14 @@
                         <div class="sec-head">User</div>
                         <span class="close material-icons" (click)="onClear('USER')">close</span>
                         <span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+
+                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
+                        <div class="sec-head">Api Name</div>
+                        <span class="close material-icons" (click)="onClear('ID')">close</span>
+                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
                     </div>
                 </div>
             </div>
