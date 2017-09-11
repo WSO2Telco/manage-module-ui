@@ -346,7 +346,6 @@ const _approveApplicationCreation = function (request, reply) {
     };
 
     let onRefIdSuccess = function (result) {
-        // console.log('####### ' + JSON.stringify(result));
         let param = request.payload;
         applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
     };
@@ -411,10 +410,8 @@ const _approveSubscriptionCreation = function (request, reply) {
         let param = request.payload;
 
         if (param.role) {
-           // console.log("HUB_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
         } else {
-           // console.log("OPERATOR_ADMIN_APPROVAL");
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
         }
@@ -434,7 +431,6 @@ const _getGraphData = function (request, reply) {
         request.params.type &&
         (request.params.type == 'applications' || request.params.type == 'subscriptions' )) {
         let onSuccess = function (result) {
-            // console.log("***************" + JSON.stringify(result))
             reply(result);
         };
 

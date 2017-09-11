@@ -30,10 +30,8 @@ const _invokeAddCategoryRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -59,10 +57,8 @@ const _invokeAddTariffRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -93,10 +89,8 @@ const _invokeAddCurrencyRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -128,10 +122,8 @@ const _invokeAddRateCardRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -139,8 +131,6 @@ const _invokeAddRateCardRest = function (request) {
 };
 
 const _invokeGetTariffListRest = function () {
-
-    console.log("rate get tariff list rest end point call")
 
     let deferred = Q.defer();
 
@@ -158,11 +148,8 @@ const _invokeGetTariffListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -170,8 +157,6 @@ const _invokeGetTariffListRest = function () {
 };
 
 const _invokeGetCurrencyListRest = function () {
-
-    console.log("rate get tariff list rest end point call")
 
     let deferred = Q.defer();
 
@@ -189,11 +174,8 @@ const _invokeGetCurrencyListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -201,8 +183,6 @@ const _invokeGetCurrencyListRest = function () {
 };
 
 const _invokeGetRateTypeListRest = function () {
-
-    console.log("rate get rate type list rest end point call")
 
     let deferred = Q.defer();
 
@@ -220,11 +200,8 @@ const _invokeGetRateTypeListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -232,8 +209,6 @@ const _invokeGetRateTypeListRest = function () {
 };
 
 const _invokeGetCategoryListRest = function () {
-
-    console.log("rate get category list rest end point call")
 
     let deferred = Q.defer();
 
@@ -251,11 +226,8 @@ const _invokeGetCategoryListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -263,8 +235,6 @@ const _invokeGetCategoryListRest = function () {
 };
 
 const _invokeGetRateDefinitionListRest = function () {
-
-    console.log("rate get rate definition list rest end point call")
 
     let deferred = Q.defer();
 
@@ -282,11 +252,8 @@ const _invokeGetRateDefinitionListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -295,8 +262,6 @@ const _invokeGetRateDefinitionListRest = function () {
 
 
 const _invokeGetRateTaxListRest = function () {
-
-    console.log("rate get rate Taxes list rest end point call")
 
     let deferred = Q.defer();
 
@@ -314,10 +279,8 @@ const _invokeGetRateTaxListRest = function () {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + payload);
             deferred.resolve(payload);
         }
     });
@@ -327,8 +290,6 @@ const _invokeGetRateTaxListRest = function () {
 };
 
 const _invokeAssignRatesRest = function (request, apiName, apiOperationId, operatorId, type) {
-
-    console.log("Assign API Operation Rates Rest end point call");
 
     let deferred = Q.defer();
 
@@ -354,10 +315,8 @@ const _invokeAssignRatesRest = function (request, apiName, apiOperationId, opera
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -367,8 +326,6 @@ const _invokeAssignRatesRest = function (request, apiName, apiOperationId, opera
 };
 
 const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, operatorId, type) {
-
-    console.log("Get Rates for API Operation rest end point call")
 
     let deferred = Q.defer();
 
@@ -400,10 +357,8 @@ const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, opera
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success");
             deferred.resolve(payload);
         }
     });
@@ -413,8 +368,6 @@ const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, opera
 };
 
 const _invokeGetApiOperationsRest = function (api) {
-
-    console.log("rate Get Api Operations Rest end point call")
 
     let deferred = Q.defer();
 
@@ -432,10 +385,8 @@ const _invokeGetApiOperationsRest = function (api) {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + payload);
             deferred.resolve(payload);
         }
     });

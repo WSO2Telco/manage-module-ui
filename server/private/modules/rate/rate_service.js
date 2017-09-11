@@ -10,7 +10,6 @@ logger.debugLevel = 'warn';
 const validateAddRequest = function (request) {
     let param = request.payload;
     if (!!param) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
@@ -19,7 +18,6 @@ const validateAddRequest = function (request) {
 const validateAddCurrencyRequest = function (request) {
     let param = request.payload;
     if (!!param && param.currencyCode && param.currencyDescription) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
@@ -28,7 +26,6 @@ const validateAddCurrencyRequest = function (request) {
 const validateAddCategoryRequest = function (request) {
     let param = request.payload;
     if (!!param && param.categoryName && param.categoryCode && param.categoryDescription && param.createdBy) {
-        logger.log('INFO', 'REQUEST VALIDATED');
         return true;
     }
     return false;
