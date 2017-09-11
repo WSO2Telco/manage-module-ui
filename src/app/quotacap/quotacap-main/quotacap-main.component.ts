@@ -692,7 +692,16 @@ export class QuotaCapMainComponent implements OnInit {
 
 
     resetdefault() {
-        this.subscriber = '';
+        this.defaultcalval = '';
+        if( this.subscriber.length != 0 && this.app.length != 0  && this.api.length != 0 ) {
+            this.getQuotaofApi(this.api);
+        }else if( this.subscriber.length != 0 && this.app.length != 0  && this.api.length == 0 ) {
+            this.getQuotaofApp(this.appID);
+        }else if( this.subscriber.length != 0 && this.app.length == 0  && this.api.length == 0  ) {
+            this.getQuotaofSubscriber(this.subscriber);
+        }
+
+       /* this.subscriber = '';
         this.app = '';
         this.api = '';
         this.quotaInputValue = '';
@@ -702,7 +711,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.resultLabel = '';
         if (!this.ISoperatordisable) {
             this.selectedoperator = '';
-        }
+        }*/
     }
 
     clearForm() {
