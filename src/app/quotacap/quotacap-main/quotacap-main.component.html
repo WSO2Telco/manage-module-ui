@@ -15,13 +15,13 @@
                             <div class="col-sm-6 ">
                                 <input type="text"
                                        class="form-control"
-                                       [ngModel]="subscriber"
-                                       (ngModelChange)="onSubscriberSelected($event)"
+                                       [(ngModel)]="subscriber"
+                                       (typeaheadOnSelect)="onSubscriberSelected()"
                                        [typeahead]="subscriberList"
                                        [typeaheadMinLength]="0"
                                        typeaheadOptionField="id"
                                        placeholder="Select Service Provider"
-                                       name="sp"
+                                       name="subscriber"
                                 >
                             </div>
                             <span class="error col-sm-offset-4 col-sm-8"
@@ -32,8 +32,8 @@
                             <div class="col-sm-6">
                                 <input type="text"
                                        class="form-control"
-                                       [ngModel]="app"
-                                       (ngModelChange)="onAppSelected($event)"
+                                       [(ngModel)]="app"
+                                       (typeaheadOnSelect)="onAppSelected()"
                                        [typeaheadMinLength]="0"
                                        container="body"
                                        [typeahead]="applicationList"
@@ -48,8 +48,8 @@
                         <div class="form-group ">
                             <label class="control-label col-sm-4">API</label>
                             <div class="col-sm-6">
-                                <input [ngModel]="api"
-                                       (ngModelChange)="onApiSelected($event)"
+                                <input [(ngModel)]="api"
+                                       (typeaheadOnSelect)="onApiSelected()"
                                        [typeaheadMinLength]="0"
                                        container="body"
                                        [typeahead]="apiList"
@@ -64,7 +64,7 @@
                         <div class="form-group">
                             <label class="control-label col-sm-4">Operators</label>
                             <div class="col-sm-6">
-                                <input [ngModel]="selectedoperator"
+                                <input [(ngModel)]="selectedoperator"
                                        (ngModelChange)="onOperatorSelected($event)"
                                        [typeaheadMinLength]="0"
                                        [typeahead]="operatorsList"
@@ -89,7 +89,7 @@
                                        #nameRef="ngModel"
                                        type="number"
                                        required
-                                       [ngModel]="quotaInputValue"
+                                       [(ngModel)]="quotaInputValue"
                                        (ngModelChange)="quotaInputValuechange($event)"
                                 >
                                 <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>

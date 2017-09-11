@@ -68,12 +68,10 @@ export class QuotaService {
         this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, operatorname, quotaValue, fromDate, toDate)
             .subscribe(
                 data => {
-                    this.message.success('Successfully added new Quota');
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    this.message.error(error);
-                    callback(error);
+                    callback(error, false);
                 },
                 () => {
                     this.slimLoadingBarService.complete();
@@ -85,10 +83,10 @@ export class QuotaService {
         this._remoteService.getQuotaLimitInfo(subscriberID, operatorname)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -109,10 +107,10 @@ export class QuotaService {
         this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, true);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }

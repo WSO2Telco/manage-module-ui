@@ -250,8 +250,7 @@ export class QuotaCapMainComponent implements OnInit {
      * this method is triggered when a subscriber is selected
      * @param event
      */
-    onSubscriberSelected(val) {
-        this.subscriber = val;
+    onSubscriberSelected() {
         this.app = '';
         this.api = '';
         this.appID = '';
@@ -344,18 +343,24 @@ export class QuotaCapMainComponent implements OnInit {
         this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
-        this.quotaService.getQuotaLimitInfo(subscriberID, this.selectedoperator, (response) => {
-            if (response.Success.text.length != 0) {
-
-                const count = response.Success.text.length;
-                for (let i = 0; i < count; i++) {
-                    this.quotalist[i] = new QuotaList();
-                    this.quotalist[i].quotaLimit = response.Success.text[i].quotaLimit;
-                    this.quotalist[i].fromDate = response.Success.text[i].fromDate.substring(0, 11);
-                    this.quotalist[i].toDate = response.Success.text[i].toDate.substring(0, 11);
+        this.quotaService.getQuotaLimitInfo(subscriberID, this.selectedoperator, (response, status) => {
+            console.log(JSON.stringify(response));
+            if (status) {
+                if (response.Success.text.length == 0) {
+                    this.message.warning('No Records Found');
+                } else {
+                    let count = 0;
+                    for (const item of response.Success.text) {
+                        this.quotalist[count] = new QuotaList();
+                        this.quotalist[count].quotaLimit = item.quotaLimit;
+                        this.quotalist[count].fromDate = item.fromDate.substring(0, 11);
+                        this.quotalist[count].toDate = item.toDate.substring(0, 11);
+                        count++;
+                    }
                 }
 
             } else {
+                this.message.error('Error Loading Quota of Subscriber');
             }
         });
     }
@@ -368,21 +373,28 @@ export class QuotaCapMainComponent implements OnInit {
         this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
-        this.quotaService.getQuotaLimitInfoApp(appID, this.selectedoperator, (response) => {
-            if (response.Success.text.length != 0) {
+        this.quotaService.getQuotaLimitInfoApp(appID, this.selectedoperator, (response, status) => {
 
-                const count = response.Success.text.length;
-                for (let i = 0; i < count; i++) {
-                    this.quotalist[i] = new QuotaList();
-                    this.quotalist[i].quotaLimit = response.Success.text[i].quotaLimit;
-                    this.quotalist[i].fromDate = response.Success.text[i].fromDate.substring(0, 11);
-                    this.quotalist[i].toDate = response.Success.text[i].toDate.substring(0, 11);
+            console.log(JSON.stringify(response));
+            if (status) {
+                if (response.Success.text.length == 0) {
+                    this.message.warning('No Records Found');
+                } else {
+                    let count = 0
+                    for (const item of response.Success.text) {
+                        this.quotalist[count] = new QuotaList();
+                        this.quotalist[count].quotaLimit = item.quotaLimit;
+                        this.quotalist[count].fromDate = item.fromDate.substring(0, 11);
+                        this.quotalist[count].toDate = item.toDate.substring(0, 11);
+                        count++;
+                    }
                 }
 
-
             } else {
-
+                this.message.error('Error Loading Quota of Application');
             }
+
+
         });
     }
 
@@ -392,6 +404,7 @@ export class QuotaCapMainComponent implements OnInit {
      * @param apiID
      */
     getQuotaofApi(apiID: string) {
+        console.log("api call");
         this.SetQuotaResultLabel();
         this.clearErrors();
         this.quotalist = [];
@@ -454,10 +467,9 @@ export class QuotaCapMainComponent implements OnInit {
      * this method is triggered when an application is selected
      * @param event
      */
-    onAppSelected(val) {
+    onAppSelected() {
         this.api = '';
         this.appID = '';
-        this.app = val;
         this.SetQuotaResultLabel();
 
         this.isCalenderEnable = false;
@@ -602,16 +614,18 @@ export class QuotaCapMainComponent implements OnInit {
             }
         }
 
-
         if (!this.isEmpty() && this.subscriber.length != 0 && !this.is_invalid_period && this.subscriber.length != 0
-            && (this.app.length == 0 || validApplication ) && (this.api.length == 0 || validApi ) && (this.selectedoperator.length == 0 || validOperator )) {
-            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.selectedoperator, this.quotaInputValue, this.fromdate, this.todate, (errorMsg) => {
-                this.submissionError = errorMsg;
-                this.resetdefault();
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            });
+            && (this.app.length == 0 || validApplication ) && (this.api.length == 0 || validApi )
+            && (this.selectedoperator.length == 0 || validOperator )) {
+            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.selectedoperator,
+                this.quotaInputValue, this.fromdate, this.todate, (response, status) => {
+                    if (status) {
+                        this.message.success('Successfully added new Quota');
+                        this.resetDefault();
+                    } else {
+                        this.message.error('Error adding new Quota');
+                    }
+                });
         } else {
             if (!validSubscriber) {
                 this.isSubscriberError = true;
@@ -655,8 +669,7 @@ export class QuotaCapMainComponent implements OnInit {
      * when and API value is selected form drop down
      * @param event
      */
-    onApiSelected(val) {
-        this.api = val;
+    onApiSelected() {
         this.SetQuotaResultLabel();
         for (const entry of this.applicationList) {
             if (entry == this.app) {
@@ -691,27 +704,28 @@ export class QuotaCapMainComponent implements OnInit {
     }
 
 
-    resetdefault() {
+    resetDefault() {
+
         this.defaultcalval = '';
-        if( this.subscriber.length != 0 && this.app.length != 0  && this.api.length != 0 ) {
+        if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0) {
             this.getQuotaofApi(this.api);
-        }else if( this.subscriber.length != 0 && this.app.length != 0  && this.api.length == 0 ) {
+        } else if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length == 0) {
             this.getQuotaofApp(this.appID);
-        }else if( this.subscriber.length != 0 && this.app.length == 0  && this.api.length == 0  ) {
+        } else if (this.subscriber.length != 0 && this.app.length == 0 && this.api.length == 0) {
             this.getQuotaofSubscriber(this.subscriber);
         }
 
-       /* this.subscriber = '';
-        this.app = '';
-        this.api = '';
-        this.quotaInputValue = '';
-        this.defaultcalval = '';
-        this.subscriber = '';
-        this.quotalist = [];
-        this.resultLabel = '';
-        if (!this.ISoperatordisable) {
-            this.selectedoperator = '';
-        }*/
+        /* this.subscriber = '';
+         this.app = '';
+         this.api = '';
+         this.quotaInputValue = '';
+         this.defaultcalval = '';
+         this.subscriber = '';
+         this.quotalist = [];
+         this.resultLabel = '';
+         if (!this.ISoperatordisable) {
+         this.selectedoperator = '';
+         }*/
     }
 
     clearForm() {
