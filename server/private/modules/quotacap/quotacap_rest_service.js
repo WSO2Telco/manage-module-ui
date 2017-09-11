@@ -10,14 +10,12 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetSubscribersRest = function (operator ) {
-
-    console.log("get subscribers rest end point call")
+const _invokeGetSubscribersRest = function (operator) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.quotaServiceUrl + 'getSubscribersByOperator?operatorName='+operator ;
+        return config.quotaServiceUrl + 'getSubscribersByOperator?operatorName=' + operator;
     };
 
     let getRequestOptions = function () {
@@ -30,25 +28,20 @@ const _invokeGetSubscribersRest = function (operator ) {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
-    deferred.resolve(payload);
-         }
+            deferred.resolve(payload);
+        }
     });
     return deferred.promise;
 };
 
-const _invokegetOperatorOfsubscriber = function (subscriberID ) {
-
-    console.log("get opereatorlist rest end point call")
+const _invokegetOperatorOfsubscriber = function (subscriberID) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName='+subscriberID ;
+        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName=' + subscriberID;
     };
 
     let getRequestOptions = function () {
@@ -61,21 +54,16 @@ const _invokegetOperatorOfsubscriber = function (subscriberID ) {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
-    deferred.resolve(payload);
-}
-});
+            deferred.resolve(payload);
+        }
+    });
     return deferred.promise;
 };
 
 
 const _invokeGetAppsRest = function (request) {
-
-    console.log("whitelist get apps rest end point call")
 
     let deferred = Q.defer();
 
@@ -94,11 +82,8 @@ const _invokeGetAppsRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -107,8 +92,6 @@ const _invokeGetAppsRest = function (request) {
 
 
 const _invokeGetApisRest = function (request) {
-
-    console.log("whitelist get apis rest end point call")
 
     let deferred = Q.defer();
 
@@ -127,11 +110,8 @@ const _invokeGetApisRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -139,9 +119,7 @@ const _invokeGetApisRest = function (request) {
 };
 
 
-const _invokegetOperatorListRest = function ( ) {
-
-    console.log("get operator list rest end point call")
+const _invokegetOperatorListRest = function () {
 
     let deferred = Q.defer();
 
@@ -159,11 +137,8 @@ const _invokegetOperatorListRest = function ( ) {
 
     wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : ");
-
             deferred.resolve(payload);
         }
     });
@@ -172,8 +147,6 @@ const _invokegetOperatorListRest = function ( ) {
 
 
 const _invokeGetQoutalistRest = function (request) {
-
-    console.log("Quota get quota rest end point call")
 
     let deferred = Q.defer();
 
@@ -192,20 +165,16 @@ const _invokeGetQoutalistRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
             deferred.resolve(payload);
-}
-});
+        }
+    });
     return deferred.promise;
 };
 
 
 const _invokegetValidityPeriodRest = function (request) {
-
-    console.log("Quota validity end point call>>>>>" + JSON.stringify(request.payload));
 
     let deferred = Q.defer();
 
@@ -224,25 +193,16 @@ const _invokegetValidityPeriodRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-    deferred.resolve(payload);
-}
-});
+            deferred.resolve(payload);
+        }
+    });
     return deferred.promise;
 };
 
 
-
-
-
-
-
 const _invokeAddNewQuotaLimit = function (request) {
-
-    console.log("QuotaLimit add QuotaLimit rest end point call")
 
     let deferred = Q.defer();
 
@@ -261,11 +221,8 @@ const _invokeAddNewQuotaLimit = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
@@ -273,8 +230,6 @@ const _invokeAddNewQuotaLimit = function (request) {
 };
 
 const _invokeRemoveFromWhitelistRest = function (request) {
-
-    console.log("whitelist remove whitelist rest end point call")
 
     let deferred = Q.defer();
 
@@ -292,11 +247,8 @@ const _invokeRemoveFromWhitelistRest = function (request) {
 
     wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
         if (error) {
-            console.log("response failed");
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log("response success : " + JSON.stringify(payload));
-
             deferred.resolve(payload);
         }
     });
