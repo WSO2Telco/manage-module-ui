@@ -3,6 +3,21 @@
 :host{
   display: block;
 }
+
+.no-rec-row {
+  position: relative;
+
+  .no-rec {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    width: 100px;
+    padding-top: 1px;
+    color: $gray;
+  }
+}
+
 .table-wrapper{
   padding: 10px;
   border: solid 1px $gray_lighter;
