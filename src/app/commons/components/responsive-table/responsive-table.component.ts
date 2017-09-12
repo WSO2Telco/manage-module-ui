@@ -19,6 +19,7 @@ export class ResponsiveTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+      this.dataSource = [];
   }
 
 }
