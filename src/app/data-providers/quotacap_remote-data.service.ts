@@ -132,14 +132,16 @@ export class QuotacapRemoteDataService {
 
 
         const data = {
-            'operator': operatorname,
-            'serviceProvider': subscriberID + '@carbon.super',
-            'applicationName': appId,
-            'apiName': apiId,
-            'quotaLimit': quotaValue,
-            'fromDate': fromDate,
-            'toDate': toDate
+            operator: operatorname,
+            serviceProvider: subscriberID + '@carbon.super',
+            applicationName: appId,
+            apiName: apiId,
+            quotaLimit: quotaValue,
+            fromDate: fromDate,
+            toDate: toDate
         };
+
+        console.log(JSON.stringify(data));
 
         return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.options)
             .map((response: Response) => {
@@ -161,9 +163,9 @@ export class QuotacapRemoteDataService {
             operatorname = '_All_';
         }
         const data = {
-            'byFlag': 'byServiceProvider',
-            'info': subscriberID + '@carbon.super',
-            'operator': operatorname
+            byFlag: 'byServiceProvider',
+            info: subscriberID + '@carbon.super',
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -185,9 +187,9 @@ export class QuotacapRemoteDataService {
             operatorname = '_All_';
         }
         const data = {
-            'byFlag': 'byApplication',
-            'info': appID,
-            'operator': operatorname
+            byFlag: 'byApplication',
+            info: appID,
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -210,9 +212,9 @@ export class QuotacapRemoteDataService {
         }
 
         const data = {
-            'byFlag': 'byApi',
-            'info': apiID,
-            'operator': operatorname
+            byFlag: 'byApi',
+            info: apiID,
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
@@ -260,11 +262,11 @@ export class QuotacapRemoteDataService {
         }
 
         const data = {
-            'byFlag': 'byServiceProvider',
-            'info': subscriberID + '@carbon.super',
-            'fromDate': fromDate,
-            'toDate': toDate,
-            'operator': operatorname
+            byFlag: 'byServiceProvider',
+            info: subscriberID + '@carbon.super',
+            fromDate: fromDate,
+            toDate: toDate,
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
@@ -287,11 +289,11 @@ export class QuotacapRemoteDataService {
         }
 
         const data = {
-            'byFlag': 'byApplication',
-            'info': appID,
-            'fromDate': fromDate,
-            'toDate': toDate,
-            'operator': operatorname
+            byFlag: 'byApplication',
+            info: appID,
+            fromDate: fromDate,
+            toDate: toDate,
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
@@ -314,11 +316,11 @@ export class QuotacapRemoteDataService {
         }
 
         const data = {
-            'byFlag': 'byApi',
-            'info': apiID,
-            'fromDate': fromDate,
-            'toDate': toDate,
-            'operator': operatorname
+            byFlag: 'byApi',
+            info: apiID,
+            fromDate: fromDate,
+            toDate: toDate,
+            operator: operatorname
         };
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
