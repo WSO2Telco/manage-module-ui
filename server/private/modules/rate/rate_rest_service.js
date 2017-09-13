@@ -239,7 +239,7 @@ const _invokeGetRateDefinitionListRest = function () {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratedefinitions';
+        return config.rateServiceURL + 'ratedefinitions?schema=full';
     };
 
     let getRequestOptions = function () {

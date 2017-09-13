@@ -78,6 +78,7 @@ export class ApplicationDataTableComponent implements OnInit {
     private isSubscription: boolean;
 
     private roleList: string[];
+    private tableID: string;
 
     private comment: string;
     private isCommentEmpty: boolean;
@@ -96,6 +97,7 @@ export class ApplicationDataTableComponent implements OnInit {
         }
         this.comment = '';
         this.isCommentEmpty = false;
+        this.tableID = this.getId();
     }
 
 
@@ -288,6 +290,18 @@ export class ApplicationDataTableComponent implements OnInit {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * this method will set the table class and id
+     * @returns {any}
+     */
+    getId(){
+        if (this._router.url === '/approvals/subscriptions') {
+            return 'subscriptionTable';
+        } else {
+            return 'applicationTable';
         }
     }
 }
