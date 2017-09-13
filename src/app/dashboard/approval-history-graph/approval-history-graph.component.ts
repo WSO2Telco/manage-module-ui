@@ -60,7 +60,6 @@ export class ApprovalHistoryGraphComponent implements OnInit {
 
                 if (historyData && historyData.graphData && historyData.graphData.length > 0) {
                     this.appCreationHistoryDataSet = historyData.graphData;
-                   // console.log('@@@@' + JSON.stringify(this.appCreationHistoryDataSet));
                 }
             },
             (error) => {

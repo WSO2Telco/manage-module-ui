@@ -184,10 +184,9 @@ export class RateMainComponent implements OnInit {
      */
     onRateCardSubmition(ratecardForm) {
 
-        this.clearErrors();
+        //this.clearErrors();
 
         const loginInfo = this.authService.loginUserInfo.getValue();
-
         let currency: Currency;
         let tariff: Tariff;
         let rateType: RateType;
@@ -325,7 +324,7 @@ export class RateMainComponent implements OnInit {
      * @returns {boolean}
      */
     isEmpty(): boolean {
-        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0) {
+        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0 && !this.isNameError && !this.isDescriptionEmpty) {
             return false;
         } else {
             return true;
@@ -474,13 +473,16 @@ export class RateMainComponent implements OnInit {
      * @param name
      */
     isNameUnique(name) {
-        let state = false;
+
+        let exists = false;
+        this.isNameError = false;
+
         for (const entry of this.rateDefinitions) {
-            if (name.trim() == entry.rateDefName.trim()) {
-                state = true;
+            if (this.rateDefName.trim() == entry.rateDefName.trim()) {
+                exists = true;
             }
         }
-        if (state) {
+        if (exists) {
             this.isNameError = true;
             this.nameError = 'Name Already Existing';
         } else {
