@@ -18,7 +18,6 @@ export class ViewRateMainComponent implements OnInit {
 
 
     private rateDefinitions: RateDefinition[];
-    private rateDefNameList: string[];
 
     constructor(private rateService: RateService, private message: MessageService) {
     }
@@ -26,7 +25,6 @@ export class ViewRateMainComponent implements OnInit {
     ngOnInit() {
         this.selectedRate = '';
         this.showRateDef = false;
-        this.rateDefNameList = [];
         this.getRateDefinitionList();
     }
 
@@ -34,7 +32,7 @@ export class ViewRateMainComponent implements OnInit {
      * when a rate value is selected
      * @param event
      */
-    onRateSelected(event: TypeaheadMatch) {
+    onRateSelected() {
         for (const entry of this.rateDefinitions) {
             if (entry.rateDefName == this.selectedRate) {
                 this.rateDefinition = entry;
@@ -50,12 +48,6 @@ export class ViewRateMainComponent implements OnInit {
         this.rateService.getRateDefinitionList((response, status) => {
             if (status) {
                 this.rateDefinitions = response;
-                let count = 0;
-                for (const entry of response) {
-                    this.rateDefNameList[count] = response[count].rateDefName;
-                    count++;
-                }
-
             } else {
                 this.message.error(response);
             }

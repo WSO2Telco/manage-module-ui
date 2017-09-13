@@ -10,13 +10,12 @@
                     <input type="text" class="form-control"
                            [(ngModel)]="selectedRate"
                            [typeaheadMinLength]="0"
+                           typeaheadOptionField="rateDefName"
                            container="body"
-                           [typeahead]="rateDefNameList"
-                           typeaheadOptionField="apiId"
-                           (typeaheadOnSelect)="onRateSelected($event)"
+                           [typeahead]="rateDefinitions"
+                           (typeaheadOnSelect)="onRateSelected()"
                            placeholder="Select the Rate">
                 </div>
-
             </div>
 
             <div *ngIf="showRateDef">
