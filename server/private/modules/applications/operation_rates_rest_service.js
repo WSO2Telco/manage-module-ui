@@ -36,7 +36,7 @@ function  _invokeOperationRatesRest(apiName, operator) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (apiName) {
-        return config.rateServiceURL + 'operators/' + operator + '/operatorrates?api=' + apiName;
+        return config.rateServiceURL + 'operators/' + operator + '/apis/'+ apiName + '/operatorrates';
     };
 
     let getRequestOptions = function () {
