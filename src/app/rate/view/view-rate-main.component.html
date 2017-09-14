@@ -1,32 +1,126 @@
-<div class="animated fadeInUp row" style="animation-delay: 0.1s">
-    <div class="col-sm-12">
-        <div class="form-container quotaInputContainer">
-            <div class="tbl-header">
-                Rate Definitions
-                <br>
-            </div>
-            <div class="searchFilter">
-                <div class="col-sm-4">
-                    <input type="text" class="form-control"
-                           [(ngModel)]="selectedRate"
-                           [typeaheadMinLength]="0"
-                           typeaheadOptionField="rateDefName"
-                           container="body"
-                           [typeahead]="rateDefinitions"
-                           (typeaheadOnSelect)="onRateSelected()"
-                           placeholder="Select the Rate">
+<div class="animated fadeInUp" style="animation-delay: 0.1s">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-container rateInputContainer">
+                <div class="tbl-header">
+                    Rate Definitions
+                    <br>
                 </div>
+                <div class="searchFilter">
+                    <h4 class="control-label col-sm-2">Rate List:</h4>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"
+                               [(ngModel)]="selectedRate"
+                               [typeaheadMinLength]="0"
+                               typeaheadOptionField="rateDefName"
+                               container="body"
+                               [typeahead]="rateDefinitions"
+                               (typeaheadOnSelect)="onRateSelected()"
+                               placeholder="Select the Rate">
+                    </div>
+                </div>
+
+                <div *ngIf="!showRateDef">
+                    <h3 class="noreteselect"><i class="material-icons">assignment_late</i> No Rate selected</h3>
+                </div>
+
+                <div *ngIf="showRateDef">
+                    <form class="form-horizontal viewListForm">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Name:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateDefName}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Description:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateDefDescription}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Currency:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.currency.currencyCode}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Rate Type:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateType.rateTypeCode}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Tariff:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffName}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff DefaultValue:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffDefaultVal}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Max Count:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffMaxCount}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Excess Rate:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffExcessRate}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Def Rate:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffDefRate}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Sp Commission:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffSPCommission}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Ads Commission:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffAdsCommission}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Opco Commission:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffOpcoCommission}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Surcharge Value:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffSurChargeval}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Surcharge Ads:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffSurChargeAds}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label sub-control-label col-sm-3">Tariff Surcharge Opco:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffSurChargeOpco}}</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
             </div>
-
-            <div *ngIf="showRateDef">
-                <label>Name: {{rateDefinition.rateDefName}}</label><br>
-                <label>Description: {{rateDefinition.rateDefDescription}}</label><br>
-                <label>Currency : {{rateDefinition.currency.currencyCode}}</label><br>
-                <label>Rate Type: {{rateDefinition.rateType.rateTypeCode}}</label><br>
-                <label>Tariff: {{rateDefinition.tariff.tariffName}}</label>
-            </div>
-
-
         </div>
     </div>
 </div>
