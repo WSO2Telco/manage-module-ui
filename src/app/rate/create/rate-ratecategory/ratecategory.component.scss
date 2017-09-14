@@ -170,3 +170,13 @@
 .btn{ border-radius: 0px !important;}
 
 .control-label span { color: #dd0d0d;}
+
+.open>.dropdown-menu {
+  display: block;
+  max-height: 100px !important;
+  overflow-y: scroll;
+}
+
+.dropdown-menu {
+  min-width: 323px !important;
+}
