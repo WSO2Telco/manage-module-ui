@@ -97,6 +97,7 @@ export class ApprovalRemoteDataService {
                 .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
                 .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
                 .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
+                .filter((task: ApplicationTask) => filter.subscribers.length ==0 || filter.subscribers.indexOf(task.subscriber) >= 0)
                 .reduce((acc, curr) => {
                     acc.push(curr);
                     return acc;
