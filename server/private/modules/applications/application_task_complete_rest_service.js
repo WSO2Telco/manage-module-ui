@@ -103,8 +103,6 @@ function _invokeApplicationCompleteTask(params) {
         };
     };
 
-    console.log('>>>>>>>>>>>>>.' + JSON.stringify(getPayload(params)));
-
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
