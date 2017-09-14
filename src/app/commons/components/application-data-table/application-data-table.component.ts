@@ -57,6 +57,8 @@ export class ApplicationDataTableComponent implements OnInit {
     private arr: string[];
 
     private apiNamesList: string[] = [''];
+    private userNamesList: string[] = [''];
+
     // Flag to determine whether to filtering is active or not
     private isFilterActivated = false;
 
@@ -83,6 +85,8 @@ export class ApplicationDataTableComponent implements OnInit {
     private comment: string;
     private isCommentEmpty: boolean;
 
+    private opsp: string;
+
     ngOnInit() {
         this.arr = [];
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
@@ -98,6 +102,7 @@ export class ApplicationDataTableComponent implements OnInit {
         this.comment = '';
         this.isCommentEmpty = false;
         this.tableID = this.getId();
+        this.creatorName();
     }
 
 
@@ -109,6 +114,12 @@ export class ApplicationDataTableComponent implements OnInit {
             for (const appTask of this.FilterFieldsDataSource){
                 if (this.apiNamesList.indexOf(appTask.apiName) === -1) {
                     this.apiNamesList.push(appTask.apiName);
+                }
+                if (this.userNamesList.indexOf(appTask.userName) === -1) {
+                    this.userNamesList.push(appTask.userName);
+                }
+                if (this.userNamesList.indexOf(appTask.subscriber) === -1) {
+                    this.userNamesList.push(appTask.subscriber);
                 }
             }
 
@@ -210,13 +221,24 @@ export class ApplicationDataTableComponent implements OnInit {
                 break;
             }
 
-            case 'USER' : {
-                if (this.filter.users.indexOf(task.userName) < 0) {
-                    this.filter.users.push(task.userName);
+            case 'userName' : {
+                if (this.filter.users.indexOf(this.filterUser) < 0) {
+                    this.filter.users.push(this.filterUser);
                 }
                 this.filterUser = null;
                 break;
             }
+
+            case 'subscriber' : {
+                if (this.filter.subscribers.indexOf(this.filterUser) < 0) {
+                    this.filter.subscribers.push(this.filterUser);
+                }
+
+                this.filterUser = null;
+                break;
+            }
+
+
         }
         this.onFilterChange.emit(this.filter);
     }
@@ -235,6 +257,11 @@ export class ApplicationDataTableComponent implements OnInit {
             }
             case 'USER': {
                 this.filter.users.length = 0;
+                this.filterUser = null;
+                break;
+            }
+            case 'SUBS': {
+                this.filter.subscribers.length = 0;
                 this.filterUser = null;
                 break;
             }
@@ -290,6 +317,14 @@ export class ApplicationDataTableComponent implements OnInit {
             return true;
         } else {
             return false;
+        }
+    }
+
+    creatorName () {
+        if (this._router.url === '/approvals/applications') {
+            this.opsp = 'userName';
+        } else {
+            this.opsp = 'subscriber';
         }
     }
 
