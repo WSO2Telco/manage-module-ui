@@ -25,10 +25,10 @@
                     <input type="text"
                            [(ngModel)]="filterUser"
                            container="body"
-                           [typeahead]="FilterFieldsDataSource"
-                           typeaheadOptionField="userName"
-                           typeaheadGroupField="userName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'USER')"
+                           [typeaheadMinLength]="0"
+                           [typeahead]="userNamesList"
+                           typeaheadOptionField="{{ opsp }}"
+                           (typeaheadOnSelect)="onFilterItemAdded($event, opsp)"
                            class="form-control" placeholder="User">
                 </div>
                 <div class="form-group col-xs-4">
@@ -52,6 +52,8 @@
                         <span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>
                     </div>
                 </div>
+
+                <ng-container *ngIf="showApiName('/approvals/applications')">
                 <div class="col-xs-4">
                     <div class="filter-val-container user" *ngIf="filter?.users.length > 0">
                         <div class="sec-head">User</div>
@@ -59,6 +61,18 @@
                         <span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>
                     </div>
                 </div>
+                </ng-container>
+
+                <ng-container *ngIf="showApiName('/approvals/subscriptions')">
+                <div class="col-xs-4">
+                    <div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">
+                        <div class="sec-head">User</div>
+                        <span class="close material-icons" (click)="onClear('SUBS')">close</span>
+                        <span class="filter-val user" *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>
+                    </div>
+                </div>
+                </ng-container>
+
                 <div class="col-xs-4">
 
                     <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
