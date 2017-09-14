@@ -24,6 +24,7 @@ export class ApplicationTask {
     comment: string;
     relevantRates: RelevantRates[];
     selectedRate: string;
+    subscriber: string;
 
     toString() {
         return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
@@ -123,6 +124,7 @@ export class ApplicationTaskFilter {
     appNames: string[] = [];
     apiNames: string[] = [];
     users: string[] = [];
+    subscribers: string[] = [];
     fromDate: string;
     toDate: string;
     dataType: TableDataType;
