@@ -62,7 +62,8 @@
 
                             <div class="form-group">
                                 <div class="col-sm-6 col-sm-offset-4">
-                                    <button type="submit" class="btn btn-primary animated fadeIn">Add Combination</button>
+                                    <button type="submit" class="btn btn-primary animated fadeIn">Add Combination
+                                    </button>
                                     <a class="btn btn-danger" (click)="clearCatSelection()">Clear</a>
                                     <div *ngIf="isMappigError">
                                         <p class="error">Invalid Mapping</p>
@@ -73,34 +74,36 @@
                         </form>
                     </div>
                     <div class="col-sm-6">
-                            <br><br>
+                        <br><br>
                         <div class="form-group">
                             <div class="col-sm-4 subtitle">Selected combinations</div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-8 ">
-                                <div class="table">
+                                <div class="scrollit">
+                                    <div class="table">
 
-                                    <div class="tbl-row header">
-                                        <div class="tbl-cell">Category</div>
-                                        <div class="tbl-cell">Sub Category</div>
-                                        <div class="tbl-cell text-right pad-r-15-im">Tariff</div>
-                                        <div class="tbl-cell text-right pad-r-15-im">X</div>
-                                    </div>
-                                    <ng-container *ngFor="let opt of rateCategories; let i=index">
-                                        <div class="tbl-row">
-                                            <div class="tbl-cell">{{opt.category}}</div>
-                                            <div class="tbl-cell">{{opt.subcategory}}</div>
-                                            <div class="tbl-cell text-right">{{opt.tariff}}</div>
-                                            <div class="tbl-cell text-right pad-r-15-im">
-                                                <button class="btn btn-danger" type="button"
-                                                        (click)="onDelete(i)"><i
-                                                        class="material-icons">delete</i></button>
-                                            </div>
+                                        <div class="tbl-row header">
+                                            <div class="tbl-cell">Category</div>
+                                            <div class="tbl-cell">Sub Category</div>
+                                            <div class="tbl-cell text-right pad-r-15-im">Tariff</div>
+                                            <div class="tbl-cell text-right pad-r-15-im">X</div>
                                         </div>
-                                    </ng-container>
-                                    <div class="no-rec-row tbl-row" *ngIf="rateCategories.length == 0">
-                                        <span class="no-rec">No Records..</span>
+                                        <ng-container *ngFor="let opt of rateCategories; let i=index">
+                                            <div class="tbl-row">
+                                                <div class="tbl-cell">{{opt.category}}</div>
+                                                <div class="tbl-cell">{{opt.subcategory}}</div>
+                                                <div class="tbl-cell text-right">{{opt.tariff}}</div>
+                                                <div class="tbl-cell text-right pad-r-15-im">
+                                                    <button class="btn btn-danger" type="button"
+                                                            (click)="onDelete(i)"><i
+                                                            class="material-icons delIcon">delete</i></button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <div class="no-rec-row tbl-row" *ngIf="rateCategories.length == 0">
+                                            <span class="no-rec">No Records..</span>
+                                        </div>
                                     </div>
                                 </div> <!--TABLE END-->
                             </div>
