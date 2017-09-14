@@ -323,10 +323,8 @@ export class ApplicationDataTableComponent implements OnInit {
     creatorName () {
         if (this._router.url === '/approvals/applications') {
             this.opsp = 'userName';
-            console.log('-----' + this.opsp);
         } else {
             this.opsp = 'subscriber';
-            console.log('+++++ ' + this.opsp);
         }
     }
 
