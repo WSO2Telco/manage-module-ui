@@ -51,7 +51,9 @@
     padding: 5px 0px 15px;
   }
 
-  .table {
+  /***** subscription table *******/
+
+  #subscriptionTable {
     display: table;
     width: 100%;
 
@@ -105,6 +107,28 @@
         }
       }
 
+      &.norateOpen {
+        height: 200px !important;
+        background-color: #f4f2c9;
+
+        .action {
+          border-color: black;
+          color: black;
+        }
+
+        &.A, &.R {
+          height: 291px !important;
+        }
+      }
+
+      .norate{  height: 150px !important;
+
+        &.A, &.R {
+          height: 238px !important;
+        }
+
+      }
+
       .more-con {
         padding: 10px 0px 10px 0px;
         background-color: $gray_0;
@@ -117,7 +141,7 @@
         @include box-shadow(inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
 
         &.A, &.R {
-          height: 308px;
+          height: 315px;
         }
 
         .more-row {
@@ -165,6 +189,124 @@
 
     }
   }
+
+  /***** application table *******/
+
+  #applicationTable {
+    display: table;
+    width: 100%;
+
+    @media only screen and (max-width: 768px) {
+      // display: block;
+    }
+
+    .tbl-row {
+      display: table-row;
+      background-color: #f6f6f6;
+      height: 0px;
+      @include transition(all 0.5s ease-in);
+
+      &:nth-of-type(odd) {
+        background-color: white;
+      }
+
+      &.header {
+        background-color: #7788aa;
+        font-weight: 600;
+        color: white;
+      }
+
+      @media only screen and (max-width: 768px) {
+        // display: block;
+      }
+
+      .tbl-cell {
+        display: table-cell;
+        padding: 10px 10px;
+        @media only screen and (max-width: 768px) {
+          //  display: block;
+        }
+      }
+
+      &.modified {
+        background-color: #ffffcc;
+      }
+
+      &.open {
+        height: 191px;
+        background-color: #f4f2c9;
+
+        .action {
+          border-color: black;
+          color: black;
+        }
+
+        &.A, &.R {
+          height: 223px;
+        }
+      }
+
+      .more-con {
+        padding: 10px 0px 10px 0px;
+        background-color: $gray_0;
+        position: absolute;
+        left: 10px;
+        right: 11px;
+        height: 138px;
+        margin-top: 53px;
+        border: solid 1px #d0d0d0;
+        @include box-shadow(inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
+
+        &.A, &.R {
+          height: 192px;
+        }
+
+        .more-row {
+          margin-bottom: 2px;
+        }
+
+        .field-name {
+          height: 40px;
+          background-color: $gray_1;
+          line-height: 40px;
+          text-align: right;
+          font-weight: 600;
+          span { color: #dd0d0d;}
+        }
+
+        .rate-field-name {
+          height: 40px;
+          background-color: $gray_4;
+          line-height: 40px;
+          text-align: right;
+          font-weight: 600;
+        }
+        .rate-field-value {
+          height: 40px;
+          background-color: $gray_4;
+          line-height: 40px;
+        }
+
+        .field-value {
+          height: 40px;
+          background-color: white;
+          line-height: 40px;
+        }
+
+        select, input {
+          margin-top: 2px;
+        }
+
+        .btn {
+          margin-top: 10px;
+          padding-top: 5px !important;
+          padding-bottom: 5px !important;
+        }
+      }
+
+    }
+  }
+
 
   .time {
     display: block;
@@ -315,4 +457,9 @@
 .error {
   font-size: 1em;
   color: #f96565;
+}
+
+.field-value pre {
+  border-radius: 0px;
+  background-color: #ffffff;
 }
