@@ -15,6 +15,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import {CurrencyComponent} from './create/rate-currency/currency.component';
 import { DualListBoxModule } from 'ng2-dual-list-box';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
     imports: [
@@ -27,6 +28,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
         TypeaheadModule.forRoot(),
         TooltipModule.forRoot(),
         DualListBoxModule.forRoot(),
+        TabsModule.forRoot(),
         AngularDualListBoxModule
     ],
     declarations: [

@@ -58,15 +58,29 @@
                             </div>
                         </div>
                         <div class="form-group ">
-                            <label class="control-label col-sm-2">Assign Rate</label>
+                            <label class="control-label col-sm-2">Assign new Rates</label>
                             <div class="col-sm-8">
-                                <dual-list
-                                        [source]="sourceList"
-                                        [destination]="destinationList"
-                                        [display]="display"
-                                        [key] = "key"
-                                        [format] = "format"
-                                ></dual-list>
+                                <tabset>
+                                    <br>
+                                    <tab heading='Assign new rate'> <dual-list
+                                            [source]="sourceList"
+                                            [destination]="destinationList"
+                                            [display]="display"
+                                            [key] = "key"
+                                            [format] = "format"
+                                    ></dual-list></tab>
+                                    <tab>
+                                        <template tabHeading>Already Assigned rates</template>
+                                        <h3 class="norateMessage" *ngIf="this.assignedList.length == 0">No Rate Assigned</h3>
+                                        <ul *ngIf="this.assignedList.length != 0">
+                                            <li *ngFor="let assignrate of this.assignedList">
+                                                {{ assignrate.rateDefName }}
+                                            </li>
+                                        </ul>
+
+                                    </tab>
+                                </tabset>
+
                             </div>
                         </div>
 
