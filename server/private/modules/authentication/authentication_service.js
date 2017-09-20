@@ -59,7 +59,6 @@ function authenticationService() {
                     if (entry == 'operator2-admin-role') {
                         operator = 'Operator2';
                     }
-
                 }
             }
 

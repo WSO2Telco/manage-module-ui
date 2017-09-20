@@ -68,7 +68,6 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getOperatorList() {
-        const data = {};
         return this.http.get(this.apiEndpoints['getOperatorList'], this.options)
             .map((response: Response) => {
                 const result = response.json();

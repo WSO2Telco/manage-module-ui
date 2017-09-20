@@ -14,10 +14,13 @@ export class ViewRateMainComponent implements OnInit {
 
     private selectedRate: string;
     private rateDefinition: RateDefinition;
+    private rateCategory;
+    private rateTax;
     private showRateDef: boolean;
 
 
-    private rateDefinitions: RateDefinition[];
+    private rateDefinitions;
+    private rates;
 
     constructor(private rateService: RateService, private message: MessageService) {
     }
@@ -26,6 +29,7 @@ export class ViewRateMainComponent implements OnInit {
         this.selectedRate = '';
         this.showRateDef = false;
         this.rateDefinitions = [];
+        this.rates =  [];
         this.getRateCards();
     }
 
@@ -35,8 +39,10 @@ export class ViewRateMainComponent implements OnInit {
      */
     onRateSelected() {
         for (const entry of this.rateDefinitions) {
-            if (entry.rateDefName == this.selectedRate) {
-                this.rateDefinition = entry;
+            if (entry.rateDefinition.rateDefName == this.selectedRate) {
+                this.rateDefinition = entry.rateDefinition;
+                this.rateCategory = entry.rateCategories;
+                this.rateTax = entry.rateTaxes;
                 this.showRateDef = true;
             }
         }
@@ -49,7 +55,10 @@ export class ViewRateMainComponent implements OnInit {
         this.rateService.getRateCards((response, status) => {
             if (status) {
                 this.rateDefinitions = response.payload;
-                console.log(JSON.stringify(this.rateDefinitions));
+                let count = 0;
+                for(const entry of this.rateDefinitions){
+                    this.rates[count] = entry.rateDefinition;
+                }
                 if(this.rateDefinitions.length == 0){
                     this.message.warning('No Records Found');
                 }
