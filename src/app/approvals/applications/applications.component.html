@@ -16,6 +16,7 @@
                 [isSubscription]="false"
                 tableTitle="All APPLICATIONS"
                 [dataSource]="allApplications"
+                [isApplicationOnly]="true"
                 (onAssignTask)="onAssignTaskHandler($event)"
                 (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>

@@ -16,6 +16,7 @@
                [filter]="groupSubscriptionFilter"
                tableTitle="SUBSCRIPTION CREATIONS"
                [isSubscription]="true"
+               [isSubscriptionOnly]="true"
                [dataSource]="allSubscriptions"
                (onAssignTask)="onAssignTaskHandler($event)"
                (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
