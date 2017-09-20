@@ -220,7 +220,7 @@
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">
                         <button class="btn btn-default animated fadeIn"
-                                (click)="item.isExpand = false; item.actionType = '' ">Cancel
+                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false">Cancel
                         </button>
                         <button class="btn btn-primary animated fadeIn"
                                 *ngIf="item.actionType == 'APPROVE'"
