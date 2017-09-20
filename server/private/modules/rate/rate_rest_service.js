@@ -242,7 +242,26 @@ const _invokeGetRateDefinitionListRest = function () {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratedefinitions?schema=full';
+        return config.rateServiceURL + 'ratedefinitions';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetRateCardsRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'ratecards?schema=full';
     };
 
     let getRequestOptions = function () {
@@ -340,6 +359,7 @@ module.exports = {
     invokeGetRateTypeListRest: _invokeGetRateTypeListRest,
     invokeGetCategoryListRest: _invokeGetCategoryListRest,
     invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
+    invokeGetRateCardsRest: _invokeGetRateCardsRest,
     invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
     invokeGetAPIOperationRatesRest: _invokeGetAPIOperationRatesRest,
     invokeGetApiOperationsRest: _invokeGetApiOperationsRest,

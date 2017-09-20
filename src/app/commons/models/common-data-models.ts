@@ -114,6 +114,7 @@ export class RateDefinition {
     rateType: RateType;
     rateDefCategoryBase: number;
     tariff: Tariff;
+    rateCategories: RateCategory[];
 }
 
 export class Tax {

@@ -189,6 +189,20 @@ export class RateService {
         }
     }
 
+    getRateCards(callback: Function) {
+        if (this.authService.validateSession()) {
+            this._remoteService.getRateCards()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
+    }
+
     getRateTaxList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getRateTax()

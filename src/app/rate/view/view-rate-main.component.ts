@@ -26,7 +26,7 @@ export class ViewRateMainComponent implements OnInit {
         this.selectedRate = '';
         this.showRateDef = false;
         this.rateDefinitions = [];
-        this.getRateDefinitionList();
+        this.getRateCards();
     }
 
     /**
@@ -45,10 +45,11 @@ export class ViewRateMainComponent implements OnInit {
     /**
      * load available rate definitions
      */
-    getRateDefinitionList() {
-        this.rateService.getRateDefinitionList((response, status) => {
+    getRateCards() {
+        this.rateService.getRateCards((response, status) => {
             if (status) {
                 this.rateDefinitions = response.payload;
+                console.log(JSON.stringify(this.rateDefinitions));
                 if(this.rateDefinitions.length == 0){
                     this.message.warning('No Records Found');
                 }

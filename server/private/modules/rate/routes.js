@@ -44,6 +44,11 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/api/rate/getratecards',
+        handler: rateService.getRateCards
+    },
+    {
+        method: 'GET',
         path: '/api/rate/categories',
         handler: rateService.getCategoryList
     },

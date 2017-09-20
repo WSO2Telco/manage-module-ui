@@ -425,6 +425,27 @@ function rateService() {
         rateRestService.invokeGetApiOperationsRest(request.params.api).then(onSuccess, onFailture);
     }
 
+    let _getRateCards = function (request, callback) {
+
+        let onSuccess = function (getResponse) {
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Definitions Loaded Successfully'
+            });
+        };
+
+        let onFailture = function (getResponseError) {
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Rate Definition List'
+            });
+        };
+
+        rateRestService.invokeGetRateCardsRest().then(onSuccess, onFailture);
+    }
+
     return {
         addCurrency: _addCurrency,
         addCategory: _addCategory,
@@ -439,6 +460,7 @@ function rateService() {
         getTaxList: _getTaxList,
         getApiOperations: _getApiOperations,
         getAPIOperationRates: _getAPIOperationRates,
+        getRateCards: _getRateCards
     };
 }
 

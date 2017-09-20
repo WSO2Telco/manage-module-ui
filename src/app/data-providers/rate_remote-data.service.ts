@@ -31,7 +31,8 @@ export class RateRemoteDataService {
         getRateDefinitionList: this.apiContext + '/rate/getratedefinitionlist',
         getRateTaxList: this.apiContext + '/rate/getTaxList',
         getApiOperations: this.apiContext + '/rate/getapioperations',
-        getAPIOperationRates: this.apiContext + '/rate/getapioperationrates'
+        getAPIOperationRates: this.apiContext + '/rate/getapioperationrates',
+        getRateCards: this.apiContext + '/rate/getratecards'
     };
 
     constructor(private http: Http) {
@@ -174,6 +175,16 @@ export class RateRemoteDataService {
             })
             .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Rate Definition List', error: error.json()}));
     }
+
+    getRateCards() {
+        return this.http.get(this.apiEndpoints['getRateCards'])
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Rate Definition List', error: error.json()}));
+    }
+
 
     getRateTax() {
         return this.http.get(this.apiEndpoints['getRateTaxList'])
