@@ -19,6 +19,7 @@
               moreLinkPath="/approvals/applications"
               tableTitle="APPLICATION CREATIONS"
               [dataSource]="allApplications"
+              [isApplicationOnly]="true"
               (onAssignTask)="onAssignTaskHandler($event)"
               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>
@@ -30,6 +31,7 @@
               moreLinkPath="/approvals/subscriptions"
               tableTitle="SUBSCRIPTION CREATIONS"
               [dataSource]="allSubscriptions"
+              [isSubscriptionOnly]="true"
               (onAssignTask)="onAssignTaskHandler($event)"
               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>

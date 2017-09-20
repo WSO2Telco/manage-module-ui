@@ -9,6 +9,7 @@ import {TableDataType} from '../../models/common-data-models';
 import {Router} from '@angular/router';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {AuthenticationService} from "../../services/authentication.service";
+import {element} from "protractor";
 
 @Component({
     selector: 'application-data-table',
@@ -87,6 +88,12 @@ export class ApplicationDataTableComponent implements OnInit {
 
     private opsp: string;
 
+    @Input()
+    private isApplicationOnly: boolean;
+
+    @Input()
+    private isSubscriptionOnly: boolean;
+
     ngOnInit() {
         this.arr = [];
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
@@ -133,12 +140,17 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     onOptionChange(event, item) {
+        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+            this.message.warning('Please assign the task to you before editing');
+        }
         item.tier = event.target.value;
     }
 
     onOperationRateChange(event, item, apiOperation) {
 
-       // console.log('event occured');
+        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+            this.message.warning('Please assign the task to you before editing');
+        }
 
         let count =0;
         for(const entry of item.relevantRates){
