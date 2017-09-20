@@ -63,7 +63,7 @@ export class CategoryComponent implements OnInit {
                     this.modalClose.emit(true);
                     this.message.success(response.message);
                 } else {
-                    this.message.error(response);
+                    this.message.error(response.message);
                 }
             });
         } else {

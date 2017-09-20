@@ -7,12 +7,13 @@ import {
     SubCategory, Currency, ServerResponse, Category, Tariff, Rate,
     RateCategory, AssignRates
 } from '../models/common-data-models';
+import {AuthenticationService} from "./authentication.service";
 
 
 @Injectable()
 export class RateService {
 
-    constructor(private _remoteService: RateRemoteDataService) {
+    constructor(private _remoteService: RateRemoteDataService, private authService: AuthenticationService) {
     }
 
 
@@ -24,7 +25,6 @@ export class RateService {
      * @param callback
      */
     addRateCategory(rateCategory: RateCategory, id: number, callback: Function) {
-       // console.log('add rate category service called');
         this._remoteService.addRateCategory(rateCategory, id)
             .subscribe(
                 data => {
@@ -42,11 +42,10 @@ export class RateService {
      * @param callback
      */
     addTariff(tariff: Tariff, callback: Function) {
-        //console.log('add new tariff service called');
         this._remoteService.addTariff(tariff)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
@@ -62,8 +61,7 @@ export class RateService {
      * @param description
      * @param callback
      */
-    addCategory(name: string, code: string, description: string, created : string,  callback: Function) {
-       // console.log('add new category service called');
+    addCategory(name: string, code: string, description: string, created: string, callback: Function) {
         const model: Category = new Category();
         model.categoryName = name;
         model.categoryCode = code;
@@ -72,7 +70,7 @@ export class RateService {
         this._remoteService.addCategory(model)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
@@ -87,7 +85,6 @@ export class RateService {
      * @param callback
      */
     addCurrency(code: string, description: string, createdby: string, callback: Function) {
-       // console.log('add new currency service called');
         const model: Currency = new Currency();
         model.currencyCode = code;
         model.currencyDescription = description;
@@ -95,7 +92,7 @@ export class RateService {
         this._remoteService.addCurrency(model)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
@@ -110,11 +107,10 @@ export class RateService {
      * @param callback
      */
     addNewRateCard(rateCard: Rate, callback: Function) {
-      //  console.log('add new rate card service called');
         this._remoteService.addNewRateCard(rateCard)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
@@ -124,122 +120,130 @@ export class RateService {
 
 
     getTariffList(callback: Function) {
-       // console.log('get list of tariff service called');
-        this._remoteService.getTariffList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getTariffList()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getCurrencyList(callback: Function) {
-       // console.log('get list of currency service called');
-        this._remoteService.getCurrencyList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getCurrencyList()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getRateTypeList(callback: Function) {
-       // console.log('get list of rate types service called');
-        this._remoteService.getRateTypeList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getRateTypeList()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getCategoryList(callback: Function) {
-       // console.log('get list of category types service called');
-        this._remoteService.getCategoryList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getCategoryList()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getRateDefinitionList(callback: Function) {
-       // console.log('get list of rate definitions service called');
-        this._remoteService.getRateDefinitionList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getRateDefinitionList()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getRateTaxList(callback: Function) {
-       // console.log('get list of tax List service called');
-        this._remoteService.getRateTax()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getRateTax()
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getApiOperations(api: string, callback: Function) {
-        // console.log('get list of tax List service called');
-        this._remoteService.getApiOperations(api)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.getApiOperations(api)
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     getRatesForAPIOperation(apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
-        this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-
+        if (this.authService.validateSession()) {
+            this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
     }
 
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
-        // console.log('get list of xxx service called');
-        this._remoteService.assignRatesForAPIOperation(data, apiName, apiOperationId, operatorId)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
+        if (this.authService.validateSession()) {
+            this._remoteService.assignRatesForAPIOperation(data, apiName, apiOperationId, operatorId)
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
+        }
 
     }
-
 }
 

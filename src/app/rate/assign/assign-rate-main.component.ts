@@ -96,7 +96,7 @@ export class AssignRateMainComponent implements OnInit {
     getApiOperations() {
         this.rateService.getApiOperations(this.api, (response, status) => {
             if (status) {
-                this.apiOperationList = response;
+                this.apiOperationList = response.payload;
             } else {
                 this.apiOperationList = [];
                 this.apiOperation = '';
@@ -138,7 +138,7 @@ export class AssignRateMainComponent implements OnInit {
                             this.assignedList = response.destination;
                             this.destinationList = [];
                         } else {
-                            this.message.error(response);
+                            this.message.error(response.message);
                         }
                     });
                 }
@@ -203,11 +203,10 @@ export class AssignRateMainComponent implements OnInit {
                         this.message.success(response.message);
                         this.reloadPage();
                     } else {
-                        this.message.error(response);
+                        this.message.error(response.message);
                     }
                 });
             }
-
         }
     }
 

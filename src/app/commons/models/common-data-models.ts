@@ -34,6 +34,8 @@ export class LoginResponse {
     operator: string;
     userName: string;
     isLoggedIn: boolean;
+    start: number;
+    token: string;
     roles: string[];
 }
 

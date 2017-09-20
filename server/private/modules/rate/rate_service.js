@@ -54,13 +54,21 @@ function rateService() {
         };
 
         let onFailture = function (error) {
-            callback(error);
+            callback({
+                error: error,
+                success: false,
+                message: 'Error Adding New Currency'
+            });
         };
 
         if (validateAddCurrencyRequest(request)) {
             rateRestService.invokeAddCurrencyRest(request).then(onSuccess, onFailture);
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error Adding New Currency'
+            });
         }
     };
 
@@ -73,23 +81,31 @@ function rateService() {
      */
     let _addCategory = function (request, callback) {
 
-        let onSuccess = function (addSubcategoryResult) {
+        let onSuccess = function (addCategoryResult) {
             callback(
                 {
-                    addSubcategoryResult: addSubcategoryResult,
+                    addSubcategoryResult: addCategoryResult,
                     success: true,
                     message: "New Category Created Successfully"
                 });
         };
 
-        let onFailture = function (addSubCategoryError) {
-            callback(addSubCategoryError);
+        let onFailture = function (addCategoryError) {
+            callback({
+                error: addCategoryError,
+                success: false,
+                message: 'Error Adding New Category'
+            });
         };
 
         if (validateAddCategoryRequest(request)) {
             rateRestService.invokeAddCategoryRest(request).then(onSuccess, onFailture);
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error Adding New Category'
+            });
         }
     };
 
@@ -101,24 +117,32 @@ function rateService() {
      */
     let _addTariff = function (request, callback) {
 
-        let onSuccess = function (addSubcategoryResult) {
+        let onSuccess = function (addTariffResult) {
             callback(
                 {
-                    addSubcategoryResult: addSubcategoryResult,
+                    addSubcategoryResult: addTariffResult,
                     success: true,
                     message: "New Tariff Created Successfully"
                 }
             );
         };
 
-        let onFailture = function (addSubCategoryError) {
-            callback(addSubCategoryError);
+        let onFailture = function (addTariffError) {
+            callback({
+                error: addTariffError,
+                success: false,
+                message: 'Error Adding New Tariff'
+            });
         };
 
         if (validateAddRequest(request)) {
             rateRestService.invokeAddTariffRest(request).then(onSuccess, onFailture);
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error Adding New Tariff'
+            });
         }
     };
 
@@ -139,8 +163,12 @@ function rateService() {
                 });
         };
 
-        let onFailture = function (addSubCategoryError) {
-            callback(addSubCategoryError);
+        let onFailture = function (error) {
+            callback({
+                error: error,
+                success: false,
+                message: 'Error Assigning Rate Values'
+            });
         };
 
         if (validateAddRequest(request)) {
@@ -150,7 +178,11 @@ function rateService() {
                 rateRestService.invokeAssignRatesRest(request, request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
             }
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error Assigning New Rates'
+            });
         }
     };
 
@@ -162,26 +194,32 @@ function rateService() {
      * @private
      */
     let _addRateCard = function (request, callback) {
-        let onSuccess = function (addSubcategoryResult) {
+        let onSuccess = function (result) {
             callback(
                 {
-                    addSubcategoryResult: addSubcategoryResult,
+                    payload: result,
                     success: true,
                     message: "Rate Card Created Successfully"
                 });
         };
 
-        let onFailture = function (addSubCategoryError) {
-            callback(addSubCategoryError);
+        let onFailture = function (error) {
+            callback({
+                error: error,
+                success: false,
+                message: 'Error Adding New Rate Card'
+            });
         };
 
         if (validateAddRequest(request)) {
             rateRestService.invokeAddRateCardRest(request).then(onSuccess, onFailture);
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error Adding New Rate Card'
+            });
         }
-
-
     };
 
     /**
@@ -192,7 +230,11 @@ function rateService() {
      */
     let _getTariffList = function (request, callback) {
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Tariff List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -214,7 +256,11 @@ function rateService() {
      */
     let _getCurrencyList = function (request, callback) {
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Currency List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -231,7 +277,11 @@ function rateService() {
     let _getRateTypeList = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Type List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -248,7 +298,11 @@ function rateService() {
     let _getCategoryList = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Category List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -265,7 +319,11 @@ function rateService() {
     let _getRateDefinitionList = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Definitions Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -282,7 +340,11 @@ function rateService() {
     let _getTaxList = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Rate Tax List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -313,16 +375,26 @@ function rateService() {
                 {
                     source: rateDefinitionResult,
                     destination: operationRates,
+                    success: true,
+                    message: 'Api Operation Rates Loaded Successfully'
                 }
             );
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Api Operation Rates'
+            });
         };
 
         let onAssignFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Assigned Operation Rates'
+            });
         };
 
         if (request.params.operatorId != 'null') {
@@ -335,11 +407,19 @@ function rateService() {
     let _getApiOperations = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Api Operations Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Api Operations'
+            });
         };
 
         rateRestService.invokeGetApiOperationsRest(request.params.api).then(onSuccess, onFailture);

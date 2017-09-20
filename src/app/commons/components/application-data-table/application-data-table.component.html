@@ -113,7 +113,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
-                <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">{{ item.apiName }}</div>
+                <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">{{item.apiName}}-{{item.apiVersion}}</div>
                 <!--<div class="tbl-cell"><a (click)="getUserDetails(item.userName || item.subscriber)">{{item.userName || item.subscriber}}</a></div>-->
                 <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="row more-row" *ngIf="isSubscription">
                                     <div class="col-xs-5 field-name">API</div>
-                                    <div class="col-xs-7 field-value"> {{item.apiName}}</div>
+                                    <div class="col-xs-7 field-value"> {{item.apiName}}-{{item.apiVersion}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6">

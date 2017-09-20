@@ -24,12 +24,11 @@ function authenticationService() {
      * @private
      */
     let _doLogin = function (request, callback) {
-        request.server.log('info', 'LOGIN REQUEST : ' + request.payload && JSON.stringify(request.payload));
+
         let loginResult;
 
         let onRoleSuccess = function (roleResults) {
 
-            // console.log("roles" + JSON.stringify(roleResults));
             let status = false;
             let isAdmin = false;
             let operator = '';
@@ -68,6 +67,7 @@ function authenticationService() {
             if (status) {
                 callback(Object.assign({}, loginResult, roleResults, {
                     userName: request.payload.userName,
+                    token: new Buffer(request.payload.userName+':'+ request.payload.password).toString('base64'),
                     isAdmin: isAdmin,
                     operator: operator,
                     success: true,
@@ -110,7 +110,6 @@ function authenticationService() {
      * @private
      */
     let _doLogout = function (request, callback) {
-        request.server.log('LOGIN REQUEST ' + request.payload);
         callback(_logoutLogic(request));
     };
 

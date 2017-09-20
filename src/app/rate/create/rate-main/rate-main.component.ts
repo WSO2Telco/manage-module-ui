@@ -61,6 +61,7 @@ export class RateMainComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.authService.validateSession();
         this.showSubcategory = false;
         this.showAddCurrency = false;
         this.showAddTariff = false;
@@ -100,12 +101,11 @@ export class RateMainComponent implements OnInit {
     getTariffList() {
         this.rateService.getTariffList((response, status) => {
             if (status) {
-                this.tariffList = response;
+                this.tariffList = response.payload;
             } else {
                 this.message.error(response.message);
             }
         });
-
     }
 
     /**
@@ -114,12 +114,11 @@ export class RateMainComponent implements OnInit {
     getCurrencyList() {
         this.rateService.getCurrencyList((response, status) => {
             if (status) {
-                this.currencyList = response;
+                this.currencyList = response.payload;
             } else {
                 this.message.error(response.message);
             }
         });
-
     }
 
     /**
@@ -128,7 +127,7 @@ export class RateMainComponent implements OnInit {
     getRateTypeList() {
         this.rateService.getRateTypeList((response, status) => {
             if (status) {
-                this.rateTypeList = response;
+                this.rateTypeList = response.payload;
             } else {
                 this.message.error(response.message);
             }
@@ -142,7 +141,7 @@ export class RateMainComponent implements OnInit {
     getRateTaxList() {
         this.rateService.getRateTaxList((response, status) => {
             if (status) {
-                this.rateTaxList = response;
+                this.rateTaxList = response.payload;
             } else {
                 this.message.error(response.message);
             }
@@ -155,7 +154,7 @@ export class RateMainComponent implements OnInit {
     getCategoryList() {
         this.rateService.getCategoryList((response, status) => {
             if (status) {
-                this.categoryList = response;
+                this.categoryList = response.payload;
             } else {
                 this.message.error(response.message);
             }
@@ -169,7 +168,7 @@ export class RateMainComponent implements OnInit {
     getRateDefinitionList() {
         this.rateService.getRateDefinitionList((response, status) => {
             if (status) {
-                this.rateDefinitions = response;
+                this.rateDefinitions = response.payload;
             } else {
                 this.message.error(response.message);
             }
@@ -183,8 +182,6 @@ export class RateMainComponent implements OnInit {
      * @param ratecardForm
      */
     onRateCardSubmition(ratecardForm) {
-
-        //this.clearErrors();
 
         const loginInfo = this.authService.loginUserInfo.getValue();
         let currency: Currency;
@@ -276,7 +273,7 @@ export class RateMainComponent implements OnInit {
                     this.message.success(response.message);
                     this.reloadPage();
                 } else {
-                    this.message.error(response);
+                    this.message.error(response.message);
                 }
             });
 
@@ -543,8 +540,6 @@ export class RateMainComponent implements OnInit {
             this.tariffError = 'Invalid Tariff';
         }
     }
-
-
 
 
     /**

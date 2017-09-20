@@ -10,6 +10,7 @@ export class ApplicationTask {
     id: number;
     assignee: string;
     apiName: string;
+    apiVersion: string;
     createTime: DateTimeInfo;
     taskDescription: string;
     applicationId: number;

@@ -27,7 +27,6 @@ var appConfig = {
     adminPassword: process.env.password || 'admin',
     apiContext: 'api',
     allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber', 'operator1-admin-role', 'operator2-admin-role', 'dialog-admin-role']
-
 };
 
 module.exports = appConfig;

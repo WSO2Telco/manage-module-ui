@@ -25,6 +25,7 @@ export class ViewRateMainComponent implements OnInit {
     ngOnInit() {
         this.selectedRate = '';
         this.showRateDef = false;
+        this.rateDefinitions = [];
         this.getRateDefinitionList();
     }
 
@@ -47,12 +48,14 @@ export class ViewRateMainComponent implements OnInit {
     getRateDefinitionList() {
         this.rateService.getRateDefinitionList((response, status) => {
             if (status) {
-                this.rateDefinitions = response;
+                this.rateDefinitions = response.payload;
+                if(this.rateDefinitions.length == 0){
+                    this.message.warning('No Records Found');
+                }
             } else {
-                this.message.error(response);
+                this.message.error(response.message);
             }
         });
-
     }
 
 

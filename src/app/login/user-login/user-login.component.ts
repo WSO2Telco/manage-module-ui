@@ -16,8 +16,7 @@ export class UserLoginComponent implements OnInit {
     constructor(private _authenticationService: AuthenticationService) {
     }
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     onLoginClick(loginForm) {
         this.isSubmitted = true;

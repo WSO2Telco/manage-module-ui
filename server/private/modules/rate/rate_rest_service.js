@@ -27,15 +27,7 @@ const _invokeAddCategoryRest = function (request) {
         };
     };
 
-
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -55,14 +47,7 @@ const _invokeAddTariffRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 /**
@@ -87,14 +72,7 @@ const _invokeAddCurrencyRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -120,173 +98,7 @@ const _invokeAddRateCardRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-const _invokeGetTariffListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'tariffs';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-const _invokeGetCurrencyListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'currencies';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-const _invokeGetRateTypeListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratetypes';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-const _invokeGetCategoryListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'categories';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-const _invokeGetRateDefinitionListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'ratedefinitions?schema=full';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
-};
-
-
-const _invokeGetRateTaxListRest = function () {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'taxes';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-
-    return deferred.promise;
-
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 const _invokeAssignRatesRest = function (request, apiName, apiOperationId, operatorId, type) {
@@ -312,16 +124,175 @@ const _invokeAssignRatesRest = function (request, apiName, apiOperationId, opera
         };
     };
 
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.post(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if(res.statusCode == 201){
+                deferred.resolve(payload);
+            }else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
 
     return deferred.promise;
+}
+
+const _invokeGETRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.get(endpointUrl, requestOptions, (error, res, payload) => {
+        if (error) {
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            if(res.statusCode == 200){
+                deferred.resolve(payload);
+            }else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
+        }
+    });
+
+    return deferred.promise;
+}
+
+const _invokeGetTariffListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'tariffs';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetCurrencyListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'currencies';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetRateTypeListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'ratetypes';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetCategoryListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'categories';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetRateDefinitionListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'ratedefinitions?schema=full';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokeGetRateTaxListRest = function () {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'taxes';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+
+};
+
+const _invokeGetApiOperationsRest = function (api) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'apis/' + api + '/operations';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 
 };
 
@@ -355,43 +326,7 @@ const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, opera
         };
     };
 
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-
-    return deferred.promise;
-
-};
-
-const _invokeGetApiOperationsRest = function (api) {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.rateServiceURL + 'apis/' + api + '/operations';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {}
-        };
-    };
-
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-
-    return deferred.promise;
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 
 };
 

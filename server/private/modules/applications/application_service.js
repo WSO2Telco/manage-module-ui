@@ -137,7 +137,7 @@ const _getApplications = function (request, reply) {
 
     let onAppDetailSuccess = function (appsDetails) {
 
-        let OperationReatesPromises;
+       let OperationReatesPromises;
         if (appsDetails) {
             appsDetailsResult = appsDetails;
             OperationReatesPromises = appsDetails.map((appDetail, index) => {
@@ -176,8 +176,6 @@ const _getApplications = function (request, reply) {
 
 
     let onApplicationSuccess = function (applicationTasksResult) {
-
-
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;

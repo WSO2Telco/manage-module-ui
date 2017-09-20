@@ -48,7 +48,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Adding New Rate Category', error: error.json()}));
     }
 
     /**
@@ -62,7 +62,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Adding New Category', error: error.json()}));
     }
 
     /**
@@ -76,7 +76,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Adding New Tariff', error: error.json()}));
     }
 
     /**
@@ -90,7 +90,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Adding New Currency', error: error.json()}));
     }
 
     /**
@@ -104,7 +104,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Adding New Rate Card', error: error.json()}));
     }
 
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number,  operatorId: number){
@@ -114,7 +114,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Assigning Rates', error: error.json()}));
     }
 
 
@@ -128,7 +128,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Tariff List', error: error.json()}));
     }
 
     /**
@@ -141,7 +141,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Currency List', error: error.json()}));
     }
 
     /**
@@ -154,7 +154,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Rate Type List', error: error.json()}));
     }
 
     getCategoryList() {
@@ -163,7 +163,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Category List', error: error.json()}));
     }
 
     getRateDefinitionList() {
@@ -172,7 +172,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Rate Definition List', error: error.json()}));
     }
 
     getRateTax() {
@@ -181,7 +181,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading Rate Tax List', error: error.json()}));
     }
 
     getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
@@ -190,7 +190,7 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading API Operation Rates', error: error.json()}));
     }
 
     getApiOperations(api: string){
@@ -199,6 +199,6 @@ export class RateRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => Observable.throw({success: false, message: 'Error Loading API Operations', error: error.json()}));
     }
 }

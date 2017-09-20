@@ -75,11 +75,7 @@ export class TariffComponent implements OnInit {
                     this.modalClose.emit(true);
                     this.message.success(response.message);
                 } else {
-                    this.submissionError = response;
-                    setTimeout(() => {
-                        this.submissionError = null;
-                    }, 5000);
-
+                    this.message.error(response.message);
                 }
             });
 

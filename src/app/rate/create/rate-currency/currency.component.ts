@@ -62,7 +62,6 @@ export class CurrencyComponent implements OnInit {
     onCurrencyValueSubmit(currencyForm) {
         this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
-       // console.log('form submitted : ' + this.currencycode + '  ' + this.currencydesc);
         this.clearErrors();
 
         if (this.currencycode.length != 0 && this.currencydesc.length != 0) {
@@ -72,7 +71,7 @@ export class CurrencyComponent implements OnInit {
                     this.modalClose.emit(true);
                     this.message.success(response.message);
                 } else {
-                    this.message.error(response);
+                    this.message.error(response.message);
                 }
             });
         } else {
