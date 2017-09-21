@@ -138,8 +138,11 @@
                                     <ng-container *ngFor="let item of rateCategory">
                                         <div class="tbl-row">
                                             <div class="tbl-cell">{{item.category.categoryName}}</div>
-                                            <div class="tbl-cell">
+                                            <div *ngIf="item.subCategory != null" class="tbl-cell">
                                                 &nbsp;{{item.subCategory.categoryName}}
+                                            </div>
+                                            <div *ngIf="item.subCategory == null" class="tbl-cell">
+                                                &nbsp;---
                                             </div>
                                             <div class="tbl-cell text-right">
                                                 &nbsp;{{item.tariff.tariffName}}
