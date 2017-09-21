@@ -22,8 +22,8 @@ export class MainMenuComponent implements OnInit {
         {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
         {id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear'},
-        {id: 7, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'search'},
-        {id: 8, route: '/rate/create', name: 'Create Rate', position: 'child', iconName: 'assignment'},
+        {id: 7, route: '/rate/create', name: 'Create Rate', position: 'child', iconName: 'assignment'},
+        {id: 8, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'search'},
         {id: 9, route: '/rate/assign', name: 'Assign Rate', position: 'child', iconName: 'assignment_turned_in'},
         {id: 10, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
         {id: 11, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase'},
@@ -39,7 +39,7 @@ export class MainMenuComponent implements OnInit {
         {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
         {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
         {id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear'},
-        {id: 7, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'assignment'},
+        {id: 7, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'search'},
         {id: 8, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
 
     ];
