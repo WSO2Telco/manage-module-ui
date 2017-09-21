@@ -69,7 +69,7 @@ export class QuotaCapMainComponent implements OnInit {
     private loggeduser: string;
 
     private myDateRangePickerOptions: IMyDrpOptions = {
-       dateFormat: 'yyyy/mm/dd',
+        dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
         indicateInvalidDateRange: true,
         markCurrentDay: true,
@@ -373,7 +373,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfo(subscriberID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                    this.message.warning('No Records Found');
+                 //   this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0;
                     for (const item of response.Success.text) {
@@ -402,7 +402,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfoApp(appID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                    this.message.warning('No Records Found');
+                  //  this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0
                     for (const item of response.Success.text) {
@@ -432,7 +432,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfoApi(apiID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                    this.message.warning('No Records Found');
+                 //   this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0
                     for (const item of response.Success.text) {
@@ -723,7 +723,10 @@ export class QuotaCapMainComponent implements OnInit {
         this.subscriber = '';
         this.app = '';
         this.api = '';
-        this.selectedoperator = '';
+
+        if (!this.ISoperatordisable) {
+            this.selectedoperator = '';
+        }
         this.quotaInputValue = '';
         this.isCalenderEnable = true;
         this.defaultcalval = '';
