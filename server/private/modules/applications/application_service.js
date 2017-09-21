@@ -413,8 +413,6 @@ const _approveSubscriptionCreation = function (request, reply) {
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
         }
-
-
         subscriptionCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));

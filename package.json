@@ -49,6 +49,7 @@
     "ng2-slim-loading-bar": "^2.3.0",
     "ng2-toasty": "^2.3.0",
     "ngx-bootstrap": "^1.8.0",
+    "nodejslogger": "^1.2.3",
     "q": "^1.4.1",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",

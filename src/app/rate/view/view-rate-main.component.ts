@@ -3,6 +3,7 @@ import {RateDefinition} from '../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {RateService} from '../../commons/services/rate.service';
 import {MessageService} from '../../commons/services/message.service';
+import {AuthenticationService} from "../../commons/services/authentication.service";
 
 @Component({
     selector: 'app-view-rate-main',
@@ -22,7 +23,7 @@ export class ViewRateMainComponent implements OnInit {
     private rateDefinitions;
     private rates;
 
-    constructor(private rateService: RateService, private message: MessageService) {
+    constructor(private rateService: RateService, private message: MessageService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
@@ -66,6 +67,11 @@ export class ViewRateMainComponent implements OnInit {
                 this.message.error(response.message);
             }
         });
+    }
+
+
+    logout(){
+        this.authService.doLogout();
     }
 
 

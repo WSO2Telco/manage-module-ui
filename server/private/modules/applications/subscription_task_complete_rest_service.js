@@ -3,6 +3,7 @@ const boom = require('boom');
 const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
+const logger = require('nodejslogger')
 
 function invokeSubscriptionCompleteTask(params) {
     let deferred = Q.defer();
@@ -17,7 +18,6 @@ function invokeSubscriptionCompleteTask(params) {
 
         if(params.selectedTier){
             if(params.selectedRate.length == 0){
-                //console.log("no rates$$$$$$$$$$$$$$$$$$$$$4");
                 return {
                     action: "complete",
                     variables: [
@@ -209,12 +209,12 @@ function invokeSubscriptionCompleteTask(params) {
         };
     };
 
-
     wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
             if(payload && payload.exception){
+                logger.error(payload.exception);
                 deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }else{
                 deferred.resolve({

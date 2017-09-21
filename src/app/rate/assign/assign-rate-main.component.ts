@@ -44,7 +44,13 @@ export class AssignRateMainComponent implements OnInit {
 
         this.display = 'rateDefName';
         this.key = 'rateDefId';
-        this.format =  { add: 'Assign', remove: 'Remove', all: 'Select All', none: 'Select None', direction: 'left-to-right' }
+        this.format = {
+            add: 'Assign',
+            remove: 'Remove',
+            all: 'Select All',
+            none: 'Select None',
+            direction: 'left-to-right'
+        }
 
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -96,7 +102,11 @@ export class AssignRateMainComponent implements OnInit {
     getApiOperations() {
         this.rateService.getApiOperations(this.api, (response, status) => {
             if (status) {
+                this.apiOperation = '';
                 this.apiOperationList = response.payload;
+                if (this.apiOperationList.length == 0) {
+                    this.message.warning('No API Operations Available for The Selected API');
+                }
             } else {
                 this.apiOperationList = [];
                 this.apiOperation = '';
@@ -137,7 +147,13 @@ export class AssignRateMainComponent implements OnInit {
                             this.sourceList = response.source;
                             this.assignedList = response.destination;
                             this.destinationList = [];
+                            if(this.sourceList.length == 0){
+                                this.message.warning('No Rate Values Available for Selected Combination');
+                            }
                         } else {
+                            this.sourceList = [];
+                            this.assignedList = [];
+                            this.destinationList = [];
                             this.message.error(response.message);
                         }
                     });
@@ -151,8 +167,8 @@ export class AssignRateMainComponent implements OnInit {
      * on form submission
      * @param rateAssigForm
      */
-    onRateAssigSubmition(rateAssignForm){
-        if (this.validate()){
+    onRateAssigSubmition(rateAssignForm) {
+        if (this.validate()) {
 
             const data = [];
             let apiOperationId;
@@ -185,7 +201,7 @@ export class AssignRateMainComponent implements OnInit {
 
             let count = 0;
 
-            for (const item of this.destinationList){
+            for (const item of this.destinationList) {
                 const rateDefinition = new RateDefinition();
                 rateDefinition.rateDefId = item.rateDefId;
                 const entry = new AssignRates();
@@ -197,7 +213,7 @@ export class AssignRateMainComponent implements OnInit {
                 count++;
             }
 
-            if (data.length > 0){
+            if (data.length > 0) {
                 this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response, status) => {
                     if (status) {
                         this.message.success(response.message);
@@ -206,11 +222,13 @@ export class AssignRateMainComponent implements OnInit {
                         this.message.error(response.message);
                     }
                 });
+            } else {
+                this.message.warning('No Rates Selected');
             }
         }
     }
 
-    reloadPage(){
+    reloadPage() {
 
         this.apiList = [];
         this.operatorList = [];

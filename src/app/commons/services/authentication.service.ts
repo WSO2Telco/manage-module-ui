@@ -127,9 +127,23 @@ export class AuthenticationService {
             this.timerHandle = null;
         }
         this.timerHandle = setTimeout(() => {
-            this.message.error('Session Expired Please Login');
+            // this.message.error('Session Expired Please Login');
             this.stopChecking();
-            this.doLogout();
+            this.doShit();
         }, 10000);
     }
+
+    doShit() {
+        const user = JSON.parse(sessionStorage.getItem('loginUserInfo'));
+        if (!!user) {
+            this._remoteService.logout(user.userName);
+            sessionStorage.setItem('loginUserInfo', null);
+            this.loginUserInfo.next(null);
+            this._router.navigate(['']);
+            this._router.navigate(['#/login']);
+        } else {
+            this._router.navigate(['login']);
+        }
+    }
+
 }
