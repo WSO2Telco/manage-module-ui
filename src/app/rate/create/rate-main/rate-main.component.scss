@@ -119,6 +119,11 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
+.info-tooltip-view {
+  margin-top: 0em !important;
+  margin-left: 0.5em;
+}
+
 .modal {
   top: 10%;
   outline: none;

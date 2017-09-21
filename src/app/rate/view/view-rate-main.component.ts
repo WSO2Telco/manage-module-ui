@@ -17,6 +17,7 @@ export class ViewRateMainComponent implements OnInit {
     private rateCategory;
     private rateTax;
     private showRateDef: boolean;
+    public isCollapsed: boolean;
 
 
     private rateDefinitions;
@@ -32,6 +33,7 @@ export class ViewRateMainComponent implements OnInit {
         this.rates =  [];
         this.getRateCards();
     }
+
 
     /**
      * when a rate value is selected
@@ -58,6 +60,7 @@ export class ViewRateMainComponent implements OnInit {
                 let count = 0;
                 for(const entry of this.rateDefinitions){
                     this.rates[count] = entry.rateDefinition;
+                    count++;
                 }
                 if(this.rateDefinitions.length == 0){
                     this.message.warning('No Records Found');

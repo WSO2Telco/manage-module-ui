@@ -16,6 +16,7 @@ import {CurrencyComponent} from './create/rate-currency/currency.component';
 import { DualListBoxModule } from 'ng2-dual-list-box';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
     imports: [
@@ -29,6 +30,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
         TooltipModule.forRoot(),
         DualListBoxModule.forRoot(),
         TabsModule.forRoot(),
+        CollapseModule.forRoot(),
         AngularDualListBoxModule
     ],
     declarations: [
