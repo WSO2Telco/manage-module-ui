@@ -48,7 +48,9 @@ const _getApplications = function (request, reply) {
         };
 
         if (appTaskResult && appTaskResult.data) {
+
             adapted.applicationTasks = appTaskResult.data.map((task, index) => {
+
                 let details = appDetailsResult[index].reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
@@ -83,7 +85,6 @@ const _getApplications = function (request, reply) {
                         count++;
                     }
                 }
-
 
 
                 let moCreated;
@@ -127,7 +128,6 @@ const _getApplications = function (request, reply) {
     };
 
     let onOperationReatesSuccess = function (operationReatesDetails) {
-
         reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
 
@@ -136,8 +136,7 @@ const _getApplications = function (request, reply) {
     };
 
     let onAppDetailSuccess = function (appsDetails) {
-
-       let OperationReatesPromises;
+        let OperationReatesPromises;
         if (appsDetails) {
             appsDetailsResult = appsDetails;
             OperationReatesPromises = appsDetails.map((appDetail, index) => {
@@ -148,11 +147,9 @@ const _getApplications = function (request, reply) {
 
 
                 if (details['apiName']) {
-                    if(request.payload.isAdmin){
-
+                    if (request.payload.isAdmin) {
                         return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName']);
-                    }else {
-
+                    } else {
                         return operationRatesREST.invokeOperationRatesRest(details['apiName'], request.payload.operator);
                     }
                 } else {
@@ -180,7 +177,6 @@ const _getApplications = function (request, reply) {
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;
             appDetailsPromises = applicationTasksResult.data.map((appTask) => {
-
                 return applicationDetailsREST.Invoke(appTask.id);
             });
 

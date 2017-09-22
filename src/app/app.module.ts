@@ -12,6 +12,7 @@ import {HeaderComponent} from './commons/components/header/header.component';
 import {HamburgerMenuComponent} from './commons/components/hamburger-menu/hamburger-menu.component';
 import {UserAvatarComponent} from './commons/components/user-avatar/user-avatar.component';
 import {MainMenuComponent} from './commons/components/main-menu/main-menu.component';
+import {UserInactiveComponent} from './commons/components/user_inactive/user-inactive.component';
 import {BreadcrumbsComponent} from './commons/components/breadcrumbs/breadcrumbs.component';
 import {ChartsModule} from 'ng2-charts';
 import {DataProvidersModule} from './data-providers/data-providers.module';
@@ -33,6 +34,7 @@ import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.s
         HamburgerMenuComponent,
         UserAvatarComponent,
         MainMenuComponent,
+        UserInactiveComponent,
         BreadcrumbsComponent,
     ],
     imports: [

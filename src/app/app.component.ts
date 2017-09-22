@@ -29,6 +29,5 @@ export class AppComponent implements OnInit {
         });
         this._appCommonService.menuToggleStream.subscribe((isExpand: boolean) => this.isMenuExpanded = isExpand);
 
-
     }
 }

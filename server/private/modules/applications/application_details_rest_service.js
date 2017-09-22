@@ -48,6 +48,8 @@ function _invokeGetWorkflowRefId(taskId) {
         };
     };
 
+    //console.log(getEndpointUrl(taskId));
+
     wreck.get(getEndpointUrl(taskId), getRequestOptions(), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));

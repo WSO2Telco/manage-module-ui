@@ -85,7 +85,7 @@ export class AssignRateMainComponent implements OnInit {
                 if (this.loginInfo.isAdmin) {
                     const admin = {
                         'operatorId': null,
-                        'operatorName': 'Admin',
+                        'operatorName': 'ALL',
                         'operatorDescription': 'hub admin'
                     };
                     this.operatorList.splice(0, 0, admin);

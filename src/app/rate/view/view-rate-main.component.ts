@@ -71,11 +71,4 @@ export class ViewRateMainComponent implements OnInit {
             }
         });
     }
-
-
-    logout(){
-        this.authService.doLogout();
-    }
-
-
 }

@@ -10,12 +10,16 @@ import {MessageService} from './message.service';
 export class AuthenticationService {
 
     loginUserInfo: BehaviorSubject<LoginResponse> = new BehaviorSubject(null);
+    isInactive: BehaviorSubject<boolean> = new BehaviorSubject(null);
+
     private timerHandle;
 
     constructor(private _router: Router, private _remoteService: LoginRemoteDataService,
                 private message: MessageService) {
         const _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
         this.loginUserInfo.next(_loginUserInfo);
+        this.isInactive.next(false);
+        // window.onbeforeunload = this.show.bind(this);
     }
 
     doLogin(userName: string, password: string, callback: Function) {
@@ -77,14 +81,6 @@ export class AuthenticationService {
     }
 
     validateSession() {
-        // const loginInfo = this.loginUserInfo.getValue();
-        // const diff = new Date().getTime() - loginInfo.start;
-        // if (diff > 10000) {
-        //     this.message.error('Session Expired Please Login');
-        //     this.doLogout();
-        // } else {
-        //     return true;
-        // }
         return true;
     }
 
@@ -108,6 +104,11 @@ export class AuthenticationService {
         document.onclick = this.resetTimer.bind(this);
     }
 
+    show(){
+        this.isInactive.next(true);
+        console.log('page reloaded');
+    }
+
     stopChecking() {
         if (this.timerHandle) {
             clearTimeout(this.timerHandle);
@@ -122,28 +123,15 @@ export class AuthenticationService {
     }
 
     private resetTimer() {
+        this.isInactive.next(false);
         if (this.timerHandle) {
             clearTimeout(this.timerHandle);
             this.timerHandle = null;
         }
         this.timerHandle = setTimeout(() => {
-            // this.message.error('Session Expired Please Login');
             this.stopChecking();
-            this.doShit();
-        }, 10000);
-    }
-
-    doShit() {
-        const user = JSON.parse(sessionStorage.getItem('loginUserInfo'));
-        if (!!user) {
-            this._remoteService.logout(user.userName);
-            sessionStorage.setItem('loginUserInfo', null);
-            this.loginUserInfo.next(null);
-            this._router.navigate(['']);
-            this._router.navigate(['#/login']);
-        } else {
-            this._router.navigate(['login']);
-        }
+            this.isInactive.next(true);
+        }, 900000);
     }
 
 }

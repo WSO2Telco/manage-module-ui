@@ -11,31 +11,31 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-6">
-      <application-data-table
-              [filter]="groupApplicationFilter"
-              [summeryModeRecordLimit]="5"
-              moreLinkPath="/approvals/applications"
-              tableTitle="APPLICATION CREATIONS"
-              [dataSource]="allApplications"
-              [isApplicationOnly]="true"
-              (onAssignTask)="onAssignTaskHandler($event)"
-              (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
-    </div>
+  <!--<div class="row">-->
+    <!--<div class="col-md-6">-->
+      <!--<application-data-table-->
+              <!--[filter]="groupApplicationFilter"-->
+              <!--[summeryModeRecordLimit]="5"-->
+              <!--moreLinkPath="/approvals/applications"-->
+              <!--tableTitle="APPLICATION CREATIONS"-->
+              <!--[dataSource]="allApplications"-->
+              <!--[isApplicationOnly]="true"-->
+              <!--(onAssignTask)="onAssignTaskHandler($event)"-->
+              <!--(onFilterChange)="onFilterChangeHandler($event)"></application-data-table>-->
+    <!--</div>-->
 
-    <div class="col-md-6">
-      <application-data-table
-              [filter]="groupSubscriptionFilter"
-              [summeryModeRecordLimit]="5"
-              moreLinkPath="/approvals/subscriptions"
-              tableTitle="SUBSCRIPTION CREATIONS"
-              [dataSource]="allSubscriptions"
-              [isSubscriptionOnly]="true"
-              (onAssignTask)="onAssignTaskHandler($event)"
-              (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
-    </div>
-  </div>
+    <!--<div class="col-md-6">-->
+      <!--<application-data-table-->
+              <!--[filter]="groupSubscriptionFilter"-->
+              <!--[summeryModeRecordLimit]="5"-->
+              <!--moreLinkPath="/approvals/subscriptions"-->
+              <!--tableTitle="SUBSCRIPTION CREATIONS"-->
+              <!--[dataSource]="allSubscriptions"-->
+              <!--[isSubscriptionOnly]="true"-->
+              <!--(onAssignTask)="onAssignTaskHandler($event)"-->
+              <!--(onFilterChange)="onFilterChangeHandler($event)"></application-data-table>-->
+    <!--</div>-->
+  <!--</div>-->
 
 
 </div>

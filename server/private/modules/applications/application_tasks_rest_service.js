@@ -43,6 +43,8 @@ function invokeApplicationRest(params) {
         };
     };
 
+    // console.log(getEndpointUrl(params));
+
     wreck.get(getEndpointUrl(params), getRequestOptions(), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));

@@ -140,8 +140,6 @@ export class QuotacapRemoteDataService {
             toDate: toDate
         };
 
-        console.log(JSON.stringify(data));
-
         return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.options)
             .map((response: Response) => {
                 const result = response.json();

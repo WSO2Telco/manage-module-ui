@@ -25,7 +25,11 @@ function _invokeOperationRatesRestAdmin(apiName) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if(payload == null){
+                deferred.resolve({});
+            } else{
+                deferred.resolve(payload);
+            }
         }
     });
     return deferred.promise;
@@ -49,7 +53,11 @@ function _invokeOperationRatesRest(apiName, operator) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if(payload == null){
+                deferred.resolve({});
+            } else{
+                deferred.resolve(payload);
+            }
         }
     });
     return deferred.promise;
