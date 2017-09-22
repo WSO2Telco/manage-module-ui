@@ -45,8 +45,8 @@ export class AssignRateMainComponent implements OnInit {
         this.display = 'rateDefName';
         this.key = 'rateDefId';
         this.format = {
-            add: 'Assign',
-            remove: 'Remove',
+            add: 'AddTo List',
+            remove: 'Remove from List',
             all: 'Select All',
             none: 'Select None',
             direction: 'left-to-right'
