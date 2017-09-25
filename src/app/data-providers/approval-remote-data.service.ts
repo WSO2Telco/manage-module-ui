@@ -112,7 +112,7 @@ export class ApprovalRemoteDataService {
         let loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName,
+                assignee: loginInfo.userName.toLowerCase(),
                 isAdmin: loginInfo.isAdmin,
                 operator: '',
                 size: 100,
@@ -199,7 +199,7 @@ export class ApprovalRemoteDataService {
         let loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName,
+                assignee: loginInfo.userName.toLowerCase(),
                 isAdmin: loginInfo.isAdmin,
                 operator: loginInfo.operator,
                 size: 100,

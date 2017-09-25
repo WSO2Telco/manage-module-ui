@@ -74,6 +74,7 @@ export class MainMenuComponent implements OnInit {
         }
 
         this._appCommonService.menuToggleStream.subscribe((flag) => this.isExpand = flag);
+        // this.authService.startChecking();
     }
 
     onClick(menu: any) {

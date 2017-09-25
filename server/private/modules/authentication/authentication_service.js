@@ -42,22 +42,18 @@ function authenticationService() {
 
             }
 
-
+            /** this for loop decide the operator field in the session storage*/
             for (const entry of roleResults.roles) {
                 if (!isAdmin) {
                     if (entry == 'manage-app-admin') {
                         operator = '';
                         isAdmin = true;
                     }
-                    if (entry == 'dialog-admin-role') {
-                        operator = 'DIALOG';
+                    if (entry == 'ivorycoast-admin-role') {
+                        operator = 'IvoryCoast';
                     }
-                    if (entry == 'operator1-admin-role') {
-                        operator = 'Operator1';
-
-                    }
-                    if (entry == 'operator2-admin-role') {
-                        operator = 'Operator2';
+                    if (entry == 'senegal-admin-role') {
+                        operator = 'Senegal';
                     }
                 }
             }

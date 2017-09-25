@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {LoginRemoteDataService} from '../../data-providers/login_remote-data.service';
 import {User, LoginResponse} from '../models/common-data-models';
-import {MessageService} from './message.service';
 
 
 @Injectable()
@@ -14,13 +13,17 @@ export class AuthenticationService {
 
     private timerHandle;
 
-    constructor(private _router: Router, private _remoteService: LoginRemoteDataService,
-                private message: MessageService) {
+    constructor(private _router: Router, private _remoteService: LoginRemoteDataService) {
         const _loginUserInfo = JSON.parse(sessionStorage.getItem('loginUserInfo'));
         this.loginUserInfo.next(_loginUserInfo);
         this.isInactive.next(false);
-        // window.onbeforeunload = this.show.bind(this);
     }
+
+    show() {
+        this.isInactive.next(true);
+        console.log('page reloaded');
+    }
+
 
     doLogin(userName: string, password: string, callback: Function) {
         const user: User = new User();
@@ -102,11 +105,10 @@ export class AuthenticationService {
         document.onkeypress = this.resetTimer.bind(this);
         document.onmousewheel = this.resetTimer.bind(this);
         document.onclick = this.resetTimer.bind(this);
-    }
-
-    show(){
-        this.isInactive.next(true);
-        console.log('page reloaded');
+        // window.onbeforeunload = (event) => {
+        //     this.doLogout();
+        //     return 1;
+        // };
     }
 
     stopChecking() {
@@ -120,6 +122,7 @@ export class AuthenticationService {
         document.onkeypress = null;
         document.onmousewheel = null;
         document.onclick = null;
+        // window.onbeforeunload = null;
     }
 
     private resetTimer() {
@@ -131,7 +134,7 @@ export class AuthenticationService {
         this.timerHandle = setTimeout(() => {
             this.stopChecking();
             this.isInactive.next(true);
-        }, 900000);
+        }, 10000);
     }
 
 }

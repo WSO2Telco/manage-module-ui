@@ -18,7 +18,6 @@ export class UserInactiveComponent implements OnInit {
     ngOnInit() {
         this._authenticationService.isInactive.subscribe((isInactive: boolean) => {
             if (isInactive) {
-                console.log('show');
                 this.showModal();
             }
         });

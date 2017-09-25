@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd, ActivatedRoute} from "@angular/router";
-import {ApprovalRemoteDataService} from "../../../data-providers/approval-remote-data.service";
-import {ToastyService, ToastOptions} from "ng2-toasty";
+import {Router, NavigationEnd} from "@angular/router";
+import {ApprovalRemoteDataService} from '../../../data-providers/approval-remote-data.service';
 import {MessageService} from "../../services/message.service";
-import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
     selector: 'app-breadcrumbs',
@@ -13,6 +11,7 @@ import {AuthenticationService} from "../../services/authentication.service";
 export class BreadcrumbsComponent implements OnInit {
 
     private activeView: any;
+    private approvals: boolean;
 
     constructor(private _router: Router,
                 private approval: ApprovalRemoteDataService,
@@ -20,10 +19,20 @@ export class BreadcrumbsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.approvals = false;
         this._router.events
             .filter((event: any) => event instanceof NavigationEnd)
             .subscribe((event: NavigationEnd) => {
                 this.activeView = event.url.replace('/', '').split('/');
+                if(this.activeView.length == 2){
+                    if(this.activeView[0] == 'approvals'){
+                        this.approvals = true
+                    }else {
+                        this.approvals = false;
+                    }
+                }else {
+                    this.approvals = false;
+                }
             });
     }
 

@@ -7,6 +7,10 @@
           tooltip="Reload"
           placement="bottom"
           (click)="onReload()"></span>
+    <span  *ngIf="approvals" class="animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh"
+           tooltip="Reload"
+           placement="bottom"
+           (click)="onReload()"></span>
     <span  *ngIf="!activeView" class="animated bounceInDown delay-1 refresh-icon glyphicon glyphicon-refresh"
            tooltip="Reload"
            placement="bottom"
