@@ -49,11 +49,19 @@ function authenticationService() {
                         operator = '';
                         isAdmin = true;
                     }
-                    if (entry == 'ivorycoast-admin-role') {
-                        operator = 'IvoryCoast';
-                    }
-                    if (entry == 'senegal-admin-role') {
-                        operator = 'Senegal';
+                }else {
+                    break;
+                }
+            }
+
+            if(!isAdmin){
+                for (const entry of roleResults.roles) {
+                    for(const item of config.allowedOperators ){
+                        const splited = item.split(':');
+                        if (entry == splited[0]) {
+                            operator = splited[1];
+                            break;
+                        }
                     }
                 }
             }

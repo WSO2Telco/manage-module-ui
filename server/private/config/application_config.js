@@ -26,7 +26,8 @@ var appConfig = {
     adminUserName : process.env.user || 'admin',
     adminPassword: process.env.password || 'admin',
     apiContext: 'api',
-    allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber','ivorycoast-admin-role','senegal-admin-role']
+    allowedRoles: process.env.wm_allowed_roles || ['admin', 'subscriber','ivorycoast-admin-role','senegal-admin-role', 'operator1-admin-role'],
+    allowedOperators: process.env.wm_allowed_operators || ['ivorycoast-admin-role:IvoryCoast', 'senegal-admin-role:Senegal', 'operator1-admin-role:Operator1']
 };
 
 module.exports = appConfig;
