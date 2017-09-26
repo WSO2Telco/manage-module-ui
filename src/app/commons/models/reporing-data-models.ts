@@ -53,3 +53,24 @@ export class Application {
     tier: string;
     uuid: string;
 }
+
+export class ApplicationHistory {
+    name: string;
+    status: string;
+    operatorApprovals: OperatorApprovals;
+    subscriptions: Subscriptions;
+}
+
+export class OperatorApprovals {
+    operatorName: string;
+    approvalStatus: string;
+}
+
+export class Subscriptions {
+    name: string;
+    version: string;
+    tier: string;
+    adminApprovalStatus: string;
+    operatorApprovals: OperatorApprovals;
+    lastUpdated: string;
+}
