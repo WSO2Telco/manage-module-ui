@@ -119,7 +119,7 @@ const _invokeGetApisRest = function (request) {
 };
 
 
-const _invokegetOperatorListRest = function () {
+const _invokegetOperatorListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -131,7 +131,7 @@ const _invokegetOperatorListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 

@@ -148,9 +148,9 @@ const _getApplications = function (request, reply) {
 
                 if (details['apiName']) {
                     if (request.payload.isAdmin) {
-                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName']);
+                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
                     } else {
-                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request.payload.operator);
+                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
                     }
                 } else {
                     reply(responseAdaptor(appTaskResult, appsDetails, null));

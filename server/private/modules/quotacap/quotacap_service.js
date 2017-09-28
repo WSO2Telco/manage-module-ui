@@ -147,7 +147,7 @@ function quotaCapService() {
             callback(getResponseError);
         };
 
-        quotaCapRestService.invokegetOperatorListRest().then(onSuccess, onFailture);
+        quotaCapRestService.invokegetOperatorListRest(request).then(onSuccess, onFailture);
 
     };
 

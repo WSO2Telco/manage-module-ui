@@ -19,12 +19,6 @@ export class AuthenticationService {
         this.isInactive.next(false);
     }
 
-    show() {
-        this.isInactive.next(true);
-        console.log('page reloaded');
-    }
-
-
     doLogin(userName: string, password: string, callback: Function) {
         const user: User = new User();
         user.userName = userName;
@@ -84,7 +78,7 @@ export class AuthenticationService {
     }
 
     validateSession() {
-        return true;
+        return this.isInactive;
     }
 
     reloadPage() {
@@ -105,10 +99,10 @@ export class AuthenticationService {
         document.onkeypress = this.resetTimer.bind(this);
         document.onmousewheel = this.resetTimer.bind(this);
         document.onclick = this.resetTimer.bind(this);
-        // window.onbeforeunload = (event) => {
-        //     this.doLogout();
-        //     return 1;
-        // };
+        window.onbeforeunload = (event) => {
+            this.stopChecking();
+            this.doLogout();
+        };
     }
 
     stopChecking() {
@@ -119,13 +113,18 @@ export class AuthenticationService {
 
         window.onload = null;
         document.onmousemove = null;
-        document.onkeypress = null;
+        document.onkeypress = this.showMessage.bind(this);
         document.onmousewheel = null;
-        document.onclick = null;
+        document.onclick = this.showMessage.bind(this);
         // window.onbeforeunload = null;
     }
 
-    private resetTimer() {
+    showMessage(){
+        this.doLogout();
+        this.isInactive.next(true);
+    }
+
+    resetTimer() {
         this.isInactive.next(false);
         if (this.timerHandle) {
             clearTimeout(this.timerHandle);
@@ -133,8 +132,7 @@ export class AuthenticationService {
         }
         this.timerHandle = setTimeout(() => {
             this.stopChecking();
-            this.isInactive.next(true);
-        }, 10000);
+        }, 900000);
     }
 
 }

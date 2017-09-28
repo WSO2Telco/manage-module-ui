@@ -22,7 +22,10 @@ const _invokeAddCategoryRest = function (request) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization,
+                'Content-Type': request.headers.content-type
+            },
             payload: request.payload
         };
     };
@@ -42,7 +45,10 @@ const _invokeAddTariffRest = function (request) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization,
+                'Content-Type': request.headers.content-type
+            },
             payload: request.payload
         };
     };
@@ -67,7 +73,10 @@ const _invokeAddCurrencyRest = function (request) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization,
+                'Content-Type': request.headers.content-type
+            },
             payload: request.payload
         };
     };
@@ -93,7 +102,10 @@ const _invokeAddRateCardRest = function (request) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization,
+                'Content-Type': request.headers.content-type
+            },
             payload: request.payload
         };
     };
@@ -101,17 +113,17 @@ const _invokeAddRateCardRest = function (request) {
     return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeAssignRatesRest = function (request, apiName, apiOperationId, operatorId, type) {
+const _invokeAssignRatesRest = function (request, type) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
         switch (type) {
             case 'admin':
-                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/operationrates';
+                return config.rateServiceURL + 'apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/operationrates';
                 break;
             case 'operator':
-                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
+                return config.rateServiceURL + 'operators/' + request.params.operatorId + '/apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/operatorrates';
                 break;
         }
     };
@@ -119,7 +131,10 @@ const _invokeAssignRatesRest = function (request, apiName, apiOperationId, opera
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization,
+                'Content-Type': request.headers.content-type
+            },
             payload: request.payload
         };
     };
@@ -133,9 +148,9 @@ const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            if(res.statusCode == 201){
+            if (res.statusCode == 201) {
                 deferred.resolve(payload);
-            }else {
+            } else {
                 deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }
         }
@@ -150,9 +165,9 @@ const _invokeGETRequest = function (deferred, endpointUrl, requestOptions) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            if(res.statusCode == 200){
+            if (res.statusCode == 200) {
                 deferred.resolve(payload);
-            }else {
+            } else {
                 deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }
         }
@@ -161,7 +176,7 @@ const _invokeGETRequest = function (deferred, endpointUrl, requestOptions) {
     return deferred.promise;
 }
 
-const _invokeGetTariffListRest = function () {
+const _invokeGetTariffListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -173,14 +188,14 @@ const _invokeGetTariffListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetCurrencyListRest = function () {
+const _invokeGetCurrencyListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -192,14 +207,14 @@ const _invokeGetCurrencyListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetRateTypeListRest = function () {
+const _invokeGetRateTypeListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -211,14 +226,14 @@ const _invokeGetRateTypeListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetCategoryListRest = function () {
+const _invokeGetCategoryListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -230,14 +245,14 @@ const _invokeGetCategoryListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetRateDefinitionListRest = function () {
+const _invokeGetRateDefinitionListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -249,14 +264,14 @@ const _invokeGetRateDefinitionListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetRateCardsRest = function () {
+const _invokeGetRateCardsRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -268,14 +283,14 @@ const _invokeGetRateCardsRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
     return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokeGetRateTaxListRest = function () {
+const _invokeGetRateTaxListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -287,7 +302,7 @@ const _invokeGetRateTaxListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -295,19 +310,19 @@ const _invokeGetRateTaxListRest = function () {
 
 };
 
-const _invokeGetApiOperationsRest = function (api) {
+const _invokeGetApiOperationsRest = function (request) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.rateServiceURL + 'apis/' + api + '/operations';
+        return config.rateServiceURL + 'apis/' + request.params.api + '/operations';
     };
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -315,23 +330,23 @@ const _invokeGetApiOperationsRest = function (api) {
 
 };
 
-const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, operatorId, type) {
+const _invokeGetAPIOperationRatesRest = function (request, type) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
         switch (type) {
             case 'admin':
-                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
+                return config.rateServiceURL + 'apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/ratedefinitions';
                 break;
             case 'operator':
-                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
+                return config.rateServiceURL + 'operators/' + request.params.operatorId + '/apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/ratedefinitions';
                 break;
             case 'admin-assign':
-                return config.rateServiceURL + 'apis/' + apiName + '/operations/' + apiOperationId + '/operationrates';
+                return config.rateServiceURL + 'apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/operationrates';
                 break;
             case 'operator-assign':
-                return config.rateServiceURL + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
+                return config.rateServiceURL + 'operators/' + request.params.operatorId + '/apis/' + request.params.apiName + '/operations/' + request.params.apiOperationId + '/operatorrates';
                 break;
         }
 
@@ -341,7 +356,7 @@ const _invokeGetAPIOperationRatesRest = function (apiName, apiOperationId, opera
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 

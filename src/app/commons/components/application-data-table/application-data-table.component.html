@@ -121,12 +121,12 @@
                     <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
                           class="action  approve material-icons"
                           [ngClass]="{'A':item.actionType =='APPROVE' }"
-                          (click)="item.isExpand = true; item.actionType = 'APPROVE' ">check</span>
+                          (click)="item.isExpand = true; item.actionType = 'APPROVE'; item.comment = ''">check</span>
 
                     <span tooltip="Reject" *ngIf="filter?.dataType?.dataCategory  == 'USER'"
                           class="action  reject material-icons"
                           [ngClass]="{'R':item.actionType =='REJECT' }"
-                          (click)="item.isExpand = true; item.actionType = 'REJECT' ">close</span>
+                          (click)="item.isExpand = true; item.actionType = 'REJECT'; item.comment = ''">close</span>
 
                     <span tooltip="Assign to Me" *ngIf="filter?.dataType?.dataCategory  == 'GROUP'"
                           class="action  assign material-icons"
@@ -211,9 +211,11 @@
                     <div class="col-sm-12" *ngIf="item.actionType !== 'MORE'">
                         <div class="row more-row">
                             <div class="col-xs-3 field-name">Comment <span>*</span></div>
-                            <div class="col-xs-9 field-value"><input [(ngModel)]="item.comment" type="text"
-                                                                     class="form-control"><span class="error"
-                                                                                                *ngIf="isCommentEmpty">Cannot Be Empty</span>
+                            <div class="col-xs-9 field-value">
+                                <input [(ngModel)]="item.comment"
+                                       type="text"
+                                       class="form-control">
+                                <span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span>
                             </div>
                         </div>
                     </div>

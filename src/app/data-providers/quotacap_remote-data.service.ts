@@ -68,7 +68,7 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getOperatorList() {
-        return this.http.get(this.apiEndpoints['getOperatorList'], this.options)
+        return this.http.get(this.apiEndpoints['getOperatorList'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -326,6 +326,16 @@ export class QuotacapRemoteDataService {
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    getOptions(): RequestOptions {
+        const token = this._authenticationService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 
 
