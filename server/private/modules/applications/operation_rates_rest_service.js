@@ -7,7 +7,7 @@ const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
 
-function _invokeOperationRatesRestAdmin(apiName) {
+function _invokeOperationRatesRestAdmin(apiName, request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (apiName) {
@@ -17,7 +17,7 @@ function _invokeOperationRatesRestAdmin(apiName) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -35,17 +35,17 @@ function _invokeOperationRatesRestAdmin(apiName) {
     return deferred.promise;
 }
 
-function _invokeOperationRatesRest(apiName, operator) {
+function _invokeOperationRatesRest(apiName, request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (apiName) {
-        return config.rateServiceURL + 'operators/' + operator + '/apis/' + apiName + '/operatorrates';
+        return config.rateServiceURL + 'operators/' + request.payload.operator + '/apis/' + apiName + '/operatorrates';
     };
 
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 

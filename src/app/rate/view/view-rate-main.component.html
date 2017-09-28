@@ -18,7 +18,7 @@
                                (typeaheadOnSelect)="onRateSelected()"
                                placeholder="Select the Rate">
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-4" *ngIf="isAdmin">
                         <a class="btn btn-primary" href="#/rate/create">Create New Rate</a>
                     </div>
                 </div>
@@ -81,14 +81,6 @@
                                     <tr>
                                         <td style="text-align: right">Tariff Def Rate:</td>
                                         <td>{{rateDefinition.tariff.tariffDefRate}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: right">Tariff SP Commission:</td>
-                                        <td>{{rateDefinition.tariff.tariffSPCommission}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="text-align: right">Tariff SP Commission:</td>
-                                        <td>{{rateDefinition.tariff.tariffSPCommission}}</td>
                                     </tr>
                                     <tr>
                                         <td style="text-align: right">Tariff SP Commission:</td>
@@ -174,14 +166,6 @@
                                                 <tr>
                                                     <td style="text-align: right">Tariff Def Rate:</td>
                                                     <td>{{item.tariff.tariffDefRate}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: right">Tariff SP Commission:</td>
-                                                    <td>{{item.tariff.tariffSPCommission}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: right">Tariff SP Commission:</td>
-                                                    <td>{{item.tariff.tariffSPCommission}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="text-align: right">Tariff SP Commission:</td>

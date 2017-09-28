@@ -26,14 +26,7 @@ const _invokeGetSubscribersRest = function () {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -54,14 +47,7 @@ const _invokeGetAppsRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -82,14 +68,7 @@ const _invokeGetApisRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -109,14 +88,7 @@ const _invokeGetWhitelistRest = function () {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 const _invokeAddNewWhitelist = function (request) {
@@ -136,14 +108,7 @@ const _invokeAddNewWhitelist = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 const _invokeRemoveFromWhitelistRest = function (request) {
@@ -162,15 +127,25 @@ const _invokeRemoveFromWhitelistRest = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.post(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if(res.statusCode == 200){
+                deferred.resolve(payload);
+            }else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
+
     return deferred.promise;
-};
+}
 
 module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,

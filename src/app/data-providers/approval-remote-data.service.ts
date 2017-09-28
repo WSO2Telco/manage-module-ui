@@ -128,12 +128,11 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
 
-                        // console.log('@@@@@ ' + JSON.stringify(result));
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -175,7 +174,7 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
@@ -216,12 +215,11 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
 
-                        //console.log('$$$$$$$ ' + JSON.stringify(result));
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -259,12 +257,10 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
-
-                        //console.log('$$$$$$$ ' + JSON.stringify(result));
 
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
@@ -331,6 +327,16 @@ export class ApprovalRemoteDataService {
 
     getFilteredResult(filter: ApplicationTaskFilter): void {
         this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
+    }
+
+    getOptions(): RequestOptions {
+        const token = this.authService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 
 }

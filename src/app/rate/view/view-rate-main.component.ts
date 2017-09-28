@@ -19,6 +19,7 @@ export class ViewRateMainComponent implements OnInit {
     private rateTax;
     private showRateDef: boolean;
     public isCollapsed: boolean;
+    private isAdmin: boolean
 
 
     private rateDefinitions;
@@ -33,6 +34,7 @@ export class ViewRateMainComponent implements OnInit {
         this.rateDefinitions = [];
         this.rates =  [];
         this.getRateCards();
+        this.isAdmin = this.authService.loginUserInfo.getValue().isAdmin;
     }
 
 

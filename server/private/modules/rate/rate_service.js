@@ -173,9 +173,9 @@ function rateService() {
 
         if (validateAddRequest(request)) {
             if (request.params.operatorId != 'null') {
-                rateRestService.invokeAssignRatesRest(request, request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
+                rateRestService.invokeAssignRatesRest(request, 'operator').then(onSuccess, onFailture);
             } else {
-                rateRestService.invokeAssignRatesRest(request, request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
+                rateRestService.invokeAssignRatesRest(request, 'admin').then(onSuccess, onFailture);
             }
         } else {
             callback({
@@ -245,7 +245,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetTariffListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetTariffListRest(request).then(onSuccess, onFailture);
     }
 
     /**
@@ -271,7 +271,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetCurrencyListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetCurrencyListRest(request).then(onSuccess, onFailture);
     }
 
     let _getRateTypeList = function (request, callback) {
@@ -292,7 +292,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetRateTypeListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetRateTypeListRest(request).then(onSuccess, onFailture);
     }
 
     let _getCategoryList = function (request, callback) {
@@ -313,7 +313,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetCategoryListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetCategoryListRest(request).then(onSuccess, onFailture);
     }
 
     let _getRateDefinitionList = function (request, callback) {
@@ -334,7 +334,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetRateDefinitionListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetRateDefinitionListRest(request).then(onSuccess, onFailture);
     }
 
     let _getTaxList = function (request, callback) {
@@ -355,7 +355,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetRateTaxListRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetRateTaxListRest(request).then(onSuccess, onFailture);
 
     }
 
@@ -364,9 +364,9 @@ function rateService() {
         let onSuccess = function (rateDefinitions) {
             rateDefinitionResult = rateDefinitions;
             if (request.params.operatorId != 'null') {
-                rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator-assign').then(onAssignSuccess, onAssignFailture);
+                rateRestService.invokeGetAPIOperationRatesRest(request, 'operator-assign').then(onAssignSuccess, onAssignFailture);
             } else {
-                rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin-assign').then(onAssignSuccess, onAssignFailture);
+                rateRestService.invokeGetAPIOperationRatesRest(request, 'admin-assign').then(onAssignSuccess, onAssignFailture);
             }
         };
 
@@ -398,9 +398,9 @@ function rateService() {
         };
 
         if (request.params.operatorId != 'null') {
-            rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'operator').then(onSuccess, onFailture);
+            rateRestService.invokeGetAPIOperationRatesRest(request, 'operator').then(onSuccess, onFailture);
         } else {
-            rateRestService.invokeGetAPIOperationRatesRest(request.params.apiName, request.params.apiOperationId, request.params.operatorId, 'admin').then(onSuccess, onFailture);
+            rateRestService.invokeGetAPIOperationRatesRest(request, 'admin').then(onSuccess, onFailture);
         }
     }
 
@@ -422,7 +422,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetApiOperationsRest(request.params.api).then(onSuccess, onFailture);
+        rateRestService.invokeGetApiOperationsRest(request).then(onSuccess, onFailture);
     }
 
     let _getRateCards = function (request, callback) {
@@ -443,7 +443,7 @@ function rateService() {
             });
         };
 
-        rateRestService.invokeGetRateCardsRest().then(onSuccess, onFailture);
+        rateRestService.invokeGetRateCardsRest(request).then(onSuccess, onFailture);
     }
 
     return {
