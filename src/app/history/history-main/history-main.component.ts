@@ -17,7 +17,7 @@ export class HistoryMainComponent implements OnInit {
 
     private filter: ApprovalHistoryFilter;
 
-    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "status","approvedOn"];
+    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "status","approvedOn", "App"];
 
     private approvalHistoryData: ApprovalHistoryDataset;
 

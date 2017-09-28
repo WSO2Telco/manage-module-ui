@@ -9,7 +9,11 @@
     </div>
 
     <div class="tbl-row" *ngFor="let item of dataSource">
-      <div class="tbl-cell" *ngFor="let field of fieldSet">{{item[field]}}</div>
+      <div class="tbl-cell" *ngFor="let field of fieldSet">
+        <span *ngIf="field == 'applicationName' "><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item[field]}}</a></span>
+        <span *ngIf="item[field] != null && field != 'applicationName' ">{{item[field]}}</span>
+        <span *ngIf="item[field] == null "><button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More </button></span>
+      </div>
     </div>
 
     <div class="no-rec-row tbl-row" *ngIf="dataSource.length == 0">

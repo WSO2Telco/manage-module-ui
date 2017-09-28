@@ -6,6 +6,7 @@ import {HistoryMainComponent} from './history-main/history-main.component';
 import {HistoryRoutes} from "./history.routes";
 import {HistoryFilterComponent} from './history-filter/history-filter.component';
 import {SharedModule} from "../shared/shared.module";
+import {ApplicationDetailComponent} from './application-detail/application-detail.component';
 
 @NgModule({
     imports: [
@@ -13,7 +14,7 @@ import {SharedModule} from "../shared/shared.module";
         HistoryRoutes,
         SharedModule
     ],
-    declarations: [SearchPanelComponent, SearchResultsComponent, HistoryMainComponent, HistoryFilterComponent]
+    declarations: [SearchPanelComponent, SearchResultsComponent, HistoryMainComponent, HistoryFilterComponent, ApplicationDetailComponent]
 })
 export class HistoryModule {
 }

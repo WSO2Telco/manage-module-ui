@@ -5,7 +5,7 @@ import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
     ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
-    Application
+    Application, ApplicationHistory
 } from "../commons/models/reporing-data-models";
 
 @Injectable()
@@ -29,6 +29,8 @@ export class ReportingRemoteDataService {
      */
     public ApplicationsProvider:Subject<Application[]> = new BehaviorSubject<Application[]>([])
 
+    public ApplicationDetailProvider:Subject<ApplicationHistory[]> = new BehaviorSubject<ApplicationHistory[]>([]);
+
     /**
      * Approval History stream
      * @type {BehaviorSubject<ApprovalHistory[]>}
@@ -50,6 +52,21 @@ export class ReportingRemoteDataService {
                 private http: Http,
                 private message: MessageService,
                 private slimLoadingBarService: SlimLoadingBarService) {
+    }
+
+    getApplicationDetail (id: number, callback: Function) {
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.options)
+            .map((response: Response) => response.json())
+            .subscribe(
+                (applications:ApplicationHistory[]) => {
+                    this.ApplicationDetailProvider.next(applications);
+                    callback(applications, true);
+                },
+                (error) => {
+                    this.message.error(error);
+                    callback(error, false);
+                }
+            );
     }
 
     getSubscribers() {
