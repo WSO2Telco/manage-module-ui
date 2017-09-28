@@ -11,8 +11,6 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 export class QuotacapRemoteDataService {
 
     private apiContext = 'api';
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
     private loginInfo;
 
 
@@ -39,7 +37,7 @@ export class QuotacapRemoteDataService {
      */
     getSubscribers(operatorName: string) {
         const data = {};
-        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.options)
+        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -54,7 +52,7 @@ export class QuotacapRemoteDataService {
      */
     getOperatorOfsubscriber(subscriberID: string) {
         const data = {};
-        return this.http.get(this.apiEndpoints['getOperatorOfsubscriber'] + '/' + subscriberID, this.options)
+        return this.http.get(this.apiEndpoints['getOperatorOfsubscriber'] + '/' + subscriberID, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -84,7 +82,7 @@ export class QuotacapRemoteDataService {
      */
     getApps(subscriberID: string) {
         const data = {id: subscriberID};
-        return this.http.post(this.apiEndpoints['getApps'], data, this.options)
+        return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -99,7 +97,7 @@ export class QuotacapRemoteDataService {
      */
     getApis(id: string) {
         const data = {id: id};
-        return this.http.post(this.apiEndpoints['getApis'], data, this.options)
+        return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -140,7 +138,7 @@ export class QuotacapRemoteDataService {
             toDate: toDate
         };
 
-        return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.options)
+        return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -165,7 +163,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -189,7 +187,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -214,7 +212,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -238,7 +236,7 @@ export class QuotacapRemoteDataService {
             'operator': operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.options)
+        return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -266,7 +264,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -293,7 +291,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -320,7 +318,7 @@ export class QuotacapRemoteDataService {
             operator: operatorname
         };
 
-        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.options)
+        return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;

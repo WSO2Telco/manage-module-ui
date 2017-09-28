@@ -24,11 +24,6 @@ module.exports = [
     },
     {
         method: 'POST',
-        path: '/api/quotacap/removefromwhitelist',
-        handler: quotaCapService.removeFromWhitelist
-    },
-    {
-        method: 'POST',
         path: '/api/quotacap/getquotalimitinfo',
         handler: quotaCapService.getQuotaLimitInfo
     },

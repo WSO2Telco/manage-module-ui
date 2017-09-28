@@ -49,7 +49,7 @@ function quotaCapService() {
             callback(getResponseError);
         };
 
-        quotaCapRestService.invokeGetSubscribersRest(request.params.operator).then(onSuccess, onFailture);
+        quotaCapRestService.invokeGetSubscribersRest(request).then(onSuccess, onFailture);
 
     };
 
@@ -63,7 +63,7 @@ function quotaCapService() {
             callback(getResponseError);
         };
 
-        quotaCapRestService.invokegetOperatorOfsubscriber(request.params.subscriberID).then(onSuccess, onFailture);
+        quotaCapRestService.invokegetOperatorOfsubscriber(request).then(onSuccess, onFailture);
 
     };
 
@@ -169,30 +169,12 @@ function quotaCapService() {
         }
     };
 
-    let _removeFromWhitelist = function (request, callback) {
-
-        let onSuccess = function (getResponse) {
-            callback(getResponse);
-        };
-
-        let onFailture = function (getResponseError) {
-            callback(getResponseError);
-        };
-
-        if (validateRemoveWhitelistRequest(request)) {
-            quotaCapRestService.invokeRemoveFromWhitelistRest(request).then(onSuccess, onFailture);
-        } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
-        }
-    };
-
     return {
         getSubscribers: _getSubscribers,
         getApps: _getApps,
         getApis: _getApis,
         getQuotaLimitInfo: _getQuotaLimitInfo,
         addNewQuotaLimit: _addNewQuotaLimit,
-        removeFromWhitelist: _removeFromWhitelist,
         getValidityPeriod: _getValidityPeriod,
         getOperatorList: _getOperatorList,
         getOperatorOfsubscriber: _getOperatorOfsubscriber

@@ -10,56 +10,42 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetSubscribersRest = function (operator) {
+const _invokeGetSubscribersRest = function (request) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.quotaServiceUrl + 'getSubscribersByOperator?operatorName=' + operator;
+        return config.quotaServiceUrl + 'getSubscribersByOperator?operatorName=' + request.params.operator;
     };
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
-const _invokegetOperatorOfsubscriber = function (subscriberID) {
+const _invokegetOperatorOfsubscriber = function (request) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName=' + subscriberID;
+        return config.quotaServiceUrl + 'getOperatorsBySubscriber?subscriberName=' + request.params.subscriberID;
     };
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -75,19 +61,14 @@ const _invokeGetAppsRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization
+            },
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -103,19 +84,14 @@ const _invokeGetApisRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization
+            },
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -135,14 +111,7 @@ const _invokegetOperatorListRest = function (request) {
         };
     };
 
-    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -158,19 +127,14 @@ const _invokeGetQoutalistRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization
+            },
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -186,19 +150,14 @@ const _invokegetValidityPeriodRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization
+            },
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-        }
-    });
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -214,46 +173,50 @@ const _invokeAddNewQuotaLimit = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {
+                'Authorization': request.headers.authorization
+            },
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+};
+
+const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.post(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if (res.statusCode == 200) {
+                deferred.resolve(payload);
+            } else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
+
     return deferred.promise;
-};
+}
 
-const _invokeRemoveFromWhitelistRest = function (request) {
+const _invokeGETRequest = function (deferred, endpointUrl, requestOptions) {
 
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'RemoveFromWhiteList/' + request.payload.msisdn;
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {},
-        };
-    };
-
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    wreck.get(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if (res.statusCode == 200) {
+                deferred.resolve(payload);
+            } else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
+
     return deferred.promise;
-};
+}
+
 
 module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,
@@ -261,7 +224,6 @@ module.exports = {
     invokeGetAppsRest: _invokeGetAppsRest,
     invokeGetApisRest: _invokeGetApisRest,
     invokeAddNewQuotaLimit: _invokeAddNewQuotaLimit,
-    invokeRemoveFromWhitelistRest: _invokeRemoveFromWhitelistRest,
     invokeGetQoutalistRest: _invokeGetQoutalistRest,
     invokegetValidityPeriodRest: _invokegetValidityPeriodRest,
     invokegetOperatorListRest: _invokegetOperatorListRest
