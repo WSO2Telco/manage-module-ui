@@ -177,7 +177,7 @@ const _getApplications = function (request, reply) {
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;
             appDetailsPromises = applicationTasksResult.data.map((appTask) => {
-                return applicationDetailsREST.Invoke(appTask.id);
+                return applicationDetailsREST.Invoke(appTask.id, request);
             });
 
             Q.all(appDetailsPromises).then(onAppDetailSuccess, onAppDetailsError);
@@ -192,7 +192,7 @@ const _getApplications = function (request, reply) {
     };
 
     if (validateApplicationRequest(request)) {
-        applicationREST.Invoke(request.payload).then(onApplicationSuccess, onApplicationError);
+        applicationREST.Invoke(request).then(onApplicationSuccess, onApplicationError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -314,7 +314,7 @@ const _assignApplicationTaskToUser = function (request, reply) {
     };
 
     if (validateRequest(request)) {
-        applicationAssignREST.Invoke(request.payload).then(onAssignSuccess, onAssignFail);
+        applicationAssignREST.Invoke(request).then(onAssignSuccess, onAssignFail);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -341,7 +341,7 @@ const _approveApplicationCreation = function (request, reply) {
 
     let onRefIdSuccess = function (result) {
         let param = request.payload;
-        applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
+        applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
     };
 
     let onRefIdError = function (error) {
@@ -364,12 +364,12 @@ const _approveApplicationCreation = function (request, reply) {
         if (param.role) {
             /** if hub admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
-            applicationDetailsREST.invokeGetWorkflowRefId(param.taskId).then(onRefIdSuccess, onRefIdError);
+            applicationDetailsREST.invokeGetWorkflowRefId(request, param.taskId).then(onRefIdSuccess, onRefIdError);
         } else {
             /** if operator admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
-            applicationCompleteRest.invokeApplicationCompleteTask(param).then(onApproveSuccess, onApproveError);
+            applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
         }
 
     } else {
@@ -409,7 +409,7 @@ const _approveSubscriptionCreation = function (request, reply) {
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
             param.selectedTier = null;
         }
-        subscriptionCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
+        subscriptionCompleteRest.Invoke(request).then(onApproveSuccess, onApproveError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -430,7 +430,7 @@ const _getGraphData = function (request, reply) {
             reply(error);
         };
 
-        applicationHistoryREST.Invoke(request.params.type, request.params.user).then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type, request.params.user,request).then(onSuccess, onError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
