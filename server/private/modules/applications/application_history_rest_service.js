@@ -5,7 +5,7 @@ const config = require('../../config/application_config');
 const wreck = require('wreck');
 const moment = require('moment');
 
-const historyREST = function (type, user) {
+const historyREST = function (type, user, request) {
 
     let last6Months = [];
     let promiseCol = [];
@@ -33,7 +33,7 @@ const historyREST = function (type, user) {
             rejectUnauthorized: false,
             json: true,
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName + ':' + config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };

@@ -4,7 +4,7 @@ const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
 
-function invokeApplicationDetailRest(taskId) {
+function invokeApplicationDetailRest(taskId, request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (taskId) {
@@ -16,7 +16,7 @@ function invokeApplicationDetailRest(taskId) {
             rejectUnauthorized: false,
             json: true,
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName + ':' + config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };
@@ -31,7 +31,7 @@ function invokeApplicationDetailRest(taskId) {
     return deferred.promise;
 }
 
-function _invokeGetWorkflowRefId(taskId) {
+function _invokeGetWorkflowRefId(request, taskId) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (taskId) {
@@ -43,7 +43,7 @@ function _invokeGetWorkflowRefId(taskId) {
             rejectUnauthorized: false,
             json: true,
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName + ':' + config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };
