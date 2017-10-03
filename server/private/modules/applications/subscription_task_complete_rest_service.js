@@ -5,7 +5,7 @@ const config = require('../../config/application_config');
 const wreck = require('wreck');
 const logger = require('nodejslogger')
 
-function invokeSubscriptionCompleteTask(params) {
+function invokeSubscriptionCompleteTask(request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (params) {
@@ -204,12 +204,12 @@ function invokeSubscriptionCompleteTask(params) {
             json: true,
             payload: getPayload(params),
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName + ':' + config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };
 
-    wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
+    wreck.post(getEndpointUrl(request.payload), getRequestOptions(request.payload), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {

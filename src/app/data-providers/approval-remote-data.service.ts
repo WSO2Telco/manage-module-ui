@@ -285,7 +285,7 @@ export class ApprovalRemoteDataService {
             param.assignee = loginInfo.userName;
             param.taskId = taskId;
 
-            return this.http.post(this.apiEndpoints['assign'], param, this.options)
+            return this.http.post(this.apiEndpoints['assign'], param, this.getOptions())
                 .map((response: Response) => {
                     this.modifiedApplicationTaskIDs.push(taskId);
                     return response.json();
@@ -302,7 +302,7 @@ export class ApprovalRemoteDataService {
      * this function will be called when we approve a application
      * */
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
-        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.options)
+        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     }
@@ -313,7 +313,7 @@ export class ApprovalRemoteDataService {
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
 
        // console.log(JSON.stringify(param));
-        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
+        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     }

@@ -5,7 +5,7 @@ import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from "../
 import {ApprovalRemoteDataService} from "./approval-remote-data.service";
 import {ApplicationTask, ApplicationTaskResult} from "../commons/models/application-data-models";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
-import {AuthenticationService} from "../commons/services/authentication.service";
+import {AuthenticationService} from '../commons/services/authentication.service';
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -70,7 +70,7 @@ export class DashboardRemoteDataService {
         param.assignee = 'admin';
         param.candidateGroups = 'Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin';
 
-        return this.http.post(this.apiEndpoints['dashboardData'], param, this.options)
+        return this.http.post(this.apiEndpoints['dashboardData'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     };
@@ -89,7 +89,7 @@ export class DashboardRemoteDataService {
         this.slimLoadingBarService.start();
 
         const user = this.authenticationService.loginUserInfo.getValue().userName;
-        this.http.get(this.apiEndpoints['graph'] + '/' + type + '/' + user, this.options)
+        this.http.get(this.apiEndpoints['graph'] + '/' + type + '/' + user, this.getOptions())
             .map((response: Response) => response.json())
             .subscribe(
                 (graphData) => {
@@ -105,6 +105,16 @@ export class DashboardRemoteDataService {
                     this.slimLoadingBarService.complete();
                 }
             );
+    }
+
+    getOptions(): RequestOptions {
+        const token = this.authenticationService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 
 }
