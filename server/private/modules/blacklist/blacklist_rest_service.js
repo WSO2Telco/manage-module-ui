@@ -44,7 +44,7 @@ const _invokeGetBlackListNumbers = function (id) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (id) {
-        return config.blacklistPerApiURL + '/' + id;
+        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + id;
     }
 
     let getRequestOptions = function () {
@@ -73,7 +73,7 @@ const _invokeRemoveBlackListNumber = function (request, msisdn) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.removeBlacklistURL + '/' + msisdn;
+        return config.blacklistWhitelistServiceURL + 'RemoveFromBlacklist/' + msisdn;
     };
 
     let getRequestOptions = function () {
@@ -108,7 +108,7 @@ const _invokeAddNewBlackListNumber = function (request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.addNewToBlacklistURL;
+        return config.blacklistWhitelistServiceURL + 'Blacklist';
     };
 
     let getRequestOptions = function () {

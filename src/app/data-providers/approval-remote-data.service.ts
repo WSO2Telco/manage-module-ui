@@ -48,7 +48,8 @@ export class ApprovalRemoteDataService {
         search: this.apiContext + '/applications/search',
         assign: this.apiContext + '/applications/assign',
         approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
-        approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
+        approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation',
+        getCreditPlan: this.apiContext + '/applications/getcreditplan'
     };
 
     private actionMap = {
@@ -93,11 +94,11 @@ export class ApprovalRemoteDataService {
     private getFilteredObservable(appTask: ApplicationTask[], filter: ApplicationTaskFilter): ApplicationTask[] {
         if (appTask && filter) {
             return appTask
-                .filter((task: ApplicationTask) => filter.apiNames.length ==0 || filter.apiNames.indexOf(task.apiName) >= 0)
+                .filter((task: ApplicationTask) => filter.apiNames.length == 0 || filter.apiNames.indexOf(task.apiName) >= 0)
                 .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
                 .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
                 .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
-                .filter((task: ApplicationTask) => filter.subscribers.length ==0 || filter.subscribers.indexOf(task.subscriber) >= 0)
+                .filter((task: ApplicationTask) => filter.subscribers.length == 0 || filter.subscribers.indexOf(task.subscriber) >= 0)
                 .reduce((acc, curr) => {
                     acc.push(curr);
                     return acc;
@@ -312,7 +313,7 @@ export class ApprovalRemoteDataService {
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
 
-       // console.log(JSON.stringify(param));
+        // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
@@ -323,6 +324,19 @@ export class ApprovalRemoteDataService {
         this.getUserAppSubscriptionTasks();
         this.getUserGroupApplicationTasks();
         this.getUserGroupAppSubscriptionTask();
+    }
+
+    getCreditPlan() {
+        return this.http.get(this.apiEndpoints['getCreditPlan'], this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Unable to Load Credit Plan',
+                error: error.json()
+            }));
     }
 
     getFilteredResult(filter: ApplicationTaskFilter): void {
