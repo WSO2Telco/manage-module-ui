@@ -4,7 +4,8 @@
         <div class="col-lg-12">
             <div class="form-container newtypeContainer">
 
-                <form class="form-horizontal" #addCategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(addCategoryForm)">
+                <form class="form-horizontal" #addCategoryForm="ngForm" novalidate
+                      (ngSubmit)="onSubmit(addCategoryForm)">
 
                     <div class="form-group">
                         <label class="control-label col-sm-3">{{type}} Name <span>*</span></label>
@@ -39,15 +40,16 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">{{type}} Description<span>*</span></label>
                         <div class="col-sm-4">
-                <textarea rows="4" cols="50" class="form-control"
-                          type="text"
-                          autocomplete="off"
-                          placeholder="Description"
-                          name="description"
-                          #descriptionRef="ngModel"
-                          required
-                          [(ngModel)]="description">
-                </textarea>
+                            <textarea rows="4" cols="50" class="form-control"
+                                      type="text"
+                                      autocomplete="off"
+                                      placeholder="Description"
+                                      name="description"
+                                      #descriptionRef="ngModel"
+                                      required
+                                      [(ngModel)]="description"
+                                      (input)="descriptionInvalid($event.target.value)">
+                            </textarea>
                             <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                         </div>
                     </div>

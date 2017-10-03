@@ -65,9 +65,7 @@ export class TariffComponent implements OnInit {
 
 
     onSubmit(addTariffForm) {
-        this.clearErrors();
-
-        if (this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
+        if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
             !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision) {
             this.rateService.addTariff(this.tariff, (response, status) => {
                 if (status) {
@@ -185,6 +183,23 @@ export class TariffComponent implements OnInit {
         } else {
             this.isNameError = false;
             this.nameError = '';
+        }
+    }
+
+    /**
+     * if the description is invalid
+     * @param description
+     */
+    descriptionInvalid(description) {
+        if (description.length == 0) {
+            this.isDescriptionError = true;
+            this.descriptionError = 'Description can not be empty';
+        } else if(description.length > 45) {
+            this.isDescriptionError = true;
+            this.descriptionError = 'Ony 45 Characters Allowed';
+        }else{
+            this.isDescriptionError = false;
+            this.descriptionError = '';
         }
     }
 

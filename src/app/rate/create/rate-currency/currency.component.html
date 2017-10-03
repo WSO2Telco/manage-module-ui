@@ -34,7 +34,8 @@
                                        placeholder="Description"
                                        [(ngModel)]="currencydesc"
                                        name="currencydesc"
-                                       required>
+                                       required
+                                       (input)="descriptionInvalid($event.target.value)">
                              </textarea>
                             <span class="error" *ngIf="isCurrencyDescError">{{currencyDescError}}</span>
                         </div>

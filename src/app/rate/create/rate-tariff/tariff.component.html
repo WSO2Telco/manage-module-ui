@@ -32,7 +32,8 @@
                                       name="description"
                                       #descriptionRef="ngModel"
                                       required
-                                      [(ngModel)]="tariff.tariffDescription">
+                                      [(ngModel)]="tariff.tariffDescription"
+                                      (input)="descriptionInvalid($event.target.value)">
                             </textarea>
                                     <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                                 </div>

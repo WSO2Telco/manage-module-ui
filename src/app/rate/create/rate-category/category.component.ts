@@ -53,11 +53,10 @@ export class CategoryComponent implements OnInit {
      * @param addCategoryForm
      */
     onSubmit(addCategoryForm) {
-        this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
-        if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0) {
-           // console.log('form submitted : ' + this.name + '  ' + this.code + '  ' + this.description);
-            this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response, status) => {
+        if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0 && !this.isDescriptionError
+            && !this.isNameError && !this.isCodeError) {
+           this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
@@ -145,6 +144,23 @@ export class CategoryComponent implements OnInit {
         this.code = '';
         this.description = '';
         this.clearErrors();
+    }
+
+    /**
+     * if the description is invalid
+     * @param description
+     */
+    descriptionInvalid(description) {
+        if (description.length == 0) {
+            this.isDescriptionError = true;
+            this.descriptionError = 'Description can not be empty';
+        } else if(description.length > 45) {
+            this.isDescriptionError = true;
+            this.descriptionError = 'Ony 45 Characters Allowed';
+        }else{
+            this.isDescriptionError = false;
+            this.descriptionError = '';
+        }
     }
 
 }
