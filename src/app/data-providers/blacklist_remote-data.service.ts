@@ -4,14 +4,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {ApiList, ServerResponse} from '../commons/models/common-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
 
 @Injectable()
 export class BlackListRemoteDataService {
     private apiContext = 'api';
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
     private loginInfo;
 
     private apiEndpoints: Object = {
@@ -31,10 +28,9 @@ export class BlackListRemoteDataService {
      */
     getApiList() {
         // console.log('hit in the rate remote data service');
-        return this.http.get(this.apiEndpoints['getApis'], this.options)
+        return this.http.get(this.apiEndpoints['getApis'], this.getOptions())
             .map((response: Response) => {
             const result = response.json();
-            //console.log( result);
             return result;
              })
             .catch((error: Response) => Observable.throw(error.json().message));
@@ -45,10 +41,10 @@ export class BlackListRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getBlackListNumberList(id) {
+    getBlackListNumberList(id: string) {
         // console.log('hit the blacklist remote number data service');
 
-        return this.http.post(this.apiEndpoints['getApis'] + '/' + id, this.options)
+        return this.http.post(this.apiEndpoints['getApis'] + '/' + id, this.getOptions())
             .map((response: Response) => {
             const result = response.json();
             return result;
@@ -62,14 +58,14 @@ export class BlackListRemoteDataService {
      * @param mssidns
      * @returns {Observable<R>}
      */
-    removeFromBlackList(mssidn, apiId) {
+    removeFromBlackList(mssidn: string, apiId: string) {
             const data = {
                 'apiId': apiId
             };
             // console.log('hit in the BlackList remove data service');
             // console.log(JSON.stringify(data));
             // console.log(this.apiEndpoints['removeBlackListNumber'] + '/' , data);
-            return this.http.post(this.apiEndpoints['removeBlackListNumber'] + '/' + mssidn, data, this.options)
+            return this.http.post(this.apiEndpoints['removeBlackListNumber'] + '/' + mssidn, data, this.getOptions())
                 .map((response: Response) => {
                     const result = response.json();
                     return result;
@@ -93,12 +89,23 @@ export class BlackListRemoteDataService {
         };
         // console.log(JSON.stringify(data));
         // console.log('hit in the blackList Number/s add remote data service');
-        return this.http.post(this.apiEndpoints['addBlackListNumbers'], data, this.options)
+        return this.http.post(this.apiEndpoints['addBlackListNumbers'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().messages));
+    }
+
+
+    getOptions(): RequestOptions {
+        const token = this._authenticationService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 }
 

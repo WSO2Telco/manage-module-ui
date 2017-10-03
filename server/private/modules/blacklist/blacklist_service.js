@@ -36,7 +36,7 @@ function blacklistService() {
             callback(getResponseError);
         };
 
-        blackListRestService.invokeGetApiListRest().then(onSuccess, onFailture);
+        blackListRestService.invokeGetApiListRest(request).then(onSuccess, onFailture);
 
     };
 
@@ -56,7 +56,7 @@ function blacklistService() {
             callback(getResponseError);
         };
 
-        blackListRestService.invokeGetBlackListNumberRest(request.params.id).then(onSuccess, onFailure);
+        blackListRestService.invokeGetBlackListNumberRest(request).then(onSuccess, onFailure);
     };
 
     /**

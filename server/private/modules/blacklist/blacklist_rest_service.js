@@ -13,7 +13,7 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetApiListRest = function () {
+const _invokeGetApiListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -25,7 +25,7 @@ const _invokeGetApiListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -39,19 +39,19 @@ const _invokeGetApiListRest = function () {
     return deferred.promise;
 };
 
-const _invokeGetBlackListNumbers = function (id) {
+const _invokeGetBlackListNumbers = function (request) {
 
     let deferred = Q.defer();
 
-    let getEndpointUrl = function (id) {
-        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + id;
+    let getEndpointUrl = function () {
+        return config.blacklistPerApiURL + '/' + request.params.id;
     }
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers}
         };
     };
 
@@ -79,7 +79,7 @@ const _invokeRemoveBlackListNumber = function (request, msisdn) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers},
             payload: request.payload
         };
     };
@@ -114,7 +114,7 @@ const _invokeAddNewBlackListNumber = function (request) {
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
