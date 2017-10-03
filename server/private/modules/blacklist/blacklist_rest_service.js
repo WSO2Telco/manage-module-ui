@@ -43,28 +43,19 @@ const _invokeGetBlackListNumbers = function (request) {
 
     let deferred = Q.defer();
 
-    let getEndpointUrl = function () {
-        return config.blacklistPerApiURL + '/' + request.params.id;
+    let getEndpointUrl = function (id) {
+        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + id;
     }
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {'Authorization': request.headers}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
-    wreck.post(getEndpointUrl(id), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-
-        }
-    });
-
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(request.params.id), getRequestOptions());
 };
 
 
@@ -73,28 +64,18 @@ const _invokeRemoveBlackListNumber = function (request, msisdn) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'RemoveFromBlacklist/' + msisdn;
+        return config.blacklistWhitelistServiceURL + '/' + msisdn;
     };
 
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {'Authorization': request.headers},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(msisdn), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-
-        }
-    });
-
-    return deferred.promise;
-
+    return _invokePOSTRequest(deferred, getEndpointUrl(msisdn), getRequestOptions());
 };
 
 /**
@@ -119,16 +100,26 @@ const _invokeAddNewBlackListNumber = function (request) {
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+
+};
+
+const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.post(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if (res.statusCode == 200) {
+                deferred.resolve(payload);
+            } else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
-    return deferred.promise;
 
-};
+    return deferred.promise;
+}
 
 
 module.exports = {

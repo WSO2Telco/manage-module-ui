@@ -7,7 +7,7 @@ const  blacklistService = require('./blacklist_service');
 module.exports = [
     {
         method: 'GET',
-        path: '/api/blacklist/list',
+        path: '/api/blacklist',
         handler: blacklistService.getApiList
     },
     {
