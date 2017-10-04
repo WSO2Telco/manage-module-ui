@@ -47,7 +47,10 @@ var appConfig = {
     /**the key value pair shows the allowed role and its related user. If you are adding new user with now role update this field,
      * if not the quota service will fail to execute
      * */
-    allowedOperators: process.env.wm_allowed_operators || ['ivorycoast-admin-role:IvoryCoast', 'senegal-admin-role:Senegal', 'operator1-admin-role:Operator1']
+    allowedOperators: process.env.wm_allowed_operators || ['ivorycoast-admin-role:IvoryCoast', 'senegal-admin-role:Senegal', 'operator1-admin-role:Operator1'],
+    /**to enable disable rate, quota in the view use true or false
+     */
+    billingEnable: process.env.wm_billing_enable || false
 };
 
 module.exports = appConfig;

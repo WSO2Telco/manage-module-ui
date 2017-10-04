@@ -30,7 +30,6 @@ export class AuthenticationService {
                         loginInfo.start = new Date().getTime();
                         this.loginUserInfo.next(loginInfo);
                         sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
-                        // this.startChecking();
                         this._router.navigate(['home']);
                     } else {
                         this._remoteService.logout(loginInfo.userName);

@@ -58,4 +58,26 @@ export class AdminGuard implements CanActivate {
     }
 }
 
+@Injectable()
+export class BillingGuard implements CanActivate {
+
+    constructor(private _authenticationService: AuthenticationService, private _router: Router) {
+    }
+
+    canActivate() {
+        if (this._authenticationService.isLoggedIn()) {
+            if (this._authenticationService.loginUserInfo.getValue().billing) {
+                return true;
+            } else {
+                this._router.navigate(['home']);
+                return false;
+            }
+
+        } else {
+            this._router.navigate(['login']);
+            return false;
+        }
+    }
+}
+
 

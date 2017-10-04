@@ -1,5 +1,5 @@
 import {RouterModule} from "@angular/router";
-import {AppGuard, LoginGuard, AdminGuard} from "./app.guard";
+import {AppGuard, LoginGuard, AdminGuard, BillingGuard} from "./app.guard";
 
 const routes = [
   {
@@ -20,12 +20,12 @@ const routes = [
   {
     path: 'rate',
     loadChildren: 'app/rate/rate.module#RateModule',
-    canActivate : [AppGuard]
+    canActivate : [AppGuard, BillingGuard]
   },
   {
     path: 'quotacap',
     loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
-    canActivate : [AppGuard]
+    canActivate : [AppGuard, BillingGuard]
   },
   {
     path: 'whitelist',

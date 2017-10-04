@@ -14,6 +14,7 @@ export class MainMenuComponent implements OnInit {
     private selectedMenu: MenuItem;
     private isExpand = false;
     private isAdmin: boolean;
+    private isBilling: boolean;
 
     private menuSourceIfAdmin: MenuItem[] = [
         {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
@@ -44,6 +45,26 @@ export class MainMenuComponent implements OnInit {
 
     ];
 
+    private menuSourceIfAdminBillingDissable: MenuItem[] = [
+        {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
+        {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
+        {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
+        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
+        {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
+        {id: 6, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase'},
+        {id: 7, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board'},
+        {id: 8, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns'},
+        {id: 9, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
+    ];
+
+    private menuSourceIfOpBillingDissable: MenuItem[] = [
+        {id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home'},
+        {id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment'},
+        {id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps'},
+        {id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions'},
+        {id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history'},
+    ];
+
     constructor(private _appCommonService: AppCommonService,
                 private _router: Router,
                 private authService: AuthenticationService) {
@@ -55,22 +76,47 @@ export class MainMenuComponent implements OnInit {
 
         if (loginInfo.isAdmin) {
             this.isAdmin = true;
-            this._router.events.subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    this.selectedMenu = this.menuSourceIfAdmin.filter((menu) => menu.route == event.url)[0];
-                }
-            });
+            if(loginInfo.billing){
+                this.isBilling = true;
+                this._router.events.subscribe((event) => {
+                    if (event instanceof NavigationEnd) {
+                        this.selectedMenu = this.menuSourceIfAdmin.filter((menu) => menu.route == event.url)[0];
+                    }
+                });
 
-            this.selectedMenu = this.menuSourceIfAdmin[0];
+                this.selectedMenu = this.menuSourceIfAdmin[0];
+            }else {
+                this.isBilling = false;
+                this._router.events.subscribe((event) => {
+                    if (event instanceof NavigationEnd) {
+                        this.selectedMenu = this.menuSourceIfAdminBillingDissable.filter((menu) => menu.route == event.url)[0];
+                    }
+                });
+
+                this.selectedMenu = this.menuSourceIfAdminBillingDissable[0];
+            }
+
         } else {
             this.isAdmin = false;
-            this._router.events.subscribe((event) => {
-                if (event instanceof NavigationEnd) {
-                    this.selectedMenu = this.menuSourceIfOp.filter((menu) => menu.route == event.url)[0];
-                }
-            });
+            if(loginInfo.billing){
+                this.isBilling = true;
+                this._router.events.subscribe((event) => {
+                    if (event instanceof NavigationEnd) {
+                        this.selectedMenu = this.menuSourceIfOp.filter((menu) => menu.route == event.url)[0];
+                    }
+                });
 
-            this.selectedMenu = this.menuSourceIfOp[0];
+                this.selectedMenu = this.menuSourceIfOp[0];
+            }else {
+                this.isBilling = false;
+                this._router.events.subscribe((event) => {
+                    if (event instanceof NavigationEnd) {
+                        this.selectedMenu = this.menuSourceIfOpBillingDissable.filter((menu) => menu.route == event.url)[0];
+                    }
+                });
+
+                this.selectedMenu = this.menuSourceIfOpBillingDissable[0];
+            }
         }
 
         this._appCommonService.menuToggleStream.subscribe((flag) => this.isExpand = flag);
