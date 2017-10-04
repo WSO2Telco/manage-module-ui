@@ -17,6 +17,11 @@ module.exports = [
         handler : ApplicationService.getGraphData
     },
     {
+        method : 'GET',
+        path : '/api/applications/getcreditplan',
+        handler : ApplicationService.getCreditPlan
+    },
+    {
         method: 'POST',
         path: '/api/applications/assign',
         handler: ApplicationService.assignApplicationTaskToUser

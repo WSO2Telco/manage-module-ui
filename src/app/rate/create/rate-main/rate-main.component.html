@@ -83,7 +83,7 @@
                                       [(ngModel)]="rateDefDescription"
                                       (input)="descriptionEmpty($event.target.value)">
                             </textarea>
-                        <span class="error" *ngIf="isDescriptionEmpty">Description can not be empty</span>
+                        <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                     </div>
                 </div>
 
@@ -120,7 +120,7 @@
                                #rateTypeRef="ngModel"
                                class="form-control"
                                required
-                               (typeaheadOnSelect)= "isRateTypeValid()"
+                               (typeaheadOnSelect)="isRateTypeValid()"
                                (input)="isRateTypeValid()">
                         <span class="error" *ngIf="isRateTypeError">{{rateTypeError}}</span>
                     </div>
@@ -189,7 +189,7 @@
                                   (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
-                <div class="form-group" >
+                <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2 btnContainer">
                         <button type="submit" class="btn btn-primary animated fadeIn">Add</button>&nbsp;
                         <a class="btn btn-warning" (click)="reloadPage()">Clear</a>

@@ -82,6 +82,7 @@ export class ApprovalHelperService {
             param.user = completedByUser;
             param.taskType = 'application';
             param.role = role;
+            param.creditPlan = appTask.creditPlan;
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {

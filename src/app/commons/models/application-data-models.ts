@@ -18,6 +18,7 @@ export class ApplicationTask {
     applicationDescription: string;
     operators: string;
     tier: string;
+    creditPlan: string;
     allTiers: string[];
     userName: string;
     isModified: boolean;
@@ -91,6 +92,7 @@ export class ApproveApplicationCreationTaskParam {
     status: 'APPROVED' | 'REJECTED';
     description: string;
     role: boolean;
+    creditPlan: string;
 
     toString() {
         return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;

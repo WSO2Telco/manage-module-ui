@@ -40,7 +40,7 @@ function whitelistService() {
             callback(getResponseError);
         };
 
-        whiteListRestService.invokeGetSubscribersRest( ).then(onSuccess, onFailture);
+        whiteListRestService.invokeGetSubscribersRest(request).then(onSuccess, onFailture);
 
     };
 
@@ -90,7 +90,7 @@ function whitelistService() {
             callback(getResponseError);
         };
 
-        whiteListRestService.invokeGetWhitelistRest( ).then(onSuccess, onFailture);
+        whiteListRestService.invokeGetWhitelistRest(request).then(onSuccess, onFailture);
 
     };
 

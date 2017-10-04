@@ -24,7 +24,7 @@ const _invokeAddCategoryRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization,
-                'Content-Type': request.headers.content-type
+                'Content-Type': 'application/json'
             },
             payload: request.payload
         };
@@ -47,7 +47,7 @@ const _invokeAddTariffRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization,
-                'Content-Type': request.headers.content-type
+                'Content-Type': 'application/json'
             },
             payload: request.payload
         };
@@ -75,11 +75,13 @@ const _invokeAddCurrencyRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization,
-                'Content-Type': request.headers.content-type
+                'Content-Type': 'application/json'
             },
             payload: request.payload
         };
     };
+
+    console.log(JSON.stringify(request.headers));
 
     return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
@@ -104,7 +106,7 @@ const _invokeAddRateCardRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization,
-                'Content-Type': request.headers.content-type
+                'Content-Type': 'application/json'
             },
             payload: request.payload
         };
@@ -133,7 +135,7 @@ const _invokeAssignRatesRest = function (request, type) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization,
-                'Content-Type': request.headers.content-type
+                'Content-Type': 'application/json'
             },
             payload: request.payload
         };

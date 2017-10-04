@@ -141,26 +141,18 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="row more-row">
-                                    <div class="col-xs-5 field-name">Application Id</div>
-                                    <div class="col-xs-7 field-value"> {{item.applicationId}}</div>
+                                    <div class="col-xs-6 field-name">Application Id</div>
+                                    <div class="col-xs-6 field-value"> {{item.applicationId}}</div>
                                 </div>
                                 <div class="row more-row" *ngIf="isSubscription">
-                                    <div class="col-xs-5 field-name">API</div>
-                                    <div class="col-xs-7 field-value"> {{item.apiName}}-{{item.apiVersion}}</div>
+                                    <div class="col-xs-6 field-name">API</div>
+                                    <div class="col-xs-6 field-value"> {{item.apiName}}-{{item.apiVersion}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6">
-                                <!--<div class="row more-row">-->
-                                <!--<div class="col-xs-6 field-name">Operator</div>-->
-                                <!--<div class="col-xs-6 field-value">{{item.operators}}</div>-->
-                                <!--</div>
-                                <div class="row more-row">
-                                    <div class="col-xs-6 field-name">Description</div>
-                                    <div class="col-xs-6 field-value"><pre> {{item.applicationDescription}}</pre></div>
-                                </div> -->
                                 <div class="row more-row" *ngIf="showTiers">
-                                    <div class="col-xs-4 field-name">Tier</div>
-                                    <div class="col-xs-8 field-value">
+                                    <div class="col-xs-6 field-name">Tier</div>
+                                    <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onOptionChange($event,item)">
                                             <option *ngFor="let opt of item.tiersStr" [selected]="item.tier == opt">
                                                 {{opt}}
@@ -168,6 +160,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="row more-row" *ngIf="showTiers && !isSubscription">
+                                    <div class="col-xs-6 field-name">Credit Plan</div>
+                                    <div class="col-xs-6 field-value">
+                                        <select class="form-control" (change)="onCreditPlanChange($event,item)">
+                                            <option *ngFor="let opt of creditPlan" [selected]="item.creditPlan == opt">
+                                                {{opt}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
                                 <div class="row more-row" *ngIf="!showTiers"></div>
                             </div>
                         </div>

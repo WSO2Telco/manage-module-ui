@@ -10,7 +10,7 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetSubscribersRest = function () {
+const _invokeGetSubscribersRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -22,7 +22,7 @@ const _invokeGetSubscribersRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -42,7 +42,7 @@ const _invokeGetAppsRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
@@ -63,7 +63,7 @@ const _invokeGetApisRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
@@ -72,7 +72,7 @@ const _invokeGetApisRest = function (request) {
 };
 
 
-const _invokeGetWhitelistRest = function () {
+const _invokeGetWhitelistRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -84,7 +84,7 @@ const _invokeGetWhitelistRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -103,7 +103,7 @@ const _invokeAddNewWhitelist = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
@@ -123,7 +123,7 @@ const _invokeRemoveFromWhitelistRest = function (request) {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
         };
     };
 

@@ -13,7 +13,7 @@ const Messages = require('../common/messages');
  * @returns {Q.Promise<T>}
  * @private
  */
-const _invokeGetApiListRest = function () {
+const _invokeGetApiListRest = function (request) {
 
     let deferred = Q.defer();
 
@@ -25,7 +25,7 @@ const _invokeGetApiListRest = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
@@ -39,32 +39,23 @@ const _invokeGetApiListRest = function () {
     return deferred.promise;
 };
 
-const _invokeGetBlackListNumbers = function (id) {
+const _invokeGetBlackListNumbers = function (request) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function (id) {
-        return config.blacklistPerApiURL + '/' + id;
+        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + id;
     }
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
             json: true,
-            headers: {}
+            headers: {'Authorization': request.headers.authorization}
         };
     };
 
-    wreck.post(getEndpointUrl(id), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-
-        }
-    });
-
-    return deferred.promise;
+    return _invokePOSTRequest(deferred, getEndpointUrl(request.params.id), getRequestOptions());
 };
 
 
@@ -73,28 +64,18 @@ const _invokeRemoveBlackListNumber = function (request, msisdn) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.removeBlacklistURL + '/' + msisdn;
+        return config.blacklistWhitelistServiceURL + '/' + msisdn;
     };
 
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(msisdn), getRequestOptions(), (error, res, payload) => {
-        if (error) {
-            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-        } else {
-            deferred.resolve(payload);
-
-        }
-    });
-
-    return deferred.promise;
-
+    return _invokePOSTRequest(deferred, getEndpointUrl(msisdn), getRequestOptions());
 };
 
 /**
@@ -108,27 +89,37 @@ const _invokeAddNewBlackListNumber = function (request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.addNewToBlacklistURL;
+        return config.blacklistWhitelistServiceURL + 'Blacklist';
     };
 
     let getRequestOptions = function () {
         return {
             json: true,
-            headers: {},
+            headers: {'Authorization': request.headers.authorization},
             payload: request.payload
         };
     };
 
-    wreck.post(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+
+};
+
+const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.post(endpointUrl, requestOptions, (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            deferred.resolve(payload);
+            if (res.statusCode == 200) {
+                deferred.resolve(payload);
+            } else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
         }
     });
-    return deferred.promise;
 
-};
+    return deferred.promise;
+}
 
 
 module.exports = {

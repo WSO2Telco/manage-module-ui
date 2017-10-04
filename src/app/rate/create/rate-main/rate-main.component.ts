@@ -16,7 +16,7 @@ import {Router} from '@angular/router';
 })
 export class RateMainComponent implements OnInit {
 
-    private isDescriptionEmpty: boolean;
+    private isDescriptionError: boolean;
     private isNameError: boolean;
     private isDateEmpty: boolean;
     private isCurrencyError: boolean;
@@ -28,6 +28,7 @@ export class RateMainComponent implements OnInit {
     private tariffError: string;
 
     private nameError: string;
+    private descriptionError: string;
 
     private rateDefName: string;
     private rateDefDescription: string;
@@ -276,15 +277,13 @@ export class RateMainComponent implements OnInit {
                     this.message.error(response.message);
                 }
             });
-
-
         } else {
             if (this.rateDefName.length == 0) {
                 this.isNameError = true;
                 this.nameError = 'Name Cannot be Empty'
             }
             if (this.rateDefDescription.length == 0) {
-                this.isDescriptionEmpty = true;
+                this.isDescriptionError = true;
             }
             if (!validRateType) {
                 this.isRateTypeError = true;
@@ -321,7 +320,7 @@ export class RateMainComponent implements OnInit {
      * @returns {boolean}
      */
     isEmpty(): boolean {
-        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0 && !this.isNameError && !this.isDescriptionEmpty) {
+        if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0 && !this.isNameError && !this.isDescriptionError) {
             return false;
         } else {
             return true;
@@ -334,7 +333,7 @@ export class RateMainComponent implements OnInit {
      */
     clearErrors() {
         this.isDateEmpty = false;
-        this.isDescriptionEmpty = false;
+        this.isDescriptionError = false;
         this.isNameError = false;
         this.isCurrencyError = false;
         this.isRateTypeError = false;
@@ -490,9 +489,14 @@ export class RateMainComponent implements OnInit {
 
     descriptionEmpty(description) {
         if (description.length == 0) {
-            this.isDescriptionEmpty = true;
-        } else {
-            this.isDescriptionEmpty = false;
+            this.isDescriptionError = true;
+            this.descriptionError = 'Description can not be empty';
+        } else if(description.length > 45) {
+            this.isDescriptionError = true;
+            this.descriptionError = 'Ony 45 Characters Allowed';
+        }else{
+            this.isDescriptionError = false;
+            this.descriptionError = '';
         }
     }
 

@@ -11,8 +11,6 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 export class WhitelistRemoteDataService {
 
     private apiContext = 'api';
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
     private loginInfo;
 
 
@@ -38,7 +36,7 @@ export class WhitelistRemoteDataService {
     getSubscribers() {
         const data = {};
        // console.log('hit in the whitelist remote data service');
-        return this.http.post(this.apiEndpoints['getSubscribers'], data, this.options)
+        return this.http.post(this.apiEndpoints['getSubscribers'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -54,7 +52,7 @@ export class WhitelistRemoteDataService {
     getApps(subscriberID: string) {
         const data = { id: subscriberID};
        // console.log('hit in the whitelist remote data service');
-        return this.http.post(this.apiEndpoints['getApps'], data, this.options)
+        return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -69,7 +67,7 @@ export class WhitelistRemoteDataService {
      */
     getApis(id: string) {
         const data = { id: id};
-        return this.http.post(this.apiEndpoints['getApis'], data, this.options)
+        return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -85,7 +83,7 @@ export class WhitelistRemoteDataService {
     getWhitelist() {
         const data = {};
        // console.log('hit in the whitelist remote data service');
-        return this.http.post(this.apiEndpoints['getWhitelist'], data, this.options)
+        return this.http.post(this.apiEndpoints['getWhitelist'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -101,7 +99,7 @@ export class WhitelistRemoteDataService {
     removeFromWhiteList(msisdn: string) {
         const data = {msisdn : msisdn};
       //  console.log('hit in the whitelist remote data service');
-        return this.http.post(this.apiEndpoints['removeFromWhiteList'], data, this.options)
+        return this.http.post(this.apiEndpoints['removeFromWhiteList'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -127,12 +125,22 @@ export class WhitelistRemoteDataService {
 
       //  console.log(JSON.stringify(data));
       //  console.log('hit in the whitelist remote data service');
-        return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.options)
+        return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    getOptions(): RequestOptions {
+        const token = this._authenticationService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 
 

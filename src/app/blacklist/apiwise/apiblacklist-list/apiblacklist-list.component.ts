@@ -34,7 +34,7 @@ export class ApiBlacklistListComponent implements OnInit {
                     this.onDeleteTask.emit(true);
                     this.message.success('MSISDN Removed Successfully');
                 } else {
-                    this.message.error(response.message);
+                    this.message.error(response);
                 }
             });
         }

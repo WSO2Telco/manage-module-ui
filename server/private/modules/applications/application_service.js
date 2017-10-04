@@ -9,6 +9,7 @@ const applicationCompleteRest = require('./application_task_complete_rest_servic
 const subscriptionCompleteRest = require('./subscription_task_complete_rest_service');
 const applicationHistoryREST = require('./application_history_rest_service');
 const operationRatesREST = require('./operation_rates_rest_service');
+const creditPlanREST = require('./credit_plan_rest_service');
 const APP_CONSTANT = require('./appication_const');
 
 
@@ -119,7 +120,8 @@ const _getApplications = function (request, reply) {
                     apiContext: details['apiContext'],
                     subscriber: details['subscriber'],
                     relevantRates: relevantRates,
-                    selectedRate: ''
+                    selectedRate: '',
+                    creditPlan: ''
                 }
             });
         }
@@ -339,15 +341,6 @@ const _approveApplicationCreation = function (request, reply) {
         return false;
     };
 
-    let onRefIdSuccess = function (result) {
-        let param = request.payload;
-        applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
-    };
-
-    let onRefIdError = function (error) {
-        reply(error);
-    };
-
     let onApproveSuccess = function (result) {
         reply(result);
     };
@@ -356,7 +349,6 @@ const _approveApplicationCreation = function (request, reply) {
         reply(error);
     };
 
-
     if (validateRequest(request)) {
 
         let param = request.payload;
@@ -364,7 +356,7 @@ const _approveApplicationCreation = function (request, reply) {
         if (param.role) {
             /** if hub admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
-            applicationDetailsREST.invokeGetWorkflowRefId(request, param.taskId).then(onRefIdSuccess, onRefIdError);
+            applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
         } else {
             /** if operator admin */
             param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
@@ -436,6 +428,18 @@ const _getGraphData = function (request, reply) {
     }
 };
 
+const _getCreditPlan = function (request, reply) {
+    let onSuccess = function (result) {
+        reply(result);
+    };
+
+    let onError = function (error) {
+        reply(error);
+    };
+
+    creditPlanREST.invokeCreditPlanRest(request).then(onSuccess, onError);
+};
+
 
 function applicationService() {
     return {
@@ -444,6 +448,7 @@ function applicationService() {
         approveSubscriptionCreation: _approveSubscriptionCreation,
         getApplicationStatistics: _getAppStat,
         getGraphData: _getGraphData,
+        getCreditPlan: _getCreditPlan,
         searchApplicationsForApproval: _getApplications
     };
 }

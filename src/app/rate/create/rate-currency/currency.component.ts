@@ -60,11 +60,9 @@ export class CurrencyComponent implements OnInit {
      * @param currencyForm
      */
     onCurrencyValueSubmit(currencyForm) {
-        this.clearErrors();
         const loginInfo = this.authService.loginUserInfo.getValue();
-        this.clearErrors();
 
-        if (this.currencycode.length != 0 && this.currencydesc.length != 0) {
+        if (this.currencycode.length != 0 && this.currencydesc.length != 0 && !this.isCurrencyError && !this.isCurrencyDescError) {
             this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
@@ -132,4 +130,22 @@ export class CurrencyComponent implements OnInit {
         this.currencydesc = '';
         this.clearErrors();
     }
+
+    /**
+     * if the description is invalid
+     * @param description
+     */
+    descriptionInvalid(description) {
+        if (description.length == 0) {
+            this.isCurrencyDescError = true;
+            this.currencyDescError = 'Description can not be empty';
+        } else if(description.length > 45) {
+            this.isCurrencyDescError = true;
+            this.currencyDescError = 'Ony 45 Characters Allowed';
+        }else{
+            this.isCurrencyDescError = false;
+            this.currencyDescError = '';
+        }
+    }
 }
+

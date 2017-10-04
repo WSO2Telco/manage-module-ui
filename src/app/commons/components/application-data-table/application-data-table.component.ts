@@ -53,8 +53,8 @@ export class ApplicationDataTableComponent implements OnInit {
     private filterUser: string;
     private filterFromDate: string;
     private filterToDate: string;
-    private  filterApiName: string;
-    private  apis: string;
+    private filterApiName: string;
+    private apis: string;
     private arr: string[];
 
     private apiNamesList: string[] = [''];
@@ -80,6 +80,9 @@ export class ApplicationDataTableComponent implements OnInit {
     @Input()
     private isSubscription: boolean;
 
+    @Input()
+    private creditPlan: string[];
+
     private roleList: string[];
     private tableID: string;
 
@@ -101,8 +104,8 @@ export class ApplicationDataTableComponent implements OnInit {
         // console.log('###' + loginInfo.isAdmin + ' ' + loginInfo.operator);
         this.showTiers = false;
 
-        for (const entry of this.roleList){
-            if (entry == 'manage-app-admin'){
+        for (const entry of this.roleList) {
+            if (entry == 'manage-app-admin') {
                 this.showTiers = true;
             }
         }
@@ -118,7 +121,7 @@ export class ApplicationDataTableComponent implements OnInit {
             const res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
             this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
 
-            for (const appTask of this.FilterFieldsDataSource){
+            for (const appTask of this.FilterFieldsDataSource) {
                 if (this.apiNamesList.indexOf(appTask.apiName) === -1) {
                     this.apiNamesList.push(appTask.apiName);
                 }
@@ -146,18 +149,25 @@ export class ApplicationDataTableComponent implements OnInit {
         item.tier = event.target.value;
     }
 
+    onCreditPlanChange(event, item) {
+        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+            this.message.warning('Please assign the task to you before editing');
+        }
+        item.creditPlan = event.target.value;
+    }
+
     onOperationRateChange(event, item, apiOperation) {
 
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
             this.message.warning('Please assign the task to you before editing');
         }
 
-        let count =0;
-        for(const entry of item.relevantRates){
-            if(entry.apiOperation == apiOperation){
+        let count = 0;
+        for (const entry of item.relevantRates) {
+            if (entry.apiOperation == apiOperation) {
                 let id;
-                for(const entry2 of entry.rateDefinitions){
-                    if(entry2.rateDefName == event.target.value){
+                for (const entry2 of entry.rateDefinitions) {
+                    if (entry2.rateDefName == event.target.value) {
                         id = entry2.rateDefId;
                     }
                 }
@@ -167,11 +177,7 @@ export class ApplicationDataTableComponent implements OnInit {
             }
             count++;
         }
-
-       // console.log('$$' + item.selectedRate);
     }
-
-
 
     onToggleFilter() {
         this.isFilterVisible = !this.isFilterVisible;
@@ -182,33 +188,33 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
-       // console.log('###' + JSON.stringify(appTask))
-
-            switch (actionType) {
-                case 'ASSIGN' : {
-                    this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
-                    break;
-                }
-
-                case 'APPROVE' : {
-                    if(appTask.comment){
-                        this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
-                    }else {
-                        this.isCommentEmpty = true;
-                    }
-
-                    break;
-                }
-
-                case 'REJECT' : {
-                    if (appTask.comment) {
-                        this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
-                    } else {
-                        this.isCommentEmpty = true;
-                    }
-                    break;
-                }
+        switch (actionType) {
+            case 'ASSIGN' : {
+                this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
+                break;
             }
+
+            case 'APPROVE' : {
+                if(this.creditPlan.length == 1){
+                    appTask.creditPlan = this.creditPlan[0];
+                }
+                if (appTask.comment) {
+                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'APPROVED'));
+                } else {
+                    this.isCommentEmpty = true;
+                }
+                break;
+            }
+
+            case 'REJECT' : {
+                if (appTask.comment) {
+                    this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
+                } else {
+                    this.isCommentEmpty = true;
+                }
+                break;
+            }
+        }
 
     }
 
@@ -315,7 +321,7 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
 
-    displayu(){
+    displayu() {
         console.log(JSON.stringify(this.dataSource));
     }
 
@@ -332,7 +338,7 @@ export class ApplicationDataTableComponent implements OnInit {
         }
     }
 
-    creatorName () {
+    creatorName() {
         if (this._router.url === '/approvals/applications') {
             this.opsp = 'userName';
         } else {
@@ -344,7 +350,7 @@ export class ApplicationDataTableComponent implements OnInit {
      * this method will set the table class and id
      * @returns {any}
      */
-    getId(){
+    getId() {
         if (this._router.url === '/approvals/subscriptions') {
             return 'subscriptionTable';
         } else {

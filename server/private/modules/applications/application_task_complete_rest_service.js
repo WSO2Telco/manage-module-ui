@@ -51,6 +51,11 @@ function _invokeApplicationCompleteTask(request) {
                         name: 'selectedTier',
                         value: params.selectedTier,
                         type: "string"
+                    },
+                    {
+                        name: 'creditPlan',
+                        value: params.creditPlan,
+                        type: "string"
                     }
                 ]
             }
