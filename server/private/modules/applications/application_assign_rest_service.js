@@ -4,7 +4,7 @@ const Messages = require('../common/messages');
 const config = require('../../config/application_config');
 const wreck = require('wreck');
 
-function invokeAssignApplicationTask(params){
+function invokeAssignApplicationTask(request){
     let deferred = Q.defer();
 
     let getEndpointUrl = function (params) {
@@ -21,12 +21,12 @@ function invokeAssignApplicationTask(params){
             json : true,
             payload : _payload,
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName+':'+ config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };
 
-    wreck.post(getEndpointUrl(params), getRequestOptions(params), (error, res, payload) => {
+    wreck.post(getEndpointUrl(request.payload), getRequestOptions(request.payload), (error, res, payload) => {
         if(error){
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         }else{

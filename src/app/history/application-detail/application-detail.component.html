@@ -12,9 +12,9 @@
                     <th>OPERATOR:</th>
                     <td colspan="2"></td>
                 </tr>
-                <tr>
-                    <td>{{ applicationDetail.operatorApprovals[0]?.operatorName }}</td>
-                    <td colspan="2">{{ applicationDetail.operatorApprovals[0]?.approvalStatus }}</td>
+                <tr *ngFor="let opt of applicationDetail.operatorApprovals; let i=index">
+                    <td>{{ applicationDetail.operatorApprovals[i]?.operatorName }}</td>
+                    <td colspan="2">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -60,13 +60,13 @@
                                         </thead>
                                         <tbody>
 
-                                        <tr>
+                                        <tr *ngFor="let opt of operatorApprovals; let x=index">
                                             <td> {{
-                                                applicationDetail?.subscriptions[i]?.operatorApprovals[0]?.operatorName
+                                                applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.operatorName
                                                 }}
                                             </td>
                                             <td>{{
-                                                applicationDetail?.subscriptions[i]?.operatorApprovals[0]?.approvalStatus
+                                                applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus
                                                 }}
                                             </td>
                                             <td> {{ applicationDetail?.subscriptions[i]?.lastUpdated }}</td>
