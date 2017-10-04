@@ -77,6 +77,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     private showTiers: boolean;
 
+    private billing: boolean;
+
     @Input()
     private isSubscription: boolean;
 
@@ -100,8 +102,7 @@ export class ApplicationDataTableComponent implements OnInit {
     ngOnInit() {
         this.arr = [];
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
-        // let loginInfo = this.authService.loginUserInfo.getValue();
-        // console.log('###' + loginInfo.isAdmin + ' ' + loginInfo.operator);
+        this.billing = this.authService.loginUserInfo.getValue().billing;
         this.showTiers = false;
 
         for (const entry of this.roleList) {
@@ -195,7 +196,7 @@ export class ApplicationDataTableComponent implements OnInit {
             }
 
             case 'APPROVE' : {
-                if(this.creditPlan.length == 1){
+                if(!this.isSubscription && this.creditPlan.length == 1){
                     appTask.creditPlan = this.creditPlan[0];
                 }
                 if (appTask.comment) {

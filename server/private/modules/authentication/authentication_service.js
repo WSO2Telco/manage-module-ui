@@ -73,6 +73,7 @@ function authenticationService() {
                     token: new Buffer(request.payload.userName+':'+ request.payload.password).toString('base64'),
                     isAdmin: isAdmin,
                     operator: operator,
+                    billing: config.billingEnable,
                     success: true,
                     message: "user verified successfully"
                 }));

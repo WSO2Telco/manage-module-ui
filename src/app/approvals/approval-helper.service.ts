@@ -52,16 +52,17 @@ export class ApprovalHelperService {
      * @param appTask
      * @param status
      */
-    approveRejectTask(dataType: TableDataType, appTask: ApplicationTask, status): void{
+    approveRejectTask(dataType: TableDataType, appTask: ApplicationTask, status): void {
 
         const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
+        const billing = JSON.parse(sessionStorage.getItem('loginUserInfo')).billing;
         let role = false;
 
         const completedByUser = JSON.parse(sessionStorage.getItem('loginUserInfo')).userName;
 
         /** for loop will set the user role */
-        for (const entry of roleList){
-            if (entry == 'manage-app-admin'){
+        for (const entry of roleList) {
+            if (entry == 'manage-app-admin') {
                 role = true;
             }
         }
@@ -73,6 +74,10 @@ export class ApprovalHelperService {
          * @param status
          */
         const applicationActions = (status: 'APPROVED' | 'REJECTED') => {
+
+            if (!billing) {
+                appTask.creditPlan = '';
+            }
 
             const param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
             param.taskId = appTask.id;
@@ -87,9 +92,9 @@ export class ApprovalHelperService {
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {
 
-                    if (status == 'APPROVED'){
+                    if (status == 'APPROVED') {
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
-                    }else{
+                    } else {
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
                     }
 
@@ -109,6 +114,10 @@ export class ApprovalHelperService {
          * @param status
          */
         const subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
+
+            if (!billing) {
+                appTask.selectedRate = '';
+            }
             const param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
             param.description = appTask.applicationDescription;
@@ -121,9 +130,9 @@ export class ApprovalHelperService {
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 () => {
-                    if (status == 'APPROVED'){
+                    if (status == 'APPROVED') {
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
-                    }else{
+                    } else {
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
                     }
 

@@ -160,7 +160,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row more-row" *ngIf="showTiers && !isSubscription">
+                                <div class="row more-row" *ngIf="showTiers && !isSubscription && billing">
                                     <div class="col-xs-6 field-name">Credit Plan</div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onCreditPlanChange($event,item)">
@@ -184,7 +184,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="item.relevantRates.length != 0">
+                        <div class="row" *ngIf="item.relevantRates.length != 0 && billing">
                             <div class="col-xs-12">
                                 <div class="row more-row">
                                     <div class="col-xs-7 rate-field-name">Rate card Details</div>
@@ -192,7 +192,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="isSubscription">
+                        <div class="row" *ngIf="isSubscription && billing">
                             <div class="col-xs-6" *ngFor="let entry of item.relevantRates; let k = index">
 
                                 <div class="row more-row">
@@ -211,8 +211,8 @@
 
                     </div>
 
-                    <div class="col-sm-12" *ngIf="item.actionType !== 'MORE'">
-                        <div class="row more-row">
+                    <div class="col-sm-12 "  *ngIf="item.actionType !== 'MORE'">
+                        <div class="row more-row ">
                             <div class="col-xs-3 field-name">Comment <span>*</span></div>
                             <div class="col-xs-9 field-value">
                                 <input [(ngModel)]="item.comment"
