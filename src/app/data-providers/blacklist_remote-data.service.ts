@@ -14,7 +14,7 @@ export class BlackListRemoteDataService {
     private apiEndpoints: Object = {
         getApis: this.apiContext + '/blacklist',
         getBlackListNumbers: this.apiContext + '/blacklist/list/',
-        removeBlackListNumber: this.apiContext + '/blacklist',
+        removeBlackListNumber: this.apiContext + '/blacklist/remove/',
         addBlackListNumbers: this.apiContext + '/blacklist'
     };
 
@@ -60,7 +60,7 @@ export class BlackListRemoteDataService {
         const data = {
             'apiId': apiId
         };
-        return this.http.post(this.apiEndpoints['removeBlackListNumber'] + '/' + mssidn, data, this.getOptions())
+        return this.http.post(this.apiEndpoints['removeBlackListNumber'] + mssidn, data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;

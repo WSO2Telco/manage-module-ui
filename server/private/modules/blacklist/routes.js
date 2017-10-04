@@ -17,7 +17,7 @@ module.exports = [
     },
     {
         method: 'POST',
-        path : '/api/blacklist/{msisdn}',
+        path : '/api/blacklist/remove/{msisdn}',
         handler : blacklistService.removeBlackListNumber
     },
     {
