@@ -81,7 +81,13 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getApps(subscriberID: string) {
-        const data = {id: subscriberID};
+        let operator;
+        if(this.loginInfo.isAdmin){
+            operator = '_ALL_';
+        }else {
+            operator = this.loginInfo.operator;
+        }
+        const data = {id: subscriberID, operator: operator};
         return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
