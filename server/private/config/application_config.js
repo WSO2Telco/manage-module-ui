@@ -3,7 +3,7 @@
  */
 'use strict';
 
-// require('dotenv').config();
+require('dotenv').config();
 
 var appConfig = {
     /** the first parameter of the url http://localhost:3060/mamage
@@ -50,7 +50,7 @@ var appConfig = {
     allowedOperators: process.env.wm_allowed_operators || ['ivorycoast-admin-role:IvoryCoast', 'senegal-admin-role:Senegal', 'operator1-admin-role:Operator1'],
     /**to enable disable rate, quota in the view use true or false
      */
-    billingEnable: process.env.wm_billing_enable || false
+    billingEnable: process.env.wm_billing_enable || true
 };
 
 module.exports = appConfig;
