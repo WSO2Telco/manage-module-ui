@@ -207,8 +207,6 @@ function invokeSubscriptionCompleteTask(request) {
         };
     };
 
-    console.log(JSON.stringify(getPayload(request.payload)));
-
     wreck.post(getEndpointUrl(request.payload), getRequestOptions(request.payload), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));

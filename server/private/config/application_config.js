@@ -17,7 +17,7 @@ var appConfig = {
     authServerURL: process.env.wm_auth_server_url || 'https://localhost:9443/services',
     /** the url used to access the rate services
      * */
-    rateServiceURL: process.env.wm_rate_service_url || 'http://10.10.12.31:9763/ratecard-service/ratecardservice/',
+    rateServiceURL: process.env.wm_rate_service_url || 'http://localhost:9763/ratecard-service/ratecardservice/',
     /** the url used to load the app history details
      * */
     reportingUrl: process.env.wm_reporting_url || 'https://localhost:9443/workflow-service/workflow/history',
@@ -49,7 +49,7 @@ var appConfig = {
     billingEnable: process.env.wm_billing_enable || true,
     /**to enable disable credit plan in the view use true or false
      */
-    creditPlanEnable: process.env.wm_credit_plan_enable || true
+    creditPlanEnable: process.env.wm_credit_plan_enable || false
 };
 
 module.exports = appConfig;
