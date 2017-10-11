@@ -74,6 +74,7 @@ function authenticationService() {
                     isAdmin: isAdmin,
                     operator: operator,
                     billing: config.billingEnable,
+                    creditPlan: config.creditPlanEnable,
                     success: true,
                     message: "user verified successfully"
                 }));
