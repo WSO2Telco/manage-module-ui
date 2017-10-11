@@ -14,8 +14,6 @@ function invokeSubscriptionCompleteTask(request) {
 
     let getPayload = function (params) {
 
-        //console.log("Operator ID " +  params.user);
-
         if(params.selectedTier){
             if(params.selectedRate.length == 0){
                 return {
@@ -208,6 +206,8 @@ function invokeSubscriptionCompleteTask(request) {
             },
         };
     };
+
+    console.log(JSON.stringify(getPayload(request.payload)));
 
     wreck.post(getEndpointUrl(request.payload), getRequestOptions(request.payload), (error, res, payload) => {
         if (error) {
