@@ -160,7 +160,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row more-row" *ngIf="showTiers && !isSubscription && billing">
+                                <div class="row more-row" *ngIf="showTiers && !isSubscription && iscreditPlan">
                                     <div class="col-xs-6 field-name">Credit Plan</div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onCreditPlanChange($event,item)">

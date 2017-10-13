@@ -29,7 +29,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/gettarifflist',
+        path: '/api/rate/tariffs',
         handler: rateService.getTariffList
     },
     {
@@ -39,7 +39,7 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/getratetypelist',
+        path: '/api/rate/ratetypes',
         handler: rateService.getRateTypeList
     },
     {
@@ -54,12 +54,12 @@ module.exports = [
     },
     {
         method: 'GET',
-        path: '/api/rate/getratedefinitionlist',
+        path: '/api/rate/ratedefinitions',
         handler: rateService.getRateDefinitionList
     },
     {
         method: 'GET',
-        path: '/api/rate/getTaxList',
+        path: '/api/rate/taxes',
         handler: rateService.getTaxList
     },
     {

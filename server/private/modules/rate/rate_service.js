@@ -309,7 +309,7 @@ function rateService() {
             callback({
                 error: getResponseError,
                 success: false,
-                message: 'Error Loading Tariff List'
+                message: 'Error Loading Category List'
             });
         };
 
