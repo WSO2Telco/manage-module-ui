@@ -73,7 +73,7 @@ var ApiBlacklistListComponent = (function () {
     return ApiBlacklistListComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/apiblacklist-list.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/apiblacklist-list.component.js.map
 
 /***/ }),
 
@@ -394,7 +394,7 @@ var ApiBlacklistMainComponent = (function () {
     return ApiBlacklistMainComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/apiblacklist-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/apiblacklist-main.component.js.map
 
 /***/ }),
 
@@ -454,7 +454,7 @@ var BlackListModule = (function () {
     ], BlackListModule);
     return BlackListModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/blacklist.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/blacklist.module.js.map
 
 /***/ }),
 
@@ -480,7 +480,7 @@ var routes = [
     },
 ];
 var BlackListRoutes = __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/blacklist.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/blacklist.routes.js.map
 
 /***/ }),
 
@@ -774,7 +774,7 @@ var SpBlacklistMainComponent = (function () {
     return SpBlacklistMainComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/spblacklist-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/spblacklist-main.component.js.map
 
 /***/ })
 

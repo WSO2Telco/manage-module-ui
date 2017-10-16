@@ -41,7 +41,7 @@ var LoginModule = (function () {
     ], LoginModule);
     return LoginModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/login.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/login.module.js.map
 
 /***/ }),
 
@@ -61,7 +61,7 @@ var routes = [
     }
 ];
 var LoginRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/login.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/login.routes.js.map
 
 /***/ }),
 
@@ -136,7 +136,7 @@ var UserLoginComponent = (function () {
     return UserLoginComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/user-login.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/user-login.component.js.map
 
 /***/ })
 

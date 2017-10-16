@@ -86,7 +86,7 @@ var WhitelistListComponent = (function () {
     return WhitelistListComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist-list.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist-list.component.js.map
 
 /***/ }),
 
@@ -526,7 +526,7 @@ var WhitelistMainComponent = (function () {
     return WhitelistMainComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist-main.component.js.map
 
 /***/ }),
 
@@ -586,7 +586,7 @@ var WhitelistModule = (function () {
     ], WhitelistModule);
     return WhitelistModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist.module.js.map
 
 /***/ }),
 
@@ -604,7 +604,7 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__whitelist_main_whitelist_main_component__["a" /* WhitelistMainComponent */]
     }];
 var WhitelistRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist.routes.js.map
 
 /***/ })
 

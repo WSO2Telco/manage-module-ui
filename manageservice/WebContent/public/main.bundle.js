@@ -125,7 +125,7 @@ var AppComponent = (function () {
     return AppComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/app.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/app.component.js.map
 
 /***/ }),
 
@@ -248,7 +248,7 @@ var BillingGuard = (function () {
     return BillingGuard;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/app.guard.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/app.guard.js.map
 
 /***/ }),
 
@@ -378,7 +378,7 @@ var AppModule = (function () {
     ], AppModule);
     return AppModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/app.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/app.module.js.map
 
 /***/ }),
 
@@ -443,7 +443,7 @@ var routes = [
     }
 ];
 var RootLevelRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forRoot(routes, { useHash: true });
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/app.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/app.routes.js.map
 
 /***/ }),
 
@@ -594,7 +594,7 @@ var ApprovalHelperService = (function () {
     return ApprovalHelperService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/approval-helper.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/approval-helper.service.js.map
 
 /***/ }),
 
@@ -659,14 +659,14 @@ var CommonsModule = (function () {
     ], CommonsModule);
     return CommonsModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/commons.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/commons.module.js.map
 
 /***/ }),
 
 /***/ "../../../../../src/app/commons/components/application-data-table/application-data-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"table-wrapper\">\n    <span class=\"filter\" tooltip=\"Filter\"\n          [ngClass]=\"{'on':isFilterVisible}\"\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\n    <div><span class=\"tbl-cat\">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\n    <div class=\"tbl-header\">\n        {{tableTitle}}\n    </div>\n\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\n            <div class=\"row\">\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterAppName\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"applicationName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\n                           class=\"form-control\" placeholder=\"App Name\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterUser\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"userNamesList\"\n                           typeaheadOptionField=\"{{ opsp }}\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event, opsp)\"\n                           class=\"form-control\" placeholder=\"User\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\" class=\"form-control\"\n                           *ngIf=\"showApiName('/approvals/subscriptions')\"\n                           [(ngModel)]=\"filterApiName\"\n                           [typeaheadMinLength]=\"0\"\n                           container=\"body\"\n                           [typeahead]=\"apiNamesList\"\n                           typeaheadOptionField=\"apiName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\n                           placeholder=\"Api Name\">\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\n                        <div class=\"sec-head\">App Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\n                    </div>\n                </div>\n\n                <ng-container *ngIf=\"showApiName('/approvals/applications')\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\n                    </div>\n                </div>\n                </ng-container>\n\n                <ng-container *ngIf=\"showApiName('/approvals/subscriptions')\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.subscribers.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('SUBS')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let subscriber of filter.subscribers\">{{subscriber}}</span>\n                    </div>\n                </div>\n                </ng-container>\n\n                <div class=\"col-xs-4\">\n\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.apiNames.length > 0\">\n                        <div class=\"sec-head\">Api Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\n                        <span class=\"filter-val ids\" *ngFor=\"let api of filter.apiNames\">{{api}}</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n    <div class=\"table {{tableID}}\" id=\"{{tableID}}\">\n\n        <div class=\"tbl-row header\">\n            <div class=\"tbl-cell\">ID</div>\n            <div class=\"tbl-cell\">APP NAME</div>\n            <div class=\"tbl-cell\" *ngIf=\"showApiName('/approvals/subscriptions')\">API NAME</div>\n            <div class=\"tbl-cell\">USER</div>\n            <div class=\"tbl-cell\">CREATED ON</div>\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\n        </div>\n\n        <ng-container *ngFor=\"let item of dataSource?.applicationTasks; let i=index\">\n            <div class=\"tbl-row\"\n                 [ngClass]=\"{\n                 'modified' : item.isModified,\n                 'open':item.isExpand,\n                 'M':item.actionType == 'MORE',\n                 'A':item.actionType == 'APPROVE',\n                 'R':item.actionType == 'REJECT',\n                 'norateOpen':(item.relevantRates.length == 0) && (item.isExpand)}\"\n                 *ngIf=\"!!!summeryModeRecordLimit || i < summeryModeRecordLimit\">\n                <div class=\"tbl-cell\">\n                    <span tooltip=\"More Info\"\n                          class=\"action expand material-icons\"\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\n                    {{item.id}}\n                </div>\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\n                <div class=\"tbl-cell\" *ngIf=\"showApiName('/approvals/subscriptions')\">{{item.apiName}}-{{item.apiVersion}}</div>\n                <!--<div class=\"tbl-cell\"><a (click)=\"getUserDetails(item.userName || item.subscriber)\">{{item.userName || item.subscriber}}</a></div>-->\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\n                <div class=\"tbl-cell text-right\">\n                    <span tooltip=\"Approve\" *ngIf=\"filter?.dataType?.dataCategory == 'USER'\"\n                          class=\"action  approve material-icons\"\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE'; item.comment = ''\">check</span>\n\n                    <span tooltip=\"Reject\" *ngIf=\"filter?.dataType?.dataCategory  == 'USER'\"\n                          class=\"action  reject material-icons\"\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT'; item.comment = ''\">close</span>\n\n                    <span tooltip=\"Assign to Me\" *ngIf=\"filter?.dataType?.dataCategory  == 'GROUP'\"\n                          class=\"action  assign material-icons\"\n                          (click)=\"onAction('ASSIGN',item,filter?.dataType)\">assignment_ind</span>\n                </div>\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\n                    'A':item.actionType == 'APPROVE',\n                    'R':item.actionType == 'REJECT',\n                    'norate':item.relevantRates.length == 0}\">\n                    <div class=\"col-sm-12\">\n                        <div class=\"row\">\n                            <div class=\"col-xs-6\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-6 field-name\">Application Id</div>\n                                    <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\n                                </div>\n                                <div class=\"row more-row\" *ngIf=\"isSubscription\">\n                                    <div class=\"col-xs-6 field-name\">API</div>\n                                    <div class=\"col-xs-6 field-value\"> {{item.apiName}}-{{item.apiVersion}}</div>\n                                </div>\n                            </div>\n                            <div class=\"col-xs-6\">\n                                <div class=\"row more-row\" *ngIf=\"showTiers\">\n                                    <div class=\"col-xs-6 field-name\">Tier</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\n                                            <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\n                                                {{opt}}\n                                            </option>\n                                        </select>\n                                    </div>\n                                </div>\n                                <div class=\"row more-row\" *ngIf=\"showTiers && !isSubscription && billing\">\n                                    <div class=\"col-xs-6 field-name\">Credit Plan</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\" (change)=\"onCreditPlanChange($event,item)\">\n                                            <option *ngFor=\"let opt of creditPlan\" [selected]=\"item.creditPlan == opt\">\n                                                {{opt}}\n                                            </option>\n                                        </select>\n                                    </div>\n                                </div>\n\n                                <div class=\"row more-row\" *ngIf=\"!showTiers\"></div>\n                            </div>\n                        </div>\n                        <div class=\"row\">\n                            <div class=\"col-xs-12\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-3 field-name\">Description</div>\n                                    <div class=\"col-xs-9 field-value\">\n                                        <pre> {{item.applicationDescription}}</pre>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\" *ngIf=\"item.relevantRates.length != 0 && billing\">\n                            <div class=\"col-xs-12\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-7 rate-field-name\">Rate card Details</div>\n                                    <div class=\"col-xs-5 rate-field-name\"></div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\" *ngIf=\"isSubscription && billing\">\n                            <div class=\"col-xs-6\" *ngFor=\"let entry of item.relevantRates; let k = index\">\n\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-6 field-name\">{{entry.apiOperation}}</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\"\n                                                (change)=\"onOperationRateChange($event,item,entry.apiOperation)\">\n                                            <ng-container *ngFor=\"let opt of entry.rateDefinitions\">\n                                                <option title=\"{{opt.rateDefDescription}}\">  {{opt.rateDefName}} </option>\n                                            </ng-container>\n                                        </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n\n                    <div class=\"col-sm-12 \"  *ngIf=\"item.actionType !== 'MORE'\">\n                        <div class=\"row more-row \">\n                            <div class=\"col-xs-3 field-name\">Comment <span>*</span></div>\n                            <div class=\"col-xs-9 field-value\">\n                                <input [(ngModel)]=\"item.comment\"\n                                       type=\"text\"\n                                       class=\"form-control\">\n                                <span class=\"error\" *ngIf=\"isCommentEmpty\">Cannot Be Empty</span>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <button class=\"btn btn-default animated fadeIn\"\n                                (click)=\"item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false\">Cancel\n                        </button>\n                        <button class=\"btn btn-primary animated fadeIn\"\n                                *ngIf=\"item.actionType == 'APPROVE'\"\n                                (click)=\"onAction('APPROVE',item,filter?.dataType)\">Approve\n                        </button>\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,filter?.dataType)\">Reject\n                        </button>\n                    </div>\n\n                </div>\n            </div>\n        </ng-container>\n\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.applicationTasks?.length == 0\">\n            <span class=\"no-rec\">No Records..</span>\n        </div>\n    </div> <!--TABLE END-->\n\n    <div class=\"text-right\" *ngIf=\"dataSource?.applicationTasks?.length > summeryModeRecordLimit\"><span class=\"more\"\n                                                                                                        (click)=\"onViewAll()\">View All</span>\n    </div>\n\n    <div class=\"pagination-container text-center\"\n         *ngIf=\"dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) \">\n\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"dataSource?.metadata?.total\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.numberOfRecordsPerPage\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n    </div>\n\n</div> <!--WRAPPER END-->\n"
+module.exports = "<div class=\"table-wrapper\">\n    <span class=\"filter\" tooltip=\"Filter\"\n          [ngClass]=\"{'on':isFilterVisible}\"\n          (click)=\"onToggleFilter()\"><i class=\"material-icons\">filter_list</i></span>\n    <div><span class=\"tbl-cat\">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>\n    <div class=\"tbl-header\">\n        {{tableTitle}}\n    </div>\n\n    <div class=\"filter-container\" [ngClass]=\"{'open':isFilterVisible}\">\n        <div class=\"content animated fadeInUp delay-02\" *ngIf=\"isFilterVisible\">\n            <div class=\"head\">Filter<span class=\"clear\" (click)=\"onClear('ALL')\">Clear All</span></div>\n            <div class=\"row\">\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterAppName\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"FilterFieldsDataSource\"\n                           typeaheadOptionField=\"applicationName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'APP_NAME')\"\n                           class=\"form-control\" placeholder=\"App Name\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\"\n                           [(ngModel)]=\"filterUser\"\n                           container=\"body\"\n                           [typeaheadMinLength]=\"0\"\n                           [typeahead]=\"userNamesList\"\n                           typeaheadOptionField=\"{{ opsp }}\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event, opsp)\"\n                           class=\"form-control\" placeholder=\"User\">\n                </div>\n                <div class=\"form-group col-xs-4\">\n                    <input type=\"text\" class=\"form-control\"\n                           *ngIf=\"showApiName('/approvals/subscriptions')\"\n                           [(ngModel)]=\"filterApiName\"\n                           [typeaheadMinLength]=\"0\"\n                           container=\"body\"\n                           [typeahead]=\"apiNamesList\"\n                           typeaheadOptionField=\"apiName\"\n                           (typeaheadOnSelect)=\"onFilterItemAdded($event,'ID')\"\n                           placeholder=\"Api Name\">\n                </div>\n            </div>\n\n            <div class=\"row\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container name\" *ngIf=\"filter?.appNames.length > 0\">\n                        <div class=\"sec-head\">App Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('NAME')\">close</span>\n                        <span class=\"filter-val name\" *ngFor=\"let name of filter.appNames\">{{name}}</span>\n                    </div>\n                </div>\n\n                <ng-container *ngIf=\"showApiName('/approvals/applications')\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.users.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('USER')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let user of filter.users\">{{user}}</span>\n                    </div>\n                </div>\n                </ng-container>\n\n                <ng-container *ngIf=\"showApiName('/approvals/subscriptions')\">\n                <div class=\"col-xs-4\">\n                    <div class=\"filter-val-container user\" *ngIf=\"filter?.subscribers.length > 0\">\n                        <div class=\"sec-head\">User</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('SUBS')\">close</span>\n                        <span class=\"filter-val user\" *ngFor=\"let subscriber of filter.subscribers\">{{subscriber}}</span>\n                    </div>\n                </div>\n                </ng-container>\n\n                <div class=\"col-xs-4\">\n\n                    <div class=\"filter-val-container id\" *ngIf=\"filter?.apiNames.length > 0\">\n                        <div class=\"sec-head\">Api Name</div>\n                        <span class=\"close material-icons\" (click)=\"onClear('ID')\">close</span>\n                        <span class=\"filter-val ids\" *ngFor=\"let api of filter.apiNames\">{{api}}</span>\n                    </div>\n                </div>\n            </div>\n\n        </div>\n    </div>\n    <div class=\"table {{tableID}}\" id=\"{{tableID}}\">\n\n        <div class=\"tbl-row header\">\n            <div class=\"tbl-cell\">ID</div>\n            <div class=\"tbl-cell\">APP NAME</div>\n            <div class=\"tbl-cell\" *ngIf=\"showApiName('/approvals/subscriptions')\">API NAME</div>\n            <div class=\"tbl-cell\">USER</div>\n            <div class=\"tbl-cell\">CREATED ON</div>\n            <div class=\"tbl-cell text-right pad-r-15-im\">ACTION</div>\n        </div>\n\n        <ng-container *ngFor=\"let item of dataSource?.applicationTasks; let i=index\">\n            <div class=\"tbl-row\"\n                 [ngClass]=\"{\n                 'modified' : item.isModified,\n                 'open':item.isExpand,\n                 'M':item.actionType == 'MORE',\n                 'A':item.actionType == 'APPROVE',\n                 'R':item.actionType == 'REJECT',\n                 'norateOpen':(item.relevantRates.length == 0) && (item.isExpand)}\"\n                 *ngIf=\"!!!summeryModeRecordLimit || i < summeryModeRecordLimit\">\n                <div class=\"tbl-cell\">\n                    <span tooltip=\"More Info\"\n                          class=\"action expand material-icons\"\n                          (click)=\"item.isExpand = !item.isExpand; item.actionType = 'MORE' \">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>\n                    {{item.id}}\n                </div>\n                <div class=\"tbl-cell\">{{item.applicationName}}</div>\n                <div class=\"tbl-cell\" *ngIf=\"showApiName('/approvals/subscriptions')\">{{item.apiName}}-{{item.apiVersion}}</div>\n                <!--<div class=\"tbl-cell\"><a (click)=\"getUserDetails(item.userName || item.subscriber)\">{{item.userName || item.subscriber}}</a></div>-->\n                <div class=\"tbl-cell\">{{item.userName || item.subscriber}}</div>\n                <div class=\"tbl-cell\">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>\n                <div class=\"tbl-cell text-right\">\n                    <span tooltip=\"Approve\" *ngIf=\"filter?.dataType?.dataCategory == 'USER'\"\n                          class=\"action  approve material-icons\"\n                          [ngClass]=\"{'A':item.actionType =='APPROVE' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'APPROVE'; item.comment = ''\">check</span>\n\n                    <span tooltip=\"Reject\" *ngIf=\"filter?.dataType?.dataCategory  == 'USER'\"\n                          class=\"action  reject material-icons\"\n                          [ngClass]=\"{'R':item.actionType =='REJECT' }\"\n                          (click)=\"item.isExpand = true; item.actionType = 'REJECT'; item.comment = ''\">close</span>\n\n                    <span tooltip=\"Assign to Me\" *ngIf=\"filter?.dataType?.dataCategory  == 'GROUP'\"\n                          class=\"action  assign material-icons\"\n                          (click)=\"onAction('ASSIGN',item,filter?.dataType)\">assignment_ind</span>\n                </div>\n                <div class=\"more-con animated fadeInUp\" *ngIf=\"item.isExpand\"\n                     [ngClass]=\"{ 'M':item.actionType == 'MORE',\n                    'A':item.actionType == 'APPROVE',\n                    'R':item.actionType == 'REJECT',\n                    'norate':item.relevantRates.length == 0}\">\n                    <div class=\"col-sm-12\">\n                        <div class=\"row\">\n                            <div class=\"col-xs-6\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-6 field-name\">Application Id</div>\n                                    <div class=\"col-xs-6 field-value\"> {{item.applicationId}}</div>\n                                </div>\n                                <div class=\"row more-row\" *ngIf=\"isSubscription\">\n                                    <div class=\"col-xs-6 field-name\">API</div>\n                                    <div class=\"col-xs-6 field-value\"> {{item.apiName}}-{{item.apiVersion}}</div>\n                                </div>\n                            </div>\n                            <div class=\"col-xs-6\">\n                                <div class=\"row more-row\" *ngIf=\"showTiers\">\n                                    <div class=\"col-xs-6 field-name\">Tier</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\" (change)=\"onOptionChange($event,item)\">\n                                            <option *ngFor=\"let opt of item.tiersStr\" [selected]=\"item.tier == opt\">\n                                                {{opt}}\n                                            </option>\n                                        </select>\n                                    </div>\n                                </div>\n                                <div class=\"row more-row\" *ngIf=\"showTiers && !isSubscription && billing\">\n                                    <div class=\"col-xs-6 field-name\">Credit Plan</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\" (change)=\"onCreditPlanChange($event,item)\">\n                                            <option *ngFor=\"let opt of creditPlan\" [selected]=\"item.creditPlan == opt\">\n                                                {{opt}}\n                                            </option>\n                                        </select>\n                                    </div>\n                                </div>\n\n                                <div class=\"row more-row\" *ngIf=\"!showTiers\"></div>\n                            </div>\n                        </div>\n                        <div class=\"row\">\n                            <div class=\"col-xs-12\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-3 field-name\">Description</div>\n                                    <div class=\"col-xs-9 field-value\">\n                                        <pre> {{item.applicationDescription}}</pre>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\" *ngIf=\"item.relevantRates.length != 0 && billing\">\n                            <div class=\"col-xs-12\">\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-7 rate-field-name\">Rate card Details</div>\n                                    <div class=\"col-xs-5 rate-field-name\"></div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"row\" *ngIf=\"isSubscription && billing\">\n                            <div class=\"col-xs-6\" *ngFor=\"let entry of item.relevantRates; let k = index\">\n\n                                <div class=\"row more-row\">\n                                    <div class=\"col-xs-6 field-name\">{{entry.apiOperation}}</div>\n                                    <div class=\"col-xs-6 field-value\">\n                                        <select class=\"form-control\"\n                                                (change)=\"onOperationRateChange($event,item,entry.apiOperation)\">\n                                            <option title=\"ABCD\" *ngFor=\"let opt of entry.rateDefinitions\">\n                                                {{opt.rateDefName}}\n                                            </option>\n                                        </select>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n\n                    <div class=\"col-sm-12 \"  *ngIf=\"item.actionType !== 'MORE'\">\n                        <div class=\"row more-row \">\n                            <div class=\"col-xs-3 field-name\">Comment <span>*</span></div>\n                            <div class=\"col-xs-9 field-value\">\n                                <input [(ngModel)]=\"item.comment\"\n                                       type=\"text\"\n                                       class=\"form-control\">\n                                <span class=\"error\" *ngIf=\"isCommentEmpty\">Cannot Be Empty</span>\n                            </div>\n                        </div>\n                    </div>\n\n                    <div class=\"col-sm-12 text-right\" *ngIf=\"item.actionType !== 'MORE'\">\n                        <button class=\"btn btn-default animated fadeIn\"\n                                (click)=\"item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false\">Cancel\n                        </button>\n                        <button class=\"btn btn-primary animated fadeIn\"\n                                *ngIf=\"item.actionType == 'APPROVE'\"\n                                (click)=\"onAction('APPROVE',item,filter?.dataType)\">Approve\n                        </button>\n                        <button *ngIf=\"item.actionType == 'REJECT'\"\n                                class=\"btn btn-danger\" (click)=\"onAction('REJECT',item,filter?.dataType)\">Reject\n                        </button>\n                    </div>\n\n                </div>\n            </div>\n        </ng-container>\n\n        <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource?.applicationTasks?.length == 0\">\n            <span class=\"no-rec\">No Records..</span>\n        </div>\n    </div> <!--TABLE END-->\n\n    <div class=\"text-right\" *ngIf=\"dataSource?.applicationTasks?.length > summeryModeRecordLimit\"><span class=\"more\"\n                                                                                                        (click)=\"onViewAll()\">View All</span>\n    </div>\n\n    <div class=\"pagination-container text-center\"\n         *ngIf=\"dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) \">\n\n        <pagination\n                [boundaryLinks]=\"true\"\n                [totalItems]=\"dataSource?.metadata?.total\"\n                [(ngModel)]=\"currentPage\"\n                [itemsPerPage]=\"filter.numberOfRecordsPerPage\"\n                [maxSize]=\"5\"\n                (pageChanged)=\"onPageChanged($event)\"\n                class=\"pagination-sm\"\n                previousText=\"&lsaquo;\"\n                nextText=\"&rsaquo;\"\n                firstText=\"&laquo;\"\n                lastText=\"&raquo;\"></pagination>\n    </div>\n\n</div> <!--WRAPPER END-->\n"
 
 /***/ }),
 
@@ -772,19 +772,19 @@ var ApplicationDataTableComponent = (function () {
     };
     ApplicationDataTableComponent.prototype.onOptionChange = function (event, item) {
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
         item.tier = event.target.value;
     };
     ApplicationDataTableComponent.prototype.onCreditPlanChange = function (event, item) {
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
         item.creditPlan = event.target.value;
     };
     ApplicationDataTableComponent.prototype.onOperationRateChange = function (event, item, apiOperation) {
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
         var count = 0;
         for (var _i = 0, _a = item.relevantRates; _i < _a.length; _i++) {
@@ -1029,7 +1029,7 @@ var ApplicationDataTableComponent = (function () {
     return ApplicationDataTableComponent;
     var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/application-data-table.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/application-data-table.component.js.map
 
 /***/ }),
 
@@ -1121,7 +1121,7 @@ var BreadcrumbsComponent = (function () {
     return BreadcrumbsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/breadcrumbs.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/breadcrumbs.component.js.map
 
 /***/ }),
 
@@ -1183,7 +1183,7 @@ var HamburgerMenuComponent = (function () {
     return HamburgerMenuComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/hamburger-menu.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/hamburger-menu.component.js.map
 
 /***/ }),
 
@@ -1243,7 +1243,7 @@ var HeaderComponent = (function () {
     ], HeaderComponent);
     return HeaderComponent;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/header.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/header.component.js.map
 
 /***/ }),
 
@@ -1408,14 +1408,14 @@ var MainMenuComponent = (function () {
     return MainMenuComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/main-menu.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/main-menu.component.js.map
 
 /***/ }),
 
 /***/ "../../../../../src/app/commons/components/responsive-table/responsive-table.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"table-wrapper\">\n  <div class=\"tbl-header\">\n    {{tableHeader}}\n  </div>\n  <div class=\"table\">\n\n    <div class=\"tbl-row header\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\" style=\"text-transform: capitalize\">{{field}}</div>\n    </div>\n\n    <div class=\"tbl-row\" *ngFor=\"let item of dataSource\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">\n        <span *ngIf=\"field == 'applicationName' \"><a (click)='onNavApplication(item.applicationId)' style=\"cursor: pointer;\">{{item[field]}}</a></span>\n        <span *ngIf=\"item[field] != null && field != 'applicationName' \">{{item[field]}}</span>\n        <span *ngIf=\"item[field] == null \"><button class=\"btn btn-primary\" (click)='onNavApplication(item.applicationId)'> More </button></span>\n      </div>\n    </div>\n\n    <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource.length == 0\">\n      <span class=\"no-rec\">No Records...</span>\n    </div>\n\n  </div>\n</div>\n"
+module.exports = "<div class=\"table-wrapper\">\n  <div class=\"tbl-header\">\n    {{tableHeader}}\n  </div>\n  <div class=\"table\">\n\n    <div class=\"tbl-row header\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">{{field}}</div>\n    </div>\n\n    <div class=\"tbl-row\" *ngFor=\"let item of dataSource\">\n      <div class=\"tbl-cell\" *ngFor=\"let field of fieldSet\">\n        <span *ngIf=\"field == 'applicationName' \"><a (click)='onNavApplication(item.applicationId)' style=\"cursor: pointer;\">{{item[field]}}</a></span>\n        <span *ngIf=\"item[field] != null && field != 'applicationName' \">{{item[field]}}</span>\n        <span *ngIf=\"item[field] == null \"><button class=\"btn btn-primary\" (click)='onNavApplication(item.applicationId)'> More </button></span>\n      </div>\n    </div>\n\n    <div class=\"no-rec-row tbl-row\" *ngIf=\"dataSource.length == 0\">\n      <span class=\"no-rec\">No Records...</span>\n    </div>\n\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -1497,7 +1497,7 @@ var ResponsiveTableComponent = (function () {
     return ResponsiveTableComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/responsive-table.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/responsive-table.component.js.map
 
 /***/ }),
 
@@ -1573,7 +1573,7 @@ var UserAvatarComponent = (function () {
     return UserAvatarComponent;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/user-avatar.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/user-avatar.component.js.map
 
 /***/ }),
 
@@ -1663,7 +1663,7 @@ var UserInactiveComponent = (function () {
     return UserInactiveComponent;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/user-inactive.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/user-inactive.component.js.map
 
 /***/ }),
 
@@ -1769,7 +1769,7 @@ var ApplicationTaskFilter = (function () {
     }
     return ApplicationTaskFilter;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/application-data-models.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/application-data-models.js.map
 
 /***/ }),
 
@@ -1923,7 +1923,7 @@ var AssignRates = (function () {
     }
     return AssignRates;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/common-data-models.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/common-data-models.js.map
 
 /***/ }),
 
@@ -1956,7 +1956,7 @@ var HistoryBarGraphData = (function () {
     }
     return HistoryBarGraphData;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/dashboard-data-models.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/dashboard-data-models.js.map
 
 /***/ }),
 
@@ -2036,7 +2036,7 @@ var Subscriptions = (function () {
     }
     return Subscriptions;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/reporing-data-models.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/reporing-data-models.js.map
 
 /***/ }),
 
@@ -2072,7 +2072,7 @@ var AppCommonService = (function () {
     ], AppCommonService);
     return AppCommonService;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/app-common.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/app-common.service.js.map
 
 /***/ }),
 
@@ -2196,6 +2196,7 @@ var AuthenticationService = (function () {
         document.onkeypress = this.showMessage.bind(this);
         document.onmousewheel = null;
         document.onclick = this.showMessage.bind(this);
+        // window.onbeforeunload = null;
     };
     AuthenticationService.prototype.showMessage = function () {
         this.doLogout();
@@ -2219,7 +2220,7 @@ var AuthenticationService = (function () {
     return AuthenticationService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/authentication.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/authentication.service.js.map
 
 /***/ }),
 
@@ -2285,7 +2286,7 @@ var BlackListService = (function () {
     return BlackListService;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/blacklist.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/blacklist.service.js.map
 
 /***/ }),
 
@@ -2352,7 +2353,7 @@ var MessageService = (function () {
     return MessageService;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/message.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/message.service.js.map
 
 /***/ }),
 
@@ -2499,7 +2500,7 @@ var QuotaService = (function () {
     return QuotaService;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/quotacap.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/quotacap.service.js.map
 
 /***/ }),
 
@@ -2717,7 +2718,7 @@ var RateService = (function () {
     return RateService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/rate.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/rate.service.js.map
 
 /***/ }),
 
@@ -2803,7 +2804,7 @@ var WhitelistService = (function () {
     return WhitelistService;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist.service.js.map
 
 /***/ }),
 
@@ -3057,7 +3058,7 @@ var ApprovalRemoteDataService = (function () {
             var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_application_data_models__["d" /* AssignApplicationTaskParam */]();
             param.assignee = loginInfo.userName;
             param.taskId = taskId;
-            return this.http.post(this.apiEndpoints['assign'], param, this.getOptions())
+            return this.http.post(this.apiEndpoints['assign'], param, this.options)
                 .map(function (response) {
                 _this.modifiedApplicationTaskIDs.push(taskId);
                 return response.json();
@@ -3072,7 +3073,7 @@ var ApprovalRemoteDataService = (function () {
      * this function will be called when we approve a application
      * */
     ApprovalRemoteDataService.prototype.approveApplicationCreationTask = function (param) {
-        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
+        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); });
     };
@@ -3081,7 +3082,7 @@ var ApprovalRemoteDataService = (function () {
      **/
     ApprovalRemoteDataService.prototype.approveSubscriptionCreationTask = function (param) {
         // console.log(JSON.stringify(param));
-        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
+        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); });
     };
@@ -3122,7 +3123,7 @@ var ApprovalRemoteDataService = (function () {
     return ApprovalRemoteDataService;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/approval-remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/approval-remote-data.service.js.map
 
 /***/ }),
 
@@ -3244,7 +3245,7 @@ var BlackListRemoteDataService = (function () {
     return BlackListRemoteDataService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/blacklist_remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/blacklist_remote-data.service.js.map
 
 /***/ }),
 
@@ -3323,7 +3324,7 @@ var DashboardRemoteDataService = (function () {
         var param = new __WEBPACK_IMPORTED_MODULE_3__commons_models_dashboard_data_models__["b" /* DashboardDataRequestParam */]();
         param.assignee = 'admin';
         param.candidateGroups = 'Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin';
-        return this.http.post(this.apiEndpoints['dashboardData'], param, this.getOptions())
+        return this.http.post(this.apiEndpoints['dashboardData'], param, this.options)
             .map(function (response) { return response.json(); })
             .catch(function (error) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].throw(error.json().message); });
     };
@@ -3340,7 +3341,7 @@ var DashboardRemoteDataService = (function () {
         var _this = this;
         this.slimLoadingBarService.start();
         var user = this.authenticationService.loginUserInfo.getValue().userName;
-        this.http.get(this.apiEndpoints['graph'] + '/' + type + '/' + user, this.getOptions())
+        this.http.get(this.apiEndpoints['graph'] + '/' + type + '/' + user, this.options)
             .map(function (response) { return response.json(); })
             .subscribe(function (graphData) {
             if (type == 'applications') {
@@ -3353,14 +3354,6 @@ var DashboardRemoteDataService = (function () {
             _this.slimLoadingBarService.complete();
         });
     };
-    DashboardRemoteDataService.prototype.getOptions = function () {
-        var token = this.authenticationService.loginUserInfo.getValue().token;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-            'Authorization': 'Basic ' + token,
-            'Content-Type': 'application/json'
-        });
-        return new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({ headers: headers });
-    };
     DashboardRemoteDataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __param(1, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('API_CONTEXT')), 
@@ -3369,7 +3362,7 @@ var DashboardRemoteDataService = (function () {
     return DashboardRemoteDataService;
     var _a, _b, _c, _d;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/dashboard-remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/dashboard-remote-data.service.js.map
 
 /***/ }),
 
@@ -3410,7 +3403,7 @@ var DataProvidersModule = (function () {
     ], DataProvidersModule);
     return DataProvidersModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/data-providers.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/data-providers.module.js.map
 
 /***/ }),
 
@@ -3483,7 +3476,7 @@ var LoginRemoteDataService = (function () {
     return LoginRemoteDataService;
     var _a;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/login_remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/login_remote-data.service.js.map
 
 /***/ }),
 
@@ -3802,7 +3795,7 @@ var QuotacapRemoteDataService = (function () {
     return QuotacapRemoteDataService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/quotacap_remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/quotacap_remote-data.service.js.map
 
 /***/ }),
 
@@ -3837,21 +3830,21 @@ var RateRemoteDataService = (function () {
         // private headers: Headers = new Headers({'Content-Type': 'application/json'});
         // private options: RequestOptions = new RequestOptions({headers: this.headers});
         this.apiEndpoints = {
-            addRateCard: this.apiContext + '/rate/ratecards',
+            addRateCard: this.apiContext + '/rate/addratecard',
             addRateCategory: this.apiContext + '/rate/addratecategory/',
             addCategory: this.apiContext + '/rate/categories',
             addCurrency: this.apiContext + '/rate/currencies',
             addTariff: this.apiContext + '/rate/tariffs',
             assignRatesForAPIOperation: this.apiContext + '/rate/assignrates',
-            getTariffList: this.apiContext + '/rate/tariffs',
+            getTariffList: this.apiContext + '/rate/gettarifflist',
             getCurrencyList: this.apiContext + '/rate/currencies',
-            getRateTypeList: this.apiContext + '/rate/ratetypes',
+            getRateTypeList: this.apiContext + '/rate/getratetypelist',
             getCategoryList: this.apiContext + '/rate/categories',
-            getRateDefinitionList: this.apiContext + '/rate/ratedefinitions',
-            getRateTaxList: this.apiContext + '/rate/taxes',
+            getRateDefinitionList: this.apiContext + '/rate/getratedefinitionlist',
+            getRateTaxList: this.apiContext + '/rate/getTaxList',
             getApiOperations: this.apiContext + '/rate/getapioperations',
             getAPIOperationRates: this.apiContext + '/rate/getapioperationrates',
-            getRateCards: this.apiContext + '/rate/ratecards'
+            getRateCards: this.apiContext + '/rate/getratecards'
         };
     }
     /**
@@ -4086,7 +4079,7 @@ var RateRemoteDataService = (function () {
     return RateRemoteDataService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/rate_remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/rate_remote-data.service.js.map
 
 /***/ }),
 
@@ -4101,7 +4094,6 @@ var RateRemoteDataService = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__("../../../../../src/app/commons/services/message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__ = __webpack_require__("../../../../ng2-slim-loading-bar/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_reporing_data_models__ = __webpack_require__("../../../../../src/app/commons/models/reporing-data-models.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__ = __webpack_require__("../../../../../src/app/commons/services/authentication.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportingRemoteDataService; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -4121,14 +4113,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 
 
 
-
 var ReportingRemoteDataService = (function () {
-    function ReportingRemoteDataService(apiContext, http, message, slimLoadingBarService, authService) {
+    function ReportingRemoteDataService(apiContext, http, message, slimLoadingBarService) {
         this.apiContext = apiContext;
         this.http = http;
         this.message = message;
         this.slimLoadingBarService = slimLoadingBarService;
-        this.authService = authService;
         /**
          * Subscribers stream
          * @type {BehaviorSubject<string[]>}
@@ -4161,7 +4151,7 @@ var ReportingRemoteDataService = (function () {
     }
     ReportingRemoteDataService.prototype.getApplicationDetail = function (id, callback) {
         var _this = this;
-        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.options)
             .map(function (response) { return response.json(); })
             .subscribe(function (applications) {
             _this.ApplicationDetailProvider.next(applications);
@@ -4174,7 +4164,7 @@ var ReportingRemoteDataService = (function () {
     ReportingRemoteDataService.prototype.getSubscribers = function () {
         var _this = this;
         this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['subscribers'], this.getOptions())
+        this.http.get(this.apiEndpoints['subscribers'], this.options)
             .map(function (response) { return response.json(); })
             .subscribe(function (subscribers) {
             _this.SubscribersProvider.next(subscribers);
@@ -4188,7 +4178,7 @@ var ReportingRemoteDataService = (function () {
     ReportingRemoteDataService.prototype.getOperators = function () {
         var _this = this;
         this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['operators'], this.getOptions())
+        this.http.get(this.apiEndpoints['operators'], this.options)
             .map(function (response) { return response.json(); })
             .subscribe(function (operators) {
             _this.OperatorsProvider.next(operators);
@@ -4203,7 +4193,7 @@ var ReportingRemoteDataService = (function () {
         var _this = this;
         if (!!subscriber) {
             this.slimLoadingBarService.start();
-            this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.getOptions())
+            this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.options)
                 .map(function (response) { return response.json(); })
                 .subscribe(function (applications) {
                 _this.ApplicationsProvider.next(applications);
@@ -4228,7 +4218,7 @@ var ReportingRemoteDataService = (function () {
         if (!!!filter.operator) {
             filter.operator = '__ALL__';
         }
-        this.http.post(this.apiEndpoints['approvalHistory'], filter, this.getOptions())
+        this.http.post(this.apiEndpoints['approvalHistory'], filter, this.options)
             .map(function (response) { return response.json(); })
             .flatMap(function (res) { return __WEBPACK_IMPORTED_MODULE_2_rxjs__["Observable"].from(res); })
             .reduce(function (arr, cur) {
@@ -4255,23 +4245,15 @@ var ReportingRemoteDataService = (function () {
             _this.slimLoadingBarService.complete();
         });
     };
-    ReportingRemoteDataService.prototype.getOptions = function () {
-        var token = this.authService.loginUserInfo.getValue().token;
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]({
-            'Authorization': 'Basic ' + token,
-            'Content-Type': 'application/json'
-        });
-        return new __WEBPACK_IMPORTED_MODULE_1__angular_http__["c" /* RequestOptions */]({ headers: headers });
-    };
     ReportingRemoteDataService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
         __param(0, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Inject"])('API_CONTEXT')), 
-        __metadata('design:paramtypes', [String, (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__["a" /* AuthenticationService */]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [String, (typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* Http */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4_ng2_slim_loading_bar__["a" /* SlimLoadingBarService */]) === 'function' && _c) || Object])
     ], ReportingRemoteDataService);
     return ReportingRemoteDataService;
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/reporting-remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/reporting-remote-data.service.js.map
 
 /***/ }),
 
@@ -4424,7 +4406,7 @@ var WhitelistRemoteDataService = (function () {
     return WhitelistRemoteDataService;
     var _a, _b;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/whitelist_remote-data.service.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/whitelist_remote-data.service.js.map
 
 /***/ }),
 
@@ -4484,7 +4466,7 @@ var SharedModule = (function () {
     ], SharedModule);
     return SharedModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/shared.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/shared.module.js.map
 
 /***/ }),
 
@@ -4500,7 +4482,7 @@ var SharedModule = (function () {
 var environment = {
     production: false
 };
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/environment.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/environment.js.map
 
 /***/ }),
 
@@ -4523,7 +4505,7 @@ if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment *
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__angular_core__["enableProdMode"])();
 }
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_4__app_app_module__["a" /* AppModule */]);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/main.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/main.js.map
 
 /***/ }),
 
@@ -4579,7 +4561,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 
 
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/polyfills.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/polyfills.js.map
 
 /***/ }),
 

@@ -35,7 +35,6 @@ module.exports = module.exports.toString();
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__ = __webpack_require__("../../../../../src/app/commons/services/message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__ = __webpack_require__("../../../../../src/app/approvals/approval-helper.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__commons_models_common_data_models__ = __webpack_require__("../../../../../src/app/commons/models/common-data-models.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__ = __webpack_require__("../../../../../src/app/commons/services/authentication.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApplicationsComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -52,13 +51,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var ApplicationsComponent = (function () {
-    function ApplicationsComponent(message, approvalHelperService, approvalService, authService) {
+    function ApplicationsComponent(message, approvalHelperService, approvalService) {
         this.message = message;
         this.approvalHelperService = approvalHelperService;
         this.approvalService = approvalService;
-        this.authService = authService;
     }
     ApplicationsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -76,9 +73,7 @@ var ApplicationsComponent = (function () {
         });
         this.creditPlan = [];
         this.getData();
-        if (this.authService.loginUserInfo.getValue().creditPlan) {
-            this.getCreditPlan();
-        }
+        this.getCreditPlan();
     };
     ApplicationsComponent.prototype.getData = function () {
         this.approvalService.getFilteredResult(this.userApplicationFilter);
@@ -119,12 +114,12 @@ var ApplicationsComponent = (function () {
             template: __webpack_require__("../../../../../src/app/approvals/applications/applications.component.html"),
             styles: [__webpack_require__("../../../../../src/app/approvals/applications/applications.component.scss")]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object, (typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__["a" /* AuthenticationService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_6__commons_services_authentication_service__["a" /* AuthenticationService */]) === 'function' && _d) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__commons_services_message_service__["a" /* MessageService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_4__approval_helper_service__["a" /* ApprovalHelperService */]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__data_providers_approval_remote_data_service__["a" /* ApprovalRemoteDataService */]) === 'function' && _c) || Object])
     ], ApplicationsComponent);
     return ApplicationsComponent;
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/applications.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/applications.component.js.map
 
 /***/ }),
 
@@ -177,7 +172,7 @@ var ApprovalMainComponent = (function () {
     ], ApprovalMainComponent);
     return ApprovalMainComponent;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/approval-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/approval-main.component.js.map
 
 /***/ }),
 
@@ -209,7 +204,7 @@ var routes = [
     }
 ];
 var ApprovalRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/approval.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/approval.routes.js.map
 
 /***/ }),
 
@@ -258,7 +253,7 @@ var ApprovalsModule = (function () {
     ], ApprovalsModule);
     return ApprovalsModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/approvals.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/approvals.module.js.map
 
 /***/ }),
 
@@ -414,7 +409,7 @@ var SubscriptionsComponent = (function () {
     return SubscriptionsComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/subscriptions.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/subscriptions.component.js.map
 
 /***/ })
 

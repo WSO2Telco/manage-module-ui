@@ -745,7 +745,7 @@ var QuotaCapMainComponent = (function () {
     return QuotaCapMainComponent;
     var _a, _b, _c;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/quotacap-main.component.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/quotacap-main.component.js.map
 
 /***/ }),
 
@@ -805,7 +805,7 @@ var QuotaCapModule = (function () {
     ], QuotaCapModule);
     return QuotaCapModule;
 }());
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/quotacap.module.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/quotacap.module.js.map
 
 /***/ }),
 
@@ -823,7 +823,7 @@ var routes = [{
         component: __WEBPACK_IMPORTED_MODULE_1__quotacap_main_quotacap_main_component__["a" /* QuotaCapMainComponent */]
     }];
 var QuotaCapRoutes = __WEBPACK_IMPORTED_MODULE_0__angular_router__["b" /* RouterModule */].forChild(routes);
-//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2TelcoNew/manageservice/manage-module-ui/src/quotacap.routes.js.map
+//# sourceMappingURL=/home/manoj/WSO2TelcoProjects/WSO2Telco4/manage-module-ui/angular_ui/src/quotacap.routes.js.map
 
 /***/ }),
 
