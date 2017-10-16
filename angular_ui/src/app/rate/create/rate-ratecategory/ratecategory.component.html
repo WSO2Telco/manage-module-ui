@@ -1,0 +1,122 @@
+<div class="animated fadeInUp" style="animation-delay: 0.2s">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-container subcategoryContainer">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)">
+                            <br><br>
+                            <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
+                                <label class="control-label col-sm-4">Category <span>*</span></label>
+                                <div class="col-sm-6">
+                                    <input [(ngModel)]="category"
+                                           [typeahead]="categoryList"
+                                           typeaheadOptionField="categoryName"
+                                           [typeaheadMinLength]="0"
+                                           placeholder="Category"
+                                           name="typeCategory"
+                                           class="form-control"
+                                           required>
+                                    <span class="error" *ngIf="isCategoryError">{{categoryError}}</span>
+                                </div>
+                                <span class="glyphicon glyphicon-plus info-tooltip"
+                                      tooltip="Click here to Add a new Category to the list" placement="right"
+                                      (click)='onAddNewModalFire("addNewCategory")' type="category"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Sub Category</label>
+                                <div class="col-sm-6">
+                                    <input [(ngModel)]="subcategory"
+                                           [typeahead]="categoryList"
+                                           typeaheadOptionField="categoryName"
+                                           [typeaheadMinLength]="0"
+                                           placeholder="Sub Category"
+                                           name="typeCaSubtegory"
+                                           class="form-control"
+                                           required>
+                                    <span class="error" *ngIf="isSubcategoryError">{{subcategoryError}}</span>
+                                </div>
+                                <span class="glyphicon glyphicon-plus info-tooltip"
+                                      tooltip="Click here to Add a new Sub Category to the list" placement="right"
+                                      (click)='onAddNewModalFire("addNewSubCategory")' type='Sub Category'></span>
+                            </div>
+                            <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
+                                <label class="control-label col-sm-4">Tariff<span>*</span></label>
+                                <div class="col-sm-6">
+                                    <input [(ngModel)]="tariff"
+                                           [typeahead]="tariffList"
+                                           typeaheadOptionField="tariffName"
+                                           [typeaheadMinLength]="0"
+                                           placeholder="Tariff"
+                                           name="typeTariff"
+                                           class="form-control"
+                                           required
+                                    >
+                                    <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
+                                </div>
+                                <span class="glyphicon glyphicon-plus info-tooltip"
+                                      tooltip="Click here to Add a new tariff to the list" placement="right"
+                                      (click)='onAddNewModalFire("addNewTariff")' type='Tariff'></span>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <button type="submit" class="btn btn-primary animated fadeIn">Add Combination
+                                    </button>
+                                    <a class="btn btn-danger" (click)="clearCatSelection()">Clear</a>
+                                    <div *ngIf="isMappigError">
+                                        <p class="error">Invalid Mapping</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <br><br>
+                        <div class="form-group">
+                            <div class="col-sm-4 subtitle">Selected combinations</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-8 ">
+                                <div class="scrollit">
+                                    <div class="table">
+
+                                        <div class="tbl-row header">
+                                            <div class="tbl-cell">Category</div>
+                                            <div class="tbl-cell">Sub Category</div>
+                                            <div class="tbl-cell text-right pad-r-15-im">Tariff</div>
+                                            <div class="tbl-cell text-right pad-r-15-im">X</div>
+                                        </div>
+                                        <ng-container *ngFor="let opt of rateCategories; let i=index">
+                                            <div class="tbl-row">
+                                                <div class="tbl-cell">{{opt.category}}</div>
+                                                <div class="tbl-cell">{{opt.subcategory}}</div>
+                                                <div class="tbl-cell text-right">{{opt.tariff}}</div>
+                                                <div class="tbl-cell text-right pad-r-15-im">
+                                                    <button class="btn btn-danger" type="button"
+                                                            (click)="onDelete(i)"><i
+                                                            class="material-icons delIcon">delete</i></button>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <div class="no-rec-row tbl-row" *ngIf="rateCategories.length == 0">
+                                            <span class="no-rec">No Records..</span>
+                                        </div>
+                                    </div>
+                                </div> <!--TABLE END-->
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+

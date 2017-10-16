@@ -1,9 +1,9 @@
 node_modules
 .idea
 /dist/
-/node_modules/
-/npm-debug.log
-npm-debug.log
-/bundle/
-/server/public
+/angular_ui/node_modules/
+/angular_ui/npm-debug.log
+angular_ui/npm-debug.log
+/angular_ui/bundle/
+/angular_ui/server
 .vscode

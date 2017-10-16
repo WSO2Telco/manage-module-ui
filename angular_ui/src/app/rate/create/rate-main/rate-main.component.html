@@ -1,0 +1,204 @@
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{dialogactionTitile}}</h4>
+                <button type="button" class="close pull-right"
+                        (click)="lgModal.hide(); clearModalContent()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <app-currency
+                        *ngIf="showAddCurrency"
+                        [existingCurrencyList]="currencyList"
+                        (onAddTask)="onAddCurrencyHandler($event)"
+                        (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
+
+                <app-addtariff *ngIf="showAddTariff"
+                               [existingTariffList]="tariffList"
+                               (onAddTask)="onAddTariffHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+
+                <app-addtariff *ngIf="showChildNewTariff"
+                               [existingTariffList]="tariffList"
+                               (onAddTask)="onAddTariffHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+
+                <app-category *ngIf="showChildNewCategory"
+                              type="Category"
+                              [existingCategories]="categoryList"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+
+                <app-category *ngIf="showChildNewSubCategory"
+                              type="Sub Category"
+                              [existingCategories]="categoryList"
+                              (onAddTask)="onAddCategoryHandler($event)"
+                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animated fadeInUp row">
+
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container rateInputContainer">
+            <div class="tbl-header">
+                Create New Rate Card
+            </div>
+
+            <form class="form-horizontal" #ratecardForm="ngForm" novalidate
+                  (ngSubmit)="onRateCardSubmition(ratecardForm)">
+                <div class="form-group" [ngClass]="{'has-danger': isNameError}">
+                    <label class="control-label col-sm-2">Rate Name <span>*</span></label>
+                    <div class="col-sm-4">
+                        <input class="form-control"
+                               type="text"
+                               autocomplete="off"
+                               placeholder="Name"
+                               name="name"
+                               #nameRef="ngModel"
+                               required
+                               [(ngModel)]="rateDefName"
+                               (input)="isNameUnique($event.target.value)">
+                        <span class="error" *ngIf="isNameError">{{nameError}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
+                    <label class="control-label col-sm-2">Rate Description <span>*</span></label>
+                    <div class="col-sm-4">
+                            <textarea rows="2" cols="50" class="form-control"
+                                      type="text"
+                                      autocomplete="off"
+                                      placeholder="Description"
+                                      name="description"
+                                      #descriptionRef="ngModel"
+                                      required
+                                      [(ngModel)]="rateDefDescription"
+                                      (input)="descriptionEmpty($event.target.value)">
+                            </textarea>
+                        <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-danger': isCurrencyError}">
+                    <label class="control-label col-sm-2">Currency <span>*</span></label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="currency"
+                               [typeahead]="currencyList"
+                               typeaheadOptionField="currencyCode"
+                               [typeaheadMinLength]="0"
+                               placeholder="Currency"
+                               name="typecurrency"
+                               class="form-control"
+                               required
+                               (typeaheadOnSelect)="isCurrencyValid()"
+                               (input)="isCurrencyValid()">
+                        <span class="error" *ngIf="isCurrencyError">{{currencyError}}</span>
+                    </div>
+                    <span class="glyphicon glyphicon-plus info-tooltip"
+                          tooltip="Click here to Add a new currency to the list" placement="right"
+                          (click)="showAddCurrency=true;changeDialogTitle();lgModal.show();"></span>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-danger': isRateTypeError}">
+                    <label class="control-label col-sm-2">Rate Type <span>*</span></label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="rateType"
+                               [typeahead]="rateTypeList"
+                               typeaheadOptionField="rateTypeCode"
+                               [typeaheadMinLength]="0"
+                               autocomplete="off"
+                               placeholder="Rate Type"
+                               name="rateType"
+                               #rateTypeRef="ngModel"
+                               class="form-control"
+                               required
+                               (typeaheadOnSelect)="isRateTypeValid()"
+                               (input)="isRateTypeValid()">
+                        <span class="error" *ngIf="isRateTypeError">{{rateTypeError}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
+                    <label class="control-label col-sm-2">Tariff <span>*</span></label>
+                    <div class="col-sm-4">
+                        <input [(ngModel)]="tariff"
+                               [typeahead]="tariffList"
+                               [typeaheadMinLength]="0"
+                               typeaheadOptionField="tariffName"
+                               autocomplete="off"
+                               placeholder="Tariff"
+                               name="tariff"
+                               #tariffRef="ngModel"
+                               required
+                               class="form-control"
+                               required
+                               (typeaheadOnSelect)="isTariffValid()"
+                               (input)="isTariffValid()">
+                        <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
+                    </div>
+                    <span class="glyphicon glyphicon-plus info-tooltip"
+                          tooltip="Click here to Add a new tariff to the list" placement="right"
+                          (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tax</label>
+                    <div class="col-sm-4">
+                        <select multiple
+                                [(ngModel)]="rateTax"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist">
+                            <option
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}
+                            </option>
+                        </select>
+                    </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"
+                    ></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Add Sub Category:</label>
+                    <div class="col-sm-4">
+                        <label class="switch">
+                            <input type="checkbox"
+                                   (change)="onCheckBox()">
+                            <span class="slider round"></span>
+                        </label>
+                        &nbsp;&nbsp; <span class="glyphicon glyphicon-question-sign info-tooltip"
+                                           tooltip="Please enable this option In oder to add subcategories"
+                                           placement="right"></span>
+                    </div>
+                </div>
+                <app-ratecategory *ngIf="showSubcategory"
+                                  [categoryList]="categoryList"
+                                  [tariffList]="tariffList"
+                                  [rateCategories]="mappingList"
+                                  (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();"
+                                  (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
+
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2 btnContainer">
+                        <button type="submit" class="btn btn-primary animated fadeIn">Add</button>&nbsp;
+                        <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+    <!--<button (click)="showit()">show</button>-->
+</div>

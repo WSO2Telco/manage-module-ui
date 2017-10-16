@@ -1,0 +1,26 @@
+<div class="animated fadeInUp">
+ <div class="row">
+   <div class="col-sm-6">
+       <application-data-table
+               class="my"
+               [filter]="mySubscriptionFilter"
+               tableTitle="SUBSCRIPTION CREATIONS"
+               [dataSource]="mySubscriptions"
+               [isSubscription]="true"
+               (onApproveRejectTask)="onApproveRejectHandler($event)"
+               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
+   </div>
+   <div class="col-sm-6">
+       <application-data-table
+               class="group"
+               [filter]="groupSubscriptionFilter"
+               tableTitle="SUBSCRIPTION CREATIONS"
+               [isSubscription]="true"
+               [isSubscriptionOnly]="true"
+               [dataSource]="allSubscriptions"
+               (onAssignTask)="onAssignTaskHandler($event)"
+               (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
+   </div>
+ </div>
+</div>
+

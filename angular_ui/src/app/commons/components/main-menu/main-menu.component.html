@@ -1,0 +1,42 @@
+<ul *ngIf="isAdmin && isBilling" [ngClass]="{'is-expand':isExpand}">
+    <li *ngFor="let menu of menuSourceIfAdmin"
+        (click)="onClick(menu)"
+        [ngClass]="{'selected':menu.id==selectedMenu?.id}" class="{{menu.position}}"><span *ngIf="!isExpand"
+                                                                                           tooltip="{{menu.name}}"
+                                                                                           placement="right"><span
+            class="icon material-icons">{{menu.iconName}}</span></span>
+        <span class="menu-name animated fadeIn" *ngIf="isExpand"><span
+                class="icon material-icons">{{menu.iconName}}</span>{{menu.name}}</span>
+    </li>
+</ul>
+<ul *ngIf="isAdmin && !isBilling" [ngClass]="{'is-expand':isExpand}">
+    <li *ngFor="let menu of menuSourceIfAdminBillingDissable"
+        (click)="onClick(menu)"
+        [ngClass]="{'selected':menu.id==selectedMenu?.id}" class="{{menu.position}}"><span *ngIf="!isExpand"
+                                                                                           tooltip="{{menu.name}}"
+                                                                                           placement="right"><span
+            class="icon material-icons">{{menu.iconName}}</span></span>
+        <span class="menu-name animated fadeIn" *ngIf="isExpand"><span
+                class="icon material-icons">{{menu.iconName}}</span>{{menu.name}}</span>
+    </li>
+</ul>
+<ul *ngIf="!isAdmin && isBilling" [ngClass]="{'is-expand':isExpand}">
+    <li *ngFor="let menu of menuSourceIfOp"
+        (click)="onClick(menu)"
+        [ngClass]="{'selected':menu.id==selectedMenu?.id}" class="{{menu.position}}">
+        <span *ngIf="!isExpand" tooltip="{{menu.name}}" placement="right">
+            <span class="icon material-icons">{{menu.iconName}}</span></span>
+        <span class="menu-name animated fadeIn" *ngIf="isExpand"><span
+                class="icon material-icons">{{menu.iconName}}</span>{{menu.name}}</span>
+    </li>
+</ul>
+<ul *ngIf="!isAdmin && !isBilling" [ngClass]="{'is-expand':isExpand}">
+    <li *ngFor="let menu of menuSourceIfOpBillingDissable"
+        (click)="onClick(menu)"
+        [ngClass]="{'selected':menu.id==selectedMenu?.id}" class="{{menu.position}}">
+        <span *ngIf="!isExpand" tooltip="{{menu.name}}" placement="right">
+            <span class="icon material-icons">{{menu.iconName}}</span></span>
+        <span class="menu-name animated fadeIn" *ngIf="isExpand"><span
+                class="icon material-icons">{{menu.iconName}}</span>{{menu.name}}</span>
+    </li>
+</ul>
