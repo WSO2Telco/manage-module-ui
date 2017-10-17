@@ -1,4 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output} from '@angular/core';
+import {ReportingRemoteDataService} from '../../../data-providers/reporting-remote-data.service';
+import {ApplicationHistory} from '../../models/reporing-data-models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-responsive-table',
@@ -16,9 +19,22 @@ export class ResponsiveTableComponent implements OnInit {
   @Input()
   private fieldSet:string[];
 
-  constructor() { }
+  @Output()
+  private   applicationDetail: ApplicationHistory;
+
+  private operatorApprovals: ApplicationHistory[];
+  private subscriptions: ApplicationHistory[];
+
+  constructor(private router: Router) { }
 
   ngOnInit() {
+      this.dataSource = [];
+      this.applicationDetail = null;
+      this.operatorApprovals = [];
+      this.subscriptions = [];
   }
 
+  onNavApplication (id: number) {
+      this.router.navigateByUrl('/history/application/' + id);
+  }
 }

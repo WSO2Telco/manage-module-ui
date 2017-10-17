@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ApprovalRemoteDataService} from "../data-providers/approval-remote-data.service";
-import {MessageService} from "../commons/services/message.service";
+import {ApprovalRemoteDataService} from '../data-providers/approval-remote-data.service';
+import {MessageService} from '../commons/services/message.service';
 import {
     ApproveApplicationCreationTaskParam,
     ApproveSubscriptionCreationTaskParam, ApplicationTask
-} from "../commons/models/application-data-models";
-import {TableDataType} from "../commons/models/common-data-models";
-import {SlimLoadingBarService} from "ng2-slim-loading-bar";
+} from '../commons/models/application-data-models';
+import {TableDataType} from '../commons/models/common-data-models';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 @Injectable()
 export class ApprovalHelperService {
@@ -17,15 +17,21 @@ export class ApprovalHelperService {
     }
 
 
-    assignApplicationTask(dataType: string, taskId: number,callBack):void {
+    /**
+     * this function is used to assign applications/ subscriptions to the logged in user.
+     * @param dataType
+     * @param taskId
+     * @param callBack
+     */
+    assignApplicationTask(dataType: string, taskId: number, callBack): void {
 
         this.slimLoadingBarService.start();
 
         this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
             () => {
-                if (dataType == "APPLICATION") {
+                if (dataType == 'APPLICATION') {
                     this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                } else if (dataType == "SUBSCRIPTION") {
+                } else if (dataType == 'SUBSCRIPTION') {
                     this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
                 }
                 callBack();
@@ -33,32 +39,62 @@ export class ApprovalHelperService {
             (error) => {
                 this.message.error(error);
             },
-            ()=>{
+            () => {
                 this.slimLoadingBarService.complete();
             }
         );
     }
 
-    approveRejectTask(dataType:TableDataType,appTask:ApplicationTask,status):void{
+
+    /**
+     * this function is used to approve or reject applications and subscriptions
+     * @param dataType
+     * @param appTask
+     * @param status
+     */
+    approveRejectTask(dataType: TableDataType, appTask: ApplicationTask, status): void {
+
+        const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
+        const billing = JSON.parse(sessionStorage.getItem('loginUserInfo')).billing;
+        let role = false;
+
+        const completedByUser = JSON.parse(sessionStorage.getItem('loginUserInfo')).userName;
+
+        /** for loop will set the user role */
+        for (const entry of roleList) {
+            if (entry == 'manage-app-admin') {
+                role = true;
+            }
+        }
 
         this.slimLoadingBarService.start();
 
-        let applicationActions = (status:'APPROVED' | 'REJECTED') => {
+        /**
+         * for applications approval or rejections
+         * @param status
+         */
+        const applicationActions = (status: 'APPROVED' | 'REJECTED') => {
 
-            let param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
+            if (!billing) {
+                appTask.creditPlan = '';
+            }
+
+            const param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
             param.taskId = appTask.id;
-            param.description = appTask.toString();
+            param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
-            param.user = 'admin';
-            param.taskType = "application";
+            param.user = completedByUser;
+            param.taskType = 'application';
+            param.role = role;
+            param.creditPlan = appTask.creditPlan;
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
                 () => {
 
-                    if(status == 'APPROVED'){
+                    if (status == 'APPROVED') {
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
-                    }else{
+                    } else {
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
                     }
 
@@ -67,26 +103,36 @@ export class ApprovalHelperService {
                 (error) => {
                     this.message.error(error);
                 },
-                ()=>{
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );
         };
 
-        let subscriptionActions = (status:'APPROVED' | 'REJECTED') => {
-            let param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
+        /**
+         * for subscription approval or rejection
+         * @param status
+         */
+        const subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
+
+            if (!billing) {
+                appTask.selectedRate = '';
+            }
+            const param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
-            param.description = appTask.toString();
+            param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
-            param.user = 'admin';
-            param.taskType = "subscription";
+            param.user = completedByUser;
+            param.taskType = 'subscription';
+            param.role = role;
+            param.selectedRate = appTask.selectedRate;
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 () => {
-                    if(status == 'APPROVED'){
+                    if (status == 'APPROVED') {
                         this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
-                    }else{
+                    } else {
                         this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
                     }
 
@@ -95,13 +141,13 @@ export class ApprovalHelperService {
                 (error) => {
                     this.message.error(error);
                 },
-                ()=>{
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );
         };
 
-        let approveActions = {};
+        const approveActions = {};
         approveActions['APPLICATION'] = applicationActions;
         approveActions['SUBSCRIPTION'] = subscriptionActions;
 

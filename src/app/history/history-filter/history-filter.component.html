@@ -6,7 +6,6 @@
                 [(ngModel)]="filter.subscriber"
                 [typeaheadMinLength]="0"
                 [typeahead]="subscribers"
-                (typeaheadNoResults)="onNoSubscriberSelected($event)"
                 (typeaheadOnSelect)="onSubscriberChange()"
                 placeholder="Service Provider">
       </div>
@@ -17,10 +16,9 @@
                   typeaheadOptionField="name"
                   [typeahead]="applications"
                   (typeaheadOnSelect)="onApplicationChange($event)"
-                  (typeaheadNoResults)="onNoApplicationSelected($event)"
                   placeholder="Application">
        </div>
-       <div class="col-sm-3">
+       <div class="col-sm-3" *ngIf="isAdmin">
            <input type="text" class="form-control"
                   [(ngModel)]="filter.operator"
                   [typeaheadMinLength]="0"
@@ -29,13 +27,7 @@
                   placeholder="Operator">
        </div>
        <div class="col-sm-3">
-           <input type="text" class="form-control" placeholder="Status">
+           <button class="btn btn-default " (click)="onClearFilter()">Clear</button>
        </div>
    </div>
-    <div class="row">
-        <div class="col-sm-12 text-right">
-            <button class="btn btn-default btn-sm" (click)="onClearFilter()">Clear</button>
-            <button class="btn btn-primary btn-sm" (click)="onFilterCriteriaChange()">Search</button>
-        </div>
-    </div>
 </div>

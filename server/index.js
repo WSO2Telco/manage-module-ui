@@ -17,7 +17,7 @@ Glue.compose(Manifest, options, function (err, server) {
         path: config.applicationContext ? ('/' + config.applicationContext + '/{param*}') : '/{param*}',
         handler: {
             directory: {
-                path: 'server/public',
+                path: __dirname+'/public',
                 listing: false,
                 index: true
             }

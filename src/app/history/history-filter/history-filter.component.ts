@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
-import {ApprovalHistoryFilter, Application} from "../../commons/models/reporing-data-models";
+import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
+import {ApprovalHistoryFilter, Application} from '../../commons/models/reporing-data-models';
+import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-history-filter',
@@ -13,7 +14,8 @@ export class HistoryFilterComponent implements OnInit {
     private operators: string[];
     private applications: Application[];
     private selectedApplication: Application;
-
+    private loggedUser;
+    private isAdmin: boolean;
 
     @Input()
     private filter: ApprovalHistoryFilter;
@@ -22,10 +24,14 @@ export class HistoryFilterComponent implements OnInit {
     private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
 
-    constructor(private reportingService: ReportingRemoteDataService) {
+    constructor(private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
+
+        this.loggedUser = this.authService.loginUserInfo.getValue();
+        this.isAdmin = this.loggedUser.isAdmin;
+
         this.reportingService.SubscribersProvider.subscribe((subscribers) => {
             this.subscribers = subscribers;
         });

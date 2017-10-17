@@ -6,7 +6,10 @@ const applicationREST = require('./application_tasks_rest_service');
 const applicationDetailsREST = require('./application_details_rest_service');
 const applicationAssignREST = require('./application_assign_rest_service');
 const applicationCompleteRest = require('./application_task_complete_rest_service');
+const subscriptionCompleteRest = require('./subscription_task_complete_rest_service');
 const applicationHistoryREST = require('./application_history_rest_service');
+const operationRatesREST = require('./operation_rates_rest_service');
+const creditPlanREST = require('./credit_plan_rest_service');
 const APP_CONSTANT = require('./appication_const');
 
 
@@ -19,6 +22,7 @@ const APP_CONSTANT = require('./appication_const');
 const _getApplications = function (request, reply) {
 
     let appTaskResult;
+    let appsDetailsResult;
 
     let validateApplicationRequest = function (request) {
         let param = request.payload;
@@ -32,7 +36,7 @@ const _getApplications = function (request, reply) {
         }
     };
 
-    let responseAdaptor = function (appTaskResult, appDetailsResult) {
+    let responseAdaptor = function (appTaskResult, appDetailsResult, operationReatesDetails) {
         let adapted = {
             applicationTasks: [],
             metadata: {
@@ -44,13 +48,45 @@ const _getApplications = function (request, reply) {
             }
         };
 
-
         if (appTaskResult && appTaskResult.data) {
+
             adapted.applicationTasks = appTaskResult.data.map((task, index) => {
+
                 let details = appDetailsResult[index].reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
+
+
+                let relevantRates = [];
+
+                if (operationReatesDetails && operationReatesDetails[index].api) {
+
+                    let operationRates = operationReatesDetails[index].api.operations;
+                    let count = 0;
+                    for (const entry of operationRates) {
+
+                        let count2 = 0;
+                        let rateDefinitions = []
+                        for (const entry2 of entry.rates) {
+
+                            rateDefinitions[count2] = {
+                                rateDefId: entry2.operationRateId,
+                                rateDefName: entry2.rateDefName,
+                                rateDefDescription: entry2.rateDefDescription
+                            }
+                            count2++;
+                        }
+                        relevantRates[count] = {
+                            apiOperation: entry.apiOperationName,
+                            rateDefinitions: rateDefinitions
+                        };
+
+
+                        count++;
+                    }
+                }
+
 
                 let moCreated;
                 let isValidDate = false;
@@ -65,6 +101,7 @@ const _getApplications = function (request, reply) {
                 return {
                     id: task.id,
                     assignee: task.assignee,
+                    apiName: details['apiName'] || '',
                     createTime: {
                         date: (isValidDate && moCreated.format('DD-MMM-YYYY') ) || '',
                         time: (isValidDate && moCreated.format('HH:mm:ss') ) || '',
@@ -81,7 +118,10 @@ const _getApplications = function (request, reply) {
                     userName: details['userName'],
                     apiVersion: details['apiVersion'],
                     apiContext: details['apiContext'],
-                    subscriber: details['subscriber']
+                    subscriber: details['subscriber'],
+                    relevantRates: relevantRates,
+                    selectedRate: '',
+                    creditPlan: ''
                 }
             });
         }
@@ -89,9 +129,45 @@ const _getApplications = function (request, reply) {
         return adapted;
     };
 
-    let onAppDetailSuccess = function (appsDetails) {
-        reply(responseAdaptor(appTaskResult, appsDetails));
+    let onOperationReatesSuccess = function (operationReatesDetails) {
+        reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
+
+    let onOperationReatesError = function (operationReatesError) {
+        reply(operationReatesError);
+    };
+
+    let onAppDetailSuccess = function (appsDetails) {
+        let OperationReatesPromises;
+        if (appsDetails) {
+            appsDetailsResult = appsDetails;
+            OperationReatesPromises = appsDetails.map((appDetail, index) => {
+                let details = appsDetails[index].reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+
+                if (details['apiName']) {
+                    if (request.payload.isAdmin) {
+                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+                    } else {
+                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+                    }
+                } else {
+                    reply(responseAdaptor(appTaskResult, appsDetails, null));
+                }
+            });
+
+            Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
+
+        } else {
+            reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
+        }
+
+
+    };
+
 
     let onAppDetailsError = function (appDetailsError) {
         reply(appDetailsError);
@@ -103,7 +179,7 @@ const _getApplications = function (request, reply) {
         if (applicationTasksResult && applicationTasksResult.data) {
             appTaskResult = applicationTasksResult;
             appDetailsPromises = applicationTasksResult.data.map((appTask) => {
-                return applicationDetailsREST.Invoke(appTask.id);
+                return applicationDetailsREST.Invoke(appTask.id, request);
             });
 
             Q.all(appDetailsPromises).then(onAppDetailSuccess, onAppDetailsError);
@@ -118,7 +194,7 @@ const _getApplications = function (request, reply) {
     };
 
     if (validateApplicationRequest(request)) {
-        applicationREST.Invoke(request.payload).then(onApplicationSuccess, onApplicationError);
+        applicationREST.Invoke(request).then(onApplicationSuccess, onApplicationError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -181,7 +257,7 @@ const _getAppStat = function (request, reply) {
 
 
     if (requestValidator(request)) {
-        //Application Creations for user
+        /**Application Creations for user */
         promises.push(applicationREST.Invoke({
             assignee: param.assignee,
             candidateGroups: null,
@@ -240,7 +316,7 @@ const _assignApplicationTaskToUser = function (request, reply) {
     };
 
     if (validateRequest(request)) {
-        applicationAssignREST.Invoke(request.payload).then(onAssignSuccess, onAssignFail);
+        applicationAssignREST.Invoke(request).then(onAssignSuccess, onAssignFail);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -259,7 +335,7 @@ const _approveApplicationCreation = function (request, reply) {
 
     let validateRequest = function (request) {
         let data = request.payload;
-        if (data && data.taskId && data.selectedTier && data.status && data.description) {
+        if (data && data.taskId && data.selectedTier && data.status) {
             return true;
         }
         return false;
@@ -274,10 +350,20 @@ const _approveApplicationCreation = function (request, reply) {
     };
 
     if (validateRequest(request)) {
-        let param = request.payload;
-        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
 
-        applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
+        let param = request.payload;
+
+        if (param.role) {
+            /** if hub admin */
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
+            applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
+        } else {
+            /** if operator admin */
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+            param.selectedTier = null;
+            applicationCompleteRest.invokeApplicationCompleteTask(request).then(onApproveSuccess, onApproveError);
+        }
+
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -292,7 +378,7 @@ const _approveApplicationCreation = function (request, reply) {
 const _approveSubscriptionCreation = function (request, reply) {
     let validateRequest = function (request) {
         let data = request.payload;
-        if (data && data.taskId && data.selectedTier && data.status && data.description) {
+        if (data && data.taskId && data.selectedTier && data.status) {
             return true;
         }
         return false;
@@ -308,11 +394,14 @@ const _approveSubscriptionCreation = function (request, reply) {
 
     if (validateRequest(request)) {
         let param = request.payload;
-        param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
 
-        //Invoke the Same Service as Application Creation approval coz same backend implementation
-        //If requirement change, plug another Invoker here
-        applicationCompleteRest.Invoke(param).then(onApproveSuccess, onApproveError);
+        if (param.role) {
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.HUB_ADMIN_APPROVAL;
+        } else {
+            param.adminApprovalLevel = APP_CONSTANT.APPROVAL_TYPES.OPERATOR_ADMIN_APPROVAL;
+            param.selectedTier = null;
+        }
+        subscriptionCompleteRest.Invoke(request).then(onApproveSuccess, onApproveError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
@@ -333,10 +422,22 @@ const _getGraphData = function (request, reply) {
             reply(error);
         };
 
-        applicationHistoryREST.Invoke(request.params.type).then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type, request.params.user,request).then(onSuccess, onError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
+};
+
+const _getCreditPlan = function (request, reply) {
+    let onSuccess = function (result) {
+        reply(result);
+    };
+
+    let onError = function (error) {
+        reply(error);
+    };
+
+    creditPlanREST.invokeCreditPlanRest(request).then(onSuccess, onError);
 };
 
 
@@ -347,6 +448,7 @@ function applicationService() {
         approveSubscriptionCreation: _approveSubscriptionCreation,
         getApplicationStatistics: _getAppStat,
         getGraphData: _getGraphData,
+        getCreditPlan: _getCreditPlan,
         searchApplicationsForApproval: _getApplications
     };
 }

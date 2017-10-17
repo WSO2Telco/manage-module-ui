@@ -33,14 +33,14 @@ const goodOptions = {
 module.exports = {
     "server": {
         "app": {
-            "name": "workflow-manager"
+            "name": "workflow-manager-ui"
         }
     },
     "connections": [
         {
             "port": config.serverPort,
             "labels": [
-                "workflow-manager"
+                "workflow-manager-ui"
             ]
         }
     ],
@@ -69,6 +69,24 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./rate"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
+                "register": "./blacklist"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
+                "register": "./whitelist"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./common"
             },
             "options": getOptions({}, true)
@@ -81,9 +99,16 @@ module.exports = {
         },
         {
             "plugin": {
+                "register": "./quotacap"
+            },
+            "options": getOptions({}, true)
+        },
+        {
+            "plugin": {
                 "register": "./reports"
             },
             "options": getOptions({}, true)
         }
+
     ]
 };

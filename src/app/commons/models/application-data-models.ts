@@ -9,6 +9,8 @@ export class DateTimeInfo {
 export class ApplicationTask {
     id: number;
     assignee: string;
+    apiName: string;
+    apiVersion: string;
     createTime: DateTimeInfo;
     taskDescription: string;
     applicationId: number;
@@ -16,15 +18,30 @@ export class ApplicationTask {
     applicationDescription: string;
     operators: string;
     tier: string;
+    creditPlan: string;
     allTiers: string[];
     userName: string;
     isModified: boolean;
     status: string;
     comment: string;
+    relevantRates: RelevantRates[];
+    selectedRate: string;
+    subscriber: string;
 
     toString() {
         return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
     }
+}
+
+export class RelevantRates {
+    apiOperation: string;
+    rateDefinitions: OperationRateDefinitions[];
+}
+
+export class OperationRateDefinitions{
+    rateDefName: string;
+    rateDefId: number;
+    rateDefDescription: string;
 }
 
 export class MetaData {
@@ -47,7 +64,7 @@ export class PaginationInfo{
 
 export class ApplicationTaskResult {
     applicationTasks: ApplicationTask[];
-    meteData: MetaData
+    meteData: MetaData;
 }
 
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
@@ -56,8 +73,10 @@ export class ApplicationTaskSearchParam {
     candidateGroups: string;
     processType: PROCESS_TYPE;
     assignee: string;
+    isAdmin: boolean;
+    operator: string;
     start:number;
-    size: number
+    size: number;
 }
 
 export class AssignApplicationTaskParam {
@@ -72,6 +91,8 @@ export class ApproveApplicationCreationTaskParam {
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
+    role: boolean;
+    creditPlan: string;
 
     toString() {
         return this.taskId + ', ' + this.description + ', ' + this.selectedTier + ', ' + this.status;
@@ -85,6 +106,8 @@ export class ApproveSubscriptionCreationTaskParam {
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
+    role: boolean;
+    selectedRate: string;
 }
 
 export class ApprovalEvent {
@@ -102,7 +125,9 @@ export class ApprovalEvent {
 export class ApplicationTaskFilter {
     ids: number[] = [];
     appNames: string[] = [];
+    apiNames: string[] = [];
     users: string[] = [];
+    subscribers: string[] = [];
     fromDate: string;
     toDate: string;
     dataType: TableDataType;

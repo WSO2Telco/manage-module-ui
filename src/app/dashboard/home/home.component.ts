@@ -2,13 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {
     ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
     ApplicationTaskResult
-} from "../../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
-import {DashboardData} from "../../commons/models/dashboard-data-models";
-import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
-import {MessageService} from "../../commons/services/message.service";
-import {ApprovalHelperService} from "../../approvals/approval-helper.service";
-import {TableDataType} from "../../commons/models/common-data-models";
+} from '../../commons/models/application-data-models';
+import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
+import {DashboardData} from '../../commons/models/dashboard-data-models';
+import {DashboardRemoteDataService} from '../../data-providers/dashboard-remote-data.service';
+import {MessageService} from '../../commons/services/message.service';
+import {ApprovalHelperService} from '../../approvals/approval-helper.service';
+import {TableDataType} from '../../commons/models/common-data-models';
 
 @Component({
     selector: 'app-home',
@@ -27,10 +27,10 @@ export class HomeComponent implements OnInit {
 
     private dashboardData: DashboardData;
 
-    private myApplicationFilter:ApplicationTaskFilter;
-    private mySubscriptionFilter:ApplicationTaskFilter;
-    private groupApplicationFilter:ApplicationTaskFilter;
-    private groupSubscriptionFilter:ApplicationTaskFilter;
+    private myApplicationFilter: ApplicationTaskFilter;
+    private mySubscriptionFilter: ApplicationTaskFilter;
+    private groupApplicationFilter: ApplicationTaskFilter;
+    private groupSubscriptionFilter: ApplicationTaskFilter;
 
 
     constructor(private approvalService: ApprovalRemoteDataService,
@@ -41,10 +41,10 @@ export class HomeComponent implements OnInit {
 
     ngOnInit() {
 
-        this.myApplicationFilter = new ApplicationTaskFilter(new TableDataType('USER','APPLICATION'));
-        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER','SUBSCRIPTION'));
-        this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP','APPLICATION'));
-        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP','SUBSCRIPTION'));
+        this.myApplicationFilter = new ApplicationTaskFilter(new TableDataType('USER', 'APPLICATION'));
+        this.mySubscriptionFilter = new ApplicationTaskFilter(new TableDataType('USER', 'SUBSCRIPTION'));
+        this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'));
+        this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'));
 
         this.approvalService.MyApplicationCreationTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
@@ -67,10 +67,10 @@ export class HomeComponent implements OnInit {
 
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
-                this.allSubscriptions = response
+                this.allSubscriptions = response;
             },
             (error) => {
-                this.message.error(error)
+                this.message.error(error);
             });
 
 
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
-        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id,()=>{
+        this.approvalHelperService.assignApplicationTask(event.dataType.dataType, event.task.id, () => {
             this.approvalService.getAllTasks();
         });
     }

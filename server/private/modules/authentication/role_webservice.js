@@ -19,11 +19,12 @@ const getRolesRequest = function (username) {
 
 function invokeRoleWebService (userName) {
   let deferred = Q.defer();
+  let auth = config.adminUserName + ':' + config.adminPassword;
 
   const getRoleRequestOptions = {
     rejectUnauthorized: false,
     headers: {
-      Authorization: 'Basic ' + new Buffer('admin:admin').toString('base64')
+      Authorization: 'Basic ' + new Buffer(auth).toString('base64')
     },
     payload: getRolesRequest(userName)
   };

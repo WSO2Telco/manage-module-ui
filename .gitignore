@@ -5,3 +5,5 @@ node_modules
 /npm-debug.log
 npm-debug.log
 /bundle/
+/server/public
+.vscode

@@ -48,7 +48,8 @@ export class ApprovalRemoteDataService {
         search: this.apiContext + '/applications/search',
         assign: this.apiContext + '/applications/assign',
         approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
-        approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation'
+        approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation',
+        getCreditPlan: this.apiContext + '/applications/getcreditplan'
     };
 
     private actionMap = {
@@ -93,9 +94,11 @@ export class ApprovalRemoteDataService {
     private getFilteredObservable(appTask: ApplicationTask[], filter: ApplicationTaskFilter): ApplicationTask[] {
         if (appTask && filter) {
             return appTask
+                .filter((task: ApplicationTask) => filter.apiNames.length == 0 || filter.apiNames.indexOf(task.apiName) >= 0)
                 .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
                 .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
                 .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
+                .filter((task: ApplicationTask) => filter.subscribers.length == 0 || filter.subscribers.indexOf(task.subscriber) >= 0)
                 .reduce((acc, curr) => {
                     acc.push(curr);
                     return acc;
@@ -110,7 +113,9 @@ export class ApprovalRemoteDataService {
         let loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName,
+                assignee: loginInfo.userName.toLowerCase(),
+                isAdmin: loginInfo.isAdmin,
+                operator: '',
                 size: 100,
                 start: 0,
                 processType: "APPLICATION_CREATION",
@@ -124,10 +129,11 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -153,6 +159,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
+                isAdmin: loginInfo.isAdmin,
+                operator: '',
                 processType: "APPLICATION_CREATION",
                 size: 100,
                 start: 0,
@@ -167,7 +175,7 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
@@ -191,7 +199,9 @@ export class ApprovalRemoteDataService {
         let loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName,
+                assignee: loginInfo.userName.toLowerCase(),
+                isAdmin: loginInfo.isAdmin,
+                operator: loginInfo.operator,
                 size: 100,
                 start: 0,
                 processType: "SUBSCRIPTION_CREATION",
@@ -206,10 +216,11 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -231,6 +242,8 @@ export class ApprovalRemoteDataService {
         if (!!loginInfo) {
             const param: ApplicationTaskSearchParam = {
                 assignee: null,
+                isAdmin: loginInfo.isAdmin,
+                operator: loginInfo.operator,
                 size: 100,
                 start: 0,
                 processType: "SUBSCRIPTION_CREATION",
@@ -245,10 +258,11 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.post(this.apiEndpoints['search'], param, this.options)
+            this.http.post(this.apiEndpoints['search'], param, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
                     (result: ApplicationTaskResult) => {
+
                         if (!!filter) {
                             result.applicationTasks = this.getFilteredObservable(result.applicationTasks, filter);
                         }
@@ -272,7 +286,7 @@ export class ApprovalRemoteDataService {
             param.assignee = loginInfo.userName;
             param.taskId = taskId;
 
-            return this.http.post(this.apiEndpoints['assign'], param, this.options)
+            return this.http.post(this.apiEndpoints['assign'], param, this.getOptions())
                 .map((response: Response) => {
                     this.modifiedApplicationTaskIDs.push(taskId);
                     return response.json();
@@ -285,14 +299,22 @@ export class ApprovalRemoteDataService {
         return this.modifiedApplicationTaskIDs;
     }
 
+    /**
+     * this function will be called when we approve a application
+     * */
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
-        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.options)
+        return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     }
 
+    /**
+     * this function will be called when we approve a subscription
+     **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
-        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.options)
+
+       // console.log(JSON.stringify(param));
+        return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
     }
@@ -304,8 +326,31 @@ export class ApprovalRemoteDataService {
         this.getUserGroupAppSubscriptionTask();
     }
 
+    getCreditPlan() {
+        return this.http.get(this.apiEndpoints['getCreditPlan'], this.options)
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Unable to Load Credit Plan',
+                error: error.json()
+            }));
+    }
+
     getFilteredResult(filter: ApplicationTaskFilter): void {
         this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
+    }
+
+    getOptions(): RequestOptions {
+        const token = this.authService.loginUserInfo.getValue().token;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
     }
 
 }

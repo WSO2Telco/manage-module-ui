@@ -1,4 +1,4 @@
-# Workflow UI
+# Manage Application
 
 ## Setting up Dev Environment
 install nodejs
@@ -27,6 +27,8 @@ npm run build
 
 
 ## Server Deployment
+
+create a bundle directory in the project root
 
 Run 
 ```bash
@@ -63,3 +65,4 @@ wm_business_process_engine_user     |kermit
 wm_business_process_engine_password |kermit
 wm_allowed_roles                    |admin,subscriber,operator1-admin-role,operator2-admin-role,operator2-cc-role"
 
+To use .env file to override default setting create a .env file in the /server directory and add the EnvVariables need to override.

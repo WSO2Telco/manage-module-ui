@@ -5,18 +5,18 @@ const config = require('../../config/application_config');
 const wreck = require('wreck');
 const moment = require('moment');
 
-const historyREST = function(type){
+const historyREST = function (type, user, request) {
 
-    let last6Months  = [];
+    let last6Months = [];
     let promiseCol = [];
 
-    let adapted ={
-        graphData : [
+    let adapted = {
+        graphData: [
             {
-                data : [],
+                data: [],
                 label: String(type).toUpperCase()
             }],
-        xAxisLabels : []
+        xAxisLabels: []
     };
 
     let deferred = Q.defer();
@@ -25,22 +25,22 @@ const historyREST = function(type){
 
         let process = (type == 'applications') ? 'application_creation_approval_process' : 'subscription_approval_process';
 
-        return config.businessProcessEngineBaseUrl + '/history/historic-task-instances?taskCreatedAfter='+month.start.format()+'&taskCreatedBefore='+month.end.format()+'&processDefinitionKey='+process;
+        return config.businessProcessEngineBaseUrl + '/history/historic-task-instances?taskCreatedAfter=' + month.start.format() + '&taskCreatedBefore=' + month.end.format() + '&processDefinitionKey=' + process + '&taskAssignee=' + user;
     };
 
     let getRequestOptions = function () {
         return {
             rejectUnauthorized: false,
-            json : true,
+            json: true,
             headers: {
-                Authorization: 'Basic ' + new Buffer(config.businessProcessEngineUserName+':'+ config.businessProcessEnginePassword).toString('base64')
+                'Authorization': request.headers.authorization
             },
         };
     };
 
     let responseAdaptor = function (responseCol) {
-        if(!!responseCol){
-            responseCol.forEach((response,key)=>{
+        if (!!responseCol) {
+            responseCol.forEach((response, key) => {
                 adapted.graphData[0].data.push(response.total || 0);
             });
         }
@@ -48,21 +48,21 @@ const historyREST = function(type){
         return adapted;
     };
 
-    for (var i = 0; i <6; i++) {
-        let month = moment().subtract(5-i, 'months');
+    for (var i = 0; i < 6; i++) {
+        let month = moment().subtract(5 - i, 'months');
         last6Months[i] = {
-            start : moment(month).startOf('month').set({'hour':'00','minute':'00','second':'00'}),
-            end : moment(month).endOf('month').set({'hour':'00','minute':'00','second':'00'})
+            start: moment(month).startOf('month').set({'hour': '00', 'minute': '00', 'second': '00'}),
+            end: moment(month).endOf('month').set({'hour': '00', 'minute': '00', 'second': '00'})
         };
         adapted.xAxisLabels.push(month.format('MMM'));
     }
 
-    last6Months.forEach((month)=>{
+    last6Months.forEach((month) => {
         let monthDeferred = Q.defer();
         wreck.get(getEndpointUrl(month), getRequestOptions(), (error, res, payload) => {
-            if(error){
+            if (error) {
                 monthDeferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
-            }else{
+            } else {
                 monthDeferred.resolve(payload);
             }
         });
@@ -70,10 +70,10 @@ const historyREST = function(type){
     });
 
     Q.all(promiseCol).then(
-        (resultCol)=>{
+        (resultCol) => {
             deferred.resolve(responseAdaptor(resultCol));
         },
-        (error)=>{
+        (error) => {
             deferred.reject(error);
         }
     );
@@ -83,5 +83,5 @@ const historyREST = function(type){
 };
 
 module.exports = {
-    Invoke : historyREST
+    Invoke: historyREST
 };

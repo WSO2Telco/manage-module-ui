@@ -13,8 +13,13 @@ module.exports = [
     },
     {
         method : 'GET',
-        path : '/api/applications/graph/{type}',
+        path : '/api/applications/graph/{type}/{user}',
         handler : ApplicationService.getGraphData
+    },
+    {
+        method : 'GET',
+        path : '/api/applications/getcreditplan',
+        handler : ApplicationService.getCreditPlan
     },
     {
         method: 'POST',

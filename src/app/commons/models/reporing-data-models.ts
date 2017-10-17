@@ -9,6 +9,17 @@ export class ApprovalHistoryFilter {
     count: number = 10;
 }
 
+export class ApprovalRateFilter {
+    fromDate: string = '';
+    toDate: string = '';
+    subscriber: string = '';
+    api: string = '';
+    applicationId: number = 0;
+    operator: string = '';
+    offset: number = 0;
+    count: number = 10;
+}
+
 export class ApprovalHistory {
     applicationId: number = 0;
     applicationName: string;
@@ -41,4 +52,25 @@ export class Application {
     subscriber: Subscriber;
     tier: string;
     uuid: string;
+}
+
+export class ApplicationHistory {
+    name: string;
+    status: string;
+    operatorApprovals: OperatorApprovals;
+    subscriptions: Subscriptions;
+}
+
+export class OperatorApprovals {
+    operatorName: string;
+    approvalStatus: string;
+}
+
+export class Subscriptions {
+    name: string;
+    version: string;
+    tier: string;
+    adminApprovalStatus: string;
+    operatorApprovals: OperatorApprovals;
+    lastUpdated: string;
 }
