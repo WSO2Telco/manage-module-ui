@@ -7,3 +7,4 @@ ui/npm-debug.log
 .vscode
 /target
 manage-service.iml
+/WebContent/public
