@@ -1,10 +1,9 @@
-node_modules
 .idea
 /dist/
-/angular_ui/node_modules/
-/angular_ui/npm-debug.log
-angular_ui/npm-debug.log
-/angular_ui/bundle/
-/angular_ui/server
+/ui/node_modules/
+/ui/npm-debug.log
+ui/npm-debug.log
+/ui/server
 .vscode
-/manageservice/target
+/target
+manage-service.iml
