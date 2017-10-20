@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.resource.workflow;
 
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.ApplicationDetailRequest;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.workflow.ApplicationDetailRequest;
 import com.wso2telco.dep.manageservice.resource.service.workflow.ApplicationSearchService;
 
 import javax.ws.rs.*;

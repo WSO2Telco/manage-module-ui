@@ -4,21 +4,21 @@ package com.wso2telco.dep.manageservice.resource.service;
  * Created by manoj on 9/15/17.
  */
 
-import com.wso2telco.dep.manageservice.resource.dao.AppDAO;
+import com.wso2telco.dep.manageservice.resource.model.App;
 
 public class AppService {
 
-    private AppDAO appDAO;
+    private App appDAO;
 
     public AppService() {
-        appDAO = new AppDAO();
+        appDAO = new App();
     }
 
-    public void setAppDAO(AppDAO appDAO) {
+    public void setAppDAO(App appDAO) {
         this.appDAO = appDAO;
     }
 
-    public AppDAO getAppDAO() {
+    public App getAppDAO() {
         return appDAO;
     }
 }

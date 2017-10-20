@@ -1,8 +1,9 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.CategoryDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Category;
+import com.wso2telco.dep.manageservice.resource.util.Messages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -20,8 +21,7 @@ public class CategoryService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(CategoryService.class);
-    private static final String ADDING_ERROR = "Error Adding New Category";
-    private static final String LOADING_ERROR = "Error Loading Category List";
+
 
     public CategoryService() {
         this.client = HttpClientBuilder.create().build();
@@ -29,27 +29,27 @@ public class CategoryService {
     }
 
     public Callback getCategories(String authHeader) {
-        HttpGet httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "categories");
+        HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/").append("categories").toString());
 
         httpGet.addHeader("Authorization", authHeader);
 
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                CategoryDAO[] categories = mapper.readValue(response.getEntity().getContent(), CategoryDAO[].class);
+                Category[] categories = mapper.readValue(response.getEntity().getContent(), Category[].class);
                 return new Callback().setPayload(categories).setSuccess(true).setMessage("Rate Category List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading categories from hub");
-                return new Callback().setPayload(null).setSuccess(false).setMessage(LOADING_ERROR);
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getName());
             }
 
         } catch (IOException e) {
             log.error(" Exception while loading categories from hub " + e);
-            return new Callback().setPayload(null).setSuccess(false).setMessage(LOADING_ERROR);
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getName());
         }
     }
 
-    public Callback setCategory(CategoryDAO categoryDAO, String authHeader) {
+    public Callback setCategory(Category categoryDAO, String authHeader) {
         HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "categories");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
@@ -61,23 +61,23 @@ public class CategoryService {
                 httpPost.setEntity(new StringEntity(mapper.writeValueAsString(categoryDAO)));
                 response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
-                    CategoryDAO category = mapper.readValue(response.getEntity().getContent(), CategoryDAO.class);
+                    Category category = mapper.readValue(response.getEntity().getContent(), Category.class);
                     return new Callback().setPayload(category).setSuccess(true).setMessage("New Category Created Successfully");
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error while adding new Category to hub");
-                    return new Callback().setPayload(null).setSuccess(false).setMessage(ADDING_ERROR);
+                    return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
                 }
             } catch (IOException e) {
                 log.error(" Exception while adding new Category to hub " + e);
-                return new Callback().setPayload(null).setSuccess(false).setMessage(ADDING_ERROR);
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
             }
         } else {
             log.error("Add New Category : Invalid Request");
-            return new Callback().setPayload(null).setSuccess(false).setMessage(ADDING_ERROR);
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
         }
     }
 
-    public boolean validateRequest(CategoryDAO categoryDAO) {
+    public boolean validateRequest(Category categoryDAO) {
         return (categoryDAO != null);
     }
 }

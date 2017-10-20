@@ -1,6 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.service.rate.TaxService;
 
 import javax.ws.rs.*;

@@ -5,8 +5,10 @@ package com.wso2telco.dep.manageservice.resource.service.rate;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.CurrencyDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Currency;
+import com.wso2telco.dep.manageservice.resource.util.ApplicationConfiguration;
+import com.wso2telco.dep.manageservice.resource.util.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -26,8 +28,9 @@ public class CurrencyService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(CurrencyService.class);
-    private CurrencyDAO[] currencyDAOS;
-    private CurrencyDAO currencyDAO;
+    private Currency[] currencyDAOS;
+    private Currency currencyDAO;
+    private Configuration configuration = ApplicationConfiguration.readAppConfig();
 
     public CurrencyService() {
         this.client = HttpClientBuilder.create().build();
@@ -36,13 +39,15 @@ public class CurrencyService {
 
     public Callback getCurrencies(String authHeader) throws Exception {
         httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+        // Sample usage of config Reader
+//        httpGet = new HttpGet(configuration.getRateServiceUrl() + "currencies");
         /** add headers*/
         httpGet.setHeader("Authorization", authHeader);
 
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.currencyDAOS = mapper.readValue(response.getEntity().getContent(), CurrencyDAO[].class);
+                this.currencyDAOS = mapper.readValue(response.getEntity().getContent(), Currency[].class);
                 return new Callback().setPayload(this.currencyDAOS).setSuccess(true).setMessage("Rate Currency List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading currencies from hub");
@@ -55,7 +60,7 @@ public class CurrencyService {
         }
     }
 
-    public Callback setCurrency(CurrencyDAO currencyDAO, String authHeader) throws Exception {
+    public Callback setCurrency(Currency currencyDAO, String authHeader) throws Exception {
         httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
@@ -67,7 +72,7 @@ public class CurrencyService {
             try {
                 response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
-                    this.currencyDAO = mapper.readValue(response.getEntity().getContent(), CurrencyDAO.class);
+                    this.currencyDAO = mapper.readValue(response.getEntity().getContent(), Currency.class);
                     return new Callback().setPayload(this.currencyDAO).setSuccess(true).setMessage("New Currency Added Successfully");
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error while adding new currency to hub");
@@ -84,7 +89,7 @@ public class CurrencyService {
         }
     }
 
-    public boolean validateRequest(CurrencyDAO currencyDAO){
+    public boolean validateRequest(Currency currencyDAO){
         if(currencyDAO.getCurrencyCode() != null){
             return true;
         }else {
