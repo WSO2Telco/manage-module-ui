@@ -1,10 +1,10 @@
 package com.wso2telco.dep.manageservice.resource.service.workflow;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.ApprovalRequest;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.ApproveEntity;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.Variable;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.workflow.ApprovalRequest;
+import com.wso2telco.dep.manageservice.resource.model.workflow.ApproveEntity;
+import com.wso2telco.dep.manageservice.resource.model.workflow.Variable;
 import com.wso2telco.dep.manageservice.resource.service.rate.CurrencyService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

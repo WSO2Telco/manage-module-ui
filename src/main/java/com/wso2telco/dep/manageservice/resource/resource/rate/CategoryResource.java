@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.CategoryDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Category;
 import com.wso2telco.dep.manageservice.resource.service.rate.CategoryService;
 
 import javax.ws.rs.*;
@@ -23,7 +23,7 @@ public class CategoryResource {
     }
 
     @POST
-    public Response setCategory(@HeaderParam("authorization") String authHeader, CategoryDAO categoryDAO) throws Exception {
+    public Response setCategory(@HeaderParam("authorization") String authHeader, Category categoryDAO) throws Exception {
         callback = categoryService.setCategory(categoryDAO, authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }

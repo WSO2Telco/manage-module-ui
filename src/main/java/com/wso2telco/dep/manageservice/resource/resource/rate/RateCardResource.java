@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.RateCardDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
 import com.wso2telco.dep.manageservice.resource.service.rate.RateCardService;
 
 import javax.ws.rs.*;
@@ -23,7 +23,7 @@ public class RateCardResource {
     }
 
     @POST
-    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCardDAO rateCardDAO) throws Exception {
+    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCardDAO) throws Exception {
         callback = rateCardService.setRateCard(rateCardDAO, authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }

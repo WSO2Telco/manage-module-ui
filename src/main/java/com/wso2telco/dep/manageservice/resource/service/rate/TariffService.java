@@ -1,8 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.TariffDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Tariff;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -24,8 +24,8 @@ public class TariffService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(TariffService.class);
-    private TariffDAO tariffDAO;
-    private TariffDAO[] tariffDAOS;
+    private Tariff tariffDAO;
+    private Tariff[] tariffDAOS;
 
     public TariffService() {
         this.client = HttpClientBuilder.create().build();
@@ -39,7 +39,7 @@ public class TariffService {
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.tariffDAOS = mapper.readValue(response.getEntity().getContent(), TariffDAO[].class);
+                this.tariffDAOS = mapper.readValue(response.getEntity().getContent(), Tariff[].class);
                 return new Callback().setPayload(this.tariffDAOS).setSuccess(true).setMessage("Rate Tariff List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading Tariff from hub");
@@ -52,7 +52,7 @@ public class TariffService {
         }
     }
 
-    public Callback setTarif(TariffDAO tariffDAO, String authHeader) throws Exception {
+    public Callback setTarif(Tariff tariffDAO, String authHeader) throws Exception {
         httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "tariffs");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
@@ -64,7 +64,7 @@ public class TariffService {
             try {
                 response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
-                    this.tariffDAO = mapper.readValue(response.getEntity().getContent(), TariffDAO.class);
+                    this.tariffDAO = mapper.readValue(response.getEntity().getContent(), Tariff.class);
                     return new Callback().setPayload(this.tariffDAOS).setSuccess(true).setMessage("New Tariff Created Successfully");
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error while adding new tariff to hub");
@@ -81,7 +81,7 @@ public class TariffService {
         }
     }
 
-    public boolean validateRequest(TariffDAO tariffDAO) {
+    public boolean validateRequest(Tariff tariffDAO) {
         if (tariffDAO != null) {
             return true;
         } else {

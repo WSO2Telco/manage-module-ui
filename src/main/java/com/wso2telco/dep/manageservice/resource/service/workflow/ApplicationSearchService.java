@@ -1,10 +1,11 @@
 package com.wso2telco.dep.manageservice.resource.service.workflow;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.RateDefinitionDAO;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.*;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateDefinition;
+import com.wso2telco.dep.manageservice.resource.model.workflow.*;
 import com.wso2telco.dep.manageservice.resource.service.rate.CurrencyService;
+import com.wso2telco.dep.manageservice.resource.util.Messages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -14,6 +15,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,11 +24,13 @@ import java.util.*;
  * Created by manoj on 10/16/17.
  */
 public class ApplicationSearchService {
-    private HttpGet httpGet;
     private HttpResponse response;
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(CurrencyService.class);
+
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String API_NAME = "apiName";
 
     public ApplicationSearchService() {
         this.client = HttpClientBuilder.create().build();
@@ -47,21 +51,21 @@ public class ApplicationSearchService {
                     if (applicationDetailsResponses != null) {
                         if (request.getProcessType().equals("SUBSCRIPTION_CREATION")) {
                             operationRateResponses = getOperationRates(authHeader, applicationDetailsResponses, request);
-                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, operationRateResponses)).setSuccess(true).setMessage("Approval Tasks Loaded");
+                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, operationRateResponses)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
                         } else {
-                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, null)).setSuccess(true).setMessage("Approval Tasks Loaded");
+                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
                         }
                     } else {
-                        return new Callback().setPayload(null).setSuccess(false).setMessage("Error Loading Approval Tasks");
+                        return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
                     }
                 } else {
-                    return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, null, null)).setSuccess(true).setMessage("Approval Tasks Loaded");
+                    return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, null, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
                 }
             } else {
-                return new Callback().setPayload(null).setSuccess(false).setMessage("Error Loading Approval Tasks");
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
             }
         } else {
-            return new Callback().setPayload(null).setSuccess(false).setMessage("Error Loading Approval Tasks");
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
         }
     }
 
@@ -72,12 +76,7 @@ public class ApplicationSearchService {
      * @return
      */
     public boolean validateApplicationRequest(ApplicationDetailRequest requestDAO) {
-        if (requestDAO != null) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return (requestDAO != null);
     }
 
     /**
@@ -114,9 +113,9 @@ public class ApplicationSearchService {
             url += "&processDefinitionKey=subscription_approval_process";
         }
 
-        httpGet = new HttpGet(url);
+        HttpGet httpGet = new HttpGet(url);
         /** add headers */
-        httpGet.setHeader("Authorization", authHeader);
+        httpGet.setHeader(AUTHORIZATION, authHeader);
 
         try {
             response = client.execute(httpGet);
@@ -128,8 +127,7 @@ public class ApplicationSearchService {
                 return null;
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            log.error(response.getStatusLine().getStatusCode() + " Exception while loading approval tasks from hub");
+            log.error(" Exception while loading approval tasks from hub " + e);
             return null;
         }
 
@@ -137,15 +135,14 @@ public class ApplicationSearchService {
     }
 
     public List<ApplicationDetailsResponse[]> getApplicationDetails(String authHeader, TaskDetailsResponse responseDAO) {
-        HttpGet httpGet;
         String url;
         ApplicationDetailsResponse[] detailsResponseDAO;
-        List<ApplicationDetailsResponse[]> detailsResponseDAOS = new ArrayList<ApplicationDetailsResponse[]>();
+        List<ApplicationDetailsResponse[]> detailsResponseDAOS = new ArrayList<>();
         for (int i = 0; i < responseDAO.getData().size(); i++) {
             url = "http://localhost:9763/activiti-rest/service" + "/runtime/tasks/" + responseDAO.getData().get(i).getId() + "/variables";
-            httpGet = new HttpGet(url);
+            HttpGet httpGet = new HttpGet(url);
             /** add headers */
-            httpGet.setHeader("Authorization", authHeader);
+            httpGet.setHeader(AUTHORIZATION, authHeader);
 
             try {
                 response = client.execute(httpGet);
@@ -157,8 +154,7 @@ public class ApplicationSearchService {
                     return null;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                log.error(response.getStatusLine().getStatusCode() + " Exception while loading application of task id from hub");
+                log.error(" Exception while loading application of task id from hub " + e);
                 return null;
             }
         }
@@ -168,8 +164,8 @@ public class ApplicationSearchService {
 
     public List<OperationRateResponse> getOperationRates(String authHeader, List<ApplicationDetailsResponse[]> applicationDetailsList, ApplicationDetailRequest request) {
         HttpGet httpGet;
-        String url;
-        List<OperationRateResponse> operationRateResponses = new ArrayList<OperationRateResponse>();
+        StringBuilder url = new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/");
+        List<OperationRateResponse> operationRateResponses = new ArrayList<>();
 
         for (int i = 0; i < applicationDetailsList.size(); i++) {
 
@@ -181,14 +177,14 @@ public class ApplicationSearchService {
             }
 
             if (request.getIsAdmin()) {
-                url = "http://localhost:9763/ratecard-service/ratecardservice/" + "apis/" + appDetails.get("apiName") + "/operations/operationrates";
+                url.append("apis/" + appDetails.get(API_NAME) + "/operations/operationrates");
             } else {
-                url = "http://localhost:9763/ratecard-service/ratecardservice/" + "operators/" + request.getOperator() + "/apis/" + appDetails.get("apiName") + "/operatorrates";
+                url.append("http://localhost:9763/ratecard-service/ratecardservice/" + "operators/" + request.getOperator() + "/apis/" + appDetails.get(API_NAME) + "/operatorrates");
             }
 
-            httpGet = new HttpGet(url);
+            httpGet = new HttpGet(url.toString());
             /** add headers */
-            httpGet.setHeader("Authorization", authHeader);
+            httpGet.setHeader(AUTHORIZATION, authHeader);
 
             try {
                 response = client.execute(httpGet);
@@ -200,8 +196,7 @@ public class ApplicationSearchService {
                     return null;
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                log.error(response.getStatusLine().getStatusCode() + " Exception while loading operation rates from  hub");
+                log.error(" Exception while loading operation rates from  hub " + e);
                 return null;
             }
         }
@@ -209,7 +204,7 @@ public class ApplicationSearchService {
         return operationRateResponses;
     }
 
-    public SearchResponse generateResponse(TaskDetailsResponse taskDetails, List<ApplicationDetailsResponse[]> applicationDetailsResponses, List<OperationRateResponse> operationRateResponses) throws Exception {
+    public SearchResponse generateResponse(TaskDetailsResponse taskDetails, List<ApplicationDetailsResponse[]> applicationDetailsResponses, List<OperationRateResponse> operationRateResponses) throws ParseException {
 
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH);
         SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
@@ -260,10 +255,10 @@ public class ApplicationSearchService {
                 for (Operation operation : operationRates) {
 
                     RelevantRate relevantRate = new RelevantRate();
-                    List<RateDefinitionDAO> rateDefinitions = new ArrayList<>();
-                    for (RateDefinitionDAO rateDefinition : operation.getRates()) {
+                    List<RateDefinition> rateDefinitions = new ArrayList<>();
+                    for (RateDefinition rateDefinition : operation.getRates()) {
 
-                        RateDefinitionDAO tempDef = new RateDefinitionDAO();
+                        RateDefinition tempDef = new RateDefinition();
                         tempDef.setRateDefId(rateDefinition.getOperationRateId());
                         tempDef.setRateDefName(rateDefinition.getRateDefName());
                         tempDef.setRateDefDescription(rateDefinition.getRateDefDescription());
@@ -277,7 +272,8 @@ public class ApplicationSearchService {
                 }
             }
 
-            String description, tier;
+            String description;
+            String tier;
 
             if (map.get("description") != null) {
                 description = map.get("description");
@@ -297,7 +293,7 @@ public class ApplicationSearchService {
 
             applicationTask.setId(task.getId());
             applicationTask.setAssignee(task.getAssignee());
-            applicationTask.setApiName((map.get("apiName") != null) ? map.get("apiName") : "");
+            applicationTask.setApiName((map.get(API_NAME) != null) ? map.get(API_NAME) : "");
             applicationTask.setCreateTime(createTime);
             applicationTask.setTaskDescription(task.getDescription());
             applicationTask.setApplicationId((map.get("applicationId") != null) ? map.get("applicationId") : "");

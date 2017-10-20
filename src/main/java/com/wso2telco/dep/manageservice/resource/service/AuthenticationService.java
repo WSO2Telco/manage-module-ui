@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
-import com.wso2telco.dep.manageservice.resource.dao.LoginResponse;
-import com.wso2telco.dep.manageservice.resource.dao.UserDAO;
+import com.wso2telco.dep.manageservice.resource.model.LoginResponse;
+import com.wso2telco.dep.manageservice.resource.model.User;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -23,7 +23,7 @@ public class AuthenticationService {
     private StringEntity entity;
 
 
-    public HttpResponse doAuthentication(UserDAO userDAO) throws Exception {
+    public HttpResponse doAuthentication(User userDAO) throws Exception {
 
         BasicCookieStore cookieStore = new BasicCookieStore();
         SSLContextBuilder builder = new SSLContextBuilder();
@@ -56,7 +56,7 @@ public class AuthenticationService {
 
     }
 
-    public LoginResponse doLogin(UserDAO userDAO) throws Exception {
+    public LoginResponse doLogin(User userDAO) throws Exception {
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setIsLoggedIn(true);
         loginResponse.setUserName("admin");

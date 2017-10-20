@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.TariffDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Tariff;
 import com.wso2telco.dep.manageservice.resource.service.rate.TariffService;
 
 import javax.ws.rs.*;
@@ -26,7 +26,7 @@ public class TariffResource {
     }
 
     @POST
-    public Response setCurrencies(@HeaderParam("authorization") String authHeader, TariffDAO tariffDAO) throws Exception {
+    public Response setCurrencies(@HeaderParam("authorization") String authHeader, Tariff tariffDAO) throws Exception {
         callback = tariffService.setTarif(tariffDAO, authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
