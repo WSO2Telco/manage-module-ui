@@ -1,6 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.resource;
 
-import com.wso2telco.dep.manageservice.resource.dao.AppDAO;
+import com.wso2telco.dep.manageservice.resource.model.App;
 import com.wso2telco.dep.manageservice.resource.service.AppService;
 
 import javax.ws.rs.*;
@@ -17,7 +17,7 @@ public class AppResource {
 	@GET
 	public Response getApp() {
 
-		AppDAO appDAO = new AppDAO();
+		App appDAO = new App();
 		appDAO.setAppName("Facebook");
 		appDAO.setAppId(1);
 
@@ -35,7 +35,7 @@ public class AppResource {
 	@Path("/read")
 	public Response readApp() {
 
-		AppDAO appDAO = new AppDAO();
+		App appDAO = new App();
 		appDAO.setAppName("Facebook");
 		appDAO.setAppId(1);
 
@@ -50,7 +50,7 @@ public class AppResource {
 	}
 
 	@POST
-	public Response setApp(AppDAO appDAO) {
+	public Response setApp(App appDAO) {
 		Object responseString = null;
 		responseString = appDAO;
 		return Response.status(Response.Status.OK).entity(responseString).build();

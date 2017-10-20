@@ -5,8 +5,8 @@ package com.wso2telco.dep.manageservice.resource.service.rate;
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.RateTypeDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateType;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -26,7 +26,7 @@ public class RateTypeService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(RateTypeService.class);
-    private RateTypeDAO[] typeDAOS;
+    private RateType[] typeDAOS;
 
     public RateTypeService() {
         this.client = HttpClientBuilder.create().build();
@@ -40,7 +40,7 @@ public class RateTypeService {
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.typeDAOS = mapper.readValue(response.getEntity().getContent(), RateTypeDAO[].class);
+                this.typeDAOS = mapper.readValue(response.getEntity().getContent(), RateType[].class);
                 return new Callback().setPayload(this.typeDAOS).setSuccess(true).setMessage("Rate Type List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading rate types from hub");

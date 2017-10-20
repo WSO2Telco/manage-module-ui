@@ -15,8 +15,6 @@ import {AuthenticationService} from "../commons/services/authentication.service"
 export class RateRemoteDataService {
 
     private apiContext = 'api';
-    // private headers: Headers = new Headers({'Content-Type': 'application/json'});
-    // private options: RequestOptions = new RequestOptions({headers: this.headers});
 
     private apiEndpoints: Object = {
         rateCards: this.apiContext + '/rate/ratecards',
@@ -59,7 +57,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     addCategory(data: Category) {
-        return this.http.post(this.apiEndpoints['addCategory'], JSON.stringify(data), this.getOptions())
+        return this.http.post(this.apiEndpoints['categories'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -77,7 +75,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     addTariff(data: Tariff) {
-        return this.http.post(this.apiEndpoints['addTariff'], JSON.stringify(data), this.getOptions())
+        return this.http.post(this.apiEndpoints['tariffs'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -95,7 +93,7 @@ export class RateRemoteDataService {
      * @returns {Observable<ServerResponse>}
      */
     addCurrency(data: Currency) {
-        return this.http.post(this.apiEndpoints['addCurrency'], JSON.stringify(data), this.getOptions())
+        return this.http.post(this.apiEndpoints['currencies'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -113,7 +111,7 @@ export class RateRemoteDataService {
      * @returns {Observable<ServerResponse>}
      */
     addNewRateCard(data: Rate) {
-        return this.http.post(this.apiEndpoints['addRateCard'], JSON.stringify(data), this.getOptions())
+        return this.http.post(this.apiEndpoints['rateCards'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -145,7 +143,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getTariffList() {
-        return this.http.get(this.apiEndpoints['getTariffList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['tariffs'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -162,7 +160,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getCurrencyList() {
-        return this.http.get(this.apiEndpoints['getCurrencyList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['currencies'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -179,7 +177,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R>}
      */
     getRateTypeList() {
-        return this.http.get(this.apiEndpoints['getRateTypeList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['rateTypes'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -192,7 +190,7 @@ export class RateRemoteDataService {
     }
 
     getCategoryList() {
-        return this.http.get(this.apiEndpoints['getCategoryList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['categories'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -205,7 +203,7 @@ export class RateRemoteDataService {
     }
 
     getRateDefinitionList() {
-        return this.http.get(this.apiEndpoints['getRateDefinitionList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['rateDefinitions'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -218,7 +216,7 @@ export class RateRemoteDataService {
     }
 
     getRateCards() {
-        return this.http.get(this.apiEndpoints['getRateCards'], this.getOptions())
+        return this.http.get(this.apiEndpoints['rateCards'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -232,7 +230,7 @@ export class RateRemoteDataService {
 
 
     getRateTax() {
-        return this.http.get(this.apiEndpoints['getRateTaxList'], this.getOptions())
+        return this.http.get(this.apiEndpoints['rateTaxes'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;

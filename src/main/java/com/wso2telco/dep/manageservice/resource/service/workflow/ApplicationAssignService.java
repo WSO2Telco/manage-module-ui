@@ -1,9 +1,9 @@
 package com.wso2telco.dep.manageservice.resource.service.workflow;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.Assign;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.AssignRequest;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.workflow.Assign;
+import com.wso2telco.dep.manageservice.resource.model.workflow.AssignRequest;
 import com.wso2telco.dep.manageservice.resource.service.rate.CurrencyService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

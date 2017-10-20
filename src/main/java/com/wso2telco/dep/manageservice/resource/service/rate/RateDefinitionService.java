@@ -1,8 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.RateDefinitionDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateDefinition;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -21,7 +21,7 @@ public class RateDefinitionService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(RateDefinitionService.class);
-    private RateDefinitionDAO[] rateDefinitionDAOS;
+    private RateDefinition[] rateDefinitionDAOS;
 
     public RateDefinitionService() {
         this.client = HttpClientBuilder.create().build();
@@ -35,7 +35,7 @@ public class RateDefinitionService {
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.rateDefinitionDAOS = mapper.readValue(response.getEntity().getContent(), RateDefinitionDAO[].class);
+                this.rateDefinitionDAOS = mapper.readValue(response.getEntity().getContent(), RateDefinition[].class);
                 return new Callback().setPayload(this.rateDefinitionDAOS).setSuccess(true).setMessage("Rate Definition  List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading rate definitions from hub");

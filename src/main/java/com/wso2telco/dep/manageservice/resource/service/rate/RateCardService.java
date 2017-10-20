@@ -1,8 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.RateCardDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -24,8 +24,8 @@ public class RateCardService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(RateCardService.class);
-    private RateCardDAO[] rateCardDAOS;
-    private RateCardDAO rateCardDAO;
+    private RateCard[] rateCardDAOS;
+    private RateCard rateCardDAO;
 
     public RateCardService() {
         this.client = HttpClientBuilder.create().build();
@@ -40,7 +40,7 @@ public class RateCardService {
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.rateCardDAOS = mapper.readValue(response.getEntity().getContent(), RateCardDAO[].class);
+                this.rateCardDAOS = mapper.readValue(response.getEntity().getContent(), RateCard[].class);
                 return new Callback().setPayload(this.rateCardDAOS).setSuccess(true).setMessage("Rate Definitions Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error Loading Rate Definition List from hub");
@@ -53,7 +53,7 @@ public class RateCardService {
         }
     }
 
-    public Callback setRateCard(RateCardDAO rateCardDAO, String authHeader) throws Exception {
+    public Callback setRateCard(RateCard rateCardDAO, String authHeader) throws Exception {
         httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "ratecards");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
@@ -65,7 +65,7 @@ public class RateCardService {
             try {
                 response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
-                    this.rateCardDAO = mapper.readValue(response.getEntity().getContent(), RateCardDAO.class);
+                    this.rateCardDAO = mapper.readValue(response.getEntity().getContent(), RateCard.class);
                     return new Callback().setPayload(this.rateCardDAO).setSuccess(true).setMessage("Rate Card Created Successfully");
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error while adding new Rate Card to hub");
@@ -82,7 +82,7 @@ public class RateCardService {
         }
     }
 
-    public boolean validateRequest(RateCardDAO rateCardDAO) {
+    public boolean validateRequest(RateCard rateCardDAO) {
         if (rateCardDAO != null) {
             return true;
         } else {

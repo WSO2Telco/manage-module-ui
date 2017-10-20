@@ -1,8 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.TaxDAO;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.Tax;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -22,7 +22,7 @@ public class TaxService {
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(TaxService.class);
-    private TaxDAO[] taxDAOS;
+    private Tax[] taxDAOS;
 
     public TaxService() {
         this.client = HttpClientBuilder.create().build();
@@ -36,7 +36,7 @@ public class TaxService {
         try {
             response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                this.taxDAOS = mapper.readValue(response.getEntity().getContent(), TaxDAO[].class);
+                this.taxDAOS = mapper.readValue(response.getEntity().getContent(), Tax[].class);
                 return new Callback().setPayload(this.taxDAOS).setSuccess(true).setMessage("Rate Tax List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading taxes from hub");

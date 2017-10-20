@@ -1,12 +1,11 @@
 package com.wso2telco.dep.manageservice.resource.service.workflow;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.dao.Callback;
-import com.wso2telco.dep.manageservice.resource.dao.rate.CurrencyDAO;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.GraphData;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.GraphResponse;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.Range;
-import com.wso2telco.dep.manageservice.resource.dao.workflow.TaskDetailsResponse;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.workflow.GraphData;
+import com.wso2telco.dep.manageservice.resource.model.workflow.GraphResponse;
+import com.wso2telco.dep.manageservice.resource.model.workflow.Range;
+import com.wso2telco.dep.manageservice.resource.model.workflow.TaskDetailsResponse;
 import com.wso2telco.dep.manageservice.resource.service.rate.CurrencyService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -19,8 +18,6 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Month;
-import java.time.YearMonth;
 import java.util.*;
 
 /**
