@@ -1,0 +1,269 @@
+<div class="table-wrapper">
+    <span class="filter" tooltip="Filter"
+          [ngClass]="{'on':isFilterVisible}"
+          (click)="onToggleFilter()"><i class="material-icons">filter_list</i></span>
+    <div><span class="tbl-cat">{{filter?.dataType?.dataCategory == 'USER' ? 'MY TASKS' : 'ALL TASKS'}}</span></div>
+    <div class="tbl-header">
+        {{tableTitle}}
+    </div>
+
+    <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
+        <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
+            <div class="head">Filter<span class="clear" (click)="onClear('ALL')">Clear All</span></div>
+            <div class="row">
+                <div class="form-group col-xs-4">
+                    <input type="text"
+                           [(ngModel)]="filterAppName"
+                           container="body"
+                           [typeaheadMinLength]="0"
+                           [typeahead]="FilterFieldsDataSource"
+                           typeaheadOptionField="applicationName"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'APP_NAME')"
+                           class="form-control" placeholder="App Name">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text"
+                           [(ngModel)]="filterUser"
+                           container="body"
+                           [typeaheadMinLength]="0"
+                           [typeahead]="userNamesList"
+                           typeaheadOptionField="{{ opsp }}"
+                           (typeaheadOnSelect)="onFilterItemAdded($event, opsp)"
+                           class="form-control" placeholder="User">
+                </div>
+                <div class="form-group col-xs-4">
+                    <input type="text" class="form-control"
+                           *ngIf="showApiName('/approvals/subscriptions')"
+                           [(ngModel)]="filterApiName"
+                           [typeaheadMinLength]="0"
+                           container="body"
+                           [typeahead]="apiNamesList"
+                           typeaheadOptionField="apiName"
+                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
+                           placeholder="Api Name">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">
+                        <div class="sec-head">App Name</div>
+                        <span class="close material-icons" (click)="onClear('NAME')">close</span>
+                        <span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>
+                    </div>
+                </div>
+
+                <ng-container *ngIf="showApiName('/approvals/applications')">
+                <div class="col-xs-4">
+                    <div class="filter-val-container user" *ngIf="filter?.users.length > 0">
+                        <div class="sec-head">User</div>
+                        <span class="close material-icons" (click)="onClear('USER')">close</span>
+                        <span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>
+                    </div>
+                </div>
+                </ng-container>
+
+                <ng-container *ngIf="showApiName('/approvals/subscriptions')">
+                <div class="col-xs-4">
+                    <div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">
+                        <div class="sec-head">User</div>
+                        <span class="close material-icons" (click)="onClear('SUBS')">close</span>
+                        <span class="filter-val user" *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>
+                    </div>
+                </div>
+                </ng-container>
+
+                <div class="col-xs-4">
+
+                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
+                        <div class="sec-head">Api Name</div>
+                        <span class="close material-icons" (click)="onClear('ID')">close</span>
+                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="table {{tableID}}" id="{{tableID}}">
+
+        <div class="tbl-row header">
+            <div class="tbl-cell">ID</div>
+            <div class="tbl-cell">APP NAME</div>
+            <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">API NAME</div>
+            <div class="tbl-cell">USER</div>
+            <div class="tbl-cell">CREATED ON</div>
+            <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
+        </div>
+
+        <ng-container *ngFor="let item of dataSource?.applicationTasks; let i=index">
+            <div class="tbl-row"
+                 [ngClass]="{
+                 'modified' : item.isModified,
+                 'open':item.isExpand,
+                 'M':item.actionType == 'MORE',
+                 'A':item.actionType == 'APPROVE',
+                 'R':item.actionType == 'REJECT',
+                 'norateOpen':(item.relevantRates.length == 0) && (item.isExpand)}"
+                 *ngIf="!!!summeryModeRecordLimit || i < summeryModeRecordLimit">
+                <div class="tbl-cell">
+                    <span tooltip="More Info"
+                          class="action expand material-icons"
+                          (click)="item.isExpand = !item.isExpand; item.actionType = 'MORE' ">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>
+                    {{item.id}}
+                </div>
+                <div class="tbl-cell">{{item.applicationName}}</div>
+                <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">{{item.apiName}}-{{item.apiVersion}}</div>
+                <!--<div class="tbl-cell"><a (click)="getUserDetails(item.userName || item.subscriber)">{{item.userName || item.subscriber}}</a></div>-->
+                <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
+                <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
+                <div class="tbl-cell text-right">
+                    <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
+                          class="action  approve material-icons"
+                          [ngClass]="{'A':item.actionType =='APPROVE' }"
+                          (click)="item.isExpand = true; item.actionType = 'APPROVE'; item.comment = ''">check</span>
+
+                    <span tooltip="Reject" *ngIf="filter?.dataType?.dataCategory  == 'USER'"
+                          class="action  reject material-icons"
+                          [ngClass]="{'R':item.actionType =='REJECT' }"
+                          (click)="item.isExpand = true; item.actionType = 'REJECT'; item.comment = ''">close</span>
+
+                    <span tooltip="Assign to Me" *ngIf="filter?.dataType?.dataCategory  == 'GROUP'"
+                          class="action  assign material-icons"
+                          (click)="onAction('ASSIGN',item,filter?.dataType)">assignment_ind</span>
+                </div>
+                <div class="more-con animated fadeInUp" *ngIf="item.isExpand"
+                     [ngClass]="{ 'M':item.actionType == 'MORE',
+                    'A':item.actionType == 'APPROVE',
+                    'R':item.actionType == 'REJECT',
+                    'norate':item.relevantRates.length == 0}">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="row more-row">
+                                    <div class="col-xs-6 field-name">Application Id</div>
+                                    <div class="col-xs-6 field-value"> {{item.applicationId}}</div>
+                                </div>
+                                <div class="row more-row" *ngIf="isSubscription">
+                                    <div class="col-xs-6 field-name">API</div>
+                                    <div class="col-xs-6 field-value"> {{item.apiName}}-{{item.apiVersion}}</div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="row more-row" *ngIf="showTiers">
+                                    <div class="col-xs-6 field-name">Tier</div>
+                                    <div class="col-xs-6 field-value">
+                                        <select class="form-control" (change)="onOptionChange($event,item)">
+                                            <option *ngFor="let opt of item.tiersStr" [selected]="item.tier == opt">
+                                                {{opt}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row more-row" *ngIf="showTiers && !isSubscription && iscreditPlan">
+                                    <div class="col-xs-6 field-name">Credit Plan</div>
+                                    <div class="col-xs-6 field-value">
+                                        <select class="form-control" (change)="onCreditPlanChange($event,item)">
+                                            <option *ngFor="let opt of creditPlan" [selected]="item.creditPlan == opt">
+                                                {{opt}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row more-row" *ngIf="!showTiers"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="row more-row">
+                                    <div class="col-xs-3 field-name">Description</div>
+                                    <div class="col-xs-9 field-value">
+                                        <pre> {{item.applicationDescription}}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="item.relevantRates.length != 0 && billing">
+                            <div class="col-xs-12">
+                                <div class="row more-row">
+                                    <div class="col-xs-7 rate-field-name">Rate card Details</div>
+                                    <div class="col-xs-5 rate-field-name"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="isSubscription && billing">
+                            <div class="col-xs-6" *ngFor="let entry of item.relevantRates; let k = index">
+
+                                <div class="row more-row">
+                                    <div class="col-xs-6 field-name">{{entry.apiOperation}}</div>
+                                    <div class="col-xs-6 field-value">
+                                        <select class="form-control"
+                                                (change)="onOperationRateChange($event,item,entry.apiOperation)">
+                                            <ng-container *ngFor="let opt of entry.rateDefinitions">
+                                                <option title="{{opt.rateDefDescription}}">  {{opt.rateDefName}} </option>
+                                            </ng-container>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-12 "  *ngIf="item.actionType !== 'MORE'">
+                        <div class="row more-row ">
+                            <div class="col-xs-3 field-name">Comment <span>*</span></div>
+                            <div class="col-xs-9 field-value">
+                                <input [(ngModel)]="item.comment"
+                                       type="text"
+                                       class="form-control">
+                                <span class="error" *ngIf="isCommentEmpty">Cannot Be Empty</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">
+                        <button class="btn btn-default animated fadeIn"
+                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false">Cancel
+                        </button>
+                        <button class="btn btn-primary animated fadeIn"
+                                *ngIf="item.actionType == 'APPROVE'"
+                                (click)="onAction('APPROVE',item,filter?.dataType)">Approve
+                        </button>
+                        <button *ngIf="item.actionType == 'REJECT'"
+                                class="btn btn-danger" (click)="onAction('REJECT',item,filter?.dataType)">Reject
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="no-rec-row tbl-row" *ngIf="dataSource?.applicationTasks?.length == 0">
+            <span class="no-rec">No Records..</span>
+        </div>
+    </div> <!--TABLE END-->
+
+    <div class="text-right" *ngIf="dataSource?.applicationTasks?.length > summeryModeRecordLimit"><span class="more"
+                                                                                                        (click)="onViewAll()">View All</span>
+    </div>
+
+    <div class="pagination-container text-center"
+         *ngIf="dataSource?.applicationTasks?.length > 0 &&  filter?.numberOfRecordsPerPage > 0 &&  (dataSource?.metadata?.total > filter?.numberOfRecordsPerPage) ">
+
+        <pagination
+                [boundaryLinks]="true"
+                [totalItems]="dataSource?.metadata?.total"
+                [(ngModel)]="currentPage"
+                [itemsPerPage]="filter.numberOfRecordsPerPage"
+                [maxSize]="5"
+                (pageChanged)="onPageChanged($event)"
+                class="pagination-sm"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination>
+    </div>
+
+</div> <!--WRAPPER END-->
