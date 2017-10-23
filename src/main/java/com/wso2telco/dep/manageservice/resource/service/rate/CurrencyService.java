@@ -7,6 +7,8 @@ package com.wso2telco.dep.manageservice.resource.service.rate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Currency;
+import com.wso2telco.dep.manageservice.resource.util.ApplicationConfiguration;
+import com.wso2telco.dep.manageservice.resource.util.Configuration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -28,14 +30,19 @@ public class CurrencyService {
     private final Log log = LogFactory.getLog(CurrencyService.class);
     private Currency[] currencyDAOS;
     private Currency currencyDAO;
+    private Configuration configuration;
 
     public CurrencyService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
+        this.configuration = ApplicationConfiguration.readAppConfig();
     }
 
     public Callback getCurrencies(String authHeader) throws Exception {
-        httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+//        httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+        // Sample usage of config Reader
+        httpGet = new HttpGet(configuration.getRateServiceUrl() + "currencies");
+
         /** add headers*/
         httpGet.setHeader("Authorization", authHeader);
 
