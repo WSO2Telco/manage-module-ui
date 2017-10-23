@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
@@ -24,9 +23,6 @@ import java.util.*;
  * Created by manoj on 10/19/17.
  */
 public class HistoryService {
-    private HttpGet httpGet;
-    private HttpPost httpPost;
-    private HttpResponse response;
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(CurrencyService.class);
@@ -36,9 +32,7 @@ public class HistoryService {
         this.mapper = new ObjectMapper();
     }
 
-    public Callback getHistory(String authHeader, String type, String user) throws Exception {
-
-        GraphResponse response = new GraphResponse();
+    public Callback getHistory(String authHeader, String type, String user) {
 
         DateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.ENGLISH);
         DateFormat monthFormat = new SimpleDateFormat("MMM", Locale.ENGLISH);
@@ -69,7 +63,7 @@ public class HistoryService {
         }
 
         List<Integer> data = getData(authHeader, type, user, months);
-        if (data != null) {
+        if (!data.isEmpty()) {
             GraphData graphData = new GraphData();
             graphData.setData(data);
             graphData.setLabel(type.toUpperCase());
@@ -80,7 +74,7 @@ public class HistoryService {
             graphResponse.setGraphData(graphDataList);
             return new Callback().setPayload(graphResponse).setSuccess(false).setMessage("Error Adding New Currency");
         } else {
-            return new Callback().setPayload(null).setSuccess(false).setMessage("Error Adding New Currency");
+            return new Callback().setPayload(Collections.emptyList()).setSuccess(false).setMessage("Error Adding New Currency");
         }
 
     }
@@ -98,18 +92,18 @@ public class HistoryService {
             httpGet.addHeader("Authorization", authHeader);
 
             try {
-                response = client.execute(httpGet);
+                HttpResponse response = client.execute(httpGet);
                 if (response.getStatusLine().getStatusCode() == 200) {
                     TaskDetailsResponse taskResponse = mapper.readValue(response.getEntity().getContent(), TaskDetailsResponse.class);
                     data.add(taskResponse.getTotal());
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error loading categories from hub");
-                    return null;
+                    return Collections.emptyList();
                 }
 
             } catch (IOException e) {
                 log.error(" Exception while loading categories from hub " + e);
-                return null;
+                return Collections.emptyList();
             }
         }
 
