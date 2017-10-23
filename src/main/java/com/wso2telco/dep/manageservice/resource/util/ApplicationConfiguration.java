@@ -15,39 +15,23 @@
  ******************************************************************************/
 package com.wso2telco.dep.manageservice.resource.util;
 
-import org.apache.log4j.Logger;
-import org.wso2.carbon.utils.CarbonUtils;
+import com.wso2telco.core.dbutils.fileutils.PropertyFileReader;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.Properties;
+
 
 public class ApplicationConfiguration {
+
+    private static final String MANAGE_APP_CONFIG_FILE = "manage.properties";
 
     private ApplicationConfiguration() {
     }
 
-    private static final Logger log = Logger.getLogger(ApplicationConfiguration.class);
+    public static Properties readAppConfig() {
 
-    public static Configuration readAppConfig() {
+        Properties properties = null;
+        properties = PropertyFileReader.getFileReader().getProperties(MANAGE_APP_CONFIG_FILE);
+        return properties;
 
-        Configuration configuration = null;
-        try {
-            String dataSourceDir = CarbonUtils.getCarbonConfigDirPath();
-            File applicationConfig = new File(dataSourceDir + File.separator + "manageAppConfig.xml");
-            if (applicationConfig.exists()) {
-                JAXBContext jaxbContext = JAXBContext.newInstance(Configuration.class);
-                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                configuration = (Configuration) jaxbUnmarshaller.unmarshal(applicationConfig);
-            } else {
-                throw new FileNotFoundException("manageAppConfig Missing in repository/conf Directory");
-            }
-        } catch (JAXBException | FileNotFoundException e) {
-            log.error(e.getMessage());
-        }
-
-        return configuration;
     }
 }
