@@ -51,21 +51,21 @@ public class ApplicationSearchService {
                     if (applicationDetailsResponses != null) {
                         if (request.getProcessType().equals("SUBSCRIPTION_CREATION")) {
                             operationRateResponses = getOperationRates(authHeader, applicationDetailsResponses, request);
-                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, operationRateResponses)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
+                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, operationRateResponses)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getValue());
                         } else {
-                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
+                            return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, applicationDetailsResponses, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getValue());
                         }
                     } else {
-                        return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
+                        return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getValue());
                     }
                 } else {
-                    return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, null, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getName());
+                    return new Callback().setPayload(generateResponse(taskDetailsResponseDAO, null, null)).setSuccess(true).setMessage(Messages.APPLICATION_SEARCH_SUCCESS.getValue());
                 }
             } else {
-                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getValue());
             }
         } else {
-            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getName());
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_SEARCH_ERROR.getValue());
         }
     }
 
