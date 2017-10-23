@@ -40,12 +40,12 @@ public class CategoryService {
                 return new Callback().setPayload(categories).setSuccess(true).setMessage("Rate Category List Loaded Successfully");
             } else {
                 log.error(response.getStatusLine().getStatusCode() + " Error loading categories from hub");
-                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getName());
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getValue());
             }
 
         } catch (IOException e) {
             log.error(" Exception while loading categories from hub " + e);
-            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getName());
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getValue());
         }
     }
 
@@ -65,15 +65,15 @@ public class CategoryService {
                     return new Callback().setPayload(category).setSuccess(true).setMessage("New Category Created Successfully");
                 } else {
                     log.error(response.getStatusLine().getStatusCode() + " Error while adding new Category to hub");
-                    return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
+                    return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getValue());
                 }
             } catch (IOException e) {
                 log.error(" Exception while adding new Category to hub " + e);
-                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getValue());
             }
         } else {
             log.error("Add New Category : Invalid Request");
-            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getName());
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_ADDING_ERROR.getValue());
         }
     }
 

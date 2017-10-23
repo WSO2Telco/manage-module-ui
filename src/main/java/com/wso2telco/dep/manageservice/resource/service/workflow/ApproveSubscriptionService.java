@@ -23,74 +23,70 @@ import java.util.Locale;
 
 public class ApproveSubscriptionService {
 
-    private HttpPost httpPost;
-    private HttpResponse response;
     private HttpClient client;
     private ObjectMapper mapper;
     private final Log log = LogFactory.getLog(CurrencyService.class);
+    private static final String ERROR = "Error Approving Subscription";
 
     public ApproveSubscriptionService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
     }
 
-    public Callback approveSubscription(String authHeader, ApprovalRequest request) throws Exception {
-        httpPost = new HttpPost("http://localhost:9763/activiti-rest/service" + "/runtime/tasks/" + request.getTaskId());
+    public Callback approveSubscription(String authHeader, ApprovalRequest request) {
+        HttpPost httpPost = new HttpPost("http://localhost:9763/activiti-rest/service" + "/runtime/tasks/" + request.getTaskId());
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", authHeader);
 
+        final String type = "string";
+
         if (validateRequest(request)) {
 
-            List<Variable> variables = new ArrayList<Variable>();
+            List<Variable> variables = new ArrayList<>();
 
             if (request.getRole()) {
-                variables.add(new Variable().setName("hubAdminApproval").setValue(request.getStatus()).setType("string"));
-                variables.add(new Variable().setName("completedByUser").setValue(request.getUser()).setType("string"));
-                variables.add(new Variable().setName("status").setValue(request.getStatus()).setType("string"));
-                variables.add(new Variable().setName("completedOn").setValue(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH).format(new Date())).setType("string"));
-                variables.add(new Variable().setName("description").setValue(request.getDescription()).setType("string"));
-                variables.add(new Variable().setName("selectedTier").setValue(request.getSelectedTier()).setType("string"));
-                variables.add(new Variable().setName("selectedRate").setValue(request.getSelectedRate()).setType("string"));
+                variables.add(new Variable().setName("hubAdminApproval").setValue(request.getStatus()).setType(type));
+                variables.add(new Variable().setName("completedByUser").setValue(request.getUser()).setType(type));
+                variables.add(new Variable().setName("status").setValue(request.getStatus()).setType(type));
+                variables.add(new Variable().setName("completedOn").setValue(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH).format(new Date())).setType(type));
+                variables.add(new Variable().setName("description").setValue(request.getDescription()).setType(type));
+                variables.add(new Variable().setName("selectedTier").setValue(request.getSelectedTier()).setType(type));
+                variables.add(new Variable().setName("selectedRate").setValue(request.getSelectedRate()).setType(type));
             } else {
-                variables.add(new Variable().setName("operatorAdminApproval").setValue(request.getStatus()).setType("string"));
-                variables.add(new Variable().setName("completedByUser").setValue(request.getUser()).setType("string"));
-                variables.add(new Variable().setName("status").setValue(request.getStatus()).setType("string"));
-                variables.add(new Variable().setName("completedOn").setValue(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH).format(new Date())).setType("string"));
-                variables.add(new Variable().setName("description").setValue(request.getDescription()).setType("string"));
-                variables.add(new Variable().setName("selectedRate").setValue(request.getSelectedRate()).setType("string"));
+                variables.add(new Variable().setName("operatorAdminApproval").setValue(request.getStatus()).setType(type));
+                variables.add(new Variable().setName("completedByUser").setValue(request.getUser()).setType(type));
+                variables.add(new Variable().setName("status").setValue(request.getStatus()).setType(type));
+                variables.add(new Variable().setName("completedOn").setValue(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.ENGLISH).format(new Date())).setType(type));
+                variables.add(new Variable().setName("description").setValue(request.getDescription()).setType(type));
+                variables.add(new Variable().setName("selectedRate").setValue(request.getSelectedRate()).setType(type));
             }
 
-            ApproveEntity entity = new ApproveEntity();
-            entity.setAction("complete");
-            entity.setVariables(variables);
-
-            httpPost.setEntity(new StringEntity(mapper.writeValueAsString(entity)));
-
             try {
-                response = client.execute(httpPost);
+                ApproveEntity entity = new ApproveEntity();
+                entity.setAction("complete");
+                entity.setVariables(variables);
+
+                httpPost.setEntity(new StringEntity(mapper.writeValueAsString(entity)));
+
+                HttpResponse response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 200) {
                     return new Callback().setPayload(null).setSuccess(true).setMessage("Subscription Approved Successfully");
                 } else {
-                    log.error(response.getStatusLine().getStatusCode() + "Error Approving Subscription");
-                    return new Callback().setPayload(null).setSuccess(false).setMessage("Error Approving Subscription");
+                    log.error(response.getStatusLine().getStatusCode() + ERROR);
+                    return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-                log.error(response.getStatusLine().getStatusCode() + " Exception while Approving Subscription");
-                return new Callback().setPayload(null).setSuccess(false).setMessage("Error Approving Subscription");
+                log.error(" Exception while Approving Subscription " + e);
+                return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
             }
         } else {
             log.error("Approving Subscription : Invalid Request");
-            return new Callback().setPayload(null).setSuccess(false).setMessage("Error Approving Subscription");
+            return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
         }
     }
 
     public boolean validateRequest(ApprovalRequest request) {
-        if (request != null && request.getTaskId() != null && request.getStatus() != null && request.getSelectedTier() != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return  (request != null && request.getTaskId() != null && request.getStatus() != null && request.getSelectedTier() != null);
     }
 }
