@@ -30,17 +30,19 @@ public class CurrencyService {
     private final Log log = LogFactory.getLog(CurrencyService.class);
     private Currency[] currencyDAOS;
     private Currency currencyDAO;
-    private Configuration configuration = ApplicationConfiguration.readAppConfig();
+    private Configuration configuration;
 
     public CurrencyService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
+        this.configuration = ApplicationConfiguration.readAppConfig();
     }
 
     public Callback getCurrencies(String authHeader) throws Exception {
-        httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+//        httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
         // Sample usage of config Reader
-//        httpGet = new HttpGet(configuration.getRateServiceUrl() + "currencies");
+        httpGet = new HttpGet(configuration.getRateServiceUrl() + "currencies");
+
         /** add headers*/
         httpGet.setHeader("Authorization", authHeader);
 

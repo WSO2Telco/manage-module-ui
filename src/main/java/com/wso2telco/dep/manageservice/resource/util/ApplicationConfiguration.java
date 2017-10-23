@@ -22,6 +22,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class ApplicationConfiguration {
 
@@ -32,8 +33,6 @@ public class ApplicationConfiguration {
 
     public static Configuration readAppConfig() {
 
-        log.info("Info Log");
-
         Configuration configuration = null;
         try {
             String dataSourceDir = CarbonUtils.getCarbonConfigDirPath();
@@ -42,9 +41,11 @@ public class ApplicationConfiguration {
                 JAXBContext jaxbContext = JAXBContext.newInstance(Configuration.class);
                 Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
                 configuration = (Configuration) jaxbUnmarshaller.unmarshal(applicationConfig);
+            } else {
+                throw new FileNotFoundException("manageAppConfig Missing in repository/conf Directory");
             }
-        } catch (JAXBException e) {
-            e.getMessage();
+        } catch (JAXBException | FileNotFoundException e) {
+            log.error(e.getMessage());
         }
 
         return configuration;
