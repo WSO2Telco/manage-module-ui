@@ -1,8 +1,5 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-/**
- * Created by manoj on 10/12/17.
- */
 
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Currency;
@@ -17,18 +14,17 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CurrencyResource {
 
-    private Callback callback;
     CurrencyService currencyService = new CurrencyService();
 
     @GET
-    public Response getCurrencies(@HeaderParam("authorization") String authHeader) throws Exception {
-        callback = currencyService.getCurrencies(authHeader);
+    public Response getCurrencies(@HeaderParam("authorization") String authHeader) {
+        Callback callback = currencyService.getCurrencies(authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 
     @POST
-    public Response setCurrency(@HeaderParam("authorization") String authHeader, Currency currencyDAO) throws Exception {
-        callback = currencyService.setCurrency(currencyDAO, authHeader);
+    public Response setCurrency(@HeaderParam("authorization") String authHeader, Currency currencyDAO) {
+        Callback callback = currencyService.setCurrency(currencyDAO, authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 

@@ -12,12 +12,12 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ApplicationSearchResource {
-    private Callback callback;
+
     ApplicationSearchService applicationDetailService = new ApplicationSearchService();
 
     @POST
     public Response getCurrencies(@HeaderParam("authorization") String authHeader, ApplicationDetailRequest detailRequestDAO) throws Exception {
-        callback = applicationDetailService.getDetails(authHeader, detailRequestDAO);
+        Callback callback = applicationDetailService.getDetails(authHeader, detailRequestDAO);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 }

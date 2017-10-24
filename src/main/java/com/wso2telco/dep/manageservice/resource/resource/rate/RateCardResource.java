@@ -13,18 +13,17 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class RateCardResource {
 
-    private Callback callback;
     RateCardService rateCardService = new RateCardService();
 
     @GET
     public Response getRateCards(@HeaderParam("authorization") String authHeader) throws Exception {
-        callback = rateCardService.getRateCards(authHeader);
+        Callback callback = rateCardService.getRateCards(authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 
     @POST
-    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCardDAO) throws Exception {
-        callback = rateCardService.setRateCard(rateCardDAO, authHeader);
+    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCardDAO) {
+        Callback callback = rateCardService.setRateCard(rateCardDAO, authHeader);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 
