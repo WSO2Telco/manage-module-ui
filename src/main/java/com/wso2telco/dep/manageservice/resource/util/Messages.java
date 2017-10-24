@@ -1,11 +1,28 @@
 package com.wso2telco.dep.manageservice.resource.util;
 
+/**
+ * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
+ * <p>
+ * WSO2.Telco Inc. licences this file to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 public enum Messages {
 
-//    Todo Define error messages
+    /** to define error messages*/
     ERROR_MESSAGES("ERROR MESSAGES"),
     CATEGORY_ADDING_ERROR("Error Adding New Category"),
     CATEGORY_LOADING_ERROR("Error Loading Category List"),
+    CATEGORY_ADDING_SUCCESS("New Category Created Successfully"),
+    CATEGORY_LOADING_SUCCESS("Rate Category List Loaded Successfully"),
     CURRENCY_ADDING_ERROR( "Error Adding New Currency"),
     CURRENCY_LOADING_ERROR("Error Loading Currency List"),
     TARIFF_ADDING_ERROR( "Error Adding New Tariff"),

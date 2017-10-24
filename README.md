@@ -3,28 +3,16 @@
 ## Setting up Dev Environment
 install nodejs
 require Node 4 or higher, together with NPM 3 or higher.
-
-Install Angular-cli
-
 ```bash
-npm install -g @angular/cli
+sudo apt-get install python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs
 ```
-
 navigate to project root folder and run 
 ```bash
-npm install
+mvn clean install
 ```
-this will install all project dependencies defined in package.json file in the root directory
-
-
-To Build client application code and copy to server/public folder
-```bash
-npm run build
-```
-
-
-
-
+this will install all project dependencies defined in pom.xml file in the root directory
 
 ## Server Deployment
 

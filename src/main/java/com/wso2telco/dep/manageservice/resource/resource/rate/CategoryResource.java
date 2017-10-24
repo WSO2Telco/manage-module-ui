@@ -2,7 +2,10 @@ package com.wso2telco.dep.manageservice.resource.resource.rate;
 
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Category;
+import com.wso2telco.dep.manageservice.resource.service.rate.RateFactory;
+import com.wso2telco.dep.manageservice.resource.service.ServiceFactory;
 import com.wso2telco.dep.manageservice.resource.service.rate.CategoryService;
+import com.wso2telco.dep.manageservice.resource.util.Types;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -13,7 +16,7 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class CategoryResource {
 
-    CategoryService categoryService = new CategoryService();
+    CategoryService categoryService = (CategoryService) ServiceFactory.getService(new RateFactory(Types.RATE_CATEGORY.getValue()));
 
     @GET
     public Response getCategories(@HeaderParam("authorization") String authHeader) {
