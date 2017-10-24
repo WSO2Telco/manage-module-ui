@@ -13,12 +13,11 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class ApplicationAssignResource {
 
-    private Callback callback;
     ApplicationAssignService applicationAssignService = new ApplicationAssignService();
 
     @POST
     public Response assignApplication(@HeaderParam("authorization") String authHeader, AssignRequest assignRequest) throws Exception {
-        callback = applicationAssignService.assignApplication(authHeader, assignRequest);
+        Callback callback = applicationAssignService.assignApplication(authHeader, assignRequest);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 }

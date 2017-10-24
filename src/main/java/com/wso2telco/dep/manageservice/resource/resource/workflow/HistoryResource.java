@@ -12,12 +12,11 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class HistoryResource {
 
-    private Callback callback;
     HistoryService historyService = new HistoryService();
 
     @GET
     public Response getCurrencies(@HeaderParam("authorization") String authHeader, @PathParam("type") String type, @PathParam("user") String user) throws Exception {
-        callback = historyService.getHistory(authHeader, type, user);
+        Callback callback = historyService.getHistory(authHeader, type, user);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 }
