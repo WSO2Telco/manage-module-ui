@@ -1,13 +1,13 @@
-package com.wso2telco.dep.manageservice.resource.resource;
+package com.wso2telco.dep.manageservice.resource.resource.authentication;
 
-/**
- * Created by manoj on 9/26/17.
- */
 
 import com.wso2telco.dep.manageservice.resource.model.User;
-import com.wso2telco.dep.manageservice.resource.service.AuthenticationService;
+import com.wso2telco.dep.manageservice.resource.service.authentication.AuthenticationService;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -16,15 +16,15 @@ import javax.ws.rs.core.Response;
 @Produces(MediaType.APPLICATION_JSON)
 public class AuthenticationResource {
 
-    private AuthenticationService authenticationService;
+    private AuthenticationService authenticationService = new AuthenticationService();
 
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response setApp(User userDAO) throws Exception {
-        authenticationService = new AuthenticationService();
+    public Response setApp(User userDAO) {
+
         Object responseString = null;
-        responseString = authenticationService.doLogin(userDAO);
+        responseString = authenticationService.doLogin();
         return Response.status(Response.Status.OK).entity(responseString).build();
     }
 }

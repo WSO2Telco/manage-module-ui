@@ -12,12 +12,12 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ApproveApplicationResource {
-    private Callback callback;
+
     ApproveApplicationService approveApplicationService = new ApproveApplicationService();
 
     @POST
     public Response assignApplication(@HeaderParam("authorization") String authHeader, ApprovalRequest approveApplicationRequest) throws Exception {
-        callback = approveApplicationService.approveApplication(authHeader, approveApplicationRequest);
+        Callback callback = approveApplicationService.approveApplication(authHeader, approveApplicationRequest);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 }
