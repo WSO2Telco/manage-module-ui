@@ -43,6 +43,27 @@ public class RateService extends AbstractService  {
         this.mapper = new ObjectMapper();
     }
 
+    public Callback get(String ERROR, String SUCCESS, String url, String authHeader) {
+        HttpGet httpGet = new HttpGet(url);
+
+        httpGet.addHeader("Authorization", authHeader);
+
+        try {
+            HttpResponse response = client.execute(httpGet);
+            if (response.getStatusLine().getStatusCode() == 200) {
+                Object object = mapper.readValue(response.getEntity().getContent(), Object.class);
+                return new Callback().setPayload(object).setSuccess(true).setMessage(SUCCESS);
+            } else {
+                log.error(response.getStatusLine().getStatusCode() + " " + ERROR);
+                return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
+            }
+
+        } catch (IOException e) {
+            log.error(" Exception while loading categories from hub " + e);
+            return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
+        }
+    }
+
     public Callback set(Object object, String ERROR, String SUCCESS, String url, String authHeader) {
         HttpPost httpPost = new HttpPost(url);
         /** add headers */
@@ -67,54 +88,4 @@ public class RateService extends AbstractService  {
     }
 
 	
-	@Override
-	public Callback executeGet(String authenticationCredential) {
-
-        HttpGet httpGet = new HttpGet(url);
-
-        httpGet.addHeader("Authorization", authHeader);
-
-        try {
-            HttpResponse response = client.execute(httpGet);
-            if (response.getStatusLine().getStatusCode() == 200) {
-                Object object = mapper.readValue(response.getEntity().getContent(), Object.class);
-                return new Callback().setPayload(object).setSuccess(true).setMessage(SUCCESS);
-            } else {
-                log.error(response.getStatusLine().getStatusCode() + " " + ERROR);
-                return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
-            }
-
-        } catch (IOException e) {
-            log.error(" Exception while loading categories from hub " + e);
-            return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
-        }
-    
-		return null;
-	}
-
-	@Override
-	public Callback executePost(RequestTransferrable request, String authenticationCredential) {
-
-        HttpPost httpPost = new HttpPost(url);
-        /** add headers */
-        httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("Authorization", authenticationCredential);
-
-        try {
-            /** set request body */
-            httpPost.setEntity(new StringEntity(mapper.writeValueAsString(object)));
-            HttpResponse response = client.execute(httpPost);
-            if (response.getStatusLine().getStatusCode() == 201) {
-                Object responseObject = mapper.readValue(response.getEntity().getContent(), Object.class);
-                return new Callback().setPayload(responseObject).setSuccess(true).setMessage(SUCCESS);
-            } else {
-                log.error(response.getStatusLine().getStatusCode() + " Error while adding new Category to hub");
-                return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
-            }
-        } catch (IOException e) {
-            log.error(" Exception while adding new Category to hub " + e);
-            return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
-        }
-    
-	}
 }
