@@ -17,7 +17,7 @@ package com.wso2telco.dep.manageservice.resource.util;
  */
 public enum ServiceTypes {
 
-    RATE("rate"),
+    RATE_CARD("rate_card"),
     QUOTA("quota");
 
     private String value;

@@ -1,9 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.model.Callback;
-import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
-import com.wso2telco.dep.manageservice.resource.util.Messages;
+import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -13,9 +11,14 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import java.io.IOException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.service.AbstractService;
+import com.wso2telco.dep.manageservice.resource.util.Messages;
 
-public class RateCardService {
+ class RateCardService  extends AbstractService {
 
     private HttpClient client;
     private ObjectMapper mapper;
@@ -82,4 +85,16 @@ public class RateCardService {
     public boolean validateRequest(RateCard rateCardDAO) {
         return (rateCardDAO != null);
     }
+
+	@Override
+	public Callback executeGet(String authenticationCredential) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Callback executePost(RequestTransferrable request, String authenticationCredential) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

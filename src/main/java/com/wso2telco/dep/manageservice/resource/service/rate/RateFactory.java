@@ -1,8 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
-import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.service.Serviceable;
-import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -21,15 +19,15 @@ import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
  */
 public class RateFactory   {
 
-    private String type;
     static RateFactory instace;
     RateFactory(){
     }
 
 
-    public Serviceable getService() {
-     new RateService();
+    public Serviceable getRateCardService() {
+     return new RateService();
     }
+    
 
 	public static RateFactory getInstace() {
 		return new RateFactory();

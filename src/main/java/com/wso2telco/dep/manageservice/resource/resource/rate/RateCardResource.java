@@ -1,30 +1,36 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.model.Callback;
-import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
-import com.wso2telco.dep.manageservice.resource.service.rate.RateCardService;
-
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
+import com.wso2telco.dep.manageservice.resource.resource.AbstractResource;
+import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 @Path("/rate/ratecards")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class RateCardResource {
+public class RateCardResource extends AbstractResource{
 
-    RateCardService rateCardService = new RateCardService();
-
+    
+    protected ServiceTypes getService() {
+    	return ServiceTypes.RATE_CARD;
+    }
+    
     @GET
     public Response getRateCards(@HeaderParam("authorization") String authHeader) throws Exception {
-        Callback callback = rateCardService.getRateCards(authHeader);
-        return Response.status(Response.Status.OK).entity(callback).build();
+    	return doGet(authHeader);
     }
 
     @POST
     public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCardDAO) {
-        Callback callback = rateCardService.setRateCard(rateCardDAO, authHeader);
-        return Response.status(Response.Status.OK).entity(callback).build();
+    	return doPost(rateCardDAO,authHeader);
     }
 
 }

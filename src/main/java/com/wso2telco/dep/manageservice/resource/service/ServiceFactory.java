@@ -1,5 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
+import com.wso2telco.dep.manageservice.resource.service.rate.RateFactory;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 /**
@@ -29,14 +30,14 @@ public class ServiceFactory {
 	}
 
 
-    public Serviceable getServiceFactory(ServiceTypes serviceTypes){
-    	Serviceable service;
+    public Serviceable getService(ServiceTypes serviceTypes){
+    	Serviceable service= null;
     	switch (serviceTypes) {
 		case QUOTA:
 
 			break;
-		case RATE:
-			service =RateFactory.getInstace();
+		case RATE_CARD:
+			service =RateFactory.getInstace().getRateCardService();
 			break;
 		default:
 			break;

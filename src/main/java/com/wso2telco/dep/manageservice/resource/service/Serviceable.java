@@ -1,5 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
  * <p>
@@ -16,5 +19,6 @@ package com.wso2telco.dep.manageservice.resource.service;
  * limitations under the License.
  */
 public interface Serviceable {
-    public AbstractService createService();
+	Callback executeGet(String authenticationCredential) ;
+	Callback executePost(RequestTransferrable request,String authenticationCredential) ;
 }
