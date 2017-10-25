@@ -15,6 +15,7 @@ package com.wso2telco.dep.manageservice.resource.service;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public abstract class AbstractService {
-
+abstract class AbstractService implements Serviceable {
+	//TODO
+	//Add common methods eg:- getUrl()
 }

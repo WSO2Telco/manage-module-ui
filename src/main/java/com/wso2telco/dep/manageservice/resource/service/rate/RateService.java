@@ -29,7 +29,7 @@ import java.io.IOException;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class RateService extends AbstractService {
+public class RateService implements RateServiceI {
 
     private HttpClient client;
     private ObjectMapper mapper;
@@ -84,4 +84,10 @@ public class RateService extends AbstractService {
             return new Callback().setPayload(null).setSuccess(false).setMessage(ERROR);
         }
     }
+
+	@Override
+	public AbstractService createService() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

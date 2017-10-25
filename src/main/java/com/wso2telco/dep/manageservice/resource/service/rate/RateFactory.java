@@ -1,8 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
-import com.wso2telco.dep.manageservice.resource.service.ServiceInterface;
-import com.wso2telco.dep.manageservice.resource.util.Types;
+import com.wso2telco.dep.manageservice.resource.service.Serviceable;
+import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -19,20 +19,19 @@ import com.wso2telco.dep.manageservice.resource.util.Types;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class RateFactory implements ServiceInterface {
+public class RateFactory   {
 
     private String type;
-
-    public RateFactory(String type){
-        this.type = type;
+    static RateFactory instace;
+    RateFactory(){
     }
 
-    @Override
-    public AbstractService createService() {
-        if(Types.RATE_CATEGORY.getValue().equalsIgnoreCase(this.type)){
-            return new CategoryService();
-        }else {
-            return null;
-        }
+
+    public Serviceable getService() {
+     new RateService();
     }
+
+	public static RateFactory getInstace() {
+		return new RateFactory();
+	}
 }

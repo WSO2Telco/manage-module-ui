@@ -1,4 +1,4 @@
-package com.wso2telco.dep.manageservice.resource.service;
+package com.wso2telco.dep.manageservice.resource.util;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -15,6 +15,18 @@ package com.wso2telco.dep.manageservice.resource.service;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public interface ServiceInterface {
-    public AbstractService createService();
+public enum ServiceTypes {
+
+    RATE("rate"),
+    QUOTA("quota");
+
+    private String value;
+
+    ServiceTypes(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

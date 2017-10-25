@@ -1,5 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
+import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
+
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
  * <p>
@@ -16,7 +18,31 @@ package com.wso2telco.dep.manageservice.resource.service;
  * limitations under the License.
  */
 public class ServiceFactory {
-    public static AbstractService getService(ServiceInterface serviceInterface) {
-        return serviceInterface.createService();
+	static ServiceFactory instance;
+	private ServiceFactory(){}
+
+	public static synchronized ServiceFactory getInstance(){
+		if(instance!=null){
+			instance = new ServiceFactory();
+		}
+		return instance;
+	}
+
+
+    public Serviceable getServiceFactory(ServiceTypes serviceTypes){
+    	Serviceable service;
+    	switch (serviceTypes) {
+		case QUOTA:
+
+			break;
+		case RATE:
+			service =RateFactory.getInstace();
+			break;
+		default:
+			break;
+
+		}
+    	return service;
     }
+
 }
