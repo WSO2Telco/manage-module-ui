@@ -23,7 +23,7 @@ public class ServiceFactory {
 	private ServiceFactory(){}
 
 	public static synchronized ServiceFactory getInstance(){
-		if(instance!=null){
+		if(instance==null){
 			instance = new ServiceFactory();
 		}
 		return instance;
@@ -38,6 +38,12 @@ public class ServiceFactory {
 			break;
 		case RATE_CARD:
 			service =RateFactory.getInstace().getRateCardService();
+			break;
+		case RATE_CATEGORY:
+			service =RateFactory.getInstace().getRateCategoryService();
+			break;
+			case RATE_CURRENCY:
+			service =RateFactory.getInstace().getRateCurrencyService();
 			break;
 		default:
 			break;

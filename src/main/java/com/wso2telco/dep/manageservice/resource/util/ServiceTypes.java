@@ -18,6 +18,8 @@ package com.wso2telco.dep.manageservice.resource.util;
 public enum ServiceTypes {
 
     RATE_CARD("rate_card"),
+    RATE_CATEGORY("rate_category"),
+    RATE_CURRENCY("rate_currency"),
     QUOTA("quota");
 
     private String value;

@@ -25,7 +25,15 @@ public class RateFactory   {
 
 
     public Serviceable getRateCardService() {
-     return new RateService();
+     return new RateCardService();
+    }
+
+    public Serviceable getRateCategoryService() {
+        return new CategoryService();
+    }
+
+    public Serviceable getRateCurrencyService() {
+        return new CurrencyService();
     }
     
 

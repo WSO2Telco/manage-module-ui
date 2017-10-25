@@ -1,17 +1,12 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
 import com.wso2telco.dep.manageservice.resource.resource.AbstractResource;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("/rate/ratecards")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -29,8 +24,8 @@ public class RateCardResource extends AbstractResource{
     }
 
     @POST
-    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCardDAO) {
-    	return doPost(rateCardDAO,authHeader);
+    public Response setRateCard(@HeaderParam("authorization") String authHeader, RateCard rateCard) {
+    	return doPost(rateCard,authHeader);
     }
 
 }
