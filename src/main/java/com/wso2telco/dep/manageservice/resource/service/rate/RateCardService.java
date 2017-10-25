@@ -1,7 +1,11 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
-import java.io.IOException;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.service.AbstractService;
+import com.wso2telco.dep.manageservice.resource.util.Messages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -11,14 +15,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.wso2telco.dep.manageservice.resource.model.Callback;
-import com.wso2telco.dep.manageservice.resource.model.rate.RateCard;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
-import com.wso2telco.dep.manageservice.resource.service.AbstractService;
-import com.wso2telco.dep.manageservice.resource.util.Messages;
+import java.io.IOException;
 
- class RateCardService  extends AbstractService {
+class RateCardService extends AbstractService {
 
     private HttpClient client;
     private ObjectMapper mapper;
@@ -32,10 +31,11 @@ import com.wso2telco.dep.manageservice.resource.util.Messages;
         this.mapper = new ObjectMapper();
     }
 
-    public Callback getRateCards(String authHeader) {
+    @Override
+    public Callback executeGet(String authenticationCredential) {
         HttpGet httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "ratecards?schema=full");
         /** add headers*/
-        httpGet.setHeader("Authorization", authHeader);
+        httpGet.setHeader("Authorization", authenticationCredential);
 
         try {
             HttpResponse response = client.execute(httpGet);
@@ -52,17 +52,18 @@ import com.wso2telco.dep.manageservice.resource.util.Messages;
         }
     }
 
-    public Callback setRateCard(RateCard rateCardDAO, String authHeader) {
+    @Override
+    public Callback executePost(RequestTransferrable request, String authenticationCredential) {
         HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "ratecards");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("Authorization", authHeader);
+        httpPost.setHeader("Authorization", authenticationCredential);
 
 
-        if (validateRequest(rateCardDAO)) {
+        if (validateRequest((RateCard) request)) {
             try {
                 /** set request body */
-                httpPost.setEntity(new StringEntity(mapper.writeValueAsString(rateCardDAO)));
+                httpPost.setEntity(new StringEntity(mapper.writeValueAsString(request)));
 
                 HttpResponse response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
@@ -85,16 +86,4 @@ import com.wso2telco.dep.manageservice.resource.util.Messages;
     public boolean validateRequest(RateCard rateCardDAO) {
         return (rateCardDAO != null);
     }
-
-	@Override
-	public Callback executeGet(String authenticationCredential) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Callback executePost(RequestTransferrable request, String authenticationCredential) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -4,15 +4,11 @@ package com.wso2telco.dep.manageservice.resource.model.rate;
  * Created by manoj on 10/11/17.
  */
 
+import com.fasterxml.jackson.annotation.*;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -22,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
         "categoryDescription",
         "createdBy"
 })
-public class Category {
+public class Category implements RequestTransferrable {
 
     @JsonProperty("categoryId")
     private Integer categoryId;

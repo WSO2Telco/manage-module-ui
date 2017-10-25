@@ -1,11 +1,11 @@
 package com.wso2telco.dep.manageservice.resource.resource;
 
-import javax.ws.rs.core.Response;
-
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.service.ServiceFactory;
 import com.wso2telco.dep.manageservice.resource.service.Serviceable;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
+
+import javax.ws.rs.core.Response;
 
 public abstract class AbstractResource {
 
