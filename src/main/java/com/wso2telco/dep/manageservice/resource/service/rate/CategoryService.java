@@ -3,6 +3,8 @@ package com.wso2telco.dep.manageservice.resource.service.rate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Category;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,26 +17,25 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 
-public class CategoryService {
+public class CategoryService extends AbstractService {
 
-    private HttpResponse response;
     private HttpClient client;
     private ObjectMapper mapper;
-    private final Log log = LogFactory.getLog(CategoryService.class);
-
+    private final Log log = LogFactory.getLog(RateService.class);
 
     public CategoryService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
     }
 
-    public Callback getCategories(String authHeader) {
+    @Override
+    public Callback executeGet(String authenticationCredential) {
         HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/").append("categories").toString());
 
-        httpGet.addHeader("Authorization", authHeader);
+        httpGet.addHeader("Authorization", authenticationCredential);
 
         try {
-            response = client.execute(httpGet);
+            HttpResponse response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
                 Category[] categories = mapper.readValue(response.getEntity().getContent(), Category[].class);
                 return new Callback().setPayload(categories).setSuccess(true).setMessage("Rate Category List Loaded Successfully");
@@ -49,17 +50,18 @@ public class CategoryService {
         }
     }
 
-    public Callback setCategory(Category categoryDAO, String authHeader) {
+    @Override
+    public Callback executePost(RequestTransferrable request, String authenticationCredential) {
         HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "categories");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
-        httpPost.setHeader("Authorization", authHeader);
+        httpPost.setHeader("Authorization", authenticationCredential);
 
-        if (validateRequest(categoryDAO)) {
+        if (validateRequest((Category)request)) {
             try {
                 /** set request body */
-                httpPost.setEntity(new StringEntity(mapper.writeValueAsString(categoryDAO)));
-                response = client.execute(httpPost);
+                httpPost.setEntity(new StringEntity(mapper.writeValueAsString(request)));
+                HttpResponse response = client.execute(httpPost);
                 if (response.getStatusLine().getStatusCode() == 201) {
                     Category category = mapper.readValue(response.getEntity().getContent(), Category.class);
                     return new Callback().setPayload(category).setSuccess(true).setMessage("New Category Created Successfully");
@@ -77,7 +79,7 @@ public class CategoryService {
         }
     }
 
-    public boolean validateRequest(Category categoryDAO) {
-        return (categoryDAO != null);
+    public boolean validateRequest(Category category) {
+        return (category != null);
     }
 }
