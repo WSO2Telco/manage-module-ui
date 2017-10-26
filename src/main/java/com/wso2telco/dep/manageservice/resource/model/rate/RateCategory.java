@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -24,7 +24,7 @@ import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
         "tariff",
         "createdBy"
 })
-public class RateCategory implements RequestTransferrable {
+public class RateCategory implements RequestTransferable {
 
     @JsonProperty("rateCategoryId")
     private Integer rateCategoryId;

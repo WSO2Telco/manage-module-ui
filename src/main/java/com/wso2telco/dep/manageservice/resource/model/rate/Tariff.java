@@ -6,7 +6,7 @@ package com.wso2telco.dep.manageservice.resource.model.rate;
 
 
 import com.fasterxml.jackson.annotation.*;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ import java.util.Map;
         "tariffSurChargeOpco",
         "createdBy"
 })
-public class Tariff implements RequestTransferrable {
+public class Tariff implements RequestTransferable {
 
     @JsonProperty("tariffId")
     private Integer tariffId;

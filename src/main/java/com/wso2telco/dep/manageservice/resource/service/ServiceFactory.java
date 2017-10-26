@@ -1,5 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
+import com.wso2telco.dep.manageservice.resource.service.quota.QuotaFactory;
 import com.wso2telco.dep.manageservice.resource.service.rate.RateFactory;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
@@ -33,17 +34,17 @@ public class ServiceFactory {
     public Serviceable getService(ServiceTypes serviceTypes){
     	Serviceable service= null;
     	switch (serviceTypes) {
-		case QUOTA:
-
+			case QUOTA_LIMIT:
+			service = QuotaFactory.getInstance().getQuotaLimitService();
 			break;
 		case RATE_CARD:
-			service =RateFactory.getInstace().getRateCardService();
+			service =RateFactory.getInstance().getRateCardService();
 			break;
 		case RATE_CATEGORY:
-			service =RateFactory.getInstace().getRateCategoryService();
+			service =RateFactory.getInstance().getRateCategoryService();
 			break;
 			case RATE_CURRENCY:
-			service =RateFactory.getInstace().getRateCurrencyService();
+			service =RateFactory.getInstance().getRateCurrencyService();
 			break;
 		default:
 			break;

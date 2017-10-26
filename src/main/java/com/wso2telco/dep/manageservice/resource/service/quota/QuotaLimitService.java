@@ -1,6 +1,8 @@
-package com.wso2telco.dep.manageservice.resource.service.rate;
+package com.wso2telco.dep.manageservice.resource.service.quota;
 
-import com.wso2telco.dep.manageservice.resource.service.Serviceable;
+import com.wso2telco.dep.manageservice.resource.model.Callback;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
+import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -17,29 +19,14 @@ import com.wso2telco.dep.manageservice.resource.service.Serviceable;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class RateFactory   {
-
-    static RateFactory instance;
-    RateFactory(){
+public class QuotaLimitService extends AbstractService {
+    @Override
+    public Callback executeGet(String authenticationCredential) {
+        return null;
     }
 
-    public static synchronized RateFactory getInstance(){
-        if(instance==null){
-            instance = new RateFactory();
-        }
-        return instance;
-    }
-
-
-    public Serviceable getRateCardService() {
-     return new RateCardService();
-    }
-
-    public Serviceable getRateCategoryService() {
-        return new CategoryService();
-    }
-
-    public Serviceable getRateCurrencyService() {
-        return new CurrencyService();
+    @Override
+    public Callback executePost(RequestTransferable request, String authenticationCredential) {
+        return null;
     }
 }

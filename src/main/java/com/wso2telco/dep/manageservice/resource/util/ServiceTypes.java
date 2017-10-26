@@ -20,7 +20,7 @@ public enum ServiceTypes {
     RATE_CARD("rate_card"),
     RATE_CATEGORY("rate_category"),
     RATE_CURRENCY("rate_currency"),
-    QUOTA("quota");
+    QUOTA_LIMIT("quota_limit");
 
     private String value;
 
