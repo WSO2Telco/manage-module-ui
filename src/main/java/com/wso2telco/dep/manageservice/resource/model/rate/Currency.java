@@ -4,7 +4,7 @@ package com.wso2telco.dep.manageservice.resource.model.rate;
  * Created by manoj on 10/12/17.
  */
 import com.fasterxml.jackson.annotation.*;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Map;
         "currencyDescription",
         "createdBy"
 })
-public class Currency implements RequestTransferrable {
+public class Currency implements RequestTransferable {
 
     @JsonProperty("currencyId")
     private Integer currencyId;

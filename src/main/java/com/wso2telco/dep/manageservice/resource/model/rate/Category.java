@@ -5,7 +5,7 @@ package com.wso2telco.dep.manageservice.resource.model.rate;
  */
 
 import com.fasterxml.jackson.annotation.*;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ import java.util.Map;
         "categoryDescription",
         "createdBy"
 })
-public class Category implements RequestTransferrable {
+public class Category implements RequestTransferable {
 
     @JsonProperty("categoryId")
     private Integer categoryId;

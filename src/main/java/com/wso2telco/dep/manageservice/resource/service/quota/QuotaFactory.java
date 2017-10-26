@@ -1,4 +1,4 @@
-package com.wso2telco.dep.manageservice.resource.service.rate;
+package com.wso2telco.dep.manageservice.resource.service.quota;
 
 import com.wso2telco.dep.manageservice.resource.service.Serviceable;
 
@@ -17,29 +17,19 @@ import com.wso2telco.dep.manageservice.resource.service.Serviceable;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class RateFactory   {
-
-    static RateFactory instance;
-    RateFactory(){
+public class QuotaFactory {
+    static QuotaFactory instance;
+    QuotaFactory(){
     }
 
-    public static synchronized RateFactory getInstance(){
+    public static synchronized QuotaFactory getInstance(){
         if(instance==null){
-            instance = new RateFactory();
+            instance = new QuotaFactory();
         }
         return instance;
     }
 
-
-    public Serviceable getRateCardService() {
-     return new RateCardService();
-    }
-
-    public Serviceable getRateCategoryService() {
-        return new CategoryService();
-    }
-
-    public Serviceable getRateCurrencyService() {
-        return new CurrencyService();
+    public Serviceable getQuotaLimitService() {
+        return new QuotaLimitService();
     }
 }
