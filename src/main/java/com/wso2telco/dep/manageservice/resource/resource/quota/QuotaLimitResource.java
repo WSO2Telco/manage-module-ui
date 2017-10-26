@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
  * limitations under the License.
  */
 
-@Path("/rate/ratecards")
+@Path("/quota/quotalimit")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class QuotaLimitResource extends AbstractResource {

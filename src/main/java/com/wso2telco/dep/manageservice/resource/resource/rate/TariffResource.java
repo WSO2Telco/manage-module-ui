@@ -1,30 +1,46 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
-import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Tariff;
-import com.wso2telco.dep.manageservice.resource.service.rate.TariffService;
+import com.wso2telco.dep.manageservice.resource.resource.AbstractResource;
+import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
+ * <p>
+ * WSO2.Telco Inc. licences this file to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 @Path("/rate/tariffs")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class TariffResource {
+public class TariffResource extends AbstractResource {
 
-    TariffService tariffService = new TariffService();
+    @Override
+    protected ServiceTypes getService() {
+        return ServiceTypes.RATE_TARIFF;
+    }
 
     @GET
     public Response getTariffs(@HeaderParam("authorization") String authHeader) {
-        Callback callback = tariffService.getTariffs(authHeader);
-        return Response.status(Response.Status.OK).entity(callback).build();
+        return doGet(authHeader);
     }
 
     @POST
-    public Response setCurrencies(@HeaderParam("authorization") String authHeader, Tariff tariffDAO) {
-        Callback callback = tariffService.setTarif(tariffDAO, authHeader);
-        return Response.status(Response.Status.OK).entity(callback).build();
+    public Response setCurrencies(@HeaderParam("authorization") String authHeader, Tariff tariff) {
+        return doPost(tariff, authHeader);
     }
-
 }

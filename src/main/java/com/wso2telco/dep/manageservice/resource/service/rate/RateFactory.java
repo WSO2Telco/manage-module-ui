@@ -17,14 +17,15 @@ import com.wso2telco.dep.manageservice.resource.service.Serviceable;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class RateFactory   {
+public class RateFactory {
 
     static RateFactory instance;
-    RateFactory(){
+
+    RateFactory() {
     }
 
-    public static synchronized RateFactory getInstance(){
-        if(instance==null){
+    public static synchronized RateFactory getInstance() {
+        if (instance == null) {
             instance = new RateFactory();
         }
         return instance;
@@ -32,7 +33,7 @@ public class RateFactory   {
 
 
     public Serviceable getRateCardService() {
-     return new RateCardService();
+        return new RateCardService();
     }
 
     public Serviceable getRateCategoryService() {
@@ -41,5 +42,21 @@ public class RateFactory   {
 
     public Serviceable getRateCurrencyService() {
         return new CurrencyService();
+    }
+
+    public Serviceable getRateTaxService() {
+        return new TaxService();
+    }
+
+    public Serviceable getRateDefinitionService() {
+        return new RateDefinitionService();
+    }
+
+    public Serviceable getRateTariffService() {
+        return new TariffService();
+    }
+
+    public Serviceable getRateTypeService() {
+        return new RateTypeService();
     }
 }

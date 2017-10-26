@@ -20,37 +20,51 @@ import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
  * limitations under the License.
  */
 public class ServiceFactory {
-	static ServiceFactory instance;
-	private ServiceFactory(){}
+    static ServiceFactory instance;
 
-	public static synchronized ServiceFactory getInstance(){
-		if(instance==null){
-			instance = new ServiceFactory();
-		}
-		return instance;
-	}
+    private ServiceFactory() {
+    }
+
+    public static synchronized ServiceFactory getInstance() {
+        if (instance == null) {
+            instance = new ServiceFactory();
+        }
+        return instance;
+    }
 
 
-    public Serviceable getService(ServiceTypes serviceTypes){
-    	Serviceable service= null;
-    	switch (serviceTypes) {
-			case QUOTA_LIMIT:
-			service = QuotaFactory.getInstance().getQuotaLimitService();
-			break;
-		case RATE_CARD:
-			service =RateFactory.getInstance().getRateCardService();
-			break;
-		case RATE_CATEGORY:
-			service =RateFactory.getInstance().getRateCategoryService();
-			break;
-			case RATE_CURRENCY:
-			service =RateFactory.getInstance().getRateCurrencyService();
-			break;
-		default:
-			break;
+    public Serviceable getService(ServiceTypes serviceTypes) {
+        Serviceable service = null;
+        switch (serviceTypes) {
+            case QUOTA_LIMIT:
+                service = QuotaFactory.getInstance().getQuotaLimitService();
+                break;
+            case RATE_CARD:
+                service = RateFactory.getInstance().getRateCardService();
+                break;
+            case RATE_CATEGORY:
+                service = RateFactory.getInstance().getRateCategoryService();
+                break;
+            case RATE_CURRENCY:
+                service = RateFactory.getInstance().getRateCurrencyService();
+                break;
+            case RATE_TAX:
+                service = RateFactory.getInstance().getRateTaxService();
+                break;
+            case RATE_TYPE:
+                service = RateFactory.getInstance().getRateTypeService();
+                break;
+            case RATE_TARIFF:
+                service = RateFactory.getInstance().getRateTariffService();
+                break;
+            case RATE_DEFINITION:
+                service = RateFactory.getInstance().getRateDefinitionService();
+                break;
+            default:
+                break;
 
-		}
-    	return service;
+        }
+        return service;
     }
 
 }
