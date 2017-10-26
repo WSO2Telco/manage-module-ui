@@ -16,5 +16,9 @@ package com.wso2telco.dep.manageservice.resource.service;
  * limitations under the License.
  */
 public abstract class AbstractService implements Serviceable {
+
+    public String getUrl(String type){
+        return "";
+    }
 	
 }

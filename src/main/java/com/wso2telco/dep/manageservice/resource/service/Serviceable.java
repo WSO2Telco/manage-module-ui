@@ -1,7 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
 import com.wso2telco.dep.manageservice.resource.model.Callback;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -19,6 +19,8 @@ import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
  * limitations under the License.
  */
 public interface Serviceable {
-	Callback executeGet(String authenticationCredential) ;
-	Callback executePost(RequestTransferrable request,String authenticationCredential) ;
+
+    Callback executeGet(String authenticationCredential);
+
+    Callback executePost(RequestTransferable request, String authenticationCredential);
 }

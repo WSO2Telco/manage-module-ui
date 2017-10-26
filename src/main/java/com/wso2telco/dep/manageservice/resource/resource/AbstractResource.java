@@ -20,7 +20,7 @@ public abstract class AbstractResource {
 		return Response.status(Response.Status.OK).entity(callback).build();
 	}
 	
-	protected Response doPost(RequestTransferrable request, String authenticationCredential) {
+	protected Response doPost(RequestTransferable request, String authenticationCredential) {
 		Serviceable service = serviceFactory.getService(getService());
 		
 		Callback callback = service.executePost(request, authenticationCredential);

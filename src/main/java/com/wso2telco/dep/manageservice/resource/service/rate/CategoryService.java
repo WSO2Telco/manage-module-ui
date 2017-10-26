@@ -3,7 +3,7 @@ package com.wso2telco.dep.manageservice.resource.service.rate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.model.rate.Category;
-import com.wso2telco.dep.manageservice.resource.resource.RequestTransferrable;
+import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
 import org.apache.commons.logging.Log;
@@ -21,7 +21,7 @@ public class CategoryService extends AbstractService {
 
     private HttpClient client;
     private ObjectMapper mapper;
-    private final Log log = LogFactory.getLog(RateService.class);
+    private final Log log = LogFactory.getLog(CategoryService.class);
 
     public CategoryService() {
         this.client = HttpClientBuilder.create().build();
@@ -51,7 +51,7 @@ public class CategoryService extends AbstractService {
     }
 
     @Override
-    public Callback executePost(RequestTransferrable request, String authenticationCredential) {
+    public Callback executePost(RequestTransferable request, String authenticationCredential) {
         HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "categories");
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
