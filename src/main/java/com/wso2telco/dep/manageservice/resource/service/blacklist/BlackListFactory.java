@@ -23,7 +23,13 @@ public class BlackListFactory {
     BlackListFactory () {
     }
 
+    public static synchronized BlackListFactory getInstance(){
+        if(instance==null){
+            instance = new BlackListFactory();
+        }
+        return instance;
+    }
+
     public Serviceable getApiService() { return new ApiService(); }
 
-    public static BlackListFactory getInstance() { return new BlackListFactory(); }
 }
