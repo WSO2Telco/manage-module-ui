@@ -33,7 +33,8 @@ public enum Messages {
     TAX_LOADING_ERROR("Error Loading Tax List"),
     RATE_TYPE_LOADING_ERROR("Error Loading Rate Type List"),
     APPLICATION_SEARCH_ERROR("Error Loading Approval Tasks"),
-    APPLICATION_SEARCH_SUCCESS("Approval Tasks Loaded");
+    APPLICATION_SEARCH_SUCCESS("Approval Tasks Loaded"),
+    API_LOADING_ERROR("Error Loading api List");
 
     private String value;
 

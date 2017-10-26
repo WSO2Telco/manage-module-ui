@@ -1,5 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service;
 
+import com.wso2telco.dep.manageservice.resource.service.blacklist.BlackListFactory;
 import com.wso2telco.dep.manageservice.resource.service.quota.QuotaFactory;
 import com.wso2telco.dep.manageservice.resource.service.rate.RateFactory;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
@@ -59,6 +60,9 @@ public class ServiceFactory {
                 break;
             case RATE_DEFINITION:
                 service = RateFactory.getInstance().getRateDefinitionService();
+                break;
+            case BLACKLIST:
+                service = BlackListFactory.getInstance().getApiService();
                 break;
             default:
                 break;
