@@ -20,6 +20,10 @@ public enum ServiceTypes {
     RATE_CARD("rate_card"),
     RATE_CATEGORY("rate_category"),
     RATE_CURRENCY("rate_currency"),
+    RATE_TAX("rate_tax"),
+    RATE_DEFINITION("rate_definition"),
+    RATE_TYPE("rate_type"),
+    RATE_TARIFF("rate_tariff"),
     QUOTA_LIMIT("quota_limit"),
     BLACKLIST("blacklist");
 
