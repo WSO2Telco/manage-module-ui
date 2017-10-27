@@ -5,7 +5,7 @@
             <div class="form-container subcategoryContainer">
                 <div class="row">
                     <div class="col-sm-6">
-                        <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)">
+                        <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)" autocomplete="off">
                             <br><br>
                             <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
                                 <label class="control-label col-sm-4">Category <span>*</span></label>
