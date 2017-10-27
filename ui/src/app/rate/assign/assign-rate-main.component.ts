@@ -64,7 +64,7 @@ export class AssignRateMainComponent implements OnInit {
         this.blackListService.getApiList((response, status) => {
             if (status) {
                 let count = 0;
-                for (const entry of response) {
+                for (const entry of response.payload) {
                     const splited = entry.split(':');
                     this.apiList[count] = splited[1];
                     count++;
@@ -81,7 +81,7 @@ export class AssignRateMainComponent implements OnInit {
     getOperators() {
         this.quotaService.getOperatorList((response, status) => {
             if (status) {
-                this.operatorList = response;
+                this.operatorList = response.payload;
                 if (this.loginInfo.isAdmin) {
                     const admin = {
                         'operatorId': null,
