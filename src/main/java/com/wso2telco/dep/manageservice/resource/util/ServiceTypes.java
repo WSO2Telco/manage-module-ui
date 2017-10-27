@@ -28,7 +28,8 @@ public enum ServiceTypes {
     RATE_API_OPERATION_RATES("rate_api_operation_rates"),
     QUOTA_LIMIT("quota_limit"),
     BLACKLIST("blacklist"),
-    WHITELIST_SUBSCRIBERS("whitelist");
+    WHITELIST_SUBSCRIBERS("whitelist"),
+    WHITELIST_APPLICATIONS("application_list");
 
     private String value;
 

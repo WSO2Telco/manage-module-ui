@@ -34,4 +34,8 @@ public class WhiteListFactory {
         return new SubscriberService();
     }
 
+    public Serviceable getApplicationService() {
+        return new ApplicationService();
+    }
+
 }

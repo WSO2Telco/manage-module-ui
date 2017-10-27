@@ -37,7 +37,8 @@ public enum Messages {
     API_OPERATIONS_LOADING_EROOR("Error Loading Api Operations"),
     API_OPERATION_RATES_LOADING_ERROR("Error Loading Api Operation Rates"),
     API_LOADING_ERROR("Error Loading api List"),
-    SUBSCRIBERS_LOADING_ERROR("Error Loading subscribers");
+    SUBSCRIBERS_LOADING_ERROR("Error Loading subscribers"),
+    APPLICATION_LOADING_ERROR("Error Loading applications");
 
     private String value;
 

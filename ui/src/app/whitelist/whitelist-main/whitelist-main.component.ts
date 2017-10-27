@@ -97,7 +97,7 @@ export class WhitelistMainComponent implements OnInit {
     getAppsofSubscriber(subscriberID: string) {
         this.whitelistService.getApps(subscriberID, (response, status) => {
             if (status) {
-                this.applicationList = response;
+                this.applicationList = response.payload;
                 let count = 0;
                 for (const entry of this.applicationList) {
                     const splitted = entry.split(':', 2);
