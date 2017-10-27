@@ -144,8 +144,8 @@ export class AssignRateMainComponent implements OnInit {
                 if (apiOperationId) {
                     this.rateService.getRatesForAPIOperation(this.api, apiOperationId, operatorId, (response, status) => {
                         if (status) {
-                            this.sourceList = response.source;
-                            this.assignedList = response.destination;
+                            this.sourceList = response.payload.source;
+                            this.assignedList = response.payload.destination;
                             this.destinationList = [];
                             if(this.sourceList.length == 0){
                                 this.message.warning('No Rate Values Available for Selected Combination');

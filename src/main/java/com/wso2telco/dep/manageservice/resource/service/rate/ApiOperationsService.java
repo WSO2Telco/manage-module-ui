@@ -6,6 +6,7 @@ import com.wso2telco.dep.manageservice.resource.model.rate.ApiOperation;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -49,7 +50,7 @@ public class ApiOperationsService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
-        HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/").append("apis/" + pathParamStringList.get(0) + "/operations").toString());
+        HttpGet httpGet = new HttpGet(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("apis/" + pathParamStringList.get(0) + "/operations").toString());
 
         httpGet.addHeader("Authorization", authenticationCredential);
 

@@ -1,6 +1,4 @@
-package com.wso2telco.dep.manageservice.resource.service;
-
-import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
+package com.wso2telco.dep.manageservice.resource.util;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -17,21 +15,16 @@ import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public abstract class AbstractService implements Serviceable {
+public enum ServiceUrl {
 
+    RATE_SERVICE("http://localhost:9763/ratecard-service/ratecardservice/");
+    private String value;
 
-    public String getUrl(ServiceUrl serviceUrl) {
-
-        String url = "";
-
-        switch (serviceUrl) {
-            case RATE_SERVICE:
-                url = serviceUrl.getValue();
-                break;
-            default:
-                break;
-        }
-        return url;
+    ServiceUrl(String value) {
+        this.value = value;
     }
 
+    public String getValue() {
+        return value;
+    }
 }

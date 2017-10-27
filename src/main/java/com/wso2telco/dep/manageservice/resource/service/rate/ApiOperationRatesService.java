@@ -6,6 +6,7 @@ import com.wso2telco.dep.manageservice.resource.model.rate.ApiOperationRates;
 import com.wso2telco.dep.manageservice.resource.model.rate.RateDefinition;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -73,7 +74,7 @@ public class ApiOperationRatesService extends AbstractService {
 
     public RateDefinition[] requestRateDefinitions(String authenticationCredential, List<String> pathParamStringList, String type) {
 
-        StringBuilder url = new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/");
+        StringBuilder url = new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE));
         RateDefinition[] rateDefinitions = new RateDefinition[0];
 
         switch (type) {
@@ -109,7 +110,7 @@ public class ApiOperationRatesService extends AbstractService {
 
     public RateDefinition[] requestOperationRates(String authenticationCredential, List<String> pathParamStringList, String type) {
 
-        StringBuilder url = new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/");
+        StringBuilder url = new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE));
         RateDefinition[] rateDefinitions = new RateDefinition[0];
 
         switch (type) {

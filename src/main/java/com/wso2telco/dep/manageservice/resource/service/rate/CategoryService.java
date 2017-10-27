@@ -6,6 +6,7 @@ import com.wso2telco.dep.manageservice.resource.model.rate.Category;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -47,7 +48,7 @@ public class CategoryService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential) {
-        HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/").append("categories").toString());
+        HttpGet httpGet = new HttpGet(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("categories").toString());
 
         httpGet.addHeader("Authorization", authenticationCredential);
 
@@ -74,7 +75,7 @@ public class CategoryService extends AbstractService {
 
     @Override
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
-        HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "categories");
+        HttpPost httpPost = new HttpPost(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("categories").toString());
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", authenticationCredential);

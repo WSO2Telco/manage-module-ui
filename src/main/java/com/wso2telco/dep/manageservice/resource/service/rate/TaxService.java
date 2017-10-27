@@ -6,6 +6,7 @@ import com.wso2telco.dep.manageservice.resource.model.rate.Tax;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -45,7 +46,7 @@ public class TaxService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential) {
-        HttpGet httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "taxes");
+        HttpGet httpGet = new HttpGet(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("taxes").toString());
         httpGet.addHeader("Authorization", authenticationCredential);
 
         try {
