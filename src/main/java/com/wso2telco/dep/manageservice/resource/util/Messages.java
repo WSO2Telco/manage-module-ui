@@ -35,7 +35,8 @@ public enum Messages {
     APPLICATION_SEARCH_ERROR("Error Loading Approval Tasks"),
     APPLICATION_SEARCH_SUCCESS("Approval Tasks Loaded"),
     API_OPERATIONS_LOADING_EROOR("Error Loading Api Operations"),
-    API_OPERATION_RATES_LOADING_ERROR("Error Loading Api Operation Rates");
+    API_OPERATION_RATES_LOADING_ERROR("Error Loading Api Operation Rates"),
+    API_LOADING_ERROR("Error Loading api List");
 
     private String value;
 
