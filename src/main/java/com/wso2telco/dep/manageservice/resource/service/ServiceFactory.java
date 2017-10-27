@@ -60,9 +60,14 @@ public class ServiceFactory {
             case RATE_DEFINITION:
                 service = RateFactory.getInstance().getRateDefinitionService();
                 break;
+            case RATE_API_OPERATIONS:
+                service = RateFactory.getInstance().getApiOperationsService();
+                break;
+            case RATE_API_OPERATION_RATES:
+                service = RateFactory.getInstance().getApiOperationRatesService();
+                break;
             default:
                 break;
-
         }
         return service;
     }
