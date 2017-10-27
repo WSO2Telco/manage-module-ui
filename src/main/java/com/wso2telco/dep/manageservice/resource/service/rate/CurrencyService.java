@@ -6,6 +6,7 @@ import com.wso2telco.dep.manageservice.resource.model.rate.Currency;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -47,7 +48,7 @@ public class CurrencyService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential) {
-        HttpGet httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+        HttpGet httpGet = new HttpGet(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("currencies").toString());
         /** add headers*/
         httpGet.setHeader("Authorization", authenticationCredential);
 
@@ -73,7 +74,7 @@ public class CurrencyService extends AbstractService {
 
     @Override
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
-        HttpPost httpPost = new HttpPost("http://localhost:9763/ratecard-service/ratecardservice/" + "currencies");
+        HttpPost httpPost = new HttpPost(new StringBuilder(super.getUrl(ServiceUrl.RATE_SERVICE)).append("currencies").toString());
         /** add headers */
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", authenticationCredential);

@@ -28,6 +28,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ApiService extends AbstractService {
 
@@ -65,6 +66,11 @@ public class ApiService extends AbstractService {
             log.error(" Exception while loading apis from hub " + e);
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.API_LOADING_ERROR.getValue());
         }
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
+        return null;
     }
 
     @Override

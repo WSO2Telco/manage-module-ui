@@ -18,6 +18,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 public class SubscriberService extends AbstractService {
 
@@ -32,6 +33,11 @@ public class SubscriberService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential) {
+        return null;
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
         return null;
     }
 

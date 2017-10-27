@@ -25,8 +25,8 @@ export class RateRemoteDataService {
         rateDefinitions: this.apiContext + '/rate/ratedefinitions',
         rateTaxes: this.apiContext + '/rate/taxes',
         assignRatesForAPIOperation: this.apiContext + '/rate/assignrates',
-        getApiOperations: this.apiContext + '/rate/getapioperations',
-        getAPIOperationRates: this.apiContext + '/rate/getapioperationrates',
+        apiOperations: this.apiContext + '/rate/apioperations',
+        apiOperationRates: this.apiContext + '/rate/apioperationrates',
         addRateCategory: this.apiContext + '/rate/addratecategory/'
     };
 
@@ -243,7 +243,7 @@ export class RateRemoteDataService {
     }
 
     getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
-        return this.http.get(this.apiEndpoints['getAPIOperationRates'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId, this.getOptions())
+        return this.http.get(this.apiEndpoints['apiOperationRates'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -256,7 +256,7 @@ export class RateRemoteDataService {
     }
 
     getApiOperations(api: string) {
-        return this.http.get(this.apiEndpoints['getApiOperations'] + '/' + api, this.getOptions())
+        return this.http.get(this.apiEndpoints['apiOperations'] + '/' + api, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
