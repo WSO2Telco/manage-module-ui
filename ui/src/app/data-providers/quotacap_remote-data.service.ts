@@ -22,7 +22,7 @@ export class QuotacapRemoteDataService {
         getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
         addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit',
         getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod',
-        getOperatorList: this.apiContext + '/quotacap/getoperatorlist'
+        getOperatorList: this.apiContext + '/rate/operators'
 
     };
 

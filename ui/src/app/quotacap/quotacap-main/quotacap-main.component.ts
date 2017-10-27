@@ -174,7 +174,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getOperatorList((response, status) => {
             if (status) {
                 let count = 1;
-                for (const entry of response) {
+                for (const entry of response.payload) {
                     this.operatorsList[count] = entry.operatorName;
                     count += 1;
                 }
@@ -185,7 +185,6 @@ export class QuotaCapMainComponent implements OnInit {
             }
         });
     }
-
 
     /**
      * Change operator list based on SP
