@@ -95,7 +95,7 @@ export class QuotaService {
         this._remoteService.getOperatorList()
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
