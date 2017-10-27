@@ -4,6 +4,8 @@ import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 
+import java.util.List;
+
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
  * <p>
@@ -22,6 +24,11 @@ import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 public class QuotaLimitService extends AbstractService {
     @Override
     public Callback executeGet(String authenticationCredential) {
+        return null;
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
         return null;
     }
 

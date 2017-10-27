@@ -1,9 +1,8 @@
 package com.wso2telco.dep.manageservice.resource.service.rate;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wso2telco.dep.manageservice.resource.model.Callback;
-import com.wso2telco.dep.manageservice.resource.model.rate.RateType;
+import com.wso2telco.dep.manageservice.resource.model.rate.ApiOperation;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
@@ -32,42 +31,42 @@ import java.util.List;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-public class RateTypeService extends AbstractService {
+public class ApiOperationsService extends AbstractService {
 
     private HttpClient client;
     private ObjectMapper mapper;
-    private final Log log = LogFactory.getLog(RateTypeService.class);
+    private final Log log = LogFactory.getLog(CategoryService.class);
 
-
-    public RateTypeService() {
+    public ApiOperationsService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
     }
 
     @Override
     public Callback executeGet(String authenticationCredential) {
-        HttpGet httpGet = new HttpGet("http://localhost:9763/ratecard-service/ratecardservice/" + "ratetypes");
+        return null;
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
+        HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/ratecard-service/ratecardservice/").append("apis/" + pathParamStringList.get(0) + "/operations").toString());
+
         httpGet.addHeader("Authorization", authenticationCredential);
 
         try {
             HttpResponse response = client.execute(httpGet);
             if (response.getStatusLine().getStatusCode() == 200) {
-                RateType[] rateTypes = mapper.readValue(response.getEntity().getContent(), RateType[].class);
-                return new Callback().setPayload(rateTypes).setSuccess(true).setMessage("Rate Type List Loaded Successfully");
+                ApiOperation[] apiOperations = mapper.readValue(response.getEntity().getContent(), ApiOperation[].class);
+                return new Callback().setPayload(apiOperations).setSuccess(true).setMessage("Api Operations Loaded Successfully");
             } else {
-                log.error(response.getStatusLine().getStatusCode() + " Error loading rate types from hub");
-                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.RATE_TYPE_LOADING_ERROR.getValue());
+                log.error(response.getStatusLine().getStatusCode() + " Error loading api operations from hub");
+                return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.API_OPERATIONS_LOADING_EROOR.getValue());
             }
-        } catch (IOException e) {
-            log.error(" Exception while loading taxes from hub " + e);
-            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.RATE_TYPE_LOADING_ERROR.getValue());
-        }
-    }
 
-    @Override
-    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
-        return null;
+        } catch (IOException e) {
+            log.error(" Exception while loading categories from hub " + e);
+            return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.API_OPERATIONS_LOADING_EROOR.getValue());
+        }
     }
 
     @Override
@@ -75,5 +74,3 @@ public class RateTypeService extends AbstractService {
         return null;
     }
 }
-
-
