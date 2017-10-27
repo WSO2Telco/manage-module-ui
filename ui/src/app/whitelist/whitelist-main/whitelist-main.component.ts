@@ -83,7 +83,7 @@ export class WhitelistMainComponent implements OnInit {
     getSubscribersOfProvider() {
         this.whitelistService.getSubscribers((response, status) => {
             if (status) {
-                this.subscriberList = response;
+                this.subscriberList = response.payload;
             } else {
                 this.message.error('Failed to load subscribers');
             }
