@@ -16,6 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -66,6 +67,11 @@ class RateCardService extends AbstractService {
             log.error(" Exception while loading Rate Definition list from hub " + e);
             return new Callback().setPayload(null).setSuccess(false).setMessage(LOADING_ERROR);
         }
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
+        return null;
     }
 
     @Override

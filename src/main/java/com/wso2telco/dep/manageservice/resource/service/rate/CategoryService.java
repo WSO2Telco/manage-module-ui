@@ -16,6 +16,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -64,6 +65,11 @@ public class CategoryService extends AbstractService {
             log.error(" Exception while loading categories from hub " + e);
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.CATEGORY_LOADING_ERROR.getValue());
         }
+    }
+
+    @Override
+    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
+        return null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.wso2telco.dep.manageservice.resource.util;
+package com.wso2telco.dep.manageservice.resource.service.rate;
 
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
@@ -15,28 +15,5 @@ package com.wso2telco.dep.manageservice.resource.util;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public enum ServiceTypes {
-
-    RATE_CARD("rate_card"),
-    RATE_CATEGORY("rate_category"),
-    RATE_CURRENCY("rate_currency"),
-    RATE_TAX("rate_tax"),
-    RATE_DEFINITION("rate_definition"),
-    RATE_TYPE("rate_type"),
-    RATE_TARIFF("rate_tariff"),
-    RATE_API_OPERATIONS("rate_api_operations"),
-    RATE_API_OPERATION_RATES("rate_api_operation_rates"),
-    QUOTA_LIMIT("quota_limit"),
-    BLACKLIST("blacklist"),
-    WHITELIST_SUBSCRIBERS("whitelist");
-
-    private String value;
-
-    ServiceTypes(String value) {
-        this.value = value;
-    }
-
-    public String getValue() {
-        return value;
-    }
+public class AssignRateService {
 }

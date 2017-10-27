@@ -59,4 +59,12 @@ public class RateFactory {
     public Serviceable getRateTypeService() {
         return new RateTypeService();
     }
+
+    public Serviceable getApiOperationsService(){
+        return new ApiOperationsService();
+    }
+
+    public Serviceable getApiOperationRatesService(){
+        return new ApiOperationRatesService();
+    }
 }
