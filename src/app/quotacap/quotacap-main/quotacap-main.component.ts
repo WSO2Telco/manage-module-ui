@@ -26,6 +26,7 @@ export class QuotaCapMainComponent implements OnInit {
     private applicationError: string;
     private apiError: string;
     private operatorError: string;
+    private calendarStartEndTime: string;
 
     private subscriberList;
     private applicationList: string[];
@@ -247,10 +248,22 @@ export class QuotaCapMainComponent implements OnInit {
             this.getQuotaofSubscriber(this.subscriber);
             this.getOperatorOfsubscriber(this.subscriber);
             this.isSubscriberSelect = true;
-        } else {
+
+            if (this.defaultcalval !== '') {
+                this.DateRangeValidation();
+            }
+
+        } else if (this.app.length !== 0) {
             this.isSubscriberError = true;
             this.subscriberError = 'Invalid Service Provider';
             this.isCalenderEnable = true;
+            this.isSubscriberSelect = false;
+            this.apiList = [];
+            this.applicationList = [];
+            this.quotalist = [];
+            this.SetQuotaResultLabel();
+        } else {
+            this.isSubscriberError = true;
             this.isSubscriberSelect = false;
             this.apiList = [];
             this.applicationList = [];
@@ -288,7 +301,11 @@ export class QuotaCapMainComponent implements OnInit {
                     this.getQuotaofApp(this.appID);
                 }
             }
-        } else {
+            if (this.defaultcalval !== '') {
+                this.DateRangeValidation();
+            }
+
+        } else if (this.app.length !== 0) {
             this.isApplicationError = true;
             this.applicationError = 'Invalid Application';
             this.isAppSelect = false;
@@ -296,6 +313,15 @@ export class QuotaCapMainComponent implements OnInit {
             this.apiList = [];
             this.quotalist = [];
             this.SetQuotaResultLabel();
+        } else {
+            this.apiList = [];
+            this.quotalist = [];
+            this.isAppSelect = false;
+            this.SetQuotaResultLabel();
+            this.getQuotaofSubscriber(this.subscriber);
+            if (this.defaultcalval !== '') {
+                this.DateRangeValidation();
+            }
         }
     }
 
@@ -323,11 +349,17 @@ export class QuotaCapMainComponent implements OnInit {
             } else if (this.isSubscriberSelect) {
                 this.getQuotaofSubscriber(this.subscriber)
             }
-        } else {
+            if (this.defaultcalval !== '') {
+                this.DateRangeValidation();
+            }
+        } else if (this.selectedoperator.length !== 0) {
             this.isOperatorError = true;
             this.operatorError = 'Invalid Operator';
-            this.isCalenderEnable = true;
             this.quotalist = [];
+            this.SetQuotaResultLabel();
+        } else {
+            this.quotalist = [];
+            this.getQuotaofApi(this.api);
             this.SetQuotaResultLabel();
         }
     }
@@ -373,7 +405,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfo(subscriberID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                 //   this.message.warning('No Quota Assign for this combination');
+                    //   this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0;
                     for (const item of response.Success.text) {
@@ -402,7 +434,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfoApp(appID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                  //  this.message.warning('No Quota Assign for this combination');
+                    //  this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0
                     for (const item of response.Success.text) {
@@ -432,7 +464,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.quotaService.getQuotaLimitInfoApi(apiID, this.selectedoperator, (response, status) => {
             if (status) {
                 if (response.Success.text.length == 0) {
-                 //   this.message.warning('No Quota Assign for this combination');
+                    //   this.message.warning('No Quota Assign for this combination');
                 } else {
                     let count = 0
                     for (const item of response.Success.text) {
@@ -685,13 +717,21 @@ export class QuotaCapMainComponent implements OnInit {
                     this.getQuotaofApi(this.api);
                 }
             }
+            if (this.defaultcalval !== '') {
+                this.DateRangeValidation();
+            }
 
-        } else {
+        } else if (this.api.length !== 0) {
             this.isApiError = true;
             this.apiError = 'Invalid API';
             this.isApiSelect = false;
             this.isCalenderEnable = true;
             this.quotalist = [];
+            this.SetQuotaResultLabel();
+        } else {
+            this.isApiSelect = false;
+            this.quotalist = [];
+            this.getQuotaofApp(this.appID);
             this.SetQuotaResultLabel();
         }
     }
@@ -735,7 +775,48 @@ export class QuotaCapMainComponent implements OnInit {
     }
 
     onDateRangeChanged(event) {
+        console.log('hit the date change');
         this.datepickvalue = event.formatted;
+        this.fromdate = this.datepickvalue.split('-')[0].trim()
+        this.todate = this.datepickvalue.split('-')[1].trim()
+
+        if (this.isApiSelect) {
+            this.quotaService.getValidityPeriodForApi(this.api, this.fromdate,
+                this.todate, this.selectedoperator, (response) => {
+                    if (!response.Success.text.isEmpty) {
+                        if (response.Success.text == 'true') {
+                            this.is_invalid_period = true;
+                        } else {
+                            this.is_invalid_period = false;
+                        }
+                    }
+                });
+        } else if (this.isAppSelect) {
+            this.quotaService.getValidityPeriodForApp(this.appID, this.fromdate,
+                this.todate, this.selectedoperator, (response) => {
+                    if (!response.Success.text.isEmpty) {
+                        if (response.Success.text == 'true') {
+                            this.is_invalid_period = true;
+                        } else {
+                            this.is_invalid_period = false;
+                        }
+                    }
+                });
+        } else if (this.isSubscriberSelect) {
+            this.quotaService.getValidityPeriodForSubscriober(this.subscriber, this.fromdate,
+                this.todate, this.selectedoperator, (response) => {
+                    if (!response.Success.text.isEmpty) {
+                        if (response.Success.text == 'true') {
+                            this.is_invalid_period = true;
+                        } else {
+                            this.is_invalid_period = false;
+                        }
+                    }
+                });
+        }
+    }
+
+    DateRangeValidation() {
         this.fromdate = this.datepickvalue.split('-')[0].trim()
         this.todate = this.datepickvalue.split('-')[1].trim()
 
