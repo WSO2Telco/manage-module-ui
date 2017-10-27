@@ -25,7 +25,8 @@ public enum ServiceTypes {
     RATE_TYPE("rate_type"),
     RATE_TARIFF("rate_tariff"),
     QUOTA_LIMIT("quota_limit"),
-    BLACKLIST("blacklist");
+    BLACKLIST("blacklist"),
+    WHITELIST_SUBSCRIBERS("whitelist");
 
     private String value;
 

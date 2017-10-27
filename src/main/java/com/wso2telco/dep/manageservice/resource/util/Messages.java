@@ -34,7 +34,8 @@ public enum Messages {
     RATE_TYPE_LOADING_ERROR("Error Loading Rate Type List"),
     APPLICATION_SEARCH_ERROR("Error Loading Approval Tasks"),
     APPLICATION_SEARCH_SUCCESS("Approval Tasks Loaded"),
-    API_LOADING_ERROR("Error Loading api List");
+    API_LOADING_ERROR("Error Loading api List"),
+    SUBSCRIBERS_LOADING_ERROR("Error Loading subscribers");
 
     private String value;
 

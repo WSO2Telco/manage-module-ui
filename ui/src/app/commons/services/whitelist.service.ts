@@ -16,7 +16,7 @@ export class WhitelistService {
         this._remoteService.getSubscribers()
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);
