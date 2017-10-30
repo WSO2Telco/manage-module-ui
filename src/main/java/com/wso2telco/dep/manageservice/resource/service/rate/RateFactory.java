@@ -67,4 +67,12 @@ public class RateFactory {
     public Serviceable getApiOperationRatesService(){
         return new ApiOperationRatesService();
     }
+
+    public Serviceable getOperatorsService(){
+        return new OperatorService();
+    }
+
+    public Serviceable getAssignRatesService(){
+        return new AssignRateService();
+    }
 }

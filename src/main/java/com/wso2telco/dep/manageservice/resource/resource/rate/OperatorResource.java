@@ -1,5 +1,12 @@
 package com.wso2telco.dep.manageservice.resource.resource.rate;
 
+import com.wso2telco.dep.manageservice.resource.resource.AbstractResource;
+import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
  * <p>
@@ -15,5 +22,18 @@ package com.wso2telco.dep.manageservice.resource.resource.rate;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class OperatorResource {
+
+@Path("/rate/operators")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public class OperatorResource extends AbstractResource {
+    @Override
+    protected ServiceTypes getService() {
+        return ServiceTypes.RATE_OPERATORS;
+    }
+
+    @GET
+    public Response getOperators(@HeaderParam("authorization") String authHeader) {
+        return doGet(authHeader);
+    }
 }

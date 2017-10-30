@@ -104,4 +104,9 @@ public class TariffService extends AbstractService {
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.TARIFF_ADDING_ERROR.getValue());
         }
     }
+
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
 }

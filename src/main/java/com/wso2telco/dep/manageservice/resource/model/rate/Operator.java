@@ -1,5 +1,10 @@
 package com.wso2telco.dep.manageservice.resource.model.rate;
 
+import com.fasterxml.jackson.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Copyright (c) 2016, WSO2.Telco Inc. (http://www.wso2telco.com) All Rights Reserved.
  * <p>
@@ -15,5 +20,76 @@ package com.wso2telco.dep.manageservice.resource.model.rate;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "operatorId",
+        "operatorName",
+        "operatorDescription",
+        "createdBy"
+})
 public class Operator {
+
+    @JsonProperty("operatorId")
+    private Integer operatorId;
+    @JsonProperty("operatorName")
+    private String operatorName;
+    @JsonProperty("operatorDescription")
+    private String operatorDescription;
+    @JsonProperty("createdBy")
+    private String createdBy;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("operatorId")
+    public Integer getOperatorId() {
+        return operatorId;
+    }
+
+    @JsonProperty("operatorId")
+    public void setOperatorId(Integer operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    @JsonProperty("operatorName")
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    @JsonProperty("operatorName")
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
+    @JsonProperty("operatorDescription")
+    public String getOperatorDescription() {
+        return operatorDescription;
+    }
+
+    @JsonProperty("operatorDescription")
+    public void setOperatorDescription(String operatorDescription) {
+        this.operatorDescription = operatorDescription;
+    }
+
+    @JsonProperty("createdBy")
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    @JsonProperty("createdBy")
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
 }

@@ -106,6 +106,11 @@ class RateCardService extends AbstractService {
         }
     }
 
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
+
     public boolean validateRequest(RateCard rateCardDAO) {
         return (rateCardDAO != null);
     }
