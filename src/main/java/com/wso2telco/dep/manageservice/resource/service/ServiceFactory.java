@@ -80,6 +80,9 @@ public class ServiceFactory {
             case WHITELIST_SUBSCRIBERS:
                 service = WhiteListFactory.getInstance().getSubscriberService();
                 break;
+            case WHITELIST_APPLICATIONS:
+                service = WhiteListFactory.getInstance().getApplicationService();
+                break;
             default:
                 break;
         }

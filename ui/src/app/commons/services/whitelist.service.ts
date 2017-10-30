@@ -29,7 +29,7 @@ export class WhitelistService {
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data, data.success);
                 },
                 error => {
                     callback(error, false);

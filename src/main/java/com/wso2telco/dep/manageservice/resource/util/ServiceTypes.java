@@ -30,7 +30,8 @@ public enum ServiceTypes {
     RATE_ASSIGN_RATES("rate_assign_rates"),
     QUOTA_LIMIT("quota_limit"),
     BLACKLIST("blacklist"),
-    WHITELIST_SUBSCRIBERS("whitelist");
+    WHITELIST_SUBSCRIBERS("whitelist"),
+    WHITELIST_APPLICATIONS("application_list");
 
 
     private String value;
