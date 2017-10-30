@@ -53,7 +53,7 @@
             </div>
 
             <form class="form-horizontal" #ratecardForm="ngForm" novalidate
-                  (ngSubmit)="onRateCardSubmition(ratecardForm)">
+                  (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-sm-2">Rate Name <span>*</span></label>
                     <div class="col-sm-4">
