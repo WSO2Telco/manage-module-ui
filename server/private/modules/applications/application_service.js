@@ -141,7 +141,7 @@ const _getApplications = function (request, reply) {
         let OperationReatesPromises;
         if (appsDetails) {
             appsDetailsResult = appsDetails;
-            OperationReatesPromises = appsDetails.map((appDetail, index) => {
+                                OperationReatesPromises = appsDetails.map((appDetail, index) => {
                 let details = appsDetails[index].reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
