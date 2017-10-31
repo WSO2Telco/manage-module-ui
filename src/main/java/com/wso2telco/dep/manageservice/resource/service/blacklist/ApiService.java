@@ -20,6 +20,7 @@ import com.wso2telco.dep.manageservice.resource.model.Callback;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -43,7 +44,7 @@ public class ApiService extends AbstractService {
 
     @Override
     public Callback executeGet(String authenticationCredential) {
-        HttpGet httpGet = new HttpGet(new StringBuilder("http://localhost:9763/blacklist-whitelist-service/queries/").append("apis").toString());
+        HttpGet httpGet = new HttpGet(new StringBuilder(super.getUrl(ServiceUrl.BLACKLIST_WHITELIST)).append("apis").toString());
         httpGet.addHeader("Authorization", authenticationCredential);
 
         try {
@@ -75,6 +76,11 @@ public class ApiService extends AbstractService {
 
     @Override
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
+        return null;
+    }
+
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
         return null;
     }
 }

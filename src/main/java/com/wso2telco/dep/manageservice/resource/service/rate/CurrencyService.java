@@ -102,6 +102,11 @@ public class CurrencyService extends AbstractService {
         }
     }
 
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
+
     public boolean validateRequest(Currency currencyDAO) {
         return (currencyDAO.getCurrencyCode() != null);
     }

@@ -27,4 +27,6 @@ public interface Serviceable {
     Callback executeGet(String authenticationCredential, List<String> pathParamStringList);
 
     Callback executePost(RequestTransferable request, String authenticationCredential);
+
+    Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList);
 }

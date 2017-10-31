@@ -79,7 +79,7 @@ export class AssignRateMainComponent implements OnInit {
      * to load the Operator list
      */
     getOperators() {
-        this.quotaService.getOperatorList((response, status) => {
+        this.rateService.getOperatorList((response, status) => {
             if (status) {
                 this.operatorList = response.payload;
                 if (this.loginInfo.isAdmin) {
@@ -110,7 +110,7 @@ export class AssignRateMainComponent implements OnInit {
             } else {
                 this.apiOperationList = [];
                 this.apiOperation = '';
-                this.message.warning('No API Operations Available for The Selected API');
+                this.message.error(response.message);
             }
         });
     }
@@ -142,7 +142,7 @@ export class AssignRateMainComponent implements OnInit {
                 }
 
                 if (apiOperationId) {
-                    this.rateService.getRatesForAPIOperation(this.api, apiOperationId, operatorId, (response, status) => {
+                    this.rateService.getAPIOperationRates(this.api, apiOperationId, operatorId, (response, status) => {
                         if (status) {
                             this.sourceList = response.payload.source;
                             this.assignedList = response.payload.destination;
@@ -214,8 +214,8 @@ export class AssignRateMainComponent implements OnInit {
             }
 
             if (data.length > 0) {
-                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response, status) => {
-                    if (status) {
+                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response) => {
+                    if (response.success) {
                         this.message.success(response.message);
                         this.reloadPage();
                     } else {

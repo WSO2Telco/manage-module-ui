@@ -17,7 +17,9 @@ package com.wso2telco.dep.manageservice.resource.util;
  */
 public enum ServiceUrl {
 
-    RATE_SERVICE("http://localhost:9763/ratecard-service/ratecardservice/");
+    RATE_SERVICE("http://localhost:9763/ratecard-service/ratecardservice/"),
+    BLACKLIST_WHITELIST("http://localhost:9763/blacklist-whitelist-service/queries/"),
+    QUOTA_SERVICE("http://localhost:9763/quota-service/services/");
     private String value;
 
     ServiceUrl(String value) {
