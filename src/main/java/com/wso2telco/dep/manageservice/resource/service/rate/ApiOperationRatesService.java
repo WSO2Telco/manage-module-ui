@@ -148,4 +148,9 @@ public class ApiOperationRatesService extends AbstractService {
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
         return null;
     }
+
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
 }

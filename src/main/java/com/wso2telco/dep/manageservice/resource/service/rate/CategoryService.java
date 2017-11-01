@@ -102,6 +102,11 @@ public class CategoryService extends AbstractService {
         }
     }
 
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
+
     public boolean validateRequest(Category category) {
         return (category != null);
     }

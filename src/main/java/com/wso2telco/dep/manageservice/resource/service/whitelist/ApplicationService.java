@@ -82,4 +82,9 @@ public class ApplicationService extends AbstractService {
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.APPLICATION_LOADING_ERROR.getValue());
         }
     }
+
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
+    }
 }

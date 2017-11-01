@@ -49,4 +49,11 @@ public abstract class AbstractResource {
         Callback callback = service.executePost(request, authenticationCredential);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
+
+    protected Response doPost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        Serviceable service = serviceFactory.getService(getService());
+
+        Callback callback = service.executePost(request, authenticationCredential, pathParamStringList);
+        return Response.status(Response.Status.OK).entity(callback).build();
+    }
 }

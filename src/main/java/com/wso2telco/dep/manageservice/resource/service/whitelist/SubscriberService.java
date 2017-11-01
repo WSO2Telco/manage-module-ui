@@ -7,6 +7,7 @@ import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.service.blacklist.ApiService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
+import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -43,7 +44,7 @@ public class SubscriberService extends AbstractService {
 
     @Override
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
-        HttpPost httpPost = new HttpPost(new StringBuilder("http://localhost:9763/blacklist-whitelist-service/queries/").append("subscribers").toString());
+        HttpPost httpPost = new HttpPost(new StringBuilder(super.getUrl(ServiceUrl.BLACKLIST_WHITELIST)).append("subscribers").toString());
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", authenticationCredential);
 
@@ -66,5 +67,10 @@ public class SubscriberService extends AbstractService {
             log.error(" Exception while loading subscribers" + e);
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.SUBSCRIBERS_LOADING_ERROR.getValue());
         }
+    }
+
+    @Override
+    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
+        return null;
     }
 }

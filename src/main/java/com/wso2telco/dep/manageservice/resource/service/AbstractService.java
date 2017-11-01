@@ -28,6 +28,12 @@ public abstract class AbstractService implements Serviceable {
             case RATE_SERVICE:
                 url = serviceUrl.getValue();
                 break;
+            case QUOTA_SERVICE:
+                url= serviceUrl.getValue();
+                break;
+            case BLACKLIST_WHITELIST:
+                url =serviceUrl.getValue();
+                break;
             default:
                 break;
         }

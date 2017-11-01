@@ -14,41 +14,24 @@ import {AuthenticationService} from "../commons/services/authentication.service"
 @Injectable()
 export class RateRemoteDataService {
 
-    private apiContext = 'api';
+    private apiContext = 'https://localhost:9443/ratecard-service/ratecardservice/';
 
     private apiEndpoints: Object = {
-        rateCards: this.apiContext + '/rate/ratecards',
-        tariffs: this.apiContext + '/rate/tariffs',
-        rateTypes: this.apiContext + '/rate/ratetypes',
-        categories: this.apiContext + '/rate/categories',
-        currencies: this.apiContext + '/rate/currencies',
-        rateDefinitions: this.apiContext + '/rate/ratedefinitions',
-        rateTaxes: this.apiContext + '/rate/taxes',
+        rateCards: this.apiContext + 'ratecards',
+        tariffs: this.apiContext + 'tariffs',
+        rateTypes: this.apiContext + 'ratetypes',
+        categories: this.apiContext + 'categories',
+        currencies: this.apiContext + 'currencies',
+        operators: this.apiContext + 'operators',
+        rateDefinitions: this.apiContext + 'ratedefinitions',
+        rateTaxes: this.apiContext + 'taxes',
         assignRatesForAPIOperation: this.apiContext + '/rate/assignrates',
-        apiOperations: this.apiContext + '/rate/apioperations',
+        apiOperations: this.apiContext + 'apis/',
         apiOperationRates: this.apiContext + '/rate/apioperationrates',
         addRateCategory: this.apiContext + '/rate/addratecategory/'
     };
 
     constructor(private http: Http, private authService: AuthenticationService) {
-    }
-
-    /**
-     * To add new rate category tariff relationship
-     * @param data
-     * @returns {Observable<R>}
-     */
-    addRateCategory(data: RateCategory, id: number) {
-        return this.http.post(this.apiEndpoints['addRateCategory'] + id, JSON.stringify(data), this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Adding New Rate Category',
-                error: error.json()
-            }));
     }
 
     /**
@@ -59,8 +42,19 @@ export class RateRemoteDataService {
     addCategory(data: Category) {
         return this.http.post(this.apiEndpoints['categories'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'New Category Added Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding New Category',
+                        payload: null
+                    }
+                }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
@@ -77,13 +71,24 @@ export class RateRemoteDataService {
     addTariff(data: Tariff) {
         return this.http.post(this.apiEndpoints['tariffs'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'New Tariff Added Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding New Tariff',
+                        payload: null
+                    }
+                }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding New Tariff',
-                error: error.json()
+                error: error
             }));
     }
 
@@ -95,13 +100,24 @@ export class RateRemoteDataService {
     addCurrency(data: Currency) {
         return this.http.post(this.apiEndpoints['currencies'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'New Currency Added Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding New Currency',
+                        payload: null
+                    }
+                }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding New Currency',
-                error: error.json()
+                error: error
             }));
     }
 
@@ -113,27 +129,57 @@ export class RateRemoteDataService {
     addNewRateCard(data: Rate) {
         return this.http.post(this.apiEndpoints['rateCards'], JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'Rate Card Created Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding New Rate Card',
+                        payload: null
+                    }
+                }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding New Rate Card',
-                error: error.json()
+                error: error
             }));
     }
 
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number, operatorId: number) {
-        return this.http.post(this.apiEndpoints['assignRatesForAPIOperation'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId,
-            JSON.stringify(data), this.getOptions())
+
+        let url = '';
+
+        if(operatorId){
+            url = this.apiContext + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
+        }else {
+            url = this.apiEndpoints['apiOperations'] + apiName + '/operations/' + apiOperationId + '/operationrates';
+        }
+
+        return this.http.post(url, JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'Rate Values Assigned Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Assigning Rates',
+                        payload: null
+                    }
+                }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Assigning Rates',
-                error: error.json()
+                error: error
             }));
     }
 
@@ -145,13 +191,16 @@ export class RateRemoteDataService {
     getTariffList() {
         return this.http.get(this.apiEndpoints['tariffs'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Tariff List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading Tariff List',
-                error: error.json()
+                error: error
             }));
     }
 
@@ -162,13 +211,16 @@ export class RateRemoteDataService {
     getCurrencyList() {
         return this.http.get(this.apiEndpoints['currencies'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Currency List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading Currency List',
-                error: error.json()
+                error: error
             }));
     }
 
@@ -179,95 +231,185 @@ export class RateRemoteDataService {
     getRateTypeList() {
         return this.http.get(this.apiEndpoints['rateTypes'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Type List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading Rate Type List',
-                error: error.json()
+                error: error
             }));
     }
 
+    /**
+     * get categories
+     * @returns {Observable<R|T>}
+     */
     getCategoryList() {
         return this.http.get(this.apiEndpoints['categories'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Category List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading Category List',
-                error: error.json()
+                error: error
             }));
     }
 
+    /**
+     * get rate definitions
+     * @returns {Observable<R|T>}
+     */
     getRateDefinitionList() {
         return this.http.get(this.apiEndpoints['rateDefinitions'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Definition List Loaded Successfully',
+                    payload: response.json()
+                };
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Rate Definition List',
-                error: error.json()
-            }));
+            .catch((error: Response) => {
+                return Observable.throw({
+                    success: false,
+                    message: 'Error Loading Rate Definition List',
+                    error: error
+                });
+            });
     }
 
+    /**
+     * get rate cards
+     * @returns {Observable<R|T>}
+     */
     getRateCards() {
         return this.http.get(this.apiEndpoints['rateCards'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Card List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Loading Rate Definition List',
-                error: error.json()
+                message: 'Error Loading Rate Card List',
+                error: error
             }));
     }
 
 
+    /**
+     * get rate tax
+     * @returns {Observable<R|T>}
+     */
     getRateTax() {
         return this.http.get(this.apiEndpoints['rateTaxes'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Rate Tax List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading Rate Tax List',
-                error: error.json()
+                error: error
             }));
     }
 
-    getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number) {
-        return this.http.get(this.apiEndpoints['apiOperationRates'] + '/' + apiName + '/' + apiOperationId + '/' + operatorId, this.getOptions())
+    /**
+     * get rates for api, api operation, operator
+     * @param apiName
+     * @param apiOperationId
+     * @param operatorId
+     * @param type
+     * @returns {Observable<R|T>}
+     */
+    getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number, type: string) {
+
+        let url = '';
+
+        switch (type) {
+            case 'admin':
+                url = this.apiEndpoints['apiOperations'] + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
+                break;
+            case 'operator':
+                url = this.apiContext + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/ratedefinitions';
+                break;
+            case 'admin-assign':
+                url = this.apiEndpoints['apiOperations'] + apiName + '/operations/' + apiOperationId + '/operationrates';
+                break;
+            case 'operator-assign':
+                url = this.apiContext + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
+                break;
+        }
+
+        return this.http.get(url, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading API Operation Rates',
-                error: error.json()
+                error: error
             }));
     }
 
+    /**
+     * get api operation for operator
+     * @param api
+     * @returns {Observable<R|T>}
+     */
     getApiOperations(api: string) {
-        return this.http.get(this.apiEndpoints['apiOperations'] + '/' + api, this.getOptions())
+        return this.http.get(this.apiEndpoints['apiOperations'] + api + '/operations', this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Operator List Loaded Successfully',
+                    payload: response.json()
+                };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading API Operations',
-                error: error.json()
+                error: error
             }));
     }
 
+    /**
+     * to get all operator
+     * @returns {Observable<R>}
+     */
+    getOperatorList() {
+        return this.http.get(this.apiEndpoints['operators'], this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Operator List Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Operators',
+                error: error
+            }));
+    }
+
+    /**
+     * generate request headers
+     * @returns {RequestOptions}
+     */
     getOptions(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
         const headers = new Headers(

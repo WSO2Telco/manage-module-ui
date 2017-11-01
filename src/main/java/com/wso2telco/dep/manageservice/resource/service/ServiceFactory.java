@@ -68,6 +68,12 @@ public class ServiceFactory {
             case RATE_API_OPERATION_RATES:
                 service = RateFactory.getInstance().getApiOperationRatesService();
                 break;
+            case RATE_OPERATORS:
+                service = RateFactory.getInstance().getOperatorsService();
+                break;
+            case RATE_ASSIGN_RATES:
+                service = RateFactory.getInstance().getAssignRatesService();
+                break;
             case BLACKLIST:
                 service = BlackListFactory.getInstance().getApiService();
                 break;

@@ -268,9 +268,9 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            this.rateService.addNewRateCard(rateCard, (response, status) => {
+            this.rateService.addNewRateCard(rateCard, (response) => {
 
-                if (status) {
+                if (response.success) {
                     this.message.success(response.message);
                     this.reloadPage();
                 } else {
