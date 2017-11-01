@@ -97,7 +97,7 @@ export class ApiBlacklistMainComponent implements OnInit {
     getApis() {
         this.blackListService.getApiList((response, status) => {
             if (status) {
-                this.apiList = response.payload;
+                this.apiList = response;
                 let count = 0;
                 for (const entry of this.apiList) {
                     const splitted = entry.split(':', 4);
@@ -108,7 +108,7 @@ export class ApiBlacklistMainComponent implements OnInit {
                     count += 1;
                 }
             } else {
-                this.message.error(response.message);
+                this.message.error(response);
             }
         });
     }
