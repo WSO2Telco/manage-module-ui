@@ -8,14 +8,14 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 
 @Injectable()
 export class BlackListRemoteDataService {
-    private apiContext = 'api';
+    private apiContext = 'https://localhost:9443/blacklist-whitelist-service/queries/';
     private loginInfo;
 
     private apiEndpoints: Object = {
-        getApis: this.apiContext + '/blacklist',
-        getBlackListNumbers: this.apiContext + '/blacklist/list/',
-        removeBlackListNumber: this.apiContext + '/blacklist/remove/',
-        addBlackListNumbers: this.apiContext + '/blacklist'
+        getApis: this.apiContext + 'apis',
+        getBlackListNumbers: this.apiContext + 'GetBlacklistPerApi/',
+        removeBlackListNumber: this.apiContext + 'RemoveFromBlacklist/',
+        addBlackListNumbers: this.apiContext + 'Blacklist'
     };
 
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
@@ -41,8 +41,7 @@ export class BlackListRemoteDataService {
      * @returns {Observable<R>}
      */
     getBlackListNumberList(id: string) {
-        const data = {};
-        return this.http.post(this.apiEndpoints['getBlackListNumbers'] + id, JSON.stringify(data), this.getOptions())
+        return this.http.get(this.apiEndpoints['getBlackListNumbers'] + id, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
