@@ -319,10 +319,10 @@ export class RateService {
         this._remoteService.getOperatorList()
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, error.success);
+                    callback(error);
                 }
             );
     }
