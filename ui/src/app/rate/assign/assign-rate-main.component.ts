@@ -79,8 +79,8 @@ export class AssignRateMainComponent implements OnInit {
      * to load the Operator list
      */
     getOperators() {
-        this.rateService.getOperatorList((response, status) => {
-            if (status) {
+        this.rateService.getOperatorList((response) => {
+            if (response.success) {
                 this.operatorList = response.payload;
                 if (this.loginInfo.isAdmin) {
                     const admin = {

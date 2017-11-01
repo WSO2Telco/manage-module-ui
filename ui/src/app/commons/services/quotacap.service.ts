@@ -19,40 +19,16 @@ export class QuotaService {
         this._remoteService.getSubscribers(operatorName)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
     getOperatorOfsubscriber(subscriberID: string, callback: Function) {
         this._remoteService.getOperatorOfsubscriber(subscriberID)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getApps(subscriberID: string, callback: Function) {
-        this._remoteService.getApps(subscriberID)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getApis(id: string, callback: Function) {
-        this._remoteService.getApis(id)
             .subscribe(
                 data => {
                     callback(data);
@@ -68,10 +44,10 @@ export class QuotaService {
         this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, operatorname, quotaValue, fromDate, toDate)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 },
                 () => {
                     this.slimLoadingBarService.complete();
@@ -83,22 +59,10 @@ export class QuotaService {
         this._remoteService.getQuotaLimitInfo(subscriberID, operatorname)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getOperatorList(callback: Function) {
-        this._remoteService.getOperatorList()
-            .subscribe(
-                data => {
-                    callback(data, data.success);
-                },
-                error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -107,10 +71,10 @@ export class QuotaService {
         this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -119,10 +83,10 @@ export class QuotaService {
         this._remoteService.getQuotaLimitInfoApi(apiID, operatorname)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -140,8 +104,8 @@ export class QuotaService {
     }
 
 
-    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
-        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate, operatorname)
+    getValidityPeriodForSubscriber(subscriberID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
+        this._remoteService.getValidityPeriodForSubscriber(subscriberID, fromDate, toDate, operatorname)
             .subscribe(
                 data => {
                     callback(data);
