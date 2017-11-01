@@ -39,30 +39,6 @@ export class QuotaService {
             );
     }
 
-    getApps(subscriberID: string, callback: Function) {
-        this._remoteService.getApps(subscriberID)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
-    getApis(id: string, callback: Function) {
-        this._remoteService.getApis(id)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
     addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
         this.slimLoadingBarService.start();
         this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, operatorname, quotaValue, fromDate, toDate)

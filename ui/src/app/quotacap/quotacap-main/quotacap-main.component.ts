@@ -2,14 +2,13 @@
  * Created by sahanK on 2/8/17.
  */
 import {Component, OnInit} from '@angular/core';
-import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {QuotaService} from '../../commons/services/quotacap.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
 import {IMyDrpOptions} from 'mydaterangepicker';
 import {RateService} from "../../commons/services/rate.service";
+import {WhitelistService} from "../../commons/services/whitelist.service";
 
 @Component({
     selector: 'app-quotacap-main',
@@ -100,6 +99,7 @@ export class QuotaCapMainComponent implements OnInit {
 
     constructor(private quotaService: QuotaService,
                 private rateService: RateService,
+                private whitelistService: WhitelistService,
                 private message: MessageService,
                 private authService: AuthenticationService) {
     }
@@ -339,7 +339,7 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getAppsofSubscriber(subscriberID: string) {
         this.clearErrors();
-        this.quotaService.getApps(subscriberID, (response) => {
+        this.whitelistService.getApps(subscriberID, (response) => {
             if (response.success) {
                 this.applicationList = response.payload;
                 if (this.applicationList.length == 0) {
@@ -357,7 +357,8 @@ export class QuotaCapMainComponent implements OnInit {
                 }
 
             } else {
-                this.message.error('Error Loading Applications of Subscriber');
+                this.applicationList = [];
+                this.message.error(response.message);
             }
         });
     }
@@ -513,18 +514,23 @@ export class QuotaCapMainComponent implements OnInit {
 
         if (id.length != 0) {
 
-            this.quotaService.getApis(id, (response) => {
-                this.apiList = response;
-                let count = 0;
-                for (const entry of this.apiList) {
-                    const splitted = entry.split(':', 4);
-                    this.apis[count] = new Api;
-                    this.apis[count].id = splitted[0];
-                    this.apis[count].name = splitted[2];
-                    this.apis[count].provider = splitted[1];
-                    this.apis[count].version = splitted[3];
-                    this.apiList[count] = splitted[2];
-                    count += 1;
+            this.whitelistService.getApis(id, (response) => {
+                if (response.success) {
+                    this.apiList = response.payload;
+                    let count = 0;
+                    for (const entry of this.apiList) {
+                        const splitted = entry.split(':', 4);
+                        this.apis[count] = new Api;
+                        this.apis[count].id = splitted[0];
+                        this.apis[count].name = splitted[2];
+                        this.apis[count].provider = splitted[1];
+                        this.apis[count].version = splitted[3];
+                        this.apiList[count] = splitted[2];
+                        count += 1;
+                    }
+                } else {
+                    this.apiList = [];
+                    this.message.error(response.message)
                 }
             });
 

@@ -10,14 +10,14 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class WhitelistRemoteDataService {
 
-    private apiContext = 'api';
+    private apiContext = 'http://localhost:9763/blacklist-whitelist-service/queries/';
     private loginInfo;
 
 
     private apiEndpoints: Object = {
+        getApps: this.apiContext + 'apps',
+        getApis: this.apiContext + 'apis',
         getSubscribers: this.apiContext + '/whitelist/getsubscribers',
-        getApps: this.apiContext + '/whitelist/getapps',
-        getApis: this.apiContext + '/whitelist/getapis',
         getWhitelist: this.apiContext + '/whitelist/getwhitelist',
         addNewWhitelist: this.apiContext + '/whitelist/addnewwhitelist',
         removeFromWhiteList: this.apiContext + '/whitelist/removefromwhitelist'
@@ -50,18 +50,29 @@ export class WhitelistRemoteDataService {
      */
     getApps(subscriberID: string) {
         let operator;
-        if(this.loginInfo.isAdmin){
+        if (this.loginInfo.isAdmin) {
             operator = '_ALL_';
-        }else {
+        } else {
             operator = this.loginInfo.operator;
         }
-        const data = {id: subscriberID, operator: operator};
+        const data = {
+            id: subscriberID,
+            operator: operator
+        };
+
         return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Applications of Subscriber Loaded Successfully',
+                    payload: response.json()
+                };
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Applications of Subscriber',
+                error: error
+            }));
     }
 
     /**
@@ -70,13 +81,22 @@ export class WhitelistRemoteDataService {
      * @returns {Observable<R>}
      */
     getApis(id: string) {
-        const data = {id: id};
+        const data = {
+            id: id
+        };
         return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'Apis of Subscriber Loaded Successfully',
+                    payload: response.json()
+                };
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Apis of Subscriber',
+                error: error
+            }));
     }
 
 

@@ -25,14 +25,13 @@ export class WhitelistService {
     }
 
     getApps(subscriberID: string, callback: Function) {
-       // console.log('get apps of subscriber service called');
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -41,10 +40,10 @@ export class WhitelistService {
         this._remoteService.getApis(id)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
