@@ -185,3 +185,7 @@ export class AssignRates {
     createdBy: string;
 }
 
+export class Configuration{
+    host: string;
+}
+

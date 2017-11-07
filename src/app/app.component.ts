@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './commons/services/authentication.service';
 import {AppCommonService} from './commons/services/app-common.service';
+import {ConfigService} from './commons/services/config.service';
 import {User, LoginResponse} from './commons/models/common-data-models';
 
 @Component({
@@ -17,12 +18,14 @@ export class AppComponent implements OnInit {
     private isMenuExpanded = false;
 
     constructor(private _authenticationService: AuthenticationService,
-                private _appCommonService: AppCommonService) {
+                private _appCommonService: AppCommonService,
+                private configService: ConfigService) {
 
     }
 
 
     ngOnInit() {
+        // console.log(this.configService.getConfiguration().host);
         this.isLoggedIn = this._authenticationService.isLoggedIn();
         this._authenticationService.loginUserInfo.subscribe((userInfo: LoginResponse) => {
             this.isLoggedIn = !!userInfo;

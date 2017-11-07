@@ -35,7 +35,7 @@ export class SubscriptionsComponent implements OnInit {
         this.approvalService.MySubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
                 this.mySubscriptions = subs;
-                if(this.mySubscriptions != null){
+                if (this.mySubscriptions != null) {
                     this.setDefaultOperationRates();
                 }
             },
@@ -47,7 +47,7 @@ export class SubscriptionsComponent implements OnInit {
         this.approvalService.GroupSubscriptionTasksProvider.subscribe(
             (subs: ApplicationTaskResult) => {
                 this.allSubscriptions = subs;
-                if(this.allSubscriptions != null){
+                if (this.allSubscriptions != null) {
                     this.setDefaultAllOperationRates();
                 }
             },
@@ -59,22 +59,20 @@ export class SubscriptionsComponent implements OnInit {
         this.getData();
 
 
-
-
     }
 
     setDefaultOperationRates() {
-        if(this.mySubscriptions != null){
+        if (this.mySubscriptions != null) {
             let count = 0;
-            for(const entry of this.mySubscriptions.applicationTasks){
+            for (const entry of this.mySubscriptions.applicationTasks) {
                 let selectedRate = '';
-                for(const entry2 of entry.relevantRates){
-                    if(entry2.rateDefinitions.length > 0){
+                for (const entry2 of entry.relevantRates) {
+                    if (entry2.rateDefinitions.length > 0) {
                         let id = entry2.rateDefinitions[0].rateDefId;
 
-                        if(selectedRate.length == 0){
+                        if (selectedRate.length == 0) {
                             selectedRate += id;
-                        }else{
+                        } else {
                             selectedRate += '-' + id;
                         }
                     }
@@ -89,17 +87,17 @@ export class SubscriptionsComponent implements OnInit {
 
     setDefaultAllOperationRates() {
 
-        if(this.allSubscriptions != null){
+        if (this.allSubscriptions != null) {
             let count = 0;
-            for(const entry of this.allSubscriptions.applicationTasks){
+            for (const entry of this.allSubscriptions.applicationTasks) {
                 let selectedRate = '';
-                for(const entry2 of entry.relevantRates){
-                    if(entry2.rateDefinitions.length > 0){
-                        let id= entry2.rateDefinitions[0].rateDefId;
+                for (const entry2 of entry.relevantRates) {
+                    if (entry2.rateDefinitions.length > 0) {
+                        let id = entry2.rateDefinitions[0].rateDefId;
 
-                        if(selectedRate.length == 0){
+                        if (selectedRate.length == 0) {
                             selectedRate += id;
-                        }else{
+                        } else {
                             selectedRate += '-' + id;
                         }
                     }
