@@ -29,10 +29,19 @@ export class BlackListRemoteDataService {
     getApiList() {
         return this.http.get(this.apiEndpoints['getApis'], this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return {
+                    success: true,
+                    message: 'API List Loaded Successfully',
+                    payload: response.json()
+                };
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => {
+                return Observable.throw({
+                    success: false,
+                    message: 'Error Loading API List',
+                    error: error
+                });
+            });
     }
 
     /**
@@ -48,6 +57,7 @@ export class BlackListRemoteDataService {
             })
             .catch((error: Response) => Observable.throw(error.json().message));
     }
+
 
     /**
      * Remove BlackListed Numbers

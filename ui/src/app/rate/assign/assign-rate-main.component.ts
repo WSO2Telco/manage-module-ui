@@ -61,13 +61,12 @@ export class AssignRateMainComponent implements OnInit {
      *  Get The List of API's
      */
     getApis() {
-        this.blackListService.getApiList((response, status) => {
-            if (status) {
-                let count = 0;
+        this.blackListService.getApiList((response) => {
+            if (response.success) {
+                this.apiList = [];
                 for (const entry of response.payload) {
                     const splited = entry.split(':');
-                    this.apiList[count] = splited[1];
-                    count++;
+                    this.apiList.push(splited[1]+ ':' + splited[2]);
                 }
             } else {
                 this.message.error(response.message);
@@ -100,7 +99,7 @@ export class AssignRateMainComponent implements OnInit {
      * to get api operations according to selected API
      */
     getApiOperations() {
-        this.rateService.getApiOperations(this.api, (response, status) => {
+        this.rateService.getApiOperations(this.api.split(':')[0], (response, status) => {
             if (status) {
                 this.apiOperation = '';
                 this.apiOperationList = response.payload;
@@ -294,6 +293,7 @@ export class AssignRateMainComponent implements OnInit {
     onApiSelected() {
         let invalid = true;
         this.invalidApi = false;
+
         for (const item of this.apiList) {
             if (item == this.api) {
                 invalid = false;

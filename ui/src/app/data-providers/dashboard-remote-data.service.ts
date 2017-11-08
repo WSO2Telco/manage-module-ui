@@ -71,7 +71,7 @@ export class DashboardRemoteDataService {
         param.candidateGroups = 'Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin';
 
         return this.http.post(this.apiEndpoints['dashboardData'], param, this.getOptions())
-            .map((response: Response) => response.json())
+            .map((response: Response) => response.json().payload)
             .catch((error: Response) => Observable.throw(error.json().message))
     };
 
