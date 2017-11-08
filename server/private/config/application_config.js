@@ -49,7 +49,7 @@ var appConfig = {
     billingEnable: process.env.wm_billing_enable || true,
     /**to enable disable credit plan in the view use true or false
      */
-    creditPlanEnable: process.env.wm_credit_plan_enable || false
+    creditPlanEnable: process.env.wm_credit_plan_enable || true
 };
 
 module.exports = appConfig;
