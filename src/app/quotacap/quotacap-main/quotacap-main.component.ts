@@ -550,7 +550,7 @@ export class QuotaCapMainComponent implements OnInit {
                     this.apis[count].name = splitted[2];
                     this.apis[count].provider = splitted[1];
                     this.apis[count].version = splitted[3];
-                    this.apiList[count] = splitted[2];
+                    this.apiList[count] = splitted[2] + ':' + splitted[3];
                     count += 1;
                 }
             });
@@ -633,7 +633,7 @@ export class QuotaCapMainComponent implements OnInit {
             this.validate(this.isApiSelect, validApi) && this.validate(this.isSubscriberSelect, validSubscriber) &&
             this.validate(this.selectedoperator.length > 0, validOperator)) {
 
-            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api, this.selectedoperator,
+            this.quotaService.addNewQuotaLimit(this.subscriber, this.appID, this.api.split(':')[0], this.selectedoperator,
                 this.quotaInputValue, this.fromdate, this.todate, (response, status) => {
                     if (status) {
                         this.message.success('Successfully added new Quota');
@@ -714,7 +714,7 @@ export class QuotaCapMainComponent implements OnInit {
                 if (entry == this.api) {
                     this.isCalenderEnable = false;
                     this.isApiSelect = true;
-                    this.getQuotaofApi(this.api);
+                    this.getQuotaofApi(this.api.split(':')[0]);
                 }
             }
             if (this.defaultcalval !== '') {
@@ -781,7 +781,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.todate = this.datepickvalue.split('-')[1].trim()
 
         if (this.isApiSelect) {
-            this.quotaService.getValidityPeriodForApi(this.api, this.fromdate,
+            this.quotaService.getValidityPeriodForApi(this.api.split(':')[0], this.fromdate,
                 this.todate, this.selectedoperator, (response) => {
                     if (!response.Success.text.isEmpty) {
                         if (response.Success.text == 'true') {
