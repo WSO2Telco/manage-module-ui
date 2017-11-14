@@ -29,7 +29,6 @@ export class TariffComponent implements OnInit {
 
     private nameError: string;
     private descriptionError: string;
-    private Errorcommision: number;
 
     private IsInvalidtariffSurChargeAds: boolean;
     private IsInvalidtariffSurChargeOpco: boolean;
@@ -64,6 +63,7 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffMaxCount = 0;
         this.tariff.tariffExcessRate = 0;
         this.tariff.tariffDefRate = 0;
+        this.InValidCommisionTotal = false;
         this.clearErrors();
     }
 
@@ -89,13 +89,6 @@ export class TariffComponent implements OnInit {
             if (this.tariff.tariffDescription.length == 0) {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
-            }
-
-            if (this.InValidCommisionTotal) {
-                console.log('working');
-                this.Errorcommision = this.tariff.tariffSPCommission;
-            }else{
-                console.log(this.ValidCommisionTotal);
             }
         }
 
