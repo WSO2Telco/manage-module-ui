@@ -244,7 +244,12 @@ export class RateMainComponent implements OnInit {
             rateDefCategoryBase = 0;
         }
 
-        if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
+        if(this.rateType === 'PERCENTAGE'){
+            rateDefCategoryBase = 1;
+        }
+
+        if (!this.isEmpty() && tariff != null && currency != null &&
+            rateType != null && validTariff && validCurrency && validRateType) {
             rateCard = new Rate();
 
             ratedefinition = new RateDefinition();
@@ -309,9 +314,7 @@ export class RateMainComponent implements OnInit {
                 this.isTariffError = true;
                 this.tariffError = 'Tariff can not be empty';
             }
-
         }
-
 
     }
 
@@ -491,10 +494,10 @@ export class RateMainComponent implements OnInit {
         if (description.length == 0) {
             this.isDescriptionError = true;
             this.descriptionError = 'Description can not be empty';
-        } else if(description.length > 45) {
+        } else if (description.length > 45) {
             this.isDescriptionError = true;
             this.descriptionError = 'Ony 45 Characters Allowed';
-        }else{
+        } else {
             this.isDescriptionError = false;
             this.descriptionError = '';
         }
@@ -527,6 +530,10 @@ export class RateMainComponent implements OnInit {
         if (invalid) {
             this.isRateTypeError = true;
             this.rateTypeError = 'Invalid Rate Type';
+        }
+
+        if (this.rateType === 'PERCENTAGE') {
+            this.showSubcategory = true;
         }
     }
 
