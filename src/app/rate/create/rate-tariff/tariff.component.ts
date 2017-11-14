@@ -36,6 +36,8 @@ export class TariffComponent implements OnInit {
     private IsInvalidadsCommission: boolean;
     private IsInvalidopcoCommission: boolean;
     private IsExceedCommision: boolean;
+    private ValidCommisionTotal: boolean;
+    private InValidCommisionTotal: boolean;
 
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }
@@ -45,9 +47,10 @@ export class TariffComponent implements OnInit {
         this.tariff = new Tariff();
         this.clearForm();
         this.tariff.createdBy = loginInfo.userName;
+        this.ValidCommisionTotal = true;
     }
 
-    clearForm(){
+    clearForm() {
         this.tariff.tariffName = '';
         this.tariff.tariffDescription = '';
         this.tariff.tariffDefaultVal = 0;
@@ -60,13 +63,14 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffMaxCount = 0;
         this.tariff.tariffExcessRate = 0;
         this.tariff.tariffDefRate = 0;
+        this.InValidCommisionTotal = false;
         this.clearErrors();
     }
 
 
     onSubmit(addTariffForm) {
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
-            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision) {
+            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision && this.ValidCommisionTotal) {
             this.rateService.addTariff(this.tariff, (response, status) => {
                 if (status) {
                     this.onAddTask.emit(true);
@@ -134,6 +138,14 @@ export class TariffComponent implements OnInit {
             this.IsInvalidspCommission = false;
         } else {
             this.IsExceedCommision = false;
+
+        }
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0)) {
+            this.ValidCommisionTotal = true;
+            this.InValidCommisionTotal = false;
+        } else {
+            this.ValidCommisionTotal = false;
+            this.InValidCommisionTotal = true;
         }
     }
 
@@ -151,6 +163,14 @@ export class TariffComponent implements OnInit {
         } else {
             this.IsExceedCommision = false;
         }
+
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0))  {
+            this.ValidCommisionTotal = true;
+            this.InValidCommisionTotal = false;
+        } else {
+            this.ValidCommisionTotal = false;
+            this.InValidCommisionTotal = true;
+        }
     }
 
     tariffOpcoCommission(val) {
@@ -166,6 +186,14 @@ export class TariffComponent implements OnInit {
             this.IsInvalidopcoCommission = false;
         } else {
             this.IsExceedCommision = false;
+        }
+
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0))  {
+            this.ValidCommisionTotal = true;
+            this.InValidCommisionTotal = false;
+        } else {
+            this.ValidCommisionTotal = false;
+            this.InValidCommisionTotal = true;
         }
     }
 
@@ -194,10 +222,10 @@ export class TariffComponent implements OnInit {
         if (description.length == 0) {
             this.isDescriptionError = true;
             this.descriptionError = 'Description can not be empty';
-        } else if(description.length > 45) {
+        } else if (description.length > 45) {
             this.isDescriptionError = true;
             this.descriptionError = 'Ony 45 Characters Allowed';
-        }else{
+        } else {
             this.isDescriptionError = false;
             this.descriptionError = '';
         }
