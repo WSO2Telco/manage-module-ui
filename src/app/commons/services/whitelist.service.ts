@@ -24,34 +24,9 @@ export class WhitelistService {
             );
     }
 
-    getApps(subscriberID: string, callback: Function) {
-       // console.log('get apps of subscriber service called');
-        this._remoteService.getApps(subscriberID)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getApis(id: string, callback: Function) {
-        this._remoteService.getApis(id)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getWhitelist(callback: Function) {
+    getWhitelist(subscriberID: string, appID: string, apiID, callback: Function) {
        // console.log('get list of white list service called');
-        this._remoteService.getWhitelist()
+        this._remoteService.getWhitelist(subscriberID, appID, apiID)
             .subscribe(
                 data => {
                     callback(data, true);

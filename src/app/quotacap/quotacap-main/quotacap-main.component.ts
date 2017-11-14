@@ -147,6 +147,8 @@ export class QuotaCapMainComponent implements OnInit {
         });
     }
 
+    l
+
 
     /**
      * to load the subscriber details of operator
@@ -370,9 +372,9 @@ export class QuotaCapMainComponent implements OnInit {
      */
     getAppsofSubscriber(subscriberID: string) {
         this.clearErrors();
-        this.quotaService.getApps(subscriberID, (response, status) => {
-            if (status) {
-                this.applicationList = response;
+        this.quotaService.getApps(subscriberID, (response) => {
+            if (response.success) {
+                this.applicationList = response.payload;
                 if (this.applicationList.length == 0) {
                     this.message.warning('No Applications of Subscriber Found');
                 } else {
@@ -388,7 +390,7 @@ export class QuotaCapMainComponent implements OnInit {
                 }
 
             } else {
-                this.message.error('Error Loading Applications of Subscriber');
+                this.message.error(response.message);
             }
         });
     }
@@ -530,28 +532,32 @@ export class QuotaCapMainComponent implements OnInit {
     getApis(appName: string) {
 
         let index = 0;
-        let id = '';
+        let appID = '';
         for (const entry of this.applications) {
             if (entry.name == appName) {
-                id = this.subscriber + '|' + entry.id;
+                appID = entry.id;
             }
             index++;
         }
 
-        if (id.length != 0) {
+        if (appID.length != 0) {
 
-            this.quotaService.getApis(id, (response) => {
-                this.apiList = response;
-                let count = 0;
-                for (const entry of this.apiList) {
-                    const splitted = entry.split(':', 4);
-                    this.apis[count] = new Api;
-                    this.apis[count].id = splitted[0];
-                    this.apis[count].name = splitted[2];
-                    this.apis[count].provider = splitted[1];
-                    this.apis[count].version = splitted[3];
-                    this.apiList[count] = splitted[2] + ':' + splitted[3];
-                    count += 1;
+            this.quotaService.getApis(this.subscriber, appID, (response) => {
+                if (response.success) {
+                    this.apiList = response.payload;
+                    let count = 0;
+                    for (const entry of this.apiList) {
+                        const splitted = entry.split(':', 4);
+                        this.apis[count] = new Api;
+                        this.apis[count].id = splitted[0];
+                        this.apis[count].name = splitted[2];
+                        this.apis[count].provider = splitted[1];
+                        this.apis[count].version = splitted[3];
+                        this.apiList[count] = splitted[2] + ':' + splitted[3];
+                        count += 1;
+                    }
+                } else {
+                    this.message.error(response.message);
                 }
             });
 

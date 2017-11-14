@@ -6,6 +6,7 @@ import {WhitelistService} from '../../commons/services/whitelist.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
+import {QuotaService} from "../../commons/services/quotacap.service";
 
 @Component({
     selector: 'app-whitelist-main',
@@ -44,14 +45,15 @@ export class WhitelistMainComponent implements OnInit {
     private whitelistList: string[];
 
 
-    constructor(private whitelistService: WhitelistService, private message: MessageService) {
+    constructor(private whitelistService: WhitelistService,
+                private quotaService: QuotaService,
+                private message: MessageService) {
 
     }
 
     ngOnInit() {
         this.subscriberList = [];
         this.getSubscribersOfProvider();
-        this.getWhitelist();
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
@@ -95,9 +97,9 @@ export class WhitelistMainComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
-        this.whitelistService.getApps(subscriberID, (response, status) => {
-            if (status) {
-                this.applicationList = response;
+        this.quotaService.getApps(subscriberID, (response) => {
+            if (response.success) {
+                this.applicationList = response.payload;
                 let count = 0;
                 for (const entry of this.applicationList) {
                     const splitted = entry.split(':', 2);
@@ -108,7 +110,7 @@ export class WhitelistMainComponent implements OnInit {
                     count += 1;
                 }
             } else {
-                this.message.error('Unable to load applications of subscriber');
+                this.message.error(response.message);
             }
 
         });
@@ -121,20 +123,19 @@ export class WhitelistMainComponent implements OnInit {
     getApis(appName: string) {
 
         let index = 0;
-        let id = '';
+        let appID = '';
         for (const entry of this.applications) {
             if (entry.name == appName) {
-                id = this.subscriber + '|' + entry.id;
+                appID = entry.id;
             }
             index++;
         }
 
-        if (id.length != 0) {
 
-            this.whitelistService.getApis(id, (response, status) => {
-                if (status) {
-
-                    this.apiList = response;
+        if (appID.length != 0) {
+            this.quotaService.getApis(this.subscriber, appID, (response) => {
+                if (response.success) {
+                    this.apiList = response.payload;
                     let count = 0;
                     for (const entry of this.apiList) {
                         const splitted = entry.split(':', 4);
@@ -147,7 +148,7 @@ export class WhitelistMainComponent implements OnInit {
                         count += 1;
                     }
                 } else {
-                    this.message.error('Unable to load APIs');
+                    this.message.error(response.message);
                 }
             });
 
@@ -160,7 +161,22 @@ export class WhitelistMainComponent implements OnInit {
      */
     getWhitelist() {
 
-        this.whitelistService.getWhitelist((response, status) => {
+        let appID = '';
+        let apiID = '';
+        for (const entry of this.applications) {
+            if (entry.name == this.app) {
+                appID = entry.id;
+            }
+        }
+
+        for (const entry of this.apis) {
+            if (entry.name == this.api.split('-')[0].trim()) {
+                apiID = entry.id;
+            }
+        }
+
+
+        this.whitelistService.getWhitelist(this.subscriber, appID, apiID, (response, status) => {
             if (status) {
                 this.whitelistList = response.Success.variables;
             } else {
@@ -288,6 +304,8 @@ export class WhitelistMainComponent implements OnInit {
         if (invalid) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Api Name';
+        } else {
+            this.getWhitelist();
         }
     }
 

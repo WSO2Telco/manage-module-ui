@@ -18,7 +18,7 @@ export class WhitelistRemoteDataService {
         getSubscribers: this.apiContext + '/whitelist/getsubscribers',
         getApps: this.apiContext + '/whitelist/getapps',
         getApis: this.apiContext + '/whitelist/getapis',
-        getWhitelist: this.apiContext + '/whitelist/getwhitelist',
+        getWhitelist: this.apiContext + '/whitelist/getwhitelist/',
         addNewWhitelist: this.apiContext + '/whitelist/addnewwhitelist',
         removeFromWhiteList: this.apiContext + '/whitelist/removefromwhitelist'
 
@@ -43,50 +43,13 @@ export class WhitelistRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
-    /**
-     * To get all the apps of the subscriber
-     * @param subscriberID
-     * @returns {Observable<R>}
-     */
-    getApps(subscriberID: string) {
-        let operator;
-        if(this.loginInfo.isAdmin){
-            operator = '_ALL_';
-        }else {
-            operator = this.loginInfo.operator;
-        }
-        const data = {id: subscriberID, operator: operator};
-        return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw(error.json().message()));
-    }
-
-    /**
-     * to get all the apis related to the selected app and subscriber
-     * @param id
-     * @returns {Observable<R>}
-     */
-    getApis(id: string) {
-        const data = {id: id};
-        return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw(error.json().message()));
-    }
-
 
     /**
      * get white list number list
      * @returns {Observable<R>}
      */
-    getWhitelist() {
-        const data = {};
-        return this.http.post(this.apiEndpoints['getWhitelist'], data, this.getOptions())
+    getWhitelist(subscriberID: string, appID: string, apiID,) {
+        return this.http.get(this.apiEndpoints['getWhitelist'] + subscriberID + '/' + apiID + '/' + appID, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
