@@ -17,7 +17,7 @@
 
                         <ng-container *ngFor="let item of dataSource">
                             <div class="tbl-row">
-                                <div class="tbl-cell">{{item}}</div>
+                                <div class="tbl-cell">{{item.replace('tel3A+','')}}</div>
                                 <div class="tbl-cell text-right">
                                     <button class="btn btn-danger" (click)="onDelete(item)"><i
                                             class="material-icons">delete</i>
