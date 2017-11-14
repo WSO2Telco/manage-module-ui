@@ -309,7 +309,7 @@ export class WhitelistMainComponent implements OnInit {
                 const msisdnList = this.msisdn.split(',');
                 let count = 0;
                 for (const entry of msisdnList) {
-                    this.msisdnList[count] = '+' + Number(entry);
+                    this.msisdnList[count] = 'tel3A+' + Number(entry);
                     count++;
                 }
                 this.addNewToWhitelist();
@@ -389,7 +389,7 @@ export class WhitelistMainComponent implements OnInit {
                         this.msisdnList = [];
                         for (let _i = 0; _i <= diff; _i++) {
                             let phone = Number(this.msisdnMin) + Number(_i)
-                            this.msisdnList[_i] = '+' + phone;
+                            this.msisdnList[_i] = 'tel3A+' + phone;
                         }
                         this.addNewToWhitelist();
                     } else {
@@ -432,7 +432,7 @@ export class WhitelistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValidMobileNumber(msisdn: string): boolean {
-        const list = /^\d{11}$/;
+        const list = /^\d{1,50}$/;
         const regexp = new RegExp(list);
         if (regexp.test(msisdn)) {
             return true;
