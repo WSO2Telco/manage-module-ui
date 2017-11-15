@@ -100,8 +100,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing tariff list
      */
     getTariffList() {
-        this.rateService.getTariffList((response, status) => {
-            if (status) {
+        this.rateService.getTariffList((response) => {
+            if (response.success) {
                 this.tariffList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -113,8 +113,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing currency list
      */
     getCurrencyList() {
-        this.rateService.getCurrencyList((response, status) => {
-            if (status) {
+        this.rateService.getCurrencyList((response) => {
+            if (response.success) {
                 this.currencyList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -126,8 +126,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing rate types
      */
     getRateTypeList() {
-        this.rateService.getRateTypeList((response, status) => {
-            if (status) {
+        this.rateService.getRateTypeList((response) => {
+            if (response.success) {
                 this.rateTypeList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -140,8 +140,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing rate taxes list
      */
     getRateTaxList() {
-        this.rateService.getRateTaxList((response, status) => {
-            if (status) {
+        this.rateService.getRateTaxList((response) => {
+            if (response.success) {
                 this.rateTaxList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -153,8 +153,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the available categories
      */
     getCategoryList() {
-        this.rateService.getCategoryList((response, status) => {
-            if (status) {
+        this.rateService.getCategoryList((response) => {
+            if (response.success) {
                 this.categoryList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -167,8 +167,8 @@ export class RateMainComponent implements OnInit {
      * load available rate definitions
      */
     getRateDefinitionList() {
-        this.rateService.getRateDefinitionList((response, status) => {
-            if (status) {
+        this.rateService.getRateDefinitionList((response) => {
+            if (response.success) {
                 this.rateDefinitions = response.payload;
             } else {
                 this.message.error(response.message);
@@ -244,7 +244,7 @@ export class RateMainComponent implements OnInit {
             rateDefCategoryBase = 0;
         }
 
-        if(this.rateType === 'PERCENTAGE'){
+        if (this.rateType === 'PERCENTAGE') {
             rateDefCategoryBase = 1;
         }
 
@@ -273,9 +273,8 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            this.rateService.addNewRateCard(rateCard, (response, status) => {
-
-                if (status) {
+            this.rateService.addNewRateCard(rateCard, (response) => {
+                if (response.success) {
                     this.message.success(response.message);
                     this.reloadPage();
                 } else {

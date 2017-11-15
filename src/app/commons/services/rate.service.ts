@@ -28,10 +28,10 @@ export class RateService {
         this._remoteService.addRateCategory(rateCategory, id)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -45,10 +45,10 @@ export class RateService {
         this._remoteService.addTariff(tariff)
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -70,10 +70,10 @@ export class RateService {
         this._remoteService.addCategory(model)
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -92,10 +92,10 @@ export class RateService {
         this._remoteService.addCurrency(model)
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -110,10 +110,10 @@ export class RateService {
         this._remoteService.addNewRateCard(rateCard)
             .subscribe(
                 data => {
-                    callback(data, data.success);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -124,10 +124,10 @@ export class RateService {
             this._remoteService.getTariffList()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -138,10 +138,10 @@ export class RateService {
             this._remoteService.getCurrencyList()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -152,10 +152,10 @@ export class RateService {
             this._remoteService.getRateTypeList()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -166,10 +166,10 @@ export class RateService {
             this._remoteService.getCategoryList()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -180,10 +180,10 @@ export class RateService {
             this._remoteService.getRateDefinitionList()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -194,10 +194,10 @@ export class RateService {
             this._remoteService.getRateCards()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -208,13 +208,25 @@ export class RateService {
             this._remoteService.getRateTax()
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
+    }
+
+    getApiList(callback: Function) {
+        this._remoteService.getApiList()
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
     }
 
     getApiOperations(api: string, callback: Function) {
@@ -222,10 +234,10 @@ export class RateService {
             this._remoteService.getApiOperations(api)
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -236,10 +248,10 @@ export class RateService {
             this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }
@@ -250,10 +262,10 @@ export class RateService {
             this._remoteService.assignRatesForAPIOperation(data, apiName, apiOperationId, operatorId)
                 .subscribe(
                     data => {
-                        callback(data, data.success);
+                        callback(data);
                     },
                     error => {
-                        callback(error, false);
+                        callback(error);
                     }
                 );
         }

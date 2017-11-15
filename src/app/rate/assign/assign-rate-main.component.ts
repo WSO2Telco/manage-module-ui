@@ -61,12 +61,11 @@ export class AssignRateMainComponent implements OnInit {
      *  Get The List of API's
      */
     getApis() {
-        this.blackListService.getApiList((response, status) => {
-            if (status) {
+        this.rateService.getApiList((response) => {
+            if (response.success) {
                 this.apiList = [];
-                for (const entry of response) {
-                    const splited = entry.split(':');
-                    this.apiList.push(splited[1]+ ':' + splited[2]);
+                for (const entry of response.payload) {
+                    this.apiList.push(entry.apiName);
                 }
             } else {
                 this.message.error(response.message);
@@ -99,8 +98,8 @@ export class AssignRateMainComponent implements OnInit {
      * to get api operations according to selected API
      */
     getApiOperations() {
-        this.rateService.getApiOperations(this.api.split(':')[0], (response, status) => {
-            if (status) {
+        this.rateService.getApiOperations(this.api.split(':')[0], (response) => {
+            if (response.success) {
                 this.apiOperation = '';
                 this.apiOperationList = response.payload;
                 if (this.apiOperationList.length == 0) {
@@ -109,7 +108,7 @@ export class AssignRateMainComponent implements OnInit {
             } else {
                 this.apiOperationList = [];
                 this.apiOperation = '';
-                this.message.warning('No API Operations Available for The Selected API');
+                this.message.error(response.message);
             }
         });
     }
@@ -141,8 +140,8 @@ export class AssignRateMainComponent implements OnInit {
                 }
 
                 if (apiOperationId) {
-                    this.rateService.getRatesForAPIOperation(this.api, apiOperationId, operatorId, (response, status) => {
-                        if (status) {
+                    this.rateService.getRatesForAPIOperation(this.api, apiOperationId, operatorId, (response) => {
+                        if (response.success) {
                             this.sourceList = response.source;
                             this.assignedList = response.destination;
                             this.destinationList = [];
@@ -213,8 +212,8 @@ export class AssignRateMainComponent implements OnInit {
             }
 
             if (data.length > 0) {
-                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response, status) => {
-                    if (status) {
+                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response) => {
+                    if (response.success) {
                         this.message.success(response.message);
                         this.reloadPage();
                     } else {

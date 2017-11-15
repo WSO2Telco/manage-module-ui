@@ -312,6 +312,26 @@ const _invokeGetRateTaxListRest = function (request) {
 
 };
 
+const _invokeGetAPIListRest = function (request) {
+
+    let deferred = Q.defer();
+
+    let getEndpointUrl = function () {
+        return config.rateServiceURL + 'apis';
+    };
+
+    let getRequestOptions = function () {
+        return {
+            rejectUnauthorized: false,
+            json: true,
+            headers: {'Authorization': request.headers.authorization}
+        };
+    };
+
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
+
+};
+
 const _invokeGetApiOperationsRest = function (request) {
 
     let deferred = Q.defer();
@@ -378,6 +398,7 @@ module.exports = {
     invokeGetRateDefinitionListRest: _invokeGetRateDefinitionListRest,
     invokeGetRateCardsRest: _invokeGetRateCardsRest,
     invokeGetRateTaxListRest: _invokeGetRateTaxListRest,
+    invokeGetAPIListRest: _invokeGetAPIListRest,
     invokeGetAPIOperationRatesRest: _invokeGetAPIOperationRatesRest,
     invokeGetApiOperationsRest: _invokeGetApiOperationsRest,
     invokeAssignRatesRest: _invokeAssignRatesRest

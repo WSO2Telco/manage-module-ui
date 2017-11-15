@@ -69,10 +69,12 @@ export class TariffComponent implements OnInit {
 
 
     onSubmit(addTariffForm) {
-        if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
-            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision && this.ValidCommisionTotal) {
-            this.rateService.addTariff(this.tariff, (response, status) => {
-                if (status) {
+        if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
+            this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
+            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission &&
+            !this.IsExceedCommision && this.ValidCommisionTotal) {
+            this.rateService.addTariff(this.tariff, (response) => {
+                if (response.success) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
                     this.message.success(response.message);
@@ -164,7 +166,7 @@ export class TariffComponent implements OnInit {
             this.IsExceedCommision = false;
         }
 
-        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0))  {
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0)) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
         } else {
@@ -188,7 +190,7 @@ export class TariffComponent implements OnInit {
             this.IsExceedCommision = false;
         }
 
-        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0))  {
+        if ((Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) && (Number(this.tariff.tariffSPCommission) !== 0 && Number(this.tariff.tariffAdsCommission) !== 0 && Number(this.tariff.tariffOpcoCommission) !== 0)) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
         } else {
