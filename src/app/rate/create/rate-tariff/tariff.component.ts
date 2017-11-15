@@ -141,13 +141,10 @@ export class TariffComponent implements OnInit {
         if (Number(this.tariff.tariffSPCommission) < 0 && Number(this.tariff.tariffSPCommission) > -100) {
             this.IsInvalidMinusSpCommission = false;
             this.IsMinusExceedCommision = false;
-            console.log('sds');
         } else if (!this.IsInvalidMinusAdsCommission || !this.IsInvalidMinusOpcoCommission) {
             this.IsInvalidMinusSpCommission = false;
-            console.log('sds2');
         } else {
             this.IsInvalidMinusSpCommission = true;
-            console.log('sds3');
         }
         if (!this.IsInvalidMinusSpCommission && Number(this.tariff.tariffSPCommission) > 100 || this.tariff.tariffSPCommission == null) {
             this.IsInvalidspCommission = true;
