@@ -137,71 +137,119 @@ const _getApplications = function (request, reply) {
         reply(operationReatesError);
     };
 
+    let onAppFilterSuccess = function (filterResult) {
+
+        // console.log('Got sucess response' + JSON.stringify(filterResult));
+
+        let filter = ["10", "13"];
+
+        let applicationTasks = [];
+        let applicationTetails = [];
+        /**
+         * write the code to filter the apps**/
+
+        if (filterResult && filterResult.length > 0) {
+
+            // let appTaskResult;
+            // let appsDetailsResult;
+
+
+
+            let applicationTetails = appTaskResult.filter((element, index, array) => {
+                let details = appsDetailsResult[index].reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+
+            });
+
+            appsDetailsResult.map((appDetail, index) => {
+
+                let details = appsDetailsResult[index].reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+                // console.log("onAppFilterdSuccess reduce completed applicationIdsRow" + applicationIdsRow);
+                applicationIdsRow.push(details['applicationId']);
+                return details['applicationId'];
+
+            });
+
+        } else {
+
+            reply({
+                applicationTasks: [],
+                metadata: {
+                    order: "desc",
+                    size: 0,
+                    sort: "createTime",
+                    start: 0,
+                    total: 0
+                }
+            });
+        }
+
+
+        // let OperationReatesPromises;
+        // if (appsDetailsResult) {
+        //
+        //     if (request.payload.processType == 'APPLICATION_CREATION') {
+        //         reply(responseAdaptor(appTaskResult, appsDetailsResult, null));
+        //     } else {
+        //         OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
+        //             let details = appsDetailsResult[index].reduce((pre, curr) => {
+        //                 pre[curr.name] = curr.value;
+        //                 return pre;
+        //             }, {});
+        //
+        //             if (request.payload.isAdmin) {
+        //                 return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+        //             } else {
+        //                 return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+        //             }
+        //
+        //         });
+        //
+        //         Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
+        //     }
+        // } else {
+        //     reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
+        // }
+
+    };
+
     let onAppDetailSuccess = function (appsDetails) {
-        let OperationReatesPromises;
-        if (appsDetails) {
-            appsDetailsResult = appsDetails;
-                                OperationReatesPromises = appsDetails.map((appDetail, index) => {
-                let details = appsDetails[index].reduce((pre, curr) => {
-                    pre[curr.name] = curr.value;
-                    return pre;
-                }, {});
-
-
-                if (details['apiName']) {
-                    if (request.payload.isAdmin) {
-                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
-                    } else {
-                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
-                    }
-                } else {
-                    reply(responseAdaptor(appTaskResult, appsDetails, null));
-                }
-            });
-
-            Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
-
-        } else {
-            reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
-        }
-
-
-    };
-
-
-    let onAppDetailsError = function (appDetailsError) {
-        reply(appDetailsError);
-    };
-
-
-
-    let onAppFilterdSuccess = function (appsDetails) {
         let applicationIdsRow = [];
+        console.log("onAppFilterdSuccess");
 
-        console.log("onAppFilterdSuccess"+JSON.stringify(appsDetails));
         if (appsDetails) {
             appsDetailsResult = appsDetails;
-            OperationReatesPromises = appsDetails.map((appDetail, index) => {
 
-                let details = appsDetails[index].reduce((pre, curr) => {
-                    pre[curr.name] = curr.value;
-                    return pre;
-                }, {});
+            if (request.payload.processType == 'APPLICATION_CREATION') {
+                reply(responseAdaptor(appTaskResult, appsDetails, null));
+            } else {
 
+                appsDetails.map((appDetail, index) => {
 
-                if (details['apiName']) {
-                    console.log("onAppFilterdSuccess reduce completed applicationIdsRow"+applicationIdsRow);
-                    applicationIdsRow.push(details['applicationId']) ;
+                    let details = appsDetails[index].reduce((pre, curr) => {
+                        pre[curr.name] = curr.value;
+                        return pre;
+                    }, {});
 
-                } else {
-                    reply(responseAdaptor(appTaskResult, appsDetails, null));
-                }
-            });
-            console.log("onAppFilterdSuccess before rest call applicationIdsRow"+applicationIdsRow);
+                    // console.log("onAppFilterdSuccess reduce completed applicationIdsRow" + applicationIdsRow);
+                    applicationIdsRow.push(details['applicationId']);
+                    return details['applicationId'];
 
-            //let applicationIdsFilterd =   approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request);
-            approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request)
-                .then(onFilerResultSuccess,onFilerResultFail);
+                });
+
+                 console.log("onAppFilterdSuccess before rest call applicationIdsRow" + applicationIdsRow);
+
+                //let applicationIdsFilterd =   approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request);
+                approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow, request)
+                    .then(onAppFilterSuccess, onAppFilterError);
+            }
 
 
         } else {
@@ -209,13 +257,6 @@ const _getApplications = function (request, reply) {
         }
 
 
-    };
-
-    let onFilerResultSuccess = function (filterd) {
-        console.log('Got sucess response'+JSON.stringify(filterd));
-    };
-    let onFilerResultFail = function (filterd) {
-        console.log('Got faild '+JSON.stringify(filterd));
     };
 
     let onApplicationSuccess = function (applicationTasksResult) {
@@ -226,7 +267,7 @@ const _getApplications = function (request, reply) {
                 return applicationDetailsREST.Invoke(appTask.id, request);
             });
 
-            Q.all(appDetailsPromises).then(onAppFilterdSuccess, onAppDetailsError);
+            Q.all(appDetailsPromises).then(onAppDetailSuccess, onAppDetailsError);
 
         } else {
             reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
@@ -234,6 +275,15 @@ const _getApplications = function (request, reply) {
     };
 
     let onApplicationError = function (appError) {
+        reply(appError);
+    };
+
+    let onAppDetailsError = function (appDetailsError) {
+        reply(appDetailsError);
+    };
+
+    let onAppFilterError = function (appError) {
+        console.log('Got failed ' + JSON.stringify(appError));
         reply(appError);
     };
 
@@ -466,7 +516,7 @@ const _getGraphData = function (request, reply) {
             reply(error);
         };
 
-        applicationHistoryREST.Invoke(request.params.type, request.params.user,request).then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type, request.params.user, request).then(onSuccess, onError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }
