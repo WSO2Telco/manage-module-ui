@@ -14,15 +14,15 @@ function _getOparatorApprovedApps(applicationIds, request) {
         return x;
     };
 
-    let getRequestOptions = function (request) {
-        console.log('getting getRequestOptions ----------------------------->');
+    let getRequestOptions = function () {
+        console.log('getting getRequestOptions ----------------------------->' + request.headers.authorization);
         return {
             json: true,
             headers: {'Authorization': request.headers.authorization}
         };
     };
 
-    wreck.get(getEndpointUrl(applicationIds), getRequestOptions(request), (error, res, payload) => {
+    wreck.get(getEndpointUrl(applicationIds), getRequestOptions(), (error, res, payload) => {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
