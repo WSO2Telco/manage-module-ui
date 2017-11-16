@@ -11,7 +11,7 @@ const applicationHistoryREST = require('./application_history_rest_service');
 const operationRatesREST = require('./operation_rates_rest_service');
 const creditPlanREST = require('./credit_plan_rest_service');
 const APP_CONSTANT = require('./appication_const');
-
+const approvedApplicationREST = require('./application_rest_service');
 
 /**
  * Search Applications for Approval
@@ -174,6 +174,50 @@ const _getApplications = function (request, reply) {
     };
 
 
+
+    let onAppFilterdSuccess = function (appsDetails) {
+        let applicationIdsRow = [];
+
+        console.log("onAppFilterdSuccess"+JSON.stringify(appsDetails));
+        if (appsDetails) {
+            appsDetailsResult = appsDetails;
+            OperationReatesPromises = appsDetails.map((appDetail, index) => {
+
+                let details = appsDetails[index].reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+
+                if (details['apiName']) {
+                    console.log("onAppFilterdSuccess reduce completed applicationIdsRow"+applicationIdsRow);
+                    applicationIdsRow.push(details['applicationId']) ;
+
+                } else {
+                    reply(responseAdaptor(appTaskResult, appsDetails, null));
+                }
+            });
+            console.log("onAppFilterdSuccess before rest call applicationIdsRow"+applicationIdsRow);
+
+            //let applicationIdsFilterd =   approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request);
+            approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request)
+                .then(onFilerResultSuccess,onFilerResultFail);
+
+
+        } else {
+            reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
+        }
+
+
+    };
+
+    let onFilerResultSuccess = function (filterd) {
+        console.log('Got sucess response'+JSON.stringify(filterd));
+    };
+    let onFilerResultFail = function (filterd) {
+        console.log('Got faild '+JSON.stringify(filterd));
+    };
+
     let onApplicationSuccess = function (applicationTasksResult) {
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
@@ -182,7 +226,7 @@ const _getApplications = function (request, reply) {
                 return applicationDetailsREST.Invoke(appTask.id, request);
             });
 
-            Q.all(appDetailsPromises).then(onAppDetailSuccess, onAppDetailsError);
+            Q.all(appDetailsPromises).then(onAppFilterdSuccess, onAppDetailsError);
 
         } else {
             reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
