@@ -56,8 +56,8 @@ export class ViewRateMainComponent implements OnInit {
      * load available rate definitions
      */
     getRateCards() {
-        this.rateService.getRateCards((response, status) => {
-            if (status) {
+        this.rateService.getRateCards((response) => {
+            if (response.success) {
                 this.rateDefinitions = response.payload;
                 let count = 0;
                 for (const entry of this.rateDefinitions){
