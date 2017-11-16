@@ -39,7 +39,9 @@ export class WhitelistMainComponent implements OnInit {
 
     private msisdnError: string;
     private msisdnRangeError: string;
-    private invalidFieldError: string
+    private invalidFieldError: string;
+    private islong: boolean;
+    private long: string;
 
 
     private whitelistList: string[];
@@ -72,6 +74,8 @@ export class WhitelistMainComponent implements OnInit {
         this.ismsisdnError = false;
         this.ismsisdnRangeError = false;
         this.isInvalidFieldError = false;
+        this.islong = false;
+        this.long = '';
     }
 
 
@@ -327,10 +331,41 @@ export class WhitelistMainComponent implements OnInit {
                 const msisdnList = this.msisdn.split(',');
                 let count = 0;
                 for (const entry of msisdnList) {
-                    this.msisdnList[count] = 'tel3A+' + Number(entry);
+
+                    if (this.isValidMobileNumber(entry)) {
+                        if (entry.includes('tel:+') || entry.includes('+')) {
+
+                            let num = entry.split('+')[1];
+                            this.msisdnList[count] = 'tel3A+' + num;
+                            this.islong = false;
+
+                            if (num.length > 15) {
+                                this.islong = true;
+                            }
+                         }
+
+                        else {
+                            if (entry.length > 15) {
+                                this.islong = true;
+                            }else {
+                                this.msisdnList[count] = 'tel3A+' + Number(entry);
+                                this.islong = false;
+                            }
+                        }
+                    } else {
+                        this.islong = true;
+                    }
                     count++;
                 }
-                this.addNewToWhitelist();
+
+                if (this.islong == true) {
+                    this.long = 'Not a Valid MSISDN';
+                    this.islong = true;
+                } else {
+                    this.addNewToWhitelist();
+                }
+
+
             } else {
 
                 if (this.msisdn.length == 0) {
@@ -435,7 +470,7 @@ export class WhitelistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValid(inputtxt: string): boolean {
-        const list = /^\d+(,\d+)*$/;
+        const list = /[^,]+/;
         const regexp = new RegExp(list);
         if (regexp.test(inputtxt)) {
             return true;
@@ -450,7 +485,7 @@ export class WhitelistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValidMobileNumber(msisdn: string): boolean {
-        const list = /^\d{1,50}$/;
+        const list = /^((((tel:\+)(\\+){0,1})|((\+){1})|(\d))([0-9]+))$/;
         const regexp = new RegExp(list);
         if (regexp.test(msisdn)) {
             return true;
