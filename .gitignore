@@ -7,3 +7,4 @@ npm-debug.log
 /bundle/
 /server/public
 .vscode
+bin
