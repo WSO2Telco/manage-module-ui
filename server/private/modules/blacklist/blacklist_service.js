@@ -93,18 +93,31 @@ function blacklistService() {
      */
     let _addBlackListNumber = function (request, callback) {
 
-        let onSuccess = function (addBlackListNumber) {
-            callback(Object.assign({}, addBlackListNumber));
+        let onSuccess = function (result) {
+            callback(
+                {
+                    result: result,
+                    success: true,
+                    message: "Number Blacklisted SuccessFully"
+                });
         };
 
-        let onFailture = function (addBlackListNumberError) {
-            callback(addBlackListNumberError);
+        let onFailture = function (error) {
+            callback({
+                error: error,
+                success: false,
+                message: 'Error in BlackList Service'
+            });
         };
 
         if (validateAddBlackListNumbers(request)) {
             blackListRestService.invokeAddBlackListNumbersRest(request).then(onSuccess, onFailture);
         } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
+            callback({
+                error: boom.badRequest(Messages['BAD_REQUEST']),
+                success: false,
+                message: 'Error in BlackList Service'
+            });
         }
 
 

@@ -89,7 +89,12 @@ export class BlackListRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().messages));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Blacklisting',
+                error: error
+            }));
+            // .catch((error: Response) => Observable.throw(error.json().messages));
     }
 
 
