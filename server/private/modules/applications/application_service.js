@@ -36,6 +36,13 @@ const _getApplications = function (request, reply) {
         }
     };
 
+    /**
+     * build the response
+     * @param appTaskResult
+     * @param appDetailsResult
+     * @param operationReatesDetails
+     * @returns {{applicationTasks: Array, metadata: {order, size, sort, start, total}}}
+     */
     let responseAdaptor = function (appTaskResult, appDetailsResult, operationReatesDetails) {
 
         let adapted = {
@@ -130,19 +137,22 @@ const _getApplications = function (request, reply) {
         return adapted;
     };
 
+    /**
+     * when rates are loaded successfully
+     * @param operationReatesDetails
+     */
     let onOperationReatesSuccess = function (operationReatesDetails) {
         reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
 
-    let onOperationReatesError = function (operationReatesError) {
-        reply(operationReatesError);
-    };
-
+    /**
+     * when application filter results successful
+     * @param filterResult
+     */
     let onAppFilterSuccess = function (filterResult) {
 
-        let resultX = ["10", "18"];
         /**
-         * write the code to filter the apps**/
+         * the code to filter the apps**/
 
         if (filterResult) {
 
@@ -229,6 +239,10 @@ const _getApplications = function (request, reply) {
         Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
     }
 
+    /**
+     * when application details results are successful
+     * @param appsDetails
+     */
     let onAppDetailSuccess = function (appsDetails) {
         let applicationIdsRow = [];
         if (appsDetails) {
@@ -268,6 +282,11 @@ const _getApplications = function (request, reply) {
         }
     };
 
+
+    /**
+     * when application task results are successful
+     * @param applicationTasksResult
+     */
     let onApplicationSuccess = function (applicationTasksResult) {
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
@@ -293,6 +312,10 @@ const _getApplications = function (request, reply) {
 
     let onAppFilterError = function (appError) {
         reply(appError);
+    };
+
+    let onOperationReatesError = function (operationReatesError) {
+        reply(operationReatesError);
     };
 
     if (validateApplicationRequest(request)) {

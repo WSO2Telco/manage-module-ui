@@ -98,8 +98,6 @@ function _invokeApplicationCompleteTask(request) {
 
     let getRequestOptions = function (params) {
 
-        console.log(JSON.stringify(getPayload(params)));
-
         return {
             rejectUnauthorized: false,
             json: true,

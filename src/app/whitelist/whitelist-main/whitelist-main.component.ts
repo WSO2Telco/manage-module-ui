@@ -254,6 +254,7 @@ export class WhitelistMainComponent implements OnInit {
         this.api = '';
         this.applicationList = [];
         this.apiList = [];
+        this.whitelistList = [];
 
         let invalid = true;
         this.isInvalidFieldError = false;
@@ -277,6 +278,7 @@ export class WhitelistMainComponent implements OnInit {
     onAppSelected() {
         this.api = '';
         this.apiList = [];
+        this.whitelistList = [];
 
         let invalid = true;
         this.isInvalidFieldError = false;
@@ -298,6 +300,7 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onApiSelected() {
+        this.whitelistList = [];
         let invalid = true;
         this.isInvalidFieldError = false;
         for (const entry of this.apiList) {
