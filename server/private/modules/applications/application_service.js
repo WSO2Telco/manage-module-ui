@@ -37,6 +37,7 @@ const _getApplications = function (request, reply) {
     };
 
     let responseAdaptor = function (appTaskResult, appDetailsResult, operationReatesDetails) {
+
         let adapted = {
             applicationTasks: [],
             metadata: {
@@ -48,11 +49,13 @@ const _getApplications = function (request, reply) {
             }
         };
 
-        if (appTaskResult && appTaskResult.data) {
+        if (appTaskResult && appTaskResult.size > 0) {
 
-            adapted.applicationTasks = appTaskResult.data.map((task, index) => {
+            adapted.applicationTasks = appDetailsResult.map((element, index) => {
 
-                let details = appDetailsResult[index].reduce((pre, curr) => {
+                let task = element.task;
+
+                let details = element.details.reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
@@ -82,11 +85,9 @@ const _getApplications = function (request, reply) {
                             rateDefinitions: rateDefinitions
                         };
 
-
                         count++;
                     }
                 }
-
 
                 let moCreated;
                 let isValidDate = false;
@@ -139,46 +140,61 @@ const _getApplications = function (request, reply) {
 
     let onAppFilterSuccess = function (filterResult) {
 
-        // console.log('Got sucess response' + JSON.stringify(filterResult));
-
-        let filter = ["10", "13"];
-
-        let applicationTasks = [];
-        let applicationTetails = [];
+        let resultX = ["10", "18"];
         /**
          * write the code to filter the apps**/
 
-        if (filterResult && filterResult.length > 0) {
+        if (filterResult) {
 
-            // let appTaskResult;
-            // let appsDetailsResult;
+            let applicationDetails = appsDetailsResult.filter((element, index, array) => {
 
-
-
-            let applicationTetails = appTaskResult.filter((element, index, array) => {
-                let details = appsDetailsResult[index].reduce((pre, curr) => {
+                let details = element.details.reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
 
+                for (const entry of filterResult) {
+                    if (details['applicationId'] == Number(entry)) {
+                        return element;
+                    }
+                }
 
             });
 
-            appsDetailsResult.map((appDetail, index) => {
+            let applicationTasks = {
+                data: [],
+                order: "desc",
+                size: applicationDetails.length,
+                sort: "createTime",
+                start: 0,
+                total: applicationDetails.length
 
-                let details = appsDetailsResult[index].reduce((pre, curr) => {
+            };
+
+
+            appTaskResult = applicationTasks;
+            appsDetailsResult = applicationDetails;
+
+
+            let OperationReatesPromises;
+
+            OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
+                let details = appDetail.details.reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
 
-                // console.log("onAppFilterdSuccess reduce completed applicationIdsRow" + applicationIdsRow);
-                applicationIdsRow.push(details['applicationId']);
-                return details['applicationId'];
+                if (request.payload.isAdmin) {
+                    return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+                } else {
+                    return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+                }
 
             });
+
+            Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
 
         } else {
-
             reply({
                 applicationTasks: [],
                 metadata: {
@@ -191,44 +207,45 @@ const _getApplications = function (request, reply) {
             });
         }
 
-
-        // let OperationReatesPromises;
-        // if (appsDetailsResult) {
-        //
-        //     if (request.payload.processType == 'APPLICATION_CREATION') {
-        //         reply(responseAdaptor(appTaskResult, appsDetailsResult, null));
-        //     } else {
-        //         OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
-        //             let details = appsDetailsResult[index].reduce((pre, curr) => {
-        //                 pre[curr.name] = curr.value;
-        //                 return pre;
-        //             }, {});
-        //
-        //             if (request.payload.isAdmin) {
-        //                 return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
-        //             } else {
-        //                 return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
-        //             }
-        //
-        //         });
-        //
-        //         Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
-        //     }
-        // } else {
-        //     reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
-        // }
-
     };
+
+    let bipassFilter = function () {
+        let OperationReatesPromises;
+
+        OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
+            let details = appDetail.details.reduce((pre, curr) => {
+                pre[curr.name] = curr.value;
+                return pre;
+            }, {});
+
+            if (request.payload.isAdmin) {
+                return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+            } else {
+                return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+            }
+
+        });
+
+        Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
+    }
 
     let onAppDetailSuccess = function (appsDetails) {
         let applicationIdsRow = [];
-        console.log("onAppFilterdSuccess");
-
         if (appsDetails) {
-            appsDetailsResult = appsDetails;
+
+            let completeTasks = appsDetails.map((appDetail, index) => {
+                return {
+                    task: appTaskResult.data[index],
+                    details: appDetail
+                };
+            });
+
+            appsDetailsResult = completeTasks;
 
             if (request.payload.processType == 'APPLICATION_CREATION') {
-                reply(responseAdaptor(appTaskResult, appsDetails, null));
+                reply(responseAdaptor(appTaskResult, appsDetailsResult, null));
+            } else if (request.payload.assignee || request.payload.isAdmin) {
+                bipassFilter();
             } else {
 
                 appsDetails.map((appDetail, index) => {
@@ -238,25 +255,17 @@ const _getApplications = function (request, reply) {
                         return pre;
                     }, {});
 
-                    // console.log("onAppFilterdSuccess reduce completed applicationIdsRow" + applicationIdsRow);
                     applicationIdsRow.push(details['applicationId']);
                     return details['applicationId'];
 
                 });
 
-                 console.log("onAppFilterdSuccess before rest call applicationIdsRow" + applicationIdsRow);
-
-                //let applicationIdsFilterd =   approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow , request);
                 approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow, request)
                     .then(onAppFilterSuccess, onAppFilterError);
             }
-
-
         } else {
             reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
         }
-
-
     };
 
     let onApplicationSuccess = function (applicationTasksResult) {
@@ -283,7 +292,6 @@ const _getApplications = function (request, reply) {
     };
 
     let onAppFilterError = function (appError) {
-        console.log('Got failed ' + JSON.stringify(appError));
         reply(appError);
     };
 

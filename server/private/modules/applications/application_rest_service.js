@@ -8,14 +8,10 @@ function _getOparatorApprovedApps(applicationIds, request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function (applicationIds) {
-
-        let x= config.reportingUrl + '/operator/approved/apps?appids='+applicationIds;
-        console.log('URL ---------------------> ' + x);
-        return x;
+        return config.reportingUrl + '/operator/approved/apps?appids=' + applicationIds;
     };
 
     let getRequestOptions = function () {
-        console.log('getting getRequestOptions ----------------------------->' + request.headers.authorization);
         return {
             json: true,
             headers: {'Authorization': request.headers.authorization}
@@ -26,17 +22,15 @@ function _getOparatorApprovedApps(applicationIds, request) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            if(payload == null){
+            if (payload == null) {
                 deferred.resolve({});
-            } else{
+            } else {
                 deferred.resolve(payload);
             }
         }
     });
     return deferred.promise;
 }
-
-
 
 module.exports = {
     invokeOparatorApprovedApps: _getOparatorApprovedApps
