@@ -42,7 +42,7 @@ export class BlackListRemoteDataService {
      */
     getBlackListNumberList(id: string) {
         const data = {};
-        return this.http.post(this.apiEndpoints['getBlackListNumbers'] + id, JSON.stringify(data), this.getOptions())
+        return this.http.get(this.apiEndpoints['getBlackListNumbers'] + id, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
