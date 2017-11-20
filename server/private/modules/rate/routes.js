@@ -64,6 +64,11 @@ module.exports = [
     },
     {
         method: 'GET',
+        path: '/api/rate/apis',
+        handler: rateService.getApiList
+    },
+    {
+        method: 'GET',
         path: '/api/rate/getapioperationrates/{apiName}/{apiOperationId}/{operatorId}',
         handler: rateService.getAPIOperationRates
     },

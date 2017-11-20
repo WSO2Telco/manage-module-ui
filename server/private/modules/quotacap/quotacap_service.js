@@ -5,12 +5,8 @@ const quotaCapRestService = require('./quotacap_rest_service');
 logger.debugLevel = 'warn';
 
 
-const validateGetAppsRequest = function (request) {
-    let param = request.payload;
-    if (!!param && param.id) {
-        return true;
-    }
-    return false;
+const validateRequest = function (request) {
+    return true;
 };
 
 const validateGetQuotaLimitInfoRequest = function (request) {
@@ -69,16 +65,23 @@ function quotaCapService() {
 
 
     let _getApps = function (request, callback) {
-
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Application List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Applications of Subscriber'
+            });
         };
 
-        if (validateGetAppsRequest(request)) {
+        if (validateRequest(request)) {
             quotaCapRestService.invokeGetAppsRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));
@@ -89,14 +92,22 @@ function quotaCapService() {
     let _getApis = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload: getResponse,
+                success: true,
+                message: 'Api List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error: getResponseError,
+                success: false,
+                message: 'Error Loading Api of Subscriber'
+            });
         };
 
-        if (validateGetAppsRequest(request)) {
+        if (validateRequest(request)) {
             quotaCapRestService.invokeGetApisRest(request).then(onSuccess, onFailture);
         } else {
             callback(boom.badRequest(Messages['BAD_REQUEST']));

@@ -164,25 +164,8 @@ export class ApiBlacklistMainComponent implements OnInit {
             let countd = 0;
 
             if (apiId.length != 0 && apiName.length != 0) {
-                this.isDublicate = false;
-
-                if (this.blackListList != null) {
-
-                    for (const entry of this.blackListList.toString()) {
-
-                        if (this.blackListList.toString().includes(this.msisdnList[countd])) {
-                            this.dublicate = 'This MSISDN already exists';
-                            this.isDublicate = true;
-                        }
-                        countd++;
-                    }
-                }
-
-                if (this.isDublicate == true) {
-                    this.dublicate = 'This MSISDN already exists';
-                } else {
-                    this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, (response, status) => {
-                        if (status) {
+                    this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, (response) => {
+                        if (response.success) {
                             this.message.success('Added Successfully');
                             this.getBlackListNumbers(apiId);
                             this.msisdn = '';
@@ -190,7 +173,7 @@ export class ApiBlacklistMainComponent implements OnInit {
                             this.message.error(response.message);
                         }
                     });
-                }
+
             }
 
         }
@@ -219,11 +202,27 @@ export class ApiBlacklistMainComponent implements OnInit {
                     const msisdnList = this.msisdn.split(',');
                     let count = 0;
 
-                    for (const entry of msisdnList) {
+                    for (let entry of msisdnList) {
 
                         if (this.isValidMobileNumber(entry)) {
-                            this.msisdnList[count] = 'tel3A+' + Number(entry);
-                            this.islong = false;
+                            if (entry.includes('tel:+') || entry.includes('+')) {
+
+                                let num = entry.split('+')[1];
+                                this.msisdnList[count] = 'tel3A+' + num;
+                                this.islong = false;
+
+                                if (num.length > 15) {
+                                    this.islong = true;
+                                }
+
+                            } else {
+                                if (entry.length > 15) {
+                                    this.islong = true;
+                                }else {
+                                    this.msisdnList[count] = 'tel3A+' + Number(entry);
+                                    this.islong = false;
+                                }
+                            }
                         } else {
                             this.islong = true;
                         }
@@ -273,7 +272,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValidMobileNumber(msisdn: string): boolean {
-        const list = /^\d{11}$/;
+        const list = /^((((tel:\+)(\\+){0,1})|((\+){1})|(\d))([0-9]+))$/;
         const regexp = new RegExp(list);
         if (regexp.test(msisdn)) {
             return true;
@@ -288,7 +287,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValid(inputtxt: string): boolean {
-        const list = /^\d+(,\d+)*$/;
+        const list = /[^,]+/;
         const regexp = new RegExp(list);
         if (regexp.test(inputtxt)) {
             return true;

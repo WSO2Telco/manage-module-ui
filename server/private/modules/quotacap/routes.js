@@ -8,13 +8,13 @@ module.exports = [
         handler: quotaCapService.getSubscribers
     },
     {
-        method: 'POST',
-        path: '/api/quotacap/getapps',
+        method: 'GET',
+        path: '/api/quotacap/getapps/{subscriberID}/{operator}',
         handler: quotaCapService.getApps
     },
     {
-        method: 'POST',
-        path: '/api/quotacap/getapis',
+        method: 'GET',
+        path: '/api/quotacap/getapis/{subscriberID}/{appID}',
         handler: quotaCapService.getApis
     },
     {

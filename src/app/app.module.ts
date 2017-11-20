@@ -1,10 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, APP_INITIALIZER} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
+import {AppConfig} from './app.config';
 import {RootLevelRoutes} from './app.routes';
 import {CommonsModule} from './commons/commons.module';
 import {AppGuard, LoginGuard, AdminGuard, BillingGuard} from './app.guard';
@@ -26,6 +27,8 @@ import {ReportingRemoteDataService} from './data-providers/reporting-remote-data
 import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data.service';
 import {WhitelistRemoteDataService} from './data-providers/whitelist_remote-data.service';
 import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.service';
+import {ApplicationRemoteDataService} from './data-providers/application-remote-data.service';
+import {ConfigService} from './commons/services/config.service';
 
 @NgModule({
     declarations: [
@@ -55,6 +58,13 @@ import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.s
         ModalModule.forRoot()
     ],
     providers: [
+        ConfigService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: AppConfig,
+            deps: [ConfigService],
+            multi: true
+        },
         AppGuard,
         LoginGuard,
         AdminGuard,
@@ -67,6 +77,7 @@ import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.s
         BlackListRemoteDataService,
         QuotacapRemoteDataService,
         WhitelistRemoteDataService,
+        ApplicationRemoteDataService,
         {
             provide : 'API_CONTEXT',
             useValue : 'api'

@@ -43,8 +43,8 @@ const _invokeGetBlackListNumbers = function (request) {
 
     let deferred = Q.defer();
 
-    let getEndpointUrl = function (id) {
-        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + id;
+    let getEndpointUrl = function () {
+        return config.blacklistWhitelistServiceURL + 'GetBlacklistPerApi/' + request.params.id;
     }
 
     let getRequestOptions = function () {
@@ -55,7 +55,14 @@ const _invokeGetBlackListNumbers = function (request) {
         };
     };
 
-    return _invokePOSTRequest(deferred, getEndpointUrl(request.params.id), getRequestOptions());
+    wreck.get(getEndpointUrl(), getRequestOptions(), (error, res, payload) => {
+        if (error) {
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            deferred.resolve(payload);
+       }
+   });
+    return deferred.promise;
 };
 
 

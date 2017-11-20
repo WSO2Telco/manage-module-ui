@@ -44,44 +44,44 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">
-                        <div class="sec-head">App Name</div>
-                        <span class="close material-icons" (click)="onClear('NAME')">close</span>
-                        <span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>
-                    </div>
-                </div>
+            <!--<div class="row">-->
+                <!--<div class="col-xs-4">-->
+                    <!--<div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">-->
+                        <!--<div class="sec-head">App Name</div>-->
+                        <!--<span class="close material-icons" (click)="onClear('NAME')">close</span>-->
+                        <!--<span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <ng-container *ngIf="showApiName('/approvals/applications')">
-                <div class="col-xs-4">
-                    <div class="filter-val-container user" *ngIf="filter?.users.length > 0">
-                        <div class="sec-head">User</div>
-                        <span class="close material-icons" (click)="onClear('USER')">close</span>
-                        <span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>
-                    </div>
-                </div>
-                </ng-container>
+                <!--<ng-container *ngIf="showApiName('/approvals/applications')">-->
+                <!--<div class="col-xs-4">-->
+                    <!--<div class="filter-val-container user" *ngIf="filter?.users.length > 0">-->
+                        <!--<div class="sec-head">User</div>-->
+                        <!--<span class="close material-icons" (click)="onClear('USER')">close</span>-->
+                        <!--<span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</ng-container>-->
 
-                <ng-container *ngIf="showApiName('/approvals/subscriptions')">
-                <div class="col-xs-4">
-                    <div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">
-                        <div class="sec-head">User</div>
-                        <span class="close material-icons" (click)="onClear('SUBS')">close</span>
-                        <span class="filter-val user" *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>
-                    </div>
-                </div>
-                </ng-container>
+                <!--<ng-container *ngIf="showApiName('/approvals/subscriptions')">-->
+                <!--<div class="col-xs-4">-->
+                    <!--<div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">-->
+                        <!--<div class="sec-head">User</div>-->
+                        <!--<span class="close material-icons" (click)="onClear('SUBS')">close</span>-->
+                        <!--<span class="filter-val user" *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--</ng-container>-->
 
-                <div class="col-xs-4">
+                <!--<div class="col-xs-4">-->
 
-                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
-                        <div class="sec-head">Api Name</div>
-                        <span class="close material-icons" (click)="onClear('ID')">close</span>
-                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
-                    </div>
-                </div>
-            </div>
+                    <!--<div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">-->
+                        <!--<div class="sec-head">Api Name</div>-->
+                        <!--<span class="close material-icons" (click)="onClear('ID')">close</span>-->
+                        <!--<span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
     </div>
@@ -132,7 +132,7 @@
                           class="action  assign material-icons"
                           (click)="onAction('ASSIGN',item,filter?.dataType)">assignment_ind</span>
                 </div>
-                <div class="more-con animated fadeInUp" *ngIf="item.isExpand"
+                <div class="more-con animated fadeInUp row{{item.relevantRates.length}}" *ngIf="item.isExpand"
                      [ngClass]="{ 'M':item.actionType == 'MORE',
                     'A':item.actionType == 'APPROVE',
                     'R':item.actionType == 'REJECT',
@@ -225,7 +225,7 @@
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">
                         <button class="btn btn-default animated fadeIn"
-                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false">Cancel
+                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false; item.tier = ''; item.creditPlan = '';">Cancel
                         </button>
                         <button class="btn btn-primary animated fadeIn"
                                 *ngIf="item.actionType == 'APPROVE'"

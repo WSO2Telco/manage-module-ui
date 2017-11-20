@@ -129,6 +129,8 @@
 
       }
 
+
+
       .more-con {
         padding: 10px 0px 10px 0px;
         background-color: $gray_0;
@@ -186,6 +188,32 @@
           padding-bottom: 5px !important;
         }
       }
+	  
+	  .row9, .row10 {
+        height: 485px;
+
+        &.A, &.R {
+          height: 570px !important;
+        }
+      }
+
+      .row7, .row8 {
+        height: 400px;
+
+        &.A, &.R {
+          height: 485px !important;
+        }
+      }
+
+      .row5, .row6 {
+        height: 315px;
+
+        &.A, &.R {
+          height: 400px !important;
+        }
+      }
+
+
 
     }
   }

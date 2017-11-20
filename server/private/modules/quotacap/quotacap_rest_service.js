@@ -54,7 +54,7 @@ const _invokeGetAppsRest = function (request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'apps';
+        return config.blacklistWhitelistServiceURL + 'apps/' + request.params.subscriberID + '/' + request.params.operator;
     };
 
     let getRequestOptions = function () {
@@ -63,12 +63,11 @@ const _invokeGetAppsRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization
-            },
-            payload: request.payload
+            }
         };
     };
 
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 
@@ -77,7 +76,7 @@ const _invokeGetApisRest = function (request) {
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'apis';
+        return config.blacklistWhitelistServiceURL + 'apis/' + request.params.subscriberID + '/' + request.params.appID;
     };
 
     let getRequestOptions = function () {
@@ -86,12 +85,11 @@ const _invokeGetApisRest = function (request) {
             json: true,
             headers: {
                 'Authorization': request.headers.authorization
-            },
-            payload: request.payload
+            }
         };
     };
 
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 

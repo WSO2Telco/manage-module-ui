@@ -11,7 +11,7 @@ const applicationHistoryREST = require('./application_history_rest_service');
 const operationRatesREST = require('./operation_rates_rest_service');
 const creditPlanREST = require('./credit_plan_rest_service');
 const APP_CONSTANT = require('./appication_const');
-
+const approvedApplicationREST = require('./application_rest_service');
 
 /**
  * Search Applications for Approval
@@ -36,7 +36,15 @@ const _getApplications = function (request, reply) {
         }
     };
 
+    /**
+     * build the response
+     * @param appTaskResult
+     * @param appDetailsResult
+     * @param operationReatesDetails
+     * @returns {{applicationTasks: Array, metadata: {order, size, sort, start, total}}}
+     */
     let responseAdaptor = function (appTaskResult, appDetailsResult, operationReatesDetails) {
+
         let adapted = {
             applicationTasks: [],
             metadata: {
@@ -48,11 +56,13 @@ const _getApplications = function (request, reply) {
             }
         };
 
-        if (appTaskResult && appTaskResult.data) {
+        if (appTaskResult && appTaskResult.size > 0) {
 
-            adapted.applicationTasks = appTaskResult.data.map((task, index) => {
+            adapted.applicationTasks = appDetailsResult.map((element, index) => {
 
-                let details = appDetailsResult[index].reduce((pre, curr) => {
+                let task = element.task;
+
+                let details = element.details.reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
@@ -82,11 +92,9 @@ const _getApplications = function (request, reply) {
                             rateDefinitions: rateDefinitions
                         };
 
-
                         count++;
                     }
                 }
-
 
                 let moCreated;
                 let isValidDate = false;
@@ -129,51 +137,156 @@ const _getApplications = function (request, reply) {
         return adapted;
     };
 
+    /**
+     * when rates are loaded successfully
+     * @param operationReatesDetails
+     */
     let onOperationReatesSuccess = function (operationReatesDetails) {
         reply(responseAdaptor(appTaskResult, appsDetailsResult, operationReatesDetails));
     };
 
-    let onOperationReatesError = function (operationReatesError) {
-        reply(operationReatesError);
-    };
+    /**
+     * when application filter results successful
+     * @param filterResult
+     */
+    let onAppFilterSuccess = function (filterResult) {
 
-    let onAppDetailSuccess = function (appsDetails) {
-        let OperationReatesPromises;
-        if (appsDetails) {
-            appsDetailsResult = appsDetails;
-            OperationReatesPromises = appsDetails.map((appDetail, index) => {
-                let details = appsDetails[index].reduce((pre, curr) => {
+        /**
+         * the code to filter the apps**/
+
+        if (filterResult) {
+
+            let applicationDetails = appsDetailsResult.filter((element, index, array) => {
+
+                let details = element.details.reduce((pre, curr) => {
                     pre[curr.name] = curr.value;
                     return pre;
                 }, {});
 
-
-                if (details['apiName']) {
-                    if (request.payload.isAdmin) {
-                        return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
-                    } else {
-                        return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+                for (const entry of filterResult) {
+                    if (details['applicationId'] == Number(entry)) {
+                        return element;
                     }
-                } else {
-                    reply(responseAdaptor(appTaskResult, appsDetails, null));
                 }
+
+            });
+
+            let applicationTasks = {
+                data: [],
+                order: "desc",
+                size: applicationDetails.length,
+                sort: "createTime",
+                start: 0,
+                total: applicationDetails.length
+
+            };
+
+
+            appTaskResult = applicationTasks;
+            appsDetailsResult = applicationDetails;
+
+
+            let OperationReatesPromises;
+
+            OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
+                let details = appDetail.details.reduce((pre, curr) => {
+                    pre[curr.name] = curr.value;
+                    return pre;
+                }, {});
+
+                if (request.payload.isAdmin) {
+                    return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+                } else {
+                    return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+                }
+
             });
 
             Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
 
         } else {
-            reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
+            reply({
+                applicationTasks: [],
+                metadata: {
+                    order: "desc",
+                    size: 0,
+                    sort: "createTime",
+                    start: 0,
+                    total: 0
+                }
+            });
         }
 
+    };
 
+    let bipassFilter = function () {
+        let OperationReatesPromises;
+
+        OperationReatesPromises = appsDetailsResult.map((appDetail, index) => {
+            let details = appDetail.details.reduce((pre, curr) => {
+                pre[curr.name] = curr.value;
+                return pre;
+            }, {});
+
+            if (request.payload.isAdmin) {
+                return operationRatesREST.invokeOperationRatesRestAdmin(details['apiName'], request);
+            } else {
+                return operationRatesREST.invokeOperationRatesRest(details['apiName'], request);
+            }
+
+        });
+
+        Q.all(OperationReatesPromises).then(onOperationReatesSuccess, onOperationReatesError);
+    }
+
+    /**
+     * when application details results are successful
+     * @param appsDetails
+     */
+    let onAppDetailSuccess = function (appsDetails) {
+        let applicationIdsRow = [];
+        if (appsDetails) {
+
+            let completeTasks = appsDetails.map((appDetail, index) => {
+                return {
+                    task: appTaskResult.data[index],
+                    details: appDetail
+                };
+            });
+
+            appsDetailsResult = completeTasks;
+
+            if (request.payload.processType == 'APPLICATION_CREATION') {
+                reply(responseAdaptor(appTaskResult, appsDetailsResult, null));
+            } else if (request.payload.assignee || request.payload.isAdmin) {
+                bipassFilter();
+            } else {
+
+                appsDetails.map((appDetail, index) => {
+
+                    let details = appsDetails[index].reduce((pre, curr) => {
+                        pre[curr.name] = curr.value;
+                        return pre;
+                    }, {});
+
+                    applicationIdsRow.push(details['applicationId']);
+                    return details['applicationId'];
+
+                });
+
+                approvedApplicationREST.invokeOparatorApprovedApps(applicationIdsRow, request)
+                    .then(onAppFilterSuccess, onAppFilterError);
+            }
+        } else {
+            reply(boom.badImplementation(Messages['INTERNAL_SERVER_ERROR']));
+        }
     };
 
 
-    let onAppDetailsError = function (appDetailsError) {
-        reply(appDetailsError);
-    };
-
-
+    /**
+     * when application task results are successful
+     * @param applicationTasksResult
+     */
     let onApplicationSuccess = function (applicationTasksResult) {
         let appDetailsPromises;
         if (applicationTasksResult && applicationTasksResult.data) {
@@ -191,6 +304,18 @@ const _getApplications = function (request, reply) {
 
     let onApplicationError = function (appError) {
         reply(appError);
+    };
+
+    let onAppDetailsError = function (appDetailsError) {
+        reply(appDetailsError);
+    };
+
+    let onAppFilterError = function (appError) {
+        reply(appError);
+    };
+
+    let onOperationReatesError = function (operationReatesError) {
+        reply(operationReatesError);
     };
 
     if (validateApplicationRequest(request)) {
@@ -422,7 +547,7 @@ const _getGraphData = function (request, reply) {
             reply(error);
         };
 
-        applicationHistoryREST.Invoke(request.params.type, request.params.user,request).then(onSuccess, onError);
+        applicationHistoryREST.Invoke(request.params.type, request.params.user, request).then(onSuccess, onError);
     } else {
         reply(boom.badRequest(Messages['BAD_REQUEST']));
     }

@@ -10,7 +10,8 @@
       "assets": [
         "images",
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        "config.json"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -28,13 +29,11 @@
       "scripts": [
         "../node_modules/chart.js/dist/Chart.js"
       ],
-	  
       "environmentSource": "environments/environment.ts",
-			"environments": {
-			"dev": "environments/environment.ts",
-			"prod": "environments/environment.prod.ts"
-}
-
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
     }
   ],
   "addons": [],

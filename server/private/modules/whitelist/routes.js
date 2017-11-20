@@ -8,18 +8,8 @@ module.exports = [
         handler: whitelistService.getSubscribers
     },
     {
-        method: 'POST',
-        path: '/api/whitelist/getapps',
-        handler: whitelistService.getApps
-    },
-    {
-        method: 'POST',
-        path: '/api/whitelist/getapis',
-        handler: whitelistService.getApis
-    },
-    {
-        method: 'POST',
-        path: '/api/whitelist/getwhitelist',
+        method: 'GET',
+        path: '/api/whitelist/getwhitelist/{subscriberID}/{apiID}/{appID}',
         handler: whitelistService.getWhitelist
     },
     {

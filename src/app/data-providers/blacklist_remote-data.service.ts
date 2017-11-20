@@ -42,7 +42,7 @@ export class BlackListRemoteDataService {
      */
     getBlackListNumberList(id: string) {
         const data = {};
-        return this.http.post(this.apiEndpoints['getBlackListNumbers'] + id, JSON.stringify(data), this.getOptions())
+        return this.http.get(this.apiEndpoints['getBlackListNumbers'] + id, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -89,7 +89,12 @@ export class BlackListRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw(error.json().messages));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Blacklisting',
+                error: error
+            }));
+            // .catch((error: Response) => Observable.throw(error.json().messages));
     }
 
 

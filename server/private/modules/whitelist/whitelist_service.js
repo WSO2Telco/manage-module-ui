@@ -44,42 +44,6 @@ function whitelistService() {
 
     };
 
-
-    let _getApps = function (request, callback) {
-
-        let onSuccess = function (getResponse) {
-            callback(getResponse);
-        };
-
-        let onFailture = function (getResponseError) {
-            callback(getResponseError);
-        };
-
-        if (validateGetAppsRequest(request)) {
-            whiteListRestService.invokeGetAppsRest(request ).then(onSuccess, onFailture);
-        } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
-        }
-    };
-
-
-    let _getApis = function (request, callback) {
-
-        let onSuccess = function (getResponse) {
-            callback(getResponse);
-        };
-
-        let onFailture = function (getResponseError) {
-            callback(getResponseError);
-        };
-
-        if (validateGetAppsRequest(request)) {
-            whiteListRestService.invokeGetApisRest(request ).then(onSuccess, onFailture);
-        } else {
-            callback(boom.badRequest(Messages['BAD_REQUEST']));
-        }
-    };
-
     let _getWhitelist = function (request, callback) {
 
         let onSuccess = function (getResponse) {
@@ -140,8 +104,6 @@ function whitelistService() {
 
     return {
         getSubscribers: _getSubscribers,
-        getApps: _getApps,
-        getApis: _getApis,
         getWhitelist: _getWhitelist,
         addNewWhitelist: _addNewWhitelist,
         removeFromWhitelist: _removeFromWhitelist

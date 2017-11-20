@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from './commons/services/authentication.service';
 import {AppCommonService} from './commons/services/app-common.service';
-import {User, LoginResponse} from './commons/models/common-data-models';
+import {LoginResponse} from './commons/models/common-data-models';
 
 @Component({
     selector: 'body',

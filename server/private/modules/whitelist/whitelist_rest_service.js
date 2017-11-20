@@ -26,58 +26,15 @@ const _invokeGetSubscribersRest = function (request) {
         };
     };
 
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
-
-
-const _invokeGetAppsRest = function (request) {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'apps';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {'Authorization': request.headers.authorization},
-            payload: request.payload
-        };
-    };
-
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
-};
-
-
-const _invokeGetApisRest = function (request) {
-
-    let deferred = Q.defer();
-
-    let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'apis';
-    };
-
-    let getRequestOptions = function () {
-        return {
-            rejectUnauthorized: false,
-            json: true,
-            headers: {'Authorization': request.headers.authorization},
-            payload: request.payload
-        };
-    };
-
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
-};
-
 
 const _invokeGetWhitelistRest = function (request) {
 
     let deferred = Q.defer();
 
     let getEndpointUrl = function () {
-        return config.blacklistWhitelistServiceURL + 'GetWhiteList';
+        return config.blacklistWhitelistServiceURL + 'GetWhiteList/' + request.params.subscriberID + '/' + request.params.apiID + '/' + request.params.appID;
     };
 
     let getRequestOptions = function () {
@@ -88,7 +45,7 @@ const _invokeGetWhitelistRest = function (request) {
         };
     };
 
-    return _invokePOSTRequest(deferred, getEndpointUrl(), getRequestOptions());
+    return _invokeGETRequest(deferred, getEndpointUrl(), getRequestOptions());
 };
 
 const _invokeAddNewWhitelist = function (request) {
@@ -136,9 +93,26 @@ const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            if(res.statusCode == 200){
+            if (res.statusCode == 200) {
                 deferred.resolve(payload);
-            }else {
+            } else {
+                deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+            }
+        }
+    });
+
+    return deferred.promise;
+}
+
+const _invokeGETRequest = function (deferred, endpointUrl, requestOptions) {
+
+    wreck.get(endpointUrl, requestOptions, (error, res, payload) => {
+        if (error) {
+            deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
+        } else {
+            if (res.statusCode == 200) {
+                deferred.resolve(payload);
+            } else {
                 deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
             }
         }
@@ -149,8 +123,6 @@ const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
 
 module.exports = {
     invokeGetSubscribersRest: _invokeGetSubscribersRest,
-    invokeGetAppsRest: _invokeGetAppsRest,
-    invokeGetApisRest: _invokeGetApisRest,
     invokeGetWhitelistRest: _invokeGetWhitelistRest,
     invokeAddNewWhitelist: _invokeAddNewWhitelist,
     invokeRemoveFromWhitelistRest: _invokeRemoveFromWhitelistRest
