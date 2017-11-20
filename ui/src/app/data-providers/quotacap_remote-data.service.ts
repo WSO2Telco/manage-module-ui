@@ -10,16 +10,20 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class QuotacapRemoteDataService {
 
-    private apiContext = 'https://localhost:9443/quota-service/services/';
+    private apiContext = 'api';
     private loginInfo;
 
 
     private apiEndpoints: Object = {
-        getSubscribers: this.apiContext + 'getSubscribersByOperator?operatorName=',
-        getOperatorOfsubscriber: this.apiContext + 'getOperatorsBySubscriber?subscriberName=',
-        getQuotaLimitInfo: this.apiContext + 'getQuotaLimitInfo',
-        getValidityPeriod: this.apiContext + 'checkIfDatesOverlap',
-        addNewQuotaLimit: this.apiContext + 'applyQuotaLimit',
+        getSubscribers: this.apiContext + '/quotacap/getsubscribers',
+        getOperatorOfsubscriber: this.apiContext + '/quotacap/getoperatorofsubscriber',
+        getApps: this.apiContext + '/quotacap/getapps',
+        getApis: this.apiContext + '/quotacap/getapis',
+        getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
+        addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit',
+        getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod',
+        getOperatorList: this.apiContext + '/quotacap/getoperatorlist'
+
     };
 
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
@@ -32,28 +36,13 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getSubscribers(operatorName: string) {
-        return this.http.get(this.apiEndpoints['getSubscribers'] + operatorName, this.getOptions())
+        const data = {};
+        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.getOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'Subscriber List Loaded Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Loading Subscriber List',
-                        payload: null
-                    };
-                }
-
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscriber List',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
 
@@ -62,28 +51,66 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getOperatorOfsubscriber(subscriberID: string) {
-        return this.http.get(this.apiEndpoints['getOperatorOfsubscriber'] + subscriberID, this.getOptions())
+        const data = {};
+        return this.http.get(this.apiEndpoints['getOperatorOfsubscriber'] + '/' + subscriberID, this.getOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'Operators of Subscriber List Loaded Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Loading Operators of Subscriber List',
-                        payload: null
-                    };
-                }
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Operators of Subscriber List',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
+
+
+    /**
+     * to get all operator
+     * @returns {Observable<R>}
+     */
+    getOperatorList() {
+        return this.http.get(this.apiEndpoints['getOperatorList'], this.getOptions())
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+
+    /**
+     * To get all the apps of the subscriber
+     * @param subscriberID
+     * @returns {Observable<R>}
+     */
+    getApps(subscriberID: string) {
+        let operator;
+        if(this.loginInfo.isAdmin){
+            operator = '_ALL_';
+        }else {
+            operator = this.loginInfo.operator;
+        }
+        const data = {id: subscriberID, operator: operator};
+        return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
+    /**
+     * to get all the apis related to the selected app and subscriber
+     * @param id
+     * @returns {Observable<R>}
+     */
+    getApis(id: string) {
+        const data = {id: id};
+        return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw(error.json().message()));
+    }
+
 
     /**
      * to add new quota value to the DB
@@ -119,25 +146,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['addNewQuotaLimit'], data, this.getOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'Quota Limit Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Adding Quota Limit',
-                        payload: null
-                    }
-                }
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Adding Quota Limit',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
 
@@ -159,17 +171,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Quota of Subscriber Loaded Successfully',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Quota of Subscriber',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -177,7 +182,7 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApp(appID: string, operatorname: string) {
+    getQuotaLimitInfoApp(appID: string,  operatorname: string) {
 
         if (operatorname == '' || operatorname == 'All') {
             operatorname = '_All_';
@@ -190,17 +195,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Quota of Application Loaded Successfully',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Quota of Application',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
 
@@ -209,7 +207,7 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApi(apiID: string, operatorname: string) {
+    getQuotaLimitInfoApi(apiID: string,  operatorname: string) {
         if (operatorname == '' || operatorname == 'All') {
             operatorname = '_All_';
         }
@@ -222,17 +220,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Quota of Api Loaded Successfully',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Quota of Api',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -253,17 +244,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getQuotaLimitInfo'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Quota of Operator Loaded Successfully',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Quota of Operator',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
 
@@ -272,7 +256,7 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getValidityPeriodForSubscriber(subscriberID: string, fromDate: string, toDate: string, operatorname: string) {
+    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, operatorname: string) {
 
         if (operatorname == '' || operatorname == 'All') {
             operatorname = '_All_';
@@ -288,17 +272,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Validated',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error While Validating Validity Period',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -322,17 +299,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Validated',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error While Validating Validity Period',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     /**
@@ -356,17 +326,10 @@ export class QuotacapRemoteDataService {
 
         return this.http.post(this.apiEndpoints['getValidityPeriod'], data, this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Validated',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error While Validating Validity Period',
-                error: error
-            }));
+            .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
     getOptions(): RequestOptions {

@@ -16,6 +16,26 @@ export class RateService {
     constructor(private _remoteService: RateRemoteDataService, private authService: AuthenticationService) {
     }
 
+
+    /**
+     * This method call the remode data service to create a new category, subcategory, tariff relationship
+     * @param category
+     * @param subcategory
+     * @param tariff
+     * @param callback
+     */
+    addRateCategory(rateCategory: RateCategory, id: number, callback: Function) {
+        this._remoteService.addRateCategory(rateCategory, id)
+            .subscribe(
+                data => {
+                    callback(data, true);
+                },
+                error => {
+                    callback(error, false);
+                }
+            );
+    }
+
     /**
      * this method call the rate remote service to create new tariff
      * @param tariff
@@ -25,10 +45,10 @@ export class RateService {
         this._remoteService.addTariff(tariff)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, data.success);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -50,10 +70,10 @@ export class RateService {
         this._remoteService.addCategory(model)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, data.success);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -72,10 +92,10 @@ export class RateService {
         this._remoteService.addCurrency(model)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, data.success);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
@@ -90,25 +110,21 @@ export class RateService {
         this._remoteService.addNewRateCard(rateCard)
             .subscribe(
                 data => {
-                    callback(data);
+                    callback(data, data.success);
                 },
                 error => {
-                    callback(error);
+                    callback(error, false);
                 }
             );
     }
 
 
-    /**
-     * get tariff
-     * @param callback
-     */
     getTariffList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getTariffList()
                 .subscribe(
                     data => {
-                        callback(data, true);
+                        callback(data, data.success);
                     },
                     error => {
                         callback(error, false);
@@ -117,10 +133,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get currency
-     * @param callback
-     */
     getCurrencyList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getCurrencyList()
@@ -135,10 +147,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get rate types
-     * @param callback
-     */
     getRateTypeList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getRateTypeList()
@@ -153,10 +161,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get category
-     * @param callback
-     */
     getCategoryList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getCategoryList()
@@ -171,10 +175,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get rate definitions
-     * @param callback
-     */
     getRateDefinitionList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getRateDefinitionList()
@@ -183,16 +183,12 @@ export class RateService {
                         callback(data, data.success);
                     },
                     error => {
-                        callback(error, error.success);
+                        callback(error, false);
                     }
                 );
         }
     }
 
-    /**
-     * get rate cards
-     * @param callback
-     */
     getRateCards(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getRateCards()
@@ -207,10 +203,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get rate tax
-     * @param callback
-     */
     getRateTaxList(callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getRateTax()
@@ -225,11 +217,6 @@ export class RateService {
         }
     }
 
-    /**
-     * get api operations of the selected api
-     * @param api
-     * @param callback
-     */
     getApiOperations(api: string, callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.getApiOperations(api)
@@ -238,112 +225,35 @@ export class RateService {
                         callback(data, data.success);
                     },
                     error => {
-                        callback(error, error.success);
+                        callback(error, false);
                     }
                 );
         }
     }
 
-    /**
-     * get rates of selected api, api operation, operator
-     * @param apiName
-     * @param apiOperationId
-     * @param operatorId
-     * @param callback
-     */
-    getAPIOperationRates(apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
+    getRatesForAPIOperation(apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
         if (this.authService.validateSession()) {
-            if (operatorId) {
-                this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator')
-                    .subscribe(
-                        data => {
-                            let source = data;
-                            this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator-assign')
-                                .subscribe(
-                                    data => {
-                                        let response = {
-                                            success: true,
-                                            message: 'Api Operation Rates List Loaded Successfully',
-                                            payload: {
-                                                source: source,
-                                                destination: data
-                                            }
-                                        };
-                                        callback(response, response.success);
-                                    },
-                                    error => {
-                                        callback(error, false);
-                                    }
-                                );
-                        },
-                        error => {
-                            callback(error, error.success);
-                        }
-                    );
-            } else {
-                this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin')
-                    .subscribe(
-                        data => {
-                            let source = data;
-                            this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin-assign')
-                                .subscribe(
-                                    data => {
-                                        let response = {
-                                            success: true,
-                                            message: 'Api Operation Rates List Loaded Successfully',
-                                            payload: {
-                                                source: source,
-                                                destination: data
-                                            }
-                                        };
-                                        callback(response, response.success);
-                                    },
-                                    error => {
-                                        callback(error, false);
-                                    }
-                                );
-                        },
-                        error => {
-                            callback(error, false);
-                        }
-                    );
-            }
+            this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId)
+                .subscribe(
+                    data => {
+                        callback(data, data.success);
+                    },
+                    error => {
+                        callback(error, false);
+                    }
+                );
         }
     }
 
-    /**
-     * get available operators
-     * @param callback
-     */
-    getOperatorList(callback: Function) {
-        this._remoteService.getOperatorList()
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
-    /**
-     * assign rates for api, api operation, operator
-     * @param data
-     * @param apiName
-     * @param apiOperationId
-     * @param operatorId
-     * @param callback
-     */
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number, operatorId: number, callback: Function) {
         if (this.authService.validateSession()) {
             this._remoteService.assignRatesForAPIOperation(data, apiName, apiOperationId, operatorId)
                 .subscribe(
                     data => {
-                        callback(data);
+                        callback(data, data.success);
                     },
                     error => {
-                        callback(error);
+                        callback(error, false);
                     }
                 );
         }

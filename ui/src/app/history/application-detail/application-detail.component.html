@@ -1,96 +1,84 @@
-<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+<div class="animated fadeInUp row">
     <div class="col-sm-12" *ngIf="show">
-        <div class="form-container quotaInputContainer">
-            <div class="tbl-header">
-                Application name - {{ applicationDetail.name }}
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <table cellspacing="0" cellpadding="0" class="table">
-                            <tbody>
-                            <tr>
-                                <th>Application Status:</th>
-                                <td colspan="2"> <span class="label label-success">{{ applicationDetail.status }}</span></td>
-                            </tr>
-                            <tr>
-                                <th>OPERATOR:</th>
-                                <td colspan="2"></td>
-                            </tr>
-                            <tr *ngFor="let opt of applicationDetail.operatorApprovals; let i=index">
-                                <td>{{ applicationDetail.operatorApprovals[i]?.operatorName }}</td>
-                                <td colspan="2"><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Approved'" class="label label-success">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Pending'" class="label label-warning">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Rejected'" class="label label-danger">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <h3> Application - {{ applicationDetail.name }} </h3>
+        <div class="span6">
+            <table cellspacing="0" cellpadding="0" class="table">
+                <tbody>
+                <tr>
+                    <th>Application Status:</th>
+                    <td colspan="2"> {{ applicationDetail.status }}</td>
+                </tr>
+                <tr>
+                    <th>OPERATOR:</th>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td>{{ applicationDetail.operatorApprovals[0]?.operatorName }}</td>
+                    <td colspan="2">{{ applicationDetail.operatorApprovals[0]?.approvalStatus }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-                    <div class="col-sm-12 tabs-section">
+        <div class="span4 appStyleFix"></div>
+        <div class="span12 tabs-section">
 
-                        <div class="ui-tab" *ngIf="applicationDetail?.subscriptions">
+            <div class="ui-tab" *ngIf="applicationDetail?.subscriptions">
 
-                            <ul class="nav nav-tabs all-tabs">
-                                <li class="first active"><a>Subscribed APIs</a>
-                                </li>
-                            </ul>
+                <ul class="nav nav-tabs all-tabs">
+                    <li class="first active"><a>Subscribed APIs</a>
+                    </li>
+                </ul>
 
-                            <div class="tab-content" *ngFor="let opt of applicationDetail.subscriptions; let i=index">
+                <div class="tab-content" *ngFor="let opt of applicationDetail.subscriptions; let i=index">
 
-                                <div class="tab-pane active">
+                    <div class="tab-pane active">
 
-                                    <div id="overview">
+                        <div id="overview">
 
-                                        <h5>
-                                            <span><b>Name : </b></span> {{ applicationDetail?.subscriptions[i]?.name }}
-                                            -
-                                            {{ applicationDetail?.subscriptions[i]?.version }} &nbsp;&nbsp;
-                                            <span><b>Tier : </b></span> [{{ applicationDetail?.subscriptions[i]?.tier
-                                            }}] &nbsp;&nbsp;
-                                            <span><b>Subscription : </b></span> -
-                                            <span style="font-weight: normal">{{ applicationDetail?.subscriptions[i]?.adminApprovalStatus }}</span>
-                                        </h5>
+                            <h5>
+                                <span><b>Name : </b></span> {{ applicationDetail?.subscriptions[i]?.name }}
+                                -
+                                {{ applicationDetail?.subscriptions[i]?.version }} &nbsp;&nbsp;
+                                <span><b>Tier : </b></span> [{{ applicationDetail?.subscriptions[i]?.tier }}] &nbsp;&nbsp;
+                                <span><b>Subscription : </b></span> -
+                                <span style="font-weight: normal">{{ applicationDetail?.subscriptions[i]?.adminApprovalStatus }}</span>
+                            </h5>
 
-                                        <div class="content-section shadow-up">
+                            <div class="content-section shadow-up">
 
-                                            <div class="content-data">
+                                <div class="content-data">
 
-                                                <div></div>
-                                                <table class="table table-bordered table-striped">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Operator</th>
-                                                        <th>Status</th>
-                                                        <th class="date-time-col">Last Updated</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
+                                    <div></div>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Operator</th>
+                                            <th>Status</th>
+                                            <th class="date-time-col">Last Updated</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
-                                                    <tr *ngFor="let opt of operatorApprovals; let x=index">
-                                                        <td> {{
-                                                            applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.operatorName
-                                                            }}
-                                                        </td>
-                                                        <td>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Approved'" class="label label-success">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Pending'" class="label label-warning">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Rejected'" class="label label-danger">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
+                                        <tr>
+                                            <td> {{
+                                                applicationDetail?.subscriptions[i]?.operatorApprovals[0]?.operatorName
+                                                }}
+                                            </td>
+                                            <td>{{
+                                                applicationDetail?.subscriptions[i]?.operatorApprovals[0]?.approvalStatus
+                                                }}
+                                            </td>
+                                            <td> {{ applicationDetail?.subscriptions[i]?.lastUpdated }}</td>
+                                        </tr>
+                                        </tbody>
 
-                                                        </td>
-                                                        <td> {{ applicationDetail?.subscriptions[i]?.lastUpdated }}</td>
-                                                    </tr>
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12"><a href="#/history" class="btn btn-primary"> Back </a></div>
                 </div>
-
             </div>
         </div>
     </div>

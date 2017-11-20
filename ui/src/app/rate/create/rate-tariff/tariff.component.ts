@@ -67,8 +67,8 @@ export class TariffComponent implements OnInit {
     onSubmit(addTariffForm) {
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 && this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
             !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission && !this.IsExceedCommision) {
-            this.rateService.addTariff(this.tariff, (response) => {
-                if (response.success) {
+            this.rateService.addTariff(this.tariff, (response, status) => {
+                if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
                     this.message.success(response.message);

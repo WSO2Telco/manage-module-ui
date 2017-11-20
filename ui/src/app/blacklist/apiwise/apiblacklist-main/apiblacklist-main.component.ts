@@ -108,7 +108,10 @@ export class ApiBlacklistMainComponent implements OnInit {
                     count += 1;
                 }
             } else {
-                this.message.error(response);
+                this.submissionError = response;
+                setTimeout(() => {
+                    this.submissionError = null;
+                }, 5000);
             }
         });
     }

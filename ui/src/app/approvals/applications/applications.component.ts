@@ -7,7 +7,6 @@ import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-da
 import {MessageService} from "../../commons/services/message.service";
 import {ApprovalHelperService} from "../approval-helper.service";
 import {TableDataType} from "../../commons/models/common-data-models";
-import {AuthenticationService} from "../../commons/services/authentication.service";
 
 @Component({
     selector: 'app-applications',
@@ -28,8 +27,7 @@ export class ApplicationsComponent implements OnInit {
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
-                private approvalService: ApprovalRemoteDataService,
-                private authService: AuthenticationService) {
+                private approvalService: ApprovalRemoteDataService) {
     }
 
     ngOnInit() {
@@ -58,10 +56,7 @@ export class ApplicationsComponent implements OnInit {
         this.creditPlan = [];
 
         this.getData();
-        if (this.authService.loginUserInfo.getValue().creditPlan) {
-            this.getCreditPlan();
-        }
-
+        this.getCreditPlan();
     }
 
     private getData() {
@@ -76,7 +71,7 @@ export class ApplicationsComponent implements OnInit {
                     this.creditPlan = [];
                     const response = data.Success.text;
                     let count = 0;
-                    for (const item of response) {
+                    for(const item of response){
                         this.creditPlan[count] = item.code;
                         count++;
                     }

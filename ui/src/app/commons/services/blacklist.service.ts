@@ -10,11 +10,11 @@ export class BlackListService {
     getApiList(callback: Function) {
         this._remoteService.getApiList()
             .subscribe(
-                data => {
-                    callback(data);
+                (data: string) => {
+                  callback(data, true);
                 },
-                error => {
-                    callback(error);
+                (error: string) => {
+                    callback(error, false);
                 }
             );
     }
