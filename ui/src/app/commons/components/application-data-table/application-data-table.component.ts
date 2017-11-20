@@ -78,7 +78,6 @@ export class ApplicationDataTableComponent implements OnInit {
     private showTiers: boolean;
 
     private billing: boolean;
-    private iscreditPlan: boolean;
 
     @Input()
     private isSubscription: boolean;
@@ -104,7 +103,6 @@ export class ApplicationDataTableComponent implements OnInit {
         this.arr = [];
         this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         this.billing = this.authService.loginUserInfo.getValue().billing;
-        this.iscreditPlan = this.authService.loginUserInfo.getValue().creditPlan;
         this.showTiers = false;
 
         for (const entry of this.roleList) {
@@ -147,14 +145,14 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onOptionChange(event, item) {
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
         item.tier = event.target.value;
     }
 
     onCreditPlanChange(event, item) {
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
         item.creditPlan = event.target.value;
     }
@@ -162,7 +160,7 @@ export class ApplicationDataTableComponent implements OnInit {
     onOperationRateChange(event, item, apiOperation) {
 
         if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
-            this.message.warning('Please assign the task to yourself before editing');
+            this.message.warning('Please assign the task to you before editing');
         }
 
         let count = 0;

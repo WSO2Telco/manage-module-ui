@@ -115,6 +115,7 @@ export class AuthenticationService {
         document.onkeypress = this.showMessage.bind(this);
         document.onmousewheel = null;
         document.onclick = this.showMessage.bind(this);
+        // window.onbeforeunload = null;
     }
 
     showMessage(){

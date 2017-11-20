@@ -28,23 +28,19 @@ export class ApprovalHelperService {
         this.slimLoadingBarService.start();
 
         this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
-            data => {
-                if (data.success) {
-                    if (dataType == 'APPLICATION') {
-                        this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                    } else if (dataType == 'SUBSCRIPTION') {
-                        this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
-                    }
-                    callBack();
-                } else {
-                    this.message.error(data.message);
-                    callBack();
+            () => {
+                if (dataType == 'APPLICATION') {
+                    this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
+                } else if (dataType == 'SUBSCRIPTION') {
+                    this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
                 }
-                this.slimLoadingBarService.complete();
-
+                callBack();
             },
-            error => {
+            (error) => {
                 this.message.error(error);
+            },
+            () => {
+                this.slimLoadingBarService.complete();
             }
         );
     }
@@ -94,23 +90,20 @@ export class ApprovalHelperService {
             param.creditPlan = appTask.creditPlan;
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
-                data => {
-                    if (data.success) {
-                        if (status == 'APPROVED') {
-                            this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
-                        } else {
-                            this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
-                        }
+                () => {
 
-                        this.approvalService.getAllTasks();
+                    if (status == 'APPROVED') {
+                        this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
                     } else {
-                        this.message.error(data.message);
+                        this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
                     }
-                    this.slimLoadingBarService.complete();
 
+                    this.approvalService.getAllTasks();
                 },
-                error => {
+                (error) => {
                     this.message.error(error);
+                },
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );
@@ -136,23 +129,19 @@ export class ApprovalHelperService {
             param.selectedRate = appTask.selectedRate;
 
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
-                data => {
-                    if (data.success) {
-                        if (status == 'APPROVED') {
-                            this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
-                        } else {
-                            this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
-                        }
-
-                        this.approvalService.getAllTasks();
+                () => {
+                    if (status == 'APPROVED') {
+                        this.message.success(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_APPROVE_SUCCESS);
                     } else {
-                        this.message.error(data.message);
+                        this.message.info(this.message.APPROVAL_MESSAGES.APP_SUBSCRIPTION_REJECT_SUCCESS);
                     }
-                    this.slimLoadingBarService.complete();
 
+                    this.approvalService.getAllTasks();
                 },
-                error => {
+                (error) => {
                     this.message.error(error);
+                },
+                () => {
                     this.slimLoadingBarService.complete();
                 }
             );

@@ -7,7 +7,6 @@ import {
     ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
     Application, ApplicationHistory
 } from "../commons/models/reporing-data-models";
-import {AuthenticationService} from '../commons/services/authentication.service';
 
 @Injectable()
 export class ReportingRemoteDataService {
@@ -52,12 +51,11 @@ export class ReportingRemoteDataService {
     constructor(@Inject('API_CONTEXT') private apiContext: string,
                 private http: Http,
                 private message: MessageService,
-                private slimLoadingBarService: SlimLoadingBarService,
-                private authService: AuthenticationService) {
+                private slimLoadingBarService: SlimLoadingBarService) {
     }
 
     getApplicationDetail (id: number, callback: Function) {
-        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.options)
             .map((response: Response) => response.json())
             .subscribe(
                 (applications:ApplicationHistory[]) => {
@@ -73,7 +71,7 @@ export class ReportingRemoteDataService {
 
     getSubscribers() {
         this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['subscribers'], this.getOptions())
+        this.http.get(this.apiEndpoints['subscribers'], this.options)
             .map((response: Response) => response.json())
             .subscribe(
                 (subscribers) => {
@@ -91,7 +89,7 @@ export class ReportingRemoteDataService {
 
     getOperators(){
         this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['operators'], this.getOptions())
+        this.http.get(this.apiEndpoints['operators'], this.options)
             .map((response: Response) => response.json())
             .subscribe(
                 (operators) => {
@@ -110,7 +108,7 @@ export class ReportingRemoteDataService {
     getApplicationsBySubscriber(subscriber:string){
         if(!!subscriber){
             this.slimLoadingBarService.start();
-            this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.getOptions())
+            this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.options)
                 .map((response: Response) => response.json())
                 .subscribe(
                     (applications:Application[]) => {
@@ -142,7 +140,7 @@ export class ReportingRemoteDataService {
             filter.operator = '__ALL__';
         }
 
-        this.http.post(this.apiEndpoints['approvalHistory'], filter, this.getOptions())
+        this.http.post(this.apiEndpoints['approvalHistory'], filter,this.options)
             .map((response: Response) => response.json())
             .flatMap((res)=>{return Observable.from(res)})
             .reduce((arr:ApprovalHistoryDataset,cur)=>{
@@ -171,16 +169,6 @@ export class ReportingRemoteDataService {
                     this.slimLoadingBarService.complete();
                 }
             )
-    }
-
-    getOptions(): RequestOptions {
-        const token = this.authService.loginUserInfo.getValue().token;
-        const headers = new Headers(
-            {
-                'Authorization': 'Basic ' + token,
-                'Content-Type': 'application/json'
-            });
-        return new RequestOptions({headers: headers});
     }
 
 }

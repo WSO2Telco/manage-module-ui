@@ -56,8 +56,8 @@ export class CategoryComponent implements OnInit {
         const loginInfo = this.authService.loginUserInfo.getValue();
         if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0 && !this.isDescriptionError
             && !this.isNameError && !this.isCodeError) {
-           this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response) => {
-                if (response.success) {
+           this.rateService.addCategory(this.name, this.code, this.description, loginInfo.userName, (response, status) => {
+                if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
                     this.message.success(response.message);

@@ -8,14 +8,14 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 
 @Injectable()
 export class BlackListRemoteDataService {
-    private apiContext = 'https://localhost:9443/blacklist-whitelist-service/queries/';
+    private apiContext = 'api';
     private loginInfo;
 
     private apiEndpoints: Object = {
-        getApis: this.apiContext + 'apis',
-        getBlackListNumbers: this.apiContext + 'GetBlacklistPerApi/',
-        removeBlackListNumber: this.apiContext + 'RemoveFromBlacklist/',
-        addBlackListNumbers: this.apiContext + 'Blacklist'
+        getApis: this.apiContext + '/blacklist',
+        getBlackListNumbers: this.apiContext + '/blacklist/list/',
+        removeBlackListNumber: this.apiContext + '/blacklist/remove/',
+        addBlackListNumbers: this.apiContext + '/blacklist'
     };
 
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
@@ -29,19 +29,10 @@ export class BlackListRemoteDataService {
     getApiList() {
         return this.http.get(this.apiEndpoints['getApis'], this.getOptions())
             .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'API List Loaded Successfully',
-                    payload: response.json()
-                };
+                const result = response.json();
+                return result;
             })
-            .catch((error: Response) => {
-                return Observable.throw({
-                    success: false,
-                    message: 'Error Loading API List',
-                    error: error
-                });
-            });
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 
     /**
@@ -50,14 +41,14 @@ export class BlackListRemoteDataService {
      * @returns {Observable<R>}
      */
     getBlackListNumberList(id: string) {
-        return this.http.get(this.apiEndpoints['getBlackListNumbers'] + id, this.getOptions())
+        const data = {};
+        return this.http.post(this.apiEndpoints['getBlackListNumbers'] + id, JSON.stringify(data), this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
             })
             .catch((error: Response) => Observable.throw(error.json().message));
     }
-
 
     /**
      * Remove BlackListed Numbers

@@ -63,8 +63,8 @@ export class CurrencyComponent implements OnInit {
         const loginInfo = this.authService.loginUserInfo.getValue();
 
         if (this.currencycode.length != 0 && this.currencydesc.length != 0 && !this.isCurrencyError && !this.isCurrencyDescError) {
-            this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response) => {
-                if (response.success) {
+            this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response, status) => {
+                if (status) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
                     this.message.success(response.message);
