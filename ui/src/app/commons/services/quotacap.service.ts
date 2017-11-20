@@ -43,16 +43,16 @@ export class QuotaService {
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
-    getApis(id: string, callback: Function) {
-        this._remoteService.getApis(id)
+    getApis(subscriberID: string, appID: string, callback: Function) {
+        this._remoteService.getApis(subscriberID, appID)
             .subscribe(
                 data => {
                     callback(data);
@@ -103,7 +103,7 @@ export class QuotaService {
             );
     }
 
-    getQuotaLimitInfoApp(appID: string, operatorname: string,  callback: Function) {
+    getQuotaLimitInfoApp(appID: string, operatorname: string, callback: Function) {
         this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
             .subscribe(
                 data => {

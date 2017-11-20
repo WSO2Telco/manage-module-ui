@@ -1,9 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RateDefinition} from '../../commons/models/common-data-models';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {RateService} from '../../commons/services/rate.service';
 import {MessageService} from '../../commons/services/message.service';
-import {AuthenticationService} from "../../commons/services/authentication.service";
+import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-view-rate-main',
@@ -19,7 +18,7 @@ export class ViewRateMainComponent implements OnInit {
     private rateTax;
     private showRateDef: boolean;
     public isCollapsed: boolean;
-    private isAdmin: boolean
+    private isAdmin: boolean;
 
 
     private rateDefinitions;
@@ -57,15 +56,15 @@ export class ViewRateMainComponent implements OnInit {
      * load available rate definitions
      */
     getRateCards() {
-        this.rateService.getRateCards((response, status) => {
-            if (status) {
+        this.rateService.getRateCards((response) => {
+            if (response.success) {
                 this.rateDefinitions = response.payload;
                 let count = 0;
-                for(const entry of this.rateDefinitions){
+                for (const entry of this.rateDefinitions){
                     this.rates[count] = entry.rateDefinition;
                     count++;
                 }
-                if(this.rateDefinitions.length == 0){
+                if (this.rateDefinitions.length == 0){
                     this.message.warning('No Records Found');
                 }
             } else {

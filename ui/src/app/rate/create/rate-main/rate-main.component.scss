@@ -308,3 +308,9 @@ input:checked + .slider:before {
     color: #dd0d0d;
   }
 }
+
+.open>.dropdown-menu {
+  display: block;
+  height: 100px;
+  overflow-y: scroll;
+}

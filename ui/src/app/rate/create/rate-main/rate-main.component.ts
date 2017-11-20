@@ -100,8 +100,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing tariff list
      */
     getTariffList() {
-        this.rateService.getTariffList((response, status) => {
-            if (status) {
+        this.rateService.getTariffList((response) => {
+            if (response.success) {
                 this.tariffList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -113,8 +113,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing currency list
      */
     getCurrencyList() {
-        this.rateService.getCurrencyList((response, status) => {
-            if (status) {
+        this.rateService.getCurrencyList((response) => {
+            if (response.success) {
                 this.currencyList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -126,8 +126,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing rate types
      */
     getRateTypeList() {
-        this.rateService.getRateTypeList((response, status) => {
-            if (status) {
+        this.rateService.getRateTypeList((response) => {
+            if (response.success) {
                 this.rateTypeList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -140,8 +140,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the existing rate taxes list
      */
     getRateTaxList() {
-        this.rateService.getRateTaxList((response, status) => {
-            if (status) {
+        this.rateService.getRateTaxList((response) => {
+            if (response.success) {
                 this.rateTaxList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -153,8 +153,8 @@ export class RateMainComponent implements OnInit {
      * this function will load the available categories
      */
     getCategoryList() {
-        this.rateService.getCategoryList((response, status) => {
-            if (status) {
+        this.rateService.getCategoryList((response) => {
+            if (response.success) {
                 this.categoryList = response.payload;
             } else {
                 this.message.error(response.message);
@@ -167,8 +167,8 @@ export class RateMainComponent implements OnInit {
      * load available rate definitions
      */
     getRateDefinitionList() {
-        this.rateService.getRateDefinitionList((response, status) => {
-            if (status) {
+        this.rateService.getRateDefinitionList((response) => {
+            if (response.success) {
                 this.rateDefinitions = response.payload;
             } else {
                 this.message.error(response.message);
@@ -244,7 +244,12 @@ export class RateMainComponent implements OnInit {
             rateDefCategoryBase = 0;
         }
 
-        if (!this.isEmpty() && tariff != null && currency != null && rateType != null && validTariff && validCurrency && validRateType) {
+        if (this.rateType === 'PERCENTAGE') {
+            rateDefCategoryBase = 1;
+        }
+
+        if (!this.isEmpty() && tariff != null && currency != null &&
+            rateType != null && validTariff && validCurrency && validRateType) {
             rateCard = new Rate();
 
             ratedefinition = new RateDefinition();
@@ -268,9 +273,8 @@ export class RateMainComponent implements OnInit {
             rateCard.rateTaxes = rateTaxes;
             rateCard.createdBy = loginInfo.userName;
 
-            this.rateService.addNewRateCard(rateCard, (response, status) => {
-
-                if (status) {
+            this.rateService.addNewRateCard(rateCard, (response) => {
+                if (response.success) {
                     this.message.success(response.message);
                     this.reloadPage();
                 } else {
@@ -309,9 +313,7 @@ export class RateMainComponent implements OnInit {
                 this.isTariffError = true;
                 this.tariffError = 'Tariff can not be empty';
             }
-
         }
-
 
     }
 
@@ -481,6 +483,12 @@ export class RateMainComponent implements OnInit {
         if (exists) {
             this.isNameError = true;
             this.nameError = 'Name Already Existing';
+        } else if (this.rateDefName.length == 0) {
+            this.isNameError = true;
+            this.nameError = 'Name Cannot Be Empty';
+        } else if (this.rateDefName.length > 45) {
+            this.isNameError = true;
+            this.nameError = 'Ony 45 Characters Allowed';
         } else {
             this.isNameError = false;
             this.nameError = '';
@@ -491,10 +499,10 @@ export class RateMainComponent implements OnInit {
         if (description.length == 0) {
             this.isDescriptionError = true;
             this.descriptionError = 'Description can not be empty';
-        } else if(description.length > 45) {
+        } else if (description.length > 45) {
             this.isDescriptionError = true;
             this.descriptionError = 'Ony 45 Characters Allowed';
-        }else{
+        } else {
             this.isDescriptionError = false;
             this.descriptionError = '';
         }
@@ -527,6 +535,10 @@ export class RateMainComponent implements OnInit {
         if (invalid) {
             this.isRateTypeError = true;
             this.rateTypeError = 'Invalid Rate Type';
+        }
+
+        if (this.rateType === 'PERCENTAGE') {
+            this.showSubcategory = true;
         }
     }
 

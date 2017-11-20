@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {BlackListService} from '../../commons/services/blacklist.service';
 import {MessageService} from '../../commons/services/message.service';
-import {QuotaService} from '../../commons/services/quotacap.service';
-import {APIOperation, AssignRates, Operator, RateDefinition} from '../../commons/models/common-data-models';
+import {Api, API, APIOperation, AssignRates, Operator, RateDefinition} from '../../commons/models/common-data-models';
 import {RateService} from '../../commons/services/rate.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
 
@@ -16,7 +14,7 @@ export class AssignRateMainComponent implements OnInit {
 
     private operatorList: Operator[];
     private apiOperationList: APIOperation[];
-    private apiList: string[];
+    private apiList: API[];
 
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
@@ -35,8 +33,7 @@ export class AssignRateMainComponent implements OnInit {
     private invalidOperator: boolean;
     private invalidApi: boolean;
 
-    constructor(private rateService: RateService, private blackListService: BlackListService,
-                private message: MessageService, private quotaService: QuotaService,
+    constructor(private rateService: RateService, private message: MessageService,
                 private _authenticationService: AuthenticationService) {
     }
 
@@ -50,7 +47,7 @@ export class AssignRateMainComponent implements OnInit {
             all: 'Select All',
             none: 'Select None',
             direction: 'left-to-right'
-        }
+        };
 
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -61,14 +58,9 @@ export class AssignRateMainComponent implements OnInit {
      *  Get The List of API's
      */
     getApis() {
-        this.blackListService.getApiList((response, status) => {
-            if (status) {
-                let count = 0;
-                for (const entry of response) {
-                    const splited = entry.split(':');
-                    this.apiList[count] = splited[1];
-                    count++;
-                }
+        this.rateService.getApiList((response) => {
+            if (response.success) {
+                this.apiList = response.payload;
             } else {
                 this.message.error(response.message);
             }
@@ -79,9 +71,9 @@ export class AssignRateMainComponent implements OnInit {
      * to load the Operator list
      */
     getOperators() {
-        this.quotaService.getOperatorList((response, status) => {
-            if (status) {
-                this.operatorList = response;
+        this.rateService.getOperatorList((response) => {
+            if (response.success) {
+                this.operatorList = response.payload;
                 if (this.loginInfo.isAdmin) {
                     const admin = {
                         'operatorId': null,
@@ -100,8 +92,8 @@ export class AssignRateMainComponent implements OnInit {
      * to get api operations according to selected API
      */
     getApiOperations() {
-        this.rateService.getApiOperations(this.api, (response, status) => {
-            if (status) {
+        this.rateService.getApiOperations(this.api, (response) => {
+            if (response.success) {
                 this.apiOperation = '';
                 this.apiOperationList = response.payload;
                 if (this.apiOperationList.length == 0) {
@@ -110,7 +102,7 @@ export class AssignRateMainComponent implements OnInit {
             } else {
                 this.apiOperationList = [];
                 this.apiOperation = '';
-                this.message.warning('No API Operations Available for The Selected API');
+                this.message.error(response.message);
             }
         });
     }
@@ -142,12 +134,12 @@ export class AssignRateMainComponent implements OnInit {
                 }
 
                 if (apiOperationId) {
-                    this.rateService.getRatesForAPIOperation(this.api, apiOperationId, operatorId, (response, status) => {
-                        if (status) {
-                            this.sourceList = response.source;
-                            this.assignedList = response.destination;
+                    this.rateService.getAPIOperationRates(this.api, apiOperationId, operatorId, (response) => {
+                        if (response.success) {
+                            this.sourceList = response.payload.source;
+                            this.assignedList = response.payload.destination;
                             this.destinationList = [];
-                            if(this.sourceList.length == 0){
+                            if (this.sourceList.length == 0){
                                 this.message.warning('No Rate Values Available for Selected Combination');
                             }
                         } else {
@@ -214,8 +206,8 @@ export class AssignRateMainComponent implements OnInit {
             }
 
             if (data.length > 0) {
-                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response, status) => {
-                    if (status) {
+                this.rateService.assignRatesForAPIOperation(data, this.api, apiOperationId, operatorId, (response) => {
+                    if (response.success) {
                         this.message.success(response.message);
                         this.reloadPage();
                     } else {
@@ -265,7 +257,7 @@ export class AssignRateMainComponent implements OnInit {
         }
 
         for (const item of this.apiList) {
-            if (item == this.api) {
+            if (item.apiName == this.api) {
                 this.invalidApi = false;
             }
         }
@@ -295,7 +287,7 @@ export class AssignRateMainComponent implements OnInit {
         let invalid = true;
         this.invalidApi = false;
         for (const item of this.apiList) {
-            if (item == this.api) {
+            if (item.apiName == this.api) {
                 invalid = false;
             }
         }

@@ -6,6 +6,7 @@ import {WhitelistService} from '../../commons/services/whitelist.service';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
+import {QuotaService} from "../../commons/services/quotacap.service";
 
 @Component({
     selector: 'app-whitelist-main',
@@ -38,20 +39,23 @@ export class WhitelistMainComponent implements OnInit {
 
     private msisdnError: string;
     private msisdnRangeError: string;
-    private invalidFieldError: string
+    private invalidFieldError: string;
+    private islong: boolean;
+    private long: string;
 
 
     private whitelistList: string[];
 
 
-    constructor(private whitelistService: WhitelistService, private message: MessageService) {
+    constructor(private whitelistService: WhitelistService,
+                private quotaService: QuotaService,
+                private message: MessageService) {
 
     }
 
     ngOnInit() {
         this.subscriberList = [];
         this.getSubscribersOfProvider();
-        this.getWhitelist();
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
@@ -70,6 +74,8 @@ export class WhitelistMainComponent implements OnInit {
         this.ismsisdnError = false;
         this.ismsisdnRangeError = false;
         this.isInvalidFieldError = false;
+        this.islong = false;
+        this.long = '';
     }
 
 
@@ -95,9 +101,9 @@ export class WhitelistMainComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
-        this.whitelistService.getApps(subscriberID, (response, status) => {
-            if (status) {
-                this.applicationList = response;
+        this.quotaService.getApps(subscriberID, (response) => {
+            if (response.success) {
+                this.applicationList = response.payload;
                 let count = 0;
                 for (const entry of this.applicationList) {
                     const splitted = entry.split(':', 2);
@@ -108,7 +114,7 @@ export class WhitelistMainComponent implements OnInit {
                     count += 1;
                 }
             } else {
-                this.message.error('Unable to load applications of subscriber');
+                this.message.error(response.message);
             }
 
         });
@@ -121,20 +127,19 @@ export class WhitelistMainComponent implements OnInit {
     getApis(appName: string) {
 
         let index = 0;
-        let id = '';
+        let appID = '';
         for (const entry of this.applications) {
             if (entry.name == appName) {
-                id = this.subscriber + '|' + entry.id;
+                appID = entry.id;
             }
             index++;
         }
 
-        if (id.length != 0) {
 
-            this.whitelistService.getApis(id, (response, status) => {
-                if (status) {
-
-                    this.apiList = response;
+        if (appID.length != 0) {
+            this.quotaService.getApis(this.subscriber, appID, (response) => {
+                if (response.success) {
+                    this.apiList = response.payload;
                     let count = 0;
                     for (const entry of this.apiList) {
                         const splitted = entry.split(':', 4);
@@ -147,7 +152,7 @@ export class WhitelistMainComponent implements OnInit {
                         count += 1;
                     }
                 } else {
-                    this.message.error('Unable to load APIs');
+                    this.message.error(response.message);
                 }
             });
 
@@ -160,7 +165,22 @@ export class WhitelistMainComponent implements OnInit {
      */
     getWhitelist() {
 
-        this.whitelistService.getWhitelist((response, status) => {
+        let appID = '';
+        let apiID = '';
+        for (const entry of this.applications) {
+            if (entry.name == this.app) {
+                appID = entry.id;
+            }
+        }
+
+        for (const entry of this.apis) {
+            if (entry.name == this.api.split('-')[0].trim()) {
+                apiID = entry.id;
+            }
+        }
+
+
+        this.whitelistService.getWhitelist(this.subscriber, appID, apiID, (response, status) => {
             if (status) {
                 this.whitelistList = response.Success.variables;
             } else {
@@ -234,6 +254,7 @@ export class WhitelistMainComponent implements OnInit {
         this.api = '';
         this.applicationList = [];
         this.apiList = [];
+        this.whitelistList = [];
 
         let invalid = true;
         this.isInvalidFieldError = false;
@@ -257,6 +278,7 @@ export class WhitelistMainComponent implements OnInit {
     onAppSelected() {
         this.api = '';
         this.apiList = [];
+        this.whitelistList = [];
 
         let invalid = true;
         this.isInvalidFieldError = false;
@@ -278,6 +300,7 @@ export class WhitelistMainComponent implements OnInit {
      * @param event
      */
     onApiSelected() {
+        this.whitelistList = [];
         let invalid = true;
         this.isInvalidFieldError = false;
         for (const entry of this.apiList) {
@@ -288,6 +311,8 @@ export class WhitelistMainComponent implements OnInit {
         if (invalid) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Api Name';
+        } else {
+            this.getWhitelist();
         }
     }
 
@@ -309,10 +334,41 @@ export class WhitelistMainComponent implements OnInit {
                 const msisdnList = this.msisdn.split(',');
                 let count = 0;
                 for (const entry of msisdnList) {
-                    this.msisdnList[count] = '+' + Number(entry);
+
+                    if (this.isValidMobileNumber(entry)) {
+                        if (entry.includes('tel:+') || entry.includes('+')) {
+
+                            let num = entry.split('+')[1];
+                            this.msisdnList[count] = 'tel3A+' + num;
+                            this.islong = false;
+
+                            if (num.length > 15) {
+                                this.islong = true;
+                            }
+                         }
+
+                        else {
+                            if (entry.length > 15) {
+                                this.islong = true;
+                            }else {
+                                this.msisdnList[count] = 'tel3A+' + Number(entry);
+                                this.islong = false;
+                            }
+                        }
+                    } else {
+                        this.islong = true;
+                    }
                     count++;
                 }
-                this.addNewToWhitelist();
+
+                if (this.islong == true) {
+                    this.long = 'Not a Valid MSISDN';
+                    this.islong = true;
+                } else {
+                    this.addNewToWhitelist();
+                }
+
+
             } else {
 
                 if (this.msisdn.length == 0) {
@@ -389,7 +445,7 @@ export class WhitelistMainComponent implements OnInit {
                         this.msisdnList = [];
                         for (let _i = 0; _i <= diff; _i++) {
                             let phone = Number(this.msisdnMin) + Number(_i)
-                            this.msisdnList[_i] = '+' + phone;
+                            this.msisdnList[_i] = 'tel3A+' + phone;
                         }
                         this.addNewToWhitelist();
                     } else {
@@ -417,7 +473,7 @@ export class WhitelistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValid(inputtxt: string): boolean {
-        const list = /^\d+(,\d+)*$/;
+        const list = /[^,]+/;
         const regexp = new RegExp(list);
         if (regexp.test(inputtxt)) {
             return true;
@@ -432,7 +488,7 @@ export class WhitelistMainComponent implements OnInit {
      * @returns {boolean}
      */
     isValidMobileNumber(msisdn: string): boolean {
-        const list = /^\d{11}$/;
+        const list = /^((((tel:\+)(\\+){0,1})|((\+){1})|(\d))([0-9]+))$/;
         const regexp = new RegExp(list);
         if (regexp.test(msisdn)) {
             return true;
