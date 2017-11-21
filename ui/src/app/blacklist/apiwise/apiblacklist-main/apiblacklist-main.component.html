@@ -13,8 +13,7 @@
                            [typeaheadMinLength]="0"
                            container="body"
                            [typeahead]="apiList"
-                           typeaheadOptionField="apiId"
-                           (typeaheadOnSelect)="onApiSelected($event)"
+                           (typeaheadOnSelect)="onApiSelected()"
                            placeholder="Select the API"
                     >
                 </div>
@@ -55,8 +54,6 @@
 
 
             <br><br>
-
-            <div class="error-container animated bounceIn" *ngIf="submissionError">{{submissionError}}</div>
 
             <app-blacklist-list
                     [datasource]="blackListList" [apiId]="numberId" (onDeleteTask)="onDeleteHandler($event, numberId)">

@@ -2,11 +2,9 @@
  * Created by manoj on 7/24/17.
  */
 import {Component, OnInit} from '@angular/core';
-import {WhitelistService} from '../../commons/services/whitelist.service';
-import {TypeaheadMatch} from 'ng2-bootstrap';
+import {BlackListWhiteListService} from '../../commons/services/blacklist_whitelist.service';
 import {Api, Application} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
-import {QuotaService} from "../../commons/services/quotacap.service";
 
 @Component({
     selector: 'app-whitelist-main',
@@ -22,7 +20,6 @@ export class WhitelistMainComponent implements OnInit {
     private api;
 
     private subscriberList;
-    private applicationList: string[];
     private apiList: string[];
     private msisdnList: string[];
 
@@ -47,8 +44,7 @@ export class WhitelistMainComponent implements OnInit {
     private whitelistList: string[];
 
 
-    constructor(private whitelistService: WhitelistService,
-                private quotaService: QuotaService,
+    constructor(private blackListWhiteListService: BlackListWhiteListService,
                 private message: MessageService) {
 
     }
@@ -56,7 +52,6 @@ export class WhitelistMainComponent implements OnInit {
     ngOnInit() {
         this.subscriberList = [];
         this.getSubscribersOfProvider();
-        this.applicationList = [];
         this.apiList = [];
         this.applications = [];
         this.apis = [];
@@ -78,20 +73,15 @@ export class WhitelistMainComponent implements OnInit {
         this.long = '';
     }
 
-
-    onSubmit() {
-
-    }
-
     /**
      * to load the subscriber details
      */
     getSubscribersOfProvider() {
-        this.whitelistService.getSubscribers((response, status) => {
-            if (status) {
-                this.subscriberList = response;
+        this.blackListWhiteListService.getSubscribers((response) => {
+            if (response.success) {
+                this.subscriberList = response.payload;
             } else {
-                this.message.error('Failed to load subscribers');
+                this.message.error(response.message);
             }
         });
     }
@@ -101,17 +91,14 @@ export class WhitelistMainComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
-        this.quotaService.getApps(subscriberID, (response) => {
+        this.blackListWhiteListService.getApps(subscriberID, (response) => {
             if (response.success) {
-                this.applicationList = response.payload;
-                let count = 0;
-                for (const entry of this.applicationList) {
+                for (const entry of response.payload) {
                     const splitted = entry.split(':', 2);
-                    this.applications[count] = new Application;
-                    this.applications[count].id = splitted[0];
-                    this.applications[count].name = splitted[1];
-                    this.applicationList[count] = splitted[1];
-                    count += 1;
+                    const app = new Application();
+                    app.id = splitted[0];
+                    app.name = splitted[1];
+                    this.applications.push(app);
                 }
             } else {
                 this.message.error(response.message);
@@ -124,39 +111,23 @@ export class WhitelistMainComponent implements OnInit {
      * to load the APIs of the application of the subscriber
      * @param appName
      */
-    getApis(appName: string) {
-
-        let index = 0;
-        let appID = '';
-        for (const entry of this.applications) {
-            if (entry.name == appName) {
-                appID = entry.id;
-            }
-            index++;
-        }
-
-
-        if (appID.length != 0) {
-            this.quotaService.getApis(this.subscriber, appID, (response) => {
-                if (response.success) {
-                    this.apiList = response.payload;
-                    let count = 0;
-                    for (const entry of this.apiList) {
-                        const splitted = entry.split(':', 4);
-                        this.apis[count] = new Api;
-                        this.apis[count].id = splitted[0];
-                        this.apis[count].name = splitted[2];
-                        this.apis[count].provider = splitted[1];
-                        this.apis[count].version = splitted[3];
-                        this.apiList[count] = splitted[2] + ' - ' + splitted[3] + ' Provided by ' + splitted[1];
-                        count += 1;
-                    }
-                } else {
-                    this.message.error(response.message);
+    getApis(appID: string) {
+        this.blackListWhiteListService.getApis(this.subscriber, appID, (response) => {
+            if (response.success) {
+                for (const entry of response.payload) {
+                    const splitted = entry.split(':', 4);
+                    const api = new Api();
+                    api.id = splitted[0];
+                    api.name = splitted[2];
+                    api.provider = splitted[1];
+                    api.version = splitted[3];
+                    this.apis.push(api);
+                    this.apiList.push(splitted[2] + ' - ' + splitted[3] + ' Provided by ' + splitted[1]);
                 }
-            });
-
-        }
+            } else {
+                this.message.error(response.message);
+            }
+        });
     }
 
     /**
@@ -174,18 +145,18 @@ export class WhitelistMainComponent implements OnInit {
         }
 
         for (const entry of this.apis) {
-            if (entry.name == this.api.split('-')[0].trim()) {
+            if (entry.name == this.api.split('-')[0].trim() && entry.version == this.api.split('-')[1].split(' ')[1].trim()) {
                 apiID = entry.id;
             }
         }
 
 
-        this.whitelistService.getWhitelist(this.subscriber, appID, apiID, (response, status) => {
-            if (status) {
-                this.whitelistList = response.Success.variables;
+        this.blackListWhiteListService.getWhitelist(this.subscriber, appID, apiID, (response) => {
+            if (response.success) {
+                this.whitelistList = response.payload.Success.variables;
             } else {
                 this.whitelistList = [];
-                this.message.error('Failed to load whitelist numbers');
+                this.message.error(response.message);
 
             }
         });
@@ -216,8 +187,8 @@ export class WhitelistMainComponent implements OnInit {
             }
 
             if (apiId.length != 0 && appId.length != 0) {
-                this.whitelistService.addNewToWhitelist(appId, apiId, this.msisdnList, (response, status) => {
-                    if (status) {
+                this.blackListWhiteListService.addNewToWhitelist(appId, apiId, this.msisdnList, (response) => {
+                    if (response.success) {
                         this.message.success('MSISDN List Added Successfully');
                         this.msisdn = '';
                         this.msisdnMin = 0;
@@ -252,7 +223,7 @@ export class WhitelistMainComponent implements OnInit {
     onSubscriberSelected() {
         this.app = '';
         this.api = '';
-        this.applicationList = [];
+        this.applications = [];
         this.apiList = [];
         this.whitelistList = [];
 
@@ -279,19 +250,22 @@ export class WhitelistMainComponent implements OnInit {
         this.api = '';
         this.apiList = [];
         this.whitelistList = [];
+        let appId = '';
 
         let invalid = true;
         this.isInvalidFieldError = false;
-        for (const entry of this.applicationList) {
-            if (entry == this.app) {
-                this.getApis(this.app);
+        for (const entry of this.applications) {
+            if (entry.name == this.app) {
                 invalid = false;
+                appId = entry.id;
             }
         }
 
         if (invalid) {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid Application';
+        } else {
+            this.getApis(appId);
         }
     }
 
@@ -338,19 +312,19 @@ export class WhitelistMainComponent implements OnInit {
                     if (this.isValidMobileNumber(entry)) {
                         if (entry.includes('tel:+') || entry.includes('+')) {
 
-                            let num = entry.split('+')[1];
+                            const num = entry.split('+')[1];
                             this.msisdnList[count] = 'tel3A+' + num;
                             this.islong = false;
 
                             if (num.length > 15) {
                                 this.islong = true;
                             }
-                         }
+                        }
 
                         else {
                             if (entry.length > 15) {
                                 this.islong = true;
-                            }else {
+                            } else {
                                 this.msisdnList[count] = 'tel3A+' + Number(entry);
                                 this.islong = false;
                             }
@@ -398,8 +372,8 @@ export class WhitelistMainComponent implements OnInit {
             }
         }
 
-        for (const entry of this.applicationList) {
-            if (this.app == entry) {
+        for (const entry of this.applications) {
+            if (this.app == entry.name) {
                 validApp = true;
             }
         }
@@ -444,7 +418,7 @@ export class WhitelistMainComponent implements OnInit {
                     if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0) {
                         this.msisdnList = [];
                         for (let _i = 0; _i <= diff; _i++) {
-                            let phone = Number(this.msisdnMin) + Number(_i)
+                            const phone = Number(this.msisdnMin) + Number(_i);
                             this.msisdnList[_i] = 'tel3A+' + phone;
                         }
                         this.addNewToWhitelist();

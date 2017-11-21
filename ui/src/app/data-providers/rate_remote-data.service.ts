@@ -54,7 +54,7 @@ export class RateRemoteDataService {
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding New Category',
-                error: error.json()
+                error: error
             }));
     }
 

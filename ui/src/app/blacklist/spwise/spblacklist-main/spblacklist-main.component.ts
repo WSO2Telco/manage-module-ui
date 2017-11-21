@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {BlackListService} from '../../../commons/services/blacklist.service';
+import {BlackListWhiteListService} from '../../../commons/services/blacklist_whitelist.service';
 import {BlackListNumbers} from '../../../commons/models/common-data-models';
 import {TypeaheadMatch} from 'ng2-bootstrap';
 
@@ -33,7 +33,7 @@ export class SpBlacklistMainComponent implements OnInit {
     private isDublicate: boolean;
     private dublicate: string;
 
-    constructor(private blackListService: BlackListService) {
+    constructor(private blackListService: BlackListWhiteListService) {
 
 
     }
@@ -61,33 +61,23 @@ export class SpBlacklistMainComponent implements OnInit {
      * @param Id
      */
     getBlackListNumbers(Id: string) {
-        this.blackListService.getBlackListNumberList(Id, (response, status) => {
-
-            if (status) {
-                this.blackListList = response.Success.variables;
-                if (this.blackListList != null) {
-                    this.count = this.blackListList.length;
-                } else {
-                    this.blackListList = response.Success.variables;
-                    this.count = 0;
-                }
-            } else {
-                this.submissionError = response;
-                setTimeout(() => {
-                    this.submissionError = null;
-                }, 5000);
-            }
-        });
-    }
-
-    /**
-     * Remove blackListed Number
-     * @param msisdn
-     */
-    removeBlackListNumber(msisdn) {
-        this.blackListService.removeBlackListNumber(msisdn, this.apiId, (response) => {
-            this.onDeleteTask.emit(true);
-        });
+        // this.blackListService.getBlackListNumberList(Id, (response, status) => {
+        //
+        //     if (status) {
+        //         this.blackListList = response.Success.variables;
+        //         if (this.blackListList != null) {
+        //             this.count = this.blackListList.length;
+        //         } else {
+        //             this.blackListList = response.Success.variables;
+        //             this.count = 0;
+        //         }
+        //     } else {
+        //         this.submissionError = response;
+        //         setTimeout(() => {
+        //             this.submissionError = null;
+        //         }, 5000);
+        //     }
+        // });
     }
 
     /**
@@ -180,11 +170,11 @@ export class SpBlacklistMainComponent implements OnInit {
                 if (this.isDublicate == true) {
                     this.dublicate = 'This MSISDN already exists';
                 } else {
-                    this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, response => {
-                        const result = response;
-                        console.log(JSON.stringify(result));
-                        this.getBlackListNumbers(apiId);
-                    });
+                    // this.blackListService.addNewToBlackListList(apiId, apiName, this.msisdnList, response => {
+                    //     const result = response;
+                    //     console.log(JSON.stringify(result));
+                    //     this.getBlackListNumbers(apiId);
+                    // });
                 }
             }
 

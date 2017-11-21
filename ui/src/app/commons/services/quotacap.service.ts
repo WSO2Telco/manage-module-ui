@@ -11,7 +11,6 @@ import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 export class QuotaService {
 
     constructor(private _remoteService: QuotacapRemoteDataService,
-                private message: MessageService,
                 private slimLoadingBarService: SlimLoadingBarService) {
     }
 
@@ -19,10 +18,10 @@ export class QuotaService {
         this._remoteService.getSubscribers(operatorName)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -81,18 +80,6 @@ export class QuotaService {
 
     getQuotaLimitInfo(subscriberID: string, operatorname: string, callback: Function) {
         this._remoteService.getQuotaLimitInfo(subscriberID, operatorname)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getOperatorList(callback: Function) {
-        this._remoteService.getOperatorList()
             .subscribe(
                 data => {
                     callback(data, true);

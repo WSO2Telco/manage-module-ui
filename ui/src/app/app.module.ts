@@ -24,8 +24,7 @@ import {DashboardRemoteDataService} from './data-providers/dashboard-remote-data
 import {ApprovalHelperService} from './approvals/approval-helper.service';
 import {SharedModule} from './shared/shared.module';
 import {ReportingRemoteDataService} from './data-providers/reporting-remote-data.service';
-import {BlackListRemoteDataService} from './data-providers/blacklist_remote-data.service';
-import {WhitelistRemoteDataService} from './data-providers/whitelist_remote-data.service';
+import {BlackListWhiteListRemoteDataService} from './data-providers/blacklist_whitelist_remote-data.service';
 import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.service';
 import {ApplicationRemoteDataService} from './data-providers/application-remote-data.service';
 import {ConfigService} from './commons/services/config.service';
@@ -74,9 +73,8 @@ import {ConfigService} from './commons/services/config.service';
         ReportingRemoteDataService,
         RateRemoteDataService,
         ApprovalHelperService,
-        BlackListRemoteDataService,
         QuotacapRemoteDataService,
-        WhitelistRemoteDataService,
+        BlackListWhiteListRemoteDataService,
         ApplicationRemoteDataService,
         {
             provide : 'API_CONTEXT',

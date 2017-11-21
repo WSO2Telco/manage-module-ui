@@ -10,12 +10,12 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class QuotacapRemoteDataService {
 
-    private apiContext = 'api';
+    private apiContext = 'http://localhost:9763/quota-service/services/';
     private loginInfo;
 
 
     private apiEndpoints: Object = {
-        getSubscribers: this.apiContext + '/quotacap/getsubscribers',
+        subscribers: this.apiContext + 'getSubscribersByOperator?operatorName=',
         getOperatorOfsubscriber: this.apiContext + '/quotacap/getoperatorofsubscriber',
         getApps: this.apiContext + '/quotacap/getapps/',
         getApis: this.apiContext + '/quotacap/getapis/',
@@ -36,8 +36,7 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getSubscribers(operatorName: string) {
-        const data = {};
-        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.getOptions())
+        return this.http.get(this.apiEndpoints['subscribers'] + operatorName, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -59,21 +58,6 @@ export class QuotacapRemoteDataService {
             })
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
-
-
-    /**
-     * to get all operator
-     * @returns {Observable<R>}
-     */
-    getOperatorList() {
-        return this.http.get(this.apiEndpoints['getOperatorList'], this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw(error.json().message()));
-    }
-
 
     /**
      * To get all the apps of the subscriber

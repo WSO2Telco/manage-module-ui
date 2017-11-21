@@ -2,13 +2,12 @@
  * Created by sahanK on 2/8/17.
  */
 import {Component, OnInit} from '@angular/core';
-import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
 import {QuotaService} from '../../commons/services/quotacap.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
 import {IMyDrpOptions} from 'mydaterangepicker';
+import {RateService} from "../../commons/services/rate.service";
 
 @Component({
     selector: 'app-quotacap-main',
@@ -99,6 +98,7 @@ export class QuotaCapMainComponent implements OnInit {
     };
 
     constructor(private quotaService: QuotaService,
+                private rateService: RateService,
                 private message: MessageService,
                 private authService: AuthenticationService) {
     }
@@ -137,17 +137,17 @@ export class QuotaCapMainComponent implements OnInit {
      * to load the subscriber details of operator
      */
     getSubscribersOfProvider(operatorName: string) {
-        this.quotaService.getSubscribers(operatorName, (response, status) => {
-            if (status) {
-                this.subscriberList = response;
+        this.quotaService.getSubscribers(operatorName, (response) => {
+            if (response.success) {
+                this.subscriberList = response.payload;
             } else {
-                this.message.error('Error Loading Subscribers of Service Provider');
+                this.message.error(response.message);
 
             }
         });
     }
 
-    l
+    l;
 
 
     /**
@@ -174,17 +174,15 @@ export class QuotaCapMainComponent implements OnInit {
      * to load the Operator list
      */
     getOperatorList() {
-        this.quotaService.getOperatorList((response, status) => {
-            if (status) {
-                let count = 1;
-                for (const entry of response) {
-                    this.operatorsList[count] = entry.operatorName;
-                    count += 1;
+        this.rateService.getOperatorList((response) => {
+            if (response.success) {
+                for (const entry of response.payload) {
+                    this.operatorsList.push(entry.operatorName);
                 }
                 this.GetLoggedUser();
 
             } else {
-                this.message.error('Error Loading Operators');
+                this.message.error(response.message);
             }
         });
     }
@@ -195,7 +193,7 @@ export class QuotaCapMainComponent implements OnInit {
      */
     GetLoggedUser() {
 
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
         this.isAdmin = loginInfo.isAdmin;
 
         if (loginInfo.isAdmin) {
@@ -222,7 +220,6 @@ export class QuotaCapMainComponent implements OnInit {
             }
             index++;
         }
-
     }
 
     /**
@@ -349,7 +346,7 @@ export class QuotaCapMainComponent implements OnInit {
             } else if (this.isAppSelect) {
                 this.getQuotaofApp(this.appID);
             } else if (this.isSubscriberSelect) {
-                this.getQuotaofSubscriber(this.subscriber)
+                this.getQuotaofSubscriber(this.subscriber);
             }
             if (this.defaultcalval !== '') {
                 this.DateRangeValidation();
@@ -438,7 +435,7 @@ export class QuotaCapMainComponent implements OnInit {
                 if (response.Success.text.length == 0) {
                     //  this.message.warning('No Quota Assign for this combination');
                 } else {
-                    let count = 0
+                    let count = 0;
                     for (const item of response.Success.text) {
                         this.quotalist[count] = new QuotaList();
                         this.quotalist[count].quotaLimit = item.quotaLimit;
@@ -468,7 +465,7 @@ export class QuotaCapMainComponent implements OnInit {
                 if (response.Success.text.length == 0) {
                     //   this.message.warning('No Quota Assign for this combination');
                 } else {
-                    let count = 0
+                    let count = 0;
                     for (const item of response.Success.text) {
                         this.quotalist[count] = new QuotaList();
                         this.quotalist[count].quotaLimit = item.quotaLimit;
@@ -569,7 +566,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.isCalendarEmpty = false;
         this.isSubscriberError = false;
         this.isInvalidquota = false;
-        this.isSubscriberError = false
+        this.isSubscriberError = false;
         this.isApplicationError = false;
         this.isApiError = false;
         this.isOperatorError = false;
@@ -783,8 +780,8 @@ export class QuotaCapMainComponent implements OnInit {
     onDateRangeChanged(event) {
         console.log('hit the date change');
         this.datepickvalue = event.formatted;
-        this.fromdate = this.datepickvalue.split('-')[0].trim()
-        this.todate = this.datepickvalue.split('-')[1].trim()
+        this.fromdate = this.datepickvalue.split('-')[0].trim();
+        this.todate = this.datepickvalue.split('-')[1].trim();
 
         if (this.isApiSelect) {
             this.quotaService.getValidityPeriodForApi(this.api.split(':')[0], this.fromdate,
@@ -823,8 +820,8 @@ export class QuotaCapMainComponent implements OnInit {
     }
 
     DateRangeValidation() {
-        this.fromdate = this.datepickvalue.split('-')[0].trim()
-        this.todate = this.datepickvalue.split('-')[1].trim()
+        this.fromdate = this.datepickvalue.split('-')[0].trim();
+        this.todate = this.datepickvalue.split('-')[1].trim();
 
         if (this.isApiSelect) {
             this.quotaService.getValidityPeriodForApi(this.api, this.fromdate,

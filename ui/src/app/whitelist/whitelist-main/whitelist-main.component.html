@@ -21,7 +21,8 @@
                 </div>
                 <div class="col-sm-4">
                     <input [(ngModel)]="app"
-                           [typeahead]="applicationList"
+                           [typeahead]="applications"
+                           typeaheadOptionField="name"
                            [typeaheadMinLength]="0"
                            type="text"
                            class="form-control"
