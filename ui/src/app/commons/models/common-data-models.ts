@@ -35,6 +35,7 @@ export class LoginResponse {
     userName: string;
     isLoggedIn: boolean;
     billing: boolean;
+    creditPlan: boolean;
     start: number;
     token: string;
     roles: string[];
@@ -181,6 +182,17 @@ export class AssignRates {
     operator: Operator;
     apiOperation: APIOperation;
     rateDefinition: RateDefinition;
+    createdBy: string;
+}
+
+export class Configuration {
+    host: string;
+}
+
+export class API {
+    apiId: number;
+    apiName: string;
+    apiDescription: string;
     createdBy: string;
 }
 

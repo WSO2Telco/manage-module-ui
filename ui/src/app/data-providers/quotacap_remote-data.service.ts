@@ -10,19 +10,19 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class QuotacapRemoteDataService {
 
-    private apiContext = 'api';
+    private apiContext = 'http://localhost:9763/quota-service/services/';
     private loginInfo;
 
 
     private apiEndpoints: Object = {
-        getSubscribers: this.apiContext + '/quotacap/getsubscribers',
+        subscribers: this.apiContext + 'getSubscribersByOperator?operatorName=',
         getOperatorOfsubscriber: this.apiContext + '/quotacap/getoperatorofsubscriber',
-        getApps: this.apiContext + '/quotacap/getapps',
-        getApis: this.apiContext + '/quotacap/getapis',
+        getApps: this.apiContext + '/quotacap/getapps/',
+        getApis: this.apiContext + '/quotacap/getapis/',
         getQuotaLimitInfo: this.apiContext + '/quotacap/getquotalimitinfo',
         addNewQuotaLimit: this.apiContext + '/quotacap/addnewquotalimit',
         getValidityPeriod: this.apiContext + '/quotacap/getvalidityperiod',
-        getOperatorList: this.apiContext + '/quotacap/getoperatorlist'
+        operators: this.apiContext + '/quotacap/getoperatorlist'
 
     };
 
@@ -36,8 +36,7 @@ export class QuotacapRemoteDataService {
      * @returns {Observable<R>}
      */
     getSubscribers(operatorName: string) {
-        const data = {};
-        return this.http.get(this.apiEndpoints['getSubscribers'] + '/' + operatorName, this.getOptions())
+        return this.http.get(this.apiEndpoints['subscribers'] + operatorName, this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;
@@ -60,21 +59,6 @@ export class QuotacapRemoteDataService {
             .catch((error: Response) => Observable.throw(error.json().message()));
     }
 
-
-    /**
-     * to get all operator
-     * @returns {Observable<R>}
-     */
-    getOperatorList() {
-        return this.http.get(this.apiEndpoints['getOperatorList'], this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw(error.json().message()));
-    }
-
-
     /**
      * To get all the apps of the subscriber
      * @param subscriberID
@@ -82,18 +66,20 @@ export class QuotacapRemoteDataService {
      */
     getApps(subscriberID: string) {
         let operator;
-        if(this.loginInfo.isAdmin){
+        if (this.loginInfo.isAdmin) {
             operator = '_ALL_';
-        }else {
+        } else {
             operator = this.loginInfo.operator;
         }
-        const data = {id: subscriberID, operator: operator};
-        return this.http.post(this.apiEndpoints['getApps'], data, this.getOptions())
+        return this.http.get(this.apiEndpoints['getApps'] + subscriberID + '/' + operator, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Application List',
+                error: error
+            }));
     }
 
     /**
@@ -101,14 +87,16 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getApis(id: string) {
-        const data = {id: id};
-        return this.http.post(this.apiEndpoints['getApis'], data, this.getOptions())
+    getApis(subscriberID: string, appID: string) {
+        return this.http.get(this.apiEndpoints['getApis'] + subscriberID + '/' + appID, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Api List',
+                error: error
+            }));
     }
 
 
@@ -120,7 +108,8 @@ export class QuotacapRemoteDataService {
      * @param quoatavalue
      * @returns {Observable<R>}
      */
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string, quotaValue: string, fromDate: string, toDate: string) {
+    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string,
+                     quotaValue: string, fromDate: string, toDate: string) {
 
         if (appId.length == 0) {
             appId = null;
@@ -182,7 +171,7 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApp(appID: string,  operatorname: string) {
+    getQuotaLimitInfoApp(appID: string, operatorname: string) {
 
         if (operatorname == '' || operatorname == 'All') {
             operatorname = '_All_';
@@ -207,7 +196,7 @@ export class QuotacapRemoteDataService {
      * @param id
      * @returns {Observable<R>}
      */
-    getQuotaLimitInfoApi(apiID: string,  operatorname: string) {
+    getQuotaLimitInfoApi(apiID: string, operatorname: string) {
         if (operatorname == '' || operatorname == 'All') {
             operatorname = '_All_';
         }

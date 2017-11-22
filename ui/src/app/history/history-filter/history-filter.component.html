@@ -6,7 +6,6 @@
                 [(ngModel)]="filter.subscriber"
                 [typeaheadMinLength]="0"
                 [typeahead]="subscribers"
-                (typeaheadNoResults)="onNoSubscriberSelected($event)"
                 (typeaheadOnSelect)="onSubscriberChange()"
                 placeholder="Service Provider">
       </div>
@@ -17,7 +16,6 @@
                   typeaheadOptionField="name"
                   [typeahead]="applications"
                   (typeaheadOnSelect)="onApplicationChange($event)"
-                  (typeaheadNoResults)="onNoApplicationSelected($event)"
                   placeholder="Application">
        </div>
        <div class="col-sm-3" *ngIf="isAdmin">

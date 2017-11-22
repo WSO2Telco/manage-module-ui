@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {BlackListService} from '../../../commons/services/blacklist.service';
+import {BlackListWhiteListService} from '../../../commons/services/blacklist_whitelist.service';
 import {MessageService} from '../../../commons/services/message.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class ApiBlacklistListComponent implements OnInit {
     @Input()
     private apiId: string[];
 
-    constructor(private blackListService: BlackListService,  private message: MessageService) {
+    constructor(private blackListWhiteListService: BlackListWhiteListService,  private message: MessageService) {
 
     }
 
@@ -29,10 +29,10 @@ export class ApiBlacklistListComponent implements OnInit {
 
     onDelete(msisdn: string, apiId: string) {
         if (msisdn.length != 0) {
-            this.blackListService.removeBlackListNumber('tel3A%2B' + msisdn, apiId.toString(), (response, status) => {
-                if (status) {
+            this.blackListWhiteListService.removeFromBlackList('tel3A%2B' + msisdn, apiId.toString(), (response) => {
+                if (response.success) {
                     this.onDeleteTask.emit(true);
-                    this.message.success('MSISDN Removed Successfully');
+                    this.message.success(response.message);
                 } else {
                     this.message.error(response);
                 }

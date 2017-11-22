@@ -11,7 +11,6 @@ import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 export class QuotaService {
 
     constructor(private _remoteService: QuotacapRemoteDataService,
-                private message: MessageService,
                 private slimLoadingBarService: SlimLoadingBarService) {
     }
 
@@ -19,10 +18,10 @@ export class QuotaService {
         this._remoteService.getSubscribers(operatorName)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
@@ -43,16 +42,16 @@ export class QuotaService {
         this._remoteService.getApps(subscriberID)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
-    getApis(id: string, callback: Function) {
-        this._remoteService.getApis(id)
+    getApis(subscriberID: string, appID: string, callback: Function) {
+        this._remoteService.getApis(subscriberID, appID)
             .subscribe(
                 data => {
                     callback(data);
@@ -91,19 +90,7 @@ export class QuotaService {
             );
     }
 
-    getOperatorList(callback: Function) {
-        this._remoteService.getOperatorList()
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getQuotaLimitInfoApp(appID: string, operatorname: string,  callback: Function) {
+    getQuotaLimitInfoApp(appID: string, operatorname: string, callback: Function) {
         this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
             .subscribe(
                 data => {

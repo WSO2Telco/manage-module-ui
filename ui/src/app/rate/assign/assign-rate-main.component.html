@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-10">
-                    <form class="form-horizontal"#rateAssignForm="ngForm" novalidate
+                    <form class="form-horizontal"#rateAssignForm="ngForm" autocomplete="off" novalidate
                           (ngSubmit)="onRateAssigSubmition(rateAssignForm)">
 
                         <div class="form-group">
@@ -16,11 +16,13 @@
                                 <input [(ngModel)]="api"
                                        [typeahead]="apiList"
                                        [typeaheadMinLength]="0"
+                                       (typeaheadScrollable)="true"
                                        placeholder="Select API"
                                        name="typeapi"
                                        class="form-control"
                                        (typeaheadOnSelect)="onApiSelected()"
                                        (input)="onApiSelected()"
+                                       typeaheadOptionField="apiName"
                                        required>
                                 <span class="error" *ngIf="invalidApi">Invalid API</span>
                             </div>
