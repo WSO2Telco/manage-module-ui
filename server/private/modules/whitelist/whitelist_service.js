@@ -33,11 +33,19 @@ function whitelistService() {
     let _getSubscribers = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload:getResponse,
+                success: true,
+                message: 'Subscriber List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error:getResponseError,
+                success: false,
+                message: 'Error Loading Subscribers'
+            });
         };
 
         whiteListRestService.invokeGetSubscribersRest(request).then(onSuccess, onFailture);
@@ -47,11 +55,19 @@ function whitelistService() {
     let _getWhitelist = function (request, callback) {
 
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload:getResponse,
+                success: true,
+                message: 'Whitelist List Loaded Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
-            callback(getResponseError);
+            callback({
+                error:getResponseError,
+                success: false,
+                message: 'Error Loading New Whitelist'
+            });
         };
 
         whiteListRestService.invokeGetWhitelistRest(request).then(onSuccess, onFailture);
@@ -62,7 +78,11 @@ function whitelistService() {
     let _addNewWhitelist = function (request, callback) {
         
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload:getResponse,
+                success: true,
+                message: 'Whitelist List Added Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {
@@ -83,7 +103,11 @@ function whitelistService() {
     let _removeFromWhitelist = function (request, callback) {
         
         let onSuccess = function (getResponse) {
-            callback(getResponse);
+            callback({
+                payload:getResponse,
+                success: true,
+                message: 'Whitelist Number Removed Successfully'
+            });
         };
 
         let onFailture = function (getResponseError) {

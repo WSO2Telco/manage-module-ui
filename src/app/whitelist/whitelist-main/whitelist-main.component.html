@@ -63,7 +63,7 @@
                         <span class="error" *ngIf="islong">{{long}}</span>
                     </div>
                     <div class="col-sm-3">
-                        <button type="submit" class="btn btn-primary animated fadeIn">
+                        <button type="submit" class="btn btn-primary animated fadeIn" [disabled]="disableAddButton">
                             Add
                         </button>
                     </div>
@@ -112,7 +112,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2"></label>
                     <div class="col-sm-4">
-                        <button class="btn btn-primary">
+                        <button class="btn btn-primary" [disabled]="disableAddButton">
                             Upload Numbers List
                         </button>
                     </div>

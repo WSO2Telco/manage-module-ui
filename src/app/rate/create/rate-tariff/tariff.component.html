@@ -218,7 +218,7 @@
 
                     <div class="form-group" *ngIf="!isNameError">
                         <div class="col-sm-offset-2 col-sm-1">
-                            <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
+                            <button type="submit" class="btn btn-primary animated fadeIn" [disabled]="disableAddButton">Add</button>
                         </div>
                         <div class="col-sm-2">
                             <a class="btn btn-warning" (click)="clearForm()" >Clear</a>

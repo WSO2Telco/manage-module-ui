@@ -117,7 +117,6 @@ const _invokePOSTRequest = function (deferred, endpointUrl, requestOptions) {
         if (error) {
             deferred.reject(boom.serverUnavailable(Messages['SERVER_FAILED']));
         } else {
-            console.log(res.statusCode);
             if (res.statusCode == 200) {
                 deferred.resolve(payload);
             } else {
