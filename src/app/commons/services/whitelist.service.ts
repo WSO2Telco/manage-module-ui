@@ -12,53 +12,49 @@ export class WhitelistService {
     }
 
     getSubscribers(callback: Function) {
-       // console.log('get subscribers of provider service called');
-        this._remoteService.getSubscribers()
+       this._remoteService.getSubscribers()
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
     getWhitelist(subscriberID: string, appID: string, apiID, callback: Function) {
-       // console.log('get list of white list service called');
-        this._remoteService.getWhitelist(subscriberID, appID, apiID)
+       this._remoteService.getWhitelist(subscriberID, appID, apiID)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
     removeFromWhiteList(msisdn: string, callback: Function) {
-       // console.log('remove white list service called');
-        this._remoteService.removeFromWhiteList(msisdn)
+       this._remoteService.removeFromWhiteList(msisdn)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }
 
     addNewToWhitelist(appId: string, apiId: string, msisdnList: string[], callback: Function) {
-      //  console.log('get apps of subscriber service called');
-        this._remoteService.addNewToWhitelist(appId, apiId, msisdnList)
+      this._remoteService.addNewToWhitelist(appId, apiId, msisdnList)
             .subscribe(
                 data => {
-                    callback(data, true);
+                    callback(data);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 }
             );
     }

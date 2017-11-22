@@ -26,6 +26,7 @@ export class TariffComponent implements OnInit {
 
     private isNameError: boolean;
     private isDescriptionError: boolean;
+    private disableAddButton: boolean;
 
     private nameError: string;
     private descriptionError: string;
@@ -54,6 +55,7 @@ export class TariffComponent implements OnInit {
         this.clearForm();
         this.tariff.createdBy = loginInfo.userName;
         this.ValidCommisionTotal = true;
+        this.disableAddButton = false;
     }
 
     clearForm() {
@@ -75,6 +77,7 @@ export class TariffComponent implements OnInit {
 
 
     onSubmit(addTariffForm) {
+        this.disableAddButton = true;
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
             this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
             !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission &&
@@ -87,6 +90,7 @@ export class TariffComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+                this.disableAddButton = false;
             });
 
         } else {
@@ -98,6 +102,7 @@ export class TariffComponent implements OnInit {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
             }
+            this.disableAddButton = false;
         }
 
     }

@@ -191,7 +191,7 @@
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2 btnContainer">
-                        <button type="submit" class="btn btn-primary animated fadeIn">Add</button>&nbsp;
+                        <button type="submit" class="btn btn-primary animated fadeIn" [disabled]="disableAddButton">Add</button>&nbsp;
                         <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                     </div>
                 </div>
