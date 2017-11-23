@@ -1,30 +1,30 @@
 package com.wso2telco.dep.manageservice.resource.service.authentication;
 
+import com.wso2telco.core.userrolepermission.UserPermissionRetriever;
+import com.wso2telco.core.userrolepermission.UserRoleRetriever;
+import com.wso2telco.core.userrolepermission.util.UserRolePermissionType;
 import com.wso2telco.dep.manageservice.resource.model.LoginResponse;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class AuthenticationService {
 
-    public LoginResponse doLogin() {
+    public LoginResponse doLogin(String userName) {
+    	
+    	UserRoleRetriever userRoleRetriever = new UserRoleRetriever();
+    	List<String> currentUserRoleList = userRoleRetriever.getUserRoles(userName);
+    	String roles[] = new String[currentUserRoleList.size()];
+    	roles = currentUserRoleList.toArray(roles);
+    	
+    	UserPermissionRetriever userPermissionRetriever = new UserPermissionRetriever();
+    	List<String> uiPermissionList = userPermissionRetriever.getUserRolePermissions(userName, UserRolePermissionType.UI_PERMISSION);
+    	String [] uiPermissions = new String[uiPermissionList.size()];
+    	uiPermissions = uiPermissionList.toArray(uiPermissions);
+    	
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setIsLoggedIn(true);
-        loginResponse.setUserName("admin");
-        loginResponse.setToken("YWRtaW46YWRtaW4=");
-        loginResponse.setIsAdmin(true);
-        loginResponse.setOperator("");
-        loginResponse.setBilling(true);
-        loginResponse.setSuccess(true);
-        loginResponse.setMessage("user verified successfully");
-
-        List<String> roles = new ArrayList();
-        roles.add("Internal/subscriber");
-        roles.add("manage-app-admin");
-        roles.add("Internal/everyone");
-        roles.add("admin");
+        loginResponse.setUserName(userName);
         loginResponse.setRoles(roles);
+        loginResponse.setUiPermissions(uiPermissions);
 
         return loginResponse;
     }
