@@ -1,14 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule, APP_INITIALIZER} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {ButtonsModule, PopoverModule, DropdownModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
+import {ButtonsModule, DropdownModule, PopoverModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
-import {AppConfig} from './app.config';
 import {RootLevelRoutes} from './app.routes';
 import {CommonsModule} from './commons/commons.module';
-import {AppGuard, LoginGuard, AdminGuard, BillingGuard} from './app.guard';
+import {AdminGuard, AppGuard, BillingGuard, LoginGuard} from './app.guard';
 import {HeaderComponent} from './commons/components/header/header.component';
 import {HamburgerMenuComponent} from './commons/components/hamburger-menu/hamburger-menu.component';
 import {UserAvatarComponent} from './commons/components/user-avatar/user-avatar.component';
@@ -58,12 +57,6 @@ import {ConfigService} from './commons/services/config.service';
     ],
     providers: [
         ConfigService,
-        {
-            provide: APP_INITIALIZER,
-            useFactory: AppConfig,
-            deps: [ConfigService],
-            multi: true
-        },
         AppGuard,
         LoginGuard,
         AdminGuard,

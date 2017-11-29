@@ -9,12 +9,11 @@ import java.util.List;
 public class AuthenticationService {
 
     public LoginResponse doLogin() {
+
         LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setIsLoggedIn(true);
         loginResponse.setUserName("admin");
         loginResponse.setToken("YWRtaW46YWRtaW4=");
         loginResponse.setIsAdmin(true);
-        loginResponse.setOperator("");
         loginResponse.setBilling(true);
         loginResponse.setSuccess(true);
         loginResponse.setMessage("user verified successfully");

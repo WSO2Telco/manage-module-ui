@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "isLoggedIn",
         "roles",
         "userName",
         "token",
@@ -29,8 +28,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class LoginResponse {
 
-    @JsonProperty("isLoggedIn")
-    private Boolean isLoggedIn;
     @JsonProperty("roles")
     private List<String> roles = null;
     @JsonProperty("userName")
@@ -49,16 +46,6 @@ public class LoginResponse {
     private String message;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-
-    @JsonProperty("isLoggedIn")
-    public Boolean getIsLoggedIn() {
-        return isLoggedIn;
-    }
-
-    @JsonProperty("isLoggedIn")
-    public void setIsLoggedIn(Boolean isLoggedIn) {
-        this.isLoggedIn = isLoggedIn;
-    }
 
     @JsonProperty("roles")
     public List<String> getRoles() {

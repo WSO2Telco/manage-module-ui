@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {
-    ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
-    ApplicationTaskResult, PaginationInfo
-} from "../../commons/models/application-data-models";
-import {ApprovalRemoteDataService} from "../../data-providers/approval-remote-data.service";
-import {MessageService} from "../../commons/services/message.service";
-import {ApprovalHelperService} from "../approval-helper.service";
-import {TableDataType} from "../../commons/models/common-data-models";
-import {AuthenticationService} from "../../commons/services/authentication.service";
+    ApplicationTaskFilter,
+    ApplicationTaskResult,
+    ApprovalEvent
+} from '../../commons/models/application-data-models';
+import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
+import {MessageService} from '../../commons/services/message.service';
+import {ApprovalHelperService} from '../approval-helper.service';
+import {TableDataType} from '../../commons/models/common-data-models';
+import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-applications',
@@ -51,7 +52,7 @@ export class ApplicationsComponent implements OnInit {
                 this.allApplications = apps;
             },
             (error) => {
-                this.message.error(error)
+                this.message.error(error);
             }
         );
 

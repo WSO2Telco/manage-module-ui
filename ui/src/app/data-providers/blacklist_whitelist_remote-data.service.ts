@@ -10,7 +10,8 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class BlackListWhiteListRemoteDataService {
 
-    private apiContext = 'https://localhost:9443/blacklist-whitelist-service/queries/';
+    private url = new URL(window.location.href);
+    private apiContext = this.url.protocol + '//' + this.url.host + '/blacklist-whitelist-service/queries/';
     private loginInfo;
 
 

@@ -10,7 +10,8 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class QuotacapRemoteDataService {
 
-    private apiContext = 'https://localhost:9443/quota-service/services/';
+    private url = new URL(window.location.href);
+    private apiContext = this.url.protocol + '//' + this.url.host + '/quota-service/services/';
     private loginInfo;
 
 
