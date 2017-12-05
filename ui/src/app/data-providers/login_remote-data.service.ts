@@ -25,10 +25,20 @@ export class LoginRemoteDataService {
    * @param data
    * @returns {Observable<User>}
    */
-  login(data: User): Observable<LoginResponse> {
+  login(data: User) {
     return this.http.post(this.apiEndpoints['login'], data, this.options)
-      .map((response: Response) => response.json())
-      .catch((error: Response) => Observable.throw(error.json().message))
+        .map((response: Response) => {
+          return {
+            success: true,
+            message: 'Login Successful',
+            payload: response.json()
+          };
+        })
+        .catch((error: Response) => Observable.throw({
+          success: false,
+          message: 'Login Error',
+          error: error
+        }));
   }
 
   /**

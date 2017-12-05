@@ -27,22 +27,34 @@ export class ApprovalHelperService {
 
         this.slimLoadingBarService.start();
 
-        this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
-            () => {
-                if (dataType == 'APPLICATION') {
+        if (dataType == 'APPLICATION') {
+            this.approvalService.assignApplicationTaskToUser(taskId).subscribe(
+                () => {
                     this.message.success(this.message.APPROVAL_MESSAGES.APPLICATION_CREATION_ASSIGN_SUCCESS);
-                } else if (dataType == 'SUBSCRIPTION') {
-                    this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
+                    callBack();
+                },
+                (error) => {
+                    this.message.error(error);
+                },
+                () => {
+                    this.slimLoadingBarService.complete();
                 }
-                callBack();
-            },
-            (error) => {
-                this.message.error(error);
-            },
-            () => {
-                this.slimLoadingBarService.complete();
-            }
-        );
+            );
+        } else if (dataType == 'SUBSCRIPTION') {
+            this.approvalService.assignSubscriptionTaskToUser(taskId).subscribe(
+                () => {
+
+                    this.message.success(this.message.APPROVAL_MESSAGES.SUBSCRIPTION_CREATION_ASSIGN_SUCCESS);
+                    callBack();
+                },
+                (error) => {
+                    this.message.error(error);
+                },
+                () => {
+                    this.slimLoadingBarService.complete();
+                }
+            );
+        }
     }
 
 

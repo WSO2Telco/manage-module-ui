@@ -30,18 +30,6 @@ export class QuotaService {
         this._remoteService.getOperatorOfsubscriber(subscriberID)
             .subscribe(
                 data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getApps(subscriberID: string, callback: Function) {
-        this._remoteService.getApps(subscriberID)
-            .subscribe(
-                data => {
                     callback(data);
                 },
                 error => {
@@ -50,11 +38,11 @@ export class QuotaService {
             );
     }
 
-    getApis(subscriberID: string, appID: string, callback: Function) {
-        this._remoteService.getApis(subscriberID, appID)
+    getQuotaLimitInfo(data, callback: Function) {
+        this._remoteService.getQuotaLimitInfo(data)
             .subscribe(
-                data => {
-                    callback(data);
+                response => {
+                    callback(response);
                 },
                 error => {
                     callback(error);
@@ -62,103 +50,30 @@ export class QuotaService {
             );
     }
 
-    addNewQuotaLimit(subscriberID: string, appId: string, apiId: string, operatorname: string, quotaValue: string, fromDate: string, toDate: string, callback: Function) {
+    getValidityPeriod(data, callback: Function) {
+        this._remoteService.getValidityPeriod(data)
+            .subscribe(
+                response => {
+                    callback(response);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    addNewQuotaLimit(data, callback: Function) {
         this.slimLoadingBarService.start();
-        this._remoteService.addNewQuotaLimit(subscriberID, appId, apiId, operatorname, quotaValue, fromDate, toDate)
+        this._remoteService.addNewQuotaLimit(data)
             .subscribe(
-                data => {
-                    callback(data, true);
+                response => {
+                    callback(response);
                 },
                 error => {
-                    callback(error, false);
+                    callback(error);
                 },
                 () => {
                     this.slimLoadingBarService.complete();
-                }
-            );
-    }
-
-    getQuotaLimitInfo(subscriberID: string, operatorname: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfo(subscriberID, operatorname)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getQuotaLimitInfoApp(appID: string, operatorname: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfoApp(appID, operatorname)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getQuotaLimitInfoApi(apiID: string, operatorname: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfoApi(apiID, operatorname)
-            .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
-            );
-    }
-
-    getQuotaLimitInfoOperator(operatorname: string, subscriberID: string, callback: Function) {
-        this._remoteService.getQuotaLimitInfoOperator(operatorname, subscriberID)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
-
-    getValidityPeriodForSubscriober(subscriberID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
-        this._remoteService.getValidityPeriodForSubscriober(subscriberID, fromDate, toDate, operatorname)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
-    getValidityPeriodForApp(appID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
-        this._remoteService.getValidityPeriodForApp(appID, fromDate, toDate, operatorname)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
-                }
-            );
-    }
-
-    getValidityPeriodForApi(apiID: string, fromDate: string, toDate: string, operatorname: string, callback: Function) {
-        this._remoteService.getValidityPeriodForApi(apiID, fromDate, toDate, operatorname)
-            .subscribe(
-                data => {
-                    callback(data);
-                },
-                error => {
-                    callback(error);
                 }
             );
     }

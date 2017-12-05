@@ -33,7 +33,6 @@ export class LoginResponse {
     isAdmin: boolean;
     operator: string;
     userName: string;
-    isLoggedIn: boolean;
     billing: boolean;
     creditPlan: boolean;
     start: number;

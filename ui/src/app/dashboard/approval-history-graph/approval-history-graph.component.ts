@@ -1,7 +1,6 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {DashboardRemoteDataService} from "../../data-providers/dashboard-remote-data.service";
-import {HistoryBarGraphData} from "../../commons/models/dashboard-data-models";
-import {MessageService} from "../../commons/services/message.service";
+import {Component, OnInit} from '@angular/core';
+import {DashboardRemoteDataService} from '../../data-providers/dashboard-remote-data.service';
+import {MessageService} from '../../commons/services/message.service';
 
 @Component({
     selector: 'app-approval-history-graph',
@@ -28,8 +27,8 @@ export class ApprovalHistoryGraphComponent implements OnInit {
         }
     };
 
-    public chartType: string = 'bar';
-    public barChartLegend: boolean = false;
+    public chartType = 'bar';
+    public barChartLegend = false;
 
     private appCreationHistoryDataSet: any[] = [{data: []}];
     private appCreationHistoryLabels: string[] = [];
@@ -46,14 +45,14 @@ export class ApprovalHistoryGraphComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.dashboardService.getCreationHistoryGraphData('applications');
-        this.dashboardService.getCreationHistoryGraphData('subscriptions');
+        this.dashboardService.getApplicationCreationHistoryGraphData();
+        this.dashboardService.getSubscriptionCreationHistoryGraphData();
 
         this.dashboardService.ApplicationCreationHistoryDataProvider.subscribe(
             (historyData: any) => {
-                if (historyData && historyData.xAxisLabels) {
+                if (historyData && historyData.xaxisLabels) {
                     this.appCreationHistoryLabels.length = 0;
-                    historyData.xAxisLabels.forEach((lbl, index) => {
+                    historyData.xaxisLabels.forEach((lbl, index) => {
                         this.appCreationHistoryLabels[index] = lbl;
                     });
                 }
@@ -63,15 +62,15 @@ export class ApprovalHistoryGraphComponent implements OnInit {
                 }
             },
             (error) => {
-                this.message.error(error);
+                this.message.error(error.message);
             }
         );
 
         this.dashboardService.SubscriptionCreationHistoryDataProvider.subscribe(
             (historyData: any) => {
-                if (historyData && historyData.xAxisLabels) {
+                if (historyData && historyData.xaxisLabels) {
                     this.subscriptionHistoryLabels.length = 0;
-                    historyData.xAxisLabels.forEach((lbl, index) => {
+                    historyData.xaxisLabels.forEach((lbl, index) => {
                         this.subscriptionHistoryLabels[index] = lbl;
                     });
                 }
@@ -81,7 +80,7 @@ export class ApprovalHistoryGraphComponent implements OnInit {
                 }
             },
             (error) => {
-                this.message.error(error);
+                this.message.error(error.message);
             }
         );
 

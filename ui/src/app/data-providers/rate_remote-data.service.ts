@@ -8,7 +8,8 @@ import {AuthenticationService} from '../commons/services/authentication.service'
 @Injectable()
 export class RateRemoteDataService {
 
-    private apiContext = 'https://localhost:9443/ratecard-service/ratecardservice/';
+    private url = new URL(window.location.href);
+    private apiContext = this.url.protocol + '//' + this.url.host + '/ratecard-service/ratecardservice/';
 
     private apiEndpoints: Object = {
         rateCards: this.apiContext + 'ratecards',

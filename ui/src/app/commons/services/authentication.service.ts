@@ -25,19 +25,20 @@ export class AuthenticationService {
         user.password = password;
         this._remoteService.login(user)
             .subscribe(
-                (loginInfo: LoginResponse) => {
-                    if (loginInfo.success) {
+                data => {
+                    if (data.success) {
+                        const loginInfo = data.payload;
                         loginInfo.start = new Date().getTime();
                         this.loginUserInfo.next(loginInfo);
                         sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
                         this._router.navigate(['home']);
                     } else {
-                        this._remoteService.logout(loginInfo.userName);
-                        callback(loginInfo.message);
+                        this._remoteService.logout(data.payload.userName);
+                        callback(data.message);
                     }
                 },
-                (error: string) => {
-                    callback(error);
+                error => {
+                    callback(error.message);
                 }
             );
     }
@@ -117,7 +118,7 @@ export class AuthenticationService {
         document.onclick = this.showMessage.bind(this);
     }
 
-    showMessage(){
+    showMessage() {
         this.doLogout();
         this.isInactive.next(true);
     }

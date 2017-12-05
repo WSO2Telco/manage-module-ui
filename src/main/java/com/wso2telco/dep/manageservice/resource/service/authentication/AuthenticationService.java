@@ -9,6 +9,7 @@ import java.util.List;
 
 public class AuthenticationService {
 
+
     public LoginResponse doLogin(String userName) {
     	
     	UserRoleRetriever userRoleRetriever = new UserRoleRetriever();
