@@ -1,6 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service.authentication;
 
-import com.wso2telco.dep.manageservice.resource.model.LoginResponse;
+import com.wso2telco.dep.manageservice.resource.model.workflow.TempLoginRespnse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,10 @@ import java.util.List;
  * limitations under the License.
  */
 public class AuthServiceTemp {
-    public LoginResponse doLogin() {
 
-        LoginResponse loginResponse = new LoginResponse();
+    public TempLoginRespnse doLogin() {
+
+        TempLoginRespnse loginResponse = new TempLoginRespnse();
         loginResponse.setUserName("admin");
         loginResponse.setToken("YWRtaW46YWRtaW4=");
         loginResponse.setIsAdmin(true);
