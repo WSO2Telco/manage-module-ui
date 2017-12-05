@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {
     ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
-    ApplicationTaskResult, RelevantRates
+    ApplicationTaskResult, RelevantRates, ApplicationTaskResults
 } from '../../commons/models/application-data-models';
 import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
 import {MessageService} from '../../commons/services/message.service';
 import {ApprovalHelperService} from '../approval-helper.service';
 import {TableDataType} from '../../commons/models/common-data-models';
+import {SubscriptionRemoteDataService} from "../../data-providers/subscription-remote-data.service";
 
 @Component({
     selector: 'app-subscriptions',
@@ -23,6 +24,7 @@ export class SubscriptionsComponent implements OnInit {
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
+                private subscriptionService: SubscriptionRemoteDataService,
                 private approvalService: ApprovalRemoteDataService) {
     }
 
@@ -32,27 +34,19 @@ export class SubscriptionsComponent implements OnInit {
 
         this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'), 10);
 
-        this.approvalService.MySubscriptionTasksProvider.subscribe(
-            (subs: ApplicationTaskResult) => {
-                this.mySubscriptions = subs;
+        this.subscriptionService.SubscriptionApprovalTaskProvider.subscribe(
+            (subs: ApplicationTaskResults) => {
+                this.mySubscriptions = subs.myApplicationTasks;
+                this.allSubscriptions = subs.allApplicationTasks;
                 if (this.mySubscriptions != null) {
                     this.setDefaultOperationRates();
                 }
-            },
-            (error) => {
-                this.message.error(error);
-            }
-        );
-
-        this.approvalService.GroupSubscriptionTasksProvider.subscribe(
-            (subs: ApplicationTaskResult) => {
-                this.allSubscriptions = subs;
-                if (this.allSubscriptions != null) {
+                if(this.allSubscriptions != null){
                     this.setDefaultAllOperationRates();
                 }
             },
             (error) => {
-                this.message.error(error);
+                this.message.error(error.message);
             }
         );
 
@@ -112,8 +106,9 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     private getData() {
-        this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
-        this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
+        // this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
+        // this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
+        this.subscriptionService.getSubscriptionTasks();
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {

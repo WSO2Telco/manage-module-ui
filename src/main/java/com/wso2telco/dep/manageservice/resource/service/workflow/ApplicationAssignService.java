@@ -36,7 +36,6 @@ public class ApplicationAssignService {
 
         if (validateRequest(request)) {
 
-
             try {
                 /** set request body */
                 Assign assign = new Assign();

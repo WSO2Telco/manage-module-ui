@@ -1,12 +1,12 @@
-import {Injectable, Inject} from '@angular/core';
-import {Headers, RequestOptions, Http, Response} from '@angular/http';
-import {Observable, ReplaySubject, BehaviorSubject} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Headers, Http, RequestOptions, Response} from '@angular/http';
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from '../commons/models/dashboard-data-models';
 import {ApprovalRemoteDataService} from './approval-remote-data.service';
-import {ApplicationTask, ApplicationTaskResult} from '../commons/models/application-data-models';
+import {ApplicationTaskResult} from '../commons/models/application-data-models';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import {AuthenticationService} from '../commons/services/authentication.service';
-import {MessageService} from "../commons/services/message.service";
+import {MessageService} from '../commons/services/message.service';
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -23,8 +23,6 @@ export class DashboardRemoteDataService {
      */
     public SubscriptionCreationHistoryDataProvider: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
     private _dashboardStatisticsData = new DashboardData();
 
     private url = new URL(window.location.href);

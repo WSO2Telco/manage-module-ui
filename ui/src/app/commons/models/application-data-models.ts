@@ -67,6 +67,12 @@ export class ApplicationTaskResult {
     meteData: MetaData;
 }
 
+export class ApplicationTaskResults {
+    myApplicationTasks: ApplicationTaskResult;
+    allApplicationTasks: ApplicationTaskResult;
+
+}
+
 type PROCESS_TYPE = 'APPLICATION_CREATION' | 'SUBSCRIPTION_CREATION';
 
 export class ApplicationTaskSearchParam {

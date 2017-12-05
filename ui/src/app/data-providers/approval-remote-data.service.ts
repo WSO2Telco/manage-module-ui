@@ -40,13 +40,10 @@ export class ApprovalRemoteDataService {
 
     private modifiedApplicationTaskIDs: number[] = new Array();
 
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
-
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
-
     private apiEndpoints: Object = {
         search: this.apiContext + '/applications/search',
-        assign: this.apiContext + '/applications/assign',
+        applicationAssign: this.apiContext + '/applications/assign',
+        subscriptionAssign: this.apiContext + '/subscriptions/assign',
         approveApplicationCreation: this.apiContext + '/applications/approve/application/creation',
         approveSubscriptionCreation: this.apiContext + '/applications/approve/subscription/creation',
         getCreditPlan: this.apiContext + '/applications/getcreditplan'
@@ -280,19 +277,30 @@ export class ApprovalRemoteDataService {
     }
 
     assignApplicationTaskToUser(taskId) {
-        let loginInfo = this.authService.loginUserInfo.getValue();
-        if (!!loginInfo) {
-            const param = new AssignApplicationTaskParam();
-            param.assignee = loginInfo.userName;
-            param.taskId = taskId;
-
-            return this.http.post(this.apiEndpoints['assign'], param, this.getOptions())
-                .map((response: Response) => {
-                    this.modifiedApplicationTaskIDs.push(taskId);
-                    return response.json();
-                })
-                .catch((error: Response) => Observable.throw(error.json().message))
+        const data = {
+            taskId: taskId
         }
+
+        return this.http.post(this.apiEndpoints['applicationAssign'], data, this.getOptions())
+            .map((response: Response) => {
+                this.modifiedApplicationTaskIDs.push(taskId);
+                return response.json();
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
+
+    }
+
+    assignSubscriptionTaskToUser(taskId) {
+        const data = {
+            taskId: taskId
+        }
+
+        return this.http.post(this.apiEndpoints['subscriptionAssign'], data, this.getOptions())
+            .map((response: Response) => {
+                this.modifiedApplicationTaskIDs.push(taskId);
+                return response.json();
+            })
+            .catch((error: Response) => Observable.throw(error.json().message));
     }
 
     getModifiedTaskIds(): number[] {
@@ -313,7 +321,7 @@ export class ApprovalRemoteDataService {
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
 
-       // console.log(JSON.stringify(param));
+        // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw(error.json().message))
@@ -327,7 +335,7 @@ export class ApprovalRemoteDataService {
     }
 
     getCreditPlan() {
-        return this.http.get(this.apiEndpoints['getCreditPlan'], this.options)
+        return this.http.get(this.apiEndpoints['getCreditPlan'], this.getOptions())
             .map((response: Response) => {
                 const result = response.json();
                 return result;

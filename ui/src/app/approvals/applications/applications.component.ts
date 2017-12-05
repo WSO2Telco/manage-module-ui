@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {
     ApplicationTaskFilter,
     ApplicationTaskResult,
+    ApplicationTaskResults,
     ApprovalEvent
 } from '../../commons/models/application-data-models';
 import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
@@ -9,6 +10,7 @@ import {MessageService} from '../../commons/services/message.service';
 import {ApprovalHelperService} from '../approval-helper.service';
 import {TableDataType} from '../../commons/models/common-data-models';
 import {AuthenticationService} from '../../commons/services/authentication.service';
+import {ApplicationRemoteDataService} from '../../data-providers/application-remote-data.service';
 
 @Component({
     selector: 'app-applications',
@@ -30,6 +32,7 @@ export class ApplicationsComponent implements OnInit {
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
                 private approvalService: ApprovalRemoteDataService,
+                private applicationService: ApplicationRemoteDataService,
                 private authService: AuthenticationService) {
     }
 
@@ -38,21 +41,13 @@ export class ApplicationsComponent implements OnInit {
 
         this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'), 10);
 
-        this.approvalService.MyApplicationCreationTasksProvider.subscribe(
-            (apps: ApplicationTaskResult) => {
-                this.myApplications = apps;
+        this.applicationService.ApplicationApprovalTasksProvider.subscribe(
+            (apps: ApplicationTaskResults) => {
+                this.myApplications = apps.myApplicationTasks;
+                this.allApplications = apps.allApplicationTasks;
             },
             (error) => {
-                this.message.error(error);
-            }
-        );
-
-        this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
-            (apps: ApplicationTaskResult) => {
-                this.allApplications = apps;
-            },
-            (error) => {
-                this.message.error(error);
+                this.message.error(error.message);
             }
         );
 
@@ -66,8 +61,9 @@ export class ApplicationsComponent implements OnInit {
     }
 
     private getData() {
-        this.approvalService.getFilteredResult(this.userApplicationFilter);
-        this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
+        this.applicationService.getApplicationTasks();
+        // this.approvalService.getFilteredResult(this.userApplicationFilter);
+        // this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
     }
 
     private getCreditPlan() {
