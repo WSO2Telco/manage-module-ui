@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@Path("/authentication")
+@Path("/authentication1")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TempAuthResource {
