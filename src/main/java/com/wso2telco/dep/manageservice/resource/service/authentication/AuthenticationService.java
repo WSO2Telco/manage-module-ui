@@ -1,8 +1,12 @@
 package com.wso2telco.dep.manageservice.resource.service.authentication;
 
+import com.wso2telco.core.userrolepermission.UserPermissionRetriever;
+import com.wso2telco.core.userrolepermission.UserRoleRetriever;
+import com.wso2telco.core.userrolepermission.util.UserRolePermissionType;
 import com.wso2telco.core.userprofile.UserProfileRetriever;
 import com.wso2telco.core.userprofile.dto.UserProfileDTO;
 import com.wso2telco.dep.manageservice.resource.model.LoginResponse;
+import java.util.List;
 
 public class AuthenticationService {
 
