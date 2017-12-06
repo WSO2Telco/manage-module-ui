@@ -29,8 +29,7 @@ export class MainMenuComponent implements OnInit {
         {id: 10, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel'},
         {id: 11, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase'},
         {id: 12, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board'},
-        {id: 13, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns'},
-        {id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
+        {id: 13, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring'}
     ];
 
     private menuSourceIfOp: MenuItem[] = [
