@@ -32,10 +32,10 @@ export class WhitelistListComponent implements OnInit {
     onDelete(msisdn: string) {
         if (msisdn.length != 0) {
 
-            this.whitelistService.removeFromWhiteList(msisdn, (response, status) => {
-                if (status) {
+            this.whitelistService.removeFromWhiteList(msisdn, (response) => {
+                if (response.success) {
                     this.onDeleteTask.emit(true);
-                    this.message.success('MSISDN Removed Successfully');
+                    this.message.success(response.message);
                 } else {
                     this.message.error(response.message);
                 }

@@ -122,6 +122,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      */
     onApiSelected(event: TypeaheadMatch) {
 
+
         const list = /\d+(?=\D*$)/;
         const regexp = new RegExp(list);
         this.numberId = regexp.exec(this.api);

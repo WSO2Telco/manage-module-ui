@@ -23,6 +23,7 @@ export class CurrencyComponent implements OnInit {
 
     private isCurrencyError: boolean;
     private isCurrencyDescError: boolean;
+    private disableAddButton: boolean;
 
     private currencyDescError: string;
     private currencyCodeError: string;
@@ -51,7 +52,7 @@ export class CurrencyComponent implements OnInit {
         this.list = currencyCodes;
         this.currencycode = '';
         this.currencydesc = '';
-
+        this.disableAddButton = false;
         this.clearErrors();
     }
 
@@ -61,7 +62,7 @@ export class CurrencyComponent implements OnInit {
      */
     onCurrencyValueSubmit(currencyForm) {
         const loginInfo = this.authService.loginUserInfo.getValue();
-
+        this.disableAddButton = true;
         if (this.currencycode.length != 0 && this.currencydesc.length != 0 && !this.isCurrencyError && !this.isCurrencyDescError) {
             this.rateService.addCurrency(this.currencycode, this.currencydesc, loginInfo.userName, (response) => {
                 if (response.success) {
@@ -71,6 +72,7 @@ export class CurrencyComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+                this.disableAddButton = false;
             });
         } else {
             if (this.currencycode.length == 0) {
@@ -81,6 +83,7 @@ export class CurrencyComponent implements OnInit {
                 this.currencyDescError = 'Currency Description Cannot Be Empty';
                 this.isCurrencyDescError = true;
             }
+            this.disableAddButton = false;
         }
     }
 

@@ -29,6 +29,7 @@ export class CategoryComponent implements OnInit {
     private isNameError: boolean;
     private isCodeError: boolean;
     private isDescriptionError: boolean;
+    private disableAddButton: boolean;
 
     private nameError: string;
     private codeError: string;
@@ -44,6 +45,7 @@ export class CategoryComponent implements OnInit {
         this.name = '';
         this.code = '';
         this.description = '';
+        this.disableAddButton = false;
         this.clearErrors();
     }
 
@@ -53,6 +55,7 @@ export class CategoryComponent implements OnInit {
      * @param addCategoryForm
      */
     onSubmit(addCategoryForm) {
+        this.disableAddButton = true;
         const loginInfo = this.authService.loginUserInfo.getValue();
         if (this.name.length != 0 && this.code.length != 0 && this.description.length != 0 && !this.isDescriptionError
             && !this.isNameError && !this.isCodeError) {
@@ -64,6 +67,7 @@ export class CategoryComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+               this.disableAddButton = false;
             });
         } else {
             if (this.name.length == 0) {
@@ -78,6 +82,7 @@ export class CategoryComponent implements OnInit {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
             }
+            this.disableAddButton = false;
         }
 
     }

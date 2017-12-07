@@ -35,7 +35,7 @@ export class AssignRateMainComponent implements OnInit {
     private invalidOperator: boolean;
     private invalidApi: boolean;
 
-    constructor(private rateService: RateService, private blackListService: BlackListService,
+    constructor(private rateService: RateService,
                 private message: MessageService, private quotaService: QuotaService,
                 private _authenticationService: AuthenticationService) {
     }

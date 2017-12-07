@@ -22,6 +22,7 @@ export class RateMainComponent implements OnInit {
     private isCurrencyError: boolean;
     private isRateTypeError: boolean;
     private isTariffError: boolean;
+    private disableAddButton: boolean;
 
     private currencyError: string;
     private rateTypeError: string;
@@ -69,6 +70,7 @@ export class RateMainComponent implements OnInit {
         this.showChildNewTariff = false;
         this.showChildNewSubCategory = false;
         this.showChildNewCategory = false;
+        this.disableAddButton = false;
         this.clearErrors();
 
         this.rateDefName = '';
@@ -197,6 +199,8 @@ export class RateMainComponent implements OnInit {
         let validTariff = false;
         let validRateType = false;
 
+        this.disableAddButton = true;
+
 
         /** for loop to assign currency id */
         for (const entry of this.currencyList) {
@@ -280,6 +284,7 @@ export class RateMainComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+                this.disableAddButton = false;
             });
         } else {
             if (this.rateDefName.length == 0) {
@@ -313,6 +318,7 @@ export class RateMainComponent implements OnInit {
                 this.isTariffError = true;
                 this.tariffError = 'Tariff can not be empty';
             }
+            this.disableAddButton = false;
         }
 
     }

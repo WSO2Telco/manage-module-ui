@@ -37,10 +37,13 @@ export class WhitelistRemoteDataService {
         const data = {};
         return this.http.post(this.apiEndpoints['getSubscribers'], data, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Subscribers',
+                error: error
+            }));
     }
 
 
@@ -51,10 +54,13 @@ export class WhitelistRemoteDataService {
     getWhitelist(subscriberID: string, appID: string, apiID,) {
         return this.http.get(this.apiEndpoints['getWhitelist'] + subscriberID + '/' + apiID + '/' + appID, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Whitelist',
+                error: error
+            }));
     }
 
     /**
@@ -66,10 +72,13 @@ export class WhitelistRemoteDataService {
         const data = {msisdn: msisdn};
         return this.http.post(this.apiEndpoints['removeFromWhiteList'], data, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Removing Whitelist Number',
+                error: error
+            }));
     }
 
     /**
@@ -90,10 +99,13 @@ export class WhitelistRemoteDataService {
 
         return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.getOptions())
             .map((response: Response) => {
-                const result = response.json();
-                return result;
+                return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message()));
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Adding New Whitelist',
+                error: error
+            }));
     }
 
     getOptions(): RequestOptions {

@@ -3,10 +3,9 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {WhitelistService} from '../../commons/services/whitelist.service';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {Api, Application} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
-import {QuotaService} from "../../commons/services/quotacap.service";
+import {QuotaService} from '../../commons/services/quotacap.service';
 
 @Component({
     selector: 'app-whitelist-main',
@@ -36,6 +35,7 @@ export class WhitelistMainComponent implements OnInit {
     private ismsisdnError: boolean;
     private ismsisdnRangeError: boolean;
     private isInvalidFieldError: boolean;
+    private disableAddButton: boolean;
 
     private msisdnError: string;
     private msisdnRangeError: string;
@@ -75,6 +75,7 @@ export class WhitelistMainComponent implements OnInit {
         this.ismsisdnRangeError = false;
         this.isInvalidFieldError = false;
         this.islong = false;
+        this.disableAddButton = false;
         this.long = '';
     }
 
@@ -87,11 +88,11 @@ export class WhitelistMainComponent implements OnInit {
      * to load the subscriber details
      */
     getSubscribersOfProvider() {
-        this.whitelistService.getSubscribers((response, status) => {
-            if (status) {
-                this.subscriberList = response;
+        this.whitelistService.getSubscribers((response) => {
+            if (response.success) {
+                this.subscriberList = response.payload;
             } else {
-                this.message.error('Failed to load subscribers');
+                this.message.error(response.message);
             }
         });
     }
@@ -174,18 +175,18 @@ export class WhitelistMainComponent implements OnInit {
         }
 
         for (const entry of this.apis) {
-            if (entry.name == this.api.split('-')[0].trim()) {
+            if (entry.name == this.api.split('-')[0].trim() && entry.version == this.api.split('-')[1].split(' ')[1].trim()) {
                 apiID = entry.id;
             }
         }
 
 
-        this.whitelistService.getWhitelist(this.subscriber, appID, apiID, (response, status) => {
-            if (status) {
-                this.whitelistList = response.Success.variables;
+        this.whitelistService.getWhitelist(this.subscriber, appID, apiID, (response) => {
+            if (response.success) {
+                this.whitelistList = response.payload.Success.variables;
             } else {
                 this.whitelistList = [];
-                this.message.error('Failed to load whitelist numbers');
+                this.message.error(response.message);
 
             }
         });
@@ -207,18 +208,16 @@ export class WhitelistMainComponent implements OnInit {
                 index++;
             }
 
-            const splited = this.api.split(' ');
-
             for (const entry of this.apis) {
-                if (entry.name == splited[0]) {
+                if (entry.name == this.api.split('-')[0].trim() && entry.version == this.api.split('-')[1].split(' ')[1].trim()) {
                     apiId = entry.id;
                 }
             }
 
             if (apiId.length != 0 && appId.length != 0) {
-                this.whitelistService.addNewToWhitelist(appId, apiId, this.msisdnList, (response, status) => {
-                    if (status) {
-                        this.message.success('MSISDN List Added Successfully');
+                this.whitelistService.addNewToWhitelist(appId, apiId, this.msisdnList, (response) => {
+                    if (response.success) {
+                        this.message.success(response.message);
                         this.msisdn = '';
                         this.msisdnMin = 0;
                         this.msisdnMax = 0;
@@ -226,11 +225,15 @@ export class WhitelistMainComponent implements OnInit {
                     } else {
                         this.message.error(response.message);
                     }
+                    this.disableAddButton = false;
                 });
+            }else {
+                this.disableAddButton = false;
             }
         } else {
             this.msisdnError = 'Something Went Wrong';
             this.ismsisdnError = true;
+            this.disableAddButton = false;
         }
     }
 
@@ -326,6 +329,7 @@ export class WhitelistMainComponent implements OnInit {
         this.invalidFieldError = '';
         this.ismsisdnError = false;
         this.isInvalidFieldError = false;
+        this.disableAddButton = true;
 
         if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0 && this.isValidInputs()) {
             this.ismsisdnError = false;
@@ -338,7 +342,7 @@ export class WhitelistMainComponent implements OnInit {
                     if (this.isValidMobileNumber(entry)) {
                         if (entry.includes('tel:+') || entry.includes('+')) {
 
-                            let num = entry.split('+')[1];
+                            const num = entry.split('+')[1];
                             this.msisdnList[count] = 'tel3A+' + num;
                             this.islong = false;
 
@@ -364,6 +368,7 @@ export class WhitelistMainComponent implements OnInit {
                 if (this.islong == true) {
                     this.long = 'Not a Valid MSISDN';
                     this.islong = true;
+                    this.disableAddButton = false;
                 } else {
                     this.addNewToWhitelist();
                 }
@@ -378,10 +383,12 @@ export class WhitelistMainComponent implements OnInit {
                     this.msisdnError = 'Wrong input please enter Comma seperated valid mobile numbers ';
                     this.ismsisdnError = true;
                 }
+                this.disableAddButton = false;
             }
         } else {
             this.msisdnError = 'Select valid Subscriber, Application and API first';
             this.ismsisdnError = true;
+            this.disableAddButton = false;
         }
 
 
@@ -435,6 +442,7 @@ export class WhitelistMainComponent implements OnInit {
 
         this.msisdnRangeError = '';
         this.ismsisdnRangeError = false;
+        this.disableAddButton = true;
 
         if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0 && this.isValidInputs()) {
 
@@ -444,26 +452,30 @@ export class WhitelistMainComponent implements OnInit {
                     if (this.subscriber.length != 0 && this.app.length != 0 && this.api.length != 0) {
                         this.msisdnList = [];
                         for (let _i = 0; _i <= diff; _i++) {
-                            let phone = Number(this.msisdnMin) + Number(_i)
+                            const phone = Number(this.msisdnMin) + Number(_i);
                             this.msisdnList[_i] = 'tel3A+' + phone;
                         }
                         this.addNewToWhitelist();
                     } else {
                         this.msisdnRangeError = 'Select the relevant Subscriber, Application and API first';
                         this.ismsisdnRangeError = true;
+                        this.disableAddButton = false;
                     }
                 } else {
                     this.msisdnRangeError = 'Set minimum and maximum values in input boxes respectively';
                     this.ismsisdnRangeError = true;
+                    this.disableAddButton = false;
                 }
 
             } else {
                 this.msisdnRangeError = 'The Entered Mobile Numbers are not valid mobile numbers';
                 this.ismsisdnRangeError = true;
+                this.disableAddButton = false;
             }
         } else {
             this.msisdnRangeError = 'Select valid Subscriber, Application and API first';
             this.ismsisdnRangeError = true;
+            this.disableAddButton = false;
         }
     }
 

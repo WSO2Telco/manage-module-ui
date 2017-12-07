@@ -6,11 +6,7 @@ const routes = [
     {
         path : 'apiwise',
         component : ApiBlacklistMainComponent
-    },
-    {
-        path : 'spwise',
-        component : SpBlacklistMainComponent
-    },
+    }
 ];
 
 export const BlackListRoutes = RouterModule.forChild(routes);
