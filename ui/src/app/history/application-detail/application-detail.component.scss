@@ -14,7 +14,7 @@
   color: #E19131;
 }
 
-.quotaInputContainer{
+.quotaInputContainer {
   min-height: 100px;
   padding: 10px;
   background-color: white;
@@ -48,8 +48,10 @@
   }
 }
 
-
-.open{overflow: visible; z-index: 100000;}
+.open {
+  overflow: visible;
+  z-index: 100000;
+}
 
 .error {
   font-size: 0.9em;
@@ -59,10 +61,11 @@
 /************* date range styles  ***********************/
 
 .daterangepicker {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-size: 14px;
   overflow: hidden
 }
+
 @media (min-width: 550px) {
   .daterangepicker {
     z-index: 3000;
@@ -72,6 +75,7 @@
     min-width: 550px;
   }
 }
+
 @media (max-width: 550px) {
   .daterangepicker {
     z-index: 3000;
@@ -88,50 +92,62 @@
   .col-md-10 {
     width: 100% !important;
   }
-  .ranges{
+  .ranges {
     display: none;
   }
 }
+
 .hidden {
   display: none !important;
   visibility: false !important;
 }
+
 .daterangepicker .calendar {
   margin: 4px;
   float: left;
   border-radius: 4px !important;
 }
-.applyBtn{
+
+.applyBtn {
   margin: 4px;
 }
-.daterangepicker  .flush {
+
+.daterangepicker .flush {
   padding: 0 !important;
   margin: 0 !important;
 }
-.daterangepicker  .flush-bottom{
+
+.daterangepicker .flush-bottom {
   padding-bottom: 0 !important;
 }
-.daterangepicker  .flush-left {
+
+.daterangepicker .flush-left {
   padding-left: 0 !important;
 }
-.daterangepicker  .flush-right {
+
+.daterangepicker .flush-right {
   padding-right: 0 !important;
 }
-.daterangepicker  .flush-half--left {
+
+.daterangepicker .flush-half--left {
   padding-left: 4px !important;
 }
+
 .daterangepicker .flush-half--right {
   padding-right: 4px !important;
 }
+
 .daterangepicker .nudge-top {
   top: 5px;
 }
+
 .daterangepicker th {
   margin: 1px !important;
   padding: 1px !important;
   text-align: center;
   border-radius: 4px !important;
 }
+
 .daterangepicker td {
   font-size: 14px;
   height: 20px;
@@ -143,63 +159,77 @@
   white-space: nowrap;
   text-align: center;
 }
+
 .daterangepicker .btn.btn-flat {
   border: none;
   background: transparent;
   margin: 3px !important;
   padding: 1px !important;
 }
+
 .daterangepicker .off {
   color: #A2A2A2;
 }
+
 .daterangepicker table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
 .daterangepicker td,
 .daterangepicker th {
   padding: 0;
 }
-.daterangepicker .clickable{
+
+.daterangepicker .clickable {
   cursor: pointer;
 }
-.daterangepicker .clickable-link{
+
+.daterangepicker .clickable-link {
   color: #337ab7;
 }
-.daterangepicker .clickable.disabled{
+
+.daterangepicker .clickable.disabled {
   pointer-events: none;
   color: #A2A2A2;
 }
+
 .ranges .clickable {
   margin-top: 8px !important;
 }
-.daterangepicker label{
+
+.daterangepicker label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-.btn{ border-radius: 0px !important;}
+.btn {
+  border-radius: 0px !important;
+}
 
 .btn-sm,
 .btn-group-sm > .btn {
-  padding: 0px 5px 0px 5px!important;
+  padding: 0px 5px 0px 5px !important;
   font-size: 10px;
   margin: 3px;
   border-radius: 3px;
 }
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 *:before,
 *:after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
 .daterangepicker input,
 .daterangepicker button,
 .daterangepicker select,
@@ -208,60 +238,78 @@
   font-size: inherit;
   line-height: inherit;
 }
+
 .daterangepicker .text-center {
   text-align: center;
 }
-.daterangepicker .col-md-1, .daterangepicker .col-md-2,.daterangepicker .col-md-3,.daterangepicker .col-md-4,.daterangepicker .col-md-5,.daterangepicker .col-md-6,.daterangepicker .col-md-7,.daterangepicker .col-md-8,.daterangepicker .col-md-9,.daterangepicker .col-md-10,.daterangepicker .col-md-11,.daterangepicker .col-md-12 {
+
+.daterangepicker .col-md-1, .daterangepicker .col-md-2, .daterangepicker .col-md-3, .daterangepicker .col-md-4, .daterangepicker .col-md-5, .daterangepicker .col-md-6, .daterangepicker .col-md-7, .daterangepicker .col-md-8, .daterangepicker .col-md-9, .daterangepicker .col-md-10, .daterangepicker .col-md-11, .daterangepicker .col-md-12 {
   position: relative;
   float: left;
 }
+
 .daterangepicker .col-md-12 {
   width: 100%;
 }
+
 .daterangepicker .col-md-11 {
   width: 91.66666667%;
 }
+
 .daterangepicker .col-md-10 {
   width: 83.33333333%;
 }
+
 .daterangepicker .col-md-9 {
   width: 75%;
 }
+
 .daterangepicker .col-md-8 {
   width: 66.66666667%;
 }
+
 .daterangepicker .col-md-7 {
   width: 58.33333333%;
 }
+
 .daterangepicker .col-md-6 {
   width: 50%;
 }
+
 .daterangepicker .col-md-5 {
   width: 41.66666667%;
 }
+
 .daterangepicker .col-md-4 {
   width: 33.33333333%;
 }
+
 .daterangepicker .col-md-3 {
   width: 25%;
 }
+
 .daterangepicker .col-md-2 {
   width: 16.66666667%;
 }
+
 .daterangepicker .col-md-1 {
   width: 8.33333333%;
 }
+
 .daterangepicker table {
   background-color: transparent;
 }
+
 .daterangepicker th {
   text-align: left;
 }
+
 .daterangepicker .table {
   width: 100%;
   max-width: 100%;
   margin-bottom: 20px;
 }
+
 .daterangepicker .table > thead > tr > th,
 .daterangepicker .table > tbody > tr > th,
 .daterangepicker .table > tfoot > tr > th,
@@ -273,10 +321,12 @@
   vertical-align: top;
   border-top: 1px solid #ddd;
 }
+
 .daterangepicker .table > thead > tr > th {
   vertical-align: bottom;
   border-bottom: 2px solid #ddd;
 }
+
 .daterangepicker .table > caption + thead > tr:first-child > th,
 .daterangepicker .table > colgroup + thead > tr:first-child > th,
 .daterangepicker .table > thead:first-child > tr:first-child > th,
@@ -285,12 +335,15 @@
 .daterangepicker .table > thead:first-child > tr:first-child > td {
   border-top: 0;
 }
+
 .daterangepicker .table > tbody + tbody {
   border-top: 2px solid #ddd;
 }
+
 .daterangepicker .table .table {
   background-color: #fff;
 }
+
 .daterangepicker .table-condensed > thead > tr > th,
 .daterangepicker .table-condensed > tbody > tr > th,
 .daterangepicker .table-condensed > tfoot > tr > th,
@@ -299,9 +352,11 @@
 .daterangepicker .table-condensed > tfoot > tr > td {
   padding: 5px;
 }
+
 .daterangepicker .table-bordered {
   border: 1px solid #ddd;
 }
+
 .daterangepicker .table-bordered > thead > tr > th,
 .daterangepicker .table-bordered > tbody > tr > th,
 .daterangepicker .table-bordered > tfoot > tr > th,
@@ -310,10 +365,12 @@
 .daterangepicker .table-bordered > tfoot > tr > td {
   border: 1px solid #ddd;
 }
+
 .daterangepicker .table-bordered > thead > tr > th,
 .daterangepicker .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
 }
+
 .daterangepicker .table > thead > tr > td.active,
 .daterangepicker .table > tbody > tr > td.active,
 .daterangepicker .table > tfoot > tr > td.active,
@@ -328,6 +385,7 @@
 .daterangepicker .table > tfoot > tr.active > th {
   background-color: #f5f5f5;
 }
+
 .daterangepicker .table-hover > tbody > tr > td.active:hover,
 .daterangepicker .table-hover > tbody > tr > th.active:hover,
 .daterangepicker .table-hover > tbody > tr.active:hover > td,
@@ -335,6 +393,7 @@
 .daterangepicker .table-hover > tbody > tr.active:hover > th {
   background-color: #e8e8e8;
 }
+
 .daterangepicker .table > thead > tr > td.info,
 .daterangepicker .table > tbody > tr > td.info,
 .daterangepicker .table > tfoot > tr > td.info,
@@ -349,6 +408,7 @@
 .daterangepicker .table > tfoot > tr.info > th {
   background-color: #d9edf7;
 }
+
 .daterangepicker .table-hover > tbody > tr > td.info:hover,
 .daterangepicker .table-hover > tbody > tr > th.info:hover,
 .daterangepicker .table-hover > tbody > tr.info:hover > td,
@@ -356,6 +416,7 @@
 .daterangepicker .table-hover > tbody > tr.info:hover > th {
   background-color: #c4e3f3;
 }
+
 .daterangepicker .form-control {
   display: block;
   width: 100%;
@@ -374,32 +435,39 @@
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
+
 .daterangepicker .form-control:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
 }
+
 .daterangepicker .form-control::-moz-placeholder {
   color: #999;
   opacity: 1;
 }
+
 .daterangepicker .form-control:-ms-input-placeholder {
   color: #999;
 }
+
 .daterangepicker .form-control::-webkit-input-placeholder {
   color: #999;
 }
+
 .daterangepicker .form-control[disabled],
 .daterangepicker .form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: #eee;
   opacity: 1;
 }
+
 .daterangepicker .form-control[disabled],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
 }
+
 .daterangepicker .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -420,6 +488,7 @@ fieldset[disabled] .form-control {
   border: 1px solid transparent;
   border-radius: 4px;
 }
+
 .daterangepicker .btn:focus,
 .daterangepicker .btn:active:focus,
 .daterangepicker .btn.active:focus,
@@ -430,12 +499,14 @@ fieldset[disabled] .form-control {
   outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
+
 .daterangepicker .btn:hover,
 .daterangepicker .btn:focus,
 .daterangepicker .btn.focus {
   color: #333;
   text-decoration: none;
 }
+
 .daterangepicker .btn:active,
 .daterangepicker .btn.active {
   background-image: none;
@@ -443,6 +514,7 @@ fieldset[disabled] .form-control {
   -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
   box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
 }
+
 .daterangepicker .btn.disabled,
 .daterangepicker .btn[disabled],
 fieldset[disabled] .btn {
@@ -453,11 +525,13 @@ fieldset[disabled] .btn {
   box-shadow: none;
   opacity: .65;
 }
+
 .daterangepicker .btn-default {
   color: #333;
   background-color: #fff;
   border-color: #ccc;
 }
+
 .daterangepicker .btn-default:hover,
 .daterangepicker .btn-default:focus,
 .daterangepicker .btn-default.focus,
@@ -468,11 +542,13 @@ fieldset[disabled] .btn {
   background-color: #e6e6e6;
   border-color: #adadad;
 }
+
 .daterangepicker .btn-default:active,
 .daterangepicker .btn-default.active,
 .daterangepicker .open > .dropdown-toggle.btn-default {
   background-image: none;
 }
+
 .daterangepicker .btn-default.disabled,
 .daterangepicker .btn-default[disabled],
 .daterangepicker fieldset[disabled] .btn-default,
@@ -494,15 +570,18 @@ fieldset[disabled] .btn {
   background-color: #fff;
   border-color: #ccc;
 }
+
 .daterangepicker .btn-default .badge {
   color: #fff;
   background-color: #333;
 }
+
 .daterangepicker .btn-success {
   color: #fff;
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+
 .daterangepicker .btn-success:hover,
 .daterangepicker .btn-success:focus,
 .daterangepicker .btn-success.focus,
@@ -513,11 +592,13 @@ fieldset[disabled] .btn {
   background-color: #449d44;
   border-color: #398439;
 }
+
 .daterangepicker .btn-success:active,
 .daterangepicker .btn-success.active,
 .daterangepicker .open > .dropdown-toggle.btn-success {
   background-image: none;
 }
+
 .daterangepicker .btn-success.disabled,
 .daterangepicker .btn-success[disabled],
 .daterangepicker fieldset[disabled] .btn-success,
@@ -539,15 +620,18 @@ fieldset[disabled] .btn {
   background-color: #5cb85c;
   border-color: #4cae4c;
 }
+
 .daterangepicker .btn-success .badge {
   color: #5cb85c;
   background-color: #fff;
 }
+
 .daterangepicker .btn-link {
   font-weight: normal;
   color: #337ab7;
   border-radius: 0;
 }
+
 .daterangepicker .btn-link,
 .daterangepicker .btn-link:active,
 .daterangepicker .btn-link.active,
@@ -557,18 +641,21 @@ fieldset[disabled] .btn {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+
 .daterangepicker .btn-link,
 .daterangepicker .btn-link:hover,
 .daterangepicker .btn-link:focus,
 .daterangepicker .btn-link:active {
   border-color: transparent;
 }
+
 .daterangepicker .btn-link:hover,
 .daterangepicker .btn-link:focus {
   color: #23527c;
   text-decoration: underline;
   background-color: transparent;
 }
+
 .daterangepicker .btn-link[disabled]:hover,
 .daterangepicker fieldset[disabled] .btn-link:hover,
 .daterangepicker .btn-link[disabled]:focus,
@@ -576,10 +663,10 @@ fieldset[disabled] .btn {
   color: #777;
   text-decoration: none;
 }
+
 .daterangepicker .btn {
   outline: none;
 }
-
 
 /**********************  ngx datepicker ***********************/
 
@@ -588,6 +675,7 @@ fieldset[disabled] .btn {
   border-radius: 32px;
   color: black;
 }
+
 .partially button span {
   background-color: orange;
   border-radius: 32px;
@@ -640,34 +728,34 @@ fieldset[disabled] .btn {
 
       .action {
         border-color: black;
-        color : black;
+        color: black;
       }
 
-      &.A,&.R{
+      &.A, &.R {
         height: 243px;
       }
     }
 
-    .more-con{
-      padding:10px 0px 10px 0px;
+    .more-con {
+      padding: 10px 0px 10px 0px;
       background-color: $gray_0;
       position: absolute;
       left: 10px;
       right: 11px;
       height: 105px;
       margin-top: 53px;
-      border:solid 1px #d0d0d0;
-      @include box-shadow( inset 0px 10px 10px -9px rgba(209,209,209,1));
+      border: solid 1px #d0d0d0;
+      @include box-shadow(inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
 
-      &.A,&.R{
+      &.A, &.R {
         height: 190px;
       }
 
-      .more-row{
+      .more-row {
         margin-bottom: 2px;
       }
 
-      .field-name{
+      .field-name {
         height: 40px;
         background-color: $gray_1;
         line-height: 40px;
@@ -675,19 +763,19 @@ fieldset[disabled] .btn {
         font-weight: 600;
       }
 
-      .field-value{
+      .field-value {
         height: 40px;
         background-color: white;
         line-height: 40px;
       }
 
-      select,input{
+      select, input {
         margin-top: 2px;
       }
 
-      .btn{
+      .btn {
         margin-top: 10px;
-        padding-top: 5px!important;
+        padding-top: 5px !important;
         padding-bottom: 5px !important;
       }
     }
@@ -708,11 +796,11 @@ fieldset[disabled] .btn {
     }
   }
 
-  .fromcolor{
+  .fromcolor {
     color: $success;
   }
 
-  .tocolor{
+  .tocolor {
     color: $error-red;
   }
 }
@@ -726,19 +814,23 @@ fieldset[disabled] .btn {
   text-transform: uppercase;
 }
 
-
-.subtitle{
+.subtitle {
   color: #E19132;
 }
 
-.has-danger .form-control{
+.has-danger .form-control {
   border-color: #d9534f;
   color: #d9534f;
 }
 
-.resulttitle{   color: #E19131; font-weight: bold;}
+.resulttitle {
+  color: #E19131;
+  font-weight: bold;
+}
 
-.control-label span { color: #dd0d0d;}
+.control-label span {
+  color: #dd0d0d;
+}
 
 .info-tooltip {
   font-size: 1.5em;
@@ -748,8 +840,16 @@ fieldset[disabled] .btn {
   cursor: pointer;
 }
 
-
 .scrollit {
-  overflow-y:auto;
-  height:400px;
+  overflow-y: auto;
+  height: 400px;
+}
+
+.center {
+  text-align: center;
+}
+
+.center i {
+  font-size: 110px !important;
+  color: #32c5d2;
 }
