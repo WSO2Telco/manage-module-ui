@@ -11,7 +11,8 @@
                             <tbody>
                             <tr>
                                 <th>Application Status:</th>
-                                <td colspan="2"> <span class="label label-success">{{ applicationDetail.status }}</span></td>
+                                <td colspan="2"><span class="label label-success">{{ applicationDetail.status }}</span>
+                                </td>
                             </tr>
                             <tr>
                                 <th>OPERATOR:</th>
@@ -19,7 +20,14 @@
                             </tr>
                             <tr *ngFor="let opt of applicationDetail.operatorApprovals; let i=index">
                                 <td>{{ applicationDetail.operatorApprovals[i]?.operatorName }}</td>
-                                <td colspan="2"><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Approved'" class="label label-success">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Pending'" class="label label-warning">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Rejected'" class="label label-danger">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span></td>
+                                <td colspan="2"><span
+                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Approved'"
+                                        class="label label-success">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
+                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Pending'"
+                                        class="label label-warning">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
+                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Rejected'"
+                                        class="label label-danger">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -71,9 +79,12 @@
                                                             }}
                                                         </td>
                                                         <td>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Approved'" class="label label-success">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Pending'" class="label label-warning">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
-                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Rejected'" class="label label-danger">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
+                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Approved'"
+                                                                  class="label label-success">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
+                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Pending'"
+                                                                  class="label label-warning">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
+                                                            <span *ngIf="applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus == 'Rejected'"
+                                                                  class="label label-danger">{{applicationDetail?.subscriptions[i]?.operatorApprovals[x]?.approvalStatus}}</span>
 
                                                         </td>
                                                         <td> {{ applicationDetail?.subscriptions[i]?.lastUpdated }}</td>
@@ -88,6 +99,20 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12"><a href="#/history" class="btn btn-primary"> Back </a></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12" *ngIf='!show'>
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header center">
+                <i class="material-icons">assignment_late</i> <br>
+                Sorry!! there is no record for this application.
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
                     <div class="col-sm-12"><a href="#/history" class="btn btn-primary"> Back </a></div>
                 </div>
 
