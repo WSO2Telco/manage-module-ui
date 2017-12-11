@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {
-    ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
-    ApplicationTaskResult, RelevantRates, ApplicationTaskResults
+    ApplicationTaskFilter,
+    ApplicationTaskResult,
+    ApprovalEvent
 } from '../../commons/models/application-data-models';
 import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
 import {MessageService} from '../../commons/services/message.service';
 import {ApprovalHelperService} from '../approval-helper.service';
 import {TableDataType} from '../../commons/models/common-data-models';
-import {SubscriptionRemoteDataService} from "../../data-providers/subscription-remote-data.service";
 
 @Component({
     selector: 'app-subscriptions',
@@ -24,7 +24,6 @@ export class SubscriptionsComponent implements OnInit {
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,
-                private subscriptionService: SubscriptionRemoteDataService,
                 private approvalService: ApprovalRemoteDataService) {
     }
 
@@ -34,14 +33,22 @@ export class SubscriptionsComponent implements OnInit {
 
         this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'), 10);
 
-        this.subscriptionService.SubscriptionApprovalTaskProvider.subscribe(
-            (subs: ApplicationTaskResults) => {
-                this.mySubscriptions = subs.myApplicationTasks;
-                this.allSubscriptions = subs.allApplicationTasks;
+        this.approvalService.MySubscriptionTasksProvider.subscribe(
+            (apps: ApplicationTaskResult) => {
+                this.mySubscriptions = apps;
                 if (this.mySubscriptions != null) {
                     this.setDefaultOperationRates();
                 }
-                if(this.allSubscriptions != null){
+            },
+            (error) => {
+                this.message.error(error.message);
+            }
+        );
+
+        this.approvalService.GroupSubscriptionTasksProvider.subscribe(
+            (apps: ApplicationTaskResult) => {
+                this.allSubscriptions = apps;
+                if (this.allSubscriptions != null){
                     this.setDefaultAllOperationRates();
                 }
             },
@@ -51,8 +58,6 @@ export class SubscriptionsComponent implements OnInit {
         );
 
         this.getData();
-
-
     }
 
     setDefaultOperationRates() {
@@ -62,7 +67,7 @@ export class SubscriptionsComponent implements OnInit {
                 let selectedRate = '';
                 for (const entry2 of entry.relevantRates) {
                     if (entry2.rateDefinitions.length > 0) {
-                        let id = entry2.rateDefinitions[0].rateDefId;
+                        const id = entry2.rateDefinitions[0].rateDefId;
 
                         if (selectedRate.length == 0) {
                             selectedRate += id;
@@ -87,7 +92,7 @@ export class SubscriptionsComponent implements OnInit {
                 let selectedRate = '';
                 for (const entry2 of entry.relevantRates) {
                     if (entry2.rateDefinitions.length > 0) {
-                        let id = entry2.rateDefinitions[0].rateDefId;
+                        const id = entry2.rateDefinitions[0].rateDefId;
 
                         if (selectedRate.length == 0) {
                             selectedRate += id;
@@ -106,9 +111,9 @@ export class SubscriptionsComponent implements OnInit {
     }
 
     private getData() {
-        // this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
-        // this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
-        this.subscriptionService.getSubscriptionTasks();
+        this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
+        this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
+        // this.subscriptionService.getSubscriptionTasks();
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {

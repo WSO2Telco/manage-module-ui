@@ -26,7 +26,7 @@ export class LoginRemoteDataService {
    * @returns {Observable<User>}
    */
   login(data: User) {
-    return this.http.post(this.apiEndpoints['login'], data, this.options)
+    return this.http.get(this.apiEndpoints['login'], this.getOptions(data))
         .map((response: Response) => {
           return {
             success: true,
@@ -61,5 +61,20 @@ export class LoginRemoteDataService {
         })
         .catch((error: Response) => Observable.throw(error.json().message()));
   }
+
+    /**
+     * generate request headers
+     * @returns {RequestOptions}
+     */
+    getOptions(data: User): RequestOptions {
+        const token = btoa(data.userName + ':' + data.password);
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'user-name': data.userName,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
+    }
 
 }

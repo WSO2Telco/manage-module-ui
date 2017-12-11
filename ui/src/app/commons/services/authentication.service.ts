@@ -27,8 +27,23 @@ export class AuthenticationService {
             .subscribe(
                 data => {
                     if (data.success) {
-                        const loginInfo = data.payload;
+                        const loginInfo = new LoginResponse();
                         loginInfo.start = new Date().getTime();
+                        loginInfo.roles = data.payload.roles;
+                        loginInfo.userName = data.payload.userName;
+                        loginInfo.isAdmin = false;
+                        for (const entry of data.payload.roles) {
+                            if (entry === 'manage-app-admin') {
+                                loginInfo.isAdmin = true;
+                            }
+                        }
+                        loginInfo.operator = '';
+                        if (!loginInfo.isAdmin) {
+                            loginInfo.operator = data.payload.userName.toUpperCase();
+                        }
+                        loginInfo.billing = true;
+                        loginInfo.creditPlan = true;
+                        loginInfo.token = btoa(userName + ':' + password)
                         this.loginUserInfo.next(loginInfo);
                         sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
                         this._router.navigate(['home']);

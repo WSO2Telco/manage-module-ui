@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'));
         this.groupSubscriptionFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'));
 
-        this.approvalService.MyApplicationCreationTasksProvider.subscribe(
+        this.approvalService.MyApplicationApprovalTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
                 this.myApplications = response;
             },
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
             },
             (error) => this.message.error(error));
 
-        this.approvalService.GroupApplicationCreationTasksProvider.subscribe(
+        this.approvalService.AllApplicationApprovalTasksProvider.subscribe(
             (response: ApplicationTaskResult) => {
                 this.allApplications = response;
             },

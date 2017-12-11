@@ -41,10 +41,18 @@ export class ApplicationsComponent implements OnInit {
 
         this.groupApplicationFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'), 10);
 
-        this.applicationService.ApplicationApprovalTasksProvider.subscribe(
-            (apps: ApplicationTaskResults) => {
-                this.myApplications = apps.myApplicationTasks;
-                this.allApplications = apps.allApplicationTasks;
+        this.approvalService.MyApplicationApprovalTasksProvider.subscribe(
+            (apps: ApplicationTaskResult) => {
+                this.myApplications = apps;
+            },
+            (error) => {
+                this.message.error(error.message);
+            }
+        );
+
+        this.approvalService.AllApplicationApprovalTasksProvider.subscribe(
+            (apps: ApplicationTaskResult) => {
+                this.allApplications = apps;
             },
             (error) => {
                 this.message.error(error.message);
@@ -61,9 +69,10 @@ export class ApplicationsComponent implements OnInit {
     }
 
     private getData() {
-        this.applicationService.getApplicationTasks();
-        // this.approvalService.getFilteredResult(this.userApplicationFilter);
-        // this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
+        // this.applicationService.getMyApplicationTasks();
+        // this.applicationService.getAllApplicationTasks();
+        this.approvalService.getFilteredResult(this.userApplicationFilter);
+        this.approvalService.getUserGroupApplicationTasks(this.groupApplicationFilter);
     }
 
     private getCreditPlan() {

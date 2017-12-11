@@ -96,27 +96,26 @@ export class ApprovalHelperService {
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
-            param.user = completedByUser;
-            param.taskType = 'application';
-            param.role = role;
             param.creditPlan = appTask.creditPlan;
 
             this.approvalService.approveApplicationCreationTask(param).subscribe(
-                () => {
-
-                    if (status == 'APPROVED') {
-                        this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
+                data => {
+                    if (data.success) {
+                        if (status == 'APPROVED') {
+                            this.message.success(this.message.APPROVAL_MESSAGES.APP_CREATION_APPROVE_SUCCESS);
+                        } else {
+                            this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                        }
+                        this.approvalService.getAllTasks();
+                        this.slimLoadingBarService.complete();
                     } else {
-                        this.message.info(this.message.APPROVAL_MESSAGES.APP_CREATION_REJECT_SUCCESS);
+                        this.message.error(data.message);
+                        this.slimLoadingBarService.stop();
                     }
-
-                    this.approvalService.getAllTasks();
                 },
-                (error) => {
-                    this.message.error(error);
-                },
-                () => {
-                    this.slimLoadingBarService.complete();
+                error => {
+                    this.message.error(error.message);
+                    this.slimLoadingBarService.stop();
                 }
             );
         };
