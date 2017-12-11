@@ -42,15 +42,17 @@ export class ReportingRemoteDataService {
 
     private options: RequestOptions = new RequestOptions({headers: this.headers});
 
+    private url = new URL(window.location.href);
+    private apiContext = this.url.protocol + '//' + this.url.host + '/workflow-service/workflow/history';
+
     private apiEndpoints: Object = {
-        subscribers: this.apiContext + '/reports/subscribers',
-        operators : this.apiContext + '/reports/operators',
-        approvalHistory : this.apiContext + '/reports/approval',
-        applications : this.apiContext + '/reports/applications',
+        subscribers: this.apiContext + '/subscribers',
+        operators : this.apiContext + '/operators',
+        approvalHistory : this.apiContext + '/approval',
+        applications : this.apiContext + '/applications',
     };
 
-    constructor(@Inject('API_CONTEXT') private apiContext: string,
-                private http: Http,
+    constructor(private http: Http,
                 private message: MessageService,
                 private slimLoadingBarService: SlimLoadingBarService,
                 private authService: AuthenticationService) {
