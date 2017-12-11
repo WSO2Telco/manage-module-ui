@@ -40,7 +40,7 @@ export class DashboardRemoteDataService {
                 private authenticationService: AuthenticationService,
                 private message: MessageService) {
 
-        approvalService.MyApplicationCreationTasksProvider.subscribe(
+        approvalService.MyApplicationApprovalTasksProvider.subscribe(
             (result) => {
                 this.updateDashboardData(result, 'appCreationsForUser');
             }
@@ -52,7 +52,7 @@ export class DashboardRemoteDataService {
             }
         );
 
-        approvalService.GroupApplicationCreationTasksProvider.subscribe(
+        approvalService.AllApplicationApprovalTasksProvider.subscribe(
             (result) => {
                 this.updateDashboardData(result, 'appCreationsForGroup');
             }
@@ -116,7 +116,7 @@ export class DashboardRemoteDataService {
 
     getSubscriptionCreationHistoryGraphData(): void {
         this.slimLoadingBarService.start();
-        this.http.get(this.apiEndpoints['applicationGraph'], this.getOptions())
+        this.http.get(this.apiEndpoints['subscriptionGraph'], this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw({
                 success: false,
