@@ -128,9 +128,24 @@
 
                 <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
                     <label class="control-label col-sm-2">Tariff <span>*</span></label>
+                    <template #customItemTemplate let-model="item" let-index="index">
+                        <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b> <span
+                                class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span
+                                *ngIf="model.tariffMaxCount !== 0"> <b>MaxCount:</b> {{ model.tariffMaxCount }}</span> <span
+                                *ngIf="model.tariffExcessRate !== 0"> <b>ExcessRate:</b> {{ model.tariffExcessRate }}</span><span
+                                *ngIf="model.tariffDefRate !== 0"> <b>DefRate:</b> {{ model.tariffDefRate }}</span><span
+                                *ngIf="model.tariffSPCommission !== 0"> <b>SPCommission:</b> {{ model.tariffSPCommission }}</span><span
+                                *ngIf="model.tariffAdsCommission !== 0"> <b>AdsCommission:</b> {{ model.tariffAdsCommission }}</span><span
+                                *ngIf="model.tariffOpcoCommission !== 0"> <b>OpcoCommission:</b> {{ model.tariffOpcoCommission }}</span><span
+                                *ngIf="model.tariffSurChargeval !== 0"> <b>SurChargeval:</b> {{ model.tariffSurChargeval }}</span><span
+                                *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span
+                                *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
+                        </h6>
+                    </template>
                     <div class="col-sm-4">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
+                               [typeaheadItemTemplate]="customItemTemplate"
                                [typeaheadMinLength]="0"
                                typeaheadOptionField="tariffName"
                                autocomplete="off"
@@ -143,10 +158,68 @@
                                (typeaheadOnSelect)="isTariffValid()"
                                (input)="isTariffValid()">
                         <span class="error" *ngIf="isTariffError">{{tariffError}}</span>
+                        <span *ngIf="isTariffSelect" class="glyphicon glyphicon-info-sign info-tooltip"
+                              [tooltip]="ref" placement="right"
+                        ></span>
                     </div>
                     <span class="glyphicon glyphicon-plus info-tooltip"
                           tooltip="Click here to Add a new tariff to the list" placement="right"
                           (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
+
+                    <template #ref>
+                        <table style="width:100%">
+                            <tr>
+                                <th colspan="2"><h5 style="text-align: center">Details of Tariff :<b>{{this.selectedtariff[0]}}</b>
+                                </h5>
+                                </th>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff Description:</td>
+                                <td>{{this.selectedtariff[1]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff Default Value:</td>
+                                <td>{{this.selectedtariff[2]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff MaxCount:</td>
+                                <td>{{this.selectedtariff[3]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff Excess Rate:</td>
+                                <td>{{this.selectedtariff[4]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff Default Rate:</td>
+                                <td>{{this.selectedtariff[5]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff SP Commission:</td>
+                                <td>{{this.selectedtariff[6]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff Ads Commission:</td>
+                                <td>{{this.selectedtariff[7]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff OpcoCommission:</td>
+                                <td>{{this.selectedtariff[8]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff SurCharge value:</td>
+                                <td>{{this.selectedtariff[9]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff SurChargeAds:</td>
+                                <td>{{this.selectedtariff[10]}}</td>
+                            </tr>
+                            <tr>
+                                <td width="70%" style="text-align: right">Tariff SurChargeOpco:</td>
+                                <td>{{this.selectedtariff[11]}}</td>
+                            </tr>
+
+                        </table>
+                    </template>
                 </div>
 
                 <div class="form-group">
@@ -174,7 +247,7 @@
                     <div class="col-sm-4">
                         <label class="switch">
                             <input type="checkbox"
-                                   (change)="onCheckBox()" [checked]="showSubcategory" >
+                                   (change)="onCheckBox()" [checked]="showSubcategory">
                             <span class="slider round"></span>
                         </label>
                         &nbsp;&nbsp; <span class="glyphicon glyphicon-question-sign info-tooltip"
@@ -191,7 +264,8 @@
 
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2 btnContainer">
-                        <button type="submit" class="btn btn-primary animated fadeIn">Add</button>&nbsp;
+                        <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
+                        &nbsp;
                         <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                     </div>
                 </div>

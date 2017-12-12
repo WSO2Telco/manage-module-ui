@@ -16,49 +16,51 @@ import {Router} from '@angular/router';
 })
 export class RateMainComponent implements OnInit {
 
-    private isDescriptionError: boolean;
-    private isNameError: boolean;
-    private isDateEmpty: boolean;
-    private isCurrencyError: boolean;
-    private isRateTypeError: boolean;
-    private isTariffError: boolean;
+    private isDescriptionError:boolean;
+    private isNameError:boolean;
+    private isDateEmpty:boolean;
+    private isCurrencyError:boolean;
+    private isRateTypeError:boolean;
+    private isTariffError:boolean;
 
-    private currencyError: string;
-    private rateTypeError: string;
-    private tariffError: string;
+    private currencyError:string;
+    private rateTypeError:string;
+    private tariffError:string;
 
-    private nameError: string;
-    private descriptionError: string;
+    private nameError:string;
+    private descriptionError:string;
 
-    private rateDefName: string;
-    private rateDefDescription: string;
-    private currency: string;
-    private rateType: string;
-    private tariff: string;
-    private rateTax: string;
-    private taxId: number;
+    private rateDefName:string;
+    private rateDefDescription:string;
+    private currency:string;
+    private rateType:string;
+    private tariff:string;
+    private rateTax:string;
+    private taxId:number;
 
-    private showSubcategory: boolean;
-    private showAddCurrency: boolean;
-    private showAddTariff: boolean;
+    private showSubcategory:boolean;
+    private showAddCurrency:boolean;
+    private showAddTariff:boolean;
+    private isTariffSelect:boolean;
 
-    private dialogactionTitile: string;
+    private dialogactionTitile:string;
+    private selectedtariff:string[];
 
-    private tariffList: Tariff[];
-    public currencyList: Currency[];
-    private rateTypeList: RateType[];
-    private categoryList: Category[];
-    private rateCategories: RateCategory[];
-    private rateTaxList: RateTax[];
-    private mappingList: Mapping[];
-    private rateDefinitions: RateDefinition [];
+    private tariffList:Tariff[];
+    public currencyList:Currency[];
+    private rateTypeList:RateType[];
+    private categoryList:Category[];
+    private rateCategories:RateCategory[];
+    private rateTaxList:RateTax[];
+    private mappingList:Mapping[];
+    private rateDefinitions:RateDefinition [];
 
-    private showChildNewCategory: boolean;
-    private showChildNewSubCategory: boolean;
-    private showChildNewTariff: boolean;
+    private showChildNewCategory:boolean;
+    private showChildNewSubCategory:boolean;
+    private showChildNewTariff:boolean;
 
-    constructor(private rateService: RateService, private _router: Router,
-                private authService: AuthenticationService, private message: MessageService) {
+    constructor(private rateService:RateService, private _router:Router,
+                private authService:AuthenticationService, private message:MessageService) {
     }
 
     ngOnInit() {
@@ -69,6 +71,7 @@ export class RateMainComponent implements OnInit {
         this.showChildNewTariff = false;
         this.showChildNewSubCategory = false;
         this.showChildNewCategory = false;
+        this.isTariffSelect = false;
         this.clearErrors();
 
         this.rateDefName = '';
@@ -87,6 +90,7 @@ export class RateMainComponent implements OnInit {
         this.rateDefinitions = [];
         this.rateTaxList = [];
         this.rateCategories = [];
+        this.selectedtariff = [];
 
         this.getTariffList();
         this.getCurrencyList();
@@ -185,13 +189,13 @@ export class RateMainComponent implements OnInit {
     onRateCardSubmition(ratecardForm) {
 
         const loginInfo = this.authService.loginUserInfo.getValue();
-        let currency: Currency;
-        let tariff: Tariff;
-        let rateType: RateType;
-        let rateTaxes: RateTax[] = [];
-        let rateCard: Rate;
-        let rateDefCategoryBase: number;
-        let ratedefinition: RateDefinition;
+        let currency:Currency;
+        let tariff:Tariff;
+        let rateType:RateType;
+        let rateTaxes:RateTax[] = [];
+        let rateCard:Rate;
+        let rateDefCategoryBase:number;
+        let ratedefinition:RateDefinition;
 
         let validCurrency = false;
         let validTariff = false;
@@ -321,7 +325,7 @@ export class RateMainComponent implements OnInit {
      * check for empty fields
      * @returns {boolean}
      */
-    isEmpty(): boolean {
+    isEmpty():boolean {
         if (this.rateDefName.length != 0 && this.rateDefDescription.length != 0 && !this.isNameError && !this.isDescriptionError) {
             return false;
         } else {
@@ -359,7 +363,7 @@ export class RateMainComponent implements OnInit {
      * event trigger to handle modal fire
      * @param event
      */
-    onmodalfireHandler(event: string) {
+    onmodalfireHandler(event:string) {
         if (event === 'addNewCategory') {
             this.showChildNewCategory = true;
         } else if (event === 'addNewSubCategory') {
@@ -382,7 +386,7 @@ export class RateMainComponent implements OnInit {
      * event handler method which is triggered when a new currency is added
      * @param event
      */
-    onAddCurrencyHandler(event: boolean) {
+    onAddCurrencyHandler(event:boolean) {
         // console.log('add currency event called');
         if (event) {
             this.getCurrencyList();
@@ -393,7 +397,7 @@ export class RateMainComponent implements OnInit {
      * event handler method which is triggered when a new category added, to refresh list
      * @param event
      */
-    onAddCategoryHandler(event: boolean) {
+    onAddCategoryHandler(event:boolean) {
         // console.log('add category event called');
         if (event) {
             this.getCategoryList();
@@ -404,7 +408,7 @@ export class RateMainComponent implements OnInit {
      * event handler mehod which assign category, sub category and tariff values.
      * @param event
      */
-    onRateCategorySubmitionHandler(event: Mapping[]) {
+    onRateCategorySubmitionHandler(event:Mapping[]) {
 
         let count = 0;
         this.rateCategories = [];
@@ -460,7 +464,7 @@ export class RateMainComponent implements OnInit {
      * event handler method which is triggered when a new tariff added, to refresh list
      * @param event
      */
-    onAddTariffHandler(event: boolean) {
+    onAddTariffHandler(event:boolean) {
         if (event) {
             this.getTariffList();
         }
@@ -548,6 +552,21 @@ export class RateMainComponent implements OnInit {
         for (const item of this.tariffList) {
             if (item.tariffName == this.tariff) {
                 invalid = false;
+                this.isTariffSelect = true;
+
+
+                this.selectedtariff[0] = item.tariffName;
+                this.selectedtariff[1] = item.tariffDescription;
+                this.selectedtariff[2] = item.tariffDefaultVal.toString();
+                this.selectedtariff[3] = item.tariffMaxCount.toString();
+                this.selectedtariff[4] = item.tariffExcessRate.toString();
+                this.selectedtariff[5] = item.tariffDefRate.toString();
+                this.selectedtariff[6] = item.tariffSPCommission.toString();
+                this.selectedtariff[7] = item.tariffAdsCommission.toString();
+                this.selectedtariff[8] = item.tariffOpcoCommission.toString();
+                this.selectedtariff[9] = item.tariffSurChargeval.toString();
+                this.selectedtariff[10] = item.tariffSurChargeAds.toString();
+                this.selectedtariff[11] = item.tariffSurChargeOpco.toString();
             }
         }
 
