@@ -129,7 +129,10 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.get(this.apiEndpoints['applicationsSearch'] + '/' + loginInfo.userName.toLowerCase(), this.getOptions())
+            const endPoint = this.apiEndpoints['applicationsSearch'] + '/' + loginInfo.userName.toLowerCase()
+                + '?start=' + filter.startRecordNumber;
+
+            this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
                 .catch((error: Response) => Observable.throw({
                     success: false,
@@ -176,7 +179,9 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.get(this.apiEndpoints['applicationsSearch'], this.getOptions())
+            const endPoint = this.apiEndpoints['applicationsSearch'] + '?start=' + filter.startRecordNumber;
+
+            this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
                 .catch((error: Response) => Observable.throw({
                     success: false,
@@ -222,7 +227,10 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.get(this.apiEndpoints['subscriptionsSearch'] + '/' + loginInfo.userName.toLowerCase(), this.getOptions())
+            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '/' + loginInfo.userName.toLowerCase()
+                + '?start=' + filter.startRecordNumber;
+
+            this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
                 .catch((error: Response) => Observable.throw({
                     success: false,
@@ -269,7 +277,9 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            this.http.get(this.apiEndpoints['subscriptionsSearch'], this.getOptions())
+            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '?start=' + filter.startRecordNumber;
+
+            this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
                 .catch((error: Response) => Observable.throw({
                     success: false,
@@ -377,9 +387,11 @@ export class ApprovalRemoteDataService {
 
     getOptions(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
+        const useName = this.authService.loginUserInfo.getValue().userName;
         const headers = new Headers(
             {
                 'Authorization': 'Basic ' + token,
+                'user-name': useName,
                 'Content-Type': 'application/json'
             });
         return new RequestOptions({headers: headers});

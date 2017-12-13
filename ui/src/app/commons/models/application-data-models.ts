@@ -64,7 +64,7 @@ export class PaginationInfo{
 
 export class ApplicationTaskResult {
     applicationTasks: ApplicationTask[];
-    meteData: MetaData;
+    metadata: MetaData;
 }
 
 export class ApplicationTaskResults {

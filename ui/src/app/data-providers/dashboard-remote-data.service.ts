@@ -80,7 +80,7 @@ export class DashboardRemoteDataService {
 
     updateDashboardData(result: ApplicationTaskResult, type: string): void {
         const changeObj = {};
-        changeObj[type] = (result && result.applicationTasks && result.applicationTasks.length) || 0;
+        changeObj[type] = (result && result.metadata && result.metadata.total) || 0;
         this._dashboardStatisticsData = Object.assign({}, this._dashboardStatisticsData, changeObj);
         this._dashboardStatisticsData.totalAppCreations = this._dashboardStatisticsData.appCreationsForGroup + this._dashboardStatisticsData.appCreationsForUser;
         this._dashboardStatisticsData.totalSubCreations = this._dashboardStatisticsData.subCreationsForGroup + this._dashboardStatisticsData.subCreationsForUser;
@@ -142,9 +142,11 @@ export class DashboardRemoteDataService {
 
     getOptions(): RequestOptions {
         const token = this.authenticationService.loginUserInfo.getValue().token;
+        const useName = this.authenticationService.loginUserInfo.getValue().userName;
         const headers = new Headers(
             {
                 'Authorization': 'Basic ' + token,
+                'user-name': useName,
                 'Content-Type': 'application/json'
             });
         return new RequestOptions({headers: headers});

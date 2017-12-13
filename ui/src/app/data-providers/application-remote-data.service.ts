@@ -84,9 +84,11 @@ export class ApplicationRemoteDataService {
 
     getOptions(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
+        const useName = this.authService.loginUserInfo.getValue().userName;
         const headers = new Headers(
             {
                 'Authorization': 'Basic ' + token,
+                'user-name': useName,
                 'Content-Type': 'application/json'
             });
         return new RequestOptions({headers: headers});
