@@ -2,6 +2,7 @@ package com.wso2telco.dep.manageservice.resource.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Deprecated
 @XmlRootElement
 public class LoginResponse {
 

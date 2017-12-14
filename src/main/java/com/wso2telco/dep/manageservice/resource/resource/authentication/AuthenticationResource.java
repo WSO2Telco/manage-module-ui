@@ -1,6 +1,7 @@
 package com.wso2telco.dep.manageservice.resource.resource.authentication;
 
 import com.wso2telco.core.authfilter.util.HeaderParam;
+import com.wso2telco.core.dbutils.exception.BusinessException;
 import com.wso2telco.dep.manageservice.resource.service.authentication.AuthenticationService;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -27,8 +28,13 @@ public class AuthenticationResource {
     	String userName = headers.getRequestHeader(HeaderParam.USER_NAME.getTObject()).get(0);
     	
         Object responseString = null;
-        responseString = authenticationService.doLogin(userName);
-        String sessionId = request.getSession(true).getId();
-        return Response.status(Response.Status.OK).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId)).build();
+        try {
+			responseString = authenticationService.doLogin(userName);
+			String sessionId = request.getSession(true).getId();
+	        return Response.status(Response.Status.OK).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId)).build();
+		} catch (BusinessException e) {
+			  return Response.status(Response.Status.BAD_GATEWAY).entity(e.getErrorType().getMessage()).build();
+		}
+        
     }
 }

@@ -54,18 +54,18 @@
         <dependency>
             <groupId>com.wso2telco.core</groupId>
             <artifactId>dbutils</artifactId>
-            <version>2.3.1-SNAPSHOT</version>
+            <version>2.3.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.wso2telco.core</groupId>
             <artifactId>user-profile</artifactId>
-            <version>2.3.1-SNAPSHOT</version>
+            <version>2.3.2-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.wso2telco.core</groupId>
             <artifactId>auth-filter</artifactId>
-            <version>2.3.1-SNAPSHOT</version>
+            <version>2.3.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <repositories>
