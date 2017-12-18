@@ -32,8 +32,9 @@ public class AuthenticationResource {
 		Status responseCode = null;
 		Object responseString = null;
 		String sessionId = request.getSession(true).getId();
+        try {
+		
 
-		try {
 
 			responseString = authenticationService.doLogin(sessionId, userName);
 			responseCode = Response.Status.OK;
