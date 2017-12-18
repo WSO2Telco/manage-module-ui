@@ -50,9 +50,9 @@ export class ApprovalHistoryGraphComponent implements OnInit {
 
         this.dashboardService.ApplicationCreationHistoryDataProvider.subscribe(
             (historyData: any) => {
-                if (historyData && historyData.xaxisLabels) {
+                if (historyData && historyData.xAxisLabels) {
                     this.appCreationHistoryLabels.length = 0;
-                    historyData.xaxisLabels.forEach((lbl, index) => {
+                    historyData.xAxisLabels.forEach((lbl, index) => {
                         this.appCreationHistoryLabels[index] = lbl;
                     });
                 }
@@ -68,9 +68,9 @@ export class ApprovalHistoryGraphComponent implements OnInit {
 
         this.dashboardService.SubscriptionCreationHistoryDataProvider.subscribe(
             (historyData: any) => {
-                if (historyData && historyData.xaxisLabels) {
+                if (historyData && historyData.xAxisLabels) {
                     this.subscriptionHistoryLabels.length = 0;
-                    historyData.xaxisLabels.forEach((lbl, index) => {
+                    historyData.xAxisLabels.forEach((lbl, index) => {
                         this.subscriptionHistoryLabels[index] = lbl;
                     });
                 }

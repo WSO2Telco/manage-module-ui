@@ -306,9 +306,11 @@ export class BlackListWhiteListRemoteDataService {
 
     getOptions(): RequestOptions {
         const token = this._authenticationService.loginUserInfo.getValue().token;
+        const useName = this._authenticationService.loginUserInfo.getValue().userName;
         const headers = new Headers(
             {
                 'Authorization': 'Basic ' + token,
+                'user-name': useName,
                 'Content-Type': 'application/json'
             });
         return new RequestOptions({headers: headers});
