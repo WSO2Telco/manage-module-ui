@@ -113,7 +113,6 @@ export class SubscriptionsComponent implements OnInit {
     private getData() {
         this.approvalService.getUserAppSubscriptionTasks(this.mySubscriptionFilter);
         this.approvalService.getUserGroupAppSubscriptionTask(this.groupSubscriptionFilter);
-        // this.subscriptionService.getSubscriptionTasks();
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {

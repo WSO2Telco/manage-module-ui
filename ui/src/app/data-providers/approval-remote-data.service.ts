@@ -9,6 +9,7 @@ import {
 import {AuthenticationService} from "../commons/services/authentication.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {MessageService} from "../commons/services/message.service";
+import {TableDataType} from "../commons/models/common-data-models";
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -110,27 +111,18 @@ export class ApprovalRemoteDataService {
 
 
     getUserApplicationTasks(filter?: ApplicationTaskFilter): void {
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
-            const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName.toLowerCase(),
-                isAdmin: loginInfo.isAdmin,
-                operator: '',
-                size: 100,
-                start: 0,
-                processType: "APPLICATION_CREATION",
-                candidateGroups: null
-            };
+            let taskFilter = new ApplicationTaskFilter(new TableDataType('USER', 'APPLICATION'), 10);
 
             if (!!filter) {
-                param.size = filter.numberOfRecordsPerPage;
-                param.start = filter.startRecordNumber;
+                taskFilter = filter;
             }
 
             this.slimLoadingBarService.start();
 
             const endPoint = this.apiEndpoints['applicationsSearch'] + '/' + loginInfo.userName.toLowerCase()
-                + '?start=' + filter.startRecordNumber;
+                + '?start=' + taskFilter.startRecordNumber;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -159,27 +151,18 @@ export class ApprovalRemoteDataService {
 
 
     getUserGroupApplicationTasks(filter?: ApplicationTaskFilter): void {
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
-            const param: ApplicationTaskSearchParam = {
-                assignee: null,
-                isAdmin: loginInfo.isAdmin,
-                operator: '',
-                processType: "APPLICATION_CREATION",
-                size: 100,
-                start: 0,
-                candidateGroups: loginInfo.roles.toString()
-            };
+            let taskFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'APPLICATION'), 10);
 
             if (!!filter) {
-                param.size = filter.numberOfRecordsPerPage;
-                param.start = filter.startRecordNumber;
+                taskFilter = filter;
             }
 
 
             this.slimLoadingBarService.start();
 
-            const endPoint = this.apiEndpoints['applicationsSearch'] + '?start=' + filter.startRecordNumber;
+            const endPoint = this.apiEndpoints['applicationsSearch'] + '?start=' + taskFilter.startRecordNumber;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -207,28 +190,17 @@ export class ApprovalRemoteDataService {
     }
 
     getUserAppSubscriptionTasks(filter?: ApplicationTaskFilter): void {
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
-            const param: ApplicationTaskSearchParam = {
-                assignee: loginInfo.userName.toLowerCase(),
-                isAdmin: loginInfo.isAdmin,
-                operator: loginInfo.operator,
-                size: 100,
-                start: 0,
-                processType: "SUBSCRIPTION_CREATION",
-                candidateGroups: null
-            };
+            let taskFilter = new ApplicationTaskFilter(new TableDataType('USER', 'SUBSCRIPTION'), 10);
 
             if (!!filter) {
-                param.size = filter.numberOfRecordsPerPage;
-                param.start = filter.startRecordNumber;
+                taskFilter = filter;
             }
-
-
             this.slimLoadingBarService.start();
 
             const endPoint = this.apiEndpoints['subscriptionsSearch'] + '/' + loginInfo.userName.toLowerCase()
-                + '?start=' + filter.startRecordNumber;
+                + '?start=' + taskFilter.startRecordNumber;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -257,27 +229,17 @@ export class ApprovalRemoteDataService {
 
 
     getUserGroupAppSubscriptionTask(filter?: ApplicationTaskFilter): void {
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
-            const param: ApplicationTaskSearchParam = {
-                assignee: null,
-                isAdmin: loginInfo.isAdmin,
-                operator: loginInfo.operator,
-                size: 100,
-                start: 0,
-                processType: "SUBSCRIPTION_CREATION",
-                candidateGroups: loginInfo.roles.toString()
-            };
+            let taskFilter = new ApplicationTaskFilter(new TableDataType('GROUP', 'SUBSCRIPTION'), 10);
 
             if (!!filter) {
-                param.size = filter.numberOfRecordsPerPage;
-                param.start = filter.startRecordNumber;
+                taskFilter = filter;
             }
-
 
             this.slimLoadingBarService.start();
 
-            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '?start=' + filter.startRecordNumber;
+            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '?start=' + taskFilter.startRecordNumber;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -357,7 +319,11 @@ export class ApprovalRemoteDataService {
         // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message))
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Approving Subscription',
+                error: error
+            }));
     }
 
     getAllTasks(): void {

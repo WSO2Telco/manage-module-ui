@@ -1,4 +1,4 @@
-import {TableDataType} from "./common-data-models";
+import {TableDataType} from './common-data-models';
 export class DateTimeInfo {
     date: string;
     time: string;
@@ -53,10 +53,10 @@ export class MetaData {
 }
 
 export class PaginationInfo{
-    pageNo:number;
+    pageNo: number;
     recordsPerPage : number;
 
-    constructor(pageNo: number,recordsPerPage:number) {
+    constructor(pageNo: number, recordsPerPage: number) {
         this.pageNo = pageNo;
         this.recordsPerPage = recordsPerPage;
     }
@@ -81,7 +81,7 @@ export class ApplicationTaskSearchParam {
     assignee: string;
     isAdmin: boolean;
     operator: string;
-    start:number;
+    start: number;
     size: number;
 }
 
@@ -137,10 +137,10 @@ export class ApplicationTaskFilter {
     fromDate: string;
     toDate: string;
     dataType: TableDataType;
-    startRecordNumber : number=0;
-    numberOfRecordsPerPage:number=0;
+    startRecordNumber= 0;
+    numberOfRecordsPerPage= 0;
 
-    constructor(dataType: TableDataType,recPerPage?:number) {
+    constructor(dataType: TableDataType, recPerPage?: number) {
         this.dataType = dataType;
         this.numberOfRecordsPerPage = recPerPage;
     }

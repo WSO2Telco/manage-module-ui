@@ -27,7 +27,7 @@ public class AuthenticationResource {
 	@Path("/login")
 	public Response setApp(@Context HttpHeaders headers, @Context HttpServletRequest request) {
 
-		String userName = headers.getRequestHeader(HeaderParam.USgiER_NAME.getTObject()).get(0);
+		String userName = headers.getRequestHeader(HeaderParam.USER_NAME.getTObject()).get(0);
 
 		Status responseCode = null;
 		Object responseString = null;
