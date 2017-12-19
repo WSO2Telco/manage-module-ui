@@ -5,11 +5,9 @@ import {
     ApplicationTaskResult,
     ApprovalEvent
 } from '../../models/application-data-models';
-import {ApprovalRemoteDataService} from '../../../data-providers/approval-remote-data.service';
 import {MessageService} from '../../services/message.service';
 import {TableDataType} from '../../models/common-data-models';
 import {Router} from '@angular/router';
-import {TypeaheadMatch} from 'ng2-bootstrap';
 import {AuthenticationService} from '../../services/authentication.service';
 
 @Component({
@@ -46,16 +44,8 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     private FilterFieldsDataSource: ApplicationTask[];
 
-    @Input()
-    private apiName: string;
 
-    private filterId: number;
-    private filterAppName: string;
-    private filterUser: string;
-    private filterFromDate: string;
-    private filterToDate: string;
-    private filterApiName: string;
-    private apis: string;
+    private filterString: string;
     private arr: string[];
 
     private apiNamesList: string[] = [''];
@@ -69,8 +59,7 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     private currentPage = 1;
 
-    constructor(private approvalService: ApprovalRemoteDataService,
-                private message: MessageService,
+    constructor(private message: MessageService,
                 private _router: Router,
                 private authService: AuthenticationService) {
 
@@ -114,6 +103,7 @@ export class SubscriptionDataTableComponent implements OnInit {
             }
         }
         this.comment = '';
+        this.filterString = '';
         this.isCommentEmpty = false;
         this.tableID = 'subscriptionTable';
         this.opsp = 'subscriber';
@@ -179,7 +169,7 @@ export class SubscriptionDataTableComponent implements OnInit {
     onToggleFilter() {
         this.isFilterVisible = !this.isFilterVisible;
         if (!this.isFilterVisible) {
-            this.onClear('ALL');
+            this.onClear();
         }
     }
 
@@ -213,86 +203,14 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     }
 
-    onFilterItemAdded(event: TypeaheadMatch, type: string) {
-        const task: ApplicationTask = <ApplicationTask>event.item;
-        this.isFilterActivated = true;
-
-        switch (type) {
-            case 'ID' : {
-                if (this.filter.apiNames.indexOf(this.filterApiName) < 0) {
-                    this.filter.apiNames.push(this.filterApiName);
-                }
-                this.filterApiName = null;
-                break;
-            }
-
-            case 'APP_NAME' : {
-                if (this.filter.appNames.indexOf(task.applicationName) < 0) {
-                    this.filter.appNames.push(task.applicationName);
-                }
-                this.filterAppName = null;
-                break;
-            }
-
-            case 'userName' : {
-                if (this.filter.users.indexOf(this.filterUser) < 0) {
-                    this.filter.users.push(this.filterUser);
-                }
-                this.filterUser = null;
-                break;
-            }
-
-            case 'subscriber' : {
-                if (this.filter.subscribers.indexOf(this.filterUser) < 0) {
-                    this.filter.subscribers.push(this.filterUser);
-                }
-
-                this.filterUser = null;
-                break;
-            }
-
-
-        }
+    onFilterItemAdded() {
+        this.filter.filerString = this.filterString;
         this.onFilterChange.emit(this.filter);
     }
 
-    onClear(type: string) {
-        switch (type) {
-            case 'ID': {
-                this.filter.apiNames.length = 0;
-                this.filterApiName = null;
-                break;
-            }
-            case 'NAME': {
-                this.filter.appNames.length = 0;
-                this.filterAppName = null;
-                break;
-            }
-            case 'USER': {
-                this.filter.users.length = 0;
-                this.filterUser = null;
-                break;
-            }
-            case 'SUBS': {
-                this.filter.subscribers.length = 0;
-                this.filterUser = null;
-                break;
-            }
-            case 'ALL': {
-                this.filter.ids.length = 0;
-                this.filter.appNames.length = 0;
-                this.filter.users.length = 0;
-                this.filterId = null;
-                this.filterAppName = null;
-                this.filterUser = null;
-                break;
-            }
-        }
-
-        if (this.filter.apiNames.length == 0 || this.filter.appNames.length == 0 || this.filter.users.length == 0) {
-            this.isFilterActivated = false;
-        }
-
+    onClear() {
+        this.filterString = '';
+        this.filter.filerString = this.filterString;
         this.onFilterChange.emit(this.filter);
     }
 
