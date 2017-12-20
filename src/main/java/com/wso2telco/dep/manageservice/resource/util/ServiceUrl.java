@@ -19,7 +19,8 @@ public enum ServiceUrl {
 
     RATE_SERVICE("http://localhost:9763/ratecard-service/ratecardservice/"),
     BLACKLIST_WHITELIST("http://localhost:9763/blacklist-whitelist-service/queries/"),
-    QUOTA_SERVICE("http://localhost:9763/quota-service/services/");
+    QUOTA_SERVICE("http://localhost:9763/quota-service/services/"),
+    MSISDN_VALIDATION_SERVICE("http://localhost:8281/services/msisdnValidation");
     private String value;
 
     ServiceUrl(String value) {
