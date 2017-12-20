@@ -3,6 +3,7 @@ package com.wso2telco.dep.manageservice.resource.service;
 import com.wso2telco.dep.manageservice.resource.service.blacklist.BlackListFactory;
 import com.wso2telco.dep.manageservice.resource.service.quota.QuotaFactory;
 import com.wso2telco.dep.manageservice.resource.service.rate.RateFactory;
+import com.wso2telco.dep.manageservice.resource.service.validation.ValidationFactory;
 import com.wso2telco.dep.manageservice.resource.service.whitelist.WhiteListFactory;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
@@ -82,6 +83,9 @@ public class ServiceFactory {
                 break;
             case WHITELIST_APPLICATIONS:
                 service = WhiteListFactory.getInstance().getApplicationService();
+                break;
+            case MSISDN_VALIDATION:
+                service = ValidationFactory.getInstance().getMsisdnValidationService();
                 break;
             default:
                 break;
