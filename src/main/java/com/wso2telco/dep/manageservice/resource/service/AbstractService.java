@@ -34,6 +34,9 @@ public abstract class AbstractService implements Serviceable {
             case BLACKLIST_WHITELIST:
                 url =serviceUrl.getValue();
                 break;
+            case MSISDN_VALIDATION_SERVICE:
+                url = serviceUrl.getValue();
+                break;
             default:
                 break;
         }

@@ -39,7 +39,8 @@ public enum Messages {
     API_LOADING_ERROR("Error Loading api List"),
     SUBSCRIBERS_LOADING_ERROR("Error Loading subscribers"),
     OPERATOR_LOADING_ERROR("Error Loading Operators"),
-    APPLICATION_LOADING_ERROR("Error Loading applications");
+    APPLICATION_LOADING_ERROR("Error Loading applications"),
+    VALIDATION_SERVICE_ERROR("Error occurred in validation service");
 
     private String value;
 

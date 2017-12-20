@@ -31,7 +31,8 @@ public enum ServiceTypes {
     QUOTA_LIMIT("quota_limit"),
     BLACKLIST("blacklist"),
     WHITELIST_SUBSCRIBERS("whitelist"),
-    WHITELIST_APPLICATIONS("application_list");
+    WHITELIST_APPLICATIONS("application_list"),
+    MSISDN_VALIDATION("msisdn_validation");
 
 
     private String value;
