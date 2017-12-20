@@ -4,7 +4,6 @@
                 class="my"
                 [filter]="userApplicationFilter"
                 tableTitle="MY APPLICATIONS"
-                [isSubscription]="false"
                 [dataSource]="myApplications"
                 [creditPlan]="creditPlan"
                 (onApproveRejectTask)="onApproveRejectHandler($event)"
@@ -14,7 +13,6 @@
         <application-data-table
                 class="group"
                 [filter]="groupApplicationFilter"
-                [isSubscription]="false"
                 tableTitle="All APPLICATIONS"
                 [dataSource]="allApplications"
                 [creditPlan]="creditPlan"

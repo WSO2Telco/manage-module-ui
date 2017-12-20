@@ -9,80 +9,16 @@
 
     <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
         <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
-            <div class="head">Filter<span class="clear" (click)="onClear('ALL')">Clear All</span></div>
+            <div class="head">Filter<span class="clear" (click)="onClear()">Clear All</span></div>
             <div class="row">
-                <div class="form-group col-xs-4">
+                <div class="form-group col-xs-8">
                     <input type="text"
-                           [(ngModel)]="filterAppName"
+                           [(ngModel)]="filterString"
                            container="body"
-                           [typeaheadMinLength]="0"
-                           [typeahead]="FilterFieldsDataSource"
-                           typeaheadOptionField="applicationName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'APP_NAME')"
                            class="form-control" placeholder="App Name">
                 </div>
-                <div class="form-group col-xs-4">
-                    <input type="text"
-                           [(ngModel)]="filterUser"
-                           container="body"
-                           [typeaheadMinLength]="0"
-                           [typeahead]="userNamesList"
-                           typeaheadOptionField="{{ opsp }}"
-                           (typeaheadOnSelect)="onFilterItemAdded($event, opsp)"
-                           class="form-control" placeholder="User">
-                </div>
-                <div class="form-group col-xs-4">
-                    <input type="text" class="form-control"
-                           *ngIf="showApiName('/approvals/subscriptions')"
-                           [(ngModel)]="filterApiName"
-                           [typeaheadMinLength]="0"
-                           container="body"
-                           [typeahead]="apiNamesList"
-                           typeaheadOptionField="apiName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
-                           placeholder="Api Name">
-                </div>
+                <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
             </div>
-
-            <!--<div class="row">-->
-                <!--<div class="col-xs-4">-->
-                    <!--<div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">-->
-                        <!--<div class="sec-head">App Name</div>-->
-                        <!--<span class="close material-icons" (click)="onClear('NAME')">close</span>-->
-                        <!--<span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<ng-container *ngIf="showApiName('/approvals/applications')">-->
-                <!--<div class="col-xs-4">-->
-                    <!--<div class="filter-val-container user" *ngIf="filter?.users.length > 0">-->
-                        <!--<div class="sec-head">User</div>-->
-                        <!--<span class="close material-icons" (click)="onClear('USER')">close</span>-->
-                        <!--<span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--</ng-container>-->
-
-                <!--<ng-container *ngIf="showApiName('/approvals/subscriptions')">-->
-                <!--<div class="col-xs-4">-->
-                    <!--<div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">-->
-                        <!--<div class="sec-head">User</div>-->
-                        <!--<span class="close material-icons" (click)="onClear('SUBS')">close</span>-->
-                        <!--<span class="filter-val user" *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--</ng-container>-->
-
-                <!--<div class="col-xs-4">-->
-
-                    <!--<div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">-->
-                        <!--<div class="sec-head">Api Name</div>-->
-                        <!--<span class="close material-icons" (click)="onClear('ID')">close</span>-->
-                        <!--<span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
         </div>
     </div>
     <div class="table {{tableID}}" id="{{tableID}}">
@@ -90,7 +26,6 @@
         <div class="tbl-row header">
             <div class="tbl-cell">ID</div>
             <div class="tbl-cell">APP NAME</div>
-            <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">API NAME</div>
             <div class="tbl-cell">USER</div>
             <div class="tbl-cell">CREATED ON</div>
             <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
@@ -103,8 +38,7 @@
                  'open':item.isExpand,
                  'M':item.actionType == 'MORE',
                  'A':item.actionType == 'APPROVE',
-                 'R':item.actionType == 'REJECT',
-                 'norateOpen':(item.relevantRates.length == 0) && (item.isExpand)}"
+                 'R':item.actionType == 'REJECT'}"
                  *ngIf="!!!summeryModeRecordLimit || i < summeryModeRecordLimit">
                 <div class="tbl-cell">
                     <span tooltip="More Info"
@@ -113,9 +47,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
-                <div class="tbl-cell" *ngIf="showApiName('/approvals/subscriptions')">{{item.apiName}}-{{item.apiVersion}}</div>
-                <!--<div class="tbl-cell"><a (click)="getUserDetails(item.userName || item.subscriber)">{{item.userName || item.subscriber}}</a></div>-->
-                <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
+                <div class="tbl-cell">{{item.userName}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
@@ -132,21 +64,16 @@
                           class="action  assign material-icons"
                           (click)="onAction('ASSIGN',item,filter?.dataType)">assignment_ind</span>
                 </div>
-                <div class="more-con animated fadeInUp row{{item.relevantRates.length}}" *ngIf="item.isExpand"
+                <div class="more-con animated fadeInUp row" *ngIf="item.isExpand"
                      [ngClass]="{ 'M':item.actionType == 'MORE',
                     'A':item.actionType == 'APPROVE',
-                    'R':item.actionType == 'REJECT',
-                    'norate':item.relevantRates.length == 0}">
+                    'R':item.actionType == 'REJECT'}">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="row more-row">
                                     <div class="col-xs-6 field-name">Application Id</div>
                                     <div class="col-xs-6 field-value"> {{item.applicationId}}</div>
-                                </div>
-                                <div class="row more-row" *ngIf="isSubscription">
-                                    <div class="col-xs-6 field-name">API</div>
-                                    <div class="col-xs-6 field-value"> {{item.apiName}}-{{item.apiVersion}}</div>
                                 </div>
                             </div>
                             <div class="col-xs-6">
@@ -160,7 +87,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row more-row" *ngIf="showTiers && !isSubscription && iscreditPlan">
+                                <div class="row more-row" *ngIf="showTiers && iscreditPlan">
                                     <div class="col-xs-6 field-name">Credit Plan</div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onCreditPlanChange($event,item)">
@@ -184,31 +111,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" *ngIf="item.relevantRates.length != 0 && billing">
-                            <div class="col-xs-12">
-                                <div class="row more-row">
-                                    <div class="col-xs-7 rate-field-name">Rate card Details</div>
-                                    <div class="col-xs-5 rate-field-name"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" *ngIf="isSubscription && billing">
-                            <div class="col-xs-6" *ngFor="let entry of item.relevantRates; let k = index">
-
-                                <div class="row more-row">
-                                    <div class="col-xs-6 field-name">{{entry.apiOperation}}</div>
-                                    <div class="col-xs-6 field-value">
-                                        <select class="form-control"
-                                                (change)="onOperationRateChange($event,item,entry.apiOperation)">
-                                            <ng-container *ngFor="let opt of entry.rateDefinitions">
-                                                <option title="{{opt.rateDefDescription}}">  {{opt.rateDefName}} </option>
-                                            </ng-container>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
 
                     <div class="col-sm-12 "  *ngIf="item.actionType !== 'MORE'">

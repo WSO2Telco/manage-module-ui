@@ -1,8 +1,6 @@
 package com.wso2telco.dep.manageservice.resource.service.authentication;
 
 import com.wso2telco.core.dbutils.exception.BusinessException;
-
-import com.wso2telco.core.dbutils.exception.BusinessException;
 import com.wso2telco.core.userprofile.UserProfileRetriever;
 import com.wso2telco.core.userprofile.cache.CacheFactory;
 import com.wso2telco.core.userprofile.cache.UserProfileCachable;

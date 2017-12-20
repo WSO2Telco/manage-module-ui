@@ -134,6 +134,7 @@ export class ApplicationTaskFilter {
     apiNames: string[] = [];
     users: string[] = [];
     subscribers: string[] = [];
+    filerString: string;
     fromDate: string;
     toDate: string;
     dataType: TableDataType;

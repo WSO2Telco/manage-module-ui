@@ -92,24 +92,6 @@ export class ApprovalRemoteDataService {
         }
     }
 
-    private getFilteredObservable(appTask: ApplicationTask[], filter: ApplicationTaskFilter): ApplicationTask[] {
-        if (appTask && filter) {
-            return appTask
-                .filter((task: ApplicationTask) => filter.apiNames.length == 0 || filter.apiNames.indexOf(task.apiName) >= 0)
-                .filter((task: ApplicationTask) => filter.ids.length == 0 || filter.ids.indexOf(task.id) >= 0)
-                .filter((task: ApplicationTask) => filter.appNames.length == 0 || filter.appNames.indexOf(task.applicationName) >= 0)
-                .filter((task: ApplicationTask) => filter.users.length == 0 || filter.users.indexOf(task.userName) >= 0)
-                .filter((task: ApplicationTask) => filter.subscribers.length == 0 || filter.subscribers.indexOf(task.subscriber) >= 0)
-                .reduce((acc, curr) => {
-                    acc.push(curr);
-                    return acc;
-                }, []);
-        } else {
-            return appTask;
-        }
-    }
-
-
     getUserApplicationTasks(filter?: ApplicationTaskFilter): void {
         const loginInfo = this.authService.loginUserInfo.getValue();
         if (!!loginInfo) {
@@ -122,7 +104,7 @@ export class ApprovalRemoteDataService {
             this.slimLoadingBarService.start();
 
             const endPoint = this.apiEndpoints['applicationsSearch'] + '/' + loginInfo.userName.toLowerCase()
-                + '?start=' + taskFilter.startRecordNumber;
+                + '?start=' + taskFilter.startRecordNumber + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -162,7 +144,8 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            const endPoint = this.apiEndpoints['applicationsSearch'] + '?start=' + taskFilter.startRecordNumber;
+            const endPoint = this.apiEndpoints['applicationsSearch'] + '?start=' + taskFilter.startRecordNumber
+                + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -200,7 +183,7 @@ export class ApprovalRemoteDataService {
             this.slimLoadingBarService.start();
 
             const endPoint = this.apiEndpoints['subscriptionsSearch'] + '/' + loginInfo.userName.toLowerCase()
-                + '?start=' + taskFilter.startRecordNumber;
+                + '?start=' + taskFilter.startRecordNumber + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -239,7 +222,8 @@ export class ApprovalRemoteDataService {
 
             this.slimLoadingBarService.start();
 
-            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '?start=' + taskFilter.startRecordNumber;
+            const endPoint = this.apiEndpoints['subscriptionsSearch'] + '?start=' + taskFilter.startRecordNumber
+                + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
@@ -315,8 +299,6 @@ export class ApprovalRemoteDataService {
      * this function will be called when we approve a subscription
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
-
-        // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw({

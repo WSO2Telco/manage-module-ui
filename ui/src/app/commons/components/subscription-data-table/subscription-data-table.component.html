@@ -9,80 +9,16 @@
 
     <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
         <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
-            <div class="head">Filter<span class="clear" (click)="onClear('ALL')">Clear All</span></div>
+            <div class="head">Filter<span class="clear" (click)="onClear()">Clear All</span></div>
             <div class="row">
-                <div class="form-group col-xs-4">
+                <div class="form-group col-xs-8">
                     <input type="text"
-                           [(ngModel)]="filterAppName"
+                           [(ngModel)]="filterString"
                            container="body"
-                           [typeaheadMinLength]="0"
-                           [typeahead]="FilterFieldsDataSource"
-                           typeaheadOptionField="applicationName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'APP_NAME')"
                            class="form-control" placeholder="App Name">
                 </div>
-                <div class="form-group col-xs-4">
-                    <input type="text"
-                           [(ngModel)]="filterUser"
-                           container="body"
-                           [typeaheadMinLength]="0"
-                           [typeahead]="userNamesList"
-                           typeaheadOptionField="{{ opsp }}"
-                           (typeaheadOnSelect)="onFilterItemAdded($event, opsp)"
-                           class="form-control" placeholder="User">
-                </div>
-                <div class="form-group col-xs-4">
-                    <input type="text" class="form-control"
-                           [(ngModel)]="filterApiName"
-                           [typeaheadMinLength]="0"
-                           container="body"
-                           [typeahead]="apiNamesList"
-                           typeaheadOptionField="apiName"
-                           (typeaheadOnSelect)="onFilterItemAdded($event,'ID')"
-                           placeholder="Api Name">
-                </div>
+                <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
             </div>
-
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="filter-val-container name" *ngIf="filter?.appNames.length > 0">
-                        <div class="sec-head">App Name</div>
-                        <span class="close material-icons" (click)="onClear('NAME')">close</span>
-                        <span class="filter-val name" *ngFor="let name of filter.appNames">{{name}}</span>
-                    </div>
-                </div>
-
-                <ng-container>
-                    <div class="col-xs-4">
-                        <div class="filter-val-container user" *ngIf="filter?.users.length > 0">
-                            <div class="sec-head">User</div>
-                            <span class="close material-icons" (click)="onClear('USER')">close</span>
-                            <span class="filter-val user" *ngFor="let user of filter.users">{{user}}</span>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <ng-container >
-                    <div class="col-xs-4">
-                        <div class="filter-val-container user" *ngIf="filter?.subscribers.length > 0">
-                            <div class="sec-head">User</div>
-                            <span class="close material-icons" (click)="onClear('SUBS')">close</span>
-                            <span class="filter-val user"
-                                  *ngFor="let subscriber of filter.subscribers">{{subscriber}}</span>
-                        </div>
-                    </div>
-                </ng-container>
-
-                <div class="col-xs-4">
-
-                    <div class="filter-val-container id" *ngIf="filter?.apiNames.length > 0">
-                        <div class="sec-head">Api Name</div>
-                        <span class="close material-icons" (click)="onClear('ID')">close</span>
-                        <span class="filter-val ids" *ngFor="let api of filter.apiNames">{{api}}</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
     <div class="table {{tableID}}" id="{{tableID}}">
@@ -114,7 +50,7 @@
                 </div>
                 <div class="tbl-cell">{{item.applicationName}}</div>
                 <div class="tbl-cell">{{item.apiName}}-{{item.apiVersion}}</div>
-                <div class="tbl-cell">{{item.userName || item.subscriber}}</div>
+                <div class="tbl-cell">{{item.userName}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
