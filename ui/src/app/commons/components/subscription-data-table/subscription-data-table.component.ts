@@ -92,16 +92,11 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     ngOnInit() {
         this.arr = [];
-        this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         this.billing = this.authService.loginUserInfo.getValue().billing;
         this.iscreditPlan = this.authService.loginUserInfo.getValue().creditPlan;
         this.showTiers = false;
 
-        for (const entry of this.roleList) {
-            if (entry == 'manage-app-admin') {
-                this.showTiers = true;
-            }
-        }
+        this.showTiers = true;
         this.comment = '';
         this.filterString = '';
         this.isCommentEmpty = false;

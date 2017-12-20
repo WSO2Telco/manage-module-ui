@@ -299,8 +299,6 @@ export class ApprovalRemoteDataService {
      * this function will be called when we approve a subscription
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
-
-        // console.log(JSON.stringify(param));
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw({

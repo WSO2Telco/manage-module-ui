@@ -29,14 +29,8 @@ export class AuthenticationService {
                     if (data.success) {
                         const loginInfo = new LoginResponse();
                         loginInfo.start = new Date().getTime();
-                        loginInfo.roles = data.payload.roles;
                         loginInfo.userName = data.payload.userName;
-                        loginInfo.isAdmin = false;
-                        for (const entry of data.payload.roles) {
-                            if (entry === 'manage-app-admin') {
-                                loginInfo.isAdmin = true;
-                            }
-                        }
+                        loginInfo.isAdmin = true;
                         loginInfo.operator = '';
                         if (!loginInfo.isAdmin) {
                             loginInfo.operator = data.payload.userName.toUpperCase();

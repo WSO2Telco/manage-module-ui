@@ -87,15 +87,9 @@ export class ApplicationDataTableComponent implements OnInit {
 
     ngOnInit() {
         this.arr = [];
-        this.roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         this.iscreditPlan = this.authService.loginUserInfo.getValue().creditPlan;
         this.showTiers = false;
-
-        for (const entry of this.roleList) {
-            if (entry == 'manage-app-admin') {
-                this.showTiers = true;
-            }
-        }
+        this.showTiers = true;
         this.comment = '';
         this.filterString = '';
         this.isCommentEmpty = false;
@@ -197,19 +191,6 @@ export class ApplicationDataTableComponent implements OnInit {
     onPageChanged(event) {
         this.filter.startRecordNumber = (<number>event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
         this.onFilterChange.emit(this.filter);
-    }
-
-    /**
-     * Display API Name in Subscriptions page
-     * @param val
-     * @returns {boolean}
-     */
-    showApiName(val) {
-        if (this._router.url === val) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     creatorName() {
