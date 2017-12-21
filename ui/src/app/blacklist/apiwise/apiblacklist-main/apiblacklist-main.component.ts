@@ -127,24 +127,30 @@ export class ApiBlacklistMainComponent implements OnInit {
 
                 this.blackListWhiteListService.validationService(this.msisdnList, (msisdnValidation: MsisdnValidation, status) => {
 
-                    if (msisdnValidation.payload.valid.length) {
+                    if (msisdnValidation.success) {
 
-                        this.blackListWhiteListService.addNewToBlacklist(apiId, apiName, msisdnValidation.payload.valid, msisdnValidation.payload.validationRegex,
-                            msisdnValidation.payload.prefixGroup, msisdnValidation.payload.digitsGroup, (response) => {
-                            if (response.success) {
-                                if (msisdnValidation.payload.invalid.length) {
-                                    this.message.longError('Below Numbers does not match with defined Regex '+ msisdnValidation.payload.invalid);
-                                }
-                                this.message.success(response.message);
-                                this.getBlackListNumbers(apiId);
-                                this.msisdn = '';
-                            } else {
-                                this.message.error(response.message);
-                            }
-                        });
+                        if (msisdnValidation.payload.valid.length) {
+
+                            this.blackListWhiteListService.addNewToBlacklist(apiId, apiName, msisdnValidation.payload.valid, msisdnValidation.payload.validationRegex,
+                                msisdnValidation.payload.prefixGroup, msisdnValidation.payload.digitsGroup, (response) => {
+                                    if (response.success) {
+                                        if (msisdnValidation.payload.invalid.length) {
+                                            this.message.longError('Below Numbers does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                                        }
+                                        this.message.success(response.message);
+                                        this.getBlackListNumbers(apiId);
+                                        this.msisdn = '';
+                                    } else {
+                                        this.message.error(response.message);
+                                    }
+                                });
+                        } else {
+                            this.message.longError('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                        }
                     } else {
-                        this.message.longError('Number does not match with defined Regex '+ msisdnValidation.payload.invalid);
+                        this.message.error(msisdnValidation.message);
                     }
+
                 });
             }
         }
