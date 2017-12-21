@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-6">
-                                <div class="row more-row" *ngIf="showTiers">
+                                <div class="row more-row" *appHasPermissions="showTiersPermissions">
                                     <div class="col-xs-6 field-name">Tier</div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onOptionChange($event,item)">
@@ -87,8 +87,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row more-row" *ngIf="showTiers && iscreditPlan">
-                                    <div class="col-xs-6 field-name">Credit Plan</div>
+                                <div class="row more-row"  *appHasPermissions="showCreditPlanPermissions">
+                                    <div class="col-xs-6 field-name">Credit Plan </div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onCreditPlanChange($event,item)">
                                             <option *ngFor="let opt of creditPlan" [selected]="item.creditPlan == opt">

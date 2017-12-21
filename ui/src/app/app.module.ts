@@ -36,7 +36,7 @@ import {ConfigService} from './commons/services/config.service';
         UserAvatarComponent,
         MainMenuComponent,
         UserInactiveComponent,
-        BreadcrumbsComponent,
+        BreadcrumbsComponent
     ],
     imports: [
         BrowserModule,

@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
-import {LoginRemoteDataService} from '../../data-providers/login_remote-data.service';
-import {User, LoginResponse} from '../models/common-data-models';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { LoginRemoteDataService } from '../../data-providers/login_remote-data.service';
+import { User, LoginResponse } from '../models/common-data-models';
 
 
 @Injectable()
@@ -25,30 +25,73 @@ export class AuthenticationService {
         user.password = password;
         this._remoteService.login(user)
             .subscribe(
-                data => {
-                    if (data.success) {
-                        const loginInfo = new LoginResponse();
-                        loginInfo.start = new Date().getTime();
-                        loginInfo.userName = data.payload.userName;
-                        loginInfo.isAdmin = true;
-                        loginInfo.operator = '';
-                        if (!loginInfo.isAdmin) {
-                            loginInfo.operator = data.payload.userName.toUpperCase();
-                        }
-                        loginInfo.billing = true;
-                        loginInfo.creditPlan = true;
-                        loginInfo.token = btoa(userName + ':' + password)
-                        this.loginUserInfo.next(loginInfo);
-                        sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
-                        this._router.navigate(['home']);
-                    } else {
-                        this._remoteService.logout(data.payload.userName);
-                        callback(data.message);
+            data => {
+                if (data.success) {
+                    const loginInfo = new LoginResponse();
+                    loginInfo.start = new Date().getTime();
+                    loginInfo.userName = data.payload.userName;
+                    loginInfo.isAdmin = true;
+                    loginInfo.operator = '';
+                    if (!loginInfo.isAdmin) {
+                        loginInfo.operator = data.payload.userName.toUpperCase();
                     }
-                },
-                error => {
-                    callback(error.message);
+                    loginInfo.billing = true;
+                    loginInfo.creditPlan = true;
+                    loginInfo.token = btoa(userName + ':' + password);
+
+                    // TODO Remove this in production
+                    loginInfo.permissions = {
+                        'rate': {
+                            'view': true,
+                            'add': false,
+                            'opco_commision': true,
+                            'assign': true
+                        },
+                        'application': {
+                            'changeTiers': true,
+                            'creditPlan': false,
+                            'viewSelectedTier': false
+                        },
+                        'subscription': {
+                            'changeTiers': true,
+                            'operationRate': true,
+                            'viewSelectedTier': true
+                        },
+                        'workFlowHistory': true,
+                        'quota': {
+                            'view': true,
+                            'add': true
+                        },
+                        'whiteList': {
+                            'view': true,
+                            'add': true,
+                            'delete': false
+                        },
+                        'apiBlacklist': {
+                            'view': true,
+                            'add': true,
+                            'delete': false
+                        },
+                        'spBlackList': {
+
+                            'view': true,
+                            'add': true,
+                            'delete': false
+                        }
+                    };
+
+
+                    this.loginUserInfo.next(loginInfo);
+                    sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
+                    this._router.navigate(['home']);
+                } else {
+                    this._remoteService.logout(data.payload.userName);
+                    callback(data.message);
                 }
+            },
+            error => {
+                callback(error.message);
+            }
             );
     }
 
@@ -77,12 +120,12 @@ export class AuthenticationService {
     getUserDetails(userName: string, callback: Function) {
         this._remoteService.getUserDetails(userName)
             .subscribe(
-                data => {
-                    callback(data, true);
-                },
-                error => {
-                    callback(error, false);
-                }
+            data => {
+                callback(data, true);
+            },
+            error => {
+                callback(error, false);
+            }
             );
     }
 
@@ -141,6 +184,35 @@ export class AuthenticationService {
         this.timerHandle = setTimeout(() => {
             this.stopChecking();
         }, 900000);
+    }
+
+    hasPermissions(patternStr: string = ''): boolean {
+        const pattern: string[] = patternStr.split(',');
+
+        let permissionsExist: boolean = false;
+        if (pattern.length) {
+            const userInfo: LoginResponse = this.loginUserInfo.getValue();
+            pattern.forEach((p: string) => {
+                const propArray = p.split(':');
+                if (propArray.indexOf('*') >= 0) {
+                    permissionsExist = permissionsExist || true;
+                } else {
+                    permissionsExist = permissionsExist || this.isPropertyExist(userInfo.permissions, propArray);
+                }
+            });
+
+        }
+        return permissionsExist;
+
+    }
+
+    private isPropertyExist(obj: any, prp: string[]): boolean {
+        if (obj && prp.length) {
+            const next = prp.shift();
+            return !!obj[next] && (!prp.length || this.isPropertyExist(obj[next], prp));
+        } else {
+            return false;
+        }
     }
 
 }

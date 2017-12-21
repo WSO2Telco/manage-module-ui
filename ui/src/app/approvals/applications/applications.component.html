@@ -6,6 +6,8 @@
                 tableTitle="MY APPLICATIONS"
                 [dataSource]="myApplications"
                 [creditPlan]="creditPlan"
+                showTiersPermissions="application:changeTiers"
+                showCreditPlanPermissions="application:creditPlan"
                 (onApproveRejectTask)="onApproveRejectHandler($event)"
                 (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>
