@@ -23,6 +23,15 @@ export class MessageService {
         theme: 'material'
     };
 
+    private toastLongOptions: ToastOptions = {
+        title: '',
+        msg: '',
+        showClose: true,
+        timeout: 0,
+        theme: 'material'
+    };
+
+
     public APPROVAL_MESSAGES = {
         APPLICATION_CREATION_ASSIGN_SUCCESS : 'Application creation task successfully assigned',
         SUBSCRIPTION_CREATION_ASSIGN_SUCCESS : 'Subscription creation task successfully assigned',
@@ -33,7 +42,7 @@ export class MessageService {
     };
 
 
-    success(message: string, title?: string) {
+    success(message: string, title?: string[]) {
         this.toast.success(Object.assign({}, this.toastOptions, {title, msg: message}));
     }
 
@@ -47,6 +56,10 @@ export class MessageService {
 
     info(message: string, title?: string) {
         this.toast.info(Object.assign({}, this.toastOptions, {title, msg: message}));
+    }
+
+    longError(message: string, title?: string[]) {
+        this.toast.error(Object.assign({}, this.toastLongOptions, {title, msg: message}));
     }
 
 }
