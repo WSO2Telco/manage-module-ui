@@ -119,8 +119,9 @@ export class BlackListWhiteListService {
             );
     }
 
-    addNewToBlacklist(apiId: string, apiName: string, msisdnList: string[], callback: Function) {
-        this._remoteService.addNewToBlacklist(apiId, apiName, msisdnList)
+    addNewToBlacklist(apiId: string, apiName: string, msisdnList: string[],
+                          validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number, callback: Function) {
+        this._remoteService.addNewToBlacklist(apiId, apiName, msisdnList, validationRegex, validationPrefixGroup, validationDigitsGroup)
             .subscribe(
                 data => {
                     callback(data);
@@ -130,4 +131,17 @@ export class BlackListWhiteListService {
                 }
             );
     }
+
+    validationService(msisdnList: string[], callback: Function) {
+        this._remoteService.msisdnValidateService(msisdnList)
+            .subscribe(
+                data => {
+                    callback(data, true)
+                },
+                error => {
+                    callback(error, false)
+                }
+            );
+    }
+
 }
