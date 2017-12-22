@@ -174,9 +174,12 @@
                                            autocomplete="off"
                                            placeholder="Sur Charge Value"
                                            name="surChargeval"
+                                           [disabled]="isDisabled"
                                            #surChargevalRef="ngModel"
                                            required
-                                           [(ngModel)]="tariff.tariffSurChargeval">
+                                           [ngModel]="tariff.tariffSurChargeval"
+                                           (ngModelChange)="surChargeValue($event)">
+                                    <span class="error" *ngIf="IsEmptySurchargeval">Required</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -189,11 +192,13 @@
                                            autocomplete="off"
                                            placeholder="Sur Charge Ads"
                                            name="surChargeAds"
+                                           [disabled]="isDisabled"
                                            #surChargeAdsRef="ngModel"
                                            required
                                            [ngModel]="tariff.tariffSurChargeAds"
                                            (ngModelChange)="tariffSurChargeAds($event)">
                                     <span class="error" *ngIf="IsInvalidtariffSurChargeAds">Range should between 0 - 100</span>
+                                    <span class="error" *ngIf="IsEmptySurchargeAddOpco">Required</span>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -206,11 +211,13 @@
                                            autocomplete="off"
                                            placeholder="Sur Charge Opco"
                                            name="surChargeOpco"
+                                           [disabled]="isDisabled"
                                            #surChargeOpcoRef="ngModel"
                                            required
                                            [ngModel]="tariff.tariffSurChargeOpco"
                                            (ngModelChange)="tariffSurChargeOpco($event)">
                                     <span class="error" *ngIf="IsInvalidtariffSurChargeOpco">Range should between 0 - 100 </span>
+                                    <span class="error" *ngIf="IsEmptySurchargeAddOpco">Required</span>
                                 </div>
                             </div>
                         </div>
