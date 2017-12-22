@@ -3,7 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {BlackListWhiteListService} from '../../commons/services/blacklist_whitelist.service';
-import {Api, Application} from '../../commons/models/common-data-models';
+import {Api, Application, MsisdnValidation} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
 
 @Component({
@@ -37,8 +37,6 @@ export class WhitelistMainComponent implements OnInit {
     private msisdnError: string;
     private msisdnRangeError: string;
     private invalidFieldError: string;
-    private islong: boolean;
-    private long: string;
 
 
     private whitelistList: string[];
@@ -69,8 +67,6 @@ export class WhitelistMainComponent implements OnInit {
         this.ismsisdnError = false;
         this.ismsisdnRangeError = false;
         this.isInvalidFieldError = false;
-        this.islong = false;
-        this.long = '';
     }
 
     /**
@@ -187,16 +183,36 @@ export class WhitelistMainComponent implements OnInit {
             }
 
             if (apiId.length != 0 && appId.length != 0) {
-                this.blackListWhiteListService.addNewToWhitelist(appId, apiId, this.msisdnList, (response) => {
-                    if (response.success) {
-                        this.message.success('MSISDN List Added Successfully');
-                        this.msisdn = '';
-                        this.msisdnMin = 0;
-                        this.msisdnMax = 0;
-                        this.getWhitelist();
+
+                this.blackListWhiteListService.validationService(this.msisdnList, (msisdnValidation: MsisdnValidation, status) => {
+
+                    if (msisdnValidation.success) {
+
+                        if (msisdnValidation.payload.valid.length) {
+
+                            this.blackListWhiteListService.addNewToWhitelist(appId, apiId, msisdnValidation.payload.valid, msisdnValidation.payload.validationRegex,
+                                msisdnValidation.payload.prefixGroup, msisdnValidation.payload.digitsGroup, (response) => {
+                                if (response.success) {
+                                    if (msisdnValidation.payload.invalid.length) {
+                                        this.message.longError('Below Numbers does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                                    }
+                                    this.message.success(response.message);
+                                    this.msisdn = '';
+                                    this.msisdnMin = 0;
+                                    this.msisdnMax = 0;
+                                    this.getWhitelist();
+                                } else {
+                                    this.message.error(response.message);
+                                }
+                            });
+                        } else {
+                            this.message.longError('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                        }
+
                     } else {
-                        this.message.error(response.message);
+                        this.message.error(msisdnValidation.message);
                     }
+
                 });
             }
         } else {
@@ -307,49 +323,20 @@ export class WhitelistMainComponent implements OnInit {
             if (this.isValid(this.msisdn)) {
                 const msisdnList = this.msisdn.split(',');
                 let count = 0;
+
                 for (const entry of msisdnList) {
-
-                    if (this.isValidMobileNumber(entry)) {
-                        if (entry.includes('tel:+') || entry.includes('+')) {
-
-                            const num = entry.split('+')[1];
-                            this.msisdnList[count] = 'tel3A+' + num;
-                            this.islong = false;
-
-                            if (num.length > 15) {
-                                this.islong = true;
-                            }
-                        }
-
-                        else {
-                            if (entry.length > 15) {
-                                this.islong = true;
-                            } else {
-                                this.msisdnList[count] = 'tel3A+' + Number(entry);
-                                this.islong = false;
-                            }
-                        }
-                    } else {
-                        this.islong = true;
-                    }
+                    this.msisdnList[count] = entry;
                     count++;
                 }
 
-                if (this.islong == true) {
-                    this.long = 'Not a Valid MSISDN';
-                    this.islong = true;
-                } else {
-                    this.addNewToWhitelist();
-                }
-
+                this.addNewToWhitelist();
 
             } else {
-
                 if (this.msisdn.length == 0) {
                     this.msisdnError = 'Empty List';
                     this.ismsisdnError = true;
                 } else {
-                    this.msisdnError = 'Wrong input please enter Comma seperated valid mobile numbers ';
+                    this.msisdnError = 'Wrong input please enter Comma separated valid mobile numbers ';
                     this.ismsisdnError = true;
                 }
             }

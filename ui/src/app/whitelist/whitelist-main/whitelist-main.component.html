@@ -61,7 +61,6 @@
                                name="manualNumber"
                                placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
                         <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
-                        <span class="error" *ngIf="islong">{{long}}</span>
                     </div>
                     <div class="col-sm-3">
                         <button type="submit" class="btn btn-primary animated fadeIn">
@@ -71,55 +70,6 @@
                 </div>
             </form>
 
-            <form class="form-horizontal" #numberrangeForm="ngForm" novalidate
-                  (ngSubmit)="onUploadNumberRange(numberrangeForm)">
-
-                <div class="form-group">
-                    <label class="col-sm-2"></label>
-                    <label class="col-sm-4 subtitle">Numbers Range configuration</label>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Min number:</label>
-                    <div class="col-sm-4">
-                        <input class="form-control"
-                               autocomplete="off"
-                               #nameRef="ngModel"
-                               required
-                               [(ngModel)]="msisdnMin"
-                               type="number"
-                               name="manualNumber">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Max number:</label>
-                    <div class="col-sm-4">
-                        <input class="form-control"
-                               autocomplete="off"
-                               #nameRef="ngModel"
-                               required
-                               [(ngModel)]="msisdnMax"
-                               type="number"
-                               name="manualNumber">
-                        <span class="error" *ngIf="ismsisdnRangeError">{{msisdnRangeError}}</span>
-                    </div>
-                    <span class="glyphicon glyphicon-question-sign info-tooltip"
-                          tooltip="e.g.94777333100 to 94777333200" placement="right"
-                    ></span>
-                </div>
-
-
-                <div class="form-group">
-                    <label class="control-label col-sm-2"></label>
-                    <div class="col-sm-4">
-                        <button class="btn btn-primary">
-                            Upload Numbers List
-                        </button>
-                    </div>
-                </div>
-
-            </form>
             <br><br>
             <app-whitelist-list
                     [dataSource]="whitelistList"
