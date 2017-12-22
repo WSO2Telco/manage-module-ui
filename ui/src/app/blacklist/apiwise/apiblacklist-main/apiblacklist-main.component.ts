@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BlackListWhiteListService} from '../../../commons/services/blacklist_whitelist.service';
-import {Api} from '../../../commons/models/common-data-models';
+import {Api, MsisdnValidation} from '../../../commons/models/common-data-models';
 import {MessageService} from '../../../commons/services/message.service';
 
 @Component({
@@ -22,14 +22,11 @@ export class ApiBlacklistMainComponent implements OnInit {
     private msisdnList: string[];
     private blackListList: string[];
     private msisdn: string;
-    private numberId: string[];
     private msisdnError: string;
     private long: string;
     private ismsisdnError: boolean;
-    private islong: boolean;
     private count;
-    private isDublicate: boolean;
-    private dublicate: string;
+    private id;
 
     constructor(private blackListWhiteListService: BlackListWhiteListService, private message: MessageService) {
 
@@ -45,12 +42,10 @@ export class ApiBlacklistMainComponent implements OnInit {
         this.apiId = '';
         this.msisdn = '';
         this.ismsisdnError = false;
-        this.islong = false;
         this.msisdnError = '';
         this.long = '';
-        this.isDublicate = false;
-        this.dublicate = '';
         this.count = '0';
+        this.id = '';
     }
 
     /**
@@ -98,20 +93,17 @@ export class ApiBlacklistMainComponent implements OnInit {
 
     /**
      * Selected api
-     * @param event
      */
     onApiSelected() {
 
-        let id = '';
-
         for (const entry of this.apis) {
             if (entry.name == this.api.split('-')[0].trim() && entry.version == this.api.split('-')[1].split(' ')[1].trim()) {
-                id = entry.id;
+                this.id = entry.id;
             }
         }
 
-        if (id.length != 0) {
-            this.getBlackListNumbers(id);
+        if (this.id.length != 0) {
+            this.getBlackListNumbers(this.id);
         }
     }
 
@@ -132,14 +124,33 @@ export class ApiBlacklistMainComponent implements OnInit {
             }
 
             if (apiId.length != 0 && apiName.length != 0) {
-                this.blackListWhiteListService.addNewToBlacklist(apiId, apiName, this.msisdnList, (response) => {
-                    if (response.success) {
-                        this.message.success(response.message);
-                        this.getBlackListNumbers(apiId);
-                        this.msisdn = '';
+
+                this.blackListWhiteListService.validationService(this.msisdnList, (msisdnValidation: MsisdnValidation, status) => {
+
+                    if (msisdnValidation.success) {
+
+                        if (msisdnValidation.payload.valid.length) {
+
+                            this.blackListWhiteListService.addNewToBlacklist(apiId, apiName, msisdnValidation.payload.valid, msisdnValidation.payload.validationRegex,
+                                msisdnValidation.payload.prefixGroup, msisdnValidation.payload.digitsGroup, (response) => {
+                                    if (response.success) {
+                                        if (msisdnValidation.payload.invalid.length) {
+                                            this.message.longError('Below Numbers does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                                        }
+                                        this.message.success(response.message);
+                                        this.getBlackListNumbers(apiId);
+                                        this.msisdn = '';
+                                    } else {
+                                        this.message.error(response.message);
+                                    }
+                                });
+                        } else {
+                            this.message.longError('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                        }
                     } else {
-                        this.message.error(response.message);
+                        this.message.error(msisdnValidation.message);
                     }
+
                 });
             }
         }
@@ -169,38 +180,11 @@ export class ApiBlacklistMainComponent implements OnInit {
                     let count = 0;
 
                     for (const entry of msisdnList) {
-
-                        if (this.isValidMobileNumber(entry)) {
-                            if (entry.includes('tel:+') || entry.includes('+')) {
-
-                                const num = entry.split('+')[1];
-                                this.msisdnList[count] = 'tel3A+' + num;
-                                this.islong = false;
-
-                                if (num.length > 15) {
-                                    this.islong = true;
-                                }
-
-                            } else {
-                                if (entry.length > 15) {
-                                    this.islong = true;
-                                } else {
-                                    this.msisdnList[count] = 'tel3A+' + Number(entry);
-                                    this.islong = false;
-                                }
-                            }
-                        } else {
-                            this.islong = true;
-                        }
+                        this.msisdnList[count] = entry;
                         count++;
                     }
 
-                    if (this.islong == true) {
-                        this.long = 'Not a Valid MSISDN';
-                        this.islong = true;
-                    } else {
-                        this.addNewBlackListnumbers();
-                    }
+                    this.addNewBlackListnumbers();
 
                 } else {
                     if (this.msisdn.length == 0) {
@@ -236,6 +220,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      * Validate Number Range
      * @param msisdn
      * @returns {boolean}
+     * @deprecated
      */
     isValidMobileNumber(msisdn: string): boolean {
         const list = /^((((tel:\+)(\\+){0,1})|((\+){1})|(\d))([0-9]+))$/;

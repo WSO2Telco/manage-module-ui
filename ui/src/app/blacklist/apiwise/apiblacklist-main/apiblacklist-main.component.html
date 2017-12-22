@@ -29,7 +29,7 @@
                   (ngSubmit)="onUploadNumber(numberlistForm)">
 
 
-                <div class="form-group" [ngClass]="{'has-danger': (isDublicate || ismsisdnError || islong)}">
+                <div class="form-group" [ngClass]="{'has-danger': (ismsisdnError)}">
                     <label class="control-label col-sm-2">Number:</label>
                     <div class="col-sm-6">
                         <input class="form-control"
@@ -40,9 +40,7 @@
                                type="text"
                                name="manualNumber"
                                placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
-                        <span class="error" *ngIf="isDublicate">{{ dublicate }}</span>
                         <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
-                        <span class="error" *ngIf="islong">{{long}}</span>
                     </div>
                     <button class="btn btn-primary">
                         <span class="glyphicon glyphicon-plus-sign"> ADD</span>
@@ -56,7 +54,7 @@
             <br><br>
 
             <app-blacklist-list
-                    [datasource]="blackListList" [apiId]="numberId" (onDeleteTask)="onDeleteHandler($event, numberId)">
+                    [datasource]="blackListList" [apiId]="id" (onDeleteTask)="onDeleteHandler($event, id)">
             </app-blacklist-list>
 
 

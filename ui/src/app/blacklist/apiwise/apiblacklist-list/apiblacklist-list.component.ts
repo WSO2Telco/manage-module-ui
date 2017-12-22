@@ -29,7 +29,7 @@ export class ApiBlacklistListComponent implements OnInit {
 
     onDelete(msisdn: string, apiId: string) {
         if (msisdn.length != 0) {
-            this.blackListWhiteListService.removeFromBlackList('tel3A%2B' + msisdn, apiId.toString(), (response) => {
+            this.blackListWhiteListService.removeFromBlackList(msisdn, apiId.toString(), (response) => {
                 if (response.success) {
                     this.onDeleteTask.emit(true);
                     this.message.success(response.message);
