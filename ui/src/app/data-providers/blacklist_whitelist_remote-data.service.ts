@@ -236,13 +236,16 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[]) {
+    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[],validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
 
         const data = {
             'appId': appId,
             'apiId': apiId,
             'userID': this.loginInfo.userName,
-            'msisdnList': msisdnList
+            'msisdnList': msisdnList,
+            'validationRegex': validationRegex,
+            'validationPrefixGroup': validationPrefixGroup,
+            'validationDigitsGroup': validationDigitsGroup
         };
 
         return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.getOptions())
