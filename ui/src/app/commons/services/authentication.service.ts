@@ -30,6 +30,8 @@ export class AuthenticationService {
                     const loginInfo = new LoginResponse();
                     loginInfo.start = new Date().getTime();
                     loginInfo.userName = data.payload.userName;
+                    loginInfo.permissions = data.payload.permissions;
+                    
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
                     if (!loginInfo.isAdmin) {
@@ -38,48 +40,6 @@ export class AuthenticationService {
                     loginInfo.billing = true;
                     loginInfo.creditPlan = true;
                     loginInfo.token = btoa(userName + ':' + password);
-
-                    // TODO Remove this in production
-                    loginInfo.permissions = {
-                        'rate': {
-                            'view': true,
-                            'add': false,
-                            'opco_commision': true,
-                            'assign': true
-                        },
-                        'application': {
-                            'changeTiers': true,
-                            'creditPlan': false,
-                            'viewSelectedTier': false
-                        },
-                        'subscription': {
-                            'changeTiers': true,
-                            'operationRate': true,
-                            'viewSelectedTier': true
-                        },
-                        'workFlowHistory': true,
-                        'quota': {
-                            'view': true,
-                            'add': true
-                        },
-                        'whiteList': {
-                            'view': true,
-                            'add': true,
-                            'delete': false
-                        },
-                        'apiBlacklist': {
-                            'view': true,
-                            'add': true,
-                            'delete': false
-                        },
-                        'spBlackList': {
-
-                            'view': true,
-                            'add': true,
-                            'delete': false
-                        }
-                    };
-
 
                     this.loginUserInfo.next(loginInfo);
                     sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));

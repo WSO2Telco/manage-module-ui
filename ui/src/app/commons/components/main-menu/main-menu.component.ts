@@ -13,7 +13,6 @@ export class MainMenuComponent implements OnInit {
 
     private selectedMenu: MenuItem;
     private isExpand = false;
-    private isAdmin: boolean;
     private isBilling: boolean;
 
     private menuSource: MenuItem[] = [
@@ -33,37 +32,6 @@ export class MainMenuComponent implements OnInit {
         { id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring', pattern: 'whiteList' }
     ];
 
-  /*   private menuSourceIfOp: MenuItem[] = [
-        { id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home' },
-        { id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment' },
-        { id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps' },
-        { id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions' },
-        { id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history' },
-        { id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear' },
-        { id: 7, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'search' },
-        { id: 8, route: '/quotacap', name: 'Quota Cap', position: 'parent', iconName: 'card_travel' },
-
-    ];
-
-    private menuSourceIfAdminBillingDissable: MenuItem[] = [
-        { id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home' },
-        { id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment' },
-        { id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps' },
-        { id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions' },
-        { id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history' },
-        { id: 6, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase' },
-        { id: 7, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board' },
-        { id: 8, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns' },
-        { id: 9, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring' }
-    ];
-
-    private menuSourceIfOpBillingDissable: MenuItem[] = [
-        { id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home' },
-        { id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment' },
-        { id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps' },
-        { id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions' },
-        { id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history' },
-    ]; */
 
     constructor(private _appCommonService: AppCommonService,
         private _router: Router,
@@ -72,53 +40,8 @@ export class MainMenuComponent implements OnInit {
 
     ngOnInit() {
 
-        let loginInfo = this.authService.loginUserInfo.getValue();
+        const loginInfo = this.authService.loginUserInfo.getValue();
 
-/*         if (loginInfo.isAdmin) {
-            this.isAdmin = true;
-            if (loginInfo.billing) {
-                this.isBilling = true;
-                this._router.events.subscribe((event) => {
-                    if (event instanceof NavigationEnd) {
-                        this.selectedMenu = this.menuSource.filter((menu) => menu.route == event.url)[0];
-                    }
-                });
-
-                this.selectedMenu = this.menuSource[0];
-            } else {
-                this.isBilling = false;
-                this._router.events.subscribe((event) => {
-                    if (event instanceof NavigationEnd) {
-                        this.selectedMenu = this.menuSourceIfAdminBillingDissable.filter((menu) => menu.route == event.url)[0];
-                    }
-                });
-
-                this.selectedMenu = this.menuSourceIfAdminBillingDissable[0];
-            }
-
-        } else {
-            this.isAdmin = false;
-            if (loginInfo.billing) {
-                this.isBilling = true;
-                this._router.events.subscribe((event) => {
-                    if (event instanceof NavigationEnd) {
-                        this.selectedMenu = this.menuSourceIfOp.filter((menu) => menu.route == event.url)[0];
-                    }
-                });
-
-                this.selectedMenu = this.menuSourceIfOp[0];
-            } else {
-                this.isBilling = false;
-                this._router.events.subscribe((event) => {
-                    if (event instanceof NavigationEnd) {
-                        this.selectedMenu = this.menuSourceIfOpBillingDissable.filter((menu) => menu.route == event.url)[0];
-                    }
-                });
-
-                this.selectedMenu = this.menuSourceIfOpBillingDissable[0];
-            }
-        } */
-        
         this._router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
                 this.selectedMenu = this.menuSource.filter((menu) => menu.route == event.url)[0];

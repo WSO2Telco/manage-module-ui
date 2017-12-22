@@ -2,13 +2,13 @@ import { RouterModule } from '@angular/router';
 import { RateMainComponent } from './create/rate-main/rate-main.component';
 import { AssignRateMainComponent } from './assign/assign-rate-main.component';
 import { ViewRateMainComponent } from './view/view-rate-main.component';
-import { AdminGuard, PermissionGuard } from '../app.guard';
+import { PermissionGuard } from '../app.guard';
 
 const routes = [
     {
         path: 'create',
         component: RateMainComponent,
-        canActivate: [AdminGuard, PermissionGuard],
+        canActivate: [PermissionGuard],
         data: {
             permissions: 'rate:add'
         }
@@ -16,7 +16,7 @@ const routes = [
     {
         path: 'assign',
         component: AssignRateMainComponent,
-        canActivate: [AdminGuard, PermissionGuard],
+        canActivate: [PermissionGuard],
         data: {
             permissions: 'rate:assign'
         }
@@ -24,7 +24,7 @@ const routes = [
     {
         path: 'view',
         component: ViewRateMainComponent,
-        canActivate: [AdminGuard, PermissionGuard],
+        canActivate: [PermissionGuard],
         data: {
             permissions: 'rate:view'
         }

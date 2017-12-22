@@ -1,5 +1,5 @@
 import { RouterModule } from "@angular/router";
-import { AppGuard, LoginGuard, AdminGuard, BillingGuard, PermissionGuard } from "./app.guard";
+import { AppGuard, LoginGuard, BillingGuard, PermissionGuard } from "./app.guard";
 
 const routes = [
   {
@@ -39,7 +39,7 @@ const routes = [
   {
     path: 'whitelist',
     loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
-    canActivate: [AdminGuard, PermissionGuard],
+    canActivate: [PermissionGuard],
     data: {
       permissions: 'whiteList'
     }
@@ -55,7 +55,7 @@ const routes = [
   {
     path: 'blacklist',
     loadChildren: 'app/blacklist/blacklist.module#BlackListModule',
-    canActivate: [AdminGuard, PermissionGuard],
+    canActivate: [PermissionGuard],
     data: {
       permissions: 'apiBlacklist,spBlackList'
     }

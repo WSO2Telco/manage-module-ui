@@ -7,7 +7,7 @@ import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
 import {CommonsModule} from './commons/commons.module';
-import {AdminGuard, AppGuard, BillingGuard, LoginGuard, PermissionGuard} from './app.guard';
+import {AppGuard, BillingGuard, LoginGuard, PermissionGuard} from './app.guard';
 import {HeaderComponent} from './commons/components/header/header.component';
 import {HamburgerMenuComponent} from './commons/components/hamburger-menu/hamburger-menu.component';
 import {UserAvatarComponent} from './commons/components/user-avatar/user-avatar.component';
@@ -59,7 +59,6 @@ import {ConfigService} from './commons/services/config.service';
         ConfigService,
         AppGuard,
         LoginGuard,
-        AdminGuard,
         BillingGuard,
         PermissionGuard,
         ApprovalRemoteDataService,
