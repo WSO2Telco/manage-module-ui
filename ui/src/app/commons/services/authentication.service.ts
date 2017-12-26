@@ -34,9 +34,6 @@ export class AuthenticationService {
                     
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
-                    if (!loginInfo.isAdmin) {
-                        loginInfo.operator = data.payload.userName.toUpperCase();
-                    }
                     loginInfo.billing = true;
                     loginInfo.creditPlan = true;
                     loginInfo.token = btoa(userName + ':' + password);
@@ -146,10 +143,10 @@ export class AuthenticationService {
         }, 900000);
     }
 
-    hasPermissions(patternStr: string = ''): boolean {
+    hasPermissions(patternStr: string): boolean {
         const pattern: string[] = patternStr.split(',');
 
-        let permissionsExist: boolean = false;
+        let permissionsExist = false;
         if (pattern.length) {
             const userInfo: LoginResponse = this.loginUserInfo.getValue();
             pattern.forEach((p: string) => {

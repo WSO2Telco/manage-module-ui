@@ -1,14 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
 import {
     ApplicationTask,
     ApplicationTaskFilter,
     ApplicationTaskResult,
     ApprovalEvent
 } from '../../models/application-data-models';
-import { MessageService } from '../../services/message.service';
-import { TableDataType } from '../../models/common-data-models';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
+import {MessageService} from '../../services/message.service';
+import {TableDataType} from '../../models/common-data-models';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'application-data-table',
@@ -35,7 +34,7 @@ export class ApplicationDataTableComponent implements OnInit {
 
     @Input()
     private showTiersPermissions: string;
-   
+
     @Input()
     private showCreditPlanPermissions: string;
 
@@ -49,8 +48,6 @@ export class ApplicationDataTableComponent implements OnInit {
     private onFilterChange: EventEmitter<ApplicationTaskFilter> = new EventEmitter();
 
     private FilterFieldsDataSource: ApplicationTask[];
-
-    private arr: string[];
 
     private filterString: string;
 
@@ -66,46 +63,33 @@ export class ApplicationDataTableComponent implements OnInit {
     private currentPage = 1;
 
     constructor(private message: MessageService,
-        private _router: Router,
-        private authService: AuthenticationService) {
-
+                private _router: Router) {
     }
-
-    private showTiers: boolean;
-    private iscreditPlan: boolean;
 
     @Input()
     private creditPlan: string[];
 
-    private roleList: string[];
     private tableID: string;
 
     private comment: string;
     private isCommentEmpty: boolean;
 
-    private opsp: string;
-
     @Input()
-    private isApplicationOnly: boolean;
+    private unAssigned: boolean;
 
     @Input()
     private isSubscriptionOnly: boolean;
 
     ngOnInit() {
-        this.arr = [];
-        this.iscreditPlan = this.authService.loginUserInfo.getValue().creditPlan;
-        this.showTiers = false;
-        this.showTiers = true;
         this.comment = '';
         this.filterString = '';
         this.isCommentEmpty = false;
-        this.tableID = this.getId();
-        this.creatorName();
     }
 
 
     ngOnChanges(changeObj: SimpleChanges) {
-        if (!this.isFilterActivated && changeObj && changeObj['dataSource'] && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
+        if (!this.isFilterActivated && changeObj && changeObj['dataSource']
+            && (changeObj['dataSource'].currentValue != changeObj['dataSource'].previousValue)) {
             const res: ApplicationTaskResult = changeObj['dataSource'].currentValue;
             this.FilterFieldsDataSource = (res && res.applicationTasks) || [];
 
@@ -120,7 +104,6 @@ export class ApplicationDataTableComponent implements OnInit {
                     this.userNamesList.push(appTask.subscriber);
                 }
             }
-
         }
     }
 
@@ -131,14 +114,14 @@ export class ApplicationDataTableComponent implements OnInit {
     }
 
     onOptionChange(event, item) {
-        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+        if (this.unAssigned) {
             this.message.warning('Please assign the task to yourself before editing');
         }
         item.tier = event.target.value;
     }
 
     onCreditPlanChange(event, item) {
-        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+        if (this.unAssigned) {
             this.message.warning('Please assign the task to yourself before editing');
         }
         item.creditPlan = event.target.value;
@@ -197,25 +180,5 @@ export class ApplicationDataTableComponent implements OnInit {
     onPageChanged(event) {
         this.filter.startRecordNumber = (<number>event.page - 1) * (this.filter.numberOfRecordsPerPage || 0);
         this.onFilterChange.emit(this.filter);
-    }
-
-    creatorName() {
-        if (this._router.url === '/approvals/applications') {
-            this.opsp = 'userName';
-        } else {
-            this.opsp = 'subscriber';
-        }
-    }
-
-    /**
-     * this method will set the table class and id
-     * @returns {any}
-     */
-    getId() {
-        if (this._router.url === '/approvals/subscriptions') {
-            return 'subscriptionTable';
-        } else {
-            return 'applicationTable';
-        }
     }
 }

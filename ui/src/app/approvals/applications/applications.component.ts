@@ -59,7 +59,7 @@ export class ApplicationsComponent implements OnInit {
         this.creditPlan = [];
 
         this.getData();
-        if (this.authService.loginUserInfo.getValue().creditPlan) {
+        if (this.authService.loginUserInfo.getValue().permissions.application && this.authService.loginUserInfo.getValue().permissions.application.creditPlan) {
             this.getCreditPlan();
         }
 
