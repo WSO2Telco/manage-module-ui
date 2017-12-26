@@ -1,6 +1,7 @@
-import {CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
-import {AuthenticationService} from './commons/services/authentication.service';
-import {Injectable} from '@angular/core';
+import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { AuthenticationService } from './commons/services/authentication.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AppGuard implements CanActivate {
@@ -37,28 +38,6 @@ export class LoginGuard implements CanActivate {
 }
 
 @Injectable()
-export class AdminGuard implements CanActivate {
-
-    constructor(private _authenticationService: AuthenticationService, private _router: Router) {
-    }
-
-    canActivate() {
-        if (this._authenticationService.isLoggedIn()) {
-            if (this._authenticationService.isAdmin()) {
-                return true;
-            } else {
-                this._router.navigate(['home']);
-                return false;
-            }
-
-        } else {
-            this._router.navigate(['login']);
-            return false;
-        }
-    }
-}
-
-@Injectable()
 export class BillingGuard implements CanActivate {
 
     constructor(private _authenticationService: AuthenticationService, private _router: Router) {
@@ -78,6 +57,33 @@ export class BillingGuard implements CanActivate {
             return false;
         }
     }
+}
+
+
+@Injectable()
+export class PermissionGuard implements CanActivate {
+
+    constructor(private _authenticationService: AuthenticationService, private _router: Router) {
+    }
+
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
+        const permissions: string = route.data['permissions'];
+
+        if (this._authenticationService.isLoggedIn()) {
+            if (this._authenticationService.hasPermissions(permissions)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            this._router.navigate(['login']);
+            return false;
+        }
+
+    }
+
 }
 
 

@@ -12,6 +12,7 @@ export class BlackListWhiteListRemoteDataService {
 
     private url = new URL(window.location.href);
     private apiContext = this.url.protocol + '//' + this.url.host + '/blacklist-whitelist-service/queries/';
+    private externalApiContext = this.url.protocol + '//' + this.url.host + '/manage-service/public/api/';
     private loginInfo;
 
 
@@ -24,9 +25,10 @@ export class BlackListWhiteListRemoteDataService {
         addNewWhitelist: this.apiContext + 'Whitelist',
         addNewBlacklist: this.apiContext + 'Blacklist',
         removeFromWhiteList: this.apiContext + 'RemoveFromWhiteList/',
-        removeFromBlackList: this.apiContext + 'RemoveFromBlacklist/'
+        removeFromBlackList: this.apiContext + 'RemoveFromBlacklist/',
+        msisdnValidation: this.externalApiContext + 'validation/msisdn'
     };
-
+    
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -234,13 +236,16 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[]) {
+    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[],validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
 
         const data = {
             'appId': appId,
             'apiId': apiId,
             'userID': this.loginInfo.userName,
-            'msisdnList': msisdnList
+            'msisdnList': msisdnList,
+            'validationRegex': validationRegex,
+            'validationPrefixGroup': validationPrefixGroup,
+            'validationDigitsGroup': validationDigitsGroup
         };
 
         return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.getOptions())
@@ -273,12 +278,15 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToBlacklist(apiId: string, apiName: string, msisdnList: string[]) {
+    addNewToBlacklist(apiId: string, apiName: string, msisdnList: string[], validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
         const data = {
             'apiID': apiId,
             'apiName': apiName,
             'userID': this.loginInfo.userName,
-            'msisdnList': msisdnList
+            'msisdnList': msisdnList,
+            'validationRegex': validationRegex,
+            'validationPrefixGroup': validationPrefixGroup,
+            'validationDigitsGroup': validationDigitsGroup
         };
 
         return this.http.post(this.apiEndpoints['addNewBlacklist'], data, this.getOptions())
@@ -302,6 +310,29 @@ export class BlackListWhiteListRemoteDataService {
                 message: 'Error Adding Blacklist',
                 error: error
             }));
+    }
+
+    /**
+     * Validate msisdns against regex
+     * @param {string[]} msisdnList
+     */
+    msisdnValidateService(msisdnList: string[]) {
+
+        const data = {
+            'msisdnList' : msisdnList
+        };
+
+        return this.http.post(this.apiEndpoints['msisdnValidation'], data, this.getOptions())
+            .map((response: Response) => {
+                const result = response.json();
+                return result;
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error in executing validation Service',
+                error: error
+            }));
+
     }
 
     getOptions(): RequestOptions {

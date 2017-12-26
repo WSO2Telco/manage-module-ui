@@ -1,14 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import {
     ApplicationTask,
     ApplicationTaskFilter,
     ApplicationTaskResult,
     ApprovalEvent
 } from '../../models/application-data-models';
-import {MessageService} from '../../services/message.service';
-import {TableDataType} from '../../models/common-data-models';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/authentication.service';
+import { MessageService } from '../../services/message.service';
+import { TableDataType } from '../../models/common-data-models';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'application-data-table',
@@ -32,6 +32,12 @@ export class ApplicationDataTableComponent implements OnInit {
 
     @Input()
     private filter: ApplicationTaskFilter;
+
+    @Input()
+    private showTiersPermissions: string;
+   
+    @Input()
+    private showCreditPlanPermissions: string;
 
     @Output()
     private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
@@ -60,8 +66,8 @@ export class ApplicationDataTableComponent implements OnInit {
     private currentPage = 1;
 
     constructor(private message: MessageService,
-                private _router: Router,
-                private authService: AuthenticationService) {
+        private _router: Router,
+        private authService: AuthenticationService) {
 
     }
 
@@ -148,12 +154,12 @@ export class ApplicationDataTableComponent implements OnInit {
     onAction(actionType: string, appTask: ApplicationTask, typeInfo: TableDataType): void {
 
         switch (actionType) {
-            case 'ASSIGN' : {
+            case 'ASSIGN': {
                 this.onAssignTask.emit(new ApprovalEvent(appTask, typeInfo));
                 break;
             }
 
-            case 'APPROVE' : {
+            case 'APPROVE': {
                 if (this.creditPlan.length == 1) {
                     appTask.creditPlan = this.creditPlan[0];
                 }
@@ -165,7 +171,7 @@ export class ApplicationDataTableComponent implements OnInit {
                 break;
             }
 
-            case 'REJECT' : {
+            case 'REJECT': {
                 if (appTask.comment) {
                     this.onApproveRejectTask.emit(new ApprovalEvent(appTask, typeInfo, 'REJECTED'));
                 } else {

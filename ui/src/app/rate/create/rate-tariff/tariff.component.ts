@@ -26,6 +26,7 @@ export class TariffComponent implements OnInit {
 
     private isNameError: boolean;
     private isDescriptionError: boolean;
+    private disableAddButton: boolean;
 
     private nameError: string;
     private descriptionError: string;
@@ -43,6 +44,9 @@ export class TariffComponent implements OnInit {
     private IsInvalidMinusSpCommission: boolean;
     private IsInvalidMinusAdsCommission: boolean;
     private IsInvalidMinusOpcoCommission: boolean;
+    private isDisabled: boolean;
+    private IsEmptySurchargeAddOpco: boolean;
+    private IsEmptySurchargeval: boolean;
 
 
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
@@ -54,6 +58,7 @@ export class TariffComponent implements OnInit {
         this.clearForm();
         this.tariff.createdBy = loginInfo.userName;
         this.ValidCommisionTotal = true;
+        this.disableAddButton = false;
     }
 
     clearForm() {
@@ -70,15 +75,18 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffExcessRate = null;
         this.tariff.tariffDefRate = null;
         this.InValidCommisionTotal = false;
+        this.IsEmptySurchargeval = false;
+        this.IsEmptySurchargeAddOpco = false;
         this.clearErrors();
     }
 
 
     onSubmit(addTariffForm) {
+        this.disableAddButton = true;
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
             this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
             !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission &&
-            !this.IsExceedCommision && this.ValidCommisionTotal) {
+            !this.IsExceedCommision && this.ValidCommisionTotal && !this.IsEmptySurchargeAddOpco && !this.IsEmptySurchargeval) {
             this.rateService.addTariff(this.tariff, (response) => {
                 if (response.success) {
                     this.onAddTask.emit(true);
@@ -87,6 +95,7 @@ export class TariffComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+                this.disableAddButton = false;
             });
 
         } else {
@@ -98,6 +107,7 @@ export class TariffComponent implements OnInit {
                 this.isDescriptionError = true;
                 this.descriptionError = 'Description can not be empty';
             }
+            this.disableAddButton = false;
         }
 
     }
@@ -114,27 +124,44 @@ export class TariffComponent implements OnInit {
      */
     tariffSurChargeAds(val) {
         this.tariff.tariffSurChargeAds = val;
+        this.IsEmptySurchargeAddOpco = false;
         if ((Number(this.tariff.tariffSurChargeAds) < 0) || (Number(this.tariff.tariffSurChargeAds) > 100)) {
             this.IsInvalidtariffSurChargeAds = true;
         } else {
             this.IsInvalidtariffSurChargeAds = false;
             this.tariff.tariffSurChargeOpco = (100 - this.tariff.tariffSurChargeAds);
+            this.IsEmptySurchargeAddOpco = false;
+        }
+
+        if (this.tariff.tariffSurChargeval == null) {
+            this.IsEmptySurchargeval = true;
+        } else {
+            this.IsEmptySurchargeval = false;
         }
     }
 
     tariffSurChargeOpco(val) {
         this.tariff.tariffSurChargeOpco = val;
+        this.IsEmptySurchargeAddOpco = false;
         if ((Number(this.tariff.tariffSurChargeOpco) < 0 ) || (Number(this.tariff.tariffSurChargeOpco) > 100)) {
             this.IsInvalidtariffSurChargeOpco = true;
         } else {
             this.IsInvalidtariffSurChargeOpco = false;
             this.tariff.tariffSurChargeAds = ( 100 - this.tariff.tariffSurChargeOpco);
+            this.IsEmptySurchargeAddOpco = false;
+        }
+
+        if (this.tariff.tariffSurChargeval == null) {
+            this.IsEmptySurchargeval = true;
+        } else {
+            this.IsEmptySurchargeval = false;
         }
     }
 
 
     tariffSPCommission(val) {
         this.tariff.tariffSPCommission = val;
+        this.isDisabled = false;
         if (Number(this.tariff.tariffSPCommission) < 0 && Number(this.tariff.tariffSPCommission) > -100) {
             this.IsInvalidMinusSpCommission = false;
             this.IsMinusExceedCommision = false;
@@ -165,21 +192,28 @@ export class TariffComponent implements OnInit {
         if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = true;
+            this.tariff.tariffSurChargeval = null;
+            this.tariff.tariffSurChargeOpco = null;
+            this.tariff.tariffSurChargeAds = null;
+            this.IsEmptySurchargeval = false;
+            this.IsEmptySurchargeAddOpco = false;
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = false;
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
         } else {
-            this.ValidCommisionTotal = false;
+			this.ValidCommisionTotal = false;
             this.InValidCommisionTotal = true;
         }
     }
 
     tariffAdsCommission(val) {
         this.tariff.tariffAdsCommission = val;
-
+        this.isDisabled = false;
         if (Number(this.tariff.tariffAdsCommission) < 0 && Number(this.tariff.tariffAdsCommission) > -100) {
             this.IsInvalidMinusAdsCommission = false;
             this.IsMinusExceedCommision = false;
@@ -211,9 +245,16 @@ export class TariffComponent implements OnInit {
         if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = true;
+            this.tariff.tariffSurChargeval = null;
+            this.tariff.tariffSurChargeOpco = null;
+            this.tariff.tariffSurChargeAds = null;
+            this.IsEmptySurchargeval = false;
+            this.IsEmptySurchargeAddOpco = false;
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = false;
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
@@ -221,11 +262,12 @@ export class TariffComponent implements OnInit {
             this.ValidCommisionTotal = false;
             this.InValidCommisionTotal = true;
         }
+
     }
 
     tariffOpcoCommission(val) {
         this.tariff.tariffOpcoCommission = val;
-
+        this.isDisabled = false;
         if (Number(this.tariff.tariffOpcoCommission) < 0 && Number(this.tariff.tariffOpcoCommission) > -100) {
             this.IsInvalidMinusOpcoCommission = false;
             this.IsMinusExceedCommision = false;
@@ -258,9 +300,16 @@ export class TariffComponent implements OnInit {
         if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === 100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = true;
+            this.tariff.tariffSurChargeval = null;
+            this.tariff.tariffSurChargeOpco = null;
+            this.tariff.tariffSurChargeAds = null;
+            this.IsEmptySurchargeval = false;
+            this.IsEmptySurchargeAddOpco = false;
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
+            this.isDisabled = false;
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
@@ -268,8 +317,33 @@ export class TariffComponent implements OnInit {
             this.ValidCommisionTotal = false;
             this.InValidCommisionTotal = true;
         }
+
     }
 
+    surChargeValue(val) {
+        this.tariff.tariffSurChargeval = val;
+        this.IsEmptySurchargeval = false;
+
+        if (this.tariff.tariffSurChargeval !== null) {
+            if (this.tariff.tariffSPCommission > 0 || this.tariff.tariffAdsCommission > 0 || this.tariff.tariffOpcoCommission > 0) {
+                this.IsInvalidMinusOpcoCommission = true;
+                this.IsInvalidMinusAdsCommission = true;
+                this.IsInvalidMinusSpCommission = true;
+            }
+
+            if (this.tariff.tariffSurChargeAds == null || this.tariff.tariffSurChargeOpco == null) {
+                this.IsEmptySurchargeAddOpco = true;
+            }
+
+        } else if (this.tariff.tariffSurChargeAds !== null || this.tariff.tariffSurChargeOpco !== null) {
+            this.IsEmptySurchargeval = true;
+        }
+
+        else {
+            this.IsEmptySurchargeAddOpco = false;
+        }
+
+    }
 
     isNameUnique(name) {
         let state = false;
@@ -281,13 +355,13 @@ export class TariffComponent implements OnInit {
         if (state) {
             this.isNameError = true;
             this.nameError = 'Name Already Existing';
-        } else if (name.length == 0) {
+		} else if (name.length == 0) {
             this.isNameError = true;
             this.nameError = 'Name Cannot Be Empty';
         } else if (name.length > 45) {
             this.isNameError = true;
             this.nameError = 'Ony 45 Characters Allowed';
-        }else {
+        } else {
             this.isNameError = false;
             this.nameError = '';
         }

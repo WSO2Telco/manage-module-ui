@@ -7,6 +7,7 @@ export class MenuItem {
     name: string;
     position: string;
     iconName: string;
+    pattern: string; // EX: permission1:add,permission2:add
 
 }
 
@@ -38,6 +39,7 @@ export class LoginResponse {
     start: number;
     token: string;
     roles: string[];
+    permissions: any;
 }
 
 export class SubCategory {
@@ -101,7 +103,7 @@ export class RateType {
 export class Rate {
     rateDefinition: RateDefinition;
     rateCategories: RateCategory[];
-    rateTaxes: RateTax [];
+    rateTaxes: RateTax[];
     createdBy: string;
 }
 
@@ -193,5 +195,19 @@ export class API {
     apiName: string;
     apiDescription: string;
     createdBy: string;
+}
+
+export class Payload {
+    valid: string[];
+    invalid: string[];
+    validationRegex: string;
+    prefixGroup: number;
+    digitsGroup: number;
+}
+
+export class MsisdnValidation {
+    payload: Payload;
+    success: boolean;
+    message: string;
 }
 

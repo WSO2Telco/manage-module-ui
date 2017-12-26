@@ -1,56 +1,74 @@
-import {RouterModule} from "@angular/router";
-import {AppGuard, LoginGuard, AdminGuard, BillingGuard} from "./app.guard";
+import { RouterModule } from "@angular/router";
+import { AppGuard, LoginGuard, BillingGuard, PermissionGuard } from "./app.guard";
 
 const routes = [
   {
     path: 'login',
     loadChildren: 'app/login/login.module#LoginModule',
-    canActivate : [LoginGuard]
+    canActivate: [LoginGuard]
   },
   {
     path: 'home',
     loadChildren: 'app/dashboard/dashboard.module#DashboardModule',
-    canActivate : [AppGuard]
+    canActivate: [AppGuard]
   },
   {
     path: 'history',
     loadChildren: 'app/history/history.module#HistoryModule',
-    canActivate : [AppGuard]
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'workFlowHistory'
+    }
   },
   {
     path: 'rate',
     loadChildren: 'app/rate/rate.module#RateModule',
-    canActivate : [AppGuard, BillingGuard]
+    canActivate: [AppGuard, BillingGuard, PermissionGuard],
+    data: {
+      permissions: 'rate'
+    }
   },
   {
     path: 'quotacap',
     loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
-    canActivate : [AppGuard, BillingGuard]
+    canActivate: [AppGuard, BillingGuard, PermissionGuard],
+    data: {
+      permissions: 'quota'
+    }
   },
   {
     path: 'whitelist',
     loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
-    canActivate : [AdminGuard]
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'whiteList'
+    }
   },
   {
     path: 'approvals',
     loadChildren: 'app/approvals/approvals.module#ApprovalsModule',
-    canActivate : [AppGuard]
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'application,subscription'
+    }
   },
   {
     path: 'blacklist',
     loadChildren: 'app/blacklist/blacklist.module#BlackListModule',
-    canActivate: [AdminGuard]
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'apiBlacklist,spBlackList'
+    }
   },
   {
-    path : '',
-    redirectTo : '/home',
-    pathMatch : 'full'
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
   {
-    path : '**',
-    redirectTo : '/home'
+    path: '**',
+    redirectTo: '/home'
   }
 ];
 
-export const RootLevelRoutes = RouterModule.forRoot(routes,{ useHash: true });
+export const RootLevelRoutes = RouterModule.forRoot(routes, { useHash: true });
