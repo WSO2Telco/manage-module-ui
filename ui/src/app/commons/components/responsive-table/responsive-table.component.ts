@@ -1,40 +1,62 @@
-import {Component, OnInit, Input, Output} from '@angular/core';
-import {ReportingRemoteDataService} from '../../../data-providers/reporting-remote-data.service';
-import {ApplicationHistory} from '../../models/reporing-data-models';
-import { Router } from '@angular/router';
+import {Component, Input, EventEmitter, OnInit, Output} from '@angular/core';
+import {AppHistory, ApplicationHistory, ApprovalHistoryFilter} from '../../models/reporing-data-models';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-responsive-table',
-  templateUrl: './responsive-table.component.html',
-  styleUrls: ['./responsive-table.component.scss']
+    selector: 'app-responsive-table',
+    templateUrl: './responsive-table.component.html',
+    styleUrls: ['./responsive-table.component.scss']
 })
 export class ResponsiveTableComponent implements OnInit {
 
-  @Input()
-  private tableHeader:string;
+    @Input()
+    private tableHeader: string;
 
-  @Input()
-  private dataSource:any[];
+    @Input()
+    private dataSource: AppHistory[];
 
-  @Input()
-  private fieldSet:string[];
+    @Input()
+    private fieldSet: string[];
 
-  @Output()
-  private   applicationDetail: ApplicationHistory;
+    @Input()
+    private filter: ApprovalHistoryFilter;
 
-  private operatorApprovals: ApplicationHistory[];
-  private subscriptions: ApplicationHistory[];
+    @Output()
+    private applicationDetail: ApplicationHistory;
 
-  constructor(private router: Router) { }
+    @Output()
+    private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
-  ngOnInit() {
-      this.dataSource = [];
-      this.applicationDetail = null;
-      this.operatorApprovals = [];
-      this.subscriptions = [];
-  }
+    private operatorApprovals: ApplicationHistory[];
+    private subscriptions: ApplicationHistory[];
 
-  onNavApplication (id: number) {
-      this.router.navigateByUrl('/history/application/' + id);
-  }
+    private isFilterVisible: boolean;
+    private filterString: string;
+
+    constructor(private router: Router) {
+    }
+
+    ngOnInit() {
+        this.dataSource = [];
+        this.applicationDetail = null;
+        this.operatorApprovals = [];
+        this.subscriptions = [];
+        this.isFilterVisible = true;
+        this.filterString = '';
+    }
+
+    onNavApplication(id: number) {
+        this.router.navigateByUrl('/history/application/' + id);
+    }
+
+    onFilterItemAdded() {
+        this.filter.filterString = this.filterString;
+        this.onFilterChange.emit(this.filter);
+    }
+
+    onClear() {
+        this.filterString = '';
+        this.filter.filterString = this.filterString;
+        this.onFilterChange.emit(this.filter);
+    }
 }

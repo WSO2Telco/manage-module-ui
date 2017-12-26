@@ -68,16 +68,8 @@ export class ApprovalHelperService {
 
         const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
         const billing = JSON.parse(sessionStorage.getItem('loginUserInfo')).billing;
-        let role = false;
 
         const completedByUser = JSON.parse(sessionStorage.getItem('loginUserInfo')).userName;
-
-        /** for loop will set the user role */
-        for (const entry of roleList) {
-            if (entry == 'manage-app-admin') {
-                role = true;
-            }
-        }
 
         this.slimLoadingBarService.start();
 
