@@ -64,7 +64,7 @@
                             <span class="error col-sm-offset-4 col-sm-8"
                                   *ngIf="isApiError">{{apiError}}</span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" *appHasPermissions="showOperatorListPermissions">
                             <label class="control-label col-sm-4">Operators</label>
                             <div class="col-sm-6">
                                 <input [(ngModel)]="selectedoperator"
