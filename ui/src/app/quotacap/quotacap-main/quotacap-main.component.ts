@@ -1,7 +1,7 @@
 /**
  * Created by sahanK on 2/8/17.
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {QuotaService} from '../../commons/services/quotacap.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
@@ -68,6 +68,8 @@ export class QuotaCapMainComponent implements OnInit {
     private date = new Date();
     private loggeduser: string;
 
+    private showOperatorListPermissions: string;
+
     private myDateRangePickerOptions: IMyDrpOptions = {
         dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
@@ -131,6 +133,8 @@ export class QuotaCapMainComponent implements OnInit {
         this.defaultcalval = '';
         this.getOperatorList();
         this.clearErrors();
+
+        this.showOperatorListPermissions = "quota:operatorList";
     }
 
 
