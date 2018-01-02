@@ -35,7 +35,6 @@ export class LoginResponse {
     operator: string;
     userName: string;
     billing: boolean;
-    creditPlan: boolean;
     start: number;
     token: string;
     roles: string[];

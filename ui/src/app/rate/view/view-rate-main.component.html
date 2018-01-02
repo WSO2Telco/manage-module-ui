@@ -18,7 +18,7 @@
                                (typeaheadOnSelect)="onRateSelected()"
                                placeholder="Select the Rate">
                     </div>
-                    <div class="col-sm-4" *ngIf="isAdmin">
+                    <div class="col-sm-4" *appHasPermissions="showCreateRate">
                         <a class="btn btn-primary" href="#/rate/create">Create New Rate</a>
                     </div>
                 </div>

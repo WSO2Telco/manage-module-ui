@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {RateDefinition} from '../../commons/models/common-data-models';
 import {RateService} from '../../commons/services/rate.service';
 import {MessageService} from '../../commons/services/message.service';
-import {AuthenticationService} from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-view-rate-main',
@@ -17,23 +16,22 @@ export class ViewRateMainComponent implements OnInit {
     private rateCategory;
     private rateTax;
     private showRateDef: boolean;
-    public isCollapsed: boolean;
-    private isAdmin: boolean;
+    private showCreateRate: string;
 
 
     private rateDefinitions;
     private rates;
 
-    constructor(private rateService: RateService, private message: MessageService, private authService: AuthenticationService) {
+    constructor(private rateService: RateService, private message: MessageService) {
     }
 
     ngOnInit() {
         this.selectedRate = '';
         this.showRateDef = false;
         this.rateDefinitions = [];
-        this.rates =  [];
+        this.rates = [];
         this.getRateCards();
-        this.isAdmin = this.authService.loginUserInfo.getValue().isAdmin;
+        this.showCreateRate = 'rate:add';
     }
 
 
@@ -60,11 +58,11 @@ export class ViewRateMainComponent implements OnInit {
             if (response.success) {
                 this.rateDefinitions = response.payload;
                 let count = 0;
-                for (const entry of this.rateDefinitions){
+                for (const entry of this.rateDefinitions) {
                     this.rates[count] = entry.rateDefinition;
                     count++;
                 }
-                if (this.rateDefinitions.length == 0){
+                if (this.rateDefinitions.length == 0) {
                     this.message.warning('No Records Found');
                 }
             } else {

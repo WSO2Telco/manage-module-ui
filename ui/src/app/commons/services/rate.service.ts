@@ -188,17 +188,15 @@ export class RateService {
      * @param callback
      */
     getRateCards(callback: Function) {
-        if (this.authService.validateSession()) {
-            this._remoteService.getRateCards()
-                .subscribe(
-                    data => {
-                        callback(data);
-                    },
-                    error => {
-                        callback(error);
-                    }
-                );
-        }
+        this._remoteService.getRateCards()
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
     }
 
     /**

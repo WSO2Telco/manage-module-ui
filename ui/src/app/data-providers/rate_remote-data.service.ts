@@ -12,7 +12,7 @@ export class RateRemoteDataService {
     private apiContext = this.url.protocol + '//' + this.url.host + '/ratecard-service/ratecardservice/';
 
     private apiEndpoints: Object = {
-        rateCards: this.apiContext + 'ratecards',
+        rateCards: this.apiContext + 'ratecards?schema=full',
         tariffs: this.apiContext + 'tariffs',
         rateTypes: this.apiContext + 'ratetypes',
         categories: this.apiContext + 'categories',

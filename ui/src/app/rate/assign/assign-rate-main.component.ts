@@ -29,6 +29,8 @@ export class AssignRateMainComponent implements OnInit {
     private key: string;
     private format;
 
+    private isAdmin: boolean; /** since rate assign is only for hub-admin this value will be hard codes as true*/
+
     private invalidApiOperation: boolean;
     private invalidOperator: boolean;
     private invalidApi: boolean;
@@ -48,6 +50,8 @@ export class AssignRateMainComponent implements OnInit {
             none: 'Select None',
             direction: 'left-to-right'
         };
+
+        this.isAdmin = true;
 
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -74,7 +78,7 @@ export class AssignRateMainComponent implements OnInit {
         this.rateService.getOperatorList((response) => {
             if (response.success) {
                 this.operatorList = response.payload;
-                if (this.loginInfo.isAdmin) {
+                if (this.isAdmin) {
                     const admin = {
                         'operatorId': null,
                         'operatorName': 'ALL',
@@ -123,7 +127,7 @@ export class AssignRateMainComponent implements OnInit {
                 }
 
                 /**condition to set the operator id*/
-                if (this.loginInfo.isAdmin && this.operator == 'Admin') {
+                if (this.isAdmin && this.operator == 'Admin') {
                     operatorId = null;
                 } else {
                     for (const entry of this.operatorList) {
@@ -177,7 +181,7 @@ export class AssignRateMainComponent implements OnInit {
             }
 
             /**condition to set the operator id*/
-            if (this.loginInfo.isAdmin && this.operator == 'Admin') {
+            if (this.isAdmin && this.operator == 'Admin') {
                 operatorId = null;
             } else {
                 for (const entry of this.operatorList) {
@@ -262,7 +266,7 @@ export class AssignRateMainComponent implements OnInit {
             }
         }
 
-        if (this.loginInfo.isAdmin) {
+        if (this.isAdmin) {
             for (const item of this.operatorList) {
                 if (item.operatorName == this.operator) {
                     this.invalidOperator = false;
@@ -272,7 +276,7 @@ export class AssignRateMainComponent implements OnInit {
             this.invalidOperator = false;
         }
 
-        if (this.loginInfo.isAdmin) {
+        if (this.isAdmin) {
             return (!this.invalidOperator && !this.invalidApi && !this.invalidApiOperation);
         } else {
             return (!this.invalidApi && !this.invalidApiOperation);

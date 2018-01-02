@@ -1,5 +1,4 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import {RateService} from '../../../commons/services/rate.service';
 import {Category, Mapping, RateCategory, Tariff} from '../../../commons/models/common-data-models';
 
 @Component({
@@ -17,13 +16,12 @@ export class RateCategoryComponent implements OnInit {
     private isCategoryError: boolean;
     private isSubcategoryError: boolean;
     private isTariffError: boolean;
-    private isMappigError: boolean;
+    private isMappingError: boolean;
 
     private categoryError: string;
     private subcategoryError: string;
     private tariffError: string;
 
-    private isSubmitted: boolean;
     private showNewCategory: boolean;
     private showNewSubCategory: boolean;
     private showNewTariff: boolean;
@@ -43,11 +41,10 @@ export class RateCategoryComponent implements OnInit {
     @Output()
     private rateCatetgorySubmition: EventEmitter<Mapping[]> = new EventEmitter();
 
-    constructor(private rateService: RateService) {
+    constructor() {
     }
 
     ngOnInit() {
-       // console.log('Sub name window loaded');
         this.category = '';
         this.subcategory = '';
         this.tariff = '';
@@ -101,7 +98,7 @@ export class RateCategoryComponent implements OnInit {
                     this.subcategory = '';
                     this.tariff = '';
                 } else {
-                    this.isMappigError = true;
+                    this.isMappingError = true;
                 }
             }
 
@@ -198,7 +195,7 @@ export class RateCategoryComponent implements OnInit {
         this.isSubcategoryError = false;
         this.isCategoryError = false;
         this.isTariffError = false;
-        this.isMappigError = false;
+        this.isMappingError = false;
         this.categoryError = '';
         this.subcategoryError = '';
         this.tariffError = '';
