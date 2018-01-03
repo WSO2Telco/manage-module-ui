@@ -34,7 +34,6 @@ export class AuthenticationService {
                     
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
-                    loginInfo.billing = true;
                     loginInfo.token = btoa(userName + ':' + password);
 
                     this.loginUserInfo.next(loginInfo);

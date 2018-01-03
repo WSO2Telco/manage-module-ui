@@ -168,6 +168,8 @@ export class ApplicationDataTableComponent implements OnInit {
 
     onFilterItemAdded() {
         this.filter.filerString = this.filterString;
+        this.filter.startRecordNumber = 0;
+        this.currentPage = 1;
         this.onFilterChange.emit(this.filter);
     }
 
