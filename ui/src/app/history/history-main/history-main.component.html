@@ -1,13 +1,15 @@
 <div class="animated fadeInUp row">
-    <div class="col-sm-12">
-        <app-history-filter
-                [filter]="filter"
-                (onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>
-    </div>
+    <!--<div class="col-sm-12">-->
+        <!--<app-history-filter-->
+                <!--[filter]="filter"-->
+                <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
+    <!--</div>-->
     <div class="col-sm-12">
         <app-responsive-table
-                [dataSource]="approvalHistoryData?.recordsCol"
-                [fieldSet]="fieldSet"></app-responsive-table>
+                [dataSource]="approvalHistoryData?.applications"
+                [fieldSet]="fieldSet"
+                [filter]="filter"
+                (onFilterChange)="onFilterChangeHandler($event)"></app-responsive-table>
     </div>
     <div class="col-sm-12 text-center">
         <pagination

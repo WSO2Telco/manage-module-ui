@@ -33,6 +33,12 @@ export class SubscriptionDataTableComponent implements OnInit {
     @Input()
     private filter: ApplicationTaskFilter;
 
+    @Input()
+    private showTiersPermissions: string;
+
+    @Input()
+    private showRatePermissions: string;
+
     @Output()
     private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
@@ -46,7 +52,6 @@ export class SubscriptionDataTableComponent implements OnInit {
 
 
     private filterString: string;
-    private arr: string[];
 
     private apiNamesList: string[] = [''];
     private userNamesList: string[] = [''];
@@ -68,40 +73,21 @@ export class SubscriptionDataTableComponent implements OnInit {
     private showTiers: boolean;
 
     private billing: boolean;
-    private iscreditPlan: boolean;
-
-    @Input()
-    private isSubscription: boolean;
-
-    @Input()
-    private creditPlan: string[];
-
-    private roleList: string[];
-    private tableID: string;
 
     private comment: string;
     private isCommentEmpty: boolean;
 
-    private opsp: string;
-
     @Input()
-    private isApplicationOnly: boolean;
-
-    @Input()
-    private isSubscriptionOnly: boolean;
+    private unAssigned: boolean;
 
     ngOnInit() {
-        this.arr = [];
         this.billing = this.authService.loginUserInfo.getValue().billing;
-        this.iscreditPlan = this.authService.loginUserInfo.getValue().creditPlan;
         this.showTiers = false;
 
         this.showTiers = true;
         this.comment = '';
         this.filterString = '';
         this.isCommentEmpty = false;
-        this.tableID = 'subscriptionTable';
-        this.opsp = 'subscriber';
     }
 
 
@@ -132,7 +118,7 @@ export class SubscriptionDataTableComponent implements OnInit {
     }
 
     onOptionChange(event, item) {
-        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+        if (this.unAssigned) {
             this.message.warning('Please assign the task to yourself before editing');
         }
         item.tier = event.target.value;
@@ -140,7 +126,7 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     onOperationRateChange(event, item, apiOperation) {
 
-        if (this.isApplicationOnly === true || this.isSubscriptionOnly === true) {
+        if (this.unAssigned) {
             this.message.warning('Please assign the task to yourself before editing');
         }
 
@@ -200,6 +186,8 @@ export class SubscriptionDataTableComponent implements OnInit {
 
     onFilterItemAdded() {
         this.filter.filerString = this.filterString;
+        this.filter.startRecordNumber = 0;
+        this.currentPage = 1;
         this.onFilterChange.emit(this.filter);
     }
 

@@ -22,8 +22,6 @@ export class TariffComponent implements OnInit {
     @Output()
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private submissionError: string;
-
     private isNameError: boolean;
     private isDescriptionError: boolean;
     private disableAddButton: boolean;
@@ -39,7 +37,6 @@ export class TariffComponent implements OnInit {
     private IsExceedCommision: boolean;
     private ValidCommisionTotal: boolean;
     private InValidCommisionTotal: boolean;
-    private IsValidMinusCommision: boolean;
     private IsMinusExceedCommision: boolean;
     private IsInvalidMinusSpCommission: boolean;
     private IsInvalidMinusAdsCommission: boolean;

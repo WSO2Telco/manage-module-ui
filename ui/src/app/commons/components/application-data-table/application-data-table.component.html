@@ -15,13 +15,13 @@
                     <input type="text"
                            [(ngModel)]="filterString"
                            container="body"
-                           class="form-control" placeholder="App Name">
+                           class="form-control" placeholder="Filter">
                 </div>
                 <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
             </div>
         </div>
     </div>
-    <div class="table {{tableID}}" id="{{tableID}}">
+    <div class="table applicationTable" id="applicationTable">
 
         <div class="tbl-row header">
             <div class="tbl-cell">ID</div>
@@ -97,8 +97,6 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="row more-row" *ngIf="!showTiers"></div>
                             </div>
                         </div>
                         <div class="row">

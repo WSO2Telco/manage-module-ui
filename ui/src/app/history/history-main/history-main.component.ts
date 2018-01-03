@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
 import {
     ApprovalHistoryFilter, ApprovalHistory,
-    ApprovalHistoryDataset
+    ApprovalHistoryDataset, AppHistoryResponse
 } from "../../commons/models/reporing-data-models";
 
 @Component({
@@ -17,20 +17,21 @@ export class HistoryMainComponent implements OnInit {
 
     private filter: ApprovalHistoryFilter;
 
-    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "status","approvedOn", "Application"];
+    private fieldSet = ["applicationId", "applicationName", "applicationDescription", "createdBy", "status", "approvedOn", "Application"];
 
-    private approvalHistoryData: ApprovalHistoryDataset;
+    private approvalHistoryData: AppHistoryResponse;
 
-    private totalItems:number=0;
-    private currentPage:number = 1;
+    private totalItems: number = 0;
+    private currentPage: number = 1;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
         this.filter.count = 10;
+        this.filter.filterString = '';
 
         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
             this.approvalHistoryData = history;
-            this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.noOfRecords) || this.totalItems;
+            this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.total) || this.totalItems;
         });
 
         this.reportingService.getSubscribers();
@@ -38,12 +39,12 @@ export class HistoryMainComponent implements OnInit {
         this.reportingService.getApprovalHistory(this.filter);
     }
 
-    onFilterChangeHandler(event:ApprovalHistoryFilter){
+    onFilterChangeHandler(event: ApprovalHistoryFilter) {
         this.filter = event;
         this.reportingService.getApprovalHistory(this.filter);
     }
 
-    onPageChanged(event){
+    onPageChanged(event) {
         this.filter.offset = (event.page - 1) * this.filter.count;
         this.reportingService.getApprovalHistory(this.filter);
     }

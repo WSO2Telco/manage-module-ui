@@ -1,5 +1,5 @@
-import { RouterModule } from "@angular/router";
-import { AppGuard, LoginGuard, BillingGuard, PermissionGuard } from "./app.guard";
+import {RouterModule} from '@angular/router';
+import {AppGuard, LoginGuard, PermissionGuard} from './app.guard';
 
 const routes = [
   {
@@ -23,7 +23,7 @@ const routes = [
   {
     path: 'rate',
     loadChildren: 'app/rate/rate.module#RateModule',
-    canActivate: [AppGuard, BillingGuard, PermissionGuard],
+    canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'rate'
     }
@@ -31,7 +31,7 @@ const routes = [
   {
     path: 'quotacap',
     loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
-    canActivate: [AppGuard, BillingGuard, PermissionGuard],
+    canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'quota'
     }

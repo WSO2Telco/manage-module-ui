@@ -18,7 +18,9 @@
                 tableTitle="All APPLICATIONS"
                 [dataSource]="allApplications"
                 [creditPlan]="creditPlan"
-                [isApplicationOnly]="true"
+                [unAssigned]="true"
+                showTiersPermissions="application:changeTiers"
+                showCreditPlanPermissions="application:creditPlan"
                 (onAssignTask)="onAssignTaskHandler($event)"
                 (onFilterChange)="onFilterChangeHandler($event)"></application-data-table>
     </div>

@@ -1,21 +1,38 @@
 <div class="table-wrapper">
+
   <div class="tbl-header">
     {{tableHeader}}
   </div>
-  <div class="table">
 
+  <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
+    <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
+      <div class="head">Filter<span class="clear" (click)="onClear()">Clear All</span></div>
+      <div class="row">
+        <div class="form-group col-xs-8">
+          <input type="text"
+                 [(ngModel)]="filterString"
+                 container="body"
+                 class="form-control" placeholder="filter">
+        </div>
+        <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="table">
     <div class="tbl-row header">
       <div class="tbl-cell" *ngFor="let field of fieldSet" style="text-transform: capitalize">{{field}}</div>
     </div>
-
     <div class="tbl-row" *ngFor="let item of dataSource">
-      <div class="tbl-cell" *ngFor="let field of fieldSet">
-        <span *ngIf="field == 'applicationName' "><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item[field]}}</a></span>
-        <span *ngIf="item[field] != null && field != 'applicationName' ">{{item[field]}}</span>
-        <span *ngIf="item[field] == null "><button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More </button></span>
-      </div>
+      <div class="tbl-cell">{{item.applicationId}}</div>
+      <div class="tbl-cell"><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item.applicationName}}</a></div>
+      <div class="tbl-cell">{{item.applicationDescription}}</div>
+      <div class="tbl-cell">{{item.createdBy}}</div>
+      <div class="tbl-cell">{{item.status}}</div>
+      <div class="tbl-cell">{{item.approvedOn}}</div>
+      <div class="tbl-cell"><button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More </button></div>
     </div>
-
     <div class="no-rec-row tbl-row" *ngIf="dataSource.length == 0">
       <span class="no-rec">No Records...</span>
     </div>

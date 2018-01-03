@@ -7,6 +7,7 @@ export class ApprovalHistoryFilter {
     operator: string = '';
     offset: number = 0;
     count: number = 10;
+    filterString: string;
 }
 
 export class ApprovalRateFilter {
@@ -31,6 +32,22 @@ export class ApprovalHistory {
 export class ApprovalHistoryDataset {
     recordsCol: ApprovalHistory[] = [];
     noOfRecords: number;
+}
+
+export class AppHistory {
+    applicationId: number;
+    applicationName: string;
+    applicationDescription: string;
+    status: string;
+    approvedOn: string;
+    createdBy: string;
+}
+
+export class AppHistoryResponse {
+    applications: AppHistory [] = [];
+    total: number;
+    start: number;
+    size: number;
 }
 
 export class Subscriber {

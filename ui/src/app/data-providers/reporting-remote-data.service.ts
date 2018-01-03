@@ -5,7 +5,7 @@ import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
     ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
-    Application, ApplicationHistory
+    Application, ApplicationHistory, AppHistoryResponse
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
 
@@ -22,34 +22,35 @@ export class ReportingRemoteDataService {
      * Operators Stream
      * @type {BehaviorSubject<string[]>}
      */
-    public OperatorsProvider:Subject<string[]> = new BehaviorSubject<string[]>([]);
+    public OperatorsProvider: Subject<string[]> = new BehaviorSubject<string[]>([]);
 
     /**
      * Applications Stream
      * @type {BehaviorSubject<any[]>}
      */
-    public ApplicationsProvider:Subject<Application[]> = new BehaviorSubject<Application[]>([])
+    public ApplicationsProvider: Subject<Application[]> = new BehaviorSubject<Application[]>([])
 
-    public ApplicationDetailProvider:Subject<ApplicationHistory[]> = new BehaviorSubject<ApplicationHistory[]>([]);
+    public ApplicationDetailProvider: Subject<ApplicationHistory[]> = new BehaviorSubject<ApplicationHistory[]>([]);
 
     /**
      * Approval History stream
      * @type {BehaviorSubject<ApprovalHistory[]>}
      */
-    public ApprovalHistoryProvider:Subject<ApprovalHistoryDataset> = new BehaviorSubject<ApprovalHistoryDataset>(null);
+    public ApprovalHistoryProvider: Subject<AppHistoryResponse> = new BehaviorSubject<AppHistoryResponse>(null);
 
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
 
     private options: RequestOptions = new RequestOptions({headers: this.headers});
 
     private url = new URL(window.location.href);
-    private apiContext = this.url.protocol + '//' + this.url.host + '/workflow-service/workflow/history';
+    private apiContext = this.url.protocol + '//' + this.url.host + '/workflow-service/workflow/';
 
     private apiEndpoints: Object = {
-        subscribers: this.apiContext + '/subscribers',
-        operators : this.apiContext + '/operators',
-        approvalHistory : this.apiContext + '/approval',
-        applications : this.apiContext + '/applications',
+        subscribers: this.apiContext + 'history/subscribers',
+        operators: this.apiContext + 'history/operators',
+        approvalHistory: this.apiContext + 'history/approval',
+        applications: this.apiContext + 'history/applications',
+        applicationHistory: this.apiContext + 'applications/history'
     };
 
     constructor(private http: Http,
@@ -58,11 +59,11 @@ export class ReportingRemoteDataService {
                 private authService: AuthenticationService) {
     }
 
-    getApplicationDetail (id: number, callback: Function) {
+    getApplicationDetail(id: number, callback: Function) {
         this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
             .map((response: Response) => response.json())
             .subscribe(
-                (applications:ApplicationHistory[]) => {
+                (applications: ApplicationHistory[]) => {
                     this.ApplicationDetailProvider.next(applications);
                     callback(applications, true);
                 },
@@ -91,7 +92,7 @@ export class ReportingRemoteDataService {
             )
     }
 
-    getOperators(){
+    getOperators() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['operators'], this.getOptions())
             .map((response: Response) => response.json())
@@ -109,13 +110,13 @@ export class ReportingRemoteDataService {
             )
     }
 
-    getApplicationsBySubscriber(subscriber:string){
-        if(!!subscriber){
+    getApplicationsBySubscriber(subscriber: string) {
+        if (!!subscriber) {
             this.slimLoadingBarService.start();
-            this.http.get(this.apiEndpoints['applications']+'/'+subscriber, this.getOptions())
+            this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.getOptions())
                 .map((response: Response) => response.json())
                 .subscribe(
-                    (applications:Application[]) => {
+                    (applications: Application[]) => {
                         this.ApplicationsProvider.next(applications)
                     },
                     (error) => {
@@ -126,53 +127,47 @@ export class ReportingRemoteDataService {
                         this.slimLoadingBarService.complete()
                     }
                 )
-        }else{
+        } else {
             this.ApplicationsProvider.next([]);
         }
 
     }
 
-    getApprovalHistory(approvalHistoryFilter:ApprovalHistoryFilter){
-        let filter:ApprovalHistoryFilter = Object.assign({},approvalHistoryFilter);
+    getApprovalHistory(filter?: ApprovalHistoryFilter) {
+
+        let historyFilter = new ApprovalHistoryFilter();
+
+        if (!!filter) {
+            historyFilter = filter;
+        }
+
         this.slimLoadingBarService.start();
 
-        if(!!!filter.subscriber){
-            filter.subscriber = '__ALL__';
-        }
+        const endPoint = this.apiEndpoints['applicationHistory']
+            + '?start=' + historyFilter.offset + '&filterBy=' + historyFilter.filterString;
 
-        if(!!!filter.operator){
-            filter.operator = '__ALL__';
-        }
-
-        this.http.post(this.apiEndpoints['approvalHistory'], filter, this.getOptions())
+        this.http.get(endPoint, this.getOptions())
             .map((response: Response) => response.json())
-            .flatMap((res)=>{return Observable.from(res)})
-            .reduce((arr:ApprovalHistoryDataset,cur)=>{
-                if(cur.length == 1){
-                    arr.noOfRecords = cur[0];
-                }else{
-                    let tmp:ApprovalHistory = new ApprovalHistory();
-                    tmp.applicationId = cur[0];
-                    tmp.applicationName= cur[1];
-                    tmp.applicationDescription= cur[2];
-                    tmp.status= cur[3];
-                    tmp.approvedOn = cur[4];
-                    arr.recordsCol.push(tmp);
-                }
-                return arr;
-            },new ApprovalHistoryDataset())
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Application History List',
+                error: error
+            }))
             .subscribe(
-                (approvalHistory) => {
-                    this.ApprovalHistoryProvider.next(approvalHistory)
+                data => {
+                    if (data.success) {
+                        this.ApprovalHistoryProvider.next(data.payload);
+                        this.slimLoadingBarService.complete();
+                    } else {
+                        this.message.error(data.message);
+                        this.slimLoadingBarService.stop();
+                    }
                 },
-                (error) => {
-                    this.message.error(error);
-                    this.slimLoadingBarService.complete();
-                },
-                () => {
-                    this.slimLoadingBarService.complete();
+                error => {
+                    this.message.error(error.message);
+                    this.slimLoadingBarService.stop();
                 }
-            )
+            );
     }
 
     getOptions(): RequestOptions {

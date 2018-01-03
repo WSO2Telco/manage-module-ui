@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '../../models/common-data-models';
-import { AppCommonService } from '../../services/app-common.service';
-import { Router, NavigationEnd } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
+import {Component, OnInit} from '@angular/core';
+import {MenuItem} from '../../models/common-data-models';
+import {AppCommonService} from '../../services/app-common.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
     selector: 'app-main-menu',
@@ -34,13 +33,10 @@ export class MainMenuComponent implements OnInit {
 
 
     constructor(private _appCommonService: AppCommonService,
-        private _router: Router,
-        private authService: AuthenticationService) {
+        private _router: Router) {
     }
 
     ngOnInit() {
-
-        const loginInfo = this.authService.loginUserInfo.getValue();
 
         this._router.events.subscribe((event) => {
             if (event instanceof NavigationEnd) {
