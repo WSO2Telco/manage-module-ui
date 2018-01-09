@@ -56,7 +56,7 @@
                   (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-sm-2">Rate Name <span>*</span></label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input class="form-control"
                                type="text"
                                autocomplete="off"
@@ -72,7 +72,7 @@
 
                 <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
                     <label class="control-label col-sm-2">Rate Description <span>*</span></label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                             <textarea rows="2" cols="50" class="form-control"
                                       type="text"
                                       autocomplete="off"
@@ -89,7 +89,7 @@
 
                 <div class="form-group" [ngClass]="{'has-danger': isCurrencyError}">
                     <label class="control-label col-sm-2">Currency <span>*</span></label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input [(ngModel)]="currency"
                                [typeahead]="currencyList"
                                typeaheadOptionField="currencyCode"
@@ -109,7 +109,7 @@
 
                 <div class="form-group" [ngClass]="{'has-danger': isRateTypeError}">
                     <label class="control-label col-sm-2">Rate Type <span>*</span></label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input [(ngModel)]="rateType"
                                [typeahead]="rateTypeList"
                                typeaheadOptionField="rateTypeCode"
@@ -142,7 +142,7 @@
                                 *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                         </h6>
                     </template>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
                                [typeaheadItemTemplate]="customItemTemplate"
@@ -223,17 +223,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax</label>
-                    <div class="col-sm-4">
+                    <label class="control-label col-sm-2">Taxes</label>
+                    <div class="col-sm-6">
                         <select multiple
                                 [(ngModel)]="rateTax"
                                 class="form-control"
                                 name="tax"
                                 required
                                 id="taxlist">
-                            <option
+                            <option style="font-size:11px"
                                     *ngFor="let c of rateTaxList"
-                                    [ngValue]="c.taxId">{{c.taxName}}
+                                    [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>
                             </option>
                         </select>
                     </div>

@@ -58,6 +58,8 @@ export class RateMainComponent implements OnInit {
     private showChildNewCategory:boolean;
     private showChildNewSubCategory:boolean;
     private showChildNewTariff:boolean;
+    private taxValidityDatesArray:string[];
+    private multiselect:string[];
 
     constructor(private rateService:RateService, private _router:Router,
                 private authService:AuthenticationService, private message:MessageService) {
@@ -91,6 +93,8 @@ export class RateMainComponent implements OnInit {
         this.rateTaxList = [];
         this.rateCategories = [];
         this.selectedtariff = [];
+        this.taxValidityDatesArray = [];
+        this.multiselect = [];
 
         this.getTariffList();
         this.getCurrencyList();
@@ -140,13 +144,31 @@ export class RateMainComponent implements OnInit {
 
     }
 
+    private getValidityText(taxesValidityDates) {
+        let name = "";
+        for (let m = 0; m < taxesValidityDates.length; m++) {
+            name += " | Value : ";
+            name += taxesValidityDates[m].taxValidityval;
+            name += " Valid from ";
+            name += taxesValidityDates[m].taxValidityactdate;
+            name += " To ";
+            name += taxesValidityDates[m].taxValiditydisdate;
+        }
+        return name;
+    }
+
     /**
      * this function will load the existing rate taxes list
      */
     getRateTaxList() {
         this.rateService.getRateTaxList((response) => {
             if (response.success) {
-                this.rateTaxList = response.payload;
+                this.rateTaxList = response.payload.map((item:RateTax) => Object.assign({}, item,
+                    {
+                        id: item.taxId,
+                        text: item.taxName + this.getValidityText(item.taxesValidityDates)
+                    }));
+
             } else {
                 this.message.error(response.message);
             }
@@ -234,7 +256,6 @@ export class RateMainComponent implements OnInit {
         for (const item of this.rateTax) {
             let temp = new RateTax();
             let temTax = new Tax();
-
             temTax.taxId = Number(item);
             temp.tax = temTax;
             rateTaxes[count2] = temp;
@@ -614,5 +635,4 @@ export class RateMainComponent implements OnInit {
         this.clearErrors();
 
     }
-
 }
