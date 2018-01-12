@@ -6230,6 +6230,11 @@
       "integrity": "sha1-3oGf282E3M2PrlnGrreWFbnSZqw=",
       "dev": true
     },
+    "mcc-mnc-list": {
+      "version": "1.0.76",
+      "resolved": "https://registry.npmjs.org/mcc-mnc-list/-/mcc-mnc-list-1.0.76.tgz",
+      "integrity": "sha1-vSEbBMr6ekmpEcnOBHHDC7XJCHM="
+    },
     "media-typer": {
       "version": "0.3.0",
       "resolved": "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz",

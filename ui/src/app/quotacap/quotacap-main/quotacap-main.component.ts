@@ -135,6 +135,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.clearErrors();
 
         this.showOperatorListPermissions = "quota:operatorList";
+
     }
 
 
@@ -147,13 +148,9 @@ export class QuotaCapMainComponent implements OnInit {
                 this.subscriberList = response.payload;
             } else {
                 this.message.error(response.message);
-
             }
         });
     }
-
-    l;
-
 
     /**
      * to load the subscriber details of operator
