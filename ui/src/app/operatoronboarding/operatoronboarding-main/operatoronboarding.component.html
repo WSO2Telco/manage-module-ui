@@ -1,0 +1,102 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container OpOnboardingInputContainer">
+            <div class="tbl-header">
+                New Operator Registration
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form class="form-horizontal" #OpOnboardingForm="ngForm" novalidate
+                          (ngSubmit)="OpOnboardingFormSubmit(OpOnboardingForm)" autocomplete="off">
+
+                        <div class="form-group" [ngClass]="{'has-danger': isCountryEmpty}">
+                            <label class="control-label col-sm-4">Country <span>*</span></label>
+                            <div class="col-sm-6 ">
+                                <input type="text"
+                                       class="form-control"
+                                       [(ngModel)]="country"
+                                       (typeaheadOnSelect)="onCountrySelected()"
+                                       (input)="onCountrySelected()"
+                                       [typeahead]="countryList"
+                                       [typeaheadMinLength]="0"
+                                       typeaheadOptionField="id"
+                                       placeholder="Select Country"
+                                       name="country"
+                                >
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isCountryError">{{countyError}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Mobile Country Code</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="MCC (Mobile Country Code)"
+                                       [(ngModel)]="mcc"
+                                       name="mcc"
+                                       disabled="true"
+                                >
+                            </div>
+                            <span class="glyphicon glyphicon-info-sign info-tooltip"
+                                  tooltip="This field will auto filled based on  selected country" placement="right"
+                            ></span>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-4">Mobile Network Code</label>
+                            <div class="col-sm-6">
+                                <input [(ngModel)]="mnc"
+                                       [typeaheadMinLength]="0"
+                                       container="body"
+                                       [typeahead]="mncList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="mnc"
+                                       placeholder="Select MNC">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isMncError">{{mncError}}</span>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-danger': isNameEmpty}">
+                            <label class="control-label col-sm-4">Name</label>
+                            <div class="col-sm-6">
+                                <input name="opName"
+                                       [(ngModel)]="operatorName"
+                                       class="form-control"
+                                       placeholder="Name">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isNameError">{{nameError}}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Description<span>*</span></label>
+                            <div class="col-sm-6">
+                                <textarea rows="2" cols="50" class="form-control"
+                                          type="text"
+                                          [(ngModel)]="operatorDes"
+                                          autocomplete="off"
+                                          placeholder="Description"
+                                          name="description"
+                                          ngModel="description"
+                                          required>
+                            </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
+                                <br>
+                                <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="is_edit">
+                                    Add
+                                </button>&nbsp;
+                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
