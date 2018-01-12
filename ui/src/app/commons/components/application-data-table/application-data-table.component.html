@@ -15,12 +15,30 @@
                     <input type="text"
                            [(ngModel)]="filterString"
                            container="body"
-                           class="form-control" placeholder="Filter">
+                           class="form-control" placeholder="Filter Applications Creation">
                 </div>
-                <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
+                <div class="form-group col-xs-4">
+                    <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button>
+                    &nbsp;
+                    <span
+                            class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
+                            [tooltip]="FilterHelper" placement="left"
+                    ></span>
+                </div>
             </div>
         </div>
     </div>
+    <template #FilterHelper>
+        <table style="width:100%;text-align: left; padding: 20px;">
+            <tr>
+                <td>Filter Example</td>
+            </tr>
+            <tr>
+                <td>appname:app1,users:admin</td>
+            </tr>
+        </table>
+    </template>
+
     <div class="table applicationTable" id="applicationTable">
 
         <div class="tbl-row header">
@@ -87,8 +105,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row more-row"  *appHasPermissions="showCreditPlanPermissions">
-                                    <div class="col-xs-6 field-name">Credit Plan </div>
+                                <div class="row more-row" *appHasPermissions="showCreditPlanPermissions">
+                                    <div class="col-xs-6 field-name">Credit Plan</div>
                                     <div class="col-xs-6 field-value">
                                         <select class="form-control" (change)="onCreditPlanChange($event,item)">
                                             <option *ngFor="let opt of creditPlan" [selected]="item.creditPlan == opt">
@@ -111,7 +129,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-12 "  *ngIf="item.actionType !== 'MORE'">
+                    <div class="col-sm-12 " *ngIf="item.actionType !== 'MORE'">
                         <div class="row more-row ">
                             <div class="col-xs-3 field-name">Comment <span>*</span></div>
                             <div class="col-xs-9 field-value">
@@ -125,7 +143,8 @@
 
                     <div class="col-sm-12 text-right" *ngIf="item.actionType !== 'MORE'">
                         <button class="btn btn-default animated fadeIn"
-                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false; item.tier = ''; item.creditPlan = '';">Cancel
+                                (click)="item.isExpand = false; item.actionType = '' ; item.comment=''; isCommentEmpty= false; item.tier = ''; item.creditPlan = '';">
+                            Cancel
                         </button>
                         <button class="btn btn-primary animated fadeIn"
                                 *ngIf="item.actionType == 'APPROVE'"

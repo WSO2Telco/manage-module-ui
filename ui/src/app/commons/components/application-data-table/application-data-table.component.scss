@@ -121,15 +121,14 @@
         }
       }
 
-      .norate{  height: 150px !important;
+      .norate {
+        height: 150px !important;
 
         &.A, &.R {
           height: 238px !important;
         }
 
       }
-
-
 
       .more-con {
         padding: 10px 0px 10px 0px;
@@ -156,7 +155,9 @@
           line-height: 40px;
           text-align: right;
           font-weight: 600;
-          span { color: #dd0d0d;}
+          span {
+            color: #dd0d0d;
+          }
         }
 
         .rate-field-name {
@@ -188,8 +189,8 @@
           padding-bottom: 5px !important;
         }
       }
-	  
-	  .row9, .row10 {
+
+      .row9, .row10 {
         height: 485px;
 
         &.A, &.R {
@@ -212,8 +213,6 @@
           height: 400px !important;
         }
       }
-
-
 
     }
   }
@@ -299,7 +298,9 @@
           line-height: 40px;
           text-align: right;
           font-weight: 600;
-          span { color: #dd0d0d;}
+          span {
+            color: #dd0d0d;
+          }
         }
 
         .rate-field-name {
@@ -334,7 +335,6 @@
 
     }
   }
-
 
   .time {
     display: block;
@@ -490,4 +490,11 @@
 .field-value pre {
   border-radius: 0px;
   background-color: #ffffff;
+}
+
+.info-tooltip {
+  font-size: 1.5em;
+  color: #8E44AD;
+  vertical-align: top;
+  cursor: pointer;
 }

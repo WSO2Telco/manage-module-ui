@@ -15,9 +15,26 @@
                     <input type="text"
                            [(ngModel)]="filterString"
                            container="body"
-                           class="form-control" placeholder="App Name">
+                           class="form-control" placeholder="Filter Subscription creations">
                 </div>
-                <div class="form-group col-xs-2"><button (click)="onFilterItemAdded()">search</button></div>
+                <div class="form-group col-xs-4">
+                    <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button>
+                    &nbsp;
+                    <span
+                            class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
+                            [tooltip]="FilterHelper" placement="left"
+                    ></span>
+                </div>
+                <template #FilterHelper>
+                    <table style="width:100%;text-align: left; padding: 20px;">
+                        <tr>
+                            <td>Filter Example</td>
+                        </tr>
+                        <tr>
+                            <td>appname:app1,users:admin</td>
+                        </tr>
+                    </table>
+                </template>
             </div>
         </div>
     </div>
