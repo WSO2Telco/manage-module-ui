@@ -14,7 +14,7 @@ const routes = [
     component: ApplicationsComponent,
     canActivate: [PermissionGuard],
     data: {
-      permissions: 'application'
+      permissions: 'application:visible'
     }
   },
   {
@@ -22,7 +22,7 @@ const routes = [
     component: SubscriptionsComponent,
     canActivate: [PermissionGuard],
     data: {
-      permissions: 'subscription'
+      permissions: 'subscription:visible'
     }
   }
 ];

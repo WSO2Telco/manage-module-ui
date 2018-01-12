@@ -309,10 +309,15 @@ export class ApprovalRemoteDataService {
     }
 
     getAllTasks(): void {
-        this.getUserApplicationTasks();
-        this.getUserAppSubscriptionTasks();
-        this.getUserGroupApplicationTasks();
-        this.getUserGroupAppSubscriptionTask();
+        if (this.authService.hasPermissions('application:visible')) {
+            this.getUserApplicationTasks();
+            this.getUserGroupApplicationTasks();
+        }
+
+        if (this.authService.hasPermissions('subscription:visible')) {
+            this.getUserAppSubscriptionTasks();
+            this.getUserGroupAppSubscriptionTask();
+        }
     }
 
     getCreditPlan() {
