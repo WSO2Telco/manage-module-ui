@@ -12,10 +12,15 @@ export class ApprovalSummeryComponent implements OnInit {
     @Input()
     private appDetailsSummery: DashboardData;
 
+    private showPendingApps: string;
+    private showPendingSubs: string;
+
     constructor(private router: Router) {
     }
 
     ngOnInit() {
+        this.showPendingApps = 'application:visible';
+        this.showPendingSubs = 'subscription:visible';
     }
 
     onCountClick(type: string) {

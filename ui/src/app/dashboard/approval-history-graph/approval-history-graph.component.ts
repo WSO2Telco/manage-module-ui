@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DashboardRemoteDataService} from '../../data-providers/dashboard-remote-data.service';
 import {MessageService} from '../../commons/services/message.service';
+import {AuthenticationService} from "../../commons/services/authentication.service";
 
 @Component({
     selector: 'app-approval-history-graph',
@@ -40,13 +41,28 @@ export class ApprovalHistoryGraphComponent implements OnInit {
     private subscriptionHistoryDataSet: any[] = [{data: []}];
     private subscriptionHistoryLabels: string[] = [];
 
+
+    private showPendingApps: string;
+    private showPendingSubs: string;
+
     constructor(private dashboardService: DashboardRemoteDataService,
+                private authService: AuthenticationService,
                 private message: MessageService) {
     }
 
     ngOnInit() {
-        this.dashboardService.getApplicationCreationHistoryGraphData();
-        this.dashboardService.getSubscriptionCreationHistoryGraphData();
+
+        this.showPendingApps = 'application:visible';
+        this.showPendingSubs = 'subscription:visible';
+
+
+        if (this.authService.hasPermissions(this.showPendingApps)) {
+            this.dashboardService.getApplicationCreationHistoryGraphData();
+        }
+
+        if (this.authService.hasPermissions(this.showPendingSubs)) {
+            this.dashboardService.getSubscriptionCreationHistoryGraphData();
+        }
 
         this.dashboardService.ApplicationCreationHistoryDataProvider.subscribe(
             (historyData: any) => {
