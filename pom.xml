@@ -121,19 +121,31 @@
         </pluginRepository>
     </pluginRepositories>
 
-	<distributionManagement>
+	<!--distributionManagement>
 		<snapshotRepository>
 			<id>wso2Telco.snapshots</id>
 			<name>Snapshot repo</name>
 			<url>http://maven.wso2telco.com/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
-		<!-- Publish the versioned releases here -->
 		<repository>
 			<id>wso2telco.releases</id>
 			<name>release repo</name>
 			<url>http://maven.wso2telco.com/nexus/content/repositories/releases/</url>
 		</repository>
-	</distributionManagement>
+	</distributionManagement-->
+    <distributionManagement>
+                <snapshotRepository>
+                        <id>wso2Telco.snapshots</id>
+                        <name>Snapshot repo</name>
+                        <url>file:///home/nuwan/nexus/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <!-- Publish the versioned releases here -->
+                <repository>
+                        <id>wso2telco.releases</id>
+                        <name>release repo</name>
+                        <url>file:///home/nuwan/nexus/content/repositories/releases/</url>
+                </repository>
+        </distributionManagement>
 
 
 	<modules>
@@ -141,12 +153,18 @@
 		<module>com.wso2telco.dep.manage-service.feature</module>
 	</modules>
 
-	<scm>
+	<!--scm>
 		<url>https://github.com/WSO2Telco/manage-module-ui.git</url>
 		<developerConnection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</developerConnection>
 		<connection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</connection>
 		<tag>HEAD</tag>
-	</scm>
+	</scm-->
+	 <scm>
+                <url>https://github.com/Nuwan-Walisundara/manage-module-ui.git</url>
+                <developerConnection>scm:git:https://github.com/Nuwan-Walisundara/manage-module-ui.git</developerConnection>
+                <connection>scm:git:https://github.com/Nuwan-Walisundara/manage-module-ui.git</connection>
+                <tag>HEAD</tag>
+        </scm>
 
 	<build>
 		<finalName>manage-service</finalName>

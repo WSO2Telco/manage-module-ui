@@ -12,3 +12,5 @@ manage-service.iml
 node_modules/
 server/
 ui/angular-cli.json
+com.wso2telco.dep.manage-service.feature/target/
+com.wso2telco.dep.manage-service.feature/src/main/resources/generated
