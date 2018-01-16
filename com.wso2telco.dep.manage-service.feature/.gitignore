@@ -7,9 +7,6 @@ ui/npm-debug.log
 /ui/server
 .vscode
 target
-manage-service.iml
-/WebContent/public
-node_modules/
-server/
 ui/angular-cli.json
 src/main/resources/generated
+.project
