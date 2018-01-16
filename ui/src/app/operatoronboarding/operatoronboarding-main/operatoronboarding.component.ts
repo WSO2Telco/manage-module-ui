@@ -1,5 +1,5 @@
 /**
- * Created by sahanK on 10/01/17/18.
+ * Created by sahanK on 10/01/18.
  */
 import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../../commons/services/authentication.service';
@@ -15,16 +15,20 @@ export class OperatorOnboardingMainComponent implements OnInit {
     private country: string;
     private mcc: string;
     private mnc: string;
+    private brand: string;
     private operatorName: string;
     private operatorDes: string;
     private mncList: string[];
+    private operatorList: string[];
 
     private countyError: string;
     private mncError: string;
     private nameError: string;
+    private brandError: string;
 
     private countryList;
     private apiList: string[];
+    private brandList: string[];
 
     private is_edit: boolean;
     private isSubscriberSelect: boolean;
@@ -45,6 +49,7 @@ export class OperatorOnboardingMainComponent implements OnInit {
     private isApplicationError: boolean;
     private isMncError: boolean;
     private isNameError: boolean;
+    private isBrandError:boolean;
 
     private isCalendarEmpty: boolean;
 
@@ -60,12 +65,14 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.name = '';
         this.countryList = [];
         this.mncList = [];
-        this.operatorsList = ['_All_'];
+        this.operatorsList = [];
         this.apiList = [];
+        this.brandList = [];
 
         this.country = '';
         this.mcc = '';
         this.mnc = '';
+        this.brand = '';
         this.operatorName = '';
         this.operatorDes = '';
         this.is_edit = false;
@@ -88,6 +95,9 @@ export class OperatorOnboardingMainComponent implements OnInit {
         const mcc_mnc_list = require('mcc-mnc-list');
 
         let records = mcc_mnc_list.all();
+        let statusCodes = mcc_mnc_list.statusCodes();
+
+        console.log(statusCodes);
 
         for (const entry of records) {
             if (entry.countryName !== null || entry.countryName !== '' || entry.countryName !== 'null') {
@@ -120,6 +130,11 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.mcc = '';
         this.mncList = [];
         this.mnc = '';
+        this.operatorName = '';
+        this.brand = '';
+        this.operatorsList = [];
+        this.brandList = [];
+        this.clearErrors();
 
         const mcc_mnc_list = require('mcc-mnc-list');
 
@@ -131,8 +146,35 @@ export class OperatorOnboardingMainComponent implements OnInit {
             this.mcc = mcclist[0].mcc;
 
             for (const entry of mcclist) {
-                this.mncList.push(entry.operator);
+                this.brandList.push(entry.brand);
             }
+
+            this.brandList = this.remove_duplicates(this.brandList);
+        }
+
+
+    }
+
+    /**
+     * this method is triggered when a brand is selected
+     * @param event
+     */
+    onBrandSelected() {
+        this.operatorName = '';
+        this.operatorsList = [];
+
+        const mcc_mnc_list = require('mcc-mnc-list');
+      //  let brandlistofCountry = mcc_mnc_list.filter({countryName: this.country});
+        let opeatorofBrandList = mcc_mnc_list.filter({brand: this.brand, mcc: this.mcc });
+
+
+        if (opeatorofBrandList.length != 0) {
+
+            for (const entry of opeatorofBrandList) {
+                this.operatorsList.push("Operator : " + entry.operator + " | Mnc : " + entry.mnc);
+            }
+
+            this.operatorsList = this.remove_duplicates(this.operatorsList);
         }
 
 
@@ -147,10 +189,13 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.isApplicationError = false;
         this.isMncError = false;
         this.isNameError = false;
+        this.isBrandError = false;
+
 
         this.countyError = '';
         this.mncError = '';
         this.nameError = '';
+        this.brandError = '';
     }
 
 
@@ -167,6 +212,8 @@ export class OperatorOnboardingMainComponent implements OnInit {
 
         let validCountry = false;
         let validMnc = false;
+        let validBrand = false;
+        let validOPMnc = false;
         this.clearErrors();
 
         for (const entry of this.countryList) {
@@ -182,13 +229,28 @@ export class OperatorOnboardingMainComponent implements OnInit {
             }
         }
 
+        for (const entry of this.brandList) {
+            if (this.brand == entry) {
+                validBrand = true;
+            }
+        }
 
-        if (validCountry && validMnc) {
+        for (const entry of this.operatorsList) {
+            if (this.operatorName == entry) {
+                validOPMnc = true;
+            }
+        }
+
+
+
+        if (validCountry && validMnc && validBrand && validOPMnc) {
 
             const data = {
                 country: this.country,
                 mcc: this.mcc,
-                mnc: this.mnc
+                mnc: this.mnc,
+                brand: this.brand,
+                operator: this.operatorName
             };
 
             /*  this.operatorService.addNewOperator(data, (response) => {
@@ -208,6 +270,14 @@ export class OperatorOnboardingMainComponent implements OnInit {
             if (!validMnc) {
                 this.isMncError = true;
                 this.mncError = 'Invalid MNC Selected';
+            }
+            if (!validOPMnc) {
+                this.isNameError = true;
+                this.nameError = 'Invalid Operator/MNC Selected';
+            }
+            if (!validBrand) {
+                this.isBrandError = true;
+                this.brandError = 'Invalid Brand Selected';
             }
 
 
