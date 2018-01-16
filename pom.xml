@@ -149,7 +149,7 @@
 
 	<modules>
 		<module>component</module>
-		<module>com.wso2telco.dep.manage-service.feature</module>
+		<!--module>com.wso2telco.dep.manage-service.feature</module-->
 	</modules>
 
 	<!--scm>
