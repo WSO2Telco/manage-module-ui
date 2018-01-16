@@ -1,0 +1,174 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                Assign quota cap
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form class="form-horizontal" #quotacapForm="ngForm" novalidate
+                          (ngSubmit)="onquotacapFormSubmit(quotacapForm)" autocomplete="off">
+
+                        <div class="form-group" [ngClass]="{'has-danger': isSpEmpty}">
+                            <label class="control-label col-sm-4">Service Provider <span>*</span></label>
+                            <div class="col-sm-6 ">
+                                <input type="text"
+                                       class="form-control"
+                                       [(ngModel)]="subscriber"
+                                       (typeaheadOnSelect)="onSubscriberSelected()"
+                                       (input)="onSubscriberSelected()"
+                                       [typeahead]="subscriberList"
+                                       [typeaheadMinLength]="0"
+                                       typeaheadOptionField="id"
+                                       placeholder="Select Service Provider"
+                                       name="subscriber"
+                                >
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isSubscriberError">{{subscriberError}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Application</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       [(ngModel)]="app"
+                                       (typeaheadOnSelect)="onAppSelected()"
+                                       (input)="onAppSelected()"
+                                       [typeaheadMinLength]="0"
+                                       container="body"
+                                       [typeahead]="applications"
+                                       typeaheadOptionField="name"
+                                       placeholder="Select Application"
+                                       name="app"
+                                >
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isApplicationError">{{applicationError}}</span>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-4">API</label>
+                            <div class="col-sm-6">
+                                <input [(ngModel)]="api"
+                                       (typeaheadOnSelect)="onApiSelected()"
+                                       (input)="onApiSelected()"
+                                       [typeaheadMinLength]="0"
+                                       container="body"
+                                       [typeahead]="apiList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="api"
+                                       placeholder="Select API">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isApiError">{{apiError}}</span>
+                        </div>
+                        <div class="form-group" *appHasPermissions="showOperatorListPermissions">
+                            <label class="control-label col-sm-4">Operators</label>
+                            <div class="col-sm-6">
+                                <input [(ngModel)]="selectedoperator"
+                                       (typeaheadOnSelect)="onOperatorSelected()"
+                                       (input)="onOperatorSelected()"
+                                       [typeaheadMinLength]="0"
+                                       [typeahead]="operatorsList"
+                                       name="op"
+                                       class="form-control"
+                                       placeholder="Select Operator"
+                                       [(disabled)]="ISoperatordisable">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isOperatorError">{{operatorError}}</span>
+                        </div>
+
+                        <div class="form-group" [ngClass]="{'has-danger': (isNameEmpty || isInvalidquota)}">
+                            <label class="control-label col-sm-4">Quota Value<span>*</span></label>
+                            <div class="col-sm-6">
+                                <input class="form-control"
+                                       autocomplete="off"
+                                       placeholder="Enter Quota Value"
+                                       name="name"
+                                       min="0"
+                                       #nameRef="ngModel"
+                                       type="number"
+                                       required
+                                       [(ngModel)]="quotaInputValue"
+                                       (input)="quotaInputValuechange()"
+                                >
+                                <span class="error" *ngIf="isNameEmpty">Quota value can not be empty</span>
+                                <span class="error" *ngIf="isInvalidquota">Cannot add negative quota</span>
+                            </div>
+                            <span class="glyphicon glyphicon-info-sign info-tooltip"
+                                  tooltip="Monthly Quota" placement="right"
+                            ></span>
+                        </div>
+                        <div class="form-group" [ngClass]="{'has-danger': (is_invalid_period || isCalendarEmpty)}">
+                            <label class="control-label col-sm-4">Validity period <span>*</span></label>
+                            <div class="col-sm-8">
+                                <my-date-range-picker name="mydaterange"
+                                                      [options]="myDateRangePickerOptions"
+                                                      [(ngModel)]="defaultcalval"
+                                                      name="rangecal"
+                                                      (dateRangeChanged)="onDateRangeChanged($event)"
+                                                      required
+                                                      [(disabled)]="isCalenderEnable"
+                                ></my-date-range-picker>
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="is_invalid_period">Validity Period cross with existing record</span>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isCalendarEmpty">Date range cannot be empty</span>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
+                                <br>
+                                <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="is_edit">
+                                    Add
+                                </button>&nbsp;
+                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <h5 class="col-sm-8 subtitle">Assigned Quota Values <span class="resulttitle"> {{this.resultLabel}}</span>
+                        </h5>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <div class="scrollit">
+                                <div class="table">
+
+                                    <div class="tbl-row header">
+                                        <div class="tbl-cell">Quota Value</div>
+                                        <div class="tbl-cell">Valid From</div>
+                                        <div class="tbl-cell text-right pad-r-15-im">Valid To</div>
+                                    </div>
+                                    <ng-container *ngFor="let item of quotalist">
+                                        <div class="tbl-row">
+                                            <div class="tbl-cell">{{item.quotaLimit}}</div>
+                                            <div class="tbl-cell"><i
+                                                    class="material-icons fromcolor">event_available</i>
+                                                &nbsp;{{item.fromDate}}
+                                            </div>
+                                            <div class="tbl-cell text-right"><i
+                                                    class="material-icons tocolor">event_busy</i>
+                                                &nbsp;{{item.toDate}}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <div class="no-rec-row tbl-row" *ngIf="quotalist.length == 0">
+                                        <span class="no-rec">No Records..</span>
+                                    </div>
+                                </div> <!--TABLE END-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

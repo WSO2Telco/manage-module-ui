@@ -1,0 +1,40 @@
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+                <div class="tbl-header">
+                    <label class="subtitle">Whitelisted subscribers</label>
+
+                </div>
+                <br>
+                <div class="scrollit">
+                    <div class="table">
+
+                        <div class="tbl-row header">
+                            <div class="tbl-cell">MSISDN</div>
+                            <div class="tbl-cell text-right pad-r-15-im">Action</div>
+                        </div>
+
+                        <ng-container *ngFor="let item of dataSource">
+                            <div class="tbl-row">
+                                <div class="tbl-cell">{{item.replace('tel3A+','')}}</div>
+                                <div class="tbl-cell text-right">
+                                    <button class="btn btn-danger" (click)="onDelete(item)"><i
+                                            class="material-icons">delete</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </ng-container>
+
+                        <div class="no-rec-row tbl-row" *ngIf="dataSource == undefined">
+                            <span class="no-rec">No Records..</span>
+                        </div>
+                    </div>
+                </div> <!--TABLE END-->
+
+                <br><br>
+            </div>
+        </div>
+    </div>
+</div>
+

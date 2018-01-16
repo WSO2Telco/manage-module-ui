@@ -1,0 +1,154 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/mixing";
+
+:host {
+  display: block;
+}
+
+.no-rec-row {
+  position: relative;
+
+  .no-rec {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    width: 100px;
+    padding-top: 1px;
+    color: $gray;
+  }
+}
+
+.table-wrapper {
+  padding: 10px;
+  border: solid 1px $gray_lighter;
+  background-color: white;
+  width: 100%;
+
+  .tbl-header {
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 5px 0px 15px;
+  }
+
+  .table {
+    display: table;
+    width: 100%;
+
+    @media only screen and (max-width: 768px) {
+      display: block;
+    }
+
+    .tbl-row {
+      display: table-row;
+      background-color: #f6f6f6;
+
+      &:nth-of-type(odd) {
+        background-color: white;
+      }
+
+      &.header {
+        background-color: $gray_4;
+        font-weight: 600;
+      }
+
+      @media only screen and (max-width: 768px) {
+        display: block;
+      }
+
+      .tbl-cell {
+        display: table-cell;
+        padding: 10px 10px;
+        @media only screen and (max-width: 768px) {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.filter-container {
+  min-height: 0px;
+  margin-bottom: 10px;
+  @include transition(all 0.4s ease-in);
+
+  &.open {
+    min-height: 100px;
+  }
+
+  .content {
+    background-color: $gray_1;
+    height: 100%;
+    padding: 10px;
+
+    .head {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: $gray_6;
+      padding-bottom: 5px;
+
+      .clear {
+        font-size: 0.7em;
+        padding-left: 7px;
+        color: $gray_5;
+        font-weight: 400;
+        @include transition(all 0.2s ease-in);
+        cursor: pointer;
+
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+
+    .filter-val-container {
+      position: relative;
+      padding: 5px;
+      background-color: white;
+
+      .close {
+        position: absolute;
+        right: 2px;
+        top: 2px;
+        font-size: 1em;
+      }
+
+      .filter-val {
+        display: inline-block;
+        padding: 2px 5px;
+        font-size: 0.9em;
+        margin: 2px;
+
+        &.ids {
+          background-color: #69db7c;
+          border: solid 1px #2f9e44;
+        }
+
+        &.name {
+          background-color: #66d9e8;
+          border: solid 1px #1098ad;
+        }
+
+        &.user {
+          background-color: #e599f7;
+          border: solid 1px #be4bdb;
+        }
+      }
+
+      .sec-head {
+        padding: 0px 5px;
+        font-size: 0.9em;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.info-tooltip {
+  font-size: 1.5em;
+  color: #8E44AD;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+

@@ -1,0 +1,215 @@
+<div class="animated fadeInUp" style="animation-delay: 0.1s">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-container rateInputContainer">
+                <div class="tbl-header">
+                    Rate Definitions
+                    <br>
+                </div>
+                <div class="searchFilter">
+                    <h4 class="control-label col-sm-2">Rate List:</h4>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control"
+                               [(ngModel)]="selectedRate"
+                               [typeaheadMinLength]="0"
+                               typeaheadOptionField="rateDefName"
+                               container="body"
+                               [typeahead]="rates"
+                               (typeaheadOnSelect)="onRateSelected()"
+                               placeholder="Select the Rate">
+                    </div>
+                    <div class="col-sm-4" *appHasPermissions="showCreateRate">
+                        <a class="btn btn-primary" href="#/rate/create">Create New Rate</a>
+                    </div>
+                </div>
+
+                <div *ngIf="!showRateDef">
+                    <h3 class="noreteselect"><i class="material-icons">assignment_late</i> No Rate selected</h3>
+                </div>
+
+                <div *ngIf="showRateDef">
+                    <form class="form-horizontal viewListForm" autocomplete="off">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Name:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateDefName}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Description:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateDefDescription}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Currency:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.currency.currencyCode}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Rate Type:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.rateType.rateTypeCode}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Tariff:</label>
+                            <div class="col-sm-4">
+                                <label>{{rateDefinition.tariff.tariffName}}</label>
+                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
+                                      [tooltip]="ref" placement="right"
+                                ></span>
+                            </div>
+                            <template #ref>
+                                <table style="width:100%">
+                                    <tr>
+                                        <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{rateDefinition.tariff.tariffName}}</b></h5></th>
+                                    </tr>
+                                    <tr>
+                                        <td width="70%" style="text-align: right">Tariff DefaultValue:</td>
+                                        <td>{{rateDefinition.tariff.tariffDefaultVal}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Tariff Max Count:</td>
+                                        <td>{{rateDefinition.tariff.tariffMaxCount}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Tariff Excess Rate:</td>
+                                        <td>{{rateDefinition.tariff.tariffExcessRate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Tariff Def Rate:</td>
+                                        <td>{{rateDefinition.tariff.tariffDefRate}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Tariff SP Commission:</td>
+                                        <td>{{rateDefinition.tariff.tariffSPCommission}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right">Tariff Ads Commission:</td>
+                                        <td> {{rateDefinition.tariff.tariffAdsCommission}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right"> Tariff Opco Commission:</td>
+                                        <td>{{rateDefinition.tariff.tariffOpcoCommission}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right"> Tariff Surcharge Value:</td>
+                                        <td>{{rateDefinition.tariff.tariffSurChargeval}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right"> Tariff Surcharge Ads:</td>
+                                        <td> {{rateDefinition.tariff.tariffSurChargeAds}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right"> Tariff Surcharge Opco:</td>
+                                        <td> {{rateDefinition.tariff.tariffSurChargeOpco}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right"><br> </td>
+                                    </tr>
+                                </table>
+                            </template>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Rate Taxes:</label>
+                            <div *ngIf="this.rateTax.length == 0" class="col-sm-4"><label>NO TAX</label></div>
+                            <div class="col-sm-4">
+                                <ng-container *ngFor="let item of rateTax"><label>{{item.tax.taxName}} </label><br>
+                                </ng-container>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Rate Categories:</label>
+                            <div class="col-sm-4">
+                                <div class="table">
+
+                                    <div class="tbl-row header">
+                                        <div class="tbl-cell">Category</div>
+                                        <div class="tbl-cell">Sub category</div>
+                                        <div class="tbl-cell text-right pad-r-15-im">Tariff</div>
+                                    </div>
+                                    <ng-container *ngFor="let item of rateCategory">
+                                        <div class="tbl-row">
+                                            <div class="tbl-cell">{{item.category.categoryName}}</div>
+                                            <div *ngIf="item.subCategory != null" class="tbl-cell">
+                                                &nbsp;{{item.subCategory.categoryName}}
+                                            </div>
+                                            <div *ngIf="item.subCategory == null" class="tbl-cell">
+                                                &nbsp;---
+                                            </div>
+                                            <div class="tbl-cell text-right">
+                                                &nbsp;{{item.tariff.tariffName}}
+                                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
+                                                      [tooltip]="TariffRef" placement="top"
+                                                ></span>
+                                            </div>
+                                        </div>
+                                        <template #TariffRef>
+                                            <table style="width:200px;">
+                                                <tr>
+                                                    <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{item.tariff.tariffName}}</b></h5></th>
+                                                </tr>
+                                                <tr>
+                                                    <td width="70%" style="text-align: right">Tariff DefaultValue:</td>
+                                                    <td>{{item.tariff.tariffDefaultVal}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">Tariff Max Count:</td>
+                                                    <td>{{item.tariff.tariffMaxCount}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">Tariff Excess Rate:</td>
+                                                    <td>{{item.tariff.tariffExcessRate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">Tariff Def Rate:</td>
+                                                    <td>{{item.tariff.tariffDefRate}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">Tariff SP Commission:</td>
+                                                    <td>{{item.tariff.tariffSPCommission}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right">Tariff Ads Commission:</td>
+                                                    <td> {{item.tariff.tariffAdsCommission}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right"> Tariff Opco Commission:</td>
+                                                    <td>{{item.tariff.tariffOpcoCommission}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right"> Tariff Surcharge Value:</td>
+                                                    <td>{{item.tariff.tariffSurChargeval}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right"> Tariff Surcharge Ads:</td>
+                                                    <td> {{item.tariff.tariffSurChargeAds}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right"> Tariff Surcharge Opco:</td>
+                                                    <td> {{item.tariff.tariffSurChargeOpco}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: right"> <br></td>
+                                                </tr>
+                                            </table>
+                                        </template>
+                                    </ng-container>
+                                    <div class="no-rec-row tbl-row" *ngIf="rateCategory.length == 0">
+                                        <span class="no-rec">No Records..</span>
+                                    </div>
+                                </div> <!--TABLE END-->
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
