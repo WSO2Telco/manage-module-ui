@@ -1,9 +1,15 @@
 import {RouterModule} from '@angular/router';
-import {OperatorOnboardingMainComponent} from './operatoronboarding-main/operatoronboarding.component';
+import {OperatorOnboardingMainComponent} from './add/operatoronboarding.component';
+import { PermissionGuard } from '../app.guard';
 
-const routes =[{
-  path : '',
-  component : OperatorOnboardingMainComponent
-}];
+const routes =[
+  {
+    path: 'add',
+    component: OperatorOnboardingMainComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'operatoronboarding:add'
+    }
+  }];
 
 export const OperatorOnboardingRoutes = RouterModule.forChild(routes);
