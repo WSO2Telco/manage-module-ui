@@ -166,6 +166,7 @@
         </scm>
 
 	<build>
+<pluginManagement>
  <plugins>
   <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -177,8 +178,13 @@
                         <arguments>-Dmaven.javadoc.skip=true</arguments>
                     </configuration>
       </plugin>
+			 <plugin>
+                                <artifactId>maven-war-plugin</artifactId>
+				 <version>3.0.0</version>
+                        </plugin>
 
 		</plugins>
+</pluginManagement>
 	</build>
 	<properties>
 		<jersey-container-servlet.version>2.17</jersey-container-servlet.version>
