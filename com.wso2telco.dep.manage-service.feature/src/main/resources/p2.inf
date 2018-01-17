@@ -1,2 +1,2 @@
 instructions.configure = \
-org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../com.wso2telco.dep.manage-service_${feature.version}/generated/manage-service.war,target:${installFolder}/../../deployment/server/webapps/manage-service.war,overwrite:true);
+org.eclipse.equinox.p2.touchpoint.natives.copy(source:${installFolder}/../features/com.wso2telco.dep.manage-service_${feature.version}/generated/manage-service.war,target:${installFolder}/../../deployment/server/webapps/manage-service.war,overwrite:true);
