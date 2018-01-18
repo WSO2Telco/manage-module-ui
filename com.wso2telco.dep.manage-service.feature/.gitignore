@@ -10,3 +10,4 @@ target
 ui/angular-cli.json
 src/main/resources/generated
 .project
+com.wso2telco.dep.manage-service.feature/com.wso2telco.dep.manage-service.feature.iml

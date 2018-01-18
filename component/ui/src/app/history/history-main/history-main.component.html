@@ -5,11 +5,10 @@
                 <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
     <!--</div>-->
     <div class="col-sm-12">
-        <app-responsive-table
+        <app-history-table
                 [dataSource]="approvalHistoryData?.applications"
-                [fieldSet]="fieldSet"
                 [filter]="filter"
-                (onFilterChange)="onFilterChangeHandler($event)"></app-responsive-table>
+                (onFilterChange)="onFilterChangeHandler($event)"></app-history-table>
     </div>
     <div class="col-sm-12 text-center">
         <pagination
