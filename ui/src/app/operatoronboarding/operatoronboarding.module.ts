@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {OperatorOnboardingRoutes} from './operatoronboarding.routes';
+import {AddTokenComponent} from './add/add-token/token.component';
 import {SharedModule} from '../shared/shared.module';
-import {OperatorOnboardingMainComponent} from './add/operatoronboarding.component';
+import {OperatorOnboardingMainComponent} from './add/add-main/operatoronboarding.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
-import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 @NgModule({
     imports: [
@@ -15,12 +15,12 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        MyDateRangePickerModule,
         ModalModule.forRoot(),
         TooltipModule.forRoot()
     ],
     declarations: [
-        OperatorOnboardingMainComponent
+        OperatorOnboardingMainComponent,
+        AddTokenComponent
         ]
 })
 export class OperatorOnboarding {
