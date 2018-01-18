@@ -8,6 +8,7 @@ ui/npm-debug.log
 .vscode
 /target
 manage-service.iml
+manage-service-parent.iml
 /WebContent/public
 node_modules/
 server/

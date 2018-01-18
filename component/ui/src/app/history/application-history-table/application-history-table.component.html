@@ -1,0 +1,69 @@
+<div class="table-wrapper">
+
+    <div class="tbl-header">
+        {{tableHeader}}
+    </div>
+
+    <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
+        <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
+            <div class="head">Filter<span class="clear" (click)="onClear()">Clear All</span></div>
+            <div class="row">
+                <div class="form-group col-xs-8">
+                    <input type="text"
+                           [(ngModel)]="filterString"
+                           container="body"
+                           class="form-control" placeholder="Filter App History">
+                </div>
+                <div class="form-group col-xs-4">
+                    <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button>
+                    &nbsp;
+                    <span
+                            class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
+                            [tooltip]="FilterHelper" placement="right"
+                    ></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template #FilterHelper>
+        <table style="width:100%;text-align: left; padding: 20px;">
+            <tr>
+                <td>Filter Example</td>
+            </tr>
+            <tr>
+                <td>appname:app1,status:approved</td>
+            </tr>
+        </table>
+    </template>
+
+
+    <div class="table">
+        <div class="tbl-row header">
+            <div class="tbl-cell">applicationId</div>
+            <div class="tbl-cell">applicationName</div>
+            <div class="tbl-cell">applicationDescription</div>
+            <div class="tbl-cell">createdBy</div>
+            <div class="tbl-cell">status</div>
+            <div class="tbl-cell" *appHasPermissions="showApprovedOn">approvedOn</div>
+            <div class="tbl-cell"  style="text-transform: capitalize">Application</div>
+        </div>
+        <div class="tbl-row" *ngFor="let item of dataSource">
+            <div class="tbl-cell">{{item.applicationId}}</div>
+            <div class="tbl-cell"><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item.applicationName}}</a>
+            </div>
+            <div class="tbl-cell">{{item.applicationDescription}}</div>
+            <div class="tbl-cell">{{item.createdBy}}</div>
+            <div class="tbl-cell">{{item.status}}</div>
+            <div class="tbl-cell" *appHasPermissions="showApprovedOn">{{item.approvedOn}}</div>
+            <div class="tbl-cell">
+                <button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More</button>
+            </div>
+        </div>
+        <div class="no-rec-row tbl-row" *ngIf="dataSource.length == 0">
+            <span class="no-rec">No Records...</span>
+        </div>
+
+    </div>
+</div>
