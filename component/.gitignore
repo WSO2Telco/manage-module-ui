@@ -12,4 +12,3 @@ manage-service-parent.iml
 /WebContent/public
 node_modules/
 server/
-ui/angular-cli.json
