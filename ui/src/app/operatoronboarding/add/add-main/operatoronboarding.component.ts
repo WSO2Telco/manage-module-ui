@@ -2,8 +2,8 @@
  * Created by sahanK on 10/01/18.
  */
 import {Component, OnInit} from '@angular/core';
-import {AuthenticationService} from '../../commons/services/authentication.service';
-import {MessageService} from '../../commons/services/message.service';
+import {AuthenticationService} from '../../../commons/services/authentication.service';
+import {MessageService} from '../../../commons/services/message.service';
 
 @Component({
     selector: 'app-operatoronboarding-main',

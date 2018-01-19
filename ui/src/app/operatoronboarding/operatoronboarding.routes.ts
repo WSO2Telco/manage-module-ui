@@ -1,5 +1,5 @@
 import {RouterModule} from '@angular/router';
-import {OperatorOnboardingMainComponent} from './add/operatoronboarding.component';
+import {OperatorOnboardingMainComponent} from './add/add-main/operatoronboarding.component';
 import { PermissionGuard } from '../app.guard';
 
 const routes =[
