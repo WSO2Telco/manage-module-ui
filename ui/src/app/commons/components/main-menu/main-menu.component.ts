@@ -31,7 +31,7 @@ export class MainMenuComponent implements OnInit {
         { id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring', pattern: 'whiteList' },
         { id: 15, route: '/', name: 'Operator Onboard', position: 'parent has-child', iconName: 'recent_actors', pattern: 'operatoronboarding' },
         { id: 16, route: '/operator/onboarding/add', name: 'Add New Operator', position: 'child', iconName: 'playlist_add', pattern: 'operatoronboarding:add' },
-        { id: 17, route: '/operator/onboarding/view', name: 'View Operators', position: 'child', iconName: 'playlist_play', pattern: 'operatoronboarding:view' }
+        { id: 17, route: '/operator/onboarding/view', name: 'View Operators', position: 'child', iconName: 'speaker_phone', pattern: 'operatoronboarding:view' }
     ];
 
 

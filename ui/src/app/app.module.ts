@@ -27,6 +27,7 @@ import {BlackListWhiteListRemoteDataService} from './data-providers/blacklist_wh
 import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.service';
 import {ApplicationRemoteDataService} from './data-providers/application-remote-data.service';
 import {ConfigService} from './commons/services/config.service';
+import { OperatorOnboardingDataService } from './data-providers/operator-onboarding-data.service';
 
 @NgModule({
     declarations: [
@@ -71,8 +72,9 @@ import {ConfigService} from './commons/services/config.service';
         ApplicationRemoteDataService,
         {
             provide : 'API_CONTEXT',
-            useValue : 'api'
-        }
+            useValue : 'api',
+        },
+        OperatorOnboardingDataService
 
     ],
     bootstrap: [AppComponent]
