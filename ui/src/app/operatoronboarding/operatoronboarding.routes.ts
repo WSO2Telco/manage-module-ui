@@ -1,5 +1,6 @@
 import {RouterModule} from '@angular/router';
 import {OperatorOnboardingMainComponent} from './add/add-main/operatoronboarding.component';
+import {ViewOperatorsComponent} from './view-operators/view-operators.component';
 import { PermissionGuard } from '../app.guard';
 
 const routes =[
@@ -9,6 +10,14 @@ const routes =[
     canActivate: [PermissionGuard],
     data: {
       permissions: 'operatoronboarding:add'
+    }
+  },
+  {
+    path: 'view',
+    component: ViewOperatorsComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'operatoronboarding:view'
     }
   }];
 

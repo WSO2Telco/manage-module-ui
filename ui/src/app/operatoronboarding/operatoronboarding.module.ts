@@ -7,6 +7,7 @@ import {OperatorOnboardingMainComponent} from './add/add-main/operatoronboarding
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { ViewOperatorsComponent } from './view-operators/view-operators.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
     ],
     declarations: [
         OperatorOnboardingMainComponent,
-        AddTokenComponent
+        AddTokenComponent,
+        ViewOperatorsComponent
         ]
 })
 export class OperatorOnboarding {
