@@ -1,3 +1,28 @@
-<p>
-  view-operators works!
-</p>
+<div class="animated fadeInUp row">
+  <div class="col-sm-12">
+    <app-common-data-table [dataSource]="operators" [fieldSet]="fieldSet">
+        <template #dynamicCellContent  let-item="element" >
+            <div>
+                <span tooltip="Edit" 
+                class="action  approve material-icons"
+                (click)="onOperatorEdit(item)">border_color</span>
+            </div>
+          </template>
+    </app-common-data-table>
+  </div>
+  <div class="col-sm-12 text-center">
+    <!-- <pagination
+                [boundaryLinks]="true"
+                [totalItems]="totalItems"
+                [(ngModel)]="currentPage"
+                [itemsPerPage]="filter.count"
+                [maxSize]="5"
+                (pageChanged)="onPageChanged($event)"
+                class="pagination-sm"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination> -->
+
+  </div>
+</div>
