@@ -4,14 +4,18 @@
         <template #dynamicCellContent  let-item="element" >
             <div>
                 <span tooltip="Edit" 
-                class="action  approve material-icons"
-                (click)="onOperatorEdit(item)">border_color</span>
+                class="action  material-icons"
+                (click)="onIconClick(item,'EDIT')">border_color</span>
+             
+                <span tooltip="Define Api Endpoint" 
+                class="action  material-icons"
+                (click)="onIconClick(item,'ENDPOINT')">settings_input_component</span>
             </div>
           </template>
     </app-common-data-table>
   </div>
   <div class="col-sm-12 text-center">
-    <!-- <pagination
+     <!-- <pagination
                 [boundaryLinks]="true"
                 [totalItems]="totalItems"
                 [(ngModel)]="currentPage"
@@ -22,7 +26,7 @@
                 previousText="&lsaquo;"
                 nextText="&rsaquo;"
                 firstText="&laquo;"
-                lastText="&raquo;"></pagination> -->
+                lastText="&raquo;"></pagination> --> 
 
   </div>
 </div>

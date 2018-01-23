@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, BaseRequestOptions} from '@angular/http';
 import {ButtonsModule, DropdownModule, PopoverModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
@@ -28,6 +28,8 @@ import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.s
 import {ApplicationRemoteDataService} from './data-providers/application-remote-data.service';
 import {ConfigService} from './commons/services/config.service';
 import { OperatorOnboardingDataService } from './data-providers/operator-onboarding-data.service';
+import { MockBackendProvider } from './app.mock.backend';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 @NgModule({
     declarations: [
@@ -57,6 +59,9 @@ import { OperatorOnboardingDataService } from './data-providers/operator-onboard
         ModalModule.forRoot()
     ],
     providers: [
+        MockBackendProvider,
+        MockBackend,
+        BaseRequestOptions,
         ConfigService,
         AppGuard,
         LoginGuard,
