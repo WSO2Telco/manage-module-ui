@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { ViewOperatorsComponent } from './view-operators/view-operators.component';
+import { CreateOperatorEndpointComponent } from './create-operator-endpoint/create-operator-endpoint.component';
+import { AddEndpointFormComponent } from './create-operator-endpoint/add-endpoint-form/add-endpoint-form.component';
 
 @NgModule({
     imports: [
@@ -22,7 +24,9 @@ import { ViewOperatorsComponent } from './view-operators/view-operators.componen
     declarations: [
         OperatorOnboardingMainComponent,
         AddTokenComponent,
-        ViewOperatorsComponent
+        ViewOperatorsComponent,
+        CreateOperatorEndpointComponent,
+        AddEndpointFormComponent
         ]
 })
 export class OperatorOnboarding {

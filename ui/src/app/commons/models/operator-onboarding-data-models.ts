@@ -1,4 +1,5 @@
 export interface Operator {
+    id: number;
     type: string;
     countryName: string;
     countryCode: string;
@@ -9,4 +10,17 @@ export interface Operator {
     status: string;
     bands: string;
     notes: string;
+}
+
+export interface OperatorEndpoint {
+    id: number;
+    operatorId: number;
+    api: any;
+    endpointUrl: string;
+}
+
+export interface AddOperatorEndpointParam{
+    operatorId: number;
+    api: any;
+    endpointUrl: string;
 }

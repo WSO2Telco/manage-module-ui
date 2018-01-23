@@ -1,17 +1,7 @@
 [
+    
     {
-        "type": "Test",
-        "countryName": null,
-        "countryCode": null,
-        "mcc": "001",
-        "mnc": "01",
-        "brand": "TEST",
-        "operator": "Test Network",
-        "status": "Operational",
-        "bands": "GSM 900 / GSM 1800",
-        "notes": "Used by GSM test equipment"
-    },
-    {
+        "id":1,
         "type": "National",
         "countryName": "Albania",
         "countryCode": "AL",
@@ -24,6 +14,7 @@
         "notes": null
     },
     {
+        "id":2,
         "type": "National",
         "countryName": "Austria",
         "countryCode": "AT",
@@ -36,6 +27,7 @@
         "notes": "MNC withdrawn"
     },
     {
+        "id":3,
         "type": "National",
         "countryName": "Brazil",
         "countryCode": "BR",

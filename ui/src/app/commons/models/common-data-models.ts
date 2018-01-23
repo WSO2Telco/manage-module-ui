@@ -177,7 +177,6 @@ export class QuotaList {
 export class FieldSet {
     columnName: string;
     fieldName?: string;
-    dynamicComponent?: Component;
 }
 
 export class Operator {

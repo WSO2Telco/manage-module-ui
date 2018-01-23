@@ -32,7 +32,19 @@ export class ViewOperatorsComponent implements OnInit {
     this.operatorService.getOperators();
   }
 
-  onOperatorEdit(op: Operator) {
-    this.router.navigate(['operator/onboarding/add']);
+  onIconClick(op: Operator, action: string) {
+    
+    switch (action) {
+      case 'EDIT':
+        this.router.navigate(['operator/onboarding/add']);
+        break;
+
+      case 'ENDPOINT':
+        this.router.navigate(['operator/onboarding/api-endpints'], { queryParams: { 'operator-id': op.id } });
+        break;
+
+      default:
+        break;
+    }
   }
 }
