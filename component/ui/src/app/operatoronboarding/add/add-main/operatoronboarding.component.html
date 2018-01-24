@@ -1,0 +1,109 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <!--Form Container - START-->
+        <div class="form-container OpOnboardingInputContainer">
+            <div class="tbl-header">
+                New Operator Registration
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <form class="form-horizontal" #OpOnboardingForm="ngForm" novalidate
+                          (ngSubmit)="OpOnboardingFormSubmit(OpOnboardingForm)" autocomplete="off">
+
+                        <div class="form-group" [ngClass]="{'has-danger': isCountryEmpty}">
+                            <label class="control-label col-sm-4">Country <span>*</span></label>
+                            <div class="col-sm-6 ">
+                                <input type="text"
+                                       class="form-control"
+                                       [(ngModel)]="country"
+                                       (typeaheadOnSelect)="onCountrySelected()"
+                                       (input)="onCountrySelected()"
+                                       [typeahead]="countryList"
+                                       [typeaheadMinLength]="0"
+                                       typeaheadOptionField="id"
+                                       placeholder="Select Country"
+                                       name="country"
+                                >
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isCountryError">{{countyError}}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Mobile Country Code</label>
+                            <div class="col-sm-6">
+                                <input type="text"
+                                       class="form-control"
+                                       placeholder="MCC (Mobile Country Code)"
+                                       [(ngModel)]="mcc"
+                                       name="mcc"
+                                       disabled="true"
+                                >
+                            </div>
+                            <span class="glyphicon glyphicon-info-sign info-tooltip"
+                                  tooltip="This field will auto filled based on  selected country" placement="right"
+                            ></span>
+                        </div>
+                        <div class="form-group ">
+                            <label class="control-label col-sm-4">Brand <span>*</span></label>
+                            <div class="col-sm-6">
+                                <input [(ngModel)]="brand"
+                                       (typeaheadOnSelect)="onBrandSelected()"
+                                       (input)="onBrandSelected()"
+                                       [typeaheadMinLength]="0"
+                                       container="body"
+                                       [typeahead]="brandList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="brand"
+                                       placeholder="Select Brand">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isBrandError">{{brandError}}</span>
+                        </div>
+                        <div class="form-group " [ngClass]="{'has-danger': isOperatorEmpty}">
+                            <label class="control-label col-sm-4">Operator <span>*</span></label>
+                            <div class="col-sm-6">
+                                <input [(ngModel)]="operatorName"
+                                       [typeaheadMinLength]="0"
+                                       container="body"
+                                       [typeahead]="operatorsList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="mnc"
+                                       placeholder="Select Operator">
+                            </div>
+                            <span class="error col-sm-offset-4 col-sm-8"
+                                  *ngIf="isNameError">{{nameError}}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-4">Description</label>
+                            <div class="col-sm-6">
+                                <textarea rows="2" cols="50" class="form-control"
+                                          type="text"
+                                          [(ngModel)]="operatorDes"
+                                          autocomplete="off"
+                                          placeholder="Description"
+                                          name="description"
+                                          ngModel="description"
+                                          required>
+                            </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-4">
+                                <br>
+                                <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="is_edit">
+                                    Add
+                                </button>&nbsp;
+                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <app-token-main></app-token-main>
+    </div>
+</div>

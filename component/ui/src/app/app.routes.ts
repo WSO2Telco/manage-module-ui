@@ -37,6 +37,14 @@ const routes = [
     }
   },
   {
+    path: 'operator/onboarding',
+    loadChildren: 'app/operatoronboarding/operatoronboarding.module#OperatorOnboarding',
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'operatoronboarding'
+    }
+  },
+  {
     path: 'whitelist',
     loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
     canActivate: [PermissionGuard],

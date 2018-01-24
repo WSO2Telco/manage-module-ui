@@ -1,0 +1,32 @@
+<div class="animated fadeInUp row">
+  <div class="col-sm-12">
+    <app-common-data-table [dataSource]="operators" [fieldSet]="fieldSet">
+        <template #dynamicCellContent  let-item="element" >
+            <div>
+                <span tooltip="Edit" 
+                class="action  material-icons"
+                (click)="onIconClick(item,'EDIT')">border_color</span>
+             
+                <span tooltip="Define Api Endpoint" 
+                class="action  material-icons"
+                (click)="onIconClick(item,'ENDPOINT')">settings_input_component</span>
+            </div>
+          </template>
+    </app-common-data-table>
+  </div>
+  <div class="col-sm-12 text-center">
+     <!-- <pagination
+                [boundaryLinks]="true"
+                [totalItems]="totalItems"
+                [(ngModel)]="currentPage"
+                [itemsPerPage]="filter.count"
+                [maxSize]="5"
+                (pageChanged)="onPageChanged($event)"
+                class="pagination-sm"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination> --> 
+
+  </div>
+</div>

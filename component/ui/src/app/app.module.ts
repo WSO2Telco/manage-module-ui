@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpModule, BaseRequestOptions} from '@angular/http';
 import {ButtonsModule, DropdownModule, PopoverModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
@@ -27,6 +27,9 @@ import {BlackListWhiteListRemoteDataService} from './data-providers/blacklist_wh
 import {QuotacapRemoteDataService} from './data-providers/quotacap_remote-data.service';
 import {ApplicationRemoteDataService} from './data-providers/application-remote-data.service';
 import {ConfigService} from './commons/services/config.service';
+import { OperatorOnboardingDataService } from './data-providers/operator-onboarding-data.service';
+import { MockBackendProvider } from './app.mock.backend';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 @NgModule({
     declarations: [
@@ -56,6 +59,9 @@ import {ConfigService} from './commons/services/config.service';
         ModalModule.forRoot()
     ],
     providers: [
+        MockBackendProvider,
+        MockBackend,
+        BaseRequestOptions,
         ConfigService,
         AppGuard,
         LoginGuard,
@@ -71,8 +77,9 @@ import {ConfigService} from './commons/services/config.service';
         ApplicationRemoteDataService,
         {
             provide : 'API_CONTEXT',
-            useValue : 'api'
-        }
+            useValue : 'api',
+        },
+        OperatorOnboardingDataService
 
     ],
     bootstrap: [AppComponent]

@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { ResponsiveTableComponent } from '../commons/components/responsive-table/responsive-table.component';
 import { HasPermissionsDirective } from 'app/commons/directves/has-permissions.directive';
+import { CommonDataTableComponent } from 'app/commons/components/common-data-table/common-data-table.component';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import { HasPermissionsDirective } from 'app/commons/directves/has-permissions.d
         ApplicationDataTableComponent,
         SubscriptionDataTableComponent,
         ResponsiveTableComponent,
+        CommonDataTableComponent,
         HasPermissionsDirective],
     exports: [
         HasPermissionsDirective,
@@ -30,6 +32,7 @@ import { HasPermissionsDirective } from 'app/commons/directves/has-permissions.d
         ResponsiveTableComponent,
         FormsModule,
         TypeaheadModule,
+        CommonDataTableComponent,
         PaginationModule]
 })
 export class SharedModule {

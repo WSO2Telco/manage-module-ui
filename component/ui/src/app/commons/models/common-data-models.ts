@@ -1,5 +1,6 @@
 import * as moment from "moment";
 import _date = moment.unitOfTime._date;
+import { Component } from "@angular/core";
 
 export class MenuItem {
     id: number;
@@ -132,7 +133,7 @@ export class RateTax {
     createdDate: string;
     updatedBy: string;
     updatedDate: string;
-    taxesValidityDates:TaxValidityDates[];
+    taxesValidityDates: TaxValidityDates[];
 }
 
 export class TaxValidityDates {
@@ -171,6 +172,11 @@ export class QuotaList {
     quotaLimit: string;
     fromDate: string;
     toDate: string;
+}
+
+export class FieldSet {
+    columnName: string;
+    fieldName?: string;
 }
 
 export class Operator {

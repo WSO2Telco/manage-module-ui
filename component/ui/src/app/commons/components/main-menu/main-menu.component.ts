@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {MenuItem} from '../../models/common-data-models';
-import {AppCommonService} from '../../services/app-common.service';
-import {NavigationEnd, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MenuItem } from '../../models/common-data-models';
+import { AppCommonService } from '../../services/app-common.service';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
     selector: 'app-main-menu',
@@ -28,7 +28,10 @@ export class MainMenuComponent implements OnInit {
         { id: 11, route: '/', name: 'Blacklist', position: 'parent has-child', iconName: 'phonelink_erase', pattern: 'apiBlacklist,spBlackList' },
         { id: 12, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board', pattern: 'apiBlacklist' },
         { id: 13, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns', pattern: 'spBlackList' },
-        { id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring', pattern: 'whiteList' }
+        { id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring', pattern: 'whiteList' },
+        { id: 15, route: '/', name: 'Operator Onboard', position: 'parent has-child', iconName: 'recent_actors', pattern: 'operatoronboarding' },
+        { id: 16, route: '/operator/onboarding/add', name: 'Add New Operator', position: 'child', iconName: 'playlist_add', pattern: 'operatoronboarding:add' },
+        { id: 17, route: '/operator/onboarding/view', name: 'View Operators', position: 'child', iconName: 'speaker_phone', pattern: 'operatoronboarding:view' }
     ];
 
 
