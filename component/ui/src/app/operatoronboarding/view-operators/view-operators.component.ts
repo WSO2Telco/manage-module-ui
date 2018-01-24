@@ -43,6 +43,10 @@ export class ViewOperatorsComponent implements OnInit {
         this.router.navigate(['operator/onboarding/api-endpints'], { queryParams: { 'operator-id': op.id } });
         break;
 
+      case 'TOKEN':
+        this.router.navigate(['operator/onboarding/set-token']);
+        break;
+
       default:
         break;
     }
