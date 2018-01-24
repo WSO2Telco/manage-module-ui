@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {OperatorOnboardingRoutes} from './operatoronboarding.routes';
-import {AddTokenComponent} from './add/add-token/token.component';
+import {SetTokenComponent} from './add/add-token/token.component';
 import {SharedModule} from '../shared/shared.module';
 import {OperatorOnboardingMainComponent} from './add/add-main/operatoronboarding.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -23,7 +23,7 @@ import { AddEndpointFormComponent } from './create-operator-endpoint/add-endpoin
     ],
     declarations: [
         OperatorOnboardingMainComponent,
-        AddTokenComponent,
+        SetTokenComponent,
         ViewOperatorsComponent,
         CreateOperatorEndpointComponent,
         AddEndpointFormComponent

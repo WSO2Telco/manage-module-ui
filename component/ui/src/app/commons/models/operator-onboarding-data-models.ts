@@ -19,6 +19,14 @@ export interface OperatorEndpoint {
     endpointUrl: string;
 }
 
+export interface TokenData {
+    id: number;
+    token: number;
+    validity: any;
+    date: string;
+    url: string;
+}
+
 export interface AddOperatorEndpointParam{
     operatorId: number;
     api: any;

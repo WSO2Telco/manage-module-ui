@@ -25,6 +25,7 @@ export class OperatorOnboardingMainComponent implements OnInit {
     private mncError: string;
     private nameError: string;
     private brandError: string;
+    private records;
 
     private countryList;
     private apiList: string[];
@@ -49,7 +50,7 @@ export class OperatorOnboardingMainComponent implements OnInit {
     private isApplicationError: boolean;
     private isMncError: boolean;
     private isNameError: boolean;
-    private isBrandError:boolean;
+    private isBrandError: boolean;
 
     private isCalendarEmpty: boolean;
 
@@ -68,6 +69,7 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.operatorsList = [];
         this.apiList = [];
         this.brandList = [];
+        this.records = [];
 
         this.country = '';
         this.mcc = '';
@@ -92,9 +94,10 @@ export class OperatorOnboardingMainComponent implements OnInit {
      * to load the country list
      */
     getCountryList() {
-        const mcc_mnc_list = require('mcc-mnc-list');
 
-        let records = mcc_mnc_list.all();
+    const mcc_mnc_list = require('mcc-mnc-list');
+
+       let records = mcc_mnc_list.all();
         let statusCodes = mcc_mnc_list.statusCodes();
 
         console.log(statusCodes);
@@ -164,8 +167,8 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.operatorsList = [];
 
         const mcc_mnc_list = require('mcc-mnc-list');
-      //  let brandlistofCountry = mcc_mnc_list.filter({countryName: this.country});
-        let opeatorofBrandList = mcc_mnc_list.filter({brand: this.brand, mcc: this.mcc });
+        //  let brandlistofCountry = mcc_mnc_list.filter({countryName: this.country});
+        let opeatorofBrandList = mcc_mnc_list.filter({brand: this.brand, mcc: this.mcc});
 
 
         if (opeatorofBrandList.length != 0) {
@@ -242,7 +245,6 @@ export class OperatorOnboardingMainComponent implements OnInit {
         }
 
 
-
         if (validCountry && validMnc && validBrand && validOPMnc) {
 
             const data = {
@@ -314,4 +316,3 @@ export class OperatorOnboardingMainComponent implements OnInit {
         this.resultLabel = '';
     }
 }
-
