@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OperatorEndpoint, AddOperatorEndpointParam } from 'app/commons/models/operator-onboarding-data-models';
-import { OperatorOnboardingDataService } from 'app/data-providers/operator-onboarding-data.service';
+import { OperatorEndpoint, AddOperatorEndpointParam } from '../../commons/models/operator-onboarding-data-models';
+import { OperatorOnboardingDataService } from '../../data-providers/operator-onboarding-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { FieldSet } from 'app/commons/models/common-data-models';
 
@@ -11,13 +11,14 @@ import { FieldSet } from 'app/commons/models/common-data-models';
 })
 export class CreateOperatorEndpointComponent implements OnInit {
 
-  private endpoints: OperatorEndpoint[] = [];
-  private operatorId: number;
+  endpoints: OperatorEndpoint[] = [];
 
-  private endpointsFieldSet: FieldSet[] = [
+  endpointsFieldSet: FieldSet[] = [
     { columnName: 'API', fieldName: 'api' },
     { columnName: 'Endpoint Url', fieldName: 'endpointUrl' }
   ];
+
+  private operatorId: number;
 
   constructor(
     private route: ActivatedRoute,

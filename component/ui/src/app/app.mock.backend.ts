@@ -2,7 +2,6 @@ import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHR
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { OperatorEndpoint, AddOperatorEndpointParam } from './commons/models/operator-onboarding-data-models';
 import { apiEndpoints } from './config/api.endpoints';
-import { Connection } from '@angular/http/src/interfaces';
 
 export function mockBackendFactory(backend: MockBackend, options: BaseRequestOptions, realBackend: XHRBackend) {
 
@@ -91,7 +90,6 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
 };
 
 export const MockBackendProvider = {
-    // use fake backend in place of Http service for backend-less development
     provide: Http,
     useFactory: mockBackendFactory,
     deps: [MockBackend, BaseRequestOptions, XHRBackend]

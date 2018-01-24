@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { OperatorOnboardingDataService } from 'app/data-providers/operator-onboarding-data.service';
-import { Operator } from 'app/commons/models/operator-onboarding-data-models';
+import { OperatorOnboardingDataService } from '../../data-providers/operator-onboarding-data.service';
+import { Operator } from '../../commons/models/operator-onboarding-data-models';
 import { FieldSet } from 'app/commons/models/common-data-models';
 
 @Component({

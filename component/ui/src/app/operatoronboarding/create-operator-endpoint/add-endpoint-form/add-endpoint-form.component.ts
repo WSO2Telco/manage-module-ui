@@ -1,6 +1,6 @@
 import { EventEmitter, Component, OnInit } from '@angular/core';
 import { Output } from '@angular/core/src/metadata/directives';
-import { OperatorEndpoint, AddOperatorEndpointParam } from 'app/commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam } from '../../../commons/models/operator-onboarding-data-models';
 
 @Component({
   selector: 'app-add-endpoint-form',
