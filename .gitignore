@@ -8,7 +8,9 @@ ui/npm-debug.log
 .vscode
 /target
 manage-service.iml
-/WebContent/public
-node_modules/
-server/
-ui/angular-cli.json
+manage-service-parent.iml
+component/WebContent/public
+component/ui/node_modules
+com.wso2telco.dep.manage-service.feature/target/
+com.wso2telco.dep.manage-service.feature/com.wso2telco.dep.manage-service.feature.iml
+com.wso2telco.dep.manage-service.feature/src/main/resources/generated
