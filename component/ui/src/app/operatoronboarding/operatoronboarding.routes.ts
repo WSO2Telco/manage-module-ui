@@ -7,6 +7,14 @@ import { CreateOperatorEndpointComponent } from 'app/operatoronboarding/create-o
 
 const routes = [
   {
+    path: 'add/:operator-mnc',
+    component: OperatorOnboardingMainComponent,
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'operatoronboarding:add'
+    }
+  },
+  {
     path: 'add',
     component: OperatorOnboardingMainComponent,
     canActivate: [PermissionGuard],

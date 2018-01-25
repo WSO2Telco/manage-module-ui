@@ -34,7 +34,6 @@ export class CreateOperatorEndpointComponent implements OnInit {
     }));
 
     this.service.CountriesProvider.subscribe((res) => {
-      debugger;
       this.countries = res;
     });
 

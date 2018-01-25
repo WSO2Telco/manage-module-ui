@@ -1,20 +1,25 @@
 /**
  * Created by sahanK on 10/01/18.
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthenticationService } from '../../../commons/services/authentication.service';
 import { MessageService } from '../../../commons/services/message.service';
 import { OperatorOnboardingDataService } from 'app/data-providers/operator-onboarding-data.service';
 import { Country, Brand, CountryOperator, Operator } from 'app/commons/models/operator-onboarding-data-models';
 import { FieldSet } from 'app/commons/models/common-data-models';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router/src/router_state';
 
 @Component({
     selector: 'app-operatoronboarding-main',
     templateUrl: './operatoronboarding.component.html',
     styleUrls: ['./operatoronboarding.component.scss']
 })
-export class OperatorOnboardingMainComponent implements OnInit {
+export class OperatorOnboardingMainComponent implements OnInit, OnDestroy {
+
+    /*Used in edit mode*/
+    private operatorMNC: number;
+    private operatorToBeEdited: Operator;
 
     public countryList: Country[];
     public brandList: Brand[];
@@ -29,6 +34,15 @@ export class OperatorOnboardingMainComponent implements OnInit {
     public operatorName: string;
     public brandName: string;
 
+    /*
+    subscriptns
+    */
+    private operatorMncSubscription;
+    private countriesProviderSubscription;
+    private brandProviderSubscription;
+    private operatorProviderSubscription;
+    private onboardOperatorProviderSubscription;
+
     private fieldSet: FieldSet[] = [
         { columnName: 'Operator', fieldName: 'operator' },
         { columnName: 'Brand Name', fieldName: 'brand' },
@@ -38,30 +52,46 @@ export class OperatorOnboardingMainComponent implements OnInit {
         { columnName: 'Country Code', fieldName: 'countryCode' },
         { columnName: 'Status', fieldName: 'status' }];
 
-    constructor(private router: Router, private service: OperatorOnboardingDataService) {
-
-        this.service.CountriesProvider.subscribe((countries) => {
-            this.countryList = countries;
-        });
-
-        this.service.BrandProvider.subscribe((brands) => {
-            this.brandList = brands;
-        });
-
-        this.service.OperatorProvider.subscribe((operators) => {
-            this.operatorsList = operators;
-        });
-
-        this.service.OnboardOperatorProvider.subscribe((op) => {
-            this.onboardOperators = op;
-        });
-
-
+    constructor(
+        private router: Router,
+        private service: OperatorOnboardingDataService,
+        private activatedRoute: ActivatedRoute) {
     }
 
     ngOnInit(): void {
+        this.operatorMncSubscription = this.activatedRoute.params.subscribe(params => {
+            this.operatorMNC = +params['operator-mnc'];
+            if (!!this.operatorMNC) {
+                this.operatorToBeEdited = this.service.getOperatorByMnc(this.operatorMNC);
+            }
+        });
+
+        this.countriesProviderSubscription = this.service.CountriesProvider.subscribe((countries) => {
+            this.countryList = countries;
+        });
+
+        this.brandProviderSubscription = this.service.BrandProvider.subscribe((brands) => {
+            this.brandList = brands;
+        });
+
+        this.operatorProviderSubscription = this.service.OperatorProvider.subscribe((operators) => {
+            this.operatorsList = operators;
+        });
+
+        this.onboardOperatorProviderSubscription = this.service.OnboardOperatorProvider.subscribe((op) => {
+            this.onboardOperators = op;
+        });
+
         this.service.loadCountries();
         this.service.getOperators();
+    }
+
+    ngOnDestroy(): void {
+        this.operatorMncSubscription.unsubscribe();
+        this.countriesProviderSubscription.unsubscribe();
+        this.brandProviderSubscription.unsubscribe();
+        this.operatorProviderSubscription.unsubscribe();
+        this.onboardOperatorProviderSubscription.unsubscribe();
     }
 
     public onCountrySelected(event) {
@@ -105,11 +135,13 @@ export class OperatorOnboardingMainComponent implements OnInit {
         }
     }
 
+
+
+
     onIconClick(op: Operator, action: string) {
 
         switch (action) {
             case 'EDIT':
-               // this.router.navigate(['operator/onboarding/add']);
                 break;
 
             case 'ENDPOINT':
