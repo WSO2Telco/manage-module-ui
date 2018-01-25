@@ -1,6 +1,7 @@
 export const apiEndpoints = {
     operatorOnboarding: {
         getOperators: '/operator/onboarding/get/operators',
+        getOperatorByMnc: '/operator/onboarding/get/operator',
         addOperator: '/operator/onboarding/add/operator',
         getEndpoints: '/operator/onboarding/get/endpoints',
         addEndpoint: '/operator/onboarding/add/endpoint',

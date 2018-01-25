@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class OperatorOnboardingDataService {
- 
+
   public OperatoEndpointProvider: Subject<OperatorEndpoint[]> = new BehaviorSubject<OperatorEndpoint[]>(null);
   public CountriesProvider: Subject<Country[]> = new BehaviorSubject<Country[]>(null);
   public BrandProvider: Subject<Brand[]> = new BehaviorSubject<Brand[]>([]);
@@ -65,6 +65,9 @@ export class OperatorOnboardingDataService {
       });
   }
 
+  getOperatorByMnc(mnc: number): Operator {
+    return null;
+  }
 
   getOperatorEndpoints(operatorId: number) {
     this.slimLoadingBarService.start();

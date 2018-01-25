@@ -18,7 +18,7 @@ export class AddEndpointFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.whenEndpointAdd.emit({ operatorId: 0, api: 'sms', endpointUrl: '' });
+    this.whenEndpointAdd.emit({ operatorMnc: 0, api: 'sms', endpointUrl: '' });
   }
 
 }
