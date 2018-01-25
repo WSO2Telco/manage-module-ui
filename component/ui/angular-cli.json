@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "E:/telco_project/hubSetup/12-6/wso2telcohub-2.2.1-SNAPSHOT/wso2telcohub-2.2.1-SNAPSHOT/repository/deployment/server/webapps/manage-service/public",
+      "outDir": "/home/sumudu/apps/wso2telcohub-2.2.1-SNAPSHOT/repository/deployment/server/webapps/manage-service/public",
       "assets": [
         "images",
         "assets",

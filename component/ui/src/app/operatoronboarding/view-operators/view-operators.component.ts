@@ -25,7 +25,7 @@ export class ViewOperatorsComponent implements OnInit {
     private router: Router,
     private operatorService: OperatorOnboardingDataService) {
 
-    this.operatorService.OperatorsProvider.subscribe((opRes: Operator[]) => { this.operators = opRes; });
+    this.operatorService.OnboardOperatorProvider.subscribe((opRes: Operator[]) => { this.operators = opRes; });
   }
 
   ngOnInit() {
@@ -40,7 +40,7 @@ export class ViewOperatorsComponent implements OnInit {
         break;
 
       case 'ENDPOINT':
-        this.router.navigate(['operator/onboarding/api-endpints'], { queryParams: { 'operator-id': op.id } });
+        this.router.navigate(['operator/onboarding/api-endpints'], { queryParams: { 'operator-mnc': op.mnc } });
         break;
 
       case 'TOKEN':
