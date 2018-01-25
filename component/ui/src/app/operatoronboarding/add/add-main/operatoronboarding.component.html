@@ -10,23 +10,26 @@
                     <form class="form-horizontal" #OpOnboardingForm="ngForm" novalidate
                           (ngSubmit)="OpOnboardingFormSubmit(OpOnboardingForm)" autocomplete="off">
 
-                        <div class="form-group" [ngClass]="{'has-danger': isCountryEmpty}">
+                        <div class="form-group" [ngClass]="{'has-danger': countryRef.touched && countryRef.errors}">
                             <label class="control-label col-sm-4">Country <span>*</span></label>
                             <div class="col-sm-6 ">
                                 <input type="text"
+                                        autocomplete="false"
+                                        required
                                        class="form-control"
                                        [(ngModel)]="country"
-                                       (typeaheadOnSelect)="onCountrySelected()"
-                                       (input)="onCountrySelected()"
+                                       (typeaheadOnSelect)="onCountrySelected($event)"
                                        [typeahead]="countryList"
                                        [typeaheadMinLength]="0"
-                                       typeaheadOptionField="id"
+                                       [typeaheadOptionsLimit]="10"
+                                       typeaheadOptionField="countryName"
                                        placeholder="Select Country"
+                                       #countryRef="ngModel"
                                        name="country"
                                 >
                             </div>
                             <span class="error col-sm-offset-4 col-sm-8"
-                                  *ngIf="isCountryError">{{countyError}}</span>
+                                  *ngIf="countryRef.touched && countryRef.errors ">Country is required</span>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-4">Mobile Country Code</label>
@@ -34,7 +37,7 @@
                                 <input type="text"
                                        class="form-control"
                                        placeholder="MCC (Mobile Country Code)"
-                                       [(ngModel)]="mcc"
+                                       value="{{selectedCountry?.mcc}}"
                                        name="mcc"
                                        disabled="true"
                                 >
@@ -43,37 +46,43 @@
                                   tooltip="This field will auto filled based on  selected country" placement="right"
                             ></span>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group " [ngClass]="{'has-danger': brandRef.touched && brandRef.errors}">
                             <label class="control-label col-sm-4">Brand <span>*</span></label>
                             <div class="col-sm-6">
-                                <input [(ngModel)]="brand"
-                                       (typeaheadOnSelect)="onBrandSelected()"
-                                       (input)="onBrandSelected()"
+                                <input [(ngModel)]="brandName"
+                                        required
+                                       (typeaheadOnSelect)="onBrandSelected($event)"
                                        [typeaheadMinLength]="0"
                                        container="body"
                                        [typeahead]="brandList"
-                                       typeaheadOptionField="id"
+                                       typeaheadOptionField="brandName"
                                        class="form-control"
                                        name="brand"
+                                       [disabled]="!selectedCountry"
+                                       #brandRef="ngModel"
                                        placeholder="Select Brand">
                             </div>
                             <span class="error col-sm-offset-4 col-sm-8"
-                                  *ngIf="isBrandError">{{brandError}}</span>
+                                  *ngIf="brandRef.touched && brandRef.errors">Brand name is required</span>
                         </div>
-                        <div class="form-group " [ngClass]="{'has-danger': isOperatorEmpty}">
+                        <div class="form-group " [ngClass]="{'has-danger': operatorRef.touched && operatorRef.errors}">
                             <label class="control-label col-sm-4">Operator <span>*</span></label>
                             <div class="col-sm-6">
                                 <input [(ngModel)]="operatorName"
                                        [typeaheadMinLength]="0"
                                        container="body"
+                                       (typeaheadOnSelect)="onOperatorSelected($event)"
                                        [typeahead]="operatorsList"
-                                       typeaheadOptionField="id"
+                                       typeaheadOptionField="operator"
                                        class="form-control"
+                                       [disabled]="!selectedBrand"
                                        name="mnc"
+                                       required
+                                       #operatorRef="ngModel"
                                        placeholder="Select Operator">
                             </div>
                             <span class="error col-sm-offset-4 col-sm-8"
-                                  *ngIf="isNameError">{{nameError}}</span>
+                                  *ngIf="operatorRef.touched && operatorRef.errors">Operator is required</span>
                         </div>
 
                         <div class="form-group">
@@ -81,22 +90,20 @@
                             <div class="col-sm-6">
                                 <textarea rows="2" cols="50" class="form-control"
                                           type="text"
-                                          [(ngModel)]="operatorDes"
+                                          [(ngModel)]="operatorDescrption"
                                           autocomplete="off"
                                           placeholder="Description"
-                                          name="description"
-                                          ngModel="description"
-                                          required>
+                                          name="description">
                             </textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-6 col-sm-offset-4">
                                 <br>
-                                <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="is_edit">
-                                    Add
-                                </button>&nbsp;
-                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                                <button  type="button" class="btn btn-default" (click)="OpOnboardingForm.reset();selectedCountry=null">Clear</button>
+                                    <button type="submit" class="btn btn-primary animated fadeIn" [(disabled)]="!OpOnboardingForm.valid">
+                                        Add
+                                    </button>&nbsp;
                             </div>
 
                         </div>
@@ -104,5 +111,26 @@
                 </div>
             </div>
         </div>
+
+    </div>
+
+    <div class="col-sm-12">
+            <app-common-data-table [dataSource]="onboardOperators" [fieldSet]="fieldSet">
+                    <template #dynamicCellContent  let-item="element" >
+                        <div class="text-right">
+                            <span tooltip="Edit"
+                            class="action  material-icons"
+                            (click)="onIconClick(item,'EDIT')">border_color</span>
+
+                            <span tooltip="Define Api Endpoint"
+                            class="action  material-icons"
+                            (click)="onIconClick(item,'ENDPOINT')">settings_input_component</span>
+
+                            <span tooltip="Set Token"
+                            class="action  material-icons"
+                            (click)="onIconClick(item,'TOKEN')">all_out</span>
+                        </div>
+                      </template>
+                </app-common-data-table>
     </div>
 </div>

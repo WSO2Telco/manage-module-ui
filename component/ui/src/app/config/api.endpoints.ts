@@ -1,8 +1,10 @@
 export const apiEndpoints = {
     operatorOnboarding: {
-        getOperators: 'assets/json/get.operators.json',
+        getOperators: '/operator/onboarding/get/operators',
+        addOperator: '/operator/onboarding/add/operator',
         getEndpoints: '/operator/onboarding/get/endpoints',
         addEndpoint: '/operator/onboarding/add/endpoint',
-        deleteEndpoint: '/operator/onboarding/delete/endpoint'
+        deleteEndpoint: '/operator/onboarding/delete/endpoint',
+        getCountries: 'https://raw.githubusercontent.com/pbakondy/mcc-mnc-list/master/mcc-mnc-list.json',
     }
 };

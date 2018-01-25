@@ -1,5 +1,4 @@
 export interface Operator {
-    id: number;
     type: string;
     countryName: string;
     countryCode: string;
@@ -10,11 +9,12 @@ export interface Operator {
     status: string;
     bands: string;
     notes: string;
+    description: string;
 }
 
 export interface OperatorEndpoint {
     id: number;
-    operatorId: number;
+    operatorMnc: number;
     api: any;
     endpointUrl: string;
 }
@@ -27,8 +27,33 @@ export interface TokenData {
     url: string;
 }
 
-export interface AddOperatorEndpointParam{
-    operatorId: number;
+export interface AddOperatorEndpointParam {
+    operatorMnc: number;
     api: any;
     endpointUrl: string;
+}
+
+export interface Country {
+    countryName: string;
+    countryCode: string;
+    mcc: number;
+}
+
+export interface CountryOperator {
+    type: string;
+    countryName: string;
+    countryCode: string;
+    mcc: number;
+    mnc: number;
+    brand: string;
+    operator: string;
+    status: string;
+    bands: string;
+    notes: string;
+}
+
+
+
+export class Brand {
+    constructor(public brandName: string, public mcc: number) { }
 }

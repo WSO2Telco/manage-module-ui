@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OperatorEndpoint, AddOperatorEndpointParam } from '../../commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Country } from '../../commons/models/operator-onboarding-data-models';
 import { OperatorOnboardingDataService } from '../../data-providers/operator-onboarding-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { FieldSet } from 'app/commons/models/common-data-models';
@@ -13,23 +13,30 @@ export class CreateOperatorEndpointComponent implements OnInit {
 
   endpoints: OperatorEndpoint[] = [];
 
+  countries: Country[];
+
   endpointsFieldSet: FieldSet[] = [
     { columnName: 'API', fieldName: 'api' },
     { columnName: 'Endpoint Url', fieldName: 'endpointUrl' }
   ];
 
-  private operatorId: number;
+  private operatorMnc: number;
 
   constructor(
     private route: ActivatedRoute,
     private service: OperatorOnboardingDataService) {
 
     this.route.queryParams.subscribe((params => {
-      this.operatorId = parseInt(params['operator-id'], 10);
-      if (!!this.operatorId) {
-        this.service.getOperatorEndpoints(this.operatorId);
+      this.operatorMnc = parseInt(params['operator-mnc'], 10);
+      if (!!this.operatorMnc) {
+        this.service.getOperatorEndpoints(this.operatorMnc);
       }
     }));
+
+    this.service.CountriesProvider.subscribe((res) => {
+      debugger;
+      this.countries = res;
+    });
 
     this.service.OperatoEndpointProvider.subscribe((res: OperatorEndpoint[]) => {
       this.endpoints = res;
@@ -38,11 +45,11 @@ export class CreateOperatorEndpointComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.service.loadCountries();
   }
 
   onAddEndpoint(event: AddOperatorEndpointParam) {
-    event.operatorId = this.operatorId;
+    event.operatorMnc = this.operatorMnc;
     this.service.addOperatorEndpoint(event);
   }
 

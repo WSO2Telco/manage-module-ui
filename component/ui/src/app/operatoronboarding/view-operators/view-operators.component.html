@@ -2,7 +2,7 @@
   <div class="col-sm-12">
     <app-common-data-table [dataSource]="operators" [fieldSet]="fieldSet">
         <template #dynamicCellContent  let-item="element" >
-            <div>
+            <div class="text-right">
                 <span tooltip="Edit" 
                 class="action  material-icons"
                 (click)="onIconClick(item,'EDIT')">border_color</span>
