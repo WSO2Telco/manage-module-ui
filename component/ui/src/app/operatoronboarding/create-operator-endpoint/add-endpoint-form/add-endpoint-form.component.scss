@@ -10,3 +10,20 @@
     padding-bottom: 20px;
   }
 }
+
+.operator{
+  line-height: 2.5em;
+}
+
+.has-danger .form-control{
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+.control-label span { color: #dd0d0d;}
+
+
+.error {
+  font-size: 0.9em;
+  color: #f96565;
+}

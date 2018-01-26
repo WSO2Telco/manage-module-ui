@@ -1,6 +1,6 @@
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHRBackend, RequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { OperatorEndpoint, AddOperatorEndpointParam ,Operator} from './commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Operator, GetOperatorEndpointParam } from './commons/models/operator-onboarding-data-models';
 import { apiEndpoints } from './config/api.endpoints';
 
 
@@ -16,7 +16,7 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 connection.request.method === RequestMethod.Post) {
 
                 const param: Operator = JSON.parse(connection.request.getBody());
-               
+
                 const allOperators: Operator[] = JSON.parse(localStorage.getItem('operators')) || [];
 
                 allOperators.push(param);
@@ -30,7 +30,7 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
             }
 
             /*
-                 GET OPERATOR MOCK 
+                 GET OPERATORS MOCK 
             */
             if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.getOperators) &&
                 connection.request.method === RequestMethod.Get) {
@@ -44,14 +44,34 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 return;
             }
 
+
             /*
-                 GET OPERATOR ENDPOINT MOCK 
+                 GET OPERATOR BY MNC MOCK 
+            */
+            if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.getOperatorByMnc) &&
+                connection.request.method === RequestMethod.Post) {
+
+                const allOperators: Operator[] = JSON.parse(localStorage.getItem('operators')) || [];
+                const param = +connection.request.getBody();
+                connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body: (allOperators.filter((op) => {
+
+                        return op.mnc == param;
+                    })[0])
+                })));
+
+                return;
+            }
+
+            /*
+                 GET OPERATOR ENDPOINTS For OPERATOR MOCK 
             */
             if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.getEndpoints) &&
                 connection.request.method === RequestMethod.Post) {
                 const allEndpoints = JSON.parse(localStorage.getItem('operator-endpoints')) || [];
                 const param = parseInt(connection.request.getBody(), 10);
-                
+
                 const filtered = allEndpoints.filter((oep: OperatorEndpoint) => {
                     return oep.operatorMnc == param;
                 });
@@ -59,6 +79,27 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 connection.mockRespond(new Response(new ResponseOptions({
                     status: 200,
                     body: filtered
+                })));
+                return;
+            }
+
+
+            /*
+                 GET OPERATOR ENDPOINT BY OPERATOR MNC and ENDPOINT ID MOCK 
+            */
+            if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.getEndpointById) &&
+                connection.request.method === RequestMethod.Post) {
+
+                const allEndpoints = JSON.parse(localStorage.getItem('operator-endpoints')) || [];
+                const param: GetOperatorEndpointParam = JSON.parse(connection.request.getBody());
+
+                const filtered = allEndpoints.filter((oep: OperatorEndpoint) => {
+                    return oep.operatorMnc == param.operatorMnc && oep.id == param.endpointId;
+                });
+
+                connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body: filtered.length && filtered[0]
                 })));
                 return;
             }
@@ -85,6 +126,36 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 })));
                 return;
             }
+
+
+            /* 
+                UPDATE OPERATOR ENDPOINT MOCK
+             */
+            if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.updateEndpoint) &&
+                connection.request.method === RequestMethod.Post) {
+
+                const p: AddOperatorEndpointParam = JSON.parse(connection.request.getBody());
+                const ep: OperatorEndpoint[] = JSON.parse(localStorage.getItem('operator-endpoints')) || [];
+                const filtered = ep.filter((o) => o.operatorMnc == p.operatorMnc && o.id != p.endpointId);
+                filtered.push(
+                    {
+                        id: p.endpointId,
+                        operatorMnc: p.operatorMnc,
+                        api: p.api,
+                        endpointUrl: p.endpointUrl
+                    }
+                );
+                localStorage.setItem('operator-endpoints', JSON.stringify(filtered));
+
+                connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body: { success: true }
+                })));
+                return;
+            }
+
+
+
             /* 
                 DELETE OPERATOR ENDPOINT MOCK
             */

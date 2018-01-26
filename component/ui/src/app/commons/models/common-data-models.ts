@@ -179,6 +179,12 @@ export class FieldSet {
     fieldName?: string;
 }
 
+export class RowSelectionParam {
+    constructor(
+        public fieldNameToMatch: string,
+        public valesToCompare: any[]) { }
+}
+
 export class Operator {
     operatorId: number;
     operatorName: string;

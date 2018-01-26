@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Operator, OperatorEndpoint, AddOperatorEndpointParam, Country, CountryOperator, Brand } from '../commons/models/operator-onboarding-data-models';
+import {
+  Operator, OperatorEndpoint, AddOperatorEndpointParam,
+  Country, CountryOperator, Brand, GetOperatorEndpointParam
+} from '../commons/models/operator-onboarding-data-models';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
@@ -17,6 +20,9 @@ export class OperatorOnboardingDataService {
   public BrandProvider: Subject<Brand[]> = new BehaviorSubject<Brand[]>([]);
   public OperatorProvider: Subject<CountryOperator[]> = new BehaviorSubject<CountryOperator[]>([]);
   public OnboardOperatorProvider: Subject<Operator[]> = new BehaviorSubject<Operator[]>([]);
+  public SelectedOperatorProvider: Subject<Operator> = new BehaviorSubject<Operator>(null);
+  public SelectedOperatorEndpointProvider: Subject<OperatorEndpoint> = new BehaviorSubject<OperatorEndpoint>(null);
+
 
   private countriesResult: CountryOperator[];
 
@@ -65,8 +71,23 @@ export class OperatorOnboardingDataService {
       });
   }
 
-  getOperatorByMnc(mnc: number): Operator {
-    return null;
+  getOperatorByMnc(mnc: number) {
+    this.slimLoadingBarService.start();
+    this.http.post(apiEndpoints.operatorOnboarding.getOperatorByMnc, mnc, this.getOptions())
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw({
+        success: false,
+        message: 'Error Loading Operator',
+        error: error
+      }))
+      .subscribe(data => {
+        this.SelectedOperatorProvider.next(data);
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.message.error(error.message);
+        this.slimLoadingBarService.stop();
+      });
   }
 
   getOperatorEndpoints(operatorId: number) {
@@ -100,6 +121,27 @@ export class OperatorOnboardingDataService {
       }))
       .subscribe(data => {
         this.getOperatorEndpoints(param.operatorMnc);
+        this.message.success('API endpoint successfully added');
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.message.error(error.message);
+        this.slimLoadingBarService.stop();
+      });
+  }
+ 
+  updateOperatorEndpoint(param: AddOperatorEndpointParam) {
+    this.slimLoadingBarService.start();
+    this.http.post(apiEndpoints.operatorOnboarding.updateEndpoint, param, this.getOptions())
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw({
+        success: false,
+        message: 'Error Updating Operator Api endpoints',
+        error: error
+      }))
+      .subscribe(data => {
+        this.getOperatorEndpoints(param.operatorMnc);
+        this.message.success('API endpoint successfully updated');
         this.slimLoadingBarService.complete();
       },
       error => {
@@ -119,6 +161,26 @@ export class OperatorOnboardingDataService {
       }))
       .subscribe(data => {
         this.getOperatorEndpoints(endpoint.operatorMnc);
+        this.message.success('API endpoint successfully deleted');
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.message.error(error.message);
+        this.slimLoadingBarService.stop();
+      });
+  }
+
+  setSelectedOperatorEndpointById(param: GetOperatorEndpointParam) {
+    this.slimLoadingBarService.start();
+    this.http.post(apiEndpoints.operatorOnboarding.getEndpointById, param, this.getOptions())
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw({
+        success: false,
+        message: 'Error Retrieving Operator Api endpoints',
+        error: error
+      }))
+      .subscribe(data => {
+        this.SelectedOperatorEndpointProvider.next(data);
         this.slimLoadingBarService.complete();
       },
       error => {

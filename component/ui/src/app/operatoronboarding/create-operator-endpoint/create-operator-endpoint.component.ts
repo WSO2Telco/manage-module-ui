@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { OperatorEndpoint, AddOperatorEndpointParam, Country } from '../../commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Country, Operator, GetOperatorEndpointParam } from '../../commons/models/operator-onboarding-data-models';
 import { OperatorOnboardingDataService } from '../../data-providers/operator-onboarding-data.service';
 import { ActivatedRoute } from '@angular/router';
-import { FieldSet } from 'app/commons/models/common-data-models';
+import { FieldSet, RowSelectionParam } from 'app/commons/models/common-data-models';
 
 @Component({
   selector: 'app-create-operator-endpoint',
@@ -12,10 +12,17 @@ import { FieldSet } from 'app/commons/models/common-data-models';
 export class CreateOperatorEndpointComponent implements OnInit {
 
   endpoints: OperatorEndpoint[] = [];
+  highlightedEndpoints: RowSelectionParam;
+
+  selectedOperator: Operator;
+  selectedEndPoint: OperatorEndpoint;
+  isEditMode = false;
+  endpointId: number;
 
   countries: Country[];
 
   endpointsFieldSet: FieldSet[] = [
+    { columnName: 'Id', fieldName: 'id' },
     { columnName: 'API', fieldName: 'api' },
     { columnName: 'Endpoint Url', fieldName: 'endpointUrl' }
   ];
@@ -26,19 +33,39 @@ export class CreateOperatorEndpointComponent implements OnInit {
     private route: ActivatedRoute,
     private service: OperatorOnboardingDataService) {
 
-    this.route.queryParams.subscribe((params => {
+    this.route.params.subscribe((params => {
       this.operatorMnc = parseInt(params['operator-mnc'], 10);
+      this.endpointId = parseInt(params['endpoint-id'], 10);
+
       if (!!this.operatorMnc) {
+        this.service.getOperatorByMnc(this.operatorMnc);
         this.service.getOperatorEndpoints(this.operatorMnc);
+
+        if (!!this.endpointId) {
+          this.isEditMode = true;
+        }
       }
+
     }));
+
+    this.service.SelectedOperatorEndpointProvider.subscribe((ep) => {
+      this.selectedEndPoint = ep;
+      if (this.selectedEndPoint) {
+        this.highlightedEndpoints = new RowSelectionParam('id', [this.selectedEndPoint.id]);
+      }
+    });
 
     this.service.CountriesProvider.subscribe((res) => {
       this.countries = res;
     });
 
+    this.service.SelectedOperatorProvider.subscribe((op) => {
+      this.selectedOperator = op;
+    });
+
     this.service.OperatoEndpointProvider.subscribe((res: OperatorEndpoint[]) => {
       this.endpoints = res;
+      console.log(this.endpoints);
     });
 
   }
@@ -48,8 +75,11 @@ export class CreateOperatorEndpointComponent implements OnInit {
   }
 
   onAddEndpoint(event: AddOperatorEndpointParam) {
-    event.operatorMnc = this.operatorMnc;
-    this.service.addOperatorEndpoint(event);
+    if (!!event.endpointId) {
+      this.service.updateOperatorEndpoint(event);
+    } else {
+      this.service.addOperatorEndpoint(event);
+    }
   }
 
   onIconClick(endpoint: OperatorEndpoint, action: string) {
@@ -57,6 +87,10 @@ export class CreateOperatorEndpointComponent implements OnInit {
 
       case 'DELETE':
         this.service.deleteOperatorEndpoint(endpoint);
+        break;
+
+      case 'EDIT':
+        this.service.setSelectedOperatorEndpointById(new GetOperatorEndpointParam(endpoint.operatorMnc, endpoint.id));
         break;
 
       default:

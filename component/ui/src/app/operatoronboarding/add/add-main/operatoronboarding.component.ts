@@ -62,8 +62,12 @@ export class OperatorOnboardingMainComponent implements OnInit, OnDestroy {
         this.operatorMncSubscription = this.activatedRoute.params.subscribe(params => {
             this.operatorMNC = +params['operator-mnc'];
             if (!!this.operatorMNC) {
-                this.operatorToBeEdited = this.service.getOperatorByMnc(this.operatorMNC);
+                this.service.getOperatorByMnc(this.operatorMNC);
             }
+        });
+
+        this.service.SelectedOperatorProvider.subscribe((op) => {
+            this.operatorToBeEdited = op;
         });
 
         this.countriesProviderSubscription = this.service.CountriesProvider.subscribe((countries) => {

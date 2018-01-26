@@ -1,18 +1,28 @@
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
 
   <div class="col-sm-12">
-    <app-add-endpoint-form (whenEndpointAdd)="onAddEndpoint($event)"></app-add-endpoint-form>
+    <app-add-endpoint-form 
+    [selectedOperator]="selectedOperator"
+    [selectedEndpoint]="selectedEndPoint"
+    (whenEndpointAdd)="onAddEndpoint($event)"></app-add-endpoint-form>
   </div>
 
   <div class="col-sm-12">
-    <app-common-data-table [dataSource]="endpoints" [fieldSet]="endpointsFieldSet">
-      <template #dynamicCellContent let-item="element">
+    
+    <app-common-data-table 
+    [dataSource]="endpoints" 
+    [fieldSet]="endpointsFieldSet"
+    [selectedRecordSet]="highlightedEndpoints">
+    
+    <template #dynamicCellContent let-item="element">
         <div style="text-align: right">
           <span tooltip="Edit" class="action  material-icons" (click)="onIconClick(item,'EDIT')">border_color</span>
 
           <span tooltip="Delete" class="action  material-icons" (click)="onIconClick(item,'DELETE')">delete</span>
         </div>
       </template>
+    
     </app-common-data-table>
+ 
   </div>
 </div>

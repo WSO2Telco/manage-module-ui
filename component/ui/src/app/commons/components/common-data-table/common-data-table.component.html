@@ -11,7 +11,8 @@
       <div class="tbl-cell"></div>
     </div>
 
-    <div class="tbl-row" *ngFor="let item of dataSource">
+    <div class="tbl-row" *ngFor="let item of dataSource" 
+    [ngClass]="{'selected':(selectedRecordSet && values) && values.indexOf(item[selectedRecordSet.fieldNameToMatch]) >= 0}">
           <div class="tbl-cell" *ngFor="let f of fieldSet">{{item[f.fieldName]}}</div>
           <div class="tbl-cell">
               <ng-container  [ngTemplateOutlet]="dynamicCellContentTmpl"  [ngOutletContext]="{element: item}"></ng-container>

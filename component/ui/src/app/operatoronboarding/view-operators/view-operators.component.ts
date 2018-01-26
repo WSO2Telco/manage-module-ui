@@ -33,14 +33,14 @@ export class ViewOperatorsComponent implements OnInit {
   }
 
   onIconClick(op: Operator, action: string) {
-    
+
     switch (action) {
       case 'EDIT':
         this.router.navigate(['operator/onboarding/add']);
         break;
 
       case 'ENDPOINT':
-        this.router.navigate(['operator/onboarding/api-endpints'], { queryParams: { 'operator-mnc': op.mnc } });
+        this.router.navigate(['operator/onboarding/api-endpints/' + op.mnc]);
         break;
 
       case 'TOKEN':

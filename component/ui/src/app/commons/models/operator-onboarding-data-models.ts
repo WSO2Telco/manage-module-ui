@@ -1,4 +1,4 @@
-export interface Operator {
+export class Operator {
     type: string;
     countryName: string;
     countryCode: string;
@@ -12,11 +12,17 @@ export interface Operator {
     description: string;
 }
 
-export interface OperatorEndpoint {
+export class OperatorEndpoint {
     id: number;
     operatorMnc: number;
     api: any;
     endpointUrl: string;
+}
+
+export class GetOperatorEndpointParam {
+    constructor(
+        public operatorMnc: number,
+        public endpointId: number) { }
 }
 
 export interface TokenData {
@@ -27,7 +33,8 @@ export interface TokenData {
     url: string;
 }
 
-export interface AddOperatorEndpointParam {
+export class AddOperatorEndpointParam {
+    endpointId?: number;
     operatorMnc: number;
     api: any;
     endpointUrl: string;
