@@ -1,6 +1,6 @@
-import { EventEmitter, Component, OnInit } from '@angular/core';
+import { EventEmitter, Input, Component, OnInit } from '@angular/core';
 import { Output } from '@angular/core/src/metadata/directives';
-import { OperatorEndpoint, AddOperatorEndpointParam } from '../../../commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Operator } from '../../../commons/models/operator-onboarding-data-models';
 
 @Component({
   selector: 'app-add-endpoint-form',
@@ -12,13 +12,23 @@ export class AddEndpointFormComponent implements OnInit {
   @Output()
   whenEndpointAdd: EventEmitter<AddOperatorEndpointParam> = new EventEmitter();
 
+  @Input()
+  public selectedOperator: Operator;
+
+  public apiList = ['SMS', 'WALLET', 'PAYMENT', 'BALANCE', 'ACCOUNT INFO', 'GEO LOCATION'];
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  onSubmit() {
-    this.whenEndpointAdd.emit({ operatorMnc: 0, api: 'sms', endpointUrl: '' });
+  onSubmit(form) {
+    this.whenEndpointAdd.emit({
+      operatorMnc: this.selectedOperator.mnc,
+      api: form.value.api,
+      endpointUrl: form.value.endpointUrl
+    });
+    form.reset();
   }
 
 }

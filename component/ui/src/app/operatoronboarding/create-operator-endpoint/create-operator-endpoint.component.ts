@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OperatorEndpoint, AddOperatorEndpointParam, Country } from '../../commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Country, Operator } from '../../commons/models/operator-onboarding-data-models';
 import { OperatorOnboardingDataService } from '../../data-providers/operator-onboarding-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { FieldSet } from 'app/commons/models/common-data-models';
@@ -12,6 +12,7 @@ import { FieldSet } from 'app/commons/models/common-data-models';
 export class CreateOperatorEndpointComponent implements OnInit {
 
   endpoints: OperatorEndpoint[] = [];
+  selectedOperator: Operator;
 
   countries: Country[];
 
@@ -29,12 +30,17 @@ export class CreateOperatorEndpointComponent implements OnInit {
     this.route.queryParams.subscribe((params => {
       this.operatorMnc = parseInt(params['operator-mnc'], 10);
       if (!!this.operatorMnc) {
+        this.service.getOperatorByMnc(this.operatorMnc);
         this.service.getOperatorEndpoints(this.operatorMnc);
       }
     }));
 
     this.service.CountriesProvider.subscribe((res) => {
       this.countries = res;
+    });
+
+    this.service.SelectedOperatorProvider.subscribe((op) => {
+      this.selectedOperator = op;
     });
 
     this.service.OperatoEndpointProvider.subscribe((res: OperatorEndpoint[]) => {
@@ -48,7 +54,6 @@ export class CreateOperatorEndpointComponent implements OnInit {
   }
 
   onAddEndpoint(event: AddOperatorEndpointParam) {
-    event.operatorMnc = this.operatorMnc;
     this.service.addOperatorEndpoint(event);
   }
 

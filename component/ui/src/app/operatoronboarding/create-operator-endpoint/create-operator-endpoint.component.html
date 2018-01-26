@@ -1,7 +1,9 @@
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
 
   <div class="col-sm-12">
-    <app-add-endpoint-form (whenEndpointAdd)="onAddEndpoint($event)"></app-add-endpoint-form>
+    <app-add-endpoint-form 
+    [selectedOperator]="selectedOperator"
+    (whenEndpointAdd)="onAddEndpoint($event)"></app-add-endpoint-form>
   </div>
 
   <div class="col-sm-12">

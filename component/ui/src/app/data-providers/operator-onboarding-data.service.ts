@@ -17,6 +17,7 @@ export class OperatorOnboardingDataService {
   public BrandProvider: Subject<Brand[]> = new BehaviorSubject<Brand[]>([]);
   public OperatorProvider: Subject<CountryOperator[]> = new BehaviorSubject<CountryOperator[]>([]);
   public OnboardOperatorProvider: Subject<Operator[]> = new BehaviorSubject<Operator[]>([]);
+  public SelectedOperatorProvider: Subject<Operator> = new BehaviorSubject<Operator>(null);
 
   private countriesResult: CountryOperator[];
 
@@ -65,8 +66,23 @@ export class OperatorOnboardingDataService {
       });
   }
 
-  getOperatorByMnc(mnc: number): Operator {
-    return null;
+  getOperatorByMnc(mnc: number) {
+    this.slimLoadingBarService.start();
+    this.http.post(apiEndpoints.operatorOnboarding.getOperatorByMnc, mnc, this.getOptions())
+      .map((response: Response) => response.json())
+      .catch((error: Response) => Observable.throw({
+        success: false,
+        message: 'Error Loading Operator',
+        error: error
+      }))
+      .subscribe(data => {
+        this.SelectedOperatorProvider.next(data);
+        this.slimLoadingBarService.complete();
+      },
+      error => {
+        this.message.error(error.message);
+        this.slimLoadingBarService.stop();
+      });
   }
 
   getOperatorEndpoints(operatorId: number) {
@@ -100,6 +116,7 @@ export class OperatorOnboardingDataService {
       }))
       .subscribe(data => {
         this.getOperatorEndpoints(param.operatorMnc);
+        this.message.success('API endpoint successfully added');
         this.slimLoadingBarService.complete();
       },
       error => {
@@ -119,6 +136,7 @@ export class OperatorOnboardingDataService {
       }))
       .subscribe(data => {
         this.getOperatorEndpoints(endpoint.operatorMnc);
+        this.message.success('API endpoint successfully deleted');
         this.slimLoadingBarService.complete();
       },
       error => {

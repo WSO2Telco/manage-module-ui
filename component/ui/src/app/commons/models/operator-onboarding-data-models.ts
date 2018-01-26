@@ -1,4 +1,4 @@
-export interface Operator {
+export class Operator {
     type: string;
     countryName: string;
     countryCode: string;

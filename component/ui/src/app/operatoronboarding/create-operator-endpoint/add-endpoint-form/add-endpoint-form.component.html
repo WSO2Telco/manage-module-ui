@@ -4,33 +4,66 @@
       <h4>Create API Endpoints</h4>
     </div>
   </div>
-  <form class="form-horizontal" (ngSubmit)="onSubmit()">
+  <form class="form-horizontal" #endPointForm="ngForm" novalidate (ngSubmit)="onSubmit(endPointForm)">
 
+    <div class="form-group">
+      <label for="inpt-operator" class="col-sm-3 control-label">Brand</label>
+      <div class="col-sm-4">
+        <span class="operator">{{selectedOperator?.brand || ''}}</span>
+      </div>
+    </div>
     <div class="form-group">
       <label for="inpt-operator" class="col-sm-3 control-label">Operator</label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="inpt-operator" placeholder="Operator">
+        <span class="operator">{{(selectedOperator?.operator || '') + ' - ' + (selectedOperator?.mnc || '') }}</span>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="inpt-operator" class="col-sm-3 control-label">API</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="inpt-operator" placeholder="Operator">
-      </div>
+    <div class="form-group" [ngClass]="{'has-danger': apiRef.touched && apiRef.errors}">
+        <label class="control-label col-sm-3">API <span>*</span></label>
+        <div class="col-sm-4 ">
+            <input type="text"
+                    autocomplete="false"
+                    required
+                   class="form-control"
+                   [(ngModel)]="seletdApi"
+                   [typeahead]="apiList"
+                   [typeaheadMinLength]="0"
+                   [typeaheadOptionsLimit]="10"
+                   typeaheadOptionField="countryName"
+                   placeholder="Select Country"
+                   #apiRef="ngModel"
+                   name="api"
+            >
+        </div>
+        <span class="error col-sm-offset-3 col-sm-8"
+              *ngIf="apiRef.touched && apiRef.errors ">Api is required</span>
     </div>
 
-    <div class="form-group">
-      <label for="inpt-enpoint" class="col-sm-3 control-label">Endpoint URL</label>
+    <div class="form-group"  [ngClass]="{'has-danger': urlRef.touched && urlRef.errors}">
+      <label for="inpt-enpoint" class="col-sm-3 control-label">Endpoint URL <span>*</span></label>
       <div class="col-sm-5">
-        <input type="text" class="form-control" id="inpt-enpoint" placeholder="Endpoint URL">
+        <input type="text" class="form-control" 
+        required
+        name="endpointUrl"
+        [(ngModel)]="endpointUrl"
+        id="inpt-enpoint"
+        #urlRef="ngModel"
+        pattern="(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})"
+        placeholder="Endpoint URL">
       </div>
+      <span *ngIf="(urlRef.touched || urlRef.dirty) && urlRef.errors">
+        <span class="error col-sm-offset-3 col-sm-8"
+        *ngIf="urlRef.errors.required">Endpoint Url is required</span>
+        <span class="error col-sm-offset-3 col-sm-8"
+        *ngIf="urlRef.errors.pattern">Invalid Url</span>
+      </span>  
     </div>
 
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-4">
         <button class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!endPointForm.valid">Add</button>
       </div>
     </div>
 
