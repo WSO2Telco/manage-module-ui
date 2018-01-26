@@ -31,7 +31,7 @@ const routes = [
     }
   },
   {
-    path: 'api-endpints',
+    path: 'api-endpints/:operator-mnc',
     component: CreateOperatorEndpointComponent,
     /* canActivate: [PermissionGuard],
     data: {

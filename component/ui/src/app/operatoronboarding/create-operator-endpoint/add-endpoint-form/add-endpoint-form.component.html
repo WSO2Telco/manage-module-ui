@@ -1,7 +1,7 @@
 <div class="form-container addEndpointContainer">
   <div class="row">
     <div class="col-sm-6 header">
-      <h4>Create API Endpoints</h4>
+      <h4>{{(!!selectedEndpoint)? 'Edit' : 'Create'}} API Endpoints</h4>
     </div>
   </div>
   <form class="form-horizontal" #endPointForm="ngForm" novalidate (ngSubmit)="onSubmit(endPointForm)">
@@ -31,7 +31,7 @@
                    [typeaheadMinLength]="0"
                    [typeaheadOptionsLimit]="10"
                    typeaheadOptionField="countryName"
-                   placeholder="Select Country"
+                   placeholder="Select API"
                    #apiRef="ngModel"
                    name="api"
             >
@@ -63,7 +63,7 @@
     <div class="form-group">
       <div class="col-sm-offset-3 col-sm-4">
         <button class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary" [disabled]="!endPointForm.valid">Add</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!endPointForm.valid">{{(selectedEndpoint)? 'Update' : 'Add' }}</button>
       </div>
     </div>
 
