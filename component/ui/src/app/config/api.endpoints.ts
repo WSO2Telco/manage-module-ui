@@ -9,5 +9,7 @@ export const apiEndpoints = {
         updateEndpoint: '/operator/onboarding/update/endpoint',
         deleteEndpoint: '/operator/onboarding/delete/endpoint',
         getCountries: 'https://raw.githubusercontent.com/pbakondy/mcc-mnc-list/master/mcc-mnc-list.json',
+        addToken: '/operator/onboarding/add/token',
+        getToken: '/operator/onboarding/get/token',
     }
 };

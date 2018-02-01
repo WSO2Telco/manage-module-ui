@@ -2,8 +2,6 @@
  * Created by sahanK on 10/01/18.
  */
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthenticationService } from '../../../commons/services/authentication.service';
-import { MessageService } from '../../../commons/services/message.service';
 import { OperatorOnboardingDataService } from 'app/data-providers/operator-onboarding-data.service';
 import { Country, Brand, CountryOperator, Operator } from 'app/commons/models/operator-onboarding-data-models';
 import { FieldSet } from 'app/commons/models/common-data-models';

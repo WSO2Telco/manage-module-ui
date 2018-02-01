@@ -26,11 +26,20 @@ export class GetOperatorEndpointParam {
 }
 
 export interface TokenData {
-    id: number;
-    token: number;
+    id:number;
+    name: string;
     validity: any;
     date: string;
     url: string;
+    type: string;
+}
+
+export interface TokenDataEndpointParam {
+    name: string;
+    validity: any;
+    date: string;
+    url: string;
+    type: string;
 }
 
 export class AddOperatorEndpointParam {

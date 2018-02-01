@@ -13,8 +13,9 @@
                             <legend>Access Token</legend>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <form class="form-horizontal" #addtokenForm="ngForm" novalidate
-                                          (ngSubmit)="accesstokenFormSubmit(addtokenForm)" autocomplete="off">
+                                    <form class="form-horizontal" #addAccessTokenForm="ngForm" novalidate
+                                          (ngSubmit)="accesstokenFormSubmit(addAccessTokenForm,'AccessToken')"
+                                          autocomplete="off">
 
                                         <div class="form-group">
                                             <label class="control-label col-sm-4">Token</label>
@@ -64,10 +65,10 @@
                                             <div class="col-sm-6 col-sm-offset-4">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary animated fadeIn"
-                                                        [(disabled)]="is_edit">
+                                                        [(disabled)]="!addAccessTokenForm.valid">
                                                     Add
                                                 </button>&nbsp;
-                                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                                                <a class="btn btn-warning" (click)="addAccessTokenForm.reset();">Clear</a>
                                             </div>
 
                                         </div>
@@ -82,17 +83,18 @@
                             <legend>Refresh Token</legend>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <form class="form-horizontal" #addtokenForm="ngForm" novalidate
-                                          (ngSubmit)="refreshTokenFormSubmit(addtokenForm)" autocomplete="off">
+                                    <form class="form-horizontal" #addRefreshTokenForm="ngForm" novalidate
+                                          (ngSubmit)="refreshTokenFormSubmit(addRefreshTokenForm, 'RefreshToken')"
+                                          autocomplete="off">
 
                                         <div class="form-group">
                                             <label class="control-label col-sm-4">Token</label>
                                             <div class="col-sm-6 ">
                                                 <input type="text"
                                                        class="form-control"
-                                                       [(ngModel)]="tokenName"
+                                                       [(ngModel)]="refershtokenName"
                                                        placeholder="Enter Token detail"
-                                                       name="token"
+                                                       name="refreshtoken"
                                                 >
                                             </div>
                                         </div>
@@ -102,8 +104,8 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        placeholder="MCC (Mobile Country Code)"
-                                                       [(ngModel)]="accessValidity"
-                                                       name="accessValidity"
+                                                       [(ngModel)]="refreshValidity"
+                                                       name="refreshValidity"
                                                 >
                                             </div>
                                         </div>
@@ -113,8 +115,8 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        placeholder="Enter created details"
-                                                       [(ngModel)]="created"
-                                                       name="accessValidity"
+                                                       [(ngModel)]="refreshcreated"
+                                                       name="refreshcreated"
                                                 >
                                             </div>
                                         </div>
@@ -125,7 +127,7 @@
                                                        class="form-control"
                                                        placeholder="Enter endpoint url"
                                                        [(ngModel)]="refreshendpoint"
-                                                       name="accessValidity"
+                                                       name="refreshendpoint"
                                                 >
                                             </div>
                                         </div>
@@ -133,10 +135,10 @@
                                             <div class="col-sm-6 col-sm-offset-4">
                                                 <br>
                                                 <button type="submit" class="btn btn-primary animated fadeIn"
-                                                        [(disabled)]="is_edit">
+                                                        [(disabled)]="!addRefreshTokenForm.valid">
                                                     Add
                                                 </button>&nbsp;
-                                                <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                                                <a class="btn btn-warning" (click)="addRefreshTokenForm.reset()">Clear</a>
                                             </div>
 
                                         </div>

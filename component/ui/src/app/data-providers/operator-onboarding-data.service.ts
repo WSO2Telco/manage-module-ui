@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import {
   Operator, OperatorEndpoint, AddOperatorEndpointParam,
-  Country, CountryOperator, Brand, GetOperatorEndpointParam
+  Country, CountryOperator, Brand, GetOperatorEndpointParam,TokenData,
+  TokenDataEndpointParam
 } from '../commons/models/operator-onboarding-data-models';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
@@ -22,6 +23,7 @@ export class OperatorOnboardingDataService {
   public OnboardOperatorProvider: Subject<Operator[]> = new BehaviorSubject<Operator[]>([]);
   public SelectedOperatorProvider: Subject<Operator> = new BehaviorSubject<Operator>(null);
   public SelectedOperatorEndpointProvider: Subject<OperatorEndpoint> = new BehaviorSubject<OperatorEndpoint>(null);
+  public TokenProvider: Subject<TokenData[]> = new BehaviorSubject<TokenData[]>([]);
 
 
   private countriesResult: CountryOperator[];
@@ -283,6 +285,45 @@ export class OperatorOnboardingDataService {
         'Content-Type': 'application/json'
       });
     return new RequestOptions({ headers: headers });
+  }
+
+  addToken(token: TokenDataEndpointParam) {
+    this.slimLoadingBarService.start();
+    this.http.post(apiEndpoints.operatorOnboarding.addToken, token, this.getOptions())
+        .map((response: Response) => response.json())
+        .catch((error: Response) => Observable.throw({
+          success: false,
+          message: 'Error Add Token',
+          error: error
+        }))
+        .subscribe(data => {
+              this.message.success('Token successfully added');
+              this.getToken();
+              this.slimLoadingBarService.complete();
+            },
+            error => {
+              this.message.error(error.message);
+              this.slimLoadingBarService.stop();
+            });
+  }
+
+  getToken() {
+    this.slimLoadingBarService.start();
+    this.http.get(apiEndpoints.operatorOnboarding.getToken, this.getOptions())
+        .map((response: Response) => response.json())
+        .catch((error: Response) => Observable.throw({
+          success: false,
+          message: 'Error Loading Token List',
+          error: error
+        }))
+        .subscribe(data => {
+              this.TokenProvider.next(data);
+              this.slimLoadingBarService.complete();
+            },
+            error => {
+              this.message.error(error.message);
+              this.slimLoadingBarService.stop();
+            });
   }
 
 }

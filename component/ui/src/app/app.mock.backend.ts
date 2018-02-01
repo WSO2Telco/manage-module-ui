@@ -1,6 +1,6 @@
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod, XHRBackend, RequestOptions } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
-import { OperatorEndpoint, AddOperatorEndpointParam, Operator, GetOperatorEndpointParam } from './commons/models/operator-onboarding-data-models';
+import { OperatorEndpoint, AddOperatorEndpointParam, Operator, GetOperatorEndpointParam, TokenData, TokenDataEndpointParam} from './commons/models/operator-onboarding-data-models';
 import { apiEndpoints } from './config/api.endpoints';
 
 
@@ -172,6 +172,47 @@ export function mockBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 })));
                 return;
             }
+			
+			 /*
+             ADD TOKEN MOCK
+             */
+            if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.addToken) &&
+                connection.request.method === RequestMethod.Post) {
+                const param: TokenDataEndpointParam = JSON.parse(connection.request.getBody());
+                const ep: TokenData[] = JSON.parse(localStorage.getItem('tokendata')) || [];
+                ep.push(
+                    {
+                        id: ep.length + 1,
+                        name: param.name,
+                        validity: param.validity,
+                        date: param.date,
+                        url: param.url,
+                        type: param.type
+                    }
+                );
+                localStorage.setItem('tokendata', JSON.stringify(ep));
+                connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body: { success: true }
+                })));
+                return;
+            }
+
+            /*
+             GET TOKEN MOCK
+             */
+            if (connection.request.url.endsWith(apiEndpoints.operatorOnboarding.getToken) &&
+                connection.request.method === RequestMethod.Get) {
+
+                const alltoken: TokenData[] = JSON.parse(localStorage.getItem('tokendata')) || [];
+                connection.mockRespond(new Response(new ResponseOptions({
+                    status: 200,
+                    body: alltoken
+                })));
+
+                return;
+            }
+
 
             // pass through any requests not handled above
             const realHttp = new Http(realBackend, options);
