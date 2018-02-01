@@ -15,9 +15,9 @@ export class SetTokenComponent implements OnInit {
     constructor(private service: OperatorOnboardingDataService) {
     }
 
-    tokenName: string;
+    accesstokenName: string;
     accessValidity: string;
-    created: string;
+    accesscreated: string;
     accessendpoint: string;
 
     refershtokenName: string;
@@ -45,6 +45,21 @@ export class SetTokenComponent implements OnInit {
 
         this.service.getToken();
     }
+
+
+    public accesstokenFormSubmit(form, type) {
+        if (form.valid) {
+            this.service.addToken({
+                name: this.accesstokenName,
+                validity: this.accessValidity,
+                date: this.accesscreated,
+                url: this.accessendpoint,
+                type: type
+            });
+            form.reset();
+        }
+    }
+
 
     public refreshTokenFormSubmit(form, type) {
         if (form.valid) {
