@@ -136,7 +136,7 @@
 
 
     <modules>
-        <module>component</module>
+        <module>component/manage-service</module>
         <module>com.wso2telco.dep.manage-service.feature</module>
     </modules>
 

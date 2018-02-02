@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../WebContent/public",
+      "outDir": "../manage-service/src/main/webapp/public",
       "assets": [
         "images",
         "assets",

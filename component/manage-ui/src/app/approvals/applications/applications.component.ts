@@ -25,7 +25,7 @@ export class ApplicationsComponent implements OnInit {
 
     private groupApplicationFilter: ApplicationTaskFilter;
 
-    private creditPlan: string[];
+    public creditPlan: string[];
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,

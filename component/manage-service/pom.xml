@@ -6,7 +6,7 @@
         <groupId>com.wso2telco.dep</groupId>
         <artifactId>manage-service-parent</artifactId>
         <version>2.0.3-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>manage-service</artifactId>
     <packaging>war</packaging>
@@ -65,29 +65,29 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <executions>
-                    <execution>
-                        <id>exec-npm-install</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <workingDirectory>${project.basedir}/ui</workingDirectory>
-                            <executable>npm</executable>
-                            <arguments>
-                                <argument>install</argument>
-                            </arguments>
-                        </configuration>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>exec-npm-install</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<configuration>-->
+                            <!--<workingDirectory>../manage-ui/</workingDirectory>-->
+                            <!--<executable>npm</executable>-->
+                            <!--<arguments>-->
+                                <!--<argument>install</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                        <!--<goals>-->
+                            <!--<goal>exec</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
                     <execution>
                         <id>exec-npm-run-build</id>
                         <phase>generate-sources</phase>
                         <configuration>
-                            <workingDirectory>${project.basedir}/ui</workingDirectory>
+                            <workingDirectory>../manage-ui/</workingDirectory>
                             <executable>npm</executable>
                             <arguments>
                                 <argument>run</argument>
-                                <argument>build</argument>
+                                <argument>bundle</argument>
                             </arguments>
                         </configuration>
                         <goals>
@@ -104,14 +104,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <warSourceDirectory>WebContent</warSourceDirectory>
-                </configuration>
-            </plugin>
-
         </plugins>
     </build>
 </project>
