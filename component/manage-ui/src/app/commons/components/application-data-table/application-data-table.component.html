@@ -59,7 +59,7 @@
                  'R':item.actionType == 'REJECT'}"
                  *ngIf="!!!summeryModeRecordLimit || i < summeryModeRecordLimit">
                 <div class="tbl-cell">
-                    <span tooltip="More Info"
+                <span tooltip="More Info" *ngIf="filter?.dataType?.dataCategory  == 'USER'"
                           class="action expand material-icons"
                           (click)="item.isExpand = !item.isExpand; item.actionType = 'MORE' ">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>
                     {{item.id}}
