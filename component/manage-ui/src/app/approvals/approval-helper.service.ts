@@ -7,13 +7,15 @@ import {
 } from '../commons/models/application-data-models';
 import {TableDataType} from '../commons/models/common-data-models';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
+import {AuthenticationService} from '../commons/services/authentication.service';
 
 @Injectable()
 export class ApprovalHelperService {
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private message: MessageService,
-                private slimLoadingBarService: SlimLoadingBarService) {
+                private slimLoadingBarService: SlimLoadingBarService,
+                private authService: AuthenticationService) {
     }
 
 
@@ -66,11 +68,6 @@ export class ApprovalHelperService {
      */
     approveRejectTask(dataType: TableDataType, appTask: ApplicationTask, status): void {
 
-        const roleList = JSON.parse(sessionStorage.getItem('loginUserInfo')).roles;
-        const billing = JSON.parse(sessionStorage.getItem('loginUserInfo')).billing;
-
-        const completedByUser = JSON.parse(sessionStorage.getItem('loginUserInfo')).userName;
-
         this.slimLoadingBarService.start();
 
         /**
@@ -79,7 +76,7 @@ export class ApprovalHelperService {
          */
         const applicationActions = (status: 'APPROVED' | 'REJECTED') => {
 
-            if (!billing) {
+            if (!this.authService.hasPermissions('application:creditPlan')) {
                 appTask.creditPlan = '';
             }
 
@@ -118,7 +115,7 @@ export class ApprovalHelperService {
          */
         const subscriptionActions = (status: 'APPROVED' | 'REJECTED') => {
 
-            if (!billing) {
+            if (!this.authService.hasPermissions('subscription:changeRates')) {
                 appTask.selectedRate = '';
             }
             const param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();

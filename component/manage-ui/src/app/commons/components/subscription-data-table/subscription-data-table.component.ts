@@ -125,7 +125,6 @@ export class SubscriptionDataTableComponent implements OnInit {
     }
 
     onOperationRateChange(event, item, apiOperation) {
-
         if (this.unAssigned) {
             this.message.warning('Please assign the task to yourself before editing');
         }
