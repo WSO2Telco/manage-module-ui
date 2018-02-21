@@ -67,6 +67,8 @@ export class QuotaCapMainComponent implements OnInit {
 
     private date = new Date();
     private loggeduser: string;
+    public loggedusername: string;
+    public isadminUser;
 
     private showOperatorListPermissions: string;
 
@@ -135,6 +137,12 @@ export class QuotaCapMainComponent implements OnInit {
         this.clearErrors();
 
         this.showOperatorListPermissions = "quota:operatorList";
+
+
+        const loginInfo = this.authService.loginUserInfo.getValue();
+        this.loggedusername = loginInfo.userName;
+
+        this.isadminUser = this.authService.hasPermissions(this.showOperatorListPermissions);
     }
 
 
@@ -354,7 +362,6 @@ export class QuotaCapMainComponent implements OnInit {
                 this.getQuotaofSubscriber(this.subscriber);
             }
             if (this.defaultcalval !== '') {
-                console.log('----hit here---');
                 this.DateRangeValidation();
             }
         } else if (this.selectedoperator.length !== 0) {
@@ -404,7 +411,9 @@ export class QuotaCapMainComponent implements OnInit {
         this.clearErrors();
         this.quotalist = [];
 
-        if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+        if (!this.isadminUser) {
+            this.selectedoperator = this.loggedusername.toUpperCase();
+        } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
             this.selectedoperator = '_All_';
         }
         const data = {
@@ -425,7 +434,9 @@ export class QuotaCapMainComponent implements OnInit {
         this.clearErrors();
         this.quotalist = [];
 
-        if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+        if (!this.isadminUser) {
+            this.selectedoperator = this.loggedusername.toUpperCase();
+        } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
             this.selectedoperator = '_All_';
         }
         const data = {
@@ -446,7 +457,9 @@ export class QuotaCapMainComponent implements OnInit {
         this.clearErrors();
         this.quotalist = [];
 
-        if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+        if (!this.isadminUser) {
+            this.selectedoperator = this.loggedusername.toUpperCase();
+        } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
             this.selectedoperator = '_All_';
         }
         const data = {
@@ -595,7 +608,7 @@ export class QuotaCapMainComponent implements OnInit {
         }
 
         for (const entry of this.operatorsList) {
-            if (this.selectedoperator == entry || (this.selectedoperator == '_All_') ) {
+            if (this.selectedoperator == entry || (this.selectedoperator == '_All_')) {
                 validOperator = true;
             }
         }
@@ -608,19 +621,20 @@ export class QuotaCapMainComponent implements OnInit {
             let apiId = '';
             if (this.app.length == 0 || this.app == '') {
                 appId = null;
-            }else{
+            } else {
                 appId = this.app;
             }
             if (this.api.split(':')[0].length == 0) {
                 apiId = null;
-            }else {
+            } else {
                 apiId = this.api
             }
 
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
 
             const data = {
                 operator: this.selectedoperator,
@@ -778,10 +792,11 @@ export class QuotaCapMainComponent implements OnInit {
         this.todate = this.datepickvalue.split('-')[1].trim();
 
         if (this.isApiSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
@@ -793,10 +808,11 @@ export class QuotaCapMainComponent implements OnInit {
             this.getValidityPeriod(data);
 
         } else if (this.isAppSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byApplication',
                 info: this.app,
@@ -808,10 +824,11 @@ export class QuotaCapMainComponent implements OnInit {
             this.getValidityPeriod(data);
 
         } else if (this.isSubscriberSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byServiceProvider',
                 info: this.subscriber + '@carbon.super',
@@ -845,10 +862,11 @@ export class QuotaCapMainComponent implements OnInit {
         this.todate = this.datepickvalue.split('-')[1].trim();
 
         if (this.isApiSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
@@ -860,10 +878,11 @@ export class QuotaCapMainComponent implements OnInit {
             this.getValidityPeriod(data);
 
         } else if (this.isAppSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byApplication',
                 info: this.app,
@@ -875,10 +894,11 @@ export class QuotaCapMainComponent implements OnInit {
             this.getValidityPeriod(data);
 
         } else if (this.isSubscriberSelect) {
-            if (this.selectedoperator == '' || this.selectedoperator == 'All') {
+            if (!this.isadminUser) {
+                this.selectedoperator = this.loggedusername.toUpperCase();
+            } else if (this.selectedoperator == '' || this.selectedoperator == 'All') {
                 this.selectedoperator = '_All_';
             }
-
             const data = {
                 byFlag: 'byServiceProvider',
                 info: this.subscriber + '@carbon.super',
