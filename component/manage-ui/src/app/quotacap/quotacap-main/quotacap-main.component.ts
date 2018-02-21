@@ -109,7 +109,7 @@ export class QuotaCapMainComponent implements OnInit {
     ngOnInit() {
         this.name = '';
         this.subscriberList = [];
-        this.operatorsList = ['_All_'];
+        this.operatorsList = ['All'];
         this.applicationList = [];
         this.apiList = [];
         this.applications = [];
@@ -147,7 +147,6 @@ export class QuotaCapMainComponent implements OnInit {
                 this.subscriberList = response.payload;
             } else {
                 this.message.error(response.message);
-
             }
         });
     }
@@ -163,10 +162,10 @@ export class QuotaCapMainComponent implements OnInit {
             this.quotaService.getOperatorOfsubscriber(subscriberID, (response) => {
                 if (response.success) {
                     if (response.payload.result === 'undefined' || response.payload.result === 'empty') {
-                        this.operatorsList = ['_All_'];
+                        this.operatorsList = ['All'];
                     } else {
                         this.operatorsList = response.payload;
-                        this.operatorsList.splice(0, 0, '_All_');
+                        this.operatorsList.splice(0, 0, 'All');
                     }
                 } else {
                     this.message.error(response.message);
@@ -236,6 +235,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.appID = '';
         this.isCalenderEnable = false;
         this.isSubscriberError = false;
+        this.applications = [];
         this.clearErrors();
         let invalid = true;
 
@@ -283,6 +283,7 @@ export class QuotaCapMainComponent implements OnInit {
     onAppSelected() {
         this.api = '';
         this.appID = '';
+        this.apiList = [];
         this.SetQuotaResultLabel();
         this.isCalenderEnable = false;
         let invalid = true;
@@ -353,6 +354,7 @@ export class QuotaCapMainComponent implements OnInit {
                 this.getQuotaofSubscriber(this.subscriber);
             }
             if (this.defaultcalval !== '') {
+                console.log('----hit here---');
                 this.DateRangeValidation();
             }
         } else if (this.selectedoperator.length !== 0) {
@@ -428,7 +430,7 @@ export class QuotaCapMainComponent implements OnInit {
         }
         const data = {
             byFlag: 'byApplication',
-            info: appID,
+            info: this.app,
             operator: this.selectedoperator
         };
 
@@ -449,7 +451,7 @@ export class QuotaCapMainComponent implements OnInit {
         }
         const data = {
             byFlag: 'byApi',
-            info: apiID,
+            info: this.api,
             operator: this.selectedoperator
         };
 
@@ -593,7 +595,7 @@ export class QuotaCapMainComponent implements OnInit {
         }
 
         for (const entry of this.operatorsList) {
-            if (this.selectedoperator == entry) {
+            if (this.selectedoperator == entry || (this.selectedoperator == '_All_') ) {
                 validOperator = true;
             }
         }
@@ -604,11 +606,15 @@ export class QuotaCapMainComponent implements OnInit {
 
             let appId = '';
             let apiId = '';
-            if (this.appID.length == 0) {
+            if (this.app.length == 0 || this.app == '') {
                 appId = null;
+            }else{
+                appId = this.app;
             }
             if (this.api.split(':')[0].length == 0) {
                 apiId = null;
+            }else {
+                apiId = this.api
             }
 
             if (this.selectedoperator == '' || this.selectedoperator == 'All') {
@@ -778,7 +784,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApi',
-                info: this.api.split(':')[0],
+                info: this.api,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -793,7 +799,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApplication',
-                info: this.appID,
+                info: this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -845,7 +851,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApi',
-                info: this.api.split(':')[0],
+                info: this.api,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -860,7 +866,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApplication',
-                info: this.appID,
+                info: this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
