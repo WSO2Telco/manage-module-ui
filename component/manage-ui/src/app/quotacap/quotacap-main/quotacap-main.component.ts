@@ -354,6 +354,7 @@ export class QuotaCapMainComponent implements OnInit {
                 this.getQuotaofSubscriber(this.subscriber);
             }
             if (this.defaultcalval !== '') {
+                console.log('----hit here---');
                 this.DateRangeValidation();
             }
         } else if (this.selectedoperator.length !== 0) {
@@ -783,7 +784,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApi',
-                info: this.api.split(':')[0],
+                info: this.api,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -798,7 +799,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApplication',
-                info: this.appID,
+                info: this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -850,7 +851,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApi',
-                info: this.api.split(':')[0],
+                info: this.api,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -865,7 +866,7 @@ export class QuotaCapMainComponent implements OnInit {
 
             const data = {
                 byFlag: 'byApplication',
-                info: this.appID,
+                info: this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
