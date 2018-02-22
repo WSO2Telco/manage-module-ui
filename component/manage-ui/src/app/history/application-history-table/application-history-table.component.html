@@ -47,20 +47,23 @@
             <div class="tbl-cell">createdBy</div>
             <div class="tbl-cell">status</div>
             <div class="tbl-cell" *appHasPermissions="showApprovedOn">approvedOn</div>
-            <!--<div class="tbl-cell"  style="text-transform: capitalize">Application</div>-->
+            <div class="tbl-cell"  style="text-transform: capitalize">Application</div>
+            <div class="tbl-cell"></div>
+            <div class="tbl-cell">Action</div>
         </div>
         <div class="tbl-row" *ngFor="let item of dataSource">
             <div class="tbl-cell">{{item.applicationId}}</div>
-            <!--<div class="tbl-cell"><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item.applicationName}}</a>-->
-            <!--</div>-->
+            <div class="tbl-cell"><a (click)='onNavApplication(item.applicationId)' style="cursor: pointer;">{{item.applicationName}}</a>
+            </div>
             <div class="tbl-cell">{{item.applicationName}}</div>
             <div class="tbl-cell">{{item.applicationDescription}}</div>
-            <div class="tbl-cell">{{item.createdBy}}</div>
+            <div class="tbl-cell">{{item.createdBy}}</div>cd
             <div class="tbl-cell">{{item.status}}</div>
             <div class="tbl-cell" *appHasPermissions="showApprovedOn">{{item.approvedOn}}</div>
-            <!--<div class="tbl-cell">-->
-                <!--<button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More</button>-->
-            <!--</div>-->
+            <div class="tbl-cell">
+                <button class="btn btn-primary" (click)='onNavApplication(item.applicationId)'> More</button>
+                <button class="btn btn-primary" (click)='onNavSubscription(item.applicationId)'> Edit Subscription</button>
+            </div>
         </div>
         <div class="no-rec-row tbl-row" *ngIf="dataSource.length == 0">
             <span class="no-rec">No Records...</span>

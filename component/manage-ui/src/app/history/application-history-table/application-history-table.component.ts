@@ -48,6 +48,10 @@ export class ApplicationHistoryTableComponent implements OnInit {
         this.router.navigateByUrl('/history/application/' + id);
     }
 
+    onNavSubscription(id: number) {
+        this.router.navigateByUrl('/history/subscription/' + id);
+    }
+
     onFilterItemAdded() {
         this.filter.filterString = this.filterString;
         this.onFilterChange.emit(this.filter);
