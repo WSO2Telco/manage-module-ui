@@ -1,0 +1,74 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                Edit Subscription
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="searchFilter">
+                            <div class="col-sm-2 col-sm-offset-1">
+                                <input [(ngModel)]="subscriber"
+                                       [typeahead]="subscriberList"
+                                       typeaheadOptionField="name"
+                                       [typeaheadMinLength]="0"
+                                       type="text"
+                                       class="form-control"
+                                       (typeaheadOnSelect)="onSubscriberSelected()"
+                                       (input)="onSubscriberSelected()"
+                                       placeholder="Service provider"
+                                       name="subscription"
+                                >
+                            </div>
+                            <div class="col-sm-2">
+                                <input [(ngModel)]="app"
+                                       [typeahead]="applications"
+                                       [typeaheadMinLength]="0"
+                                       type="text"
+                                       class="form-control"
+                                       (typeaheadOnSelect)="onAppSelected()"
+                                       (input)="onAppSelected()"
+                                       typeaheadOptionField="name"
+                                       placeholder="Application"
+                                       name="app">
+                            </div>
+                            <div class="col-sm-2" *ngIf="IfNorthBound">
+                                <input [(ngModel)]="operator"
+                                       [typeahead]="operatorList"
+                                       [typeaheadMinLength]="0"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Operator"
+                                       name="op">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12">
+                    <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
+                        <template #dynamicCellContent let-item="element">
+                            <div>
+                <span tooltip="Edit"
+                      class="action  material-icons"
+                      (click)="onIconClick(item,'EDIT')">border_color</span>
+
+                                <span tooltip="Define Api Endpoint"
+                                      class="action  material-icons"
+                                      (click)="onIconClick(item,'ENDPOINT')">settings_input_component</span>
+
+                                <span tooltip="Set Token"
+                                      class="action  material-icons"
+                                      (click)="onIconClick(item,'TOKEN')">mode_edit</span>
+                            </div>
+                        </template>
+                    </app-common-data-table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

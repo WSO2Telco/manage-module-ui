@@ -21,6 +21,14 @@ const routes = [
     }
   },
   {
+    path: 'edit-subscription',
+    loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'edit-subscription'
+    }
+  },
+  {
     path: 'rate',
     loadChildren: 'app/rate/rate.module#RateModule',
     canActivate: [AppGuard, PermissionGuard],

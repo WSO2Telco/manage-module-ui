@@ -1,0 +1,70 @@
+import {Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
+import {ApplicationHistory} from '../../commons/models/reporing-data-models';
+import {ActivatedRoute} from '@angular/router';
+import {MessageService} from '../../commons/services/message.service';
+import { TabsetComponent } from 'ngx-bootstrap';
+
+@Component({
+  selector: 'app-update-sub',
+  templateUrl: './update-sub.component.html',
+  styleUrls: ['./update-sub.component.scss']
+})
+export class UpdateSubComponent implements OnInit {
+
+    @Input() private applicationDetail: ApplicationHistory;
+    private subscriptions: ApplicationHistory[];
+    private operatorApprovals: ApplicationHistory[];
+    private id: number;
+    private show: boolean;
+
+  constructor(private reportingService: ReportingRemoteDataService,
+    private route: ActivatedRoute,  private message: MessageService) {}
+
+  ngOnInit() {
+      this.applicationDetail = null;
+      this.subscriptions = [];
+      this.operatorApprovals = [];
+      this.show  = false;
+
+    /*  this.route.params.subscribe(params => {
+          this.id = params['id'];
+          this.onApplication(this.id);
+      }); */
+  }
+
+    public alertMe(): void {
+        setTimeout(function (): void {
+            alert('You\'ve selected the alert tab!');
+        });
+    }
+
+
+    onApplication (id: number) {
+        this.reportingService.getApplicationDetail(id, (response, status) => {
+            if (status) {
+                this.applicationDetail = response;
+                if (response.operatorApprovals != null) {
+                    this.operatorApprovals = response.operatorApprovals;
+                    this.subscriptions = response.subscriptions;
+                    this.show = true;
+                } else {
+                    this.show = false;
+                }
+            } else {
+                this.message.error('Error Loading Application History Data');
+            }
+        });
+    }
+
+    @ViewChild('staticTabs') staticTabs: TabsetComponent;
+
+    selectTab(tab_id: number) {
+        this.staticTabs.tabs[tab_id].active = true;
+    }
+
+    disableEnable() {
+        this.staticTabs.tabs[2].disabled = ! this.staticTabs.tabs[2].disabled
+    }
+
+}

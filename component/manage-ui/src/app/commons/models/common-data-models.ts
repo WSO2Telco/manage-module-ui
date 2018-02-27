@@ -52,6 +52,11 @@ export class ServerResponse {
     messsage: string;
 }
 
+export class FieldSet {
+    columnName: string;
+    fieldName?: string;
+}
+
 export class Currency {
     currencyId: number;
     currencyCode: string;
@@ -201,6 +206,12 @@ export class API {
     apiName: string;
     apiDescription: string;
     createdBy: string;
+}
+
+export class RowSelectionParam {
+    constructor(
+        public fieldNameToMatch: string,
+        public valesToCompare: any[]) { }
 }
 
 export class Payload {

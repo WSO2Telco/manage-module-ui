@@ -1,0 +1,28 @@
+<div class="table-wrapper">
+
+  <div class="tbl-header">
+    {{tableHeader}}
+  </div>
+
+
+  <div class="table">
+    <div class="tbl-row header">
+      <div class="tbl-cell" *ngFor="let field of fieldSet" style="text-transform: capitalize">{{field.columnName}}</div>
+      <div class="tbl-cell"></div>
+    </div>
+
+    <div class="tbl-row" *ngFor="let item of dataSource" 
+    [ngClass]="{'selected':(selectedRecordSet && values) && values.indexOf(item[selectedRecordSet.fieldNameToMatch]) >= 0}">
+          <div class="tbl-cell" *ngFor="let f of fieldSet">{{item[f.fieldName]}}</div>
+          <div class="tbl-cell">
+              <ng-container  [ngTemplateOutlet]="dynamicCellContentTmpl"  [ngOutletContext]="{element: item}"></ng-container>
+          </div>
+    </div>
+    <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">
+      <span class="no-rec">No Records...</span>
+    </div>
+
+  </div>
+ 
+</div>
+
