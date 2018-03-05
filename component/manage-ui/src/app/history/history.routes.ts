@@ -9,7 +9,7 @@ const routes = [
     component: HistoryMainComponent
     },
     {
-        path: 'application/:id',
+        path: 'application/:id/:name',
         component: ApplicationDetailComponent
     },
     {

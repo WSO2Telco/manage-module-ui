@@ -24,7 +24,8 @@ export class RateRemoteDataService {
         assignRatesForAPIOperation: this.apiContext + '/rate/assignrates',
         apiOperations: this.apiContext + 'apis/',
         apiOperationRates: this.apiContext + '/rate/apioperationrates',
-        addRateCategory: this.apiContext + '/rate/addratecategory/'
+        addRateCategory: this.apiContext + '/rate/addratecategory/',
+        approvedApiOperationRate: this.apiContext + 'applications/'
     };
 
     constructor(private http: Http, private authService: AuthenticationService) {
@@ -150,9 +151,9 @@ export class RateRemoteDataService {
 
         let url = '';
 
-        if (operatorId){
+        if (operatorId) {
             url = this.apiContext + 'operators/' + operatorId + '/apis/' + apiName + '/operations/' + apiOperationId + '/operatorrates';
-        }else {
+        } else {
             url = this.apiEndpoints['apiOperations'] + apiName + '/operations/' + apiOperationId + '/operationrates';
         }
 
@@ -408,6 +409,27 @@ export class RateRemoteDataService {
      */
     getOperatorList() {
         return this.http.get(this.apiEndpoints['operators'], this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Operator List Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Operators',
+                error: error
+            }));
+    }
+
+
+    /**
+     * to get rate api operations
+     * @returns {Observable<R>}
+     */
+    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string) {
+        return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiid + '/' + direction, this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,

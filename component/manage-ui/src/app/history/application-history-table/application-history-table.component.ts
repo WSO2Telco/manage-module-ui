@@ -30,6 +30,7 @@ export class ApplicationHistoryTableComponent implements OnInit {
     private isFilterVisible: boolean;
     private filterString: string;
     private showApprovedOn: string;
+    public name:string;
 
     constructor(private router: Router) {
     }
@@ -42,10 +43,11 @@ export class ApplicationHistoryTableComponent implements OnInit {
         this.isFilterVisible = true;
         this.filterString = '';
         this.showApprovedOn = 'workFlowHistory:showApprovedOn';
+        this.name = 'test';
     }
 
     onNavApplication(id: number) {
-        this.router.navigateByUrl('/history/application/' + id);
+        this.router.navigateByUrl('/history/application/' + id+'/'+ this.name);
     }
 
     onNavSubscription(id: number) {

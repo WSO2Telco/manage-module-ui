@@ -91,3 +91,12 @@ export class Subscriptions {
     operatorApprovals: OperatorApprovals;
     lastUpdated: string;
 }
+
+export class ApprovedApiOperationRate {
+    apiOperation: string;
+    rateDefname: string;
+    applicationId: number;
+    apiOperationId: number;
+    rateDefId: number;
+    createBy: string;
+}

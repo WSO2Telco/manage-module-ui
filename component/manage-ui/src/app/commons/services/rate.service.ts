@@ -331,6 +331,25 @@ export class RateService {
             );
     }
 
+
+
+    /**
+     * get assign api operation rate
+     * @param callback
+     */
+    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string,callback: Function) {
+        this._remoteService.getApprovedAPIOperationRate(appID,apiid,direction)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+
     /**
      * assign rates for api, api operation, operator
      * @param data

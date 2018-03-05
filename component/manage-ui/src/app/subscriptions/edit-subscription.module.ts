@@ -6,6 +6,7 @@ import {UpdateSubComponent} from './subscription-detail/update-sub.component';
 import {ApplicationDataTableComponent} from "../commons/components/application-data-table/application-data-table.component";
 import {SharedModule} from "../shared/shared.module";
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import {TooltipModule} from 'ngx-bootstrap/tooltip';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
         CommonModule,
         SharedModule,
         EditSubscriptionRoutes,
-        TabsModule.forRoot()
+        TabsModule.forRoot(),
+        TooltipModule.forRoot()
     ],
     declarations: [
         SubscriptionDetailComponent,

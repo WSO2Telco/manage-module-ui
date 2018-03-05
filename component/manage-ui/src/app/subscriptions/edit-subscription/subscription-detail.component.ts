@@ -348,11 +348,11 @@ export class SubscriptionDetailComponent implements OnInit {
 
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-subscription/item/'+sup.name]);
+                this.router.navigate(['edit-subscription/'+this.appID+'/'+sup.name]);
                 break;
 
-            case 'DELETE':
-                this.router.navigate(['operator/onboarding/api-endpints/']);
+            case 'SHOW':
+                this.router.navigate(['edit-subscription/']);
                 break;
 
              default:

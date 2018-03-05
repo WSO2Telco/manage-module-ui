@@ -15,6 +15,7 @@ export class ApplicationDetailComponent implements OnInit {
     private subscriptions: ApplicationHistory[];
     private operatorApprovals: ApplicationHistory[];
     private id: number;
+    private name:string;
     private show: boolean;
 
   constructor(private reportingService: ReportingRemoteDataService,
@@ -28,6 +29,8 @@ export class ApplicationDetailComponent implements OnInit {
 
       this.route.params.subscribe(params => {
           this.id = params['id'];
+          this.name = params['name'];
+          console.log('tst :'+this.name);
           this.onApplication(this.id);
       });
   }

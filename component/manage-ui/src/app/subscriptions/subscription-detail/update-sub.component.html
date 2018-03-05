@@ -1,7 +1,104 @@
-<tabset>
-    <tab heading='Subscription Details'>Subscription Details content</tab>
-    <tab>
-        <template tabHeading>Operation Rate details</template>
-        Operation rate details content
-    </tab>
-</tabset>
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                {{title}}
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <tabset>
+                        <tab heading='Subscription Details'>
+                            <form class="form-horizontal subDesForm" autocomplete="off">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Name:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval">{{title}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Version:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval">yhyhyhyh</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Tier:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval">yhyhyh</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Admin Approval Status:</label>
+                                    <div class="col-sm-4">
+                                        <span class="label label-success">Approved</span>
+                                        <span class="label label-warning">Pending</span>
+                                        <span class="label label-danger">Reject</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Operator Approvals:</label>
+                                    <div class="col-sm-4">
+                                        <span class="label label-success">Approved</span>
+                                        <span class="label label-warning">Pending</span>
+                                        <span class="label label-danger">Reject</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </tab>
+                        <tab>
+                            <template tabHeading>Operation Rate details</template>
+                            <div *ngIf="!editRateOperation">
+                                <ng-container *ngFor="let item of subscriptionsrate">
+                                    <form class="form-horizontal subDesForm" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">{{item.apiOperation}}</label>
+                                            <div class="col-sm-4">
+                                                <label *ngIf="item.rateDefname !== 'null'" class="fieldval">{{item.rateDefname}}</label>
+                                                <label *ngIf="item.rateDefname == null" class="fieldval">Not
+                                                    Assign</label>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </ng-container>
+                            </div>
+                            <div *ngIf="editRateOperation">
+                                <ng-container *ngFor="let item of apiOperationList; let i = index">
+                                <form class="form-horizontal subDesForm" autocomplete="off">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-3">{{item.apiOperation}}</label>
+                                        <div class="col-sm-3">
+                                            <select class="form-control">
+                                                <ng-container *ngFor="let opt of assignedList[i]">
+                                                    <option title="{{opt.rateDefId}}"> {{opt.rateDefName}}
+                                                    </option>
+                                                </ng-container>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+                                </ng-container>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-6">
+                                    <button *ngIf="!editRateOperation" class="btn btn-primary animated fadeIn btn-large" (click)="getApiOperations()">Edit
+                                    </button>&nbsp;
+                                    <button *ngIf="editRateOperation" type="submit" class="btn btn-primary animated fadeIn btn-large">Update</button>&nbsp;
+                                    <a class="btn btn-warning btn-large" (click)="reloadPage()">Clear</a>
+                                </div>
+
+                            </div>
+                        </tab>
+                    </tabset>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12"><a href="#/edit-subscription" class="btn btn-primary"> Back </a></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

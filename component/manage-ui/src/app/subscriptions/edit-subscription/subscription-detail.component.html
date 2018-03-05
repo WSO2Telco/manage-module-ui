@@ -51,17 +51,13 @@
                     <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
                         <template #dynamicCellContent let-item="element">
                             <div>
-                <span tooltip="Edit"
+                <span tooltip="Show More Details"
                       class="action  material-icons"
-                      (click)="onIconClick(item,'EDIT')">border_color</span>
+                      (click)="onIconClick(item,'EDIT')">dvr</span>
 
-                                <span tooltip="Define Api Endpoint"
+                                <span tooltip="Edit Operation Rate"
                                       class="action  material-icons"
-                                      (click)="onIconClick(item,'ENDPOINT')">settings_input_component</span>
-
-                                <span tooltip="Set Token"
-                                      class="action  material-icons"
-                                      (click)="onIconClick(item,'TOKEN')">mode_edit</span>
+                                      (click)="onIconClick(item,'EDIT')">mode_edit</span>
                             </div>
                         </template>
                     </app-common-data-table>
