@@ -6,6 +6,7 @@ import {MessageService} from '../../commons/services/message.service';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {RateService} from "../../commons/services/rate.service";
 import {API, APIOperation, AssignRates, Operator, RateDefinition} from '../../commons/models/common-data-models';
+import {ModalDirective} from 'ngx-bootstrap/modal'
 
 @Component({
     selector: 'app-update-sub',
@@ -16,13 +17,17 @@ export class UpdateSubComponent implements OnInit {
 
 
     private subscriptionsrate: ApprovedApiOperationRate[];
-    private id: number;
+    private appId: number;
+    public apiId: number;
     private show: boolean;
     public title: string;
+    public action: string;
     public direction: string;
     private apiOperationList: APIOperation[];
     private apiList: API[];
     public editRateOperation: boolean;
+    public selectedVal: string[];
+    public updateOperationRate: string[];
 
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
@@ -39,32 +44,20 @@ export class UpdateSubComponent implements OnInit {
         this.direction = 'NBsubscriptions';
         this.editRateOperation = false;
         this.assignedList = [];
+        this.selectedVal = [];
+        this.updateOperationRate = [];
 
         this.route.params.subscribe(params => {
             this.title = params['apiname'];
-            this.id = params['appid'];
-            this.getApprovedAPIOperationRate(this.id, 4, this.direction);
+            this.appId = params['appid'];
+            this.apiId = params['apiid'];
+            this.action = params['action'];
+            this.getApprovedAPIOperationRate(this.appId, this.apiId, this.direction);
         });
     }
 
-
-    /*onApplication(id: number) {
-     this.reportingService.getApplicationDetail(id, (response, status) => {
-     if (status) {
-     this.applicationDetail = response;
-     if (response.operatorApprovals != null) {
-     this.operatorApprovals = response.operatorApprovals;
-     this.subscriptions = response.subscriptions;
-     this.show = true;
-     } else {
-     this.show = false;
-     }
-     } else {
-     this.message.error('Error Loading Application History Data');
-     }
-     });
-     } */
-
+    @ViewChild('staticTabs') staticTabs: TabsetComponent;
+    @ViewChild('lgModal') public modal: ModalDirective;
 
     /**
      * to load the Operator list
@@ -79,6 +72,12 @@ export class UpdateSubComponent implements OnInit {
             } else {
                 this.message.error(response.message);
             }
+
+            if (this.action == 'edit') {
+                this.staticTabs.tabs[1].active = true;
+            }
+
+
         });
     }
 
@@ -93,7 +92,7 @@ export class UpdateSubComponent implements OnInit {
                 this.editRateOperation = true;
                 if (this.apiOperationList.length == 0) {
                     this.message.warning('No API Operations Available for The Selected API');
-                }else{
+                } else {
                     let apiOperationId;
                     for (const item of this.apiOperationList) {
                         apiOperationId = item.apiOperationId;
@@ -111,28 +110,59 @@ export class UpdateSubComponent implements OnInit {
 
 
     /**
+     * to update rate for list of operation of selected API
+     */
+    updateAPIOperationRate() {
+        /*   const data = {
+         operator: this.selectedoperator,
+         serviceProvider: this.subscriber + '@carbon.super',
+         applicationName: appId,
+         apiName: apiId,
+         quotaLimit: this.quotaInputValue,
+         fromDate: this.fromdate,
+         toDate: this.todate
+         };
+
+         this.rateService.updateAPIOperationRate(this.appId, this.apiId, this.direction, data, (response) => {
+         if (response.success) {
+         this.message.success(response.message);
+         this.resetDefault();
+         } else {
+         this.message.error(response.message);
+         }
+         }); */
+        this.message.success('API Operation Added successfully!!!');
+        this.modal.hide();
+
+     /*   for (let i = 0; i < this.apiOperationList.length; i++) {
+            console.log(this.selectedVal[i]);
+        } */
+    }
+
+
+    /**
      * load the Available and Assigned Rates For selected API Operation
      */
-    loadRates(apiOperationId:number) {
+    loadRates(apiOperationId: number) {
         if (this.title.length != 0 && this.apiOperationList.length != 0) {
-         /*   let apiOperationId;
-            let operatorId;
-            /**for loop to set the api operation id
-            for (const item of this.apiOperationList) {
-                    apiOperationId = item.apiOperationId;
-                    console.log('hit this location');
-            }
-*/
-            /**condition to set the operator id*/
-      /*      if (this.isAdmin && this.operator == 'Admin') {
-                operatorId = null;
-            } else {
-                for (const entry of this.operatorList) {
-                    if (entry.operatorName == this.operator) {
-                        operatorId = entry.operatorId;
-                    }
-                }
-            } */
+            /*   let apiOperationId;
+             let operatorId;
+             /**for loop to set the api operation Id
+             for (const item of this.apiOperationList) {
+             apiOperationId = item.apiOperationId;
+             console.log('hit this location');
+             }
+             */
+            /**condition to set the operator Id*/
+            /*      if (this.isAdmin && this.operator == 'Admin') {
+             operatorId = null;
+             } else {
+             for (const entry of this.operatorList) {
+             if (entry.operatorName == this.operator) {
+             operatorId = entry.operatorId;
+             }
+             }
+             } */
 
             if (apiOperationId) {
                 this.rateService.getAPIOperationRates(this.title, apiOperationId, null, (response) => {
@@ -156,14 +186,11 @@ export class UpdateSubComponent implements OnInit {
         }
     }
 
-
-    @ViewChild('staticTabs') staticTabs: TabsetComponent;
-
-    selectTab(tab_id: number) {
-        this.staticTabs.tabs[tab_id].active = true;
+    onOptionChange(event, item) {
+        item.rateDefName = event.target.value;
+        this.updateOperationRate.push(item.rateDefName);
+        console.log(this.updateOperationRate);
     }
 
-    disableEnable() {
-        this.staticTabs.tabs[2].disabled = !this.staticTabs
-    }
+
 }

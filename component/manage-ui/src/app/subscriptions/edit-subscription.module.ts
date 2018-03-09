@@ -7,7 +7,7 @@ import {ApplicationDataTableComponent} from "../commons/components/application-d
 import {SharedModule} from "../shared/shared.module";
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
     imports: [
@@ -15,7 +15,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
         SharedModule,
         EditSubscriptionRoutes,
         TabsModule.forRoot(),
-        TooltipModule.forRoot()
+        TooltipModule.forRoot(),
+        ModalModule.forRoot()
     ],
     declarations: [
         SubscriptionDetailComponent,

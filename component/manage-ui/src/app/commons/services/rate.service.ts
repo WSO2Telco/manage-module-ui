@@ -94,6 +94,24 @@ export class RateService {
 
 
     /**
+     * This method call the remote service to add new rate card
+     * @param rateCard
+     * @param callback
+     */
+    updateAPIOperationRate(appID: number, apiid: number, direction: string, rateCard: Rate, callback: Function) {
+        this._remoteService.updateAPIOperationRate(appID, apiid, direction, rateCard)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+
+    /**
      * get tariff
      * @param callback
      */
@@ -332,13 +350,12 @@ export class RateService {
     }
 
 
-
     /**
      * get assign api operation rate
      * @param callback
      */
-    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string,callback: Function) {
-        this._remoteService.getApprovedAPIOperationRate(appID,apiid,direction)
+    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string, callback: Function) {
+        this._remoteService.getApprovedAPIOperationRate(appID, apiid, direction)
             .subscribe(
                 data => {
                     callback(data);

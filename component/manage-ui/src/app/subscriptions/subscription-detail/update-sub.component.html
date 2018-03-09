@@ -1,3 +1,28 @@
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Update Operation Rate </h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="lgModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                    <h4>Do you want to Do this update</h4>
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-6">
+                        <button (click)="updateAPIOperationRate()" class="btn btn-primary animated fadeIn">Update
+                        </button>&nbsp;
+                        <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
     <div class="col-sm-12">
         <div class="form-container quotaInputContainer">
@@ -6,7 +31,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <tabset>
+                    <tabset  #staticTabs>
                         <tab heading='Subscription Details'>
                             <form class="form-horizontal subDesForm" autocomplete="off">
                                 <div class="form-group">
@@ -31,17 +56,17 @@
                                     <label class="control-label col-sm-2">Admin Approval Status:</label>
                                     <div class="col-sm-4">
                                         <span class="label label-success">Approved</span>
-                                        <span class="label label-warning">Pending</span>
-                                        <span class="label label-danger">Reject</span>
+                                        <!--span class="label label-warning">Pending</span>
+                                        <span class="label label-danger">Reject</span -->
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Operator Approvals:</label>
                                     <div class="col-sm-4">
-                                        <span class="label label-success">Approved</span>
+                                        <!--span class="label label-success">Approved</span-->
                                         <span class="label label-warning">Pending</span>
-                                        <span class="label label-danger">Reject</span>
+                                        <!--span class="label label-danger">Reject</span-->
                                     </div>
                                 </div>
                             </form>
@@ -64,27 +89,30 @@
                             </div>
                             <div *ngIf="editRateOperation">
                                 <ng-container *ngFor="let item of apiOperationList; let i = index">
-                                <form class="form-horizontal subDesForm" autocomplete="off">
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-3">{{item.apiOperation}}</label>
-                                        <div class="col-sm-3">
-                                            <select class="form-control">
-                                                <ng-container *ngFor="let opt of assignedList[i]">
-                                                    <option title="{{opt.rateDefId}}"> {{opt.rateDefName}}
-                                                    </option>
-                                                </ng-container>
-                                            </select>
+                                    <form class="form-horizontal subDesForm" autocomplete="off">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3">{{item.apiOperation}}</label>
+                                            <div class="col-sm-3">
+                                                <select class="form-control" (change)="onOptionChange($event,item)">
+                                                    <ng-container *ngFor="let opt of assignedList[i]">
+                                                        <option title="{{opt.rateDefId}}" [selected]="item.rateDefName == opt.rateDefName"> {{opt.rateDefName}}
+                                                        </option>
+                                                    </ng-container>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
                                 </ng-container>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-6 col-sm-offset-6">
-                                    <button *ngIf="!editRateOperation" class="btn btn-primary animated fadeIn btn-large" (click)="getApiOperations()">Edit
+                                    <button *ngIf="!editRateOperation" class="btn btn-primary animated fadeIn btn-large"
+                                            (click)="getApiOperations()">Edit
                                     </button>&nbsp;
-                                    <button *ngIf="editRateOperation" type="submit" class="btn btn-primary animated fadeIn btn-large">Update</button>&nbsp;
+                                    <button *ngIf="editRateOperation" (click)="lgModal.show()"
+                                            class="btn btn-primary animated fadeIn btn-large">Update
+                                    </button>&nbsp;
                                     <a class="btn btn-warning btn-large" (click)="reloadPage()">Clear</a>
                                 </div>
 
@@ -93,7 +121,8 @@
                     </tabset>
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="col-sm-12"><a href="#/edit-subscription" class="btn btn-primary"> Back </a></div>
+                            <div class="col-sm-12"><a href="#/edit-subscription" class="btn btn-primary"> Back </a>
+                            </div>
                         </div>
 
                     </div>

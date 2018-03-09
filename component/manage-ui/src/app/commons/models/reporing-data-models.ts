@@ -85,10 +85,11 @@ export class OperatorApprovals {
 
 export class Subscriptions {
     name: string;
+    id: string;
     version: string;
     tier: string;
     adminApprovalStatus: string;
-    operatorApprovals: OperatorApprovals;
+    operatorList: OperatorApprovals;
     lastUpdated: string;
 }
 

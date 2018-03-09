@@ -25,7 +25,7 @@ export class RateRemoteDataService {
         apiOperations: this.apiContext + 'apis/',
         apiOperationRates: this.apiContext + '/rate/apioperationrates',
         addRateCategory: this.apiContext + '/rate/addratecategory/',
-        approvedApiOperationRate: this.apiContext + 'applications/'
+        approvedApiOperationRate: this.apiContext + 'applications/',
     };
 
     constructor(private http: Http, private authService: AuthenticationService) {
@@ -146,6 +146,41 @@ export class RateRemoteDataService {
                 error: error
             }));
     }
+
+
+    /**
+     * Update ratecard for API operation
+     * @param data
+     * @returns {Observable<ServerResponse>}
+     */
+    updateAPIOperationRate(appID: number, apiid: number, direction: string,data: Rate) {
+        return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiid + '/' + direction, JSON.stringify(data), this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'API operation Rate updated Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error update API operation Rate',
+                        payload: null
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error update API operation Rate',
+                error: error
+            }));
+    }
+
+
+
+
+
 
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number, operatorId: number) {
 

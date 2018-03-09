@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="searchFilter">
-                            <div class="col-sm-2 col-sm-offset-1">
+                            <div class="col-sm-3">
                                 <input [(ngModel)]="subscriber"
                                        [typeahead]="subscriberList"
                                        typeaheadOptionField="name"
@@ -21,7 +21,7 @@
                                        name="subscription"
                                 >
                             </div>
-                            <div class="col-sm-2">
+                            <div class="col-sm-3">
                                 <input [(ngModel)]="app"
                                        [typeahead]="applications"
                                        [typeaheadMinLength]="0"
@@ -33,10 +33,25 @@
                                        placeholder="Application"
                                        name="app">
                             </div>
-                            <div class="col-sm-2" *ngIf="IfNorthBound">
-                                <input [(ngModel)]="operator"
-                                       [typeahead]="operatorList"
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="api"
                                        [typeaheadMinLength]="0"
+                                       (typeaheadOnSelect)="onApiSelected()"
+                                       (input)="onApiSelected()"
+                                       container="body"
+                                       [typeahead]="apiList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="api"
+                                       placeholder="Select API">
+                            </div>
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="operator"
+                                       [typeahead]="operatorsList"
+                                       [typeaheadMinLength]="0"
+                                       (typeaheadOnSelect)="onOperatorSelected()"
+                                       (input)="onOperatorSelected()"
+                                       typeaheadOptionField="operatorName"
                                        type="text"
                                        class="form-control"
                                        placeholder="Operator"
@@ -50,17 +65,48 @@
                 <div class="col-sm-12">
                     <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
                         <template #dynamicCellContent let-item="element">
-                            <div>
-                <span tooltip="Show More Details"
-                      class="action  material-icons"
-                      (click)="onIconClick(item,'EDIT')">dvr</span>
+                           <tr> <td>
+                            <div style="margin-top: -14px;">
+
+                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Approved'"
+                                      tooltip="Admin Status" class="adstatus label label-success">{{item.adminApprovalStatus}}</span>
+                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Pending'"
+                                      tooltip="Admin Status" class="adstatus label label-warning">{{item.adminApprovalStatus}}</span>
+                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Rejected'"
+                                      tooltip="Admin Status" class="adstatus label label-danger">{{item.adminApprovalStatus}}</span>
+
+                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Approved'"
+                                      tooltip="Operator Status" class="adstatus label label-success">{{item.operatorList[0]?.approvalStatus}}</span>
+                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Pending'"
+                                      tooltip="Operator Status" class="adstatus label label-warning">{{item.operatorList[0]?.approvalStatus}}</span>
+                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Rejected'"
+                                      tooltip="Operator Status" class="adstatus label label-danger">{{item.operatorList[0]?.approvalStatus}}</span>
+                            </div></td><td>
+                            <div style="margin-left: 15px;">
+                                <span tooltip="Show More Details"
+                                      class="action  material-icons"
+                                      (click)="onIconClick(item,'SHOW')">dvr</span>
 
                                 <span tooltip="Edit Operation Rate"
                                       class="action  material-icons"
                                       (click)="onIconClick(item,'EDIT')">mode_edit</span>
-                            </div>
+                            </div></td></tr>
                         </template>
                     </app-common-data-table>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <pagination
+                            [boundaryLinks]="true"
+                            [totalItems]="totalItems"
+                            [(ngModel)]="currentPage"
+                            [maxSize]="5"
+                            (pageChanged)="onPageChanged($event)"
+                            class="pagination-sm"
+                            previousText="&lsaquo;"
+                            nextText="&rsaquo;"
+                            firstText="&laquo;"
+                            lastText="&raquo;"></pagination>
+
                 </div>
 
 

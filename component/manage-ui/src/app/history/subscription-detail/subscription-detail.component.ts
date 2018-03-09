@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
-import {ApplicationHistory} from '../../commons/models/reporing-data-models';
+import {ApplicationHistory, Subscriptions} from '../../commons/models/reporing-data-models';
 import {ActivatedRoute} from '@angular/router';
 import {MessageService} from '../../commons/services/message.service';
 
@@ -12,7 +12,7 @@ import {MessageService} from '../../commons/services/message.service';
 export class SubscriptionDetailComponent implements OnInit {
 
     @Input() private applicationDetail: ApplicationHistory;
-    private subscriptions: ApplicationHistory[];
+    private subscriptions: Subscriptions[];
     private operatorApprovals: ApplicationHistory[];
     private id: number;
     private show: boolean;
