@@ -70,6 +70,7 @@ export class SubscriptionDetailComponent implements OnInit {
         {columnName: 'Name', fieldName: 'name'},
         {columnName: 'version', fieldName: 'version'},
         {columnName: 'Tier', fieldName: 'tier'},
+        {columnName: 'ApprovalStatus', fieldName: 'approvalStatus'},
         {columnName: 'last Updated', fieldName: 'lastUpdated'}];
 
     constructor(private router: Router,
@@ -321,12 +322,6 @@ export class SubscriptionDetailComponent implements OnInit {
             if (status) {
                 this.subscriptions = response;
 
-                if (this.subscriptions[0].adminApprovalStatus != null) {
-                    this.isadminresult = true;
-                } else {
-                    this.isadminresult = false;
-                }
-
             } else {
                 this.message.error('Error Loading Application History Data');
             }
@@ -394,11 +389,11 @@ export class SubscriptionDetailComponent implements OnInit {
     onIconClick(sup: Subscriptions, action: string) {
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + sup.id + '/edit']);
+                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + sup.version + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
-                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + sup.id + '/show']);
+                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + sup.version + '/show/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             default:

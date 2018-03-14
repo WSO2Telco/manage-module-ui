@@ -228,3 +228,16 @@ export class MsisdnValidation {
     message: string;
 }
 
+
+export class UpdatedRate {
+
+    apiVersion : string;
+    operatorId : number;
+    apiOperationId : number;
+    applicationId : number;
+    rateDefId : number;
+    createBy : string;
+    updateBy : string;
+    comment : string;
+}
+

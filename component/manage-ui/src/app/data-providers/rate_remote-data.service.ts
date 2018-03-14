@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Category, Currency, Rate, ServerResponse, Tariff} from '../commons/models/common-data-models';
+import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate} from '../commons/models/common-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
 
 
@@ -153,33 +153,53 @@ export class RateRemoteDataService {
      * @param data
      * @returns {Observable<ServerResponse>}
      */
-    updateAPIOperationRate(appID: number, apiid: number, direction: string,data: Rate) {
-        return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiid + '/' + direction, JSON.stringify(data), this.getOptions())
-            .map((response: Response) => {
-                if (response.status == 201) {
-                    return {
-                        success: true,
-                        message: 'API operation Rate updated Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error update API operation Rate',
-                        payload: null
-                    };
-                }
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error update API operation Rate',
-                error: error
-            }));
+    updateAPIOperationRate(appID: number, operatorId: string, apiname: string, apiversion: string, direction: string, data: UpdatedRate[]) {
+        if (direction == "NBsubscriptions") {
+            return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, data, this.getOptions())
+                .map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'API operation Rate updated Successfully',
+                            payload: response.json()
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error update API operation Rate',
+                            payload: null
+                        };
+                    }
+                })
+                .catch((error: Response) => Observable.throw({
+                    success: false,
+                    message: 'Error update API operation Rate',
+                    error: error
+                }));
+        } else {
+            return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/operators/' + operatorId + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, data, this.getOptions())
+                .map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'API operation Rate updated Successfully',
+                            payload: response.json()
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error update API operation Rate',
+                            payload: null
+                        };
+                    }
+                })
+                .catch((error: Response) => Observable.throw({
+                    success: false,
+                    message: 'Error update API operation Rate',
+                    error: error
+                }));
+        }
     }
-
-
-
-
 
 
     assignRatesForAPIOperation(data, apiName: string, apiOperationId: number, operatorId: number) {
@@ -463,20 +483,37 @@ export class RateRemoteDataService {
      * to get rate api operations
      * @returns {Observable<R>}
      */
-    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string) {
-        return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiid + '/' + direction, this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Operator List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Operators',
-                error: error
-            }));
+    getApprovedAPIOperationRate(appID: number, apiname: string, apiversion: string, operatorId: string, direction: string) {
+        if (direction == "NBsubscriptions") {
+            return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, this.getOptions())
+                .map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Operator List Loaded Successfully',
+                        payload: response.json()
+                    };
+                })
+                .catch((error: Response) => Observable.throw({
+                    success: false,
+                    message: 'Error Loading Operators',
+                    error: error
+                }));
+        }
+        else {
+            return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/operators/' + operatorId + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, this.getOptions())
+                .map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Operation Rate list Loaded Successfully',
+                        payload: response.json()
+                    };
+                })
+                .catch((error: Response) => Observable.throw({
+                    success: false,
+                    message: 'Error Loading Operation Rate list',
+                    error: error
+                }));
+        }
     }
 
     /**

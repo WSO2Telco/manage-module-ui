@@ -88,8 +88,8 @@ export class Subscriptions {
     id: string;
     version: string;
     tier: string;
-    adminApprovalStatus: string;
-    operatorList: OperatorApprovals;
+    approvalStatus: string;
+    operatorName: string;
     lastUpdated: string;
 }
 

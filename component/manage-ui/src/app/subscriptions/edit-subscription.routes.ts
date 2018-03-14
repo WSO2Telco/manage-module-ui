@@ -9,11 +9,11 @@ const routes = [
     component: SubscriptionDetailComponent
   },
   {
-    path: ':appid/:apiname/:apiid',
+    path: ':appid/:apiname/:apiversion',
     component: UpdateSubComponent
   },
   {
-    path: ':appid/:apiname/:apiid/:action',
+    path: ':appid/:apiname/:apiversion/:action/:status/:operator',
     component: UpdateSubComponent
   }
 ];

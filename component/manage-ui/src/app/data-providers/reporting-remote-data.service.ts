@@ -76,7 +76,7 @@ export class ReportingRemoteDataService {
 
 
     getSubscriptionDetail(id: number,opId:string,apiid:string, callback: Function) {
-        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid , this.getOptions())
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50'  , this.getOptions())
             .map((response: Response) => response.json())
             .subscribe(
                 (applications: ApplicationHistory[]) => {

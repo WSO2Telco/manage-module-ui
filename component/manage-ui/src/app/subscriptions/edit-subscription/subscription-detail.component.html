@@ -65,32 +65,15 @@
                 <div class="col-sm-12">
                     <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
                         <template #dynamicCellContent let-item="element">
-                           <tr> <td>
-                            <div style="margin-top: -14px;">
-
-                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Approved'"
-                                      tooltip="Admin Status" class="adstatus label label-success">{{item.adminApprovalStatus}}</span>
-                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Pending'"
-                                      tooltip="Admin Status" class="adstatus label label-warning">{{item.adminApprovalStatus}}</span>
-                                <span *ngIf="this.isadminresult && item.adminApprovalStatus == 'Rejected'"
-                                      tooltip="Admin Status" class="adstatus label label-danger">{{item.adminApprovalStatus}}</span>
-
-                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Approved'"
-                                      tooltip="Operator Status" class="adstatus label label-success">{{item.operatorList[0]?.approvalStatus}}</span>
-                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Pending'"
-                                      tooltip="Operator Status" class="adstatus label label-warning">{{item.operatorList[0]?.approvalStatus}}</span>
-                                <span *ngIf="!this.isadminresult && item.operatorList[0]?.approvalStatus == 'Rejected'"
-                                      tooltip="Operator Status" class="adstatus label label-danger">{{item.operatorList[0]?.approvalStatus}}</span>
-                            </div></td><td>
-                            <div style="margin-left: 15px;">
+                            <div>
                                 <span tooltip="Show More Details"
                                       class="action  material-icons"
                                       (click)="onIconClick(item,'SHOW')">dvr</span>
 
-                                <span tooltip="Edit Operation Rate"
+                                <span  *ngIf="item.approvalStatus == 'Approved'" tooltip="Edit Operation Rate"
                                       class="action  material-icons"
                                       (click)="onIconClick(item,'EDIT')">mode_edit</span>
-                            </div></td></tr>
+                            </div>
                         </template>
                     </app-common-data-table>
                 </div>

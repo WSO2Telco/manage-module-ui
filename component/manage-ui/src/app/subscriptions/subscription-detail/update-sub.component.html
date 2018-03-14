@@ -1,5 +1,5 @@
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-     aria-hidden="true" >
+     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,14 +10,35 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-12">
-                    <h4>Do you want to Do this update</h4>
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-6">
-                        <button (click)="updateAPIOperationRate()" class="btn btn-primary animated fadeIn">Update
-                        </button>&nbsp;
-                        <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
-                    </div>
+                    <form (ngSubmit)="updateAPIOperationRate()" #updateconfirmationForm="ngForm">
+                        <div class="col-sm-12">
+                            <h4>Please confirm your update</h4>
+                            <div class="col-sm-8">
+                              <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll" (change)="checkboxChange()"/>Set 1st
+                                Comment as for all changes<br></span>
+                                <ng-container *ngFor="let item of updateOperationRate ; let i = index">
+                                    <ng-container *ngFor="let opt of subscriptionsrate">
+                                        <div *ngIf="opt.apiOperationId == item.apiOperationId">
+                                            <label>{{opt.apiOperation}}</label><br>
+                                        </div>
+
+                                    </ng-container>
+                                    <textarea rows="2" cols="70" required
+                                              id="{{item.apiOperationId}}"
+                                              placeholder="Comment" name="commentfield"
+                                              (input)="onSearchChange(item.apiOperationId)"></textarea>
+
+                                </ng-container>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-sm-4 col-sm-offset-6" style="margin-top: 2%">
+                            <button type="submit" [disabled]="!updateconfirmationForm.form.valid"
+                                    class="btn btn-primary animated fadeIn">Update
+                            </button>&nbsp;
+                            <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -31,7 +52,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <tabset  #staticTabs>
+                    <tabset #staticTabs>
                         <tab heading='Subscription Details'>
                             <form class="form-horizontal subDesForm" autocomplete="off">
                                 <div class="form-group">
@@ -43,30 +64,15 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Version:</label>
                                     <div class="col-sm-4">
-                                        <label class="fieldval">yhyhyhyh</label>
+                                        <label class="fieldval">{{apiversion}}</label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2">Tier:</label>
+                                    <label class="control-label col-sm-2">Approval Status:</label>
                                     <div class="col-sm-4">
-                                        <label class="fieldval">yhyhyh</label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2">Admin Approval Status:</label>
-                                    <div class="col-sm-4">
-                                        <span class="label label-success">Approved</span>
-                                        <!--span class="label label-warning">Pending</span>
-                                        <span class="label label-danger">Reject</span -->
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2">Operator Approvals:</label>
-                                    <div class="col-sm-4">
-                                        <!--span class="label label-success">Approved</span-->
-                                        <span class="label label-warning">Pending</span>
-                                        <!--span class="label label-danger">Reject</span-->
+                                        <span *ngIf="status == 'Approved'" class="label label-success">{{status}}</span>
+                                        <span *ngIf="status == 'Pending'" class="label label-warning">{{status}}</span>
+                                        <span *ngIf="status == 'Reject'" class="label label-danger">{{status}}</span>
                                     </div>
                                 </div>
                             </form>
@@ -93,9 +99,11 @@
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">{{item.apiOperation}}</label>
                                             <div class="col-sm-3">
-                                                <select class="form-control" (change)="onOptionChange($event,item)">
+                                                <select class="form-control" (change)="onOptionChange($event,item,i)">
                                                     <ng-container *ngFor="let opt of assignedList[i]">
-                                                        <option title="{{opt.rateDefId}}" [selected]="item.rateDefName == opt.rateDefName"> {{opt.rateDefName}}
+                                                        <option [value]="opt.rateDefId"
+                                                                [selected]="item.rateDefName == opt.rateDefName">
+                                                            {{opt.rateDefName}}
                                                         </option>
                                                     </ng-container>
                                                 </select>

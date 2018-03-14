@@ -5,7 +5,14 @@ import {ActivatedRoute} from '@angular/router';
 import {MessageService} from '../../commons/services/message.service';
 import {TabsetComponent} from 'ngx-bootstrap';
 import {RateService} from "../../commons/services/rate.service";
-import {API, APIOperation, AssignRates, Operator, RateDefinition} from '../../commons/models/common-data-models';
+import {
+    API,
+    APIOperation,
+    AssignRates,
+    Operator,
+    RateDefinition,
+    UpdatedRate
+} from '../../commons/models/common-data-models';
 import {ModalDirective} from 'ngx-bootstrap/modal'
 
 @Component({
@@ -19,15 +26,23 @@ export class UpdateSubComponent implements OnInit {
     private subscriptionsrate: ApprovedApiOperationRate[];
     private appId: number;
     public apiId: number;
+    public operatorId: string;
+    public apiversion: string;
     private show: boolean;
     public title: string;
     public action: string;
+    public status: string;
     public direction: string;
+    public confirmMsg: string;
     private apiOperationList: APIOperation[];
     private apiList: API[];
     public editRateOperation: boolean;
+    public setForAll: boolean;
+    public selectboxdisable: boolean;
     public selectedVal: string[];
-    public updateOperationRate: string[];
+    public updateOperationRate: UpdatedRate[];
+    public selectedValue: number[];
+    public commentList: string[];
 
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
@@ -40,19 +55,30 @@ export class UpdateSubComponent implements OnInit {
 
     ngOnInit() {
         this.subscriptionsrate = [];
+        this.selectedVal = [];
         this.show = false;
-        this.direction = 'NBsubscriptions';
+        this.setForAll = false;
         this.editRateOperation = false;
+        this.selectboxdisable = false;
         this.assignedList = [];
         this.selectedVal = [];
         this.updateOperationRate = [];
+        this.commentList = [];
 
         this.route.params.subscribe(params => {
             this.title = params['apiname'];
             this.appId = params['appid'];
-            this.apiId = params['apiid'];
+            this.apiversion = params['apiversion'];
             this.action = params['action'];
-            this.getApprovedAPIOperationRate(this.appId, this.apiId, this.direction);
+            this.status = params['status'];
+            this.operatorId = params['operator'];
+
+            if (this.operatorId == '_ALL') {
+                this.direction = 'NBsubscriptions';
+            } else {
+                this.direction = 'SBsubscriptions';
+            }
+            this.getApprovedAPIOperationRate(this.appId, this.title, this.apiversion, this.operatorId, this.direction);
         });
     }
 
@@ -62,8 +88,8 @@ export class UpdateSubComponent implements OnInit {
     /**
      * to load the Operator list
      */
-    getApprovedAPIOperationRate(appID: number, apiid: number, direction: string) {
-        this.rateService.getApprovedAPIOperationRate(appID, apiid, direction, (response) => {
+    getApprovedAPIOperationRate(appID: number, apiname: string, apiversion: string, operatorId: string, direction: string) {
+        this.rateService.getApprovedAPIOperationRate(appID, apiname, apiversion, operatorId, direction, (response) => {
             if (response.success) {
                 for (const entry of response.payload) {
                     this.subscriptionsrate.push(entry);
@@ -77,8 +103,40 @@ export class UpdateSubComponent implements OnInit {
                 this.staticTabs.tabs[1].active = true;
             }
 
+            if (this.status != 'Approved') {
+                this.staticTabs.tabs[1].disabled = true;
+            }
+
 
         });
+    }
+
+    onSearchChange(id: number) {
+        if (id == this.updateOperationRate[0].apiOperationId) {
+            this.selectboxdisable = true;
+        }
+    }
+
+
+    /**
+     * to see the check status
+     */
+    checkboxChange() {
+        if (!this.setForAll) {
+            this.setForAll = true;
+        } else {
+            this.setForAll = false;
+        }
+        if (this.setForAll) {
+            var num1 = ((document.getElementById(this.updateOperationRate[0].apiOperationId.toString()) as HTMLInputElement).value);
+            for (var i = 0; i < this.updateOperationRate.length; i++) {
+                (document.getElementById(this.updateOperationRate[i].apiOperationId.toString()) as HTMLInputElement).value = num1;
+            }
+        } else {
+            for (var i = 0; i < this.updateOperationRate.length; i++) {
+                (document.getElementById(this.updateOperationRate[i + 1].apiOperationId.toString()) as HTMLInputElement).value = '';
+            }
+        }
     }
 
 
@@ -113,30 +171,23 @@ export class UpdateSubComponent implements OnInit {
      * to update rate for list of operation of selected API
      */
     updateAPIOperationRate() {
-        /*   const data = {
-         operator: this.selectedoperator,
-         serviceProvider: this.subscriber + '@carbon.super',
-         applicationName: appId,
-         apiName: apiId,
-         quotaLimit: this.quotaInputValue,
-         fromDate: this.fromdate,
-         toDate: this.todate
-         };
 
-         this.rateService.updateAPIOperationRate(this.appId, this.apiId, this.direction, data, (response) => {
-         if (response.success) {
-         this.message.success(response.message);
-         this.resetDefault();
-         } else {
-         this.message.error(response.message);
-         }
-         }); */
-        this.message.success('API Operation Added successfully!!!');
-        this.modal.hide();
+        // const opRate = new UpdatedRate();
+        for (var i = 0; i < this.updateOperationRate.length; i++) {
+            this.commentList[i] = (document.getElementById(this.updateOperationRate[i].apiOperationId.toString()) as HTMLInputElement).value;
+            this.updateOperationRate[i].comment = this.commentList[i];
+        }
 
-     /*   for (let i = 0; i < this.apiOperationList.length; i++) {
-            console.log(this.selectedVal[i]);
-        } */
+            this.rateService.updateAPIOperationRate(this.appId, this.operatorId, this.title, this.apiversion, this.direction, this.updateOperationRate, (response) => {
+                if (response.length != 0) {
+                    this.message.success("Successfully Update the operation rate");
+                } else {
+                    this.message.error(response.message);
+                }
+            });
+            this.modal.hide();
+
+
     }
 
 
@@ -186,10 +237,35 @@ export class UpdateSubComponent implements OnInit {
         }
     }
 
-    onOptionChange(event, item) {
-        item.rateDefName = event.target.value;
-        this.updateOperationRate.push(item.rateDefName);
-        console.log(this.updateOperationRate);
+    onOptionChange(event, item, index) {
+        item.rateDefID = event.target.value;
+        item.rateDefName = event.target.options[event.target.selectedIndex].text;
+        if ((this.subscriptionsrate[index].rateDefname != item.rateDefName) || (this.subscriptionsrate[index].rateDefname == null)) {
+            console.log('hit here');
+            const opRate = new UpdatedRate();
+            opRate.apiVersion = this.apiversion;
+            opRate.operatorId = +this.operatorId;
+            opRate.apiOperationId = this.subscriptionsrate[index].apiOperationId;
+            opRate.applicationId = this.appId;
+            opRate.rateDefId = item.rateDefID;
+            opRate.createBy = "admin";
+            opRate.updateBy = "admin";
+            if (this.updateOperationRate.length == 0) {
+                this.updateOperationRate.push(opRate);
+            } else {
+                let index;
+                for (var v in this.updateOperationRate) // for acts as a foreach
+                {
+                    index = +v;
+                    if (this.updateOperationRate[v].apiOperationId == item.apiOperationId) {
+                        this.updateOperationRate.splice(index);
+                    }
+                }
+
+                this.updateOperationRate.push(opRate);
+            }
+        }
+
     }
 
 
