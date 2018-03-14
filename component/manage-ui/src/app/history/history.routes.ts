@@ -1,6 +1,7 @@
 import {RouterModule} from "@angular/router";
 import {HistoryMainComponent} from "./history-main/history-main.component";
 import {ApplicationDetailComponent} from './application-detail/application-detail.component';
+import {SubscriptionDetailComponent} from './subscription-detail/subscription-detail.component';
 
 const routes = [
     {
@@ -8,8 +9,12 @@ const routes = [
     component: HistoryMainComponent
     },
     {
-        path: 'application/:id',
+        path: 'application/:id/:name',
         component: ApplicationDetailComponent
+    },
+    {
+        path: 'subscription/:id',
+        component: SubscriptionDetailComponent
     }
 
     ];

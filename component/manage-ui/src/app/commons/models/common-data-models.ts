@@ -52,6 +52,11 @@ export class ServerResponse {
     messsage: string;
 }
 
+export class FieldSet {
+    columnName: string;
+    fieldName?: string;
+}
+
 export class Currency {
     currencyId: number;
     currencyCode: string;
@@ -203,6 +208,12 @@ export class API {
     createdBy: string;
 }
 
+export class RowSelectionParam {
+    constructor(
+        public fieldNameToMatch: string,
+        public valesToCompare: any[]) { }
+}
+
 export class Payload {
     valid: string[];
     invalid: string[];
@@ -215,5 +226,18 @@ export class MsisdnValidation {
     payload: Payload;
     success: boolean;
     message: string;
+}
+
+
+export class UpdatedRate {
+
+    apiVersion : string;
+    operatorId : number;
+    apiOperationId : number;
+    applicationId : number;
+    rateDefId : number;
+    createBy : string;
+    updateBy : string;
+    comment : string;
 }
 

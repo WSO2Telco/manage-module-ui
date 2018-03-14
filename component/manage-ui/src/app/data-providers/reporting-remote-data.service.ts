@@ -74,6 +74,26 @@ export class ReportingRemoteDataService {
             );
     }
 
+
+    getSubscriptionDetail(id: number,opId:string,apiid:string, callback: Function) {
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50'  , this.getOptions())
+            .map((response: Response) => response.json())
+            .subscribe(
+                (applications: ApplicationHistory[]) => {
+                    this.ApplicationDetailProvider.next(applications);
+                    callback(applications, true);
+                },
+                (error) => {
+                    this.message.error(error);
+                    callback(error, false);
+                }
+            );
+    }
+
+
+
+
+
     getSubscribers() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['subscribers'], this.getOptions())

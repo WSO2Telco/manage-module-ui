@@ -1,0 +1,99 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="form-container quotaInputContainer">
+            <div class="tbl-header">
+                Edit Subscription
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="searchFilter">
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="subscriber"
+                                       [typeahead]="subscriberList"
+                                       typeaheadOptionField="name"
+                                       [typeaheadMinLength]="0"
+                                       type="text"
+                                       class="form-control"
+                                       (typeaheadOnSelect)="onSubscriberSelected()"
+                                       (input)="onSubscriberSelected()"
+                                       placeholder="Service provider"
+                                       name="subscription"
+                                >
+                            </div>
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="app"
+                                       [typeahead]="applications"
+                                       [typeaheadMinLength]="0"
+                                       type="text"
+                                       class="form-control"
+                                       (typeaheadOnSelect)="onAppSelected()"
+                                       (input)="onAppSelected()"
+                                       typeaheadOptionField="name"
+                                       placeholder="Application"
+                                       name="app">
+                            </div>
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="api"
+                                       [typeaheadMinLength]="0"
+                                       (typeaheadOnSelect)="onApiSelected()"
+                                       (input)="onApiSelected()"
+                                       container="body"
+                                       [typeahead]="apiList"
+                                       typeaheadOptionField="id"
+                                       class="form-control"
+                                       name="api"
+                                       placeholder="Select API">
+                            </div>
+                            <div class="col-sm-3">
+                                <input [(ngModel)]="operator"
+                                       [typeahead]="operatorsList"
+                                       [typeaheadMinLength]="0"
+                                       (typeaheadOnSelect)="onOperatorSelected()"
+                                       (input)="onOperatorSelected()"
+                                       typeaheadOptionField="operatorName"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Operator"
+                                       name="op">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12">
+                    <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
+                        <template #dynamicCellContent let-item="element">
+                            <div>
+                                <span tooltip="Show More Details"
+                                      class="action  material-icons"
+                                      (click)="onIconClick(item,'SHOW')">dvr</span>
+
+                                <span  *ngIf="item.approvalStatus == 'Approved'" tooltip="Edit Operation Rate"
+                                      class="action  material-icons"
+                                      (click)="onIconClick(item,'EDIT')">mode_edit</span>
+                            </div>
+                        </template>
+                    </app-common-data-table>
+                </div>
+                <div class="col-sm-12 text-center">
+                    <pagination
+                            [boundaryLinks]="true"
+                            [totalItems]="totalItems"
+                            [(ngModel)]="currentPage"
+                            [maxSize]="5"
+                            (pageChanged)="onPageChanged($event)"
+                            class="pagination-sm"
+                            previousText="&lsaquo;"
+                            nextText="&rsaquo;"
+                            firstText="&laquo;"
+                            lastText="&raquo;"></pagination>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

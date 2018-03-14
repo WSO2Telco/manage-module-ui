@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {RateRemoteDataService} from "../../data-providers/rate_remote-data.service";
-import {Category, Currency, Rate, Tariff} from "../models/common-data-models";
+import {Category, Currency, Rate, Tariff, UpdatedRate} from "../models/common-data-models";
 import {AuthenticationService} from "./authentication.service";
 
 
@@ -82,6 +82,24 @@ export class RateService {
      */
     addNewRateCard(rateCard: Rate, callback: Function) {
         this._remoteService.addNewRateCard(rateCard)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+
+    /**
+     * This method call the remote service to add new rate card
+     * @param rateCard
+     * @param callback
+     */
+    updateAPIOperationRate(appID: number, operatorId:string, apiname:string, apiversion:string, direction: string, updaterateCard: UpdatedRate[], callback: Function) {
+        this._remoteService.updateAPIOperationRate(appID, operatorId, apiname, apiversion, direction, updaterateCard)
             .subscribe(
                 data => {
                     callback(data);
@@ -330,6 +348,24 @@ export class RateService {
                 }
             );
     }
+
+
+    /**
+     * get assign api operation rate
+     * @param callback
+     */
+    getApprovedAPIOperationRate(appID: number, apiname:string, apiversion: string, operatorId: string, direction: string, callback: Function) {
+        this._remoteService.getApprovedAPIOperationRate(appID, apiname, apiversion, operatorId, direction)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
 
     /**
      * assign rates for api, api operation, operator

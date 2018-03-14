@@ -85,9 +85,19 @@ export class OperatorApprovals {
 
 export class Subscriptions {
     name: string;
+    id: string;
     version: string;
     tier: string;
-    adminApprovalStatus: string;
-    operatorApprovals: OperatorApprovals;
+    approvalStatus: string;
+    operatorName: string;
     lastUpdated: string;
+}
+
+export class ApprovedApiOperationRate {
+    apiOperation: string;
+    rateDefname: string;
+    applicationId: number;
+    apiOperationId: number;
+    rateDefId: number;
+    createBy: string;
 }
