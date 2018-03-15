@@ -82,7 +82,7 @@
                           class="action  assign material-icons"
                           (click)="onAction('ASSIGN',item,filter?.dataType)">assignment_ind</span>
                 </div>
-                <div class="more-con animated fadeInUp row" *ngIf="item.isExpand"
+                <div class="more-con animated fadeInUp" *ngIf="item.isExpand"
                      [ngClass]="{ 'M':item.actionType == 'MORE',
                     'A':item.actionType == 'APPROVE',
                     'R':item.actionType == 'REJECT'}">
