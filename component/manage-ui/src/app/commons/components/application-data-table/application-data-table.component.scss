@@ -214,6 +214,14 @@
         }
       }
 
+      .row3, .row4 {
+        height: 255px;
+
+        &.A, &.R {
+          height: 310px !important;
+        }
+      }
+
     }
   }
 
@@ -285,7 +293,7 @@
         @include box-shadow(inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
 
         &.A, &.R {
-          height: 192px;
+          height: 230px;
         }
 
         .more-row {
