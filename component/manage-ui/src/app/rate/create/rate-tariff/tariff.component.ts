@@ -158,6 +158,7 @@ export class TariffComponent implements OnInit {
 
     tariffSPCommission(val) {
         this.tariff.tariffSPCommission = val;
+        console.log(this.tariff.tariffSPCommission);
         this.isDisabled = false;
         if (Number(this.tariff.tariffSPCommission) < 0 && Number(this.tariff.tariffSPCommission) > -100) {
             this.IsInvalidMinusSpCommission = false;
@@ -195,15 +196,29 @@ export class TariffComponent implements OnInit {
             this.tariff.tariffSurChargeAds = null;
             this.IsEmptySurchargeval = false;
             this.IsEmptySurchargeAddOpco = false;
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
             this.isDisabled = false;
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
         } else {
-			this.ValidCommisionTotal = false;
+            this.ValidCommisionTotal = false;
             this.InValidCommisionTotal = true;
         }
     }
@@ -248,10 +263,25 @@ export class TariffComponent implements OnInit {
             this.tariff.tariffSurChargeAds = null;
             this.IsEmptySurchargeval = false;
             this.IsEmptySurchargeAddOpco = false;
+
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
             this.isDisabled = false;
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
@@ -303,10 +333,29 @@ export class TariffComponent implements OnInit {
             this.tariff.tariffSurChargeAds = null;
             this.IsEmptySurchargeval = false;
             this.IsEmptySurchargeAddOpco = false;
+
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
+
+
+
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
             this.isDisabled = false;
+            if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission == null || this.tariff.tariffOpcoCommission == 0) {
+                this.tariff.tariffOpcoCommission = 0;
+            } else if (this.tariff.tariffSPCommission == null || this.tariff.tariffSPCommission == 0 && this.tariff.tariffAdsCommission != null && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffSPCommission = 0;
+            } else if (this.tariff.tariffSPCommission != null && this.tariff.tariffAdsCommission == null || this.tariff.tariffAdsCommission == 0 && this.tariff.tariffOpcoCommission != null) {
+                this.tariff.tariffAdsCommission = 0;
+            }
+
         } else if (this.tariff.tariffSPCommission == null && this.tariff.tariffAdsCommission == null && this.tariff.tariffOpcoCommission == null) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
@@ -314,6 +363,7 @@ export class TariffComponent implements OnInit {
             this.ValidCommisionTotal = false;
             this.InValidCommisionTotal = true;
         }
+
 
     }
 
