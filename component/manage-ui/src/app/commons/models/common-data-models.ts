@@ -236,6 +236,7 @@ export class UpdatedRate {
     apiOperationId : number;
     applicationId : number;
     rateDefId : number;
+    rateDefname : string;
     createBy : string;
     updateBy : string;
     comment : string;

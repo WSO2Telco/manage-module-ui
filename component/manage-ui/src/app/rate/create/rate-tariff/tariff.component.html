@@ -114,7 +114,8 @@
                                            #spCommissionRef="ngModel"
                                            required
                                            [ngModel]="tariff.tariffSPCommission"
-                                           (ngModelChange)="tariffSPCommission($event)">
+                                           (ngModelChange)="tariffSPCommission($event)"
+                                           (onchange)="tariffSPCommission($event)" >
 
                                     <span class="error" *ngIf="IsInvalidspCommission">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsInvalidMinusSpCommission">Range should between -100 to 0</span>
@@ -157,7 +158,8 @@
                                            #opcoCommissionRef="ngModel"
                                            required
                                            [ngModel]="tariff.tariffOpcoCommission"
-                                           (ngModelChange)="tariffOpcoCommission($event)">
+                                           (ngModelChange)="tariffOpcoCommission($event)"
+                                           (onchange)="tariffOpcoCommission($event)">
                                     <span class="error" *ngIf="IsInvalidopcoCommission">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsInvalidMinusOpcoCommission">Range should between -100 to 0</span>
                                     <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
