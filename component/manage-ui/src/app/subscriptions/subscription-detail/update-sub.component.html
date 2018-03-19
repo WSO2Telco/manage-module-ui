@@ -9,17 +9,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row">
+                <div class="row" *ngIf="updateOperationRate.length != 0">
                     <form (ngSubmit)="updateAPIOperationRate()" #updateconfirmationForm="ngForm">
                         <div class="col-sm-12">
                             <h4>Please confirm your update</h4>
                             <div class="col-sm-8">
-                              <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll" (change)="checkboxChange()"/>Set 1st
+                              <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll"
+                                                                    (change)="checkboxChange()"/>Set 1st
                                 Comment as for all changes<br></span>
                                 <ng-container *ngFor="let item of updateOperationRate ; let i = index">
                                     <ng-container *ngFor="let opt of subscriptionsrate">
                                         <div *ngIf="opt.apiOperationId == item.apiOperationId">
-                                            <label>{{opt.apiOperation}}</label><br>
+                                            <label>{{opt.apiOperation}}</label> |Changed from <label
+                                                class="label label-success">{{opt.rateDefname}}</label> <label
+                                                *ngIf="opt.rateDefname == null" class="label label-danger">No
+                                            rate </label> &rArr; <label
+                                                class="label label-success">{{item.rateDefname}}</label><br>
                                         </div>
 
                                     </ng-container>
@@ -39,6 +44,13 @@
                             <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
                         </div>
                     </form>
+                </div>
+                <div class="row" *ngIf="updateOperationRate.length == 0">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <h3>No Rate operation to update</h3>
+                        <br>
+                        <a class="btn btn-danger col-sm-offset-2" (click)="lgModal.hide()">Close</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,8 +92,12 @@
                         <tab>
                             <template tabHeading>Operation Rate details</template>
                             <div *ngIf="!editRateOperation">
-                                <ng-container *ngFor="let item of subscriptionsrate">
-                                    <form class="form-horizontal subDesForm" autocomplete="off">
+                                <form class="form-horizontal subDesForm" autocomplete="off">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 "><h4 class="resulttitle">Operation Name</h4></label>
+                                        <div class="col-sm-4 resulttitle"><h4>Assigned rate name</h4></div>
+                                    </div>
+                                    <ng-container *ngFor="let item of subscriptionsrate">
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">{{item.apiOperation}}</label>
                                             <div class="col-sm-4">
@@ -90,27 +106,53 @@
                                                     Assign</label>
                                             </div>
                                         </div>
-                                    </form>
-                                </ng-container>
+                                    </ng-container>
+                                </form>
                             </div>
                             <div *ngIf="editRateOperation">
-                                <ng-container *ngFor="let item of apiOperationList; let i = index">
-                                    <form class="form-horizontal subDesForm" autocomplete="off">
+                                <form class="form-horizontal subDesForm" autocomplete="off">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 "><h4 class="resulttitle">Operation Name</h4></label>
+                                        <div class="col-sm-4 resulttitle"><h4>Rate List</h4></div>
+                                        <div class="col-sm-4 resulttitle"><h4>Existing rate</h4></div>
+                                    </div>
+                                    <ng-container *ngFor="let item of apiOperationList; let i = index">
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">{{item.apiOperation}}</label>
-                                            <div class="col-sm-3">
-                                                <select class="form-control" (change)="onOptionChange($event,item,i)">
-                                                    <ng-container *ngFor="let opt of assignedList[i]">
-                                                        <option [value]="opt.rateDefId"
-                                                                [selected]="item.rateDefName == opt.rateDefName">
-                                                            {{opt.rateDefName}}
+                                            <div class="col-sm-4">
+                                                <ng-container *ngFor="let set of subscriptionsrate">
+                                                    <select *ngIf="item.apiOperationId == set.apiOperationId"
+                                                            class="form-control"
+                                                            (change)="onOptionChange($event,item,i)">
+                                                        <option *ngIf="set.rateDefname == null" [value]=null>
+                                                            select
                                                         </option>
-                                                    </ng-container>
-                                                </select>
+                                                        <ng-container *ngFor="let opt of assignedList[i]">
+                                                            <option [value]="opt.rateDefId"
+                                                                    [selected]="opt.rateDefId == set.rateDefId">
+                                                                {{opt.rateDefName}}
+                                                            </option>
+                                                        </ng-container>
+                                                    </select>
+                                                </ng-container>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <ng-container *ngFor="let items of subscriptionsrate">
+                                                    <div class="form-group"
+                                                         *ngIf="item.apiOperationId == items.apiOperationId">
+                                                        <div class="col-sm-4">
+                                                            <label *ngIf="items.rateDefname !== 'null'"
+                                                                   class="label label-success">{{items.rateDefname}}</label>
+                                                            <label *ngIf="items.rateDefname == null"
+                                                                   class="label label-danger">Not
+                                                                Assign</label>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
                                             </div>
                                         </div>
-                                    </form>
-                                </ng-container>
+                                    </ng-container>
+                                </form>
                             </div>
 
                             <div class="form-group">
@@ -118,7 +160,8 @@
                                     <button *ngIf="!editRateOperation" class="btn btn-primary animated fadeIn btn-large"
                                             (click)="getApiOperations()">Edit
                                     </button>&nbsp;
-                                    <button *ngIf="editRateOperation" (click)="lgModal.show()"
+                                    <button *ngIf="editRateOperation" [disabled]="disableUpdate"
+                                            (click)="lgModal.show()"
                                             class="btn btn-primary animated fadeIn btn-large">Update
                                     </button>&nbsp;
                                     <a class="btn btn-warning btn-large" (click)="reloadPage()">Clear</a>
