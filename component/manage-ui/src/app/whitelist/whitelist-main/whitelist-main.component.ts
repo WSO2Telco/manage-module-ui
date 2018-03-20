@@ -177,10 +177,11 @@ export class WhitelistMainComponent implements OnInit {
             const splited = this.api.split(' ');
 
             for (const entry of this.apis) {
-                if (entry.name == splited[0]) {
+                if ((entry.name == splited[0]) && (entry.version == splited[2])) {
                     apiId = entry.id;
                 }
             }
+
 
             if (apiId.length != 0 && appId.length != 0) {
 
@@ -192,19 +193,19 @@ export class WhitelistMainComponent implements OnInit {
 
                             this.blackListWhiteListService.addNewToWhitelist(appId, apiId, msisdnValidation.payload.valid, msisdnValidation.payload.validationRegex,
                                 msisdnValidation.payload.prefixGroup, msisdnValidation.payload.digitsGroup, (response) => {
-                                if (response.success) {
-                                    if (msisdnValidation.payload.invalid.length) {
-                                        this.message.longError('Below Numbers does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                                    if (response.success) {
+                                        if (msisdnValidation.payload.invalid.length) {
+                                            this.message.longError('Below Numbers does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                                        }
+                                        this.message.success(response.message);
+                                        this.msisdn = '';
+                                        this.msisdnMin = 0;
+                                        this.msisdnMax = 0;
+                                        this.getWhitelist();
+                                    } else {
+                                        this.message.error(response.message);
                                     }
-                                    this.message.success(response.message);
-                                    this.msisdn = '';
-                                    this.msisdnMin = 0;
-                                    this.msisdnMax = 0;
-                                    this.getWhitelist();
-                                } else {
-                                    this.message.error(response.message);
-                                }
-                            });
+                                });
                         } else {
                             this.message.longError('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
                         }
