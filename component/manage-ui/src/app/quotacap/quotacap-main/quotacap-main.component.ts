@@ -442,6 +442,7 @@ export class QuotaCapMainComponent implements OnInit {
         const data = {
             byFlag: 'byApplication',
             info: this.app,
+            sp:this.subscriber + '@carbon.super',
             operator: this.selectedoperator
         };
 
@@ -465,6 +466,8 @@ export class QuotaCapMainComponent implements OnInit {
         const data = {
             byFlag: 'byApi',
             info: this.api,
+            sp:this.subscriber + '@carbon.super',
+            app:this.app,
             operator: this.selectedoperator
         };
 
@@ -800,6 +803,8 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
+                sp:this.subscriber + '@carbon.super',
+                app:this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -816,6 +821,7 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApplication',
                 info: this.app,
+                sp:this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -870,6 +876,8 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
+                sp:this.subscriber + '@carbon.super',
+                app:this.app,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -886,6 +894,7 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApplication',
                 info: this.app,
+                sp:this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
