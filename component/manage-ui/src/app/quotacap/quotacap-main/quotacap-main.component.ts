@@ -246,6 +246,8 @@ export class QuotaCapMainComponent implements OnInit {
         this.applications = [];
         this.clearErrors();
         let invalid = true;
+        this.isAppSelect = false;
+        this.isApiSelect = false;
 
         /** validation */
         for (const item of this.subscriberList) {
@@ -296,6 +298,7 @@ export class QuotaCapMainComponent implements OnInit {
         this.isCalenderEnable = false;
         let invalid = true;
         this.isApplicationError = false;
+        this.isApiSelect = false;
 
 
         for (const item of this.applications) {
@@ -441,7 +444,7 @@ export class QuotaCapMainComponent implements OnInit {
         }
         const data = {
             byFlag: 'byApplication',
-            info: this.app,
+            info: this.appID,
             sp:this.subscriber + '@carbon.super',
             operator: this.selectedoperator
         };
@@ -467,7 +470,7 @@ export class QuotaCapMainComponent implements OnInit {
             byFlag: 'byApi',
             info: this.api,
             sp:this.subscriber + '@carbon.super',
-            app:this.app,
+            app:this.appID,
             operator: this.selectedoperator
         };
 
@@ -625,7 +628,7 @@ export class QuotaCapMainComponent implements OnInit {
             if (this.app.length == 0 || this.app == '') {
                 appId = null;
             } else {
-                appId = this.app;
+                appId = this.appID;
             }
             if (this.api.split(':')[0].length == 0) {
                 apiId = null;
@@ -642,7 +645,7 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 operator: this.selectedoperator,
                 serviceProvider: this.subscriber + '@carbon.super',
-                applicationName: appId,
+                application: appId,
                 apiName: apiId,
                 quotaLimit: this.quotaInputValue,
                 fromDate: this.fromdate,
@@ -777,7 +780,11 @@ export class QuotaCapMainComponent implements OnInit {
 
         this.subscriber = '';
         this.app = '';
+        this.appID = '';
         this.api = '';
+        this.isSubscriberSelect = false;
+        this.isAppSelect = false;
+        this.isApiSelect = false;
 
         if (!this.ISoperatordisable) {
             this.selectedoperator = '';
@@ -804,7 +811,7 @@ export class QuotaCapMainComponent implements OnInit {
                 byFlag: 'byApi',
                 info: this.api,
                 sp:this.subscriber + '@carbon.super',
-                app:this.app,
+                app:this.appID,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -820,7 +827,7 @@ export class QuotaCapMainComponent implements OnInit {
             }
             const data = {
                 byFlag: 'byApplication',
-                info: this.app,
+                info: this.appID,
                 sp:this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
@@ -877,7 +884,7 @@ export class QuotaCapMainComponent implements OnInit {
                 byFlag: 'byApi',
                 info: this.api,
                 sp:this.subscriber + '@carbon.super',
-                app:this.app,
+                app:this.appID,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -893,7 +900,7 @@ export class QuotaCapMainComponent implements OnInit {
             }
             const data = {
                 byFlag: 'byApplication',
-                info: this.app,
+                info: this.appID,
                 sp:this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
