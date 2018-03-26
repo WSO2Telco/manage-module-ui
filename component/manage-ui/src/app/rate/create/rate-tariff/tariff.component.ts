@@ -79,6 +79,7 @@ export class TariffComponent implements OnInit {
 
 
     onSubmit(addTariffForm) {
+        console.log(this.tariff);
         this.disableAddButton = true;
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
             this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
@@ -395,11 +396,15 @@ export class TariffComponent implements OnInit {
     tariffmaxcountchange(val) {
         this.tariff.tariffMaxCount = val;
 
-        if (this.tariff.tariffExcessRate == 0) {
+        if ((this.tariff.tariffMaxCount == null) && (this.tariff.tariffExcessRate != null || this.tariff.tariffDefRate != null)) {
+            this.tariff.tariffMaxCount = 0;
+        }
+
+        if (this.tariff.tariffExcessRate == 0 || this.tariff.tariffExcessRate == null) {
             this.tariff.tariffExcessRate = 0;
         }
 
-        if (this.tariff.tariffDefRate == 0) {
+        if (this.tariff.tariffDefRate == 0 || this.tariff.tariffDefRate == null) {
             this.tariff.tariffDefRate = 0;
         }
 
@@ -408,11 +413,16 @@ export class TariffComponent implements OnInit {
     tariffExcessRatechange(val) {
         this.tariff.tariffExcessRate = val;
 
-        if (this.tariff.tariffMaxCount == 0) {
+        if ((this.tariff.tariffExcessRate == null) && (this.tariff.tariffMaxCount != null || this.tariff.tariffDefRate != null)) {
+            this.tariff.tariffExcessRate = 0;
+        }
+
+
+        if (this.tariff.tariffMaxCount == 0 || this.tariff.tariffMaxCount == null) {
             this.tariff.tariffMaxCount = 0;
         }
 
-        if (this.tariff.tariffDefRate == 0) {
+        if (this.tariff.tariffDefRate == 0 || this.tariff.tariffDefRate == null) {
             this.tariff.tariffDefRate = 0;
         }
 
@@ -420,12 +430,18 @@ export class TariffComponent implements OnInit {
 
     tariffDefRatechange(val) {
         this.tariff.tariffDefRate = val;
+        console.log(val);
 
-        if (this.tariff.tariffExcessRate == 0) {
+        if ((this.tariff.tariffDefRate == null) && (this.tariff.tariffMaxCount != null || this.tariff.tariffExcessRate != null)) {
+            this.tariff.tariffDefRate = 0;
+            console.log(this.tariff.tariffDefRate);
+        }
+
+        if (this.tariff.tariffExcessRate == 0 || this.tariff.tariffExcessRate == null) {
             this.tariff.tariffExcessRate = 0;
         }
 
-        if (this.tariff.tariffMaxCount == 0) {
+        if (this.tariff.tariffMaxCount == 0 || this.tariff.tariffMaxCount == null) {
             this.tariff.tariffMaxCount = 0;
         }
 
