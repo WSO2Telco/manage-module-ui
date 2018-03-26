@@ -395,12 +395,38 @@ export class TariffComponent implements OnInit {
     tariffmaxcountchange(val) {
         this.tariff.tariffMaxCount = val;
 
-        if (this.tariff.tariffExcessRate == null) {
+        if (this.tariff.tariffExcessRate == 0) {
             this.tariff.tariffExcessRate = 0;
         }
 
-        if (this.tariff.tariffDefRate == null) {
+        if (this.tariff.tariffDefRate == 0) {
             this.tariff.tariffDefRate = 0;
+        }
+
+    }
+
+    tariffExcessRatechange(val) {
+        this.tariff.tariffExcessRate = val;
+
+        if (this.tariff.tariffMaxCount == 0) {
+            this.tariff.tariffMaxCount = 0;
+        }
+
+        if (this.tariff.tariffDefRate == 0) {
+            this.tariff.tariffDefRate = 0;
+        }
+
+    }
+
+    tariffDefRatechange(val) {
+        this.tariff.tariffDefRate = val;
+
+        if (this.tariff.tariffExcessRate == 0) {
+            this.tariff.tariffExcessRate = 0;
+        }
+
+        if (this.tariff.tariffMaxCount == 0) {
+            this.tariff.tariffMaxCount = 0;
         }
 
     }
