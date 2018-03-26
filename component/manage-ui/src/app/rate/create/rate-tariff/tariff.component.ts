@@ -62,15 +62,15 @@ export class TariffComponent implements OnInit {
         this.tariff.tariffName = '';
         this.tariff.tariffDescription = '';
         this.tariff.tariffDefaultVal = null;
-        this.tariff.tariffAdsCommission = null;
-        this.tariff.tariffSPCommission = null;
+        this.tariff.tariffAdsCommission = 0;
+        this.tariff.tariffSPCommission = 0;
         this.tariff.tariffSurChargeAds = null;
         this.tariff.tariffSurChargeOpco = null;
         this.tariff.tariffSurChargeval = null;
-        this.tariff.tariffOpcoCommission = null;
-        this.tariff.tariffMaxCount = null;
-        this.tariff.tariffExcessRate = null;
-        this.tariff.tariffDefRate = null;
+        this.tariff.tariffOpcoCommission = 0;
+        this.tariff.tariffMaxCount = 0;
+        this.tariff.tariffExcessRate = 0;
+        this.tariff.tariffDefRate = 0;
         this.InValidCommisionTotal = false;
         this.IsEmptySurchargeval = false;
         this.IsEmptySurchargeAddOpco = false;
@@ -343,7 +343,6 @@ export class TariffComponent implements OnInit {
             }
 
 
-
         } else if (Number(this.tariff.tariffSPCommission + this.tariff.tariffAdsCommission + this.tariff.tariffOpcoCommission) === -100) {
             this.ValidCommisionTotal = true;
             this.InValidCommisionTotal = false;
@@ -392,6 +391,20 @@ export class TariffComponent implements OnInit {
 
     }
 
+
+    tariffmaxcountchange(val) {
+        this.tariff.tariffMaxCount = val;
+
+        if (this.tariff.tariffExcessRate == null) {
+            this.tariff.tariffExcessRate = 0;
+        }
+
+        if (this.tariff.tariffDefRate == null) {
+            this.tariff.tariffDefRate = 0;
+        }
+
+    }
+
     isNameUnique(name) {
         let state = false;
         for (const entry of this.existingTariffList) {
@@ -402,7 +415,7 @@ export class TariffComponent implements OnInit {
         if (state) {
             this.isNameError = true;
             this.nameError = 'Name Already Existing';
-		} else if (name.length == 0) {
+        } else if (name.length == 0) {
             this.isNameError = true;
             this.nameError = 'Name Cannot Be Empty';
         } else if (name.length > 45) {
