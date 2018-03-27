@@ -79,7 +79,6 @@ export class TariffComponent implements OnInit {
 
 
     onSubmit(addTariffForm) {
-        console.log(this.tariff);
         this.disableAddButton = true;
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
             this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&

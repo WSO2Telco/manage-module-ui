@@ -401,8 +401,4 @@ export class SubscriptionDetailComponent implements OnInit {
         }
     }
 
-    onPageChanged(event) {
-        console.log('hit');
-    }
-
 }
