@@ -430,11 +430,9 @@ export class TariffComponent implements OnInit {
 
     tariffDefRatechange(val) {
         this.tariff.tariffDefRate = val;
-        console.log(val);
 
         if ((this.tariff.tariffDefRate == null) && (this.tariff.tariffMaxCount != null || this.tariff.tariffExcessRate != null)) {
             this.tariff.tariffDefRate = 0;
-            console.log(this.tariff.tariffDefRate);
         }
 
         if (this.tariff.tariffExcessRate == 0 || this.tariff.tariffExcessRate == null) {
