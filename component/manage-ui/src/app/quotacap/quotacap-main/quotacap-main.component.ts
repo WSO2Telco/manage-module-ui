@@ -138,9 +138,8 @@ export class QuotaCapMainComponent implements OnInit {
 
         this.showOperatorListPermissions = "quota:operatorList";
 
-
         const loginInfo = this.authService.loginUserInfo.getValue();
-        this.loggedusername = loginInfo.userName;
+        this.loggedusername = loginInfo.operatorName;
 
         this.isadminUser = this.authService.hasPermissions(this.showOperatorListPermissions);
     }
@@ -212,6 +211,7 @@ export class QuotaCapMainComponent implements OnInit {
             this.getSubscribersOfProvider(this.loggeduser);
         } else {
             this.loggeduser = loginInfo.operator;
+
             this.setOperatorofSP();
             this.getSubscribersOfProvider(this.loggeduser.toUpperCase());
         }
@@ -445,7 +445,7 @@ export class QuotaCapMainComponent implements OnInit {
         const data = {
             byFlag: 'byApplication',
             info: this.appID,
-            sp:this.subscriber + '@carbon.super',
+            sp: this.subscriber + '@carbon.super',
             operator: this.selectedoperator
         };
 
@@ -469,8 +469,8 @@ export class QuotaCapMainComponent implements OnInit {
         const data = {
             byFlag: 'byApi',
             info: this.api,
-            sp:this.subscriber + '@carbon.super',
-            app:this.appID,
+            sp: this.subscriber + '@carbon.super',
+            app: this.appID,
             operator: this.selectedoperator
         };
 
@@ -810,8 +810,8 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
-                sp:this.subscriber + '@carbon.super',
-                app:this.appID,
+                sp: this.subscriber + '@carbon.super',
+                app: this.appID,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -828,7 +828,7 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApplication',
                 info: this.appID,
-                sp:this.subscriber + '@carbon.super',
+                sp: this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -883,8 +883,8 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApi',
                 info: this.api,
-                sp:this.subscriber + '@carbon.super',
-                app:this.appID,
+                sp: this.subscriber + '@carbon.super',
+                app: this.appID,
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
@@ -901,7 +901,7 @@ export class QuotaCapMainComponent implements OnInit {
             const data = {
                 byFlag: 'byApplication',
                 info: this.appID,
-                sp:this.subscriber + '@carbon.super',
+                sp: this.subscriber + '@carbon.super',
                 fromDate: this.fromdate,
                 toDate: this.todate,
                 operator: this.selectedoperator
