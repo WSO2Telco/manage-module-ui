@@ -22,6 +22,7 @@ public class AuthenticationService {
 		returnJson.put("userName", userProfileDTO.getUserName());
 		returnJson.put("organization", userProfileDTO.getOrganization());
 		returnJson.put("Department",userProfileDTO.getDepartment());
+		returnJson.put("operatorName",userProfileDTO.getOperatorName());
 
 		UserProfileCachable cachable = CacheFactory.getInstance(CacheType.LOCAL).getService();
 		cachable.cache(sessionId, userProfileDTO);
