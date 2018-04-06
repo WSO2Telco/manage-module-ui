@@ -98,7 +98,7 @@ export class RateService {
      * @param rateCard
      * @param callback
      */
-    updateAPIOperationRate(appID: number, operatorId:string, apiname:string, apiversion:string, direction: string, updaterateCard: UpdatedRate[], callback: Function) {
+    updateAPIOperationRate(appID: number, operatorId: string, apiname: string, apiversion: string, direction: string, updaterateCard: UpdatedRate[], callback: Function) {
         this._remoteService.updateAPIOperationRate(appID, operatorId, apiname, apiversion, direction, updaterateCard)
             .subscribe(
                 data => {
@@ -205,8 +205,8 @@ export class RateService {
      * get rate cards
      * @param callback
      */
-    getRateCards(callback: Function) {
-        this._remoteService.getRateCards()
+    getRateCards(operatorId: string, callback: Function) {
+        this._remoteService.getRateCards(operatorId)
             .subscribe(
                 data => {
                     callback(data);
@@ -354,7 +354,7 @@ export class RateService {
      * get assign api operation rate
      * @param callback
      */
-    getApprovedAPIOperationRate(appID: number, apiname:string, apiversion: string, operatorId: string, direction: string, callback: Function) {
+    getApprovedAPIOperationRate(appID: number, apiname: string, apiversion: string, operatorId: string, direction: string, callback: Function) {
         this._remoteService.getApprovedAPIOperationRate(appID, apiname, apiversion, operatorId, direction)
             .subscribe(
                 data => {
