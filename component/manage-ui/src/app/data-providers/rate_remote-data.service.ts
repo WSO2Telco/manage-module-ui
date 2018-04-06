@@ -12,6 +12,7 @@ export class RateRemoteDataService {
     private apiContext = this.url.protocol + '//' + this.url.host + '/ratecard-service/ratecardservice/';
 
     private apiEndpoints: Object = {
+        rateCardsByUser: this.apiContext + 'ratecards/operator/',
         rateCards: this.apiContext + 'ratecards?schema=full',
         tariffs: this.apiContext + 'tariffs',
         rateTypes: this.apiContext + 'ratetypes',
@@ -342,8 +343,8 @@ export class RateRemoteDataService {
      * get rate cards
      * @returns {Observable<R|T>}
      */
-    getRateCards() {
-        return this.http.get(this.apiEndpoints['rateCards'], this.getOptions())
+    getRateCards(operatorId: string) {
+        return this.http.get(this.apiEndpoints['rateCardsByUser'] +operatorId + '?schema=full', this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RateDefinition} from '../../commons/models/common-data-models';
+import {RateDefinition, OperatorList} from '../../commons/models/common-data-models';
 import {RateService} from '../../commons/services/rate.service';
+import {AuthenticationService} from '../../commons/services/authentication.service';
 import {MessageService} from '../../commons/services/message.service';
 
 @Component({
@@ -17,23 +18,62 @@ export class ViewRateMainComponent implements OnInit {
     private rateTax;
     private showRateDef: boolean;
     private showCreateRate: string;
+    private operatorsList: OperatorList[];
+    private loggeduser: string;
+    public loggedusername: string;
+    public isadminUser;
+    private isAdmin: boolean;
+    public operatorId: string;
 
 
     private rateDefinitions;
     private rates;
 
-    constructor(private rateService: RateService, private message: MessageService) {
+    constructor(private rateService: RateService, private message: MessageService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
         this.selectedRate = '';
+        this.operatorId = '';
         this.showRateDef = false;
         this.rateDefinitions = [];
+        this.operatorsList = [];
         this.rates = [];
-        this.getRateCards();
+
+        const loginInfo = this.authService.loginUserInfo.getValue();
+        this.loggedusername = loginInfo.operatorName;
+        this.getOperatorList();
         this.showCreateRate = 'rate:add';
     }
 
+    /**
+     * to load the Operator list
+     */
+    getOperatorList() {
+
+        if (this.loggedusername == null || this.loggedusername == 'null') {
+            this.operatorId = '__ALL';
+            this.getRateCards(this.operatorId);
+        } else {
+
+            this.rateService.getOperatorList((response) => {
+                if (response.success) {
+                    for (const entry of response.payload) {
+                        if (new String(entry.operatorName.toLowerCase()).valueOf() == new String(this.loggedusername.toLowerCase()).valueOf()) {
+                            this.operatorId = entry.operatorId;
+                            this.getRateCards(this.operatorId);
+                        }
+
+                    }
+
+
+                } else {
+                    this.message.error(response.message);
+                }
+            });
+
+        }
+    }
 
     /**
      * when a rate value is selected
@@ -53,8 +93,8 @@ export class ViewRateMainComponent implements OnInit {
     /**
      * load available rate definitions
      */
-    getRateCards() {
-        this.rateService.getRateCards((response) => {
+    getRateCards(opID: string) {
+        this.rateService.getRateCards(opID, (response) => {
             if (response.success) {
                 this.rateDefinitions = response.payload;
                 let count = 0;

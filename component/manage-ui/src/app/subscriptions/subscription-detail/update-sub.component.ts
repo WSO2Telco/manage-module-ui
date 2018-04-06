@@ -37,6 +37,7 @@ export class UpdateSubComponent implements OnInit {
     public confirmMsg: string;
     private apiOperationList: APIOperation[];
     private apiList: API[];
+    private operatorParamforOpRate: string;
     public editRateOperation: boolean;
     public setForAll: boolean;
     public selectboxdisable: boolean;
@@ -77,8 +78,10 @@ export class UpdateSubComponent implements OnInit {
 
             if (this.operatorId == '_ALL') {
                 this.direction = 'NBsubscriptions';
+                this.operatorParamforOpRate = null;
             } else {
                 this.direction = 'SBsubscriptions';
+                this.operatorParamforOpRate = this.operatorId;
             }
             this.getApprovedAPIOperationRate(this.appId, this.title, this.apiversion, this.operatorId, this.direction);
         });
@@ -156,7 +159,6 @@ export class UpdateSubComponent implements OnInit {
                     let apiOperationId;
                     for (const item of this.apiOperationList) {
                         apiOperationId = item.apiOperationId;
-                        console.log('hit this location');
                         this.loadRates(apiOperationId);
                     }
                 }
@@ -220,7 +222,7 @@ export class UpdateSubComponent implements OnInit {
              } */
 
             if (apiOperationId) {
-                this.rateService.getAPIOperationRates(this.title, apiOperationId, null, (response) => {
+                this.rateService.getAPIOperationRates(this.title, apiOperationId,  +this.operatorParamforOpRate , (response) => {
                     if (response.success) {
                         this.sourceList = response.payload.source;
                         this.assignedList.push(response.payload.destination);

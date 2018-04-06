@@ -34,6 +34,7 @@ export class LoginResponse {
     isAdmin: boolean;
     operator: string;
     userName: string;
+    operatorName: string;
     billing: boolean;
     start: number;
     token: string;
@@ -126,6 +127,11 @@ export class RateDefinition {
 
 export class Tax {
     taxId: number;
+}
+
+export class OperatorList {
+    id: string;
+    operatorName: string;
 }
 
 export class RateTax {
