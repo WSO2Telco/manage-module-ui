@@ -15,3 +15,8 @@ com.wso2telco.dep.manage-service.feature/target/
 com.wso2telco.dep.manage-service.feature/com.wso2telco.dep.manage-service.feature.iml
 com.wso2telco.dep.manage-service.feature/src/main/resources/generated
 component/manage-service/src/main/webapp/public
+component/target
+component/manage-service (1).iml
+component/.classpath
+component/.project
+.project

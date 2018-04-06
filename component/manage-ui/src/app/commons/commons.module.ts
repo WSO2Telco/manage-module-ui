@@ -8,6 +8,7 @@ import {LoginRemoteDataService} from '../data-providers/login_remote-data.servic
 import {AppCommonService} from './services/app-common.service';
 import {MessageService} from './services/message.service';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
+import { TimerService } from './services/timer.service';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {TooltipModule} from 'ngx-bootstrap/tooltip';
         MessageService,
         RateService,
         BlackListWhiteListService,
-        QuotaService],
+        QuotaService,
+        TimerService],
     exports: []
 })
 export class CommonsModule {
