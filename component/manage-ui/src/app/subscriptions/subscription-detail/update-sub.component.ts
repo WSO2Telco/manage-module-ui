@@ -45,6 +45,7 @@ export class UpdateSubComponent implements OnInit {
     public updateOperationRate: UpdatedRate[];
     public selectedValue: number[];
     public commentList: string[];
+    public apiOperationIDList: number[];
 
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
@@ -58,6 +59,7 @@ export class UpdateSubComponent implements OnInit {
     ngOnInit() {
         this.subscriptionsrate = [];
         this.selectedVal = [];
+        this.apiOperationIDList = [];
         this.show = false;
         this.setForAll = false;
         this.editRateOperation = false;
@@ -159,8 +161,9 @@ export class UpdateSubComponent implements OnInit {
                     let apiOperationId;
                     for (const item of this.apiOperationList) {
                         apiOperationId = item.apiOperationId;
-                        this.loadRates(apiOperationId);
+                        this.apiOperationIDList.push(apiOperationId);
                     }
+                    this.loadRates(this.apiOperationIDList);
                 }
 
             } else {
@@ -168,6 +171,8 @@ export class UpdateSubComponent implements OnInit {
                 this.message.error(response.message);
             }
         });
+
+      //  this.loadRates(this.apiOperationIDList);
     }
 
 
@@ -200,37 +205,20 @@ export class UpdateSubComponent implements OnInit {
     /**
      * load the Available and Assigned Rates For selected API Operation
      */
-    loadRates(apiOperationId: number) {
-        if (this.title.length != 0 && this.apiOperationList.length != 0) {
-            /*   let apiOperationId;
-             let operatorId;
-             /**for loop to set the api operation Id
-             for (const item of this.apiOperationList) {
-             apiOperationId = item.apiOperationId;
-             console.log('hit this location');
-             }
-             */
-            /**condition to set the operator Id*/
-            /*      if (this.isAdmin && this.operator == 'Admin') {
-             operatorId = null;
-             } else {
-             for (const entry of this.operatorList) {
-             if (entry.operatorName == this.operator) {
-             operatorId = entry.operatorId;
-             }
-             }
-             } */
+    loadRates(apiOperationId: number[]) {
+        if (this.title.length != 0 ) {
+            let index = 0;
+            for (var v = 0; v < apiOperationId.length; v++) {
+                this.rateService.getAPIOperationRates(this.title, apiOperationId[v],  +this.operatorParamforOpRate , (response) => {
 
-            if (apiOperationId) {
-                this.rateService.getAPIOperationRates(this.title, apiOperationId,  +this.operatorParamforOpRate , (response) => {
                     if (response.success) {
                         this.sourceList = response.payload.source;
                         this.assignedList.push(response.payload.destination);
                         this.destinationList = [];
-                        if (this.sourceList.length == 0) {
-                            this.message.warning('No Rate Values Available for Selected Combination');
+                        if (response.payload.destination == 0) {
+                            this.message.warning('No Rate card Available for '+this.apiOperationList[index].apiOperation);
                         }
-                        //  console.log(this.assignedList);
+                        index++;
                     } else {
                         this.sourceList = [];
                         this.assignedList = [];
@@ -238,6 +226,7 @@ export class UpdateSubComponent implements OnInit {
                         this.message.error(response.message);
                     }
                 });
+
             }
 
         }
@@ -273,20 +262,15 @@ export class UpdateSubComponent implements OnInit {
                 this.updateOperationRate.push(opRate);
             }
         } else if (event.target.value == 'null') {
-            //  console.log('hit null');
             this.updateOperationRate.splice(index, 1);
 
         } else {
-            //   console.log('hit rateid = ' + item.rateDefID + 'op id' + item.apiOperationId);
             let index;
             for (var v in this.subscriptionsrate) // for acts as a foreach
             {
-                //    console.log('hit subsarray =' + this.subscriptionsrate[v].rateDefId + 'operation id' + this.subscriptionsrate[v].apiOperationId);
-                //    console.log('hit updatearray =' + this.updateOperationRate[v].rateDefId + 'operation id' + this.updateOperationRate[v].apiOperationId);
                 index = +v;
 
                 if ((this.updateOperationRate[v].apiOperationId == item.apiOperationId)) {
-                    //    console.log('hit drop position =' + index);
                     this.updateOperationRate.splice(index, 1);
                 }
             }
