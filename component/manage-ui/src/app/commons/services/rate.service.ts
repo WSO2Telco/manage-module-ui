@@ -303,8 +303,9 @@ export class RateService {
                     });
                 })
             }
+        }else{
+           return Observable.empty();
         }
-        return Observable.empty();
     }
 
 

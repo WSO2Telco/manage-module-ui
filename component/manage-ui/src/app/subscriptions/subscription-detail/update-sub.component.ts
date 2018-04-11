@@ -263,6 +263,8 @@ export class UpdateSubComponent implements OnInit {
                         }               
                     }
                 }
+            }).catch((err)=>{
+                this.message.error(err);
             });
         }
     }
