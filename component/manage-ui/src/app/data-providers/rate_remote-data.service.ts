@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate} from '../commons/models/common-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
+import * as Q from "Q";
 
 
 @Injectable()
@@ -344,7 +345,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R|T>}
      */
     getRateCards(operatorId: string) {
-        return this.http.get(this.apiEndpoints['rateCardsByUser'] +operatorId + '?schema=full', this.getOptions())
+        return this.http.get(this.apiEndpoints['rateCardsByUser'] + operatorId + '?schema=full', this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,
@@ -400,6 +401,33 @@ export class RateRemoteDataService {
             }));
     }
 
+    getAPIOperationRatesQueue(apiName: string, apiOperationId: number, operatorId: number, type: string) {
+
+        let appDetailsPromises;
+        let ids = ['1','2','3','4'];
+        appDetailsPromises = ids.map((myid) => {
+            return this.http.get(myid, this.getOptions())
+                .map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'API List Loaded Successfully',
+                        payload: response.json()
+                    };
+                })
+                .catch((error: Response) => Observable.throw({
+                    success: false,
+                    message: 'Error Loading API List',
+                    error: error
+                }));
+        });
+
+        Q.all(appDetailsPromises).then(arr => {
+            console.log(arr.length);
+            return null;
+        });
+    }
+
+
     /**
      * get rates for api, api operation, operator
      * @param apiName
@@ -429,8 +457,10 @@ export class RateRemoteDataService {
 
         return this.http.get(url, this.getOptions())
             .map((response: Response) => {
+            response
                 return response.json();
             })
+
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading API Operation Rates',

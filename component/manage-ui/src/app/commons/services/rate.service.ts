@@ -272,39 +272,43 @@ export class RateService {
         }
     }
 
-    getAPIOperationRatesStream(apiName: string, apiOperationId: number, operatorId: number):Observable<any>{
+    getAPIOperationRatesStream(apiName: string, apiOperationId: number, operatorId: number): Observable<any> {
         if (this.authService.validateSession()) {
             if (operatorId) {
-                forkJoin([
-                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator').catch(err=>{throw err}),
-                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator-assign').catch(err=>{throw err})
-                ]).subscribe((result)=>{
-                        return Observable.of({
-                            success: true,
-                            message: 'Api Operation Rates List Loaded Successfully',
-                            payload: {
-                                source: result[0],
-                                destination: result[1]
-                            }
-                        });
+                return forkJoin([
+                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator').catch(err => {
+                        throw err
+                    }),
+                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator-assign').catch(err => {
+                        throw err
+                    })
+                ]).map((result) => {
+                    return {
+                        success: true,
+                        message: 'Api Operation Rates List Loaded Successfully',
+                        payload: {
+                            source: result[0],
+                            destination: result[1]
+                        }
+                    }
                 })
             } else {
-                forkJoin([
+                return forkJoin([
                     this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin'),
                     this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin-assign')
-                ]).subscribe((res)=>{
-                    return Observable.of({
+                ]).map((res) => {
+                    return {
                         success: true,
                         message: 'Api Operation Rates List Loaded Successfully',
                         payload: {
                             source: res[0],
                             destination: res[1]
                         }
-                    });
+                    }
                 })
             }
-        }else{
-           return Observable.empty();
+        } else {
+            return Observable.empty();
         }
     }
 
@@ -371,9 +375,6 @@ export class RateService {
             }
         }
     }
-
-
-
 
     /**
      * get available operators

@@ -24,7 +24,7 @@ export class AppHTTPInterceptor extends Http {
     url: string | Request,
     options?: RequestOptionsArgs
   ): Observable<Response> {
-   
+
     this.service.resetLogoutTimer();
     return super.request(url, options);
   }

@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
     constructor(private _authenticationService: AuthenticationService,
                 private _appCommonService: AppCommonService) {
-
     }
 
 
