@@ -33,7 +33,7 @@ public class AuthenticationResource {
 		Object responseString = null;
 		String sessionId = request.getSession(true).getId();
         try {
-		
+
 
 
 			responseString = authenticationService.doLogin(sessionId, userName);
@@ -52,7 +52,9 @@ public class AuthenticationResource {
 			responseCode = Response.Status.BAD_REQUEST;
 		}
 
-		return Response.status(responseCode).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId))
-				.build();
+		String path = "/";
+
+		return Response.status(responseCode).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId,path,null,null,NewCookie.DEFAULT_MAX_AGE,false))
+                                .build();
 	}
 }
