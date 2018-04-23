@@ -52,7 +52,7 @@ public class AuthenticationResource {
 			responseCode = Response.Status.BAD_REQUEST;
 		}
 
-		return Response.status(responseCode).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId))
+		return Response.status(responseCode).entity(responseString)
 				.build();
 	}
 }

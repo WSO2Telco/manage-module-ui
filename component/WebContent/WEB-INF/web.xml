@@ -18,6 +18,12 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+	
+	<session-config>
+	 <cookie-config>
+		<secure>true</secure>
+	 </cookie-config>
+    </session-config>
 
     <servlet-mapping>
         <servlet-name>jersey-servlet</servlet-name>
