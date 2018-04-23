@@ -217,7 +217,6 @@ export class UpdateSubComponent implements OnInit {
 
             forkJoin(forkJoinAray).subscribe((res: any[]) => {
                 if (res && res.length)
-                    debugger;
                 for (let i = 0; i < res.length; i++) {
                     if (res[i].success) {
                         this.sourceList = res[i].payload.source;
@@ -235,39 +234,6 @@ export class UpdateSubComponent implements OnInit {
                     }
                 }
 
-            })
-        }
-    }
-
-    loadRatesFromStream(apiOperationId: number[]){
-        if (this.title.length != 0 ) {
-            let index = 0;
-            let forkJoinAray = [];
-            for (var v = 0; v < apiOperationId.length; v++) {
-                forkJoinAray.push(
-                    this.rateService.getAPIOperationRatesStream(this.title, apiOperationId[v],  +this.operatorParamforOpRate)
-                );
-            }
-
-            forkJoin(forkJoinAray).subscribe((res:any[])=>{
-                if(res && res.length){
-                    for (let i = 0; i < res.length; i++) {
-                        if (res[i].success) {
-                            this.sourceList = res[i].payload.source;
-                            this.assignedList.push(res[i].payload.destination);
-                            this.destinationList = [];
-                            if (res[i].payload.destination == 0) {
-                                this.message.warning('No Rate card Available for '+this.apiOperationList[index].apiOperation);
-                            }
-                            index++;
-                        } else {
-                            this.sourceList = [];
-                            this.assignedList = [];
-                            this.destinationList = [];
-                            this.message.error(res[i].message);
-                        }               
-                    }
-                }
             })
         }
     }

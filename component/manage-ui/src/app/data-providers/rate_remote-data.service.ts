@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate} from '../commons/models/common-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
-import * as Q from "Q";
 
 
 @Injectable()
@@ -400,34 +399,6 @@ export class RateRemoteDataService {
                 error: error
             }));
     }
-
-    getAPIOperationRatesQueue(apiName: string, apiOperationId: number, operatorId: number, type: string) {
-
-        let appDetailsPromises;
-        let ids = ['1','2','3','4'];
-        appDetailsPromises = ids.map((myid) => {
-            return this.http.get(myid, this.getOptions())
-                .map((response: Response) => {
-                    return {
-                        success: true,
-                        message: 'API List Loaded Successfully',
-                        payload: response.json()
-                    };
-                })
-                .catch((error: Response) => Observable.throw({
-                    success: false,
-                    message: 'Error Loading API List',
-                    error: error
-                }));
-        });
-
-        Q.all(appDetailsPromises).then(arr => {
-            console.log(arr.length);
-            return null;
-        });
-    }
-
-
     /**
      * get rates for api, api operation, operator
      * @param apiName
@@ -551,7 +522,23 @@ export class RateRemoteDataService {
      * generate request headers
      * @returns {RequestOptions}
      */
+
+
+
+
     getOptions(): RequestOptions {
+        const token = this.authService.loginUserInfo.getValue().token;
+        const useName = this.authService.loginUserInfo.getValue().userName;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'user-name': useName,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
+    }
+
+    getOptionsCokkie(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
         const headers = new Headers(

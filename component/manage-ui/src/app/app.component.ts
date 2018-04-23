@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
                 private _appCommonService: AppCommonService) {
     }
 
-
     ngOnInit() {
         this.isLoggedIn = this._authenticationService.isLoggedIn();
         this._authenticationService.loginUserInfo.subscribe((userInfo: LoginResponse) => {
