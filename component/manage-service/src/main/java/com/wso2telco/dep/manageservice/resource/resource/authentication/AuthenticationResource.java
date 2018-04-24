@@ -52,9 +52,6 @@ public class AuthenticationResource {
 			responseCode = Response.Status.BAD_REQUEST;
 		}
 
-		String path = "/";
-
-		return Response.status(responseCode).entity(responseString).cookie(new NewCookie("JSESSIONID", sessionId,path,null,null,NewCookie.DEFAULT_MAX_AGE,false))
-                                .build();
+		return Response.status(responseCode).entity(responseString).build();
 	}
 }
