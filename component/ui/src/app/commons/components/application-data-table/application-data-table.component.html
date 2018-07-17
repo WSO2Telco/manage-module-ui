@@ -65,7 +65,7 @@
                     {{item.id}}
                 </div>
                 <div class="tbl-cell tbl-app-name-cell">{{item.applicationName}}</div>
-                <div class="tbl-cell">{{item.userName}}</div>
+                <div class="tbl-cell tbl-user-name-cell">{{item.userName}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
