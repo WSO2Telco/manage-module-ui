@@ -253,7 +253,18 @@
         padding: 10px 10px;
         @media only screen and (max-width: 768px) {
           //  display: block;
+          word-break: break-all;
         }
+      }
+
+      .tbl-app-name-cell{
+        word-break: break-all;
+        width:20%;
+      }
+
+      .tbl-api-name-cell{
+        word-break: break-all;
+        width:20%;
       }
 
       &.modified {

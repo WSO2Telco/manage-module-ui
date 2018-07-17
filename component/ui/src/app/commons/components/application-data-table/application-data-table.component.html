@@ -64,7 +64,7 @@
                           (click)="item.isExpand = !item.isExpand; item.actionType = 'MORE' ">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>
                     {{item.id}}
                 </div>
-                <div class="tbl-cell">{{item.applicationName}}</div>
+                <div class="tbl-cell tbl-app-name-cell">{{item.applicationName}}</div>
                 <div class="tbl-cell">{{item.userName}}</div>
                 <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
