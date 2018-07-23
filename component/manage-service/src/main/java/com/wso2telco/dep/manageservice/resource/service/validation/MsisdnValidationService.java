@@ -21,7 +21,7 @@ import com.wso2telco.dep.manageservice.resource.model.MsisdnValidation;
 import com.wso2telco.dep.manageservice.resource.resource.RequestTransferable;
 import com.wso2telco.dep.manageservice.resource.service.AbstractService;
 import com.wso2telco.dep.manageservice.resource.util.Messages;
-import com.wso2telco.dep.manageservice.resource.util.ServiceUrl;
+import com.wso2telco.dep.manageservice.resource.util.ApplicationConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
@@ -56,7 +56,7 @@ public class MsisdnValidationService extends AbstractService {
 
     @Override
     public Callback executePost(RequestTransferable request, String authenticationCredential) {
-        HttpPost httpPost = new HttpPost(new StringBuilder(super.getUrl(ServiceUrl.MSISDN_VALIDATION_SERVICE)).toString());
+        HttpPost httpPost = new HttpPost(ApplicationConfiguration.getMsisdnValidationServiceUrl());
 
         httpPost.setHeader("Content-Type", "application/json");
         httpPost.setHeader("Authorization", authenticationCredential);
