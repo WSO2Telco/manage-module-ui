@@ -37,6 +37,7 @@ public class ApplicationConfiguration {
     private static final String MANAGE_APP_CONFIG_FILE = "manage.properties";
     private static final String MSISDN_VALIDATION_SERVICE = "MsisdnValidationService";
     private static final Log log = LogFactory.getLog(ApplicationConfiguration.class);
+    private static String serviceEndpoint = "";
 
     private ApplicationConfiguration() {
     }
@@ -50,23 +51,24 @@ public class ApplicationConfiguration {
     }
 
     public static String getMsisdnValidationServiceUrl() {
-		String serviceEndpoint = "";
-		String carbonHome = System.getProperty("carbon.home");
-		String apiManagerFile = carbonHome + "/repository/conf/api-manager.xml";
+		if (serviceEndpoint.equals("")) {
+			String carbonHome = System.getProperty("carbon.home");
+			String apiManagerFile = carbonHome + "/repository/conf/api-manager.xml";
 
-		try {
-			DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			try {
+				DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 
-			Document document = builder.parse(new File(apiManagerFile));
-			Element rootElement = document.getDocumentElement();
+				Document document = builder.parse(new File(apiManagerFile));
+				Element rootElement = document.getDocumentElement();
 
-			NodeList nodeList = rootElement.getElementsByTagName(MSISDN_VALIDATION_SERVICE);
-			Node node = nodeList.item(0);
+				NodeList nodeList = rootElement.getElementsByTagName(MSISDN_VALIDATION_SERVICE);
+				Node node = nodeList.item(0);
 
-			serviceEndpoint = ((Element)node).getTextContent();
-		} catch (Exception e) {
-			String errorMessage = "Error in ApplicationConfiguration.getMsisdnValidationServiceUrl";
-			log.error(errorMessage, e);
+				serviceEndpoint = ((Element)node).getTextContent();
+			} catch (Exception e) {
+				String errorMessage = "Error in ApplicationConfiguration.getMsisdnValidationServiceUrl";
+				log.error(errorMessage, e);
+			}
 		}
         return serviceEndpoint;
     }
