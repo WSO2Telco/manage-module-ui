@@ -101,6 +101,24 @@
         width:30%;
       }
 
+      .tbl-sub-title{
+        word-break: break-all;
+        width:20%;
+      }
+
+      .tbl-create-title{
+        word-break: break-all;
+        width:20%;
+      }
+
+      .tbl-create-cell{
+
+        @media only screen and (max-width: 768px) {
+          width: 30%;
+          word-break: break-all;
+        }
+      }
+
 
       &.modified {
         background-color: #ffffcc;
