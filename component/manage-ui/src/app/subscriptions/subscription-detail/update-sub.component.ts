@@ -11,10 +11,11 @@ import {
     AssignRates,
     Operator,
     RateDefinition,
-    UpdatedRate
+    UpdatedRate,
+    AssignRateList
 } from '../../commons/models/common-data-models';
-import {ModalDirective} from 'ngx-bootstrap/modal'
-import { forkJoin } from "rxjs/observable/forkJoin";
+import {ModalDirective} from 'ngx-bootstrap/modal';
+import {forkJoin} from "rxjs/observable/forkJoin";
 
 @Component({
     selector: 'app-update-sub',
@@ -31,6 +32,7 @@ export class UpdateSubComponent implements OnInit {
     public apiversion: string;
     private show: boolean;
     public disableUpdate: boolean;
+    public requestNxtService: boolean;
     public title: string;
     public action: string;
     public status: string;
@@ -50,7 +52,7 @@ export class UpdateSubComponent implements OnInit {
 
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
-    private assignedList: RateDefinition[];
+    private assignedList: AssignRateList[];
 
     constructor(private reportingService: ReportingRemoteDataService,
                 private rateService: RateService,
@@ -70,6 +72,7 @@ export class UpdateSubComponent implements OnInit {
         this.selectedVal = [];
         this.updateOperationRate = [];
         this.commentList = [];
+        this.requestNxtService = true;
 
         this.route.params.subscribe(params => {
             this.title = params['apiname'];
@@ -164,7 +167,6 @@ export class UpdateSubComponent implements OnInit {
                         apiOperationId = item.apiOperationId;
                         this.apiOperationIDList.push(apiOperationId);
                     }
-                    //this.loadRates(this.apiOperationIDList);
                     this.loadRatesFromStream(this.apiOperationIDList);
                 }
 
@@ -174,7 +176,7 @@ export class UpdateSubComponent implements OnInit {
             }
         });
 
-      //  this.loadRates(this.apiOperationIDList);
+        //  this.loadRates(this.apiOperationIDList);
     }
 
 
@@ -203,69 +205,36 @@ export class UpdateSubComponent implements OnInit {
 
     }
 
-
-    /**
-     * load the Available and Assigned Rates For selected API Operation
-     */
-    loadRates(apiOperationId: number[]) {
-        if (this.title.length != 0 ) {
+    loadRatesFromStream(apiOperationId: number[]) {
+        if (this.title.length != 0) {
             let index = 0;
+            let forkJoinAray = [];
             for (var v = 0; v < apiOperationId.length; v++) {
-                this.rateService.getAPIOperationRates(this.title, apiOperationId[v],  +this.operatorParamforOpRate , (response) => {
+                forkJoinAray.push(
+                    this.rateService.getAPIOperationRatesStream(this.title, apiOperationId[v], +this.operatorParamforOpRate)
+                );
+            }
 
-                    if (response.success) {
-                        this.sourceList = response.payload.source;
-                        this.assignedList.push(response.payload.destination);
+            forkJoin(forkJoinAray).subscribe((res: any[]) => {
+                if (res && res.length)
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i].success) {
+                        this.sourceList = res[i].payload.source;
+                        this.assignedList.push(res[i].payload.destination);
                         this.destinationList = [];
-                        if (response.payload.destination == 0) {
-                            this.message.warning('No Rate card Available for '+this.apiOperationList[index].apiOperation);
+                        if (res[i].payload.destination == 0) {
+                            this.message.warning('No Rate card Available for ' + this.apiOperationList[index].apiOperation);
                         }
                         index++;
                     } else {
                         this.sourceList = [];
                         this.assignedList = [];
                         this.destinationList = [];
-                        this.message.error(response.message);
-                    }
-                });
-
-            }
-
-        }
-    }
-
-    loadRatesFromStream(apiOperationId: number[]){
-        if (this.title.length != 0 ) {
-            let index = 0;
-            let forkJoinAray = [];
-            for (var v = 0; v < apiOperationId.length; v++) {
-                forkJoinAray.push(
-                    this.rateService.getAPIOperationRatesStream(this.title, apiOperationId[v],  +this.operatorParamforOpRate)
-                );
-            }
-
-            forkJoin(forkJoinAray).subscribe((res:any[])=>{
-                if(res && res.length){
-                    for (let i = 0; i < res.length; i++) {
-                        if (res[i].success) {
-                            this.sourceList = res[i].payload.source;
-                            this.assignedList.push(res[i].payload.destination);
-                            this.destinationList = [];
-                            if (res[i].payload.destination == 0) {
-                                this.message.warning('No Rate card Available for '+this.apiOperationList[index].apiOperation);
-                            }
-                            index++;
-                        } else {
-                            this.sourceList = [];
-                            this.assignedList = [];
-                            this.destinationList = [];
-                            this.message.error(res[i].message);
-                        }               
+                        this.message.error(res[i].message);
                     }
                 }
-            }).catch((err)=>{
-                this.message.error(err);
-            });
+
+            })
         }
     }
 

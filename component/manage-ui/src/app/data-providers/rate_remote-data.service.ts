@@ -344,7 +344,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R|T>}
      */
     getRateCards(operatorId: string) {
-        return this.http.get(this.apiEndpoints['rateCardsByUser'] +operatorId + '?schema=full', this.getOptions())
+        return this.http.get(this.apiEndpoints['rateCardsByUser'] + operatorId + '?schema=full', this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,
@@ -399,7 +399,6 @@ export class RateRemoteDataService {
                 error: error
             }));
     }
-
     /**
      * get rates for api, api operation, operator
      * @param apiName
@@ -429,8 +428,10 @@ export class RateRemoteDataService {
 
         return this.http.get(url, this.getOptions())
             .map((response: Response) => {
+            response
                 return response.json();
             })
+
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Loading API Operation Rates',
@@ -521,7 +522,23 @@ export class RateRemoteDataService {
      * generate request headers
      * @returns {RequestOptions}
      */
+
+
+
+
     getOptions(): RequestOptions {
+        const token = this.authService.loginUserInfo.getValue().token;
+        const useName = this.authService.loginUserInfo.getValue().userName;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'user-name': useName,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({headers: headers});
+    }
+
+    getOptionsCokkie(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
         const headers = new Headers(

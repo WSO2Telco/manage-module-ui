@@ -29,7 +29,8 @@ export class AssignRateMainComponent implements OnInit {
     private key: string;
     private format;
 
-    private isAdmin: boolean; /** since rate assign is only for hub-admin this value will be hard codes as true*/
+    private isAdmin: boolean;
+    /** since rate assign is only for hub-admin this value will be hard codes as true*/
 
     private invalidApiOperation: boolean;
     private invalidOperator: boolean;
@@ -143,7 +144,7 @@ export class AssignRateMainComponent implements OnInit {
                             this.sourceList = response.payload.source;
                             this.assignedList = response.payload.destination;
                             this.destinationList = [];
-                            if (this.sourceList.length == 0){
+                            if (this.sourceList.length == 0) {
                                 this.message.warning('No Rate Values Available for Selected Combination');
                             }
                         } else {

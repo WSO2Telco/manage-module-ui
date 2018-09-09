@@ -125,6 +125,19 @@ export class RateDefinition {
     rateCategories: RateCategory[];
 }
 
+export class AssignRateList {
+    rateDefId: number;
+    rateDefName: string;
+    rateDefDescription: string;
+    rateDefDefault: number;
+    currency: Currency;
+    rateType: RateType;
+    rateDefCategoryBase: number;
+    tariff: Tariff;
+    rateCategories: RateCategory[];
+    apioperationid:number;
+}
+
 export class Tax {
     taxId: number;
 }

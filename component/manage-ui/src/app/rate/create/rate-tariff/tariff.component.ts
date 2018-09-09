@@ -76,8 +76,6 @@ export class TariffComponent implements OnInit {
         this.IsEmptySurchargeAddOpco = false;
         this.clearErrors();
     }
-
-
     onSubmit(addTariffForm) {
         this.disableAddButton = true;
         if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
