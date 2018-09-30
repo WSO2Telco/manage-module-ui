@@ -22,6 +22,11 @@
                                (onAddTask)="onAddTariffHandler($event)"
                                (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
+                <app-addtax *ngIf="showAddTax"
+                               [existingTaxList]="taxList"
+                               (onAddTask)="onAddTaxHandler($event)"
+                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtax>
+
                 <app-addtariff *ngIf="showChildNewTariff"
                                [existingTariffList]="tariffList"
                                (onAddTask)="onAddTariffHandler($event)"
@@ -223,7 +228,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Taxes</label>
+                    <label class="control-label col-sm-2">Tax 1</label>
                     <div class="col-sm-6">
                         <select multiple
                                 [(ngModel)]="rateTax"
@@ -231,6 +236,85 @@
                                 name="tax"
                                 required
                                 id="taxlist">
+                            <option style="font-size:11px"
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>
+                            </option>
+                        </select>
+                    </div>
+                    <span class="glyphicon glyphicon-plus info-tooltip"
+                    tooltip="Click here to Add a new tax to the list" placement="right"
+                    (click)="showAddTax=true;changeDialogTitle();lgModal.show();"></span>
+    
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tax 2</label>
+                    <div class="col-sm-6">
+                        <select multiple
+                                [(ngModel)]="rateTax2"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist2">
+                            <option style="font-size:11px"
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>
+                            </option>
+                        </select>
+                    </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"
+                    ></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tax 3</label>
+                    <div class="col-sm-6">
+                        <select multiple
+                                [(ngModel)]="rateTax3"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist3">
+                            <option style="font-size:11px"
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>
+                            </option>
+                        </select>
+                    </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"
+                    ></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tax 4</label>
+                    <div class="col-sm-6">
+                        <select multiple
+                                [(ngModel)]="rateTax4"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist4">
+                            <option style="font-size:11px"
+                                    *ngFor="let c of rateTaxList"
+                                    [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>
+                            </option>
+                        </select>
+                    </div>
+                    <span class="glyphicon glyphicon-question-sign info-tooltip"
+                          tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"
+                    ></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2">Tax 5</label>
+                    <div class="col-sm-6">
+                        <select multiple
+                                [(ngModel)]="rateTax5"
+                                class="form-control"
+                                name="tax"
+                                required
+                                id="taxlist5">
                             <option style="font-size:11px"
                                     *ngFor="let c of rateTaxList"
                                     [ngValue]="c.taxId">{{c.taxName}}<span *ngFor="let d of c.taxesValidityDates">{{" | Tax Val - " + d.taxValidityval + " Valid from " + d.taxValidityactdate + " to " + d.taxValiditydisdate}}</span>

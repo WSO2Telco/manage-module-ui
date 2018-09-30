@@ -36,12 +36,14 @@ export class RateMainComponent implements OnInit {
     private rateType:string;
     private tariff:string;
     private rateTax:string;
+    private rateTax2:string;
     private taxId:number;
 
     private showSubcategory:boolean;
     private showAddCurrency:boolean;
     private showAddTariff:boolean;
     private isTariffSelect:boolean;
+    private showAddTax:boolean;
 
     private dialogactionTitile:string;
     private selectedtariff:string[];
@@ -70,6 +72,7 @@ export class RateMainComponent implements OnInit {
         this.showSubcategory = false;
         this.showAddCurrency = false;
         this.showAddTariff = false;
+        this.showAddTax = false;
         this.showChildNewTariff = false;
         this.showChildNewSubCategory = false;
         this.showChildNewCategory = false;
@@ -82,6 +85,7 @@ export class RateMainComponent implements OnInit {
         this.rateType = '';
         this.tariff = '';
         this.rateTax = '';
+        this.rateTax2 = '';
         this.taxId = 0;
 
         this.tariffList = [];
@@ -215,6 +219,7 @@ export class RateMainComponent implements OnInit {
         let tariff:Tariff;
         let rateType:RateType;
         let rateTaxes:RateTax[] = [];
+        let rateTaxes2:RateTax[] = [];
         let rateCard:Rate;
         let rateDefCategoryBase:number;
         let ratedefinition:RateDefinition;
@@ -260,6 +265,17 @@ export class RateMainComponent implements OnInit {
             temp.tax = temTax;
             rateTaxes[count2] = temp;
             count2++;
+        }
+
+        let count3 = 0;
+        /** for loop to assign rate tax values*/
+        for (const item of this.rateTax2) {
+            let temp = new RateTax();
+            let temTax = new Tax();
+            temTax.taxId = Number(item);
+            temp.tax = temTax;
+            rateTaxes2[count3] = temp;
+            count3++;
         }
 
         /** assign value to rateDefCategoryBase */
@@ -378,6 +394,8 @@ export class RateMainComponent implements OnInit {
             return this.dialogactionTitile = 'Add new Tariff code';
         else if (this.showChildNewCategory || this.showChildNewSubCategory)
             return this.dialogactionTitile = 'Add new Category';
+        else if (this.showAddTax)
+            return this.dialogactionTitile = 'Add new Category';
     }
 
     /**
@@ -398,6 +416,7 @@ export class RateMainComponent implements OnInit {
     clearModalContent() {
         this.showAddCurrency = false;
         this.showAddTariff = false;
+        this.showAddTax = false;
         this.showChildNewTariff = false;
         this.showChildNewSubCategory = false;
         this.showChildNewCategory = false;
