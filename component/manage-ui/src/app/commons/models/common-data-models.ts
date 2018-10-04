@@ -156,7 +156,8 @@ export class RateTax {
     createdDate: string;
     updatedBy: string;
     updatedDate: string;
-    taxesValidityDates:TaxValidityDates[];
+    taxesValidityDates:TaxValidityDates[]
+    level: number;
 }
 
 export class TaxValidityDates {
