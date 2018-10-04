@@ -37,6 +37,9 @@ export class RateMainComponent implements OnInit {
     private tariff:string;
     private rateTax:string;
     private rateTax2:string;
+    private rateTax3:string;
+    private rateTax4:string;
+    private rateTax5:string;
     private taxId:number;
 
     private showSubcategory:boolean;
@@ -86,6 +89,9 @@ export class RateMainComponent implements OnInit {
         this.tariff = '';
         this.rateTax = '';
         this.rateTax2 = '';
+        this.rateTax3 = '';
+        this.rateTax4 = '';
+        this.rateTax5 = '';
         this.taxId = 0;
 
         this.tariffList = [];
@@ -219,7 +225,6 @@ export class RateMainComponent implements OnInit {
         let tariff:Tariff;
         let rateType:RateType;
         let rateTaxes:RateTax[] = [];
-        let rateTaxes2:RateTax[] = [];
         let rateCard:Rate;
         let rateDefCategoryBase:number;
         let ratedefinition:RateDefinition;
@@ -263,20 +268,42 @@ export class RateMainComponent implements OnInit {
             let temTax = new Tax();
             temTax.taxId = Number(item);
             temp.tax = temTax;
-            rateTaxes[count2] = temp;
-            count2++;
-        }
-
-        let count3 = 0;
-        /** for loop to assign rate tax values*/
+            temp.level = 1;
+            rateTaxes.push(temp);
+            }
         for (const item of this.rateTax2) {
             let temp = new RateTax();
             let temTax = new Tax();
             temTax.taxId = Number(item);
             temp.tax = temTax;
-            rateTaxes2[count3] = temp;
-            count3++;
+            temp.level = 2;
+            rateTaxes.push(temp);
         }
+        for (const item of this.rateTax3) {
+            let temp = new RateTax();
+            let temTax = new Tax();
+            temTax.taxId = Number(item);
+            temp.tax = temTax;
+            temp.level = 3;
+            rateTaxes.push(temp);
+        }
+        for (const item of this.rateTax4) {
+            let temp = new RateTax();
+            let temTax = new Tax();
+            temTax.taxId = Number(item);
+            temp.tax = temTax;
+            temp.level = 4;
+            rateTaxes.push(temp);
+        }
+        for (const item of this.rateTax5) {
+            let temp = new RateTax();
+            let temTax = new Tax();
+            temTax.taxId = Number(item);
+            temp.tax = temTax;
+            temp.level = 5;
+            rateTaxes.push(temp);
+        }
+    
 
         /** assign value to rateDefCategoryBase */
         if (this.showSubcategory && this.rateCategories.length > 0) {
@@ -430,6 +457,16 @@ export class RateMainComponent implements OnInit {
         // console.log('add currency event called');
         if (event) {
             this.getCurrencyList();
+        }
+    }
+
+     /**
+     * event handler method which is triggered when a new tax is added
+     * @param event
+     */
+    onAddTaxHandler(event:boolean) {
+        if (event) {
+            this.getRateTaxList();
         }
     }
 

@@ -24,14 +24,21 @@ export class TaxComponent implements OnInit {
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
     private isNameError: boolean;
-    private isDescriptionError: boolean;
-    private disableAddButton: boolean;
+    private isCodeError: boolean;
     private is_invalid_period: boolean;
     private isCalenderEnable: boolean;
     private isCalendarEmpty: boolean;
+    private isvalueError: boolean;
+    private isdateError: boolean;
+    private datepickvalue: string;
+    private fromdate: string;
+    private todate: string;
+    private taxValue: string;
 
     private nameError: string;
-    private descriptionError: string;
+    private codeError: string;
+    private valueError: string;
+    private dateError: string;
     private date = new Date();
 
     private myDateRangePickerOptions: IMyDrpOptions = {
@@ -71,23 +78,31 @@ export class TaxComponent implements OnInit {
         this.tax = new RateTax();
         this.clearForm();
         this.tax.createdBy = loginInfo.userName;
-        this.disableAddButton = false;
         this.defaultcalval = '';
+        this.taxValue = '';
+        this.tax.taxesValidityDates = [];
     }
 
     clearForm() {
         this.tax.taxName = '';
         this.tax.taxCode = '';
+        this.taxValue = '';
+        this.defaultcalval = '';
         this.clearErrors();
     }
 
+    onDateRangeChanged(event) {
+        this.datepickvalue = event.formatted;
+        this.fromdate = this.datepickvalue.split('-')[0].trim();
+        this.todate = this.datepickvalue.split('-')[1].trim();
+    }
+
     onSubmit(addTaxForm) {
-       /* this.disableAddButton = true;
-        if (!this.isNameError && !this.isDescriptionError && this.tariff.tariffName.length != 0 &&
-            this.tariff.tariffDescription.length != 0 && !this.IsInvalidtariffSurChargeAds && !this.IsInvalidtariffSurChargeOpco &&
-            !this.IsInvalidspCommission && !this.IsInvalidadsCommission && !this.IsInvalidopcoCommission &&
-            !this.IsExceedCommision && this.ValidCommisionTotal && !this.IsEmptySurchargeAddOpco && !this.IsEmptySurchargeval) {
-            this.rateService.addTariff(this.tariff, (response) => {
+        if(this.tax.taxCode != null && this.tax.taxCode != '' && this.tax.taxName != null && this.tax.taxName != '' && this.defaultcalval != null && this.defaultcalval != '' && this.taxValue != null && this.taxValue != ''){
+            this.tax.taxCode = this.tax.taxCode;
+            this.tax.taxName = this.tax.taxName;
+            this.tax.taxesValidityDates = [{taxValidityactdate:this.fromdate,taxValiditydisdate:this.todate,taxValidityval:Number(this.taxValue)}];    
+            this.rateService.addTax(this.tax, (response) => {
                 if (response.success) {
                     this.onAddTask.emit(true);
                     this.modalClose.emit(true);
@@ -95,28 +110,46 @@ export class TaxComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
-                this.disableAddButton = false;
             });
 
         } else {
-            if (this.tariff.tariffName.length == 0) {
+            if (this.tax.taxName.length == 0) {
                 this.isNameError = true;
-                this.nameError = 'Name can not be empty';
+                this.nameError = 'Tax Name can not be empty';
+            }else{
+                this.isNameError = false;
             }
-            if (this.tariff.tariffDescription.length == 0) {
-                this.isDescriptionError = true;
-                this.descriptionError = 'Description can not be empty';
+            if (this.tax.taxCode.length == 0) {
+                this.isCodeError = true;
+                this.codeError = 'Tax Code can not be empty';
+            }else{
+                this.isCodeError = false;
             }
-            this.disableAddButton = false;
-        } */
+            if (this.taxValue.length == 0) {
+                this.isvalueError = true;
+                this.valueError = 'Tax Value can not be empty';
+            }else{
+                this.isvalueError = false;
+            }
+            if (this.defaultcalval.length == 0) {
+                this.isdateError = true;
+                this.dateError = 'Date can not be empty';
+            }else{
+                this.isdateError = false;
+            }
+        }  
 
     }
 
     clearErrors() {
         this.isNameError = false;
-        this.isDescriptionError = false;
+        this.isCodeError = false;
+        this.isvalueError = false;
+        this.isdateError = false;
         this.nameError = '';
-        this.descriptionError = '';
+        this.codeError = '';
+        this.valueError = '';
+        this.dateError = '';
     }
 
     isNameUnique(name) {
