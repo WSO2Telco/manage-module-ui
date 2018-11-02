@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {RateRemoteDataService} from "../../data-providers/rate_remote-data.service";
-import {Category, Currency, Rate, Tariff, UpdatedRate} from "../models/common-data-models";
+import {Category, Currency, Rate, Tariff, UpdatedRate, RateTax} from "../models/common-data-models";
 import {AuthenticationService} from "./authentication.service";
 import { forkJoin } from "rxjs/observable/forkJoin";
 import { Observable } from 'rxjs/Observable';
@@ -69,6 +69,28 @@ export class RateService {
             .subscribe(
                 data => {
                     callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+
+
+    /**
+     * This method call the remote service to add new tax
+     * @param code
+     * @param name
+     * @param updatedBy
+     * @param callback
+     */
+    addTax(tax: RateTax, callback: Function) {
+        this._remoteService.addTax(tax)
+            .subscribe(
+                data => {
+                    callback(data);
+                    console.log(data);
                 },
                 error => {
                     callback(error);
@@ -432,5 +454,6 @@ export class RateService {
         }
 
     }
+
 }
 

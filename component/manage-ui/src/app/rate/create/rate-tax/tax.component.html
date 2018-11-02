@@ -13,9 +13,8 @@
                                            name="code"
                                            #nameRef="ngModel"
                                            required
-                                           [(ngModel)]="tax.taxCode"
-                                           (input)="isNameUnique($event.target.value)">
-                                    <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
+                                           [(ngModel)]="tax.taxCode">
+                                    <span class="error" *ngIf="isCodeError">{{codeError}}</span>
                                 </div>
                             </div>
 
@@ -29,9 +28,22 @@
                                            name="name"
                                            #nameRef="ngModel"
                                            required
-                                           [(ngModel)]="tax.taxName"
-                                           (input)="isNameUnique($event.target.value)">
+                                           [(ngModel)]="tax.taxName">
                                     <span class="error" *ngIf="isNameError">{{nameError}}</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-4">Tax Value <span>*</span></label>
+                                <div class="col-sm-6">
+                                    <input class="form-control"
+                                           type="number"
+                                           autocomplete="off"
+                                           placeholder="Tax Value"
+                                           name="value"
+                                           #nameRef="ngModel"
+                                           required
+                                           [(ngModel)]="taxValue">
+                                    <span class="error" *ngIf="isvalueError">{{valueError}}</span>
                                 </div>
                             </div>
 
@@ -48,9 +60,7 @@
                                     ></my-date-range-picker>
                                 </div>
                                 <span class="error col-sm-offset-4 col-sm-8"
-                                      *ngIf="is_invalid_period">Validity Period cross with existing record</span>
-                                <span class="error col-sm-offset-4 col-sm-8"
-                                      *ngIf="isCalendarEmpty">Date range cannot be empty</span>
+                                      *ngIf="isdateError">{{dateError}}</span>
                             </div>
 
                         <div class="form-group">

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate} from '../commons/models/common-data-models';
+import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate, RateTax} from '../commons/models/common-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
 
 
@@ -18,6 +18,7 @@ export class RateRemoteDataService {
         rateTypes: this.apiContext + 'ratetypes',
         categories: this.apiContext + 'categories',
         currencies: this.apiContext + 'currencies',
+        tax: this.apiContext + 'taxes/add',
         operators: this.apiContext + 'operators',
         rateDefinitions: this.apiContext + 'ratedefinitions',
         rateTaxes: this.apiContext + 'taxes',
@@ -115,6 +116,35 @@ export class RateRemoteDataService {
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding New Currency',
+                error: error
+            }));
+    }
+
+    /**
+     * Add a new Tax
+     * @param data
+     * @returns {Observable<ServerResponse>}
+     */
+    addTax(data: RateTax) {
+        return this.http.post(this.apiEndpoints['tax'], JSON.stringify(data), this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'New Tax Added Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding New Tax',
+                        payload: null
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Adding New Tax',
                 error: error
             }));
     }
