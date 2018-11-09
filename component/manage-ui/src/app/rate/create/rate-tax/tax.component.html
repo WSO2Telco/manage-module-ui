@@ -13,7 +13,8 @@
                                            name="code"
                                            #nameRef="ngModel"
                                            required
-                                           [(ngModel)]="tax.taxCode">
+                                           [(ngModel)]="tax.taxCode"
+                                           (input)="isCodeUnique($event.target.value)">
                                     <span class="error" *ngIf="isCodeError">{{codeError}}</span>
                                 </div>
                             </div>
@@ -28,7 +29,8 @@
                                            name="name"
                                            #nameRef="ngModel"
                                            required
-                                           [(ngModel)]="tax.taxName">
+                                           [(ngModel)]="tax.taxName"
+                                           (input)="isNameUnique($event.target.value)">
                                     <span class="error" *ngIf="isNameError">{{nameError}}</span>
                                 </div>
                             </div>
@@ -40,11 +42,14 @@
                                            autocomplete="off"
                                            placeholder="Tax Value"
                                            name="value"
+                                           min="0"
                                            #nameRef="ngModel"
+                                           oninput="this.value = Math.abs(this.value)"
                                            required
                                            [(ngModel)]="taxValue">
                                     <span class="error" *ngIf="isvalueError">{{valueError}}</span>
                                 </div>
+                                <i class="fa fa-percent "></i>
                             </div>
 
                             <div class="form-group">
@@ -63,7 +68,7 @@
                                       *ngIf="isdateError">{{dateError}}</span>
                             </div>
 
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="!isNameError && !isCodeError">
                         <div class="col-sm-offset-2 col-sm-1">
                             <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
                         </div>
