@@ -25,6 +25,7 @@ export class TaxComponent implements OnInit {
 
     private isNameError: boolean;
     private isCodeError: boolean;
+    private disableAddButton: boolean;
     private is_invalid_period: boolean;
     private isCalenderEnable: boolean;
     private isCalendarEmpty: boolean;
@@ -81,6 +82,7 @@ export class TaxComponent implements OnInit {
         this.defaultcalval = '';
         this.taxValue = '';
         this.tax.taxesValidityDates = [];
+        this.disableAddButton = false;
     }
 
     clearForm() {
@@ -98,10 +100,14 @@ export class TaxComponent implements OnInit {
     }
 
     onSubmit(addTaxForm) {
-        if(this.tax.taxCode != null && this.tax.taxCode != '' && this.tax.taxName != null && this.tax.taxName != '' && this.defaultcalval != null && this.defaultcalval != '' && this.taxValue != null && this.taxValue != ''){
+        this.disableAddButton = true;
+        if(!this.isNameError && !this.isCodeError &&
+            this.tax.taxCode != null && this.tax.taxCode != '' && this.tax.taxName != null &&
+            this.tax.taxName != '' && this.defaultcalval != null && this.defaultcalval != '' &&
+            this.taxValue != null && this.taxValue != ''){
             this.tax.taxCode = this.tax.taxCode;
             this.tax.taxName = this.tax.taxName;
-            this.tax.taxesValidityDates = [{taxValidityactdate:this.fromdate,taxValiditydisdate:this.todate,taxValidityval:Number(this.taxValue)}];    
+            this.tax.taxesValidityDates = [{taxValidityactdate:this.fromdate,taxValiditydisdate:this.todate,taxValidityval:Number(this.taxValue) / 100}];
             this.rateService.addTax(this.tax, (response) => {
                 if (response.success) {
                     this.onAddTask.emit(true);
@@ -110,6 +116,7 @@ export class TaxComponent implements OnInit {
                 } else {
                     this.message.error(response.message);
                 }
+                this.disableAddButton = false;
             });
 
         } else {
@@ -137,6 +144,7 @@ export class TaxComponent implements OnInit {
             }else{
                 this.isdateError = false;
             }
+            this.disableAddButton = false;
         }  
 
     }
@@ -171,6 +179,28 @@ export class TaxComponent implements OnInit {
         } else {
             this.isNameError = false;
             this.nameError = '';
+        }
+    }
+
+    isCodeUnique(code) {
+        let state = false;
+        for (const entry of this.existingTaxList) {
+            if (code.trim() == entry.taxCode.trim()) {
+                state = true;
+            }
+        }
+        if (state) {
+            this.isCodeError = true;
+            this.codeError = 'Code Already Existing';
+        } else if (code.length == 0) {
+            this.isCodeError = true;
+            this.codeError = 'Code Cannot Be Empty';
+        } else if (code.length > 45) {
+            this.isCodeError = true;
+            this.codeError = 'Ony 45 Characters Allowed';
+        } else {
+            this.isCodeError = false;
+            this.codeError = '';
         }
     }
 
