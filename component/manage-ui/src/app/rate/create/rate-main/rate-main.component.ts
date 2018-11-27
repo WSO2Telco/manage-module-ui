@@ -422,7 +422,7 @@ export class RateMainComponent implements OnInit {
         else if (this.showChildNewCategory || this.showChildNewSubCategory)
             return this.dialogactionTitile = 'Add new Category';
         else if (this.showAddTax)
-            return this.dialogactionTitile = 'Add new Category';
+            return this.dialogactionTitile = 'Add new Tax';
     }
 
     /**

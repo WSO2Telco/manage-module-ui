@@ -82,7 +82,9 @@ export class TaxComponent implements OnInit {
         this.defaultcalval = '';
         this.taxValue = '';
         this.tax.taxesValidityDates = [];
+        this.existingTaxList = [];
         this.disableAddButton = false;
+        this.getExistingTaxesList();
     }
 
     clearForm() {
@@ -204,5 +206,14 @@ export class TaxComponent implements OnInit {
         }
     }
 
+    getExistingTaxesList() {
+        this.rateService.getRateTaxList((response) => {
+            if (response.success) {
+                this.existingTaxList = response.payload;
+            } else {
+                this.message.error(response.message);
+            }
+        });
+    }
 
 }
