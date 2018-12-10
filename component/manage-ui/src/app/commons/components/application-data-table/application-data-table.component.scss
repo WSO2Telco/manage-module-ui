@@ -269,6 +269,11 @@
         width:30%;
       }
 
+      .tbl-user-name-cell{
+        word-break: break-all;
+        width:20%;
+      }
+
       &.modified {
         background-color: #ffffcc;
       }
