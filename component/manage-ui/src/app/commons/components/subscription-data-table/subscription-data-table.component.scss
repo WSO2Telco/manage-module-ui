@@ -103,8 +103,11 @@
       }
 
       .tbl-sub-title{
-        word-break: break-all;
-        width:20%;
+
+        @media only screen and (max-width: 800px) {
+          width: 30%;
+          word-break: break-all;
+        }
       }
 
        .tbl-create-title{
@@ -114,7 +117,7 @@
 
        .tbl-create-cell{
 
-         @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 800px) {
           width: 30%;
           word-break: break-all;
         }
