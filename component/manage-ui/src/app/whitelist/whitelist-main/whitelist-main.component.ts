@@ -207,7 +207,7 @@ export class WhitelistMainComponent implements OnInit {
                                     }
                                 });
                         } else {
-                            this.message.longError('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
+                            this.message.error('Number does not match with defined Regex ' + msisdnValidation.payload.invalid);
                         }
 
                     } else {
