@@ -12,11 +12,14 @@ export class UserLoginComponent implements OnInit {
     password: string;
     isSubmitted: boolean;
     loginError: string;
+    year: number;
 
     constructor(private _authenticationService: AuthenticationService) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.year = new Date().getFullYear();
+    }
 
     onLoginClick(loginForm) {
         this.isSubmitted = true;
