@@ -184,7 +184,8 @@ export class SubscriptionDataTableComponent implements OnInit {
     }
 
     onFilterItemAdded() {
-        this.filter.filerString = this.filterString;
+        let stringValue = this.filterString.replace(/\s/g, '');
+        this.filter.filerString = stringValue;
         this.filter.startRecordNumber = 0;
         this.currentPage = 1;
         this.onFilterChange.emit(this.filter);
