@@ -51,7 +51,8 @@ export class ApplicationHistoryTableComponent implements OnInit {
     }
 
     onFilterItemAdded() {
-        this.filter.filterString = this.filterString;
+        let stringValue = this.filterString.replace(/\s/g, '');
+        this.filter.filterString = stringValue;
         this.onFilterChange.emit(this.filter);
     }
 
