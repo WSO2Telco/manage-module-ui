@@ -29,7 +29,7 @@ export class ApplicationTask {
     subscriber: string;
 
     toString() {
-        return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment + ',' + this.userName;
+        return '' + this.id + ',' + this.applicationName + ',' + this.applicationDescription + ',' + this.comment;
     }
 }
 
