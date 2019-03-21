@@ -48,6 +48,7 @@ export class ReportingRemoteDataService {
     private apiEndpoints: Object = {
         subscribers: this.apiContext + 'history/subscribers',
         operators: this.apiContext + 'history/operators',
+        depType: this.apiContext + 'history/details',
         approvalHistory: this.apiContext + 'history/approval',
         applications: this.apiContext + 'history/applications',
         applicationHistory: this.apiContext + 'applications/history'
@@ -202,4 +203,11 @@ export class ReportingRemoteDataService {
         return new RequestOptions({headers: headers});
     }
 
+    getDeploymentType(): Promise<any> {
+        return this.http.get(this.apiEndpoints['depType'], this.getOptions())
+            .toPromise()
+            .then((res: Response)=>{
+                return res.json();
+            });
+    }
 }

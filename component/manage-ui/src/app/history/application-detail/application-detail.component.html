@@ -11,24 +11,35 @@
                             <tbody>
                             <tr>
                                 <th>Application Status:</th>
-                                <td colspan="2"><span class="label label-success">{{ applicationDetail.status }}</span>
+                                <td colspan="2">
+                                    <span *ngIf="applicationDetail.status == 'Approved'" class="label label-success">{{ applicationDetail.status }}</span>
+                                    <span *ngIf="applicationDetail.status == 'Rejected'" class="label label-danger">{{ applicationDetail.status }}</span>
+                                    <span *ngIf="applicationDetail.status == 'Pending'" class="label label-warning">{{ applicationDetail.status }}</span>
+                                <th>Dep type:</th>
+                                <td colspan="2"><span class="label label-success">{{ depType }}</span>
                                 </td>
                             </tr>
-                            <tr>
-                                <th>OPERATOR:</th>
+                            <!--<tr *ngIf="depType == 'internal_gateway_type1' || depType == 'internal_gateway_type2'">-->
+                                <!--<th>Admin Approval Status :</th>-->
+                                <!--<td colspan="2"></td>-->
+                            <!--</tr>-->
+                            <tr *ngIf="depType == 'external_gateway' || depType == 'hub'">
+                                <th>Operator Approval Status :</th>
                                 <td colspan="2"></td>
                             </tr>
-                            <tr *ngFor="let opt of applicationDetail.operatorApprovals; let i=index">
-                                <td>{{ applicationDetail.operatorApprovals[i]?.operatorName }}</td>
-                                <td colspan="2"><span
-                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Approved'"
-                                        class="label label-success">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
-                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Pending'"
-                                        class="label label-warning">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
-                                        *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Rejected'"
-                                        class="label label-danger">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span>
-                                </td>
-                            </tr>
+                            <ng-container *ngIf="depType == 'external_gateway' || depType == 'hub'">
+                                <tr *ngFor="let opt of applicationDetail.operatorApprovals; let i=index">
+                                    <td>{{ applicationDetail.operatorApprovals[i]?.operatorName }}</td>
+                                    <td colspan="2"><span
+                                            *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Approved'"
+                                            class="label label-success">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
+                                            *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Pending'"
+                                            class="label label-warning">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span><span
+                                            *ngIf="applicationDetail.operatorApprovals[i]?.approvalStatus == 'Rejected'"
+                                            class="label label-danger">{{ applicationDetail.operatorApprovals[i]?.approvalStatus }}</span>
+                                    </td>
+                                </tr>
+                            </ng-container>
                             </tbody>
                         </table>
                     </div>
