@@ -17,10 +17,6 @@
                                     <span *ngIf="applicationDetail.status == 'Pending'" class="label label-warning">{{ applicationDetail.status }}</span>
                                 </td>
                             </tr>
-                            <!--<tr *ngIf="depType == 'internal_gateway_type1' || depType == 'internal_gateway_type2'">-->
-                                <!--<th>Admin Approval Status :</th>-->
-                                <!--<td colspan="2"></td>-->
-                            <!--</tr>-->
                             <tr *ngIf="depType == 'external_gateway' || depType == 'hub'">
                                 <th>Operator Approval Status :</th>
                                 <td colspan="2"></td>
