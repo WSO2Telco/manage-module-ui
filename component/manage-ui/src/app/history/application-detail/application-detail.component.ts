@@ -17,7 +17,7 @@ export class ApplicationDetailComponent implements OnInit {
     private id: number;
     private name:string;
     private show: boolean;
-    private depType : string = "internal_gateway_type1";
+    private depType : string = "internal_gateway_type2";
 
   constructor(private reportingService: ReportingRemoteDataService,
     private route: ActivatedRoute,  private message: MessageService) {}
