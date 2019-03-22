@@ -17,6 +17,7 @@ export class ApplicationDetailComponent implements OnInit {
     private id: number;
     private name:string;
     private show: boolean;
+    private depType : string = "internal_gateway_type2";
 
   constructor(private reportingService: ReportingRemoteDataService,
     private route: ActivatedRoute,  private message: MessageService) {}
@@ -27,10 +28,15 @@ export class ApplicationDetailComponent implements OnInit {
       this.operatorApprovals = [];
       this.show  = false;
 
+      this.reportingService.getDeploymentType().then((result)=>{
+          this.depType = result.depType;
+      }).catch((err)=> {
+          console.log(err);
+      });
+
       this.route.params.subscribe(params => {
           this.id = params['id'];
           this.name = params['name'];
-          console.log('tst :'+this.name);
           this.onApplication(this.id);
       });
   }
@@ -51,5 +57,4 @@ export class ApplicationDetailComponent implements OnInit {
             }
         });
     }
-
 }
