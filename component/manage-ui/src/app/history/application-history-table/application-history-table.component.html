@@ -46,7 +46,7 @@
             <div class="tbl-cell">Application Description</div>
             <div class="tbl-cell">CreatedBy</div>
             <div class="tbl-cell">Status</div>
-            <div *ngIf="depType == 'external_gateway' || depType == 'hub'" class="tbl-cell">More</div>
+            <div class="tbl-cell">More</div>
         </div>
         <div class="tbl-row" *ngFor="let item of dataSource">
             <div class="tbl-cell">{{item.applicationId}}</div>
@@ -54,7 +54,7 @@
             <div class="tbl-cell">{{item.applicationDescription}}</div>
             <div class="tbl-cell">{{item.createdBy}}</div>
             <div class="tbl-cell">{{item.status}}</div>
-            <div *ngIf="depType == 'external_gateway' || depType == 'hub'" class="tbl-cell">
+            <div class="tbl-cell">
                 <button class="btn btn-primary" tooltip="Application Detail" placement="top" (click)='onNavApplication(item.applicationId)'> More</button>
             </div>
         </div>
