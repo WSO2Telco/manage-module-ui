@@ -51,7 +51,8 @@ export class ReportingRemoteDataService {
         depType: this.apiContext + 'history/deptype',
         approvalHistory: this.apiContext + 'history/approval',
         applications: this.apiContext + 'history/applications',
-        applicationHistory: this.apiContext + 'applications/history'
+        applicationHistory: this.apiContext + 'applications/history',
+        subscriptionHistory: this.apiContext + 'history/subscriptions'
     };
 
     constructor(private http: Http,
@@ -201,6 +202,14 @@ export class ReportingRemoteDataService {
 
     getDeploymentType(): Promise<any> {
         return this.http.get(this.apiEndpoints['depType'], this.getOptions())
+            .toPromise()
+            .then((res: Response)=>{
+                return res.json();
+            });
+    }
+
+    getSubscriptionHistory(): Promise<any> {
+        return this.http.get(this.apiEndpoints['subscriptionHistory'], this.getOptions())
             .toPromise()
             .then((res: Response)=>{
                 return res.json();

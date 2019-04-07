@@ -61,6 +61,24 @@
         <div class="no-rec-row tbl-row" *ngIf="dataSource.length == 0">
             <span class="no-rec">No Records...</span>
         </div>
-
+    </div>
+<!--    When user with Publisher role is Logged in, This will show Subscription details-->
+    <div class="table" *ngIf="subViewPermission">
+        <div class="tbl-row header">
+            <div class="tbl-cell">Subscription Id</div>
+            <div class="tbl-cell">Tier Id</div>
+            <div class="tbl-cell">Api Id</div>
+            <div class="tbl-cell">Application Id</div>
+            <div class="tbl-cell">Subscription Status</div>
+            <div class="tbl-cell">CreatedBy</div>
+        </div>
+        <div class="tbl-row" *ngFor="let sub of subscriptionDataSource">
+            <div class="tbl-cell">{{sub.subscription_id}}</div>
+            <div class="tbl-cell">{{sub.tier_id}}</div>
+            <div class="tbl-cell">{{sub.api_id}}</div>
+            <div class="tbl-cell">{{sub.app_id}}</div>
+            <div class="tbl-cell">{{sub.sub_status}}</div>
+            <div class="tbl-cell">{{sub.created_by}}</div>
+        </div>
     </div>
 </div>

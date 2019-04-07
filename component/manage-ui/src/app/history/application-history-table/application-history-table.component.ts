@@ -1,7 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AppHistory, ApplicationHistory, ApprovalHistoryFilter} from '../../commons/models/reporing-data-models';
+import {
+    AppHistory,
+    ApplicationHistory,
+    ApprovalHistoryFilter,
+    SubscriptionsHistory
+} from '../../commons/models/reporing-data-models';
 import {Router} from '@angular/router';
 import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
+import {AuthenticationService} from "../../commons/services/authentication.service";
 
 @Component({
     selector: 'app-history-table',
@@ -28,16 +34,22 @@ export class ApplicationHistoryTableComponent implements OnInit {
     private operatorApprovals: ApplicationHistory[];
     private subscriptions: ApplicationHistory[];
     private depType : string = "internal_gateway_type2";
+    private subscriptionDataSource : SubscriptionsHistory[];
 
     private isFilterVisible: boolean;
     private filterString: string;
     private showApprovedOn: string;
     public name:string;
+    private loggedUser:any;
+    private subViewPermission: boolean;
 
-    constructor(private router: Router,private reportingService: ReportingRemoteDataService) {
+
+    constructor(private router: Router,private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
+        this.subscriptionDataSource = [];
+        this.subViewPermission = null;
         this.dataSource = [];
         this.applicationDetail = null;
         this.operatorApprovals = [];
@@ -52,6 +64,22 @@ export class ApplicationHistoryTableComponent implements OnInit {
         }).catch((err)=> {
             console.log(err);
         });
+
+        this.reportingService.getSubscriptionHistory().then((result)=>{
+            this.subscriptionDataSource = result;
+            console.log(this.subscriptionDataSource);
+        }).catch((err)=> {
+            console.log(err);
+        });
+
+        // this.loggedUser = this.authService.loginUserInfo.getValue();
+        // this.subViewPermission = this.loggedUser.permissions.subscription.visible;
+
+        if (this.authService.hasPermissions('subscription:visible')){
+            console.log(this.authService.hasPermissions('subscription:visible'));
+            this.subViewPermission = true;
+        }
+
     }
 
     onNavApplication(id: number) {

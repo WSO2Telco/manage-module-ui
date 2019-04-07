@@ -93,6 +93,16 @@ export class Subscriptions {
     lastUpdated: string;
 }
 
+export class SubscriptionsHistory {
+    subscription_id : number;
+    tier_id: string;
+    api_id: number;
+    app_id: number;
+    sub_status: string;
+    subs_create_state: string;
+    created_by: string;
+}
+
 export class ApprovedApiOperationRate {
     apiOperation: string;
     rateDefname: string;
