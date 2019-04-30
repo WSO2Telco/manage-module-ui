@@ -4,7 +4,7 @@
                 <!--[filter]="filter"-->
                 <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
     <!--</div>-->
-    <div class="col-sm-12">
+    <div class="col-sm-12" *ngIf="">
         <app-history-table
                 [dataSource]="approvalHistoryData?.applications"
                 [filter]="filter"
@@ -18,6 +18,24 @@
                 [itemsPerPage]="filter.count"
                 [maxSize]="3"
                 (pageChanged)="onPageChanged($event)"
+                class="pagination-sm"
+                previousText="&lsaquo;"
+                nextText="&rsaquo;"
+                firstText="&laquo;"
+                lastText="&raquo;"></pagination>
+
+    </div>
+    <div class="col-sm-12">
+        <sub-history-table></sub-history-table>
+    </div>
+    <div class="col-sm-12 text-center">
+        <pagination
+                [boundaryLinks]="true"
+                [totalItems]="totalItems"
+                [(ngModel)]="subCurrentPage"
+                [itemsPerPage]="subFilter.count"
+                [maxSize]="3"
+                (pageChanged)="onSubPageChanged($event)"
                 class="pagination-sm"
                 previousText="&lsaquo;"
                 nextText="&rsaquo;"

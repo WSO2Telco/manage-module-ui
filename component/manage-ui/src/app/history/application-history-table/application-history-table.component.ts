@@ -1,13 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
     AppHistory,
     ApplicationHistory,
     ApprovalHistoryFilter,
+    SubscriptionHistoryFilter,
     SubscriptionsHistory
 } from '../../commons/models/reporing-data-models';
-import {Router} from '@angular/router';
-import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
-import {AuthenticationService} from "../../commons/services/authentication.service";
+import { Router } from '@angular/router';
+import { ReportingRemoteDataService } from "../../data-providers/reporting-remote-data.service";
+import { AuthenticationService } from "../../commons/services/authentication.service";
+
 
 @Component({
     selector: 'app-history-table',
@@ -33,23 +35,19 @@ export class ApplicationHistoryTableComponent implements OnInit {
 
     private operatorApprovals: ApplicationHistory[];
     private subscriptions: ApplicationHistory[];
-    private depType : string = "internal_gateway_type2";
-    private subscriptionDataSource : SubscriptionsHistory[];
+    private depType: string = "internal_gateway_type2";
 
     private isFilterVisible: boolean;
     private filterString: string;
     private showApprovedOn: string;
-    public name:string;
-    private loggedUser:any;
-    private subViewPermission: boolean;
+    public name: string;
+    private loggedUser: any;
 
 
-    constructor(private router: Router,private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {
+    constructor(private router: Router, private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {
     }
 
     ngOnInit() {
-        this.subscriptionDataSource = [];
-        this.subViewPermission = null;
         this.dataSource = [];
         this.applicationDetail = null;
         this.operatorApprovals = [];
@@ -59,31 +57,16 @@ export class ApplicationHistoryTableComponent implements OnInit {
         this.showApprovedOn = 'workFlowHistory:showApprovedOn';
         this.name = 'test';
 
-        this.reportingService.getDeploymentType().then((result)=>{
+        this.reportingService.getDeploymentType().then((result) => {
             this.depType = result.depType;
-        }).catch((err)=> {
+        }).catch((err) => {
             console.log(err);
         });
-
-        this.reportingService.getSubscriptionHistory().then((result)=>{
-            this.subscriptionDataSource = result;
-            console.log(this.subscriptionDataSource);
-        }).catch((err)=> {
-            console.log(err);
-        });
-
-        // this.loggedUser = this.authService.loginUserInfo.getValue();
-        // this.subViewPermission = this.loggedUser.permissions.subscription.visible;
-
-        if (this.authService.hasPermissions('subscription:visible')){
-            console.log(this.authService.hasPermissions('subscription:visible'));
-            this.subViewPermission = true;
-        }
 
     }
 
     onNavApplication(id: number) {
-        this.router.navigateByUrl('/history/application/' + id+'/'+ this.name);
+        this.router.navigateByUrl('/history/application/' + id + '/' + this.name);
     }
 
     onFilterItemAdded() {

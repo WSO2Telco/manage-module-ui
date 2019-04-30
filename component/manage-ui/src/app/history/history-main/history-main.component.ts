@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
 import {
     ApprovalHistoryFilter, ApprovalHistory,
-    ApprovalHistoryDataset, AppHistoryResponse
+    ApprovalHistoryDataset, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter
 } from "../../commons/models/reporing-data-models";
 
 @Component({
@@ -16,18 +16,30 @@ export class HistoryMainComponent implements OnInit {
     }
 
     private filter: ApprovalHistoryFilter;
+    private subFilter: SubscriptionHistoryFilter;
 
     private fieldSet = ["applicationId", "applicationName", "applicationDescription", "createdBy", "status", "approvedOn", "Application"];
 
     private approvalHistoryData: AppHistoryResponse;
 
+    private subscriptionHistoryData : SubscriptionHistoryResponse;
+
     private totalItems: number = 0;
     private currentPage: number = 1;
+    private subCurrentPage: number = 1;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
+        this.subFilter = new SubscriptionHistoryFilter();
+
         this.filter.count = 10;
+        this.subFilter.count = 10;
+
+        this.filter.count;
+        this.subFilter.count;
+
         this.filter.filterString = '';
+        this.subFilter.filterString = '';
 
         this.reportingService.ApprovalHistoryProvider.subscribe((history) => {
             this.approvalHistoryData = history;
@@ -49,4 +61,8 @@ export class HistoryMainComponent implements OnInit {
         this.reportingService.getApprovalHistory(this.filter);
     }
 
+    onSubPageChanged(event) {
+        this.subFilter.offset = (event.page - 1) * this.subFilter.count;
+        this.reportingService.getSubscriptionHistory(this.subFilter);
+    }
 }

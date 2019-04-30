@@ -4,8 +4,8 @@ import {Subject, BehaviorSubject, Observable} from "rxjs";
 import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
-    ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
-    Application, ApplicationHistory, AppHistoryResponse
+    ApprovalHistory, ApprovalHistoryFilter,
+    Application, ApplicationHistory, AppHistoryResponse, SubscriptionHistoryResponse
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
 
@@ -52,7 +52,7 @@ export class ReportingRemoteDataService {
         approvalHistory: this.apiContext + 'history/approval',
         applications: this.apiContext + 'history/applications',
         applicationHistory: this.apiContext + 'applications/history',
-        subscriptionHistory: this.apiContext + 'history/subscriptions'
+        subscriptionHistory: this.apiContext + 'applications/subshistory'
     };
 
     constructor(private http: Http,
@@ -208,11 +208,54 @@ export class ReportingRemoteDataService {
             });
     }
 
-    getSubscriptionHistory(): Promise<any> {
-        return this.http.get(this.apiEndpoints['subscriptionHistory'], this.getOptions())
+    getSubscriptionHistory(filter?: any): Promise<any> {
+
+        let offset = 0;
+
+        const endPoint = this.apiEndpoints['subscriptionHistory']
+            + '?start=' + offset + '&filterBy=' + filter;
+        console.log("filter",filter);
+        return this.http.get(endPoint, this.getOptions())
             .toPromise()
             .then((res: Response)=>{
+                console.log("JSON",res.json());
                 return res.json();
             });
     }
+
+    // getSubscriptionHistory(filter?: SubscriptionHistoryFilter) {
+    //     let subHistoryFilter = new SubscriptionHistoryFilter();
+    //
+    //     if (!!filter) {
+    //         subHistoryFilter = filter;
+    //     }
+    //
+    //     this.slimLoadingBarService.start();
+    //
+    //     const endPoint = this.apiEndpoints['subscriptionHistory']
+    //         + '?start=' + subHistoryFilter.offset + '&filterBy=' + subHistoryFilter.filterString;
+    //
+    //     this.http.get(endPoint, this.getOptions())
+    //         .map((response: Response) => response.json())
+    //         .catch((error: Response) => Observable.throw({
+    //             success: false,
+    //             message: 'Error Loading Subscription approval History List',
+    //             error: error
+    //         }))
+    //         .subscribe(
+    //             data => {
+    //                 if (data.success) {
+    //                     this.SubscriptionApprovalHistoryProvider.next(data.payload);
+    //                     this.slimLoadingBarService.complete();
+    //                 } else {
+    //                     this.message.error(data.message);
+    //                     this.slimLoadingBarService.stop();
+    //                 }
+    //             },
+    //             error => {
+    //                 this.message.error(error.message);
+    //                 this.slimLoadingBarService.stop();
+    //             }
+    //         );
+    // }
 }
