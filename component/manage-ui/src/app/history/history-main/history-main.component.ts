@@ -25,6 +25,8 @@ export class HistoryMainComponent implements OnInit {
     private subscriptionHistoryData : SubscriptionHistoryResponse;
 
     private totalItems: number = 0;
+    private subTotalItems: number = 0;
+
     private currentPage: number = 1;
     private subCurrentPage: number = 1;
 
@@ -46,14 +48,25 @@ export class HistoryMainComponent implements OnInit {
             this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.total) || this.totalItems;
         });
 
+        this.reportingService.SubApprovalHistoryProvider.subscribe((subHistory) => {
+            this.subscriptionHistoryData = subHistory;
+            this.subTotalItems = (this.subscriptionHistoryData && this.subscriptionHistoryData.total) || this.subTotalItems;
+        });
+
         this.reportingService.getSubscribers();
         this.reportingService.getOperators();
         this.reportingService.getApprovalHistory(this.filter);
+        this.reportingService.getSubscriptionHistory(this.subFilter);
     }
 
     onFilterChangeHandler(event: ApprovalHistoryFilter) {
         this.filter = event;
         this.reportingService.getApprovalHistory(this.filter);
+    }
+
+    onSubFilterChangeHandler(event: SubscriptionHistoryFilter) {
+        this.subFilter = event;
+        this.reportingService.getSubscriptionHistory(this.subFilter);
     }
 
     onPageChanged(event) {

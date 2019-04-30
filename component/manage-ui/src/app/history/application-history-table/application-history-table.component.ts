@@ -1,15 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
     AppHistory,
     ApplicationHistory,
-    ApprovalHistoryFilter,
-    SubscriptionHistoryFilter,
-    SubscriptionsHistory
+    ApprovalHistoryFilter
 } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
 import { ReportingRemoteDataService } from "../../data-providers/reporting-remote-data.service";
 import { AuthenticationService } from "../../commons/services/authentication.service";
-
 
 @Component({
     selector: 'app-history-table',

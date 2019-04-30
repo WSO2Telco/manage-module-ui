@@ -31,7 +31,8 @@
                 <td>Subscription Approval Filter Example</td>
             </tr>
             <tr>
-                <td>subId:id,api:name</td>
+                <td>subId:id,api:name,app:name,created</td>
+                <td>subscriptionId:id,api:name,application:name,createdBy:name</td>
             </tr>
         </table>
     </template>
@@ -39,7 +40,7 @@
     <div class="table" *ngIf="subViewPermission">
         <div class="tbl-row header">
             <div class="tbl-cell">Subscription Id</div>
-            <div class="tbl-cell">Tier Id</div>
+            <div class="tbl-cell">Tier</div>
             <div class="tbl-cell">Api Id</div>
             <div class="tbl-cell">Api Name</div>
             <div class="tbl-cell">Application Id</div>
