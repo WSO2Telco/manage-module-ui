@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-    ApprovalHistoryFilter,
     SubscriptionHistoryFilter,
     SubscriptionsHistory
 } from '../../commons/models/reporing-data-models';
@@ -41,8 +40,6 @@ export class SubscriptionHistoryTableComponent implements OnInit {
         this.isSubFilterVisible = true;
         this.filterSubString = '';
 
-        // this.getSubscriptionHistory(this.filterSubString);
-
         if (this.authService.hasPermissions('subscription:visible')) {
             console.log(this.authService.hasPermissions('subscription:visible'));
             this.subViewPermission = true;
@@ -52,23 +49,13 @@ export class SubscriptionHistoryTableComponent implements OnInit {
 
     onSubFilterItemAdded() {
         let stringValue = this.filterSubString.replace(/\s/g, '');
-        // this.getSubscriptionHistory(stringValue);
         this.subsFilter.filterString = stringValue;
         this.onSubFilterChange.emit(this.subsFilter);
     }
 
     onSubsClear() {
         this.filterSubString = '';
-        // this.getSubscriptionHistory(this.filterSubString);
         this.subsFilter.filterString = this.filterSubString;
         this.onSubFilterChange.emit(this.subsFilter);
     }
-
-    // getSubscriptionHistory = function(filterStringValue){
-    //     this.reportingService.getSubscriptionHistory(filterStringValue).then((result) => {
-    //         this.subscriptionDataSource = result.payload.subscriptions;
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     });
-    // }
 }

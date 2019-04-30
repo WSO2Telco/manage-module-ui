@@ -4,7 +4,7 @@ import {Subject, BehaviorSubject, Observable} from "rxjs";
 import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
-    ApprovalHistory, ApprovalHistoryFilter,
+    ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
     Application, ApplicationHistory, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
@@ -209,21 +209,6 @@ export class ReportingRemoteDataService {
                 return res.json();
             });
     }
-
-    // getSubscriptionHistory(filter?: any): Promise<any> {
-    //
-    //     let offset = 0;
-    //
-    //     const endPoint = this.apiEndpoints['subscriptionHistory']
-    //         + '?start=' + offset + '&filterBy=' + filter;
-    //     console.log("filter",filter);
-    //     return this.http.get(endPoint, this.getOptions())
-    //         .toPromise()
-    //         .then((res: Response)=>{
-    //             console.log("JSON",res.json());
-    //             return res.json();
-    //         });
-    // }
 
     getSubscriptionHistory(filter?: SubscriptionHistoryFilter) {
         let subHistoryFilter = new SubscriptionHistoryFilter();
