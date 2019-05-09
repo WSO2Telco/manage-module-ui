@@ -38,8 +38,6 @@ export class ReportingRemoteDataService {
      */
     public ApprovalHistoryProvider: Subject<AppHistoryResponse> = new BehaviorSubject<AppHistoryResponse>(null);
 
-    public SubApprovalHistoryProvider: Subject<SubscriptionHistoryResponse> = new BehaviorSubject<SubscriptionHistoryResponse>(null);
-
     private headers: Headers = new Headers({'Content-Type': 'application/json'});
 
     private options: RequestOptions = new RequestOptions({headers: this.headers});
@@ -53,8 +51,7 @@ export class ReportingRemoteDataService {
         depType: this.apiContext + 'history/deptype',
         approvalHistory: this.apiContext + 'history/approval',
         applications: this.apiContext + 'history/applications',
-        applicationHistory: this.apiContext + 'applications/history',
-        subscriptionHistory: this.apiContext + 'applications/subshistory'
+        applicationHistory: this.apiContext + 'applications/history'
     };
 
     constructor(private http: Http,
@@ -208,41 +205,5 @@ export class ReportingRemoteDataService {
             .then((res: Response)=>{
                 return res.json();
             });
-    }
-
-    getSubscriptionHistory(filter?: SubscriptionHistoryFilter) {
-        let subHistoryFilter = new SubscriptionHistoryFilter();
-
-        if (!!filter) {
-            subHistoryFilter = filter;
-        }
-
-        this.slimLoadingBarService.start();
-
-        const endPoint = this.apiEndpoints['subscriptionHistory']
-            + '?start=' + subHistoryFilter.offset + '&filterBy=' + subHistoryFilter.filterString;
-
-        this.http.get(endPoint, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscription approval History List',
-                error: error
-            }))
-            .subscribe(
-                data => {
-                    if (data.success) {
-                        this.SubApprovalHistoryProvider.next(data.payload);
-                        this.slimLoadingBarService.complete();
-                    } else {
-                        this.message.error(data.message);
-                        this.slimLoadingBarService.stop();
-                    }
-                },
-                error => {
-                    this.message.error(error.message);
-                    this.slimLoadingBarService.stop();
-                }
-            );
     }
 }

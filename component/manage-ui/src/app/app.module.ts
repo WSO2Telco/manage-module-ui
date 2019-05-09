@@ -30,6 +30,7 @@ import {ConfigService} from './commons/services/config.service';
 import { TimerService } from './commons/services/timer.service';
 import { AppHTTPInterceptor } from './app.http.interceptor';
 import { httpFactory } from '@angular/http/src/http_module';
+import {SubscriptionRemoteDataService} from "./data-providers/subscription-remote-data.service";
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import { httpFactory } from '@angular/http/src/http_module';
         ApprovalRemoteDataService,
         DashboardRemoteDataService,
         ReportingRemoteDataService,
+        SubscriptionRemoteDataService,
         RateRemoteDataService,
         ApprovalHelperService,
         QuotacapRemoteDataService,

@@ -82,6 +82,9 @@ export class ApprovalHelperService {
 
             const param: ApproveApplicationCreationTaskParam = new ApproveApplicationCreationTaskParam();
             param.taskId = appTask.id;
+            param.taskType = 'application';
+            param.appId = appTask.applicationId;
+            param.apiName = appTask.apiName;
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
@@ -120,11 +123,14 @@ export class ApprovalHelperService {
             }
             const param: ApproveSubscriptionCreationTaskParam = new ApproveSubscriptionCreationTaskParam();
             param.taskId = appTask.id;
+            param.taskType = 'subscription';
+            param.appId = appTask.applicationId;
+            param.apiName = appTask.apiName;
             param.description = appTask.applicationDescription;
             param.selectedTier = appTask.tier;
             param.status = status;
             param.selectedRate = appTask.selectedRate;
-
+            console.log("PARAMS",param);
             this.approvalService.approveSubscriptionCreationTask(param).subscribe(
                 data => {
                     if (data.success) {

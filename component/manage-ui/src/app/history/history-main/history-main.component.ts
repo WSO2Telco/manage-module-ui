@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ReportingRemoteDataService} from "../../data-providers/reporting-remote-data.service";
+import {SubscriptionRemoteDataService} from "../../data-providers/subscription-remote-data.service";
 import {
     ApprovalHistoryFilter, ApprovalHistory,
     ApprovalHistoryDataset, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter
 } from "../../commons/models/reporing-data-models";
+import {AuthenticationService} from "../../commons/services/authentication.service";
 
 @Component({
     selector: 'app-history-main',
@@ -12,7 +14,8 @@ import {
 })
 export class HistoryMainComponent implements OnInit {
 
-    constructor(private reportingService: ReportingRemoteDataService) {
+    constructor(private reportingService: ReportingRemoteDataService, private subscriptionService: SubscriptionRemoteDataService,
+                private authService: AuthenticationService) {
     }
 
     private filter: ApprovalHistoryFilter;
@@ -29,6 +32,7 @@ export class HistoryMainComponent implements OnInit {
 
     private currentPage: number = 1;
     private subCurrentPage: number = 1;
+    private subViewPermission: boolean;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
@@ -48,15 +52,20 @@ export class HistoryMainComponent implements OnInit {
             this.totalItems = (this.approvalHistoryData && this.approvalHistoryData.total) || this.totalItems;
         });
 
-        this.reportingService.SubApprovalHistoryProvider.subscribe((subHistory) => {
+        this.subscriptionService.SubApprovalHistoryProvider.subscribe((subHistory) => {
             this.subscriptionHistoryData = subHistory;
             this.subTotalItems = (this.subscriptionHistoryData && this.subscriptionHistoryData.total) || this.subTotalItems;
         });
 
+        if (this.authService.hasPermissions('subscription:visible')) {
+            console.log(this.authService.hasPermissions('subscription:visible'));
+            this.subViewPermission = true;
+        }
+
         this.reportingService.getSubscribers();
         this.reportingService.getOperators();
         this.reportingService.getApprovalHistory(this.filter);
-        this.reportingService.getSubscriptionHistory(this.subFilter);
+        this.subscriptionService.getSubscriptionHistory(this.subFilter);
     }
 
     onFilterChangeHandler(event: ApprovalHistoryFilter) {
@@ -66,7 +75,7 @@ export class HistoryMainComponent implements OnInit {
 
     onSubFilterChangeHandler(event: SubscriptionHistoryFilter) {
         this.subFilter = event;
-        this.reportingService.getSubscriptionHistory(this.subFilter);
+        this.subscriptionService.getSubscriptionHistory(this.subFilter);
     }
 
     onPageChanged(event) {
@@ -76,6 +85,6 @@ export class HistoryMainComponent implements OnInit {
 
     onSubPageChanged(event) {
         this.subFilter.offset = (event.page - 1) * this.subFilter.count;
-        this.reportingService.getSubscriptionHistory(this.subFilter);
+        this.subscriptionService.getSubscriptionHistory(this.subFilter);
     }
 }

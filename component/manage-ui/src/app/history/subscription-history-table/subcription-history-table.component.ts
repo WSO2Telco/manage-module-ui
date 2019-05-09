@@ -6,6 +6,7 @@ import {
 import { Router } from '@angular/router';
 import { ReportingRemoteDataService } from "../../data-providers/reporting-remote-data.service";
 import { AuthenticationService } from "../../commons/services/authentication.service";
+import {SubscriptionRemoteDataService} from "../../data-providers/subscription-remote-data.service";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class SubscriptionHistoryTableComponent implements OnInit {
     private subViewPermission: boolean;
 
 
-    constructor(private router: Router, private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {
+    constructor(private router: Router, private reportingService: ReportingRemoteDataService, private subscriptionService: SubscriptionRemoteDataService,
+                private authService: AuthenticationService) {
     }
 
     ngOnInit() {

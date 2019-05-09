@@ -25,13 +25,13 @@
                 lastText="&raquo;"></pagination>
 
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-12" *ngIf="subViewPermission">
         <sub-history-table
                 [subscriptionDataSource]="subscriptionHistoryData?.subscriptions"
                 [subsFilter]="subFilter"
                 (onSubFilterChange)="onSubFilterChangeHandler($event)"></sub-history-table>
     </div>
-    <div class="col-sm-12 text-center">
+    <div class="col-sm-12 text-center" *ngIf="subViewPermission">
         <pagination
                 [boundaryLinks]="true"
                 [totalItems]="totalItems"

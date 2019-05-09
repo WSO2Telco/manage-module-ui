@@ -1,4 +1,4 @@
-<div class="table-wrapper" *ngIf="dataSource.length > 0">
+<div class="table-wrapper">
 
     <div class="tbl-header">
         {{tableHeader}}
@@ -6,13 +6,13 @@
 
     <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
         <div class="content animated fadeInUp delay-02" *ngIf="isFilterVisible">
-            <div class="head">Filter<span class="clear" (click)="onClear()">Clear All</span></div>
+            <div class="head">Application History Filter<span class="clear" (click)="onClear()">Clear All</span></div>
             <div class="row">
                 <div class="form-group col-xs-8">
                     <input type="text"
                            [(ngModel)]="filterString"
                            container="body"
-                           class="form-control" placeholder="Filter App History">
+                           class="form-control" placeholder="Filter Application History">
                 </div>
                 <div class="form-group col-xs-4">
                     <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button>
@@ -44,7 +44,7 @@
             <div class="tbl-cell">Application Id</div>
             <div class="tbl-cell">Application Name</div>
             <div class="tbl-cell">Application Description</div>
-            <div class="tbl-cell">CreatedBy</div>
+            <div class="tbl-cell">Created By</div>
             <div class="tbl-cell">Status</div>
             <div *ngIf="depType == 'external_gateway' || depType == 'hub'" class="tbl-cell">More</div>
         </div>

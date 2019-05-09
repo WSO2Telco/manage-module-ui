@@ -32,7 +32,6 @@
             </tr>
             <tr>
                 <td>subId:id,api:name,app:name,created</td>
-                <td>subscriptionId:id,api:name,application:name,createdBy:name</td>
             </tr>
         </table>
     </template>
@@ -46,7 +45,7 @@
             <div class="tbl-cell">Application Id</div>
             <div class="tbl-cell">Application Name</div>
             <div class="tbl-cell">Subscription Status</div>
-            <div class="tbl-cell">CreatedBy</div>
+            <div class="tbl-cell">Created By</div>
         </div>
         <div class="tbl-row" *ngFor="let sub of subscriptionDataSource">
             <div class="tbl-cell">{{sub.subscriptionId}}</div>
@@ -57,6 +56,9 @@
             <div class="tbl-cell">{{sub.applicationName}}</div>
             <div class="tbl-cell">{{sub.subscriptionStatus}}</div>
             <div class="tbl-cell">{{sub.createdBy}}</div>
+        </div>
+        <div class="no-rec-row tbl-row" *ngIf="subscriptionDataSource.length == 0">
+            <span class="no-rec">No Records...</span>
         </div>
     </div>
 </div>

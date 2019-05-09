@@ -94,6 +94,8 @@ export class ApproveApplicationCreationTaskParam {
     taskId: number;
     taskType: 'application';
     user: string;
+    appId: number;
+    apiName: string;
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
@@ -109,6 +111,8 @@ export class ApproveSubscriptionCreationTaskParam {
     taskId: number;
     taskType: 'subscription';
     user: string;
+    appId: number;
+    apiName: string;
     selectedTier: string;
     status: 'APPROVED' | 'REJECTED';
     description: string;
