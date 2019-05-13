@@ -34,6 +34,8 @@ export class HistoryMainComponent implements OnInit {
     private subCurrentPage: number = 1;
     private subViewPermission: boolean;
 
+    private depType: string = "internal_gateway_type2";
+
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
         this.subFilter = new SubscriptionHistoryFilter();
@@ -66,6 +68,12 @@ export class HistoryMainComponent implements OnInit {
         this.reportingService.getOperators();
         this.reportingService.getApprovalHistory(this.filter);
         this.subscriptionService.getSubscriptionHistory(this.subFilter);
+
+        this.reportingService.getDeploymentType().then((result) => {
+            this.depType = result.depType;
+        }).catch((err) => {
+            console.log(err);
+        });
     }
 
     onFilterChangeHandler(event: ApprovalHistoryFilter) {

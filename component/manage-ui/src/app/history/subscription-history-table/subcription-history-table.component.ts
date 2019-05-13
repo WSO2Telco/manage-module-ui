@@ -43,7 +43,6 @@ export class SubscriptionHistoryTableComponent implements OnInit {
         this.filterSubString = '';
 
         if (this.authService.hasPermissions('subscription:visible')) {
-            console.log(this.authService.hasPermissions('subscription:visible'));
             this.subViewPermission = true;
         }
 

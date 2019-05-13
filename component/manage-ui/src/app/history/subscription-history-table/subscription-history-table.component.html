@@ -2,7 +2,7 @@
 
     <!--    When user with Publisher role is Logged in, This will show Subscription details-->
 
-    <div class="filter-container" [ngClass]="{'open':isSubFilterVisible}" *ngIf="subViewPermission">
+    <div class="filter-container" [ngClass]="{'open':isSubFilterVisible}">
         <div class="content animated fadeInUp delay-02" *ngIf="isSubFilterVisible">
             <div class="head">Subscription History Filter<span class="clear" (click)="onSubsClear()">Clear All</span></div>
             <div class="row">
@@ -36,7 +36,7 @@
         </table>
     </template>
 
-    <div class="table" *ngIf="subViewPermission">
+    <div class="table">
         <div class="tbl-row header">
             <div class="tbl-cell">Subscription Id</div>
             <div class="tbl-cell">Tier</div>
