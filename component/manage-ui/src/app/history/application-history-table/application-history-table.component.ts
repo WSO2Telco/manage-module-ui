@@ -32,7 +32,7 @@ export class ApplicationHistoryTableComponent implements OnInit {
 
     private operatorApprovals: ApplicationHistory[];
     private subscriptions: ApplicationHistory[];
-    private depType: string = "internal_gateway_type2";
+    private depType: string;
 
     private isFilterVisible: boolean;
     private filterString: string;

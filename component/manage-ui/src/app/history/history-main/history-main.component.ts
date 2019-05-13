@@ -34,7 +34,7 @@ export class HistoryMainComponent implements OnInit {
     private subCurrentPage: number = 1;
     private subViewPermission: boolean;
 
-    private depType: string = "internal_gateway_type2";
+    private depType: string;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();
