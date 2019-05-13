@@ -323,7 +323,7 @@ export class SubscriptionDetailComponent implements OnInit {
                 this.subscriptions = response;
 
             } else {
-                this.message.error('Error Loading Application History Data');
+                this.message.error('Error Loading Subscription History Data');
             }
         });
     }

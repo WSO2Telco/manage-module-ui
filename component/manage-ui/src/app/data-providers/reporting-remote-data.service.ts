@@ -5,7 +5,7 @@ import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
     ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
-    Application, ApplicationHistory, AppHistoryResponse
+    Application, ApplicationHistory, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
 

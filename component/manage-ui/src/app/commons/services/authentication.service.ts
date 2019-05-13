@@ -31,7 +31,7 @@ export class AuthenticationService {
                     loginInfo.start = new Date().getTime();
                     loginInfo.userName = data.payload.userName;
                     loginInfo.permissions = data.payload.permissions;
-                    loginInfo.operatorName = data.payload.operatorName
+                    loginInfo.operatorName = data.payload.operatorName;
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
                     loginInfo.token = btoa(userName + ':' + password);
