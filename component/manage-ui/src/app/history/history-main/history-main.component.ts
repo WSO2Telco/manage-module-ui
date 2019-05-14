@@ -33,6 +33,7 @@ export class HistoryMainComponent implements OnInit {
     private currentPage: number = 1;
     private subCurrentPage: number = 1;
     private subViewPermission: boolean;
+    private appViewPermission: boolean;
 
     private depType: string;
 
@@ -60,8 +61,11 @@ export class HistoryMainComponent implements OnInit {
         });
 
         if (this.authService.hasPermissions('subscription:visible')) {
-            console.log(this.authService.hasPermissions('subscription:visible'));
             this.subViewPermission = true;
+        }
+
+        if (this.authService.hasPermissions('application:visible')) {
+            this.appViewPermission = true;
         }
 
         this.reportingService.getSubscribers();

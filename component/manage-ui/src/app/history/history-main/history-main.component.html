@@ -4,13 +4,13 @@
                 <!--[filter]="filter"-->
                 <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
     <!--</div>-->
-    <div class="col-sm-12">
+    <div class="col-sm-12" *ngIf="appViewPermission">
         <app-history-table
                 [dataSource]="approvalHistoryData?.applications"
                 [filter]="filter"
                 (onFilterChange)="onFilterChangeHandler($event)"></app-history-table>
     </div>
-    <div class="col-sm-12 text-center">
+    <div class="col-sm-12 text-center" *ngIf="appViewPermission">
         <pagination
                 [boundaryLinks]="true"
                 [totalItems]="totalItems"
