@@ -5,7 +5,7 @@
     <groupId>com.wso2telco.dep</groupId>
     <artifactId>manage-service-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.2-SNAPSHOT</version>
+    <version>2.1.1-SNAPSHOT</version>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -143,7 +143,7 @@
         <url>https://github.com/WSO2Telco/manage-module-ui.git</url>
         <developerConnection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</developerConnection>
         <connection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</connection>
-        <tag>HEAD</tag>
+        <tag>v2_1_1</tag>
     </scm>
 
     <build>
@@ -173,7 +173,7 @@
         <com.esotericsoftware.yamlbeans.version>1.11</com.esotericsoftware.yamlbeans.version>
         <org.apache.commons.version>2.0</org.apache.commons.version>
         <org.wso2.carbon.version>4.4.8</org.wso2.carbon.version>
-        <com.wso2telco.core.version>2.4.5</com.wso2telco.core.version>
+        <com.wso2telco.core.version>2.4.3</com.wso2telco.core.version>
         <carbon.p2.plugin.version>1.5.8</carbon.p2.plugin.version>
     </properties>
 </project>
