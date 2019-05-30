@@ -44,9 +44,9 @@
             <div class="tbl-cell">ID</div>
             <div class="tbl-cell">APP NAME</div>
             <div class="tbl-cell">API NAME</div>
-            <div class="tbl-cell">SUBSCRIBER</div>
-            <div class="tbl-cell">CREATED ON</div>
-            <div class="tbl-cell text-right pad-r-15-im">ACTION</div>
+            <div class="tbl-cell tbl-sub-title">SUBSCRIBER</div>
+            <div class="tbl-cell tbl-create-title">CREATED ON</div>
+            <div class="tbl-cell text-right tbl-sub-title pad-r-15-im">ACTION</div>
         </div>
 
         <ng-container *ngFor="let item of dataSource?.applicationTasks; let i=index">
@@ -65,10 +65,10 @@
                           (click)="item.isExpand = !item.isExpand; item.actionType = 'MORE' ">{{(item.isExpand)? 'expand_less' :  'expand_more'}}</span>
                     {{item.id}}
                 </div>
-                <div class="tbl-cell">{{item.applicationName}}</div>
-                <div class="tbl-cell">{{item.apiName}}-{{item.apiVersion}}</div>
+                <div class="tbl-cell tbl-app-name-cell">{{item.applicationName}}</div>
+                <div class="tbl-cell tbl-api-name-cell">{{item.apiName}}-{{item.apiVersion}}</div>
                 <div class="tbl-cell">{{item.userName}}</div>
-                <div class="tbl-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
+                <div class="tbl-cell tbl-create-cell">{{item.createTime?.date + ' ' + item.createTime?.time}}</div>
                 <div class="tbl-cell text-right">
                     <span tooltip="Approve" *ngIf="filter?.dataType?.dataCategory == 'USER'"
                           class="action  approve material-icons"
