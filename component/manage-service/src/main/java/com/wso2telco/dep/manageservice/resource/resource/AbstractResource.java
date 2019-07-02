@@ -21,7 +21,6 @@ import com.wso2telco.dep.manageservice.resource.service.Serviceable;
 import com.wso2telco.dep.manageservice.resource.util.ServiceTypes;
 
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 public abstract class AbstractResource {
 
@@ -29,31 +28,10 @@ public abstract class AbstractResource {
 
     protected abstract ServiceTypes getService();
 
-    protected Response doGet(String authenticationCredential) {
-        Serviceable service = serviceFactory.getService(getService());
-
-        Callback callback = service.executeGet(authenticationCredential);
-        return Response.status(Response.Status.OK).entity(callback).build();
-    }
-
-    protected Response doGet(String authenticationCredential, List<String> pathParamStringList) {
-        Serviceable service = serviceFactory.getService(getService());
-
-        Callback callback = service.executeGet(authenticationCredential, pathParamStringList);
-        return Response.status(Response.Status.OK).entity(callback).build();
-    }
-
     protected Response doPost(RequestTransferable request, String authenticationCredential) {
         Serviceable service = serviceFactory.getService(getService());
 
         Callback callback = service.executePost(request, authenticationCredential);
-        return Response.status(Response.Status.OK).entity(callback).build();
-    }
-
-    protected Response doPost(RequestTransferable[] request, String authenticationCredential, List<String> pathParamStringList) {
-        Serviceable service = serviceFactory.getService(getService());
-
-        Callback callback = service.executePost(request, authenticationCredential, pathParamStringList);
         return Response.status(Response.Status.OK).entity(callback).build();
     }
 }

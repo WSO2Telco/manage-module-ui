@@ -25,15 +25,6 @@ public abstract class AbstractService implements Serviceable {
         String url = "";
 
         switch (serviceUrl) {
-            case RATE_SERVICE:
-                url = serviceUrl.getValue();
-                break;
-            case QUOTA_SERVICE:
-                url= serviceUrl.getValue();
-                break;
-            case BLACKLIST_WHITELIST:
-                url =serviceUrl.getValue();
-                break;
             case MSISDN_VALIDATION_SERVICE:
                 url = serviceUrl.getValue();
                 break;
