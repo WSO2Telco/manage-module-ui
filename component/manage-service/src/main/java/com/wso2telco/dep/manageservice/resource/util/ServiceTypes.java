@@ -17,21 +17,6 @@ package com.wso2telco.dep.manageservice.resource.util;
  */
 public enum ServiceTypes {
 
-    RATE_CARD("rate_card"),
-    RATE_CATEGORY("rate_category"),
-    RATE_CURRENCY("rate_currency"),
-    RATE_TAX("rate_tax"),
-    RATE_DEFINITION("rate_definition"),
-    RATE_TYPE("rate_type"),
-    RATE_TARIFF("rate_tariff"),
-    RATE_API_OPERATIONS("rate_api_operations"),
-    RATE_API_OPERATION_RATES("rate_api_operation_rates"),
-    RATE_OPERATORS("rate_operators"),
-    RATE_ASSIGN_RATES("rate_assign_rates"),
-    QUOTA_LIMIT("quota_limit"),
-    BLACKLIST("blacklist"),
-    WHITELIST_SUBSCRIBERS("whitelist"),
-    WHITELIST_APPLICATIONS("application_list"),
     MSISDN_VALIDATION("msisdn_validation");
 
 

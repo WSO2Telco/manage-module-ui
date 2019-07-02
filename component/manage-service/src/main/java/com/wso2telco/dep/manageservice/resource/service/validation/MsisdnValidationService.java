@@ -31,7 +31,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.IOException;
-import java.util.List;
 
 public class MsisdnValidationService extends AbstractService {
 
@@ -42,16 +41,6 @@ public class MsisdnValidationService extends AbstractService {
     public MsisdnValidationService() {
         this.client = HttpClientBuilder.create().build();
         this.mapper = new ObjectMapper();
-    }
-
-    @Override
-    public Callback executeGet(String authenticationCredential) {
-        return null;
-    }
-
-    @Override
-    public Callback executeGet(String authenticationCredential, List<String> pathParamStringList) {
-        return null;
     }
 
     @Override
@@ -78,11 +67,5 @@ public class MsisdnValidationService extends AbstractService {
             return new Callback().setPayload(null).setSuccess(false).setMessage(Messages.VALIDATION_SERVICE_ERROR.getValue());
         }
 
-    }
-
-    @Override
-    public Callback executePost(RequestTransferable[] request, String authenticationCredential, List<String>
-            pathParamStringList) {
-        return null;
     }
 }
