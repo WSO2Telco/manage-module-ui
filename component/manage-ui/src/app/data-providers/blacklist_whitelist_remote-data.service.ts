@@ -1,10 +1,10 @@
 /**
  * Created by manoj on 7/27/17.
  */
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {AuthenticationService} from '../commons/services/authentication.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Http, Headers, RequestOptions, Response, ResponseContentType } from '@angular/http';
+import { AuthenticationService } from '../commons/services/authentication.service';
 
 
 @Injectable()
@@ -22,13 +22,17 @@ export class BlackListWhiteListRemoteDataService {
         apis: this.apiContext + 'apis/',
         whitelist: this.apiContext + 'GetWhiteList/',
         blacklist: this.apiContext + 'GetBlacklistPerApi/',
+        blacklistCount: this.apiContext + 'count/',
+        searchBlacklist: this.apiContext + 'search/',
+        downloadBlacklist: this.apiContext + 'downloadAsZip/',
         addNewWhitelist: this.apiContext + 'Whitelist',
-        addNewBlacklist: this.apiContext + 'Blacklist',
+        addNewBlacklist: this.apiContext + 'add/',
+        addBulkToBlacklist: this.apiContext + 'bulkAdd/',
         removeFromWhiteList: this.apiContext + 'RemoveFromWhiteList/',
-        removeFromBlackList: this.apiContext + 'RemoveFromBlacklist/',
+        removeFromBlackList: this.apiContext + 'remove/',
         msisdnValidation: this.externalApiContext + 'validation/msisdn'
     };
-    
+
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -128,7 +132,7 @@ export class BlackListWhiteListRemoteDataService {
      * get white list number list
      * @returns {Observable<R>}
      */
-    getWhitelist(subscriberID: string, appID: string, apiID,) {
+    getWhitelist(subscriberID: string, appID: string, apiID, ) {
         return this.http.get(this.apiEndpoints['whitelist'] + subscriberID + '/' + apiID + '/' + appID, this.getOptions())
             .map((response: Response) => {
                 return {
@@ -166,6 +170,81 @@ export class BlackListWhiteListRemoteDataService {
             }));
     }
 
+
+    /**
+     * load blacklist numbers count for api
+     * @param appid/apiid
+     * @returns {Observable<R|T>}
+     */
+    getBlacklistNumberCount(apiid: string, appid: string, subscriber: string) {
+        return this.http.get(this.apiEndpoints['blacklistCount'] + appid + '/' + apiid + '?action=blacklist&sp=' + subscriber, this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Blacklist Number count Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Blacklist Count',
+                error: error
+            }));
+    }
+
+    /**
+    * load blacklist numbers exsits for api
+    * @param appid/apiid/msisdn
+    * @returns {Observable<R|T>}
+    */
+    getBlacklistNumberExit(apiid: string, appid: string, msisdn: string, subscriber: string) {
+        return this.http.get(this.apiEndpoints['searchBlacklist'] + appid + '/' + apiid + '?msisdn=' + encodeURIComponent(msisdn) + '&action=blacklist&sp=' + subscriber, this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Blacklist Number count Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Blacklist numbers',
+                error: error
+            }));
+    }
+
+
+    /**
+    * Download blacklist numbers list for api
+    * @param appid/apiid
+    * @returns {Observable<R|T>}
+    */
+    downloadBlacklistNumberList(apiid: string, appid: string, sp: string) {
+        const token = this._authenticationService.loginUserInfo.getValue().token;
+        const useName = this._authenticationService.loginUserInfo.getValue().userName;
+        return this.http.get(this.apiEndpoints['downloadBlacklist'] + appid + '/' + apiid + '?action=blacklist&sp=' + sp, {
+            responseType: ResponseContentType.Blob,
+            headers: new Headers({
+                'Authorization': 'Basic ' + token,
+                'user-name': useName,
+                'Content-Type': 'multipart/form-data',
+                'cache-control': 'no-cache',
+                'Accept': 'application/zip',
+                'observe': 'response',
+                'reportProgress': true,
+            })
+        })
+            .map((response: Response) => {
+                return new Blob([response.blob()], { type: 'application/zip' })
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Blacklist numbers file',
+                error: error
+            }));
+    }
+
+
     /**
      * remove a msisdn from whitelist
      * @param msisdn
@@ -198,17 +277,18 @@ export class BlackListWhiteListRemoteDataService {
 
     /**
      * Remove BlackListed Numbers
+     * @param appId
      * @param apiId
      * @param mssidns
      * @returns {Observable<R>}
      */
-    removeFromBlackList(mssidn: string, apiId: string) {
+    removeFromBlackList(msisdn: string, appId: string, apiId: string, subscriber: string) {
         const data = {
             'apiId': apiId
         };
-        return this.http.post(this.apiEndpoints['removeFromBlackList'] + mssidn, data, this.getOptions())
+        return this.http.delete(this.apiEndpoints['removeFromBlackList'] + appId + '/' + apiId + '?msisdn=' + msisdn + '&action=blacklist&sp=' + subscriber, this.getOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
+                if (response.status == 204) {
                     return {
                         success: true,
                         message: 'MSISDN Removed Successfully',
@@ -227,6 +307,7 @@ export class BlackListWhiteListRemoteDataService {
                 message: 'Error Removing MSISDN',
                 error: error
             }));
+
     };
 
     /**
@@ -236,7 +317,7 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[],validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
+    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[], validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
 
         const data = {
             'appId': appId,
@@ -272,26 +353,57 @@ export class BlackListWhiteListRemoteDataService {
     }
 
     /**
-     * Add New BlackListNumber/s
+     * Add New BlackListNumber
      * @param apiId
-     * @param apiName
+     * @param appId
+     * @param msisdn
+     * @returns {Observable<R>}
+     */
+    addNewToBlacklist(appId: string, apiId: string, msisdnList: string) {
+        const data = {
+            'sp': this.loginInfo.userName,
+            'msisdn': msisdnList,
+            'action': 'blacklist'
+        };
+
+        return this.http.post(this.apiEndpoints['addNewBlacklist'] + appId + '/' + apiId + '?', data, this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 201) {
+                    return {
+                        success: true,
+                        message: 'New Blacklist Added Successfully',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding Blacklist',
+                        payload: null
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Adding Blacklist',
+                error: error
+            }));
+    }
+
+
+
+    /**
+     * Add bulk BlackListNumber
+     * @param apiId
+     * @param appId
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToBlacklist(apiId: string, apiName: string, msisdnList: string[], validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
-        const data = {
-            'apiID': apiId,
-            'apiName': apiName,
-            'userID': this.loginInfo.userName,
-            'msisdnList': msisdnList,
-            'validationRegex': validationRegex,
-            'validationPrefixGroup': validationPrefixGroup,
-            'validationDigitsGroup': validationDigitsGroup
-        };
+    addBulkToBlacklist(appId: string, apiId: string, msisdnfile: FormData) {
 
-        return this.http.post(this.apiEndpoints['addNewBlacklist'], data, this.getOptions())
+
+        return this.http.post(this.apiEndpoints['addBulkToBlacklist'] + appId + '/' + apiId, msisdnfile, this.getDownloadOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
+                if (response.status == 201) {
                     return {
                         success: true,
                         message: 'New Blacklist Added Successfully',
@@ -319,7 +431,7 @@ export class BlackListWhiteListRemoteDataService {
     msisdnValidateService(msisdnList: string[]) {
 
         const data = {
-            'msisdnList' : msisdnList
+            'msisdnList': msisdnList
         };
 
         return this.http.post(this.apiEndpoints['msisdnValidation'], data, this.getOptions())
@@ -344,7 +456,20 @@ export class BlackListWhiteListRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
+    }
+
+    getDownloadOptions(): RequestOptions {
+        const token = this._authenticationService.loginUserInfo.getValue().token;
+        const useName = this._authenticationService.loginUserInfo.getValue().userName;
+        const headers = new Headers(
+            {
+                'Authorization': 'Basic ' + token,
+                'user-name': useName,
+                'Content-Type': 'multipart/form-data',
+                'cache-control': 'no-cache',
+            });
+        return new RequestOptions({ headers: headers });
     }
 
 
