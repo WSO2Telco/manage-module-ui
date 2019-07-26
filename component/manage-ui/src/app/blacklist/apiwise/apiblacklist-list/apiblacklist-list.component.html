@@ -1,35 +1,30 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
-                <div class="tbl-header">
-                    <label class="subtitle">Subscriber list</label>
-                </div>
-                <div class="scrollit">
+            <div class="col-md-6 col-md-offset-1 col-lg-4 col-lg-offset-1">
+                <h4 class="text-success text-center">Number is exist in the list</h4>
+                <div>
                     <div class="table">
-
                         <div class="tbl-row header">
                             <div class="tbl-cell">MSISDN</div>
                             <div class="tbl-cell text-right pad-r-15-im">Action</div>
                         </div>
 
-                        <ng-container *ngFor="let item of datasource">
-                            <div class="tbl-row">
-                                <div class="tbl-cell">{{item.replace('tel3A+','')}}</div>
-                                <div class="tbl-cell text-right">
-                                    <button class="btn btn-danger"
-                                            (click)="onDelete(item, apiId.toString())"><i
-                                            class="material-icons">delete</i></button>
-                                </div>
+                        <div class="tbl-row">
+                            <div class="tbl-cell">{{datasource}}</div>
+                            <div class="tbl-cell text-right">
+                                <button class="btn btn-danger" (click)="onDelete(datasource, selcetedAppId.toString(), apiId.toString(),spName.toString())"><i
+                                        class="material-icons">delete</i></button>
                             </div>
-                        </ng-container>
+                        </div>
 
                         <div class="no-rec-row tbl-row" *ngIf="datasource == null">
                             <span class="no-rec">No Records..</span>
                         </div>
                         <br><br><br>
                     </div>
-                </div> <!--TABLE END-->
+                </div>
+                <!--TABLE END-->
 
             </div>
         </div>
