@@ -10,7 +10,6 @@ import {MessageService} from './services/message.service';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { TimerService } from './services/timer.service';
 
-
 @NgModule({
     imports: [
         CommonModule,
