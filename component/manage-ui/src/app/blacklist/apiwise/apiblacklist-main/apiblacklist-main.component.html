@@ -1,63 +1,194 @@
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
     <div class="col-sm-12">
-        <div class="form-container quotaInputContainer">
-            <div class="tbl-header">
-                APIwise Blacklist
-                <br>
-            </div>
-            <div class="searchFilter">
-                <h4 class="control-label col-sm-1">API :</h4>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control"
-                           [(ngModel)]="api"
-                           [typeaheadMinLength]="0"
-                           container="body"
-                           [typeahead]="apiList"
-                           (typeaheadOnSelect)="onApiSelected()"
-                           placeholder="Select the API"
-                    >
-                </div>
-                <div class="col-sm-4"><h4>BlackListed subscribers count : &nbsp; <span
-                        class="label label-info">{{ count }}</span>
-                </h4>
-                </div>
 
-            </div>
-
-            <br><br>
-            <form class="form-horizontal" #numberlistForm="ngForm" novalidate
-                  (ngSubmit)="onUploadNumber(numberlistForm)">
-
-
-                <div class="form-group" [ngClass]="{'has-danger': (ismsisdnError)}">
-                    <label class="control-label col-sm-2">Number:</label>
-                    <div class="col-sm-6">
-                        <input class="form-control"
-                               autocomplete="off"
-                               #nameRef="ngModel"
-                               required="required"
-                               [(ngModel)]="msisdn"
-                               type="text"
-                               name="manualNumber"
-                               placeholder="e.g.94777333100,94777333105 (Comma seperated entries)">&nbsp;
-                        <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+        <div class="card card-block card-header">
+            <div class="form-container quotaInputContainer">
+                <div class="searchFilter">
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="subscriber" [typeahead]="subscriberList" [typeaheadMinLength]="0" type="text"
+                            class="form-control" (typeaheadOnSelect)="onSubscriberSelected()" (input)="onSubscriberSelected()"
+                            placeholder="Select Service Provider">
                     </div>
-                    <button class="btn btn-primary">
-                        <span class="glyphicon glyphicon-plus-sign"> ADD</span>
-                    </button>
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="app" [typeahead]="applications" typeaheadOptionField="name"
+                            [typeaheadMinLength]="0" type="text" class="form-control" (typeaheadOnSelect)="onAppSelected()"
+                            (input)="onAppSelected()" placeholder="Select Application">
+                    </div>
+                    <div class="col-sm-3">
+                        <input [(ngModel)]="api" [typeahead]="apiList" [typeaheadMinLength]="0" type="text" class="form-control"
+                            (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" placeholder="Select API">
+                    </div>
+                    <div class="col-sm-3">
+                        <h4>BlackListed count : &nbsp; <span class="label label-info">{{ count }}</span>
+                        </h4>
+                    </div>
                 </div>
+                <div><span class="error" *ngIf="isInvalidFieldError">{{invalidFieldError}}</span></div>
+                <br><br>
 
+                <tabset [justified]="true">
+                    <tab heading="Search and Remove Blacklist Numbers">
+                        <div *ngIf="api != '' && !isInvalidFieldError" class="content-div">
+                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
+                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
+                                        *ngIf="count != 0">have
+                                        <span class="label label-info">{{ count }}</span> blacklisted numbers </span><span
+                                        *ngIf="count == 0"> Doesn't have blacklisted
+                                        numbers</span>
+                                </span>
+                            </div>
+                            <br><br>
+                            <div class="center-block halfwidth" *ngIf="count != 0">
+                                <h4>Search BlackListed Msisdn No</h4>
+                                <form class="form-horizontal center-block ">
+                                    <div class="form-group" [ngClass]="{'has-danger': (ismsisdnError)}">
+                                        <label class="control-label col-sm-2">Number:</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
+                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g.tel:94777333100">&nbsp;
+                                            <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                                        </div>
+                                        <button class="btn btn-primary" (click)="searchBlackListNumbers()">
+                                            <span class="glyphicon glyphicon-search"> Search</span>
+                                        </button>
+                                    </div>
 
-            </form>
+                                    <app-blacklist-list *ngIf="ismsisdnAvailable" [datasource]="blackListList" [apiId]="id"
+                                        [selcetedAppId]="selcetedAppId" [spName]="subscriber" (onDeleteTask)="onDeleteHandler($event, id)">
+                                    </app-blacklist-list>
+                                </form>
+                                <hr>
+                                <h1 class="text-center">OR</h1>
+                                <hr>
+                                <h4>Download blacklisted numbers</h4>
+                                <br>
+                                <button class="btn btn-primary btn-lg col-sm-offset-2" (click)="downloadBlackListNumbers()"
+                                    style="width:60%">
+                                    <span class="glyphicon glyphicon-download"> Download</span></button>
 
+                            </div>
 
-            <br><br>
+                        </div>
+                        <div *ngIf="api == ''  || isInvalidFieldError" class="content-div">
+                            <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
+                                <br>
+                            </span>
+                            <h4 class="center-block halfwidth text-center">Select the Service
+                                Provider, Application and
+                                API combination to continue</h4>
+                        </div>
+                    </tab>
+                    <tab heading="Blacklist New Numbers (Bulk or Single)">
+                        <div class="content-div" *ngIf="api != '' && !isInvalidFieldError">
+                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
+                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
+                                        *ngIf="count != 0">have
+                                        <span class="label label-info">{{ count }}</span> blacklisted numbers </span><span
+                                        *ngIf="count == 0"> Doesn't have blacklisted
+                                        numbers</span>
+                                </span>
+                            </div>
+                            <br><br>
+                            <div class="halfwidth center-block">
+                                <h4>Blacklist single number</h4>
+                                <form class="form-horizontal center-block " #numberlistForm="ngForm" novalidate
+                                    (ngSubmit)="onUploadNumber(numberlistForm)">
+                                    <div class="form-group" [ngClass]="{'has-danger': (ismsisdnError)}">
+                                        <label class="control-label col-sm-2">Number:</label>
+                                        <div class="col-sm-6">
+                                            <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
+                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g.tel:94777333100">&nbsp;
+                                            <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                                        </div>
+                                        <button class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-plus-sign"> ADD</span>
+                                        </button>
+                                    </div>
+                                </form>
+                                <hr>
+                                <h1 class="text-center">OR</h1>
+                                <hr>
+                                <h4>Blacklist bulk numbers list (maximum 5000 at a time)</h4>
+                                <br>
+                                <label for="uploader-input" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+                                    (fileOver)="fileOverBase($event)" (change)="fileChangeListener($event)" [uploader]="uploader"
+                                    class="well my-drop-zone center-block ">
+                                    <div class="vz-drop-zone">
+                                        <div class="center">
+                                            <i class="fa fa-upload font-large-2"></i>
+                                        </div>
+                                        <div class="center">Drag the App icon or Browse</div>
+                                        <div class="instructions">
+                                            1. File size should be lower than 200kb<br>
+                                            2. Accepting only txt file format
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="file" (change)="fileChangeListener($event)" ng2FileSelect [uploader]="uploader"
+                                    id="uploader-input" style="display:none" />
 
-            <app-blacklist-list
-                    [datasource]="blackListList" [apiId]="id" (onDeleteTask)="onDeleteHandler($event, id)">
-            </app-blacklist-list>
+                                <h3 class="error" *ngIf="uploader?.queue?.length == 0"><strong>{{errorMessage}}</strong></h3>
 
+                                <div class="table_queue" *ngIf="uploader?.queue?.length != 0">
+                                    <h3>Upload queue</h3>
+                                    <!--  <p>Queue length: {{ uploader?.queue?.length }}</p> -->
 
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th width="50%">Name</th>
+                                                <th>Size</th>
+                                                <!-- <th>Progress</th>
+                                               <th>Status</th> -->
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of uploader.queue">
+                                                <td><strong>{{ item?.file?.name }}</strong></td>
+                                                <td nowrap>{{ item?.file?.size/1000 |
+                                                    number:'.3'
+                                                    }} KB</td>
+                                                <!--  <td>
+                                                    <div class="progress" style="margin-bottom: 0;">
+                                                        <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                                    </div>
+                                                </td>
+                                                 <td class="text-center">
+                                                    <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                                    <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                                    <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                                </td> -->
+                                                <td nowrap>
+                                                    <button type="button" class="btn btn-success btn-sm" (click)="onUpload()"
+                                                        [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                                    </button>
+                                                    <button type="button" class="btn btn-warning btn-sm" (click)="item.cancel()"
+                                                        [disabled]="!item.isUploading">
+                                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-sm" (click)="item.remove()">
+                                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="api == '' || isInvalidFieldError" class="content-div">
+                            <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
+                                <br>
+                            </span>
+                            <h4 class="center-block halfwidth text-center">Select the Service
+                                Provider, Application and
+                                API combination to continue</h4>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
         </div>
     </div>
 </div>
