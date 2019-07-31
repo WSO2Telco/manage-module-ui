@@ -125,7 +125,9 @@ export class ApiBlacklistMainComponent implements OnInit {
     getSubscribersOfProvider() {
         this.blackListWhiteListService.getSubscribers((response) => {
             if (response.success) {
-                this.subscriberList.push(response.payload);
+                for (const entry of response.payload) {
+                    this.subscriberList.push(entry);
+                }
             } else {
                 this.message.error(response.message);
             }
@@ -137,7 +139,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @param AppId/APIID
      */
     getBlackListNumbersCount(apiid: string, appid: string, subscriber: string) {
-        this.blackListWhiteListService.getBlacklistCount(appid, apiid, subscriber,'blacklist', (response) => {
+        this.blackListWhiteListService.getBlacklistCount(appid, apiid, subscriber, 'blacklist', (response) => {
 
             if (response.success) {
                 this.ismsisdnAvailable = false;
@@ -160,7 +162,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn,'blacklist', (response) => {
+        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn, 'blacklist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
                 this.getBlackListNumbersCount(this.id, newappId, newsp);
@@ -212,7 +214,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.getBlacklistNumberExit(newappId, this.id, this.msisdn, newsp,'blacklist', (response) => {
+        this.blackListWhiteListService.getBlacklistNumberExit(newappId, this.id, this.msisdn, newsp, 'blacklist', (response) => {
 
             if (response.success) {
                 if (response.payload.exists) {
@@ -242,7 +244,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, newappId, newsp,'blacklist', (response) => {
+        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, newappId, newsp, 'blacklist', (response) => {
 
             if (response.success) {
             } else {

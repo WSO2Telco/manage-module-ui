@@ -124,7 +124,9 @@ export class WhitelistMainComponent implements OnInit {
     getSubscribersOfProvider() {
         this.blackListWhiteListService.getSubscribers((response) => {
             if (response.success) {
-                this.subscriberList.push(response.payload);
+                for (const entry of response.payload) {
+                    this.subscriberList.push(entry);
+                }
             } else {
                 this.message.error(response.message);
             }
