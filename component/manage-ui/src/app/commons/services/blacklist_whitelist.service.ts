@@ -84,8 +84,8 @@ export class BlackListWhiteListService {
             );
     }
 
-    getBlacklistCount(apiid: string, appid: string, subscriber: string, callback: Function) {
-        this._remoteService.getBlacklistNumberCount(appid, apiid, subscriber)
+    getBlacklistCount(apiid: string, appid: string, subscriber: string, action: string, callback: Function) {
+        this._remoteService.getBlacklistNumberCount(appid, apiid, subscriber, action)
             .subscribe(
                 data => {
                     callback(data);
@@ -96,8 +96,8 @@ export class BlackListWhiteListService {
             );
     }
 
-    getBlacklistNumberExit(apiid: string, appid: string, msisdn: string, subscribe: string, callback: Function) {
-        this._remoteService.getBlacklistNumberExit(appid, apiid, msisdn, subscribe)
+    getBlacklistNumberExit(apiid: string, appid: string, msisdn: string, subscribe: string, action: string, callback: Function) {
+        this._remoteService.getBlacklistNumberExit(appid, apiid, msisdn, subscribe, action)
             .subscribe(
                 data => {
                     callback(data);
@@ -108,11 +108,11 @@ export class BlackListWhiteListService {
             );
     }
 
-    downloadBlacklistNumberList(apiid: string, appid: string, sp: string, callback: Function) {
-        this._remoteService.downloadBlacklistNumberList(apiid, appid, sp)
+    downloadBlacklistNumberList(apiid: string, appid: string, sp: string, action: string, callback: Function) {
+        this._remoteService.downloadBlacklistNumberList(apiid, appid, sp, action)
             .subscribe(
                 data => {
-                    this.downloadFile(data)
+                    this.downloadFile(data, action)
                 },
                 (error: string) => {
                     callback(error);
@@ -120,15 +120,15 @@ export class BlackListWhiteListService {
             );
     }
 
-    downloadFile(data: any) {
+    downloadFile(data: any, action: string) {
         const blob = new Blob([data], { type: 'application/zip' });
         const url = window.URL.createObjectURL(blob);
 
         var a = document.createElement('a');
         a.href = url;
         var dd = new Date();
-        var today = dd.getDay()+'-'+dd.getMonth()+'-'+dd.getFullYear();
-        a.download = 'blacklist_'+today+'.zip';
+        var today = dd.getUTCDate() + '-' + (dd.getMonth() + 1) + '-' + dd.getUTCFullYear();
+        a.download = action + '_' + today + '.zip';
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -148,8 +148,8 @@ export class BlackListWhiteListService {
             );
     }
 
-    removeFromBlackList(msisdn, appId, apiId, subscribe, callback: Function) {
-        this._remoteService.removeFromBlackList(msisdn, appId, apiId, subscribe)
+    removeFromBlackList(msisdn, appId, apiId, subscribe, action: string, callback: Function) {
+        this._remoteService.removeFromBlackList(msisdn, appId, apiId, subscribe, action)
             .subscribe(
                 data => {
                     callback(data);
@@ -173,8 +173,8 @@ export class BlackListWhiteListService {
             );
     }
 
-    addNewToBlacklist(appId: string, apiId: string, msisdnList: string, callback: Function) {
-        this._remoteService.addNewToBlacklist(appId, apiId, msisdnList)
+    addNewToBlacklist(appId: string, apiId: string, msisdnList: string, action: string, callback: Function) {
+        this._remoteService.addNewToBlacklist(appId, apiId, msisdnList, action)
             .subscribe(
                 data => {
                     callback(data);

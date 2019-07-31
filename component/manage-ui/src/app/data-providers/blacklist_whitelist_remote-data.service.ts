@@ -176,53 +176,53 @@ export class BlackListWhiteListRemoteDataService {
      * @param appid/apiid
      * @returns {Observable<R|T>}
      */
-    getBlacklistNumberCount(apiid: string, appid: string, subscriber: string) {
-        return this.http.get(this.apiEndpoints['blacklistCount'] + appid + '/' + apiid + '?action=blacklist&sp=' + subscriber, this.getOptions())
+    getBlacklistNumberCount(apiid: string, appid: string, subscriber: string, action: string) {
+        return this.http.get(this.apiEndpoints['blacklistCount'] + appid + '/' + apiid + '?action=' + action + '&sp=' + subscriber, this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,
-                    message: 'Blacklist Number count Loaded Successfully',
+                    message: action + ' Number count Loaded Successfully',
                     payload: response.json()
                 };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Loading Blacklist Count',
+                message: 'Error Loading ' + action + ' Count',
                 error: error
             }));
     }
 
     /**
-    * load blacklist numbers exsits for api
+    * load blacklist/whitelist numbers exsits for api
     * @param appid/apiid/msisdn
     * @returns {Observable<R|T>}
     */
-    getBlacklistNumberExit(apiid: string, appid: string, msisdn: string, subscriber: string) {
-        return this.http.get(this.apiEndpoints['searchBlacklist'] + appid + '/' + apiid + '?msisdn=' + encodeURIComponent(msisdn) + '&action=blacklist&sp=' + subscriber, this.getOptions())
+    getBlacklistNumberExit(apiid: string, appid: string, msisdn: string, subscriber: string, action: string) {
+        return this.http.get(this.apiEndpoints['searchBlacklist'] + appid + '/' + apiid + '?msisdn=' + encodeURIComponent(msisdn) + '&action=' + action + '&sp=' + subscriber, this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,
-                    message: 'Blacklist Number count Loaded Successfully',
+                    message: action + ' Number count Loaded Successfully',
                     payload: response.json()
                 };
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Loading Blacklist numbers',
+                message: 'Error Loading ' + action + ' numbers',
                 error: error
             }));
     }
 
 
     /**
-    * Download blacklist numbers list for api
+    * Download blacklist/whitelist numbers list for api
     * @param appid/apiid
     * @returns {Observable<R|T>}
     */
-    downloadBlacklistNumberList(apiid: string, appid: string, sp: string) {
+    downloadBlacklistNumberList(apiid: string, appid: string, sp: string, action: string) {
         const token = this._authenticationService.loginUserInfo.getValue().token;
         const useName = this._authenticationService.loginUserInfo.getValue().userName;
-        return this.http.get(this.apiEndpoints['downloadBlacklist'] + appid + '/' + apiid + '?action=blacklist&sp=' + sp, {
+        return this.http.get(this.apiEndpoints['downloadBlacklist'] + appid + '/' + apiid + '?action=' + action + '&sp=' + sp, {
             responseType: ResponseContentType.Blob,
             headers: new Headers({
                 'Authorization': 'Basic ' + token,
@@ -239,7 +239,7 @@ export class BlackListWhiteListRemoteDataService {
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Loading Blacklist numbers file',
+                message: 'Error Loading ' + action + ' numbers file',
                 error: error
             }));
     }
@@ -276,17 +276,17 @@ export class BlackListWhiteListRemoteDataService {
 
 
     /**
-     * Remove BlackListed Numbers
+     * Remove BlackListed/Whitelisted Numbers
      * @param appId
      * @param apiId
      * @param mssidns
      * @returns {Observable<R>}
      */
-    removeFromBlackList(msisdn: string, appId: string, apiId: string, subscriber: string) {
+    removeFromBlackList(msisdn: string, appId: string, apiId: string, subscriber: string, action: string) {
         const data = {
             'apiId': apiId
         };
-        return this.http.delete(this.apiEndpoints['removeFromBlackList'] + appId + '/' + apiId + '?msisdn=' + msisdn + '&action=blacklist&sp=' + subscriber, this.getOptions())
+        return this.http.delete(this.apiEndpoints['removeFromBlackList'] + appId + '/' + apiId + '?msisdn=' + msisdn + '&action=' + action + '&sp=' + subscriber, this.getOptions())
             .map((response: Response) => {
                 if (response.status == 204) {
                     return {
@@ -353,17 +353,18 @@ export class BlackListWhiteListRemoteDataService {
     }
 
     /**
-     * Add New BlackListNumber
+     * Add New BlackList/whitelist Number
      * @param apiId
      * @param appId
      * @param msisdn
      * @returns {Observable<R>}
      */
-    addNewToBlacklist(appId: string, apiId: string, msisdnList: string) {
+    addNewToBlacklist(appId: string, apiId: string, msisdnList: string, action: string) {
         const data = {
             'sp': this.loginInfo.userName,
             'msisdn': msisdnList,
-            'action': 'blacklist'
+            'action': action,
+            'user': this._authenticationService.loginUserInfo.getValue().userName
         };
 
         return this.http.post(this.apiEndpoints['addNewBlacklist'] + appId + '/' + apiId + '?', data, this.getOptions())
@@ -371,20 +372,20 @@ export class BlackListWhiteListRemoteDataService {
                 if (response.status == 201) {
                     return {
                         success: true,
-                        message: 'New Blacklist Added Successfully',
+                        message: 'New ' + action + ' Added Successfully',
                         payload: response.json()
                     };
                 } else {
                     return {
                         success: false,
-                        message: 'Error Adding Blacklist',
+                        message: 'Error Adding' + action,
                         payload: null
                     };
                 }
             })
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Adding Blacklist',
+                message: 'Error Adding ' + action,
                 error: error
             }));
     }
@@ -392,14 +393,14 @@ export class BlackListWhiteListRemoteDataService {
 
 
     /**
-     * Add bulk BlackListNumber
+     * Add bulk BlackList/Whitelist Number
      * @param apiId
      * @param appId
      * @param msisdnList
      * @returns {Observable<R>}
      */
     addBulkToBlacklist(appId: string, apiId: string, msisdnfile: FormData) {
-
+        msisdnfile.append('user', this._authenticationService.loginUserInfo.getValue().userName);
 
         return this.http.post(this.apiEndpoints['addBulkToBlacklist'] + appId + '/' + apiId, msisdnfile, this.getDownloadOptions())
             .map((response: Response) => {
