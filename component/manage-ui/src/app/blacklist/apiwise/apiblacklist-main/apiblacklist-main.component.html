@@ -45,7 +45,7 @@
                                         <label class="control-label col-sm-2">Number:</label>
                                         <div class="col-sm-6">
                                             <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
-                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g.tel:94777333100">&nbsp;
+                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g:94777333100" (keyup)="onChange($event)">&nbsp;
                                             <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
                                         </div>
                                         <button class="btn btn-primary" (click)="searchBlackListNumbers()">
@@ -93,12 +93,12 @@
                                 <h4>Blacklist single number</h4>
                                 <form class="form-horizontal center-block " #numberlistForm="ngForm" novalidate
                                     (ngSubmit)="onUploadNumber(numberlistForm)">
-                                    <div class="form-group" [ngClass]="{'has-danger': (ismsisdnError)}">
+                                    <div class="form-group" [ngClass]="{'has-danger': (isblackListError)}">
                                         <label class="control-label col-sm-2">Number:</label>
                                         <div class="col-sm-6">
                                             <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
-                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g.tel:94777333100">&nbsp;
-                                            <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
+                                                [(ngModel)]="msisdnBlacklist" type="text" name="manualNumber" placeholder="e.g:94777333100">&nbsp;
+                                            <span class="error" *ngIf="isblackListError">{{msisdnError}}</span>
                                         </div>
                                         <button class="btn btn-primary">
                                             <span class="glyphicon glyphicon-plus-sign"> ADD</span>
