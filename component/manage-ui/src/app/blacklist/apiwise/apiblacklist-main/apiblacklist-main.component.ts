@@ -3,7 +3,6 @@ import { BlackListWhiteListService } from '../../../commons/services/blacklist_w
 import { Api, MsisdnValidation, Application } from '../../../commons/models/common-data-models';
 import { MessageService } from '../../../commons/services/message.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { TabsetComponent } from 'ngx-bootstrap';
 
 
 // const URL = '/api/';
@@ -28,9 +27,11 @@ export class ApiBlacklistMainComponent implements OnInit {
     private msisdnList: string;
     private blackListList: string;
     private msisdn: string;
+    private msisdnBlacklist: string;
     private msisdnError: string;
     private long: string;
     private ismsisdnError: boolean;
+    private isblackListError: boolean;
     private ismsisdnAvailable: boolean;
     private count;
     private id;
@@ -73,7 +74,9 @@ export class ApiBlacklistMainComponent implements OnInit {
         this.api = '';
         this.apiId = '';
         this.msisdn = '';
+        this.msisdnBlacklist = '';
         this.ismsisdnError = false;
+        this.isblackListError = false;
         this.msisdnError = '';
         this.long = '';
         this.count = '0';
@@ -134,7 +137,7 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @param AppId/APIID
      */
     getBlackListNumbersCount(apiid: string, appid: string, subscriber: string) {
-        this.blackListWhiteListService.getBlacklistCount(appid, apiid, subscriber, (response) => {
+        this.blackListWhiteListService.getBlacklistCount(appid, apiid, subscriber,'blacklist', (response) => {
 
             if (response.success) {
                 this.ismsisdnAvailable = false;
@@ -157,11 +160,11 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn, (response) => {
+        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn,'blacklist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
                 this.getBlackListNumbersCount(this.id, newappId, newsp);
-                this.msisdn = '';
+                this.msisdnBlacklist = '';
             } else {
                 this.message.error(response.message);
             }
@@ -186,51 +189,18 @@ export class ApiBlacklistMainComponent implements OnInit {
 
         if (validApi) {
             if (this.api.length != 0) {
-                this.ismsisdnError = false;
-                const msisdnList = this.msisdn;
+                this.isblackListError = false;
+                const msisdnList = this.msisdnBlacklist;
                 let count = 0;
                 this.addNewBlackListnumbers(msisdnList);
 
             }
         } else {
             this.msisdnError = 'Please Select Valid API';
-            this.ismsisdnError = true;
+            this.isblackListError = true;
         }
     }
 
-
-    /**
-    *
-    * @param numberlistForm
-    */
-    /*  onBulkUploadNumber(numberlistFile: any) {
- 
-         let validApi = false;
- 
-         for (const entry of this.apiList) {
-             if (entry == this.api) {
-                 validApi = true;
-             }
-         }
- 
-         if (validApi) {
-             if (this.api.length != 0) {
-                 this.blackListWhiteListService.addBulkToBlacklist(this.selcetedAppId, this.id, numberlistFile, (response) => {
-                     if (response.success) {
-                         this.message.success(response.message);
-                         this.getBlackListNumbersCount(this.id, this.selcetedAppId, this.subscriber);
-                         this.msisdn = '';
-                     } else {
-                         this.message.error(response.message);
-                     }
-                 });
-             }
-         } else {
-             this.msisdnError = 'Please Select Valid API';
-             this.ismsisdnError = true;
-         }
-     }
-  */
     /**
     *  search blacklist number for api
     * @param AppId/APIID
@@ -242,7 +212,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.getBlacklistNumberExit(newappId, this.id, this.msisdn, newsp, (response) => {
+        this.blackListWhiteListService.getBlacklistNumberExit(newappId, this.id, this.msisdn, newsp,'blacklist', (response) => {
 
             if (response.success) {
                 if (response.payload.exists) {
@@ -272,7 +242,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, newappId, newsp, (response) => {
+        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, newappId, newsp,'blacklist', (response) => {
 
             if (response.success) {
             } else {
@@ -400,6 +370,10 @@ export class ApiBlacklistMainComponent implements OnInit {
         */
     onMsisdnSelected() {
 
+    }
+
+    onChange(event: any) {
+        if (event.target.value == '' || event.target.value == null) { this.ismsisdnError = false; }
     }
 
     /**
