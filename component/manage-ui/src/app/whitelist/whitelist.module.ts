@@ -7,6 +7,8 @@ import {WhitelistListComponent} from './whilelist-list/whitelist-list.component'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ng2-bootstrap/tabs';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
     imports: [
@@ -15,8 +17,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
+        FileUploadModule,
         ModalModule.forRoot(),
-        TooltipModule.forRoot()
+        TooltipModule.forRoot(),
+        TabsModule.forRoot()
     ],
     declarations: [
         WhitelistMainComponent,
