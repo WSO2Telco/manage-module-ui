@@ -1,3 +1,6 @@
+@import "/../../../styles/colors";
+@import "/../../../styles/mixing";
+
 :host {
   display: block;
   margin-top: 20px;
@@ -7,34 +10,46 @@
   background-color: #ffffff;
 }
 
-.searchFilter {
-  div[class^="col-"] {
-    padding-bottom: 10px;
-  }
-}
-
 .tbl-header {
   color: #E19131;
 }
 
-.addbtn {
-
-}
-
-.error {
-  font-size: 0.9em;
-  color: #f96565;
-}
-
-.whitelistInputContainer {
+.quotaInputContainer {
   min-height: 100px;
   padding: 10px;
   background-color: white;
   border: solid 1px whitesmoke;
 }
 
-.tbl-header {
-  color: #E19131;
+.bs-callout-info {
+  background-color: #E19131;
+  border: 1px solid #e3e3e3;
+}
+
+.bs-callout {
+  padding: 20px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.label-info {
+  background-color: #5bc0de;
+}
+
+.label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
 }
 
 .searchFilter {
@@ -55,23 +70,13 @@
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  color: #ffffff;
 }
 
-.open {
-  overflow: visible;
-  z-index: 100000;
-}
-
-.subtitle {
-  color: #E19132;
-}
-
-.info-tooltip {
-  font-size: 1.5em;
-  color: #8E44AD;
-  vertical-align: top;
-  margin-top: 0.3em;
-  cursor: pointer;
+.searchFilter {
+  div[class^="col-"] {
+    padding-bottom: 10px;
+  }
 }
 
 .tbl-header {
@@ -83,4 +88,268 @@
   text-transform: uppercase;
 }
 
+.error {
+  font-size: 0.9em;
+  color: #f96565;
+}
 
+.has-danger .form-control{
+  border-color: #d9534f;
+  color: #d9534f;
+}
+
+
+.table {
+  display: table;
+  width: 100%;
+
+  @media only screen and (max-width: 768px) {
+    // display: block;
+  }
+
+  .tbl-row {
+    display: table-row;
+    background-color: #f6f6f6;
+    height: 0px;
+    @include transition(all 0.5s ease-in);
+
+    &:nth-of-type(odd) {
+      background-color: white;
+    }
+
+    &.header {
+      background-color: #7788aa;
+      font-weight: 600;
+      color: white;
+    }
+
+    @media only screen and (max-width: 768px) {
+      // display: block;
+    }
+
+    .tbl-cell {
+      display: table-cell;
+      padding: 10px 10px;
+      @media only screen and (max-width: 768px) {
+        //  display: block;
+      }
+    }
+
+    &.modified {
+      background-color: #ffffcc;
+    }
+
+    &.open {
+      height: 158px;
+      background-color: #f4f2c9;
+
+      .action {
+        border-color: black;
+        color : black;
+      }
+
+      &.A,&.R{
+        height: 243px;
+      }
+    }
+
+    .more-con{
+      padding:10px 0px 10px 0px;
+      background-color: $gray_0;
+      position: absolute;
+      left: 10px;
+      right: 11px;
+      height: 105px;
+      margin-top: 53px;
+      border:solid 1px #d0d0d0;
+      @include box-shadow( inset 0px 10px 10px -9px rgba(209,209,209,1));
+
+      &.A,&.R{
+        height: 190px;
+      }
+
+      .more-row{
+        margin-bottom: 2px;
+      }
+
+      .field-name{
+        height: 40px;
+        background-color: $gray_1;
+        line-height: 40px;
+        text-align: right;
+        font-weight: 600;
+      }
+
+      .field-value{
+        height: 40px;
+        background-color: white;
+        line-height: 40px;
+      }
+
+      select,input{
+        margin-top: 2px;
+      }
+
+      .btn{
+        margin-top: 10px;
+        padding-top: 5px!important;
+        padding-bottom: 5px !important;
+      }
+    }
+
+  }
+
+  .no-rec-row {
+    position: relative;
+
+    .no-rec {
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      margin: auto;
+      width: 100px;
+      padding-top: 15px;
+      color: $gray;
+    }
+  }
+
+  .fromcolor{
+    color: $success;
+  }
+
+  .tocolor{
+    color: $error-red;
+  }
+}
+
+h3{ text-transform: uppercase;}
+
+.subtitle{ color: #E19132;}
+
+.scrollit {
+  overflow-y:auto;
+  height:300px;
+}
+
+
+/******************** new style ******************/
+
+.blacklist-activity{
+  height: 170px;
+  position: relative;
+  overflow: hidden;
+  background-color: #3598dc;
+  transition: all 0.2s ease-in;
+
+  .count{
+    position: absolute;
+    right: 31%;
+    top : 36%;
+    font-size: 2.5em;
+    color: white;
+
+  }
+
+  .name{
+    position: absolute;
+    right: 10px;
+    bottom:30px;
+    color: #e9e9e9;
+    font-size: 1.2em;
+    font-weight: 900;
+  }
+
+  .icon{
+    color: rgba(255, 255, 255, 0.06);
+    position: absolute;
+    bottom: 0px;
+    top:23%;
+    left: 33%;
+    font-size: 9em;
+  }
+
+  .myCount{
+    position: absolute;
+    color: #e9e9e9;
+    top: 37px;
+    left: 15px;
+  }
+
+  .groupCount{
+    top: 12px;
+    left: 15px;
+    position: absolute;
+    color: #e9e9e9;
+  }
+
+  .sub{
+    font-weight: 900;
+  }
+
+}
+
+.blacklist-activity:hover {
+  background-color: #2f87c4;
+  cursor: pointer;
+}
+
+
+.purpel{
+  background-color: #8E44AD !important;
+}
+
+/********** Drop zone styles **********/
+
+.my-drop-zone { 
+  border: dotted 3px lightgray; 
+  background-color: #f5f7fa !important;
+  min-height: 100px;
+  padding-top: 2%;
+  text-align: center;
+}
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+.another-file-over-class { border: dotted 3px green; }
+
+.center {
+  text-align: center;
+}
+
+.vz-drop-zone .instructions {
+  line-height: 1.3;
+  color: #8E44AD;
+  font-size: 11px;
+}
+
+.font-large-2 {
+  font-size: 3rem!important;
+  line-height: 2.95rem;
+}
+
+/**************** end of drop zone style **********/
+
+
+.content-div {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border: 1px solid #ddd;
+}
+
+.halfwidth{
+  width: 50%;
+}
+
+.quarterwidth{
+  width: 20%;
+}
+
+.text-success strong{
+  color: #E19131;
+}
+
+.noApiSet{
+  font-size: 12rem;
+  color: #ddd;
+  text-align: center;
+  margin-bottom: 3%;
+}
