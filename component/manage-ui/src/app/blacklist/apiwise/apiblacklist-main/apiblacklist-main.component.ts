@@ -5,9 +5,6 @@ import { MessageService } from '../../../commons/services/message.service';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
-// const URL = '/api/';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
-
 @Component({
     selector: 'app-blacklist-main',
     templateUrl: './apiblacklist-main.component.html',

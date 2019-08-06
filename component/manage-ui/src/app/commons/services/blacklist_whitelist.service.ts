@@ -3,7 +3,6 @@
  */
 import { Injectable } from '@angular/core';
 import { BlackListWhiteListRemoteDataService } from '../../data-providers/blacklist_whitelist_remote-data.service';
-import 'rxjs/Rx';
 
 
 @Injectable()

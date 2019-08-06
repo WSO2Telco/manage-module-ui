@@ -97,7 +97,6 @@ export class WhitelistMainComponent implements OnInit {
         reader.onload = (event) => {
         };
         reader.readAsDataURL(item._file);
-        //  reader.readAsText(item._file);
     }
 
 
