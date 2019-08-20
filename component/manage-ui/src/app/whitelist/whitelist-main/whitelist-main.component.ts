@@ -441,7 +441,6 @@ export class WhitelistMainComponent implements OnInit {
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid API Name';
             this.count = 0;
-            alert(this.count)
         }
     }
 
