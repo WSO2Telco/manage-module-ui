@@ -436,11 +436,8 @@ export class ApiBlacklistMainComponent implements OnInit {
         }
 
         if (invalid) {
-
             this.isInvalidFieldError = true;
             this.invalidFieldError = 'Invalid API Name';
-            this.count = 0;
-            alert(this.count)
         }
     }
 
