@@ -19,7 +19,8 @@
                             (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" placeholder="Select API">
                     </div>
                     <div class="col-sm-3">
-                        <h4>BlackListed count : &nbsp; <span class="label label-info">{{ count }}</span>
+                        <h4>BlackListed count : &nbsp; <span class="label label-info"><span *ngIf="!isInvalidFieldError">{{
+                                    count }}</span><span *ngIf="isInvalidFieldError">0</span></span>
                         </h4>
                     </div>
                 </div>
@@ -29,14 +30,8 @@
                 <tabset [justified]="true">
                     <tab heading="Search and Remove Blacklist Numbers">
                         <div *ngIf="api != '' && !isInvalidFieldError" class="content-div">
-                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
-                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
-                                        *ngIf="count != 0">have
-                                        <span class="label label-info">{{ count }}</span> blacklisted numbers </span><span
-                                        *ngIf="count == 0"> Doesn't have blacklisted
-                                        numbers</span>
-                                </span>
-                            </div>
+                            <h4 class="text-success" *ngIf="count == 0"> Doesn't have blacklisted numbers to Search or
+                                Remove</h4>
                             <br><br>
                             <div class="center-block halfwidth" *ngIf="count != 0">
                                 <h4>Search BlackListed Msisdn No</h4>
@@ -45,7 +40,8 @@
                                         <label class="control-label col-sm-2">Number:</label>
                                         <div class="col-sm-6">
                                             <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
-                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g:94777333100" (keyup)="onChange($event)">&nbsp;
+                                                [(ngModel)]="msisdn" type="text" name="manualNumber" placeholder="e.g:94777333100"
+                                                (keyup)="onChange($event)">&nbsp;
                                             <span class="error" *ngIf="ismsisdnError">{{msisdnError}}</span>
                                         </div>
                                         <button class="btn btn-primary" (click)="searchBlackListNumbers()">
@@ -80,14 +76,6 @@
                     </tab>
                     <tab heading="Blacklist New Numbers (Bulk or Single)">
                         <div class="content-div" *ngIf="api != '' && !isInvalidFieldError">
-                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
-                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
-                                        *ngIf="count != 0">have
-                                        <span class="label label-info">{{ count }}</span> blacklisted numbers </span><span
-                                        *ngIf="count == 0"> Doesn't have blacklisted
-                                        numbers</span>
-                                </span>
-                            </div>
                             <br><br>
                             <div class="halfwidth center-block">
                                 <h4>Blacklist single number</h4>
@@ -97,7 +85,8 @@
                                         <label class="control-label col-sm-2">Number:</label>
                                         <div class="col-sm-6">
                                             <input class="form-control" autocomplete="off" #nameRef="ngModel" required="required"
-                                                [(ngModel)]="msisdnBlacklist" type="text" name="manualNumber" placeholder="e.g:94777333100">&nbsp;
+                                                [(ngModel)]="msisdnBlacklist" type="text" name="manualNumber"
+                                                placeholder="e.g:94777333100">&nbsp;
                                             <span class="error" *ngIf="isblackListError">{{msisdnError}}</span>
                                         </div>
                                         <button class="btn btn-primary">

@@ -19,7 +19,8 @@
                             (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" placeholder="Select API">
                     </div>
                     <div class="col-sm-3">
-                        <h4>WhiteListed count : &nbsp; <span class="label label-info">{{ count }}</span>
+                        <h4>WhiteListed count : &nbsp; <span class="label label-info"><span *ngIf="!isInvalidFieldError">{{
+                                    count }}</span><span *ngIf="isInvalidFieldError">0</span></span>
                         </h4>
                     </div>
                 </div>
@@ -29,14 +30,8 @@
                 <tabset [justified]="true">
                     <tab heading="Search and Remove Whitelist Numbers">
                         <div *ngIf="api != '' && !isInvalidFieldError" class="content-div">
-                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
-                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
-                                        *ngIf="count != 0">have
-                                        <span class="label label-info">{{ count }}</span> WhiteListed numbers </span><span
-                                        *ngIf="count == 0"> Doesn't have WhiteListed
-                                        numbers</span>
-                                </span>
-                            </div>
+                            <h4 class="text-success" *ngIf="count == 0"> Doesn't have blacklisted numbers to Search or
+                                Remove</h4>
                             <br><br>
                             <div class="center-block halfwidth" *ngIf="count != 0">
                                 <h4>Search WhiteListed Msisdn No</h4>
@@ -81,14 +76,6 @@
                     </tab>
                     <tab heading="Whitelist New Numbers (Bulk or Single)">
                         <div class="content-div" *ngIf="api != '' && !isInvalidFieldError">
-                            <div><span class="text-success" *ngIf="api != ''"> {{subscriber}} <strong>
-                                        >> </strong>{{app}}<strong> >> </strong>{{api}} <span class="text-warning"
-                                        *ngIf="count != 0">have
-                                        <span class="label label-info">{{ count }}</span> whitelisted numbers </span><span
-                                        *ngIf="count == 0"> Doesn't have whitelisted
-                                        numbers</span>
-                                </span>
-                            </div>
                             <br><br>
                             <div class="halfwidth center-block">
                                 <h4>Whitelist single number</h4>

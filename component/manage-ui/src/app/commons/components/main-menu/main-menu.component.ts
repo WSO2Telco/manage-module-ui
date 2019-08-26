@@ -20,7 +20,7 @@ export class MainMenuComponent implements OnInit {
         { id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps', pattern: 'application:visible' },
         { id: 4, route: '/approvals/subscriptions', position: 'child', name: 'Approve Subscriptions', iconName: 'subscriptions', pattern: 'subscription:visible' },
         { id: 5, route: '/history', name: 'History', position: 'child', iconName: 'history', pattern: 'workFlowHistory:visible' },
-        { id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear', pattern: 'rate' },
+        { id: 6, route: '/', name: 'Rate', position: 'parent has-child', iconName: 'blur_linear', pattern: 'rate:view,rate:add,rate:assign' },
         { id: 7, route: '/rate/view', name: 'View Rate', position: 'child', iconName: 'search', pattern: 'rate:view' },
         { id: 8, route: '/rate/create', name: 'Create Rate', position: 'child', iconName: 'assignment', pattern: 'rate:add' },
         { id: 9, route: '/rate/assign', name: 'Assign Rate', position: 'child', iconName: 'assignment_turned_in', pattern: 'rate:assign' },
