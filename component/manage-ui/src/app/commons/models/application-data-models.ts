@@ -116,6 +116,13 @@ export class ApproveSubscriptionCreationTaskParam {
     selectedRate: string;
 }
 
+export class EditApplicationTierParam {
+    applicationId: number;
+    applicationName: string;
+    applicationTier:string;
+    user: string;
+}
+
 export class ApprovalEvent {
     task: ApplicationTask;
     dataType: TableDataType;
