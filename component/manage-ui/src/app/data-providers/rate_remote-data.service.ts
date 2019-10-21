@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate, RateTax} from '../commons/models/common-data-models';
-import {AuthenticationService} from '../commons/services/authentication.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Headers, Http, RequestOptions, Response } from '@angular/http';
+import { Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate, RateTax } from '../commons/models/common-data-models';
+import { AuthenticationService } from '../commons/services/authentication.service';
 
 
 @Injectable()
@@ -10,6 +10,7 @@ export class RateRemoteDataService {
 
     private url = new URL(window.location.href);
     private apiContext = this.url.protocol + '//' + this.url.host + '/ratecard-service/ratecardservice/';
+    private apiTierContext = this.url.protocol + '//' + this.url.host + '/api/am/store/v0.13/';
 
     private apiEndpoints: Object = {
         rateCardsByUser: this.apiContext + 'ratecards/operator/',
@@ -28,6 +29,7 @@ export class RateRemoteDataService {
         apiOperationRates: this.apiContext + '/rate/apioperationrates',
         addRateCategory: this.apiContext + '/rate/addratecategory/',
         approvedApiOperationRate: this.apiContext + 'applications/',
+        applicationTier: this.apiTierContext + 'tiers/application'
     };
 
     constructor(private http: Http, private authService: AuthenticationService) {
@@ -458,7 +460,7 @@ export class RateRemoteDataService {
 
         return this.http.get(url, this.getOptions())
             .map((response: Response) => {
-            response
+                response
                 return response.json();
             })
 
@@ -508,6 +510,28 @@ export class RateRemoteDataService {
                 message: 'Error Loading Operators',
                 error: error
             }));
+    }
+
+      /**
+     * get application tiers
+     * @returns {Observable<R|T>}
+     */
+    getApplicationTiers() {
+        return this.http.get(this.apiEndpoints['applicationTier'])
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Application Tier List Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => {
+                return Observable.throw({
+                    success: false,
+                    message: 'Error Loading Application Tier List',
+                    error: error
+                });
+            });
     }
 
 
@@ -565,7 +589,7 @@ export class RateRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 
     getOptionsCokkie(): RequestOptions {
@@ -577,6 +601,6 @@ export class RateRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 }
