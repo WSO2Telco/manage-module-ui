@@ -73,6 +73,10 @@ export class ApiList {
 export class Application {
     id: string;
     name: string;
+    tier:string;
+    approvalStatus:string;
+    lastUpdate:string;
+
 }
 
 export class Api {

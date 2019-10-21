@@ -1,15 +1,15 @@
-import {Injectable, Inject} from '@angular/core';
-import {Headers, RequestOptions, Response, Http} from "@angular/http";
-import {Observable, Subject, BehaviorSubject} from "rxjs";
+import { Injectable, Inject } from '@angular/core';
+import { Headers, RequestOptions, Response, Http } from "@angular/http";
+import { Observable, Subject, BehaviorSubject } from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
-    ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo
+    ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo, EditApplicationTierParam
 } from "../commons/models/application-data-models";
-import {AuthenticationService} from "../commons/services/authentication.service";
-import {SlimLoadingBarService} from "ng2-slim-loading-bar";
-import {MessageService} from "../commons/services/message.service";
-import {TableDataType} from "../commons/models/common-data-models";
+import { AuthenticationService } from "../commons/services/authentication.service";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
+import { MessageService } from "../commons/services/message.service";
+import { TableDataType } from "../commons/models/common-data-models";
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -50,7 +50,8 @@ export class ApprovalRemoteDataService {
         applicationAssign: this.apiContext + 'applications/assign',
         subscriptionAssign: this.apiContext + 'subscriptions/assign',
         approveApplicationCreation: this.apiContext + 'applications/approve',
-        approveSubscriptionCreation: this.apiContext + 'subscriptions/approve'
+        approveSubscriptionCreation: this.apiContext + 'subscriptions/approve',
+        editAppTier: this.apiContext + 'applications'
     };
 
     private actionMap = {
@@ -65,10 +66,10 @@ export class ApprovalRemoteDataService {
     };
 
     constructor(private http: Http,
-                @Inject('API_CONTEXT') private apiContext2: string,
-                private slimLoadingBarService: SlimLoadingBarService,
-                private message: MessageService,
-                private authService: AuthenticationService) {
+        @Inject('API_CONTEXT') private apiContext2: string,
+        private slimLoadingBarService: SlimLoadingBarService,
+        private message: MessageService,
+        private authService: AuthenticationService) {
     }
 
     private updateModifiedTask(result: ApplicationTask[], modified: number[]) {
@@ -308,6 +309,19 @@ export class ApprovalRemoteDataService {
             }));
     }
 
+    /**
+   * this function will be called when edit application tier
+   **/
+    editApplicationTier(param:EditApplicationTierParam): Observable<any> {
+        return this.http.put(this.apiEndpoints['editAppTier'], param, this.getOptions())
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Approving Tier',
+                error: error
+            }));
+    }
+
     getAllTasks(): void {
         if (this.authService.hasPermissions('application:visible')) {
             this.getUserApplicationTasks();
@@ -347,7 +361,7 @@ export class ApprovalRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 
 }
