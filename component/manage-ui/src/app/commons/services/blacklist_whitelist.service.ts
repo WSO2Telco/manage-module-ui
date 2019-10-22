@@ -145,4 +145,22 @@ export class BlackListWhiteListService {
             );
     }
 
+        /**
+     * get Subscription tier list
+     * @param api
+     * @param callback
+     */
+    getSubscriptionTierOperations(apiName:string,version:string,apiProvider:string, callback: Function) {
+        this._remoteService.getSubscriptionTiers(apiName,version,apiProvider)
+                .subscribe(
+                    data => {
+                        callback(data);
+                    },
+                    error => {
+                        callback(error);
+                    }
+                );
+        
+    }
+
 }

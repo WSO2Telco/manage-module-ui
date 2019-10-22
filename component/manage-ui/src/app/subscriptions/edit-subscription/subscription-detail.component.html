@@ -1,98 +1,100 @@
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
     <div class="col-sm-12">
-        <div class="form-container quotaInputContainer">
-            <div class="tbl-header">
-                Edit Subscription
-            </div>
-            <div class="row">
-                <div class="col-sm-12">
+        <div class="card card-block card-header">
+            <div class="form-container quotaInputContainer">
+                <!--  <div class="tbl-header">
+                    Edit Subscription
+                </div> -->
+                <div class="row">
                     <div class="col-sm-12">
-                        <div class="searchFilter">
-                            <div class="col-sm-3">
-                                <input [(ngModel)]="subscriber"
-                                       [typeahead]="subscriberList"
-                                       typeaheadOptionField="name"
-                                       [typeaheadMinLength]="0"
-                                       type="text"
-                                       class="form-control"
-                                       (typeaheadOnSelect)="onSubscriberSelected()"
-                                       (input)="onSubscriberSelected()"
-                                       placeholder="Service provider"
-                                       name="subscription"
-                                >
-                            </div>
-                            <div class="col-sm-3">
-                                <input [(ngModel)]="app"
-                                       [typeahead]="applications"
-                                       [typeaheadMinLength]="0"
-                                       type="text"
-                                       class="form-control"
-                                       (typeaheadOnSelect)="onAppSelected()"
-                                       (input)="onAppSelected()"
-                                       typeaheadOptionField="name"
-                                       placeholder="Application"
-                                       name="app">
-                            </div>
-                            <div class="col-sm-3">
-                                <input [(ngModel)]="api"
-                                       [typeaheadMinLength]="0"
-                                       (typeaheadOnSelect)="onApiSelected()"
-                                       (input)="onApiSelected()"
-                                       container="body"
-                                       [typeahead]="apiList"
-                                       typeaheadOptionField="id"
-                                       class="form-control"
-                                       name="api"
-                                       placeholder="Select API">
-                            </div>
-                            <div class="col-sm-3">
-                                <input [(ngModel)]="operator"
-                                       [typeahead]="operatorsList"
-                                       [typeaheadMinLength]="0"
-                                       (typeaheadOnSelect)="onOperatorSelected()"
-                                       (input)="onOperatorSelected()"
-                                       typeaheadOptionField="operatorName"
-                                       type="text"
-                                       class="form-control"
-                                       placeholder="Operator"
-                                       name="op">
+                        <div class="col-sm-12">
+                            <div class="searchFilter">
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="subscriber" [typeahead]="subscriberList" typeaheadOptionField="name"
+                                        [typeaheadMinLength]="0" type="text" class="form-control" (typeaheadOnSelect)="onSubscriberSelected()"
+                                        (input)="onSubscriberSelected()" placeholder="Service provider" name="subscription">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0" type="text"
+                                        class="form-control" (typeaheadOnSelect)="onAppSelected()" (input)="onAppSelected()"
+                                        typeaheadOptionField="name" placeholder="Application" name="app">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="api" [typeaheadMinLength]="0" (typeaheadOnSelect)="onApiSelected()"
+                                        (input)="onApiSelected()" container="body" [typeahead]="apiList"
+                                        typeaheadOptionField="id" class="form-control" name="api" placeholder="Select API">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="operator" [typeahead]="operatorsList" [typeaheadMinLength]="0"
+                                        (typeaheadOnSelect)="onOperatorSelected()" (input)="onOperatorSelected()"
+                                        typeaheadOptionField="operatorName" type="text" class="form-control"
+                                        placeholder="Operator" name="op">
+                                </div>
                             </div>
                         </div>
+
                     </div>
+                    <div class="col-sm-12">
+                        <tabset [justified]="true" #staticTabs>
+                            <tab heading="Application Details">
+                                <div class="content-div" *ngIf="applications.length < 1">
+                                    <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
+                                        <br>
+                                    </span>
+                                    <h4 class="center-block halfwidth text-center">Select the Service
+                                        Provider and Application to edit tier</h4>
+                                </div>
+                                <div class="col-sm-12" *ngIf="applications.length >= 1">
+                                    <app-common-data-table [dataSource]="applicationSubscriptions" [fieldSet]="appfieldSet">
+                                        <template #dynamicCellContent let-item="element">
+                                            <div>
+                                                <span tooltip="Show More Details" class="action  material-icons"
+                                                    (click)="onIconClick(item,'SHOW_APP')">dvr</span>
 
+                                                <span *ngIf="item.approvalStatus == 'APPROVED'" tooltip="Edit Tier"
+                                                    class="action  material-icons" (click)="onIconClick(item,'EDIT_TIER')">mode_edit</span>
+                                            </div>
+                                        </template>
+                                    </app-common-data-table>
+                                    <div class=" text-center">
+                                        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage"
+                                            [maxSize]="5" (pageChanged)="onPageChanged($event)" class="pagination-sm"
+                                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+                                    </div>
+                                </div>
+
+                            </tab>
+                            <tab heading="Subscription Details">
+                                <div class="content-div" *ngIf="!isApiSelect">
+                                    <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
+                                        <br>
+                                    </span>
+                                    <h4 class="center-block halfwidth text-center">Select the Service
+                                        Provider, Application and API to edit tier or rate</h4>
+                                </div>
+                                <div class="col-sm-12" *ngIf="isApiSelect">
+                                    <app-common-data-table [dataSource]="subscriptions" [fieldSet]="subscriptionfieldSet">
+                                        <template #dynamicCellContent let-item="element">
+                                            <div>
+                                                <span tooltip="Show More Details" class="action  material-icons"
+                                                    (click)="onIconClick(item,'SHOW')">dvr</span>
+
+                                                <span *ngIf="item.approvalStatus == 'Approved'" tooltip="Edit Operation Rate"
+                                                    class="action  material-icons" (click)="onIconClick(item,'EDIT')">mode_edit</span>
+                                            </div>
+                                        </template>
+                                    </app-common-data-table>
+                                    <div class="col-sm-12 text-center">
+                                        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage"
+                                            [maxSize]="5" (pageChanged)="onPageChanged($event)" class="pagination-sm"
+                                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"></pagination>
+                                    </div>
+                                </div>
+
+                            </tab>
+                        </tabset>
+                    </div>
                 </div>
-
-                <div class="col-sm-12">
-                    <app-common-data-table [dataSource]="subscriptions" [fieldSet]="fieldSet">
-                        <template #dynamicCellContent let-item="element">
-                            <div>
-                                <span tooltip="Show More Details"
-                                      class="action  material-icons"
-                                      (click)="onIconClick(item,'SHOW')">dvr</span>
-
-                                <span  *ngIf="item.approvalStatus == 'Approved'" tooltip="Edit Operation Rate"
-                                      class="action  material-icons"
-                                      (click)="onIconClick(item,'EDIT')">mode_edit</span>
-                            </div>
-                        </template>
-                    </app-common-data-table>
-                </div>
-                <div class="col-sm-12 text-center">
-                    <pagination
-                            [boundaryLinks]="true"
-                            [totalItems]="totalItems"
-                            [(ngModel)]="currentPage"
-                            [maxSize]="5"
-                            (pageChanged)="onPageChanged($event)"
-                            class="pagination-sm"
-                            previousText="&lsaquo;"
-                            nextText="&rsaquo;"
-                            firstText="&laquo;"
-                            lastText="&raquo;"></pagination>
-
-                </div>
-
-
             </div>
         </div>
     </div>

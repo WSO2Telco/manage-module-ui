@@ -1,21 +1,21 @@
-import {Injectable} from '@angular/core';
-import {ApprovalRemoteDataService} from '../data-providers/approval-remote-data.service';
-import {MessageService} from '../commons/services/message.service';
+import { Injectable } from '@angular/core';
+import { ApprovalRemoteDataService } from '../data-providers/approval-remote-data.service';
+import { MessageService } from '../commons/services/message.service';
 import {
     ApproveApplicationCreationTaskParam,
-    ApproveSubscriptionCreationTaskParam, ApplicationTask
+    ApproveSubscriptionCreationTaskParam, ApplicationTask, EditApplicationTierParam, EditSubscriptionTierParam
 } from '../commons/models/application-data-models';
-import {TableDataType} from '../commons/models/common-data-models';
-import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
-import {AuthenticationService} from '../commons/services/authentication.service';
+import { TableDataType } from '../commons/models/common-data-models';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { AuthenticationService } from '../commons/services/authentication.service';
 
 @Injectable()
 export class ApprovalHelperService {
 
     constructor(private approvalService: ApprovalRemoteDataService,
-                private message: MessageService,
-                private slimLoadingBarService: SlimLoadingBarService,
-                private authService: AuthenticationService) {
+        private message: MessageService,
+        private slimLoadingBarService: SlimLoadingBarService,
+        private authService: AuthenticationService) {
     }
 
 
@@ -58,6 +58,40 @@ export class ApprovalHelperService {
             );
         }
     }
+
+
+
+    /**
+    * this function is used to edit application tier.
+    * @param EditApplicationTierParam
+    */
+    editApplicationTier(param: EditApplicationTierParam, callback: Function): void {
+
+        this.approvalService.editApplicationTier(param).subscribe(
+            data => {
+                callback(data);
+            },
+            error => {
+                callback(error);
+            }
+        );
+    }
+
+     /**
+    * this function is used to edit Subscription tier.
+    * @param EditSubscriptionTierParam
+    */
+   editSubscriptionTier(param: EditSubscriptionTierParam, callback: Function): void {
+
+    this.approvalService.editSubscriptionTier(param).subscribe(
+        data => {
+            callback(data);
+        },
+        error => {
+            callback(error);
+        }
+    );
+}
 
 
     /**

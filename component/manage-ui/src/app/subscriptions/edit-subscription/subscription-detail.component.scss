@@ -907,4 +907,35 @@ fieldset[disabled] .btn {
 
 .action{cursor: pointer;}
 
-.adstatus{ }
+/***************** new style *****************/
+
+
+.content-div {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  padding: 2rem;
+  border: 1px solid #ddd;
+}
+
+.halfwidth{
+  width: 50%;
+}
+
+.quarterwidth{
+  width: 20%;
+}
+
+.text-success strong{
+  color: #E19131;
+}
+
+.noApiSet{
+  font-size: 12rem;
+  color: #ddd;
+  text-align: center;
+  margin-bottom: 3%;
+}
+
+.msisdn-list-container{
+  width: 75%;
+}

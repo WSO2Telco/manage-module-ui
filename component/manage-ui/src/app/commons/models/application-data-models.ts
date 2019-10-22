@@ -1,4 +1,4 @@
-import {TableDataType} from './common-data-models';
+import { TableDataType } from './common-data-models';
 export class DateTimeInfo {
     date: string;
     time: string;
@@ -38,7 +38,7 @@ export class RelevantRates {
     rateDefinitions: OperationRateDefinitions[];
 }
 
-export class OperationRateDefinitions{
+export class OperationRateDefinitions {
     rateDefName: string;
     rateDefId: number;
     rateDefDescription: string;
@@ -52,9 +52,9 @@ export class MetaData {
     total: number;
 }
 
-export class PaginationInfo{
+export class PaginationInfo {
     pageNo: number;
-    recordsPerPage : number;
+    recordsPerPage: number;
 
     constructor(pageNo: number, recordsPerPage: number) {
         this.pageNo = pageNo;
@@ -116,6 +116,22 @@ export class ApproveSubscriptionCreationTaskParam {
     selectedRate: string;
 }
 
+export class EditApplicationTierParam {
+    applicationId: number;
+    applicationName: string;
+    applicationTier: string;
+    user: string;
+}
+
+export class EditSubscriptionTierParam {
+    applicationId: number;
+    applicationName: string;
+    subscriptionTier: string;
+    user: string;
+    apiName: string;
+    department: string;
+}
+
 export class ApprovalEvent {
     task: ApplicationTask;
     dataType: TableDataType;
@@ -138,8 +154,8 @@ export class ApplicationTaskFilter {
     fromDate: string;
     toDate: string;
     dataType: TableDataType;
-    startRecordNumber= 0;
-    numberOfRecordsPerPage= 0;
+    startRecordNumber = 0;
+    numberOfRecordsPerPage = 0;
 
     constructor(dataType: TableDataType, recPerPage?: number) {
         this.dataType = dataType;

@@ -1,10 +1,10 @@
-import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
-import {ApprovedApiOperationRate} from '../../commons/models/reporing-data-models';
-import {ActivatedRoute} from '@angular/router';
-import {MessageService} from '../../commons/services/message.service';
-import {TabsetComponent} from 'ngx-bootstrap';
-import {RateService} from "../../commons/services/rate.service";
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ReportingRemoteDataService } from '../../data-providers/reporting-remote-data.service';
+import { ApprovedApiOperationRate } from '../../commons/models/reporing-data-models';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService } from '../../commons/services/message.service';
+import { TabsetComponent } from 'ngx-bootstrap';
+import { RateService } from "../../commons/services/rate.service";
 import {
     API,
     APIOperation,
@@ -14,8 +14,12 @@ import {
     UpdatedRate,
     AssignRateList
 } from '../../commons/models/common-data-models';
-import {ModalDirective} from 'ngx-bootstrap/modal';
-import {forkJoin} from "rxjs/observable/forkJoin";
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { forkJoin } from "rxjs/observable/forkJoin";
+import { ApprovalHelperService } from 'app/approvals/approval-helper.service';
+import { EditApplicationTierParam, EditSubscriptionTierParam } from 'app/commons/models/application-data-models';
+import { BlackListWhiteListService } from 'app/commons/services/blacklist_whitelist.service';
+import { AuthenticationService } from 'app/commons/services/authentication.service';
 
 @Component({
     selector: 'app-update-sub',
@@ -30,11 +34,14 @@ export class UpdateSubComponent implements OnInit {
     public apiId: number;
     public operatorId: string;
     public apiversion: string;
+    public apiprovider: string;
     private show: boolean;
     public disableUpdate: boolean;
     public requestNxtService: boolean;
     public title: string;
+    public appName: string;
     public action: string;
+    public tier: string;
     public status: string;
     public direction: string;
     public confirmMsg: string;
@@ -53,10 +60,20 @@ export class UpdateSubComponent implements OnInit {
     private sourceList: RateDefinition[];
     private destinationList: RateDefinition[];
     private assignedList: AssignRateList[];
+    public appTiers: string[];
+    public subscriptionTiers: string[];
+    public editTierState: boolean;
+    public isAppTier: boolean;
+    public newAppTier: string;
+    public editAppTierParam: EditApplicationTierParam[];
+    private loggedUser;
 
     constructor(private reportingService: ReportingRemoteDataService,
-                private rateService: RateService,
-                private route: ActivatedRoute, private message: MessageService) {
+        private rateService: RateService,
+        private workflowService: ApprovalHelperService,
+        private blackListWhiteListService: BlackListWhiteListService,
+        private authService: AuthenticationService,
+        private route: ActivatedRoute, private message: MessageService) {
     }
 
     ngOnInit() {
@@ -72,12 +89,18 @@ export class UpdateSubComponent implements OnInit {
         this.selectedVal = [];
         this.updateOperationRate = [];
         this.commentList = [];
+        this.appTiers = [];
+        this.subscriptionTiers = [];
         this.requestNxtService = true;
+        this.loggedUser = this.authService.loginUserInfo.getValue();
 
         this.route.params.subscribe(params => {
             this.title = params['apiname'];
+            this.appName = params['appname'];
             this.appId = params['appid'];
             this.apiversion = params['apiversion'];
+            this.apiprovider = params['apiprovider'];
+            this.tier = params['tier'];
             this.action = params['action'];
             this.status = params['status'];
             this.operatorId = params['operator'];
@@ -89,12 +112,16 @@ export class UpdateSubComponent implements OnInit {
                 this.direction = 'SBsubscriptions';
                 this.operatorParamforOpRate = this.operatorId;
             }
-            this.getApprovedAPIOperationRate(this.appId, this.title, this.apiversion, this.operatorId, this.direction);
+            if (this.action == 'edit') {
+                this.getApprovedAPIOperationRate(this.appId, this.title, this.apiversion, this.operatorId, this.direction);
+            }
         });
+
     }
 
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
     @ViewChild('lgModal') public modal: ModalDirective;
+    @ViewChild('appModal') public appmodal: ModalDirective;
 
     /**
      * to load the Operator list
@@ -217,22 +244,22 @@ export class UpdateSubComponent implements OnInit {
 
             forkJoin(forkJoinAray).subscribe((res: any[]) => {
                 if (res && res.length)
-                for (let i = 0; i < res.length; i++) {
-                    if (res[i].success) {
-                        this.sourceList = res[i].payload.source;
-                        this.assignedList.push(res[i].payload.destination);
-                        this.destinationList = [];
-                        if (res[i].payload.destination == 0) {
-                            this.message.warning('No Rate card Available for ' + this.apiOperationList[index].apiOperation);
+                    for (let i = 0; i < res.length; i++) {
+                        if (res[i].success) {
+                            this.sourceList = res[i].payload.source;
+                            this.assignedList.push(res[i].payload.destination);
+                            this.destinationList = [];
+                            if (res[i].payload.destination == 0) {
+                                this.message.warning('No Rate card Available for ' + this.apiOperationList[index].apiOperation);
+                            }
+                            index++;
+                        } else {
+                            this.sourceList = [];
+                            this.assignedList = [];
+                            this.destinationList = [];
+                            this.message.error(res[i].message);
                         }
-                        index++;
-                    } else {
-                        this.sourceList = [];
-                        this.assignedList = [];
-                        this.destinationList = [];
-                        this.message.error(res[i].message);
                     }
-                }
 
             })
         }
@@ -285,5 +312,99 @@ export class UpdateSubComponent implements OnInit {
 
     }
 
+    editTierValue(flag: boolean, action: string) {
+        this.editTierState = flag;
+        console.log(this.editTierState);
+        if (this.editTierState) {
+            if (action == 'application') {
+                this.appTiers = [];
+                this.rateService.getApplicationTierOperations((response) => {
+                    if (response.success) {
 
+                        for (const entry of response.payload.list) {
+                            if (entry.name == this.tier) {
+                                this.appTiers.splice(0, 0, entry.name)
+                            } else {
+                                this.appTiers.push(entry.name);
+                            }
+                        }
+
+                    } else {
+                        this.message.error(response.message);
+                    }
+                });
+            } else if (action == 'subscription') {
+                this.subscriptionTiers = [];
+                this.blackListWhiteListService.getSubscriptionTierOperations(this.title, this.apiversion, this.apiprovider, (response) => {
+                    if (response.success) {
+
+                        for (const entry of response.payload) {
+                            if (entry == this.tier) {
+                                this.subscriptionTiers.splice(0, 0, entry)
+                            } else {
+                                this.subscriptionTiers.push(entry);
+                            }
+
+                        }
+
+                    } else {
+                        this.message.error(response.message);
+                    }
+                });
+            }
+        }
+    }
+
+    onTierOptionChange(event, type: string) {
+        if (type == 'subscription') {
+            this.isAppTier = false;
+        } if (type == 'application') {
+            this.isAppTier = true;
+        }
+        this.newAppTier = event.target.value;
+        this.appmodal.show();
+    }
+
+    /**
+   * to update tier for specific application
+   */
+    updateApplicationTier() {
+        if (this.isAppTier) {
+            const editTierParam = new EditApplicationTierParam();
+            editTierParam.applicationId = this.appId;
+            editTierParam.applicationName = this.title;
+            editTierParam.applicationTier = this.newAppTier;
+            editTierParam.user = this.loggedUser;
+
+            this.workflowService.editApplicationTier(editTierParam, (response) => {
+                if (response) {
+                    this.message.success("Application Tier Successfully updated");
+                    this.tier = this.newAppTier;
+                    this.editTierValue(false, 'application');
+                } else {
+                    this.message.error('error');
+                }
+            });
+        } else {
+            const editsubTierParam = new EditSubscriptionTierParam();
+            editsubTierParam.applicationId = this.appId;
+            editsubTierParam.apiName = this.title;
+            editsubTierParam.subscriptionTier = this.newAppTier;
+            editsubTierParam.applicationName = this.appName;
+            editsubTierParam.department = '';
+            editsubTierParam.user = this.loggedUser;
+
+            this.workflowService.editSubscriptionTier(editsubTierParam, (response) => {
+                if (response) {
+                    this.message.success("Subscription Tier Successfully updated");
+                    this.tier = this.newAppTier;
+                    this.editTierValue(false, 'subscription');
+                } else {
+                    this.message.error('error');
+                }
+            });
+        }
+        this.appmodal.hide();
+
+    }
 }

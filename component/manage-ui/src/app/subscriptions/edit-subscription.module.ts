@@ -16,7 +16,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         EditSubscriptionRoutes,
         TabsModule.forRoot(),
         TooltipModule.forRoot(),
-        ModalModule.forRoot()
+        ModalModule.forRoot(),
+        TabsModule.forRoot()
     ],
     declarations: [
         SubscriptionDetailComponent,

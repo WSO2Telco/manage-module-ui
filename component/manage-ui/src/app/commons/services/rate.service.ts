@@ -294,6 +294,23 @@ export class RateService {
         }
     }
 
+      /**
+     * get application tier list
+     */
+    getApplicationTierOperations(callback: Function) {
+        if (this._remoteService.getApplicationTiers()) {
+            this._remoteService.getApplicationTiers()
+                .subscribe(
+                    data => {
+                        callback(data);
+                    },
+                    error => {
+                        callback(error);
+                    }
+                );
+        }
+    }
+
     getAPIOperationRatesStream(apiName: string, apiOperationId: number, operatorId: number): Observable<any> {
         if (this.authService.validateSession()) {
             if (operatorId) {

@@ -1,5 +1,5 @@
 <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-     aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,32 +14,27 @@
                         <div class="col-sm-12">
                             <h4>Please confirm your update</h4>
                             <div class="col-sm-8">
-                              <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll"
-                                                                    (change)="checkboxChange()"/>Set 1st
-                                Comment as for all changes<br></span>
+                                <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll" (change)="checkboxChange()" />Set
+                                    1st
+                                    Comment as for all changes<br></span>
                                 <ng-container *ngFor="let item of updateOperationRate ; let i = index">
                                     <ng-container *ngFor="let opt of subscriptionsrate">
                                         <div *ngIf="opt.apiOperationId == item.apiOperationId">
-                                            <label>{{opt.apiOperation}}</label> |Changed from <label
-                                                class="label label-success">{{opt.rateDefname}}</label> <label
-                                                *ngIf="opt.rateDefname == null" class="label label-danger">No
-                                            rate </label> &rArr; <label
-                                                class="label label-success">{{item.rateDefname}}</label><br>
+                                            <label>{{opt.apiOperation}}</label> |Changed from <label class="label label-success">{{opt.rateDefname}}</label>
+                                            <label *ngIf="opt.rateDefname == null" class="label label-danger">No
+                                                rate </label> &rArr; <label class="label label-success">{{item.rateDefname}}</label><br>
                                         </div>
 
                                     </ng-container>
-                                    <textarea rows="2" cols="70" required
-                                              id="{{item.apiOperationId}}"
-                                              placeholder="Comment" name="commentfield"
-                                              (input)="onSearchChange(item.apiOperationId)"></textarea>
+                                    <textarea rows="2" cols="70" required id="{{item.apiOperationId}}" placeholder="Comment"
+                                        name="commentfield" (input)="onSearchChange(item.apiOperationId)"></textarea>
 
                                 </ng-container>
                             </div>
                         </div>
                         <br>
                         <div class="col-sm-4 col-sm-offset-6" style="margin-top: 2%">
-                            <button type="submit" [disabled]="!updateconfirmationForm.form.valid"
-                                    class="btn btn-primary animated fadeIn">Update
+                            <button type="submit" [disabled]="!updateconfirmationForm.form.valid" class="btn btn-primary animated fadeIn">Update
                             </button>&nbsp;
                             <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
                         </div>
@@ -56,6 +51,31 @@
         </div>
     </div>
 </div>
+
+<div bsModal #appModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AppTierModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Update Tier</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Are sure you want to change the Tier from <b> {{tier}} </b>to <b>{{newAppTier}}</b></h4>
+                        <form (ngSubmit)="updateApplicationTier()" #updateAppTierForm="ngForm">
+                            <button type="submit" class="btn btn-primary animated fadeIn">Yes
+                            </button>
+                            <a class="btn btn-danger" (click)="appModal.hide()">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="animated fadeInUp row" style="animation-delay: 0.1s">
     <div class="col-sm-12">
         <div class="form-container quotaInputContainer">
@@ -65,7 +85,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <tabset #staticTabs>
-                        <tab heading='Subscription Details'>
+                        <tab heading='Subscription Details' *ngIf="action == 'edit'">
                             <form class="form-horizontal subDesForm" autocomplete="off">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2">Name:</label>
@@ -80,6 +100,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-sm-2">Selected Tier:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval" *ngIf="!editTierState">{{tier}}</label>
+                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onTierOptionChange($event,'subscription')">
+                                            <ng-container *ngFor="let set of subscriptionTiers">
+                                                <option [value]="set">
+                                                    {{set}}
+                                            </ng-container>
+                                        </select>
+                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true,'subscription')">Edit
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-sm-2">Approval Status:</label>
                                     <div class="col-sm-4">
                                         <span *ngIf="status == 'Approved'" class="label label-success">{{status}}</span>
@@ -89,13 +123,50 @@
                                 </div>
                             </form>
                         </tab>
-                        <tab>
+                        <tab heading='Application Details' *ngIf="action != 'edit'">
+                            <form class="form-horizontal subDesForm" autocomplete="off">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Name:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval">{{title}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Selected Tier:</label>
+                                    <div class="col-sm-4">
+                                        <label class="fieldval" *ngIf="!editTierState">{{tier}}</label>
+                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onTierOptionChange($event,'application')">
+                                            <ng-container *ngFor="let set of appTiers">
+                                                <option [value]="set">
+                                                    {{set}}
+                                            </ng-container>
+                                        </select>
+                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true,'application')">Edit
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Approval Status:</label>
+                                    <div class="col-sm-4">
+                                        <span *ngIf="status == 'APPROVED'" class="label label-success">{{status}}</span>
+                                        <span *ngIf="status == 'PENDING'" class="label label-warning">{{status}}</span>
+                                        <span *ngIf="status == 'REJECT'" class="label label-danger">{{status}}</span>
+                                    </div>
+                                </div>
+                            </form>
+                        </tab>
+                        <tab *ngIf="action == 'edit'">
                             <template tabHeading>Operation Rate details</template>
                             <div *ngIf="!editRateOperation">
                                 <form class="form-horizontal subDesForm" autocomplete="off">
                                     <div class="form-group">
-                                        <label class="col-sm-3 "><h4 class="resulttitle">Operation Name</h4></label>
-                                        <div class="col-sm-4 resulttitle"><h4>Assigned rate name</h4></div>
+                                        <label class="col-sm-3 ">
+                                            <h4 class="resulttitle">Operation Name</h4>
+                                        </label>
+                                        <div class="col-sm-4 resulttitle">
+                                            <h4>Assigned rate name</h4>
+                                        </div>
                                     </div>
                                     <ng-container *ngFor="let item of subscriptionsrate">
                                         <div class="form-group">
@@ -112,24 +183,28 @@
                             <div *ngIf="editRateOperation">
                                 <form class="form-horizontal subDesForm" autocomplete="off">
                                     <div class="form-group">
-                                        <label class="col-sm-3 "><h4 class="resulttitle">Operation Name</h4></label>
-                                        <div class="col-sm-4 resulttitle"><h4>Rate List</h4></div>
-                                        <div class="col-sm-4 resulttitle"><h4>Existing rate</h4></div>
+                                        <label class="col-sm-3 ">
+                                            <h4 class="resulttitle">Operation Name</h4>
+                                        </label>
+                                        <div class="col-sm-4 resulttitle">
+                                            <h4>Rate List</h4>
+                                        </div>
+                                        <div class="col-sm-4 resulttitle">
+                                            <h4>Existing rate</h4>
+                                        </div>
                                     </div>
                                     <ng-container *ngFor="let item of apiOperationList; let i = index">
                                         <div class="form-group">
                                             <label class="control-label col-sm-3">{{item.apiOperation}}</label>
                                             <div class="col-sm-4">
                                                 <ng-container *ngFor="let set of subscriptionsrate">
-                                                    <select *ngIf="item.apiOperationId == set.apiOperationId"
-                                                            class="form-control"
-                                                            (change)="onOptionChange($event,item,i)">
+                                                    <select *ngIf="item.apiOperationId == set.apiOperationId" class="form-control"
+                                                        (change)="onOptionChange($event,item,i)">
                                                         <option *ngIf="set.rateDefname == null" [value]=null>
                                                             select
                                                         </option>
                                                         <ng-container *ngFor="let opt of assignedList[i]">
-                                                            <option [value]="opt.rateDefId"
-                                                                    [selected]="opt.rateDefId == set.rateDefId">
+                                                            <option [value]="opt.rateDefId" [selected]="opt.rateDefId == set.rateDefId">
                                                                 {{opt.rateDefName}}
                                                             </option>
                                                         </ng-container>
@@ -138,13 +213,10 @@
                                             </div>
                                             <div class="col-sm-4">
                                                 <ng-container *ngFor="let items of subscriptionsrate">
-                                                    <div class="form-group"
-                                                         *ngIf="item.apiOperationId == items.apiOperationId">
+                                                    <div class="form-group" *ngIf="item.apiOperationId == items.apiOperationId">
                                                         <div class="col-sm-4">
-                                                            <label *ngIf="items.rateDefname !== 'null'"
-                                                                   class="label label-success">{{items.rateDefname}}</label>
-                                                            <label *ngIf="items.rateDefname == null"
-                                                                   class="label label-danger">Not
+                                                            <label *ngIf="items.rateDefname !== 'null'" class="label label-success">{{items.rateDefname}}</label>
+                                                            <label *ngIf="items.rateDefname == null" class="label label-danger">Not
                                                                 Assign</label>
                                                         </div>
                                                     </div>
@@ -158,11 +230,10 @@
                             <div class="form-group">
                                 <div class="col-sm-6 col-sm-offset-6">
                                     <button *ngIf="!editRateOperation" class="btn btn-primary animated fadeIn btn-large"
-                                            (click)="getApiOperations()">Edit
+                                        (click)="getApiOperations()">Edit
                                     </button>&nbsp;
-                                    <button *ngIf="editRateOperation" [disabled]="disableUpdate"
-                                            (click)="lgModal.show()"
-                                            class="btn btn-primary animated fadeIn btn-large">Update
+                                    <button *ngIf="editRateOperation" [disabled]="disableUpdate" (click)="lgModal.show()"
+                                        class="btn btn-primary animated fadeIn btn-large">Update
                                     </button>&nbsp;
                                     <a class="btn btn-warning btn-large" (click)="reloadPage()">Clear</a>
                                 </div>
