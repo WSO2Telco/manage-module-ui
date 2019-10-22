@@ -13,7 +13,7 @@ const routes = [
     component: UpdateSubComponent
   },
   {
-    path: ':appid/:apiname/:apiversion/:tier/:action/:status/:operator',
+    path: ':appid/:apiname/:appname/:apiversion/:apiprovider/:tier/:action/:status/:operator',
     component: UpdateSubComponent
   },
   {
