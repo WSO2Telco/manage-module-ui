@@ -57,7 +57,7 @@
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title pull-left">Update Application tier</h4>
+                <h4 class="modal-title pull-left">Update Tier</h4>
 
             </div>
             <div class="modal-body">
@@ -103,13 +103,13 @@
                                     <label class="control-label col-sm-2">Selected Tier:</label>
                                     <div class="col-sm-4">
                                         <label class="fieldval" *ngIf="!editTierState">{{tier}}</label>
-                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onAppTierOptionChange($event)">
-                                            <ng-container *ngFor="let set of appTiers">
+                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onTierOptionChange($event,'subscription')">
+                                            <ng-container *ngFor="let set of subscriptionTiers">
                                                 <option [value]="set">
                                                     {{set}}
                                             </ng-container>
                                         </select>
-                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true)">Edit
+                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true,'subscription')">Edit
                                         </button>
                                     </div>
                                 </div>
@@ -135,13 +135,13 @@
                                     <label class="control-label col-sm-2">Selected Tier:</label>
                                     <div class="col-sm-4">
                                         <label class="fieldval" *ngIf="!editTierState">{{tier}}</label>
-                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onAppTierOptionChange($event)">
+                                        <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState" (change)="onTierOptionChange($event,'application')">
                                             <ng-container *ngFor="let set of appTiers">
                                                 <option [value]="set">
                                                     {{set}}
                                             </ng-container>
                                         </select>
-                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true)">Edit
+                                        &nbsp; <button class="btn btn-primary animated fadeIn btn-md" (click)="editTierValue(true,'application')">Edit
                                         </button>
                                     </div>
                                 </div>

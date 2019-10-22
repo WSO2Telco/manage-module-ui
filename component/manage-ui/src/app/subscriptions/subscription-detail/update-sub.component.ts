@@ -17,7 +17,9 @@ import {
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { forkJoin } from "rxjs/observable/forkJoin";
 import { ApprovalHelperService } from 'app/approvals/approval-helper.service';
-import { EditApplicationTierParam } from 'app/commons/models/application-data-models';
+import { EditApplicationTierParam, EditSubscriptionTierParam } from 'app/commons/models/application-data-models';
+import { BlackListWhiteListService } from 'app/commons/services/blacklist_whitelist.service';
+import { AuthenticationService } from 'app/commons/services/authentication.service';
 
 @Component({
     selector: 'app-update-sub',
@@ -32,10 +34,12 @@ export class UpdateSubComponent implements OnInit {
     public apiId: number;
     public operatorId: string;
     public apiversion: string;
+    public apiprovider: string;
     private show: boolean;
     public disableUpdate: boolean;
     public requestNxtService: boolean;
     public title: string;
+    public appName: string;
     public action: string;
     public tier: string;
     public status: string;
@@ -57,13 +61,18 @@ export class UpdateSubComponent implements OnInit {
     private destinationList: RateDefinition[];
     private assignedList: AssignRateList[];
     public appTiers: string[];
+    public subscriptionTiers: string[];
     public editTierState: boolean;
+    public isAppTier: boolean;
     public newAppTier: string;
     public editAppTierParam: EditApplicationTierParam[];
+    private loggedUser;
 
     constructor(private reportingService: ReportingRemoteDataService,
         private rateService: RateService,
         private workflowService: ApprovalHelperService,
+        private blackListWhiteListService: BlackListWhiteListService,
+        private authService: AuthenticationService,
         private route: ActivatedRoute, private message: MessageService) {
     }
 
@@ -81,12 +90,16 @@ export class UpdateSubComponent implements OnInit {
         this.updateOperationRate = [];
         this.commentList = [];
         this.appTiers = [];
+        this.subscriptionTiers = [];
         this.requestNxtService = true;
+        this.loggedUser = this.authService.loginUserInfo.getValue();
 
         this.route.params.subscribe(params => {
             this.title = params['apiname'];
+            this.appName = params['appname'];
             this.appId = params['appid'];
             this.apiversion = params['apiversion'];
+            this.apiprovider = params['apiprovider'];
             this.tier = params['tier'];
             this.action = params['action'];
             this.status = params['status'];
@@ -299,25 +312,55 @@ export class UpdateSubComponent implements OnInit {
 
     }
 
-    editTierValue(flag: boolean) {
+    editTierValue(flag: boolean, action: string) {
         this.editTierState = flag;
+        console.log(this.editTierState);
         if (this.editTierState) {
-            this.appTiers = [];
-            this.rateService.getApplicationTierOperations((response) => {
-                if (response.success) {
+            if (action == 'application') {
+                this.appTiers = [];
+                this.rateService.getApplicationTierOperations((response) => {
+                    if (response.success) {
 
-                    for (const entry of response.payload.list) {
-                        this.appTiers.push(entry.name);
+                        for (const entry of response.payload.list) {
+                            if (entry.name == this.tier) {
+                                this.appTiers.splice(0, 0, entry.name)
+                            } else {
+                                this.appTiers.push(entry.name);
+                            }
+                        }
+
+                    } else {
+                        this.message.error(response.message);
                     }
+                });
+            } else if (action == 'subscription') {
+                this.subscriptionTiers = [];
+                this.blackListWhiteListService.getSubscriptionTierOperations(this.title, this.apiversion, this.apiprovider, (response) => {
+                    if (response.success) {
 
-                } else {
-                    this.message.error(response.message);
-                }
-            });
+                        for (const entry of response.payload) {
+                            if (entry == this.tier) {
+                                this.subscriptionTiers.splice(0, 0, entry)
+                            } else {
+                                this.subscriptionTiers.push(entry);
+                            }
+
+                        }
+
+                    } else {
+                        this.message.error(response.message);
+                    }
+                });
+            }
         }
     }
 
-    onAppTierOptionChange(event) {
+    onTierOptionChange(event, type: string) {
+        if (type == 'subscription') {
+            this.isAppTier = false;
+        } if (type == 'application') {
+            this.isAppTier = true;
+        }
         this.newAppTier = event.target.value;
         this.appmodal.show();
     }
@@ -326,21 +369,41 @@ export class UpdateSubComponent implements OnInit {
    * to update tier for specific application
    */
     updateApplicationTier() {
-        const editTierParam = new EditApplicationTierParam();
-        editTierParam.applicationId = this.appId;
-        editTierParam.applicationName = this.title;
-        editTierParam.applicationTier = this.newAppTier;
-        editTierParam.user = 'admin';
+        if (this.isAppTier) {
+            const editTierParam = new EditApplicationTierParam();
+            editTierParam.applicationId = this.appId;
+            editTierParam.applicationName = this.title;
+            editTierParam.applicationTier = this.newAppTier;
+            editTierParam.user = this.loggedUser;
 
-        this.workflowService.editApplicationTier(editTierParam, (response) => {
-            if (response) {
-                this.message.success("Application Tier Successfully updated");
-                this.tier = this.newAppTier;
-                this.editTierValue(false);
-            } else {
-                this.message.error('error');
-            }
-        });
+            this.workflowService.editApplicationTier(editTierParam, (response) => {
+                if (response) {
+                    this.message.success("Application Tier Successfully updated");
+                    this.tier = this.newAppTier;
+                    this.editTierValue(false, 'application');
+                } else {
+                    this.message.error('error');
+                }
+            });
+        } else {
+            const editsubTierParam = new EditSubscriptionTierParam();
+            editsubTierParam.applicationId = this.appId;
+            editsubTierParam.apiName = this.title;
+            editsubTierParam.subscriptionTier = this.newAppTier;
+            editsubTierParam.applicationName = this.appName;
+            editsubTierParam.department = '';
+            editsubTierParam.user = this.loggedUser;
+
+            this.workflowService.editSubscriptionTier(editsubTierParam, (response) => {
+                if (response) {
+                    this.message.success("Subscription Tier Successfully updated");
+                    this.tier = this.newAppTier;
+                    this.editTierValue(false, 'subscription');
+                } else {
+                    this.message.error('error');
+                }
+            });
+        }
         this.appmodal.hide();
 
     }
