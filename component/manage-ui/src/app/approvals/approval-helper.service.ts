@@ -3,7 +3,7 @@ import { ApprovalRemoteDataService } from '../data-providers/approval-remote-dat
 import { MessageService } from '../commons/services/message.service';
 import {
     ApproveApplicationCreationTaskParam,
-    ApproveSubscriptionCreationTaskParam, ApplicationTask, EditApplicationTierParam
+    ApproveSubscriptionCreationTaskParam, ApplicationTask, EditApplicationTierParam, EditSubscriptionTierParam
 } from '../commons/models/application-data-models';
 import { TableDataType } from '../commons/models/common-data-models';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
@@ -63,9 +63,7 @@ export class ApprovalHelperService {
 
     /**
     * this function is used to edit application tier.
-    * @param dataType
-    * @param taskId
-    * @param callBack
+    * @param EditApplicationTierParam
     */
     editApplicationTier(param: EditApplicationTierParam, callback: Function): void {
 
@@ -78,6 +76,22 @@ export class ApprovalHelperService {
             }
         );
     }
+
+     /**
+    * this function is used to edit Subscription tier.
+    * @param EditSubscriptionTierParam
+    */
+   editSubscriptionTier(param: EditSubscriptionTierParam, callback: Function): void {
+
+    this.approvalService.editSubscriptionTier(param).subscribe(
+        data => {
+            callback(data);
+        },
+        error => {
+            callback(error);
+        }
+    );
+}
 
 
     /**
