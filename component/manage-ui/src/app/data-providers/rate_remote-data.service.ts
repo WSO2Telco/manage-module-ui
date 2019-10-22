@@ -534,7 +534,6 @@ export class RateRemoteDataService {
             });
     }
 
-
     /**
      * to get rate api operations
      * @returns {Observable<R>}

@@ -1,10 +1,10 @@
 /**
  * Created by manoj on 7/27/17.
  */
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {Http, Headers, RequestOptions, Response} from '@angular/http';
-import {AuthenticationService} from '../commons/services/authentication.service';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { AuthenticationService } from '../commons/services/authentication.service';
 
 
 @Injectable()
@@ -26,9 +26,10 @@ export class BlackListWhiteListRemoteDataService {
         addNewBlacklist: this.apiContext + 'Blacklist',
         removeFromWhiteList: this.apiContext + 'RemoveFromWhiteList/',
         removeFromBlackList: this.apiContext + 'RemoveFromBlacklist/',
-        msisdnValidation: this.externalApiContext + 'validation/msisdn'
+        msisdnValidation: this.externalApiContext + 'validation/msisdn',
+        subscriptionTier: this.externalApiContext + 'subscription/'
     };
-    
+
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
@@ -128,7 +129,7 @@ export class BlackListWhiteListRemoteDataService {
      * get white list number list
      * @returns {Observable<R>}
      */
-    getWhitelist(subscriberID: string, appID: string, apiID,) {
+    getWhitelist(subscriberID: string, appID: string, apiID, ) {
         return this.http.get(this.apiEndpoints['whitelist'] + subscriberID + '/' + apiID + '/' + appID, this.getOptions())
             .map((response: Response) => {
                 return {
@@ -236,7 +237,7 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdnList
      * @returns {Observable<R>}
      */
-    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[],validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
+    addNewToWhitelist(appId: string, apiId: string, msisdnList: string[], validationRegex: string, validationPrefixGroup: number, validationDigitsGroup: number) {
 
         const data = {
             'appId': appId,
@@ -312,6 +313,22 @@ export class BlackListWhiteListRemoteDataService {
             }));
     }
 
+    getSubscriptionTiers(apiName: string, version: string, apiProvider: string) {
+        return this.http.get(this.apiEndpoints['subscriptionTier'] + apiName + '/' + version + '/' + apiProvider + '/tiers', this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Subscription Tier loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Subscription Tiers',
+                error: error
+            }));
+    }
+
     /**
      * Validate msisdns against regex
      * @param {string[]} msisdnList
@@ -319,7 +336,7 @@ export class BlackListWhiteListRemoteDataService {
     msisdnValidateService(msisdnList: string[]) {
 
         const data = {
-            'msisdnList' : msisdnList
+            'msisdnList': msisdnList
         };
 
         return this.http.post(this.apiEndpoints['msisdnValidation'], data, this.getOptions())
@@ -344,7 +361,7 @@ export class BlackListWhiteListRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 
 

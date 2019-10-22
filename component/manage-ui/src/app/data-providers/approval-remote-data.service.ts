@@ -4,7 +4,7 @@ import { Observable, Subject, BehaviorSubject } from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
-    ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo, EditApplicationTierParam
+    ApplicationTaskFilter, ApplicationTaskResult, PaginationInfo, EditApplicationTierParam, EditSubscriptionTierParam
 } from "../commons/models/application-data-models";
 import { AuthenticationService } from "../commons/services/authentication.service";
 import { SlimLoadingBarService } from "ng2-slim-loading-bar";
@@ -51,7 +51,8 @@ export class ApprovalRemoteDataService {
         subscriptionAssign: this.apiContext + 'subscriptions/assign',
         approveApplicationCreation: this.apiContext + 'applications/approve',
         approveSubscriptionCreation: this.apiContext + 'subscriptions/approve',
-        editAppTier: this.apiContext + 'applications'
+        editAppTier: this.apiContext + 'applications',
+        editSubTier: this.apiContext + 'subscriptions'
     };
 
     private actionMap = {
@@ -312,12 +313,25 @@ export class ApprovalRemoteDataService {
     /**
    * this function will be called when edit application tier
    **/
-    editApplicationTier(param:EditApplicationTierParam): Observable<any> {
+    editApplicationTier(param: EditApplicationTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editAppTier'], param, this.getOptions())
             .map((response: Response) => response.json())
             .catch((error: Response) => Observable.throw({
                 success: false,
-                message: 'Error Approving Tier',
+                message: 'Error updating Application Tier',
+                error: error
+            }));
+    }
+
+    /**
+  * this function will be called when edit subscription tier
+  **/
+    editSubscriptionTier(param: EditSubscriptionTierParam): Observable<any> {
+        return this.http.put(this.apiEndpoints['editSubTier'], param, this.getOptions())
+            .map((response: Response) => response.json())
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error updating subscription Tier',
                 error: error
             }));
     }
