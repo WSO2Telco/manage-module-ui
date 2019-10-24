@@ -21,7 +21,7 @@ const routes = [
     }
   },
   {
-    path: 'edit-subscription',
+    path: 'edit-subscription-application',
     loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
     canActivate: [AppGuard, PermissionGuard],
     data: {
