@@ -374,7 +374,7 @@ export class UpdateSubComponent implements OnInit {
             editTierParam.applicationId = this.appId;
             editTierParam.applicationName = this.title;
             editTierParam.applicationTier = this.newAppTier;
-            editTierParam.user = this.loggedUser;
+            editTierParam.user = this.loggedUser.userName;
 
             this.workflowService.editApplicationTier(editTierParam, (response) => {
                 if (response) {
@@ -392,7 +392,7 @@ export class UpdateSubComponent implements OnInit {
             editsubTierParam.subscriptionTier = this.newAppTier;
             editsubTierParam.applicationName = this.appName;
             editsubTierParam.department = '';
-            editsubTierParam.user = this.loggedUser;
+            editsubTierParam.user = this.loggedUser.userName;
 
             this.workflowService.editSubscriptionTier(editsubTierParam, (response) => {
                 if (response) {
