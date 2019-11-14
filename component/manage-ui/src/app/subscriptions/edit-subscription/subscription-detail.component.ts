@@ -415,19 +415,19 @@ export class SubscriptionDetailComponent implements OnInit {
     onIconClick(sup: Subscriptions, action: string) {
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-subscription-application/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
-                this.router.navigate(['edit-subscription/' + this.appID + '/' + sup.name + '/' + sup.version + '/' + sup.tier + '/show/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-subscription-application/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'EDIT_TIER':
-                this.router.navigate(['edit-subscription/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-subscription-application/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW_APP':
-                this.router.navigate(['edit-subscription/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-subscription-application/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             default:
