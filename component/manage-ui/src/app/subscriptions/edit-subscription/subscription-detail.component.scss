@@ -11,7 +11,7 @@
 }
 
 .tbl-header {
-  color: #E19131;
+  color: #e19131;
 }
 
 .quotaInputContainer {
@@ -32,7 +32,7 @@
   min-height: 78px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #E19131;
+  background-color: #e19131;
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -63,7 +63,7 @@
 .daterangepicker {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-size: 14px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 @media (min-width: 550px) {
@@ -168,7 +168,7 @@
 }
 
 .daterangepicker .off {
-  color: #A2A2A2;
+  color: #a2a2a2;
 }
 
 .daterangepicker table {
@@ -191,7 +191,7 @@
 
 .daterangepicker .clickable.disabled {
   pointer-events: none;
-  color: #A2A2A2;
+  color: #a2a2a2;
 }
 
 .ranges .clickable {
@@ -243,7 +243,18 @@
   text-align: center;
 }
 
-.daterangepicker .col-md-1, .daterangepicker .col-md-2, .daterangepicker .col-md-3, .daterangepicker .col-md-4, .daterangepicker .col-md-5, .daterangepicker .col-md-6, .daterangepicker .col-md-7, .daterangepicker .col-md-8, .daterangepicker .col-md-9, .daterangepicker .col-md-10, .daterangepicker .col-md-11, .daterangepicker .col-md-12 {
+.daterangepicker .col-md-1,
+.daterangepicker .col-md-2,
+.daterangepicker .col-md-3,
+.daterangepicker .col-md-4,
+.daterangepicker .col-md-5,
+.daterangepicker .col-md-6,
+.daterangepicker .col-md-7,
+.daterangepicker .col-md-8,
+.daterangepicker .col-md-9,
+.daterangepicker .col-md-10,
+.daterangepicker .col-md-11,
+.daterangepicker .col-md-12 {
   position: relative;
   float: left;
 }
@@ -429,18 +440,18 @@
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
 .daterangepicker .form-control:focus {
   border-color: #66afe9;
   outline: 0;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
 .daterangepicker .form-control::-moz-placeholder {
@@ -511,8 +522,8 @@ fieldset[disabled] .form-control {
 .daterangepicker .btn.active {
   background-image: none;
   outline: 0;
-  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
 .daterangepicker .btn.disabled,
@@ -523,7 +534,7 @@ fieldset[disabled] .btn {
   filter: alpha(opacity=65);
   -webkit-box-shadow: none;
   box-shadow: none;
-  opacity: .65;
+  opacity: 0.65;
 }
 
 .daterangepicker .btn-default {
@@ -731,7 +742,8 @@ fieldset[disabled] .btn {
         color: black;
       }
 
-      &.A, &.R {
+      &.A,
+      &.R {
         height: 243px;
       }
     }
@@ -747,7 +759,8 @@ fieldset[disabled] .btn {
       border: solid 1px #d0d0d0;
       @include box-shadow(inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
 
-      &.A, &.R {
+      &.A,
+      &.R {
         height: 190px;
       }
 
@@ -769,7 +782,8 @@ fieldset[disabled] .btn {
         line-height: 40px;
       }
 
-      select, input {
+      select,
+      input {
         margin-top: 2px;
       }
 
@@ -779,7 +793,6 @@ fieldset[disabled] .btn {
         padding-bottom: 5px !important;
       }
     }
-
   }
 
   .no-rec-row {
@@ -810,12 +823,12 @@ fieldset[disabled] .btn {
   font-weight: 600;
   font-size: 1.3em;
   padding: 5px 0px 15px;
-  color: #E19131;
+  color: #e19131;
   text-transform: uppercase;
 }
 
 .subtitle {
-  color: #E19132;
+  color: #e19132;
 }
 
 .has-danger .form-control {
@@ -824,7 +837,7 @@ fieldset[disabled] .btn {
 }
 
 .resulttitle {
-  color: #E19131;
+  color: #e19131;
   font-weight: bold;
 }
 
@@ -834,7 +847,7 @@ fieldset[disabled] .btn {
 
 .info-tooltip {
   font-size: 1.5em;
-  color: #8E44AD;
+  color: #8e44ad;
   vertical-align: top;
   margin-top: 0.3em;
   cursor: pointer;
@@ -854,7 +867,6 @@ fieldset[disabled] .btn {
   color: #32c5d2;
 }
 
-
 .searchFilter {
   div[class^="col-"] {
     padding-bottom: 10px;
@@ -862,11 +874,10 @@ fieldset[disabled] .btn {
 }
 
 .tbl-header {
-  color: #E19131;
+  color: #e19131;
 }
 
 .addbtn {
-
 }
 
 .error {
@@ -882,7 +893,7 @@ fieldset[disabled] .btn {
 }
 
 .tbl-header {
-  color: #E19131;
+  color: #e19131;
 }
 
 .searchFilter {
@@ -895,7 +906,7 @@ fieldset[disabled] .btn {
   min-height: 78px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #E19131;
+  background-color: #e19131;
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -905,10 +916,11 @@ fieldset[disabled] .btn {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-.action{cursor: pointer;}
+.action {
+  cursor: pointer;
+}
 
 /***************** new style *****************/
-
 
 .content-div {
   padding: 2rem;
@@ -917,25 +929,43 @@ fieldset[disabled] .btn {
   border: 1px solid #ddd;
 }
 
-.halfwidth{
+.halfwidth {
   width: 50%;
 }
 
-.quarterwidth{
+.quarterwidth {
   width: 20%;
 }
 
-.text-success strong{
-  color: #E19131;
+.text-success strong {
+  color: #e19131;
 }
 
-.noApiSet{
+.noApiSet {
   font-size: 12rem;
   color: #999999;
   text-align: center;
   margin-bottom: 3%;
 }
 
-.msisdn-list-container{
+.msisdn-list-container {
   width: 75%;
+}
+
+/********* Tab ***************/
+
+:host /deep/ .appTab > a , :host /deep/ .subTab > a {
+  background-color: #e7dddd!important;
+  color: #333333 !important;
+  font-weight: bold !important;
+}
+
+:host /deep/ .appTab > a:hover , :host /deep/ .subTab > a:hover {
+  background-color: #666666!important;
+  color: #ffffff !important;
+}
+
+:host /deep/ .appTab > .active , :host /deep/ .subTab > .active {
+  background-color: #666666!important;
+  color: #ffffff !important;
 }

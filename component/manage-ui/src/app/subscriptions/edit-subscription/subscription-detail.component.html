@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-sm-12">
                         <tabset [justified]="true" #staticTabs>
-                            <tab heading="Application Details">
+                            <tab heading="Application Details" customClass="appTab">
                                 <div class="content-div" *ngIf="applications.length < 1">
                                     <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
                                         <br>
@@ -64,7 +64,7 @@
                                 </div>
 
                             </tab>
-                            <tab heading="Subscription Details">
+                            <tab heading="Subscription Details" customClass="subTab">
                                 <div class="content-div" *ngIf="!isApiSelect">
                                     <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
                                         <br>
