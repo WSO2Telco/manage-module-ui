@@ -205,7 +205,7 @@ export class SubscriptionDetailComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
-        this.blackListWhiteListService.getApps(subscriberID, (response) => {
+        this.blackListWhiteListService.getAppsOfEditSub(subscriberID, (response) => {
             if (response.success) {
                 if (response.payload.length == 0) {
                     this.message.warning('No Applications of Subscriber Found');
@@ -219,11 +219,13 @@ export class SubscriptionDetailComponent implements OnInit {
                         appsfulldetails.name = splitted[1];
                         appsfulldetails.tier = splitted[2];
                         appsfulldetails.approvalStatus = splitted[3];
+                        appsfulldetails.lastUpdated = splitted[4];
                         this.applicationSubscriptions.push(appsfulldetails);
                         app.id = splitted[0];
                         app.name = splitted[1];
                         app.tier = splitted[2];
                         app.approvalStatus = splitted[3];
+                        app.lastUpdate = splitted[4];
                         this.applications.push(app);
                     }
                 }
@@ -256,6 +258,7 @@ export class SubscriptionDetailComponent implements OnInit {
                 appsfulldetails.id = item.id;
                 appsfulldetails.name = item.name;
                 appsfulldetails.tier = item.tier;
+                appsfulldetails.lastUpdated = item.lastUpdate;
                 appsfulldetails.approvalStatus = item.approvalStatus;
                 this.applicationSubscriptions.push(appsfulldetails);
             }
@@ -347,6 +350,7 @@ export class SubscriptionDetailComponent implements OnInit {
         this.reportingService.getSubscriptionDetail(id, opid, apiid, (response, status) => {
             if (status) {
                 this.subscriptions = response;
+                console.log('~~~~~~~'+response);
 
             } else {
                 this.message.error('Error Loading Subscription History Data');
