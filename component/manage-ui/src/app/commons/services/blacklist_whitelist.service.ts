@@ -35,6 +35,19 @@ export class BlackListWhiteListService {
             );
     }
 
+    getAppsOfEditSub(subscriberID: string, callback: Function) {
+        this._remoteService.getAppsForEditSub(subscriberID)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+
     getApis(subscriberID: string, appID: string, callback: Function) {
         this._remoteService.getApis(subscriberID, appID)
             .subscribe(
