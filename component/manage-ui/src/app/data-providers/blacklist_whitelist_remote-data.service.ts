@@ -359,9 +359,9 @@ export class BlackListWhiteListRemoteDataService {
      * @param msisdn
      * @returns {Observable<R>}
      */
-    addNewToBlacklist(appId: string, apiId: string, msisdnList: string, action: string) {
+    addNewToBlacklist(appId: string, apiId: string, sp:string, msisdnList: string, action: string) {
         const data = {
-            'sp': this.loginInfo.userName,
+            'sp': sp,
             'msisdn': msisdnList,
             'action': action,
             'user': this._authenticationService.loginUserInfo.getValue().userName

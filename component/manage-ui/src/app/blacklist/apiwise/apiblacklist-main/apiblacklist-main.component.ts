@@ -159,7 +159,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn, 'blacklist', (response) => {
+        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id,this.subscriber, msisdn, 'blacklist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
                 this.getBlackListNumbersCount(this.id, newappId, newsp);
