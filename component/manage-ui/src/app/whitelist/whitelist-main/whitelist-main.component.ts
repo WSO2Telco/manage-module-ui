@@ -160,7 +160,7 @@ export class WhitelistMainComponent implements OnInit {
         else { newappId = this.selcetedAppId }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, msisdn, 'whitelist', (response) => {
+        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id, this.subscriber, msisdn, 'whitelist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
                 this.getBlackListNumbersCount(this.id, newappId, newsp);

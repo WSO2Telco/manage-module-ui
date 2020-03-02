@@ -172,8 +172,8 @@ export class BlackListWhiteListService {
             );
     }
 
-    addNewToBlacklist(appId: string, apiId: string, msisdnList: string, action: string, callback: Function) {
-        this._remoteService.addNewToBlacklist(appId, apiId, msisdnList, action)
+    addNewToBlacklist(appId: string, apiId: string, sp:string, msisdnList: string, action: string, callback: Function) {
+        this._remoteService.addNewToBlacklist(appId, apiId, sp, msisdnList, action)
             .subscribe(
                 data => {
                     callback(data);
