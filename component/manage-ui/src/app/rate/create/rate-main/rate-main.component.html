@@ -57,7 +57,7 @@
                 Create New Rate Card
             </div>
 
-            <form class="form-horizontal" #ratecardForm="ngForm" novalidate
+            <form class="form-horizontal" #ratecardForm="ngForm" ngNoForm
                   (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-sm-2">Rate Name <span>*</span></label>
@@ -133,7 +133,7 @@
 
                 <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
                     <label class="control-label col-sm-2">Tariff <span>*</span></label>
-                    <template #customItemTemplate let-model="item" let-index="index">
+                    <ng-template #customItemTemplate let-model="item" let-index="index">
                         <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b> <span
                                 class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span
                                 *ngIf="model.tariffMaxCount !== 0"> <b>MaxCount:</b> {{ model.tariffMaxCount }}</span> <span
@@ -146,7 +146,7 @@
                                 *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span
                                 *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                         </h6>
-                    </template>
+                    </ng-template>
                     <div class="col-sm-6">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
@@ -171,7 +171,7 @@
                           tooltip="Click here to Add a new tariff to the list" placement="right"
                           (click)="showAddTariff=true;changeDialogTitle();lgModal.show();"></span>
 
-                    <template #ref>
+                    <ng-template #ref>
                         <table style="width:100%">
                             <tr>
                                 <th colspan="2"><h5 style="text-align: center">Details of Tariff :<b>{{this.selectedtariff[0]}}</b>
@@ -224,7 +224,7 @@
                             </tr>
 
                         </table>
-                    </template>
+                    </ng-template>
                 </div>
 
                 <div class="form-group">

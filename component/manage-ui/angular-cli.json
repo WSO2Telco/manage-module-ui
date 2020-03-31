@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../manage-service/src/main/webapp/public",
+      "outDir": "/home/telco/Documents/Projects/AXP-roadmap/igw410/wso2telcohub-4.1.0-SNAPSHOT/repository/deployment/server/webapps/manage-service/public",
       "assets": [
         "images",
         "assets",

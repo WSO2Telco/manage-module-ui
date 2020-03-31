@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-10">
-                    <form class="form-horizontal"#rateAssignForm="ngForm" autocomplete="off" novalidate
+                    <form class="form-horizontal"#rateAssignForm="ngForm" autocomplete="off" ngNoForm
                           (ngSubmit)="onRateAssigSubmition(rateAssignForm)">
 
                         <div class="form-group">
@@ -72,7 +72,7 @@
                                             [format] = "format"
                                     ></dual-list></tab>
                                     <tab>
-                                        <template tabHeading>Already Assigned rates</template>
+                                        <ng-template tabHeading>Already Assigned rates</ng-template>
                                         <h3 class="norateMessage" *ngIf="this.assignedList.length == 0">No Rate Assigned</h3>
                                         <ul *ngIf="this.assignedList.length != 0">
                                             <li *ngFor="let assignrate of this.assignedList">

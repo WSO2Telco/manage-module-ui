@@ -8,7 +8,7 @@
   <div class="form-container">
     <h3 class="sign-in">Sign In</h3>
     <!--login form START-->
-    <form #loginForm="ngForm" novalidate (ngSubmit)="onLoginClick(loginForm)" >
+    <form #loginForm="ngForm" (ngSubmit)="onLoginClick(loginForm)" >
       <div class="form-fields">
         <div class="form-group">
           <input class="form-control"

@@ -15,7 +15,7 @@
     [ngClass]="{'selected':(selectedRecordSet && values) && values.indexOf(item[selectedRecordSet.fieldNameToMatch]) >= 0}">
           <div class="tbl-cell" *ngFor="let f of fieldSet">{{item[f.fieldName]}}</div>
           <div class="tbl-cell">
-              <ng-container  [ngTemplateOutlet]="dynamicCellContentTmpl"  [ngOutletContext]="{element: item}"></ng-container>
+              <ng-container  [ngTemplateOutlet]="dynamicCellContentTmpl"  [ngTemplateOutletContext]="{element: item}"></ng-container>
           </div>
     </div>
     <div class="no-rec-row tbl-row" *ngIf="dataSource?.length == 0">

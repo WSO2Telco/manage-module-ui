@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule, XHRBackend, RequestOptions, Http} from '@angular/http';
-import {ButtonsModule, DropdownModule, PopoverModule, TooltipModule, TypeaheadModule} from 'ng2-bootstrap';
+import {ButtonsModule, BsDropdownModule, PopoverModule, TooltipModule, TypeaheadModule} from 'ngx-bootstrap';
 import {ModalModule} from 'ngx-bootstrap/modal';
 import {AppComponent} from './app.component';
 import {RootLevelRoutes} from './app.routes';
@@ -53,7 +53,7 @@ import {SubscriptionRemoteDataService} from "./data-providers/subscription-remot
         DataProvidersModule,
         ButtonsModule.forRoot(),
         PopoverModule.forRoot(),
-        DropdownModule.forRoot(),
+        BsDropdownModule.forRoot(),
         TooltipModule.forRoot(),
         ToastyModule.forRoot(),
         TypeaheadModule.forRoot(),

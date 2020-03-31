@@ -14,7 +14,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import {CurrencyComponent} from './create/rate-currency/currency.component';
-import { DualListBoxModule } from 'ng2-dual-list-box';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -30,7 +29,6 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
         ModalModule.forRoot(),
         TypeaheadModule.forRoot(),
         TooltipModule.forRoot(),
-        DualListBoxModule.forRoot(),
         TabsModule.forRoot(),
         CollapseModule.forRoot(),
         AngularDualListBoxModule,

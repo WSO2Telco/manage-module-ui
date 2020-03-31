@@ -61,7 +61,7 @@
                                       [tooltip]="ref" placement="right"
                                 ></span>
                             </div>
-                            <template #ref>
+                            <ng-template #ref>
                                 <table style="width:100%">
                                     <tr>
                                         <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{rateDefinition.tariff.tariffName}}</b></h5></th>
@@ -110,7 +110,7 @@
                                         <td style="text-align: right"><br> </td>
                                     </tr>
                                 </table>
-                            </template>
+                            </ng-template>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">Rate Taxes:</label>
@@ -146,7 +146,7 @@
                                                 ></span>
                                             </div>
                                         </div>
-                                        <template #TariffRef>
+                                        <ng-template #TariffRef>
                                             <table style="width:200px;">
                                                 <tr>
                                                     <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{item.tariff.tariffName}}</b></h5></th>
@@ -195,7 +195,7 @@
                                                     <td style="text-align: right"> <br></td>
                                                 </tr>
                                             </table>
-                                        </template>
+                                        </ng-template>
                                     </ng-container>
                                     <div class="no-rec-row tbl-row" *ngIf="rateCategory.length == 0">
                                         <span class="no-rec">No Records..</span>
