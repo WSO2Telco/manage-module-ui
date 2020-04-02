@@ -1,5 +1,4 @@
-import { Directive, Input, SimpleChanges,TemplateRef , ViewContainerRef} from '@angular/core';
-import { OnInit, OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Directive, Input, SimpleChanges,TemplateRef , ViewContainerRef, OnInit, OnChanges} from '@angular/core';
 import { AuthenticationService } from 'app/commons/services/authentication.service';
 //import { TemplateRef } from '@angular/core/src/linker/template_ref';
 //import { ViewContainerRef } from '@angular/core/src/linker/view_container_ref';

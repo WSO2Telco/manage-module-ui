@@ -29,9 +29,9 @@ export class AuthenticationService {
                 if (data.success) {
                     const loginInfo = new LoginResponse();
                     loginInfo.start = new Date().getTime();
-                    loginInfo.userName = data.payload.userName;
-                    loginInfo.permissions = data.payload.permissions;
-                    loginInfo.operatorName = data.payload.operatorName;
+                    loginInfo.userName = data.userName;
+                    loginInfo.permissions = data.permissions;
+                    loginInfo.operatorName = data.operatorName;
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
                     loginInfo.token = btoa(userName + ':' + password);
@@ -40,7 +40,7 @@ export class AuthenticationService {
                     sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
                     this._router.navigate(['home']);
                 } else {
-                    this._remoteService.logout(data.payload.userName);
+                    this._remoteService.logout(data.userName);
                     callback(data.message);
                 }
             },
@@ -104,7 +104,7 @@ export class AuthenticationService {
         window.onload = this.resetTimer.bind(this);
         document.onmousemove = this.resetTimer.bind(this);
         document.onkeypress = this.resetTimer.bind(this);
-        document.onmousewheel = this.resetTimer.bind(this);
+        // document.onmousewheel = this.resetTimer.bind(this);
         document.onclick = this.resetTimer.bind(this);
         window.onbeforeunload = (event) => {
             this.stopChecking();
@@ -121,7 +121,7 @@ export class AuthenticationService {
         window.onload = null;
         document.onmousemove = null;
         document.onkeypress = this.showMessage.bind(this);
-        document.onmousewheel = null;
+        // document.onmousewheel = null;
         document.onclick = this.showMessage.bind(this);
     }
 
