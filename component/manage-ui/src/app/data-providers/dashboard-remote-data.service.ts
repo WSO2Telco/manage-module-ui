@@ -1,13 +1,14 @@
 
 import {throwError as observableThrowError, BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
 import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from '../commons/models/dashboard-data-models';
 import {ApprovalRemoteDataService} from './approval-remote-data.service';
 import {ApplicationTaskResult} from '../commons/models/application-data-models';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import {AuthenticationService} from '../commons/services/authentication.service';
 import {MessageService} from '../commons/services/message.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class DashboardRemoteDataService {
@@ -35,7 +36,7 @@ export class DashboardRemoteDataService {
         subscriptionGraph: this.apiContext + 'subscriptions/graph',
     };
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private approvalService: ApprovalRemoteDataService,
                 private slimLoadingBarService: SlimLoadingBarService,
                 private authenticationService: AuthenticationService,
@@ -74,9 +75,7 @@ export class DashboardRemoteDataService {
         param.assignee = 'admin';
         param.candidateGroups = 'Internal/subscriber,manage-app-admin,Internal/identity,Internal/everyone,admin';
 
-        return this.http.post(this.apiEndpoints['dashboardData'], param, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => observableThrowError(error.json().message));
+        return this.http.post<any>(this.apiEndpoints['dashboardData'], param, this.getOptions());
     };
 
     updateDashboardData(result: ApplicationTaskResult, type: string): void {
@@ -92,19 +91,20 @@ export class DashboardRemoteDataService {
     getApplicationCreationHistoryGraphData(): void {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['applicationGraph'], this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => observableThrowError({
-                success: false,
-                message: 'Error Loading Application Creation History Graph Data',
-                error: error
-            }))
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Application Creation History Graph Data',
+                    error: error
+                }))
+            )
             .subscribe(
                 graphData => {
-                    if (graphData.success) {
-                        this.ApplicationCreationHistoryDataProvider.next(graphData.payload);
+                    if (graphData) {
+                        this.ApplicationCreationHistoryDataProvider.next(graphData['payload']);
                         this.slimLoadingBarService.complete();
                     } else {
-                        this.message.error(graphData.message);
+                        this.message.error(graphData['message']);
                         this.slimLoadingBarService.stop();
                     }
                 },
@@ -118,19 +118,20 @@ export class DashboardRemoteDataService {
     getSubscriptionCreationHistoryGraphData(): void {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['subscriptionGraph'], this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => observableThrowError({
-                success: false,
-                message: 'Error Loading Subscription Creation History Graph Data',
-                error: error
-            }))
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Subscription Creation History Graph Data',
+                    error: error
+                }))
+            )
             .subscribe(
                 data => {
-                    if (data.success) {
-                        this.SubscriptionCreationHistoryDataProvider.next(data.payload);
+                    if (data) {
+                        this.SubscriptionCreationHistoryDataProvider.next(data['payload']);
                         this.slimLoadingBarService.complete();
                     } else {
-                        this.message.error(data.message);
+                        this.message.error(data['message']);
                         this.slimLoadingBarService.stop();
                     }
                 },
@@ -141,16 +142,16 @@ export class DashboardRemoteDataService {
             );
     }
 
-    getOptions(): RequestOptions {
+    getOptions() {
         const token = this.authenticationService.loginUserInfo.getValue().token;
         const useName = this.authenticationService.loginUserInfo.getValue().userName;
-        const headers = new Headers(
+        const headers = new HttpHeaders(
             {
                 'Authorization': 'Basic ' + token,
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return {headers: headers};
     }
 
 }

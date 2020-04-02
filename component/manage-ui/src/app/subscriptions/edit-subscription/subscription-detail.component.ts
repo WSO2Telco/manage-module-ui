@@ -9,7 +9,6 @@ import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../comm
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
-import { isEmpty } from "rxjs/operator/isEmpty";
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({

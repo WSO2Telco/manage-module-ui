@@ -1,7 +1,6 @@
 
 import {throwError as observableThrowError, Subject, BehaviorSubject, Observable} from 'rxjs';
 import {Injectable, Inject} from '@angular/core';
-import {Headers, RequestOptions, Http, Response} from "@angular/http";
 import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
@@ -9,6 +8,7 @@ import {
     Application, ApplicationHistory, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ReportingRemoteDataService {
@@ -39,9 +39,9 @@ export class ReportingRemoteDataService {
      */
     public ApprovalHistoryProvider: Subject<AppHistoryResponse> = new BehaviorSubject<AppHistoryResponse>(null);
 
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
+    private headers: HttpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
+    private options = {headers: this.headers};
 
     private url = new URL(window.location.href);
     private apiContext = this.url.protocol + '//' + this.url.host + '/workflow-service/workflow/';
@@ -55,96 +55,95 @@ export class ReportingRemoteDataService {
         applicationHistory: this.apiContext + 'applications/history'
     };
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private message: MessageService,
                 private slimLoadingBarService: SlimLoadingBarService,
                 private authService: AuthenticationService) {
     }
 
     getApplicationDetail(id: number, callback: Function) {
-        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
-            .map((response: Response) => response.json())
-            .subscribe(
-                (applications: ApplicationHistory[]) => {
-                    this.ApplicationDetailProvider.next(applications);
-                    callback(applications, true);
-                },
-                (error) => {
-                    this.message.error(error);
-                    callback(error, false);
-                }
-            );
+        this.http.get<ApplicationHistory>(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
+            // .subscribe(
+            //     (applications) => {
+            //         this.ApplicationDetailProvider.next(applications);
+            //         callback(applications, true);
+            //     },
+            //     (error) => {
+            //         this.message.error(error);
+            //         callback(error, false);
+            //     }
+            // );
     }
 
 
     getSubscriptionDetail(id: number,opId:string,apiid:string, callback: Function) {
         this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50'  , this.getOptions())
-            .map((response: Response) => response.json())
-            .subscribe(
-                (applications: ApplicationHistory[]) => {
-                    this.ApplicationDetailProvider.next(applications);
-                    callback(applications, true);
-                },
-                (error) => {
-                    this.message.error(error);
-                    callback(error, false);
-                }
-            );
+            // .map((response: Response) => response.json())
+            // .subscribe(
+            //     (applications: ApplicationHistory[]) => {
+            //         this.ApplicationDetailProvider.next(applications);
+            //         callback(applications, true);
+            //     },
+            //     (error) => {
+            //         this.message.error(error);
+            //         callback(error, false);
+            //     }
+            // );
     }
 
     getSubscribers() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['subscribers'], this.getOptions())
-            .map((response: Response) => response.json())
-            .subscribe(
-                (subscribers) => {
-                    this.SubscribersProvider.next(subscribers)
-                },
-                (error) => {
-                    this.message.error(error);
-                    this.slimLoadingBarService.complete();
-                },
-                () => {
-                    this.slimLoadingBarService.complete()
-                }
-            )
+            // .map((response: Response) => response.json())
+            // .subscribe(
+            //     (subscribers) => {
+            //         this.SubscribersProvider.next(subscribers)
+            //     },
+            //     (error) => {
+            //         this.message.error(error);
+            //         this.slimLoadingBarService.complete();
+            //     },
+            //     () => {
+            //         this.slimLoadingBarService.complete()
+            //     }
+            // )
     }
 
     getOperators() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['operators'], this.getOptions())
-            .map((response: Response) => response.json())
-            .subscribe(
-                (operators) => {
-                    this.OperatorsProvider.next(operators)
-                },
-                (error) => {
-                    this.message.error(error);
-                    this.slimLoadingBarService.complete();
-                },
-                () => {
-                    this.slimLoadingBarService.complete()
-                }
-            )
+            // .map((response: Response) => response.json())
+            // .subscribe(
+            //     (operators) => {
+            //         this.OperatorsProvider.next(operators)
+            //     },
+            //     (error) => {
+            //         this.message.error(error);
+            //         this.slimLoadingBarService.complete();
+            //     },
+            //     () => {
+            //         this.slimLoadingBarService.complete()
+            //     }
+            // )
     }
 
     getApplicationsBySubscriber(subscriber: string) {
         if (!!subscriber) {
             this.slimLoadingBarService.start();
             this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.getOptions())
-                .map((response: Response) => response.json())
-                .subscribe(
-                    (applications: Application[]) => {
-                        this.ApplicationsProvider.next(applications)
-                    },
-                    (error) => {
-                        this.message.error(error);
-                        this.slimLoadingBarService.complete();
-                    },
-                    () => {
-                        this.slimLoadingBarService.complete()
-                    }
-                )
+                // .map((response: Response) => response.json())
+                // .subscribe(
+                //     (applications: Application[]) => {
+                //         this.ApplicationsProvider.next(applications)
+                //     },
+                //     (error) => {
+                //         this.message.error(error);
+                //         this.slimLoadingBarService.complete();
+                //     },
+                //     () => {
+                //         this.slimLoadingBarService.complete()
+                //     }
+                // )
         } else {
             this.ApplicationsProvider.next([]);
         }
@@ -165,39 +164,39 @@ export class ReportingRemoteDataService {
             + '?start=' + historyFilter.offset + '&filterBy=' + historyFilter.filterString;
 
         this.http.get(endPoint, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => observableThrowError({
-                success: false,
-                message: 'Error Loading Application History List',
-                error: error
-            }))
-            .subscribe(
-                data => {
-                    if (data.success) {
-                        this.ApprovalHistoryProvider.next(data.payload);
-                        this.slimLoadingBarService.complete();
-                    } else {
-                        this.message.error(data.message);
-                        this.slimLoadingBarService.stop();
-                    }
-                },
-                error => {
-                    this.message.error(error.message);
-                    this.slimLoadingBarService.stop();
-                }
-            );
+            // .map((response: Response) => response.json())
+            // .catch((error: Response) => observableThrowError({
+            //     success: false,
+            //     message: 'Error Loading Application History List',
+            //     error: error
+            // }))
+            // .subscribe(
+            //     data => {
+            //         if (data.success) {
+            //             this.ApprovalHistoryProvider.next(data.payload);
+            //             this.slimLoadingBarService.complete();
+            //         } else {
+            //             this.message.error(data.message);
+            //             this.slimLoadingBarService.stop();
+            //         }
+            //     },
+            //     error => {
+            //         this.message.error(error.message);
+            //         this.slimLoadingBarService.stop();
+            //     }
+            // );
     }
 
-    getOptions(): RequestOptions {
+    getOptions() {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
-        const headers = new Headers(
+        const headers = new HttpHeaders(
             {
                 'Authorization': 'Basic ' + token,
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return {headers: headers};
     }
 
     getDeploymentType(): Promise<any> {

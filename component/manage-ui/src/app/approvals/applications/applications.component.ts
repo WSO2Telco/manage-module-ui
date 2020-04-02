@@ -75,7 +75,7 @@ export class ApplicationsComponent implements OnInit {
             .subscribe(
                 data => {
                     this.creditPlan = [];
-                    const response = data.Success.text;
+                    const response = data['Success'].text;
                     let count = 0;
                     for (const item of response) {
                         this.creditPlan[count] = item.code;
