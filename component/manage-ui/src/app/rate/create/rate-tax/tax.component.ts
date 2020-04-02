@@ -3,7 +3,6 @@ import {RateService} from '../../../commons/services/rate.service';
 import {RateTax} from '../../../commons/models/common-data-models';
 import {AuthenticationService} from '../../../commons/services/authentication.service';
 import {MessageService} from '../../../commons/services/message.service';
-import {IMyDrpOptions} from 'mydaterangepicker';
 
 @Component({
     selector: 'app-addtax',
@@ -42,7 +41,7 @@ export class TaxComponent implements OnInit {
     private dateError: string;
     private date = new Date();
 
-    private myDateRangePickerOptions: IMyDrpOptions = {
+    private myDateRangePickerOptions = {
         dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
         indicateInvalidDateRange: true,
