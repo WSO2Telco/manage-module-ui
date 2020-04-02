@@ -4,17 +4,17 @@ import {AppGuard, LoginGuard, PermissionGuard} from './app.guard';
 const routes = [
   {
     path: 'login',
-    loadChildren: 'app/login/login.module#LoginModule',
+    loadChildren: () => import('app/login/login.module').then(m => m.LoginModule),
     canActivate: [LoginGuard]
   },
   {
     path: 'home',
-    loadChildren: 'app/dashboard/dashboard.module#DashboardModule',
+    loadChildren: () => import('app/dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AppGuard]
   },
   {
     path: 'history',
-    loadChildren: 'app/history/history.module#HistoryModule',
+    loadChildren: () => import('app/history/history.module').then(m => m.HistoryModule),
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'workFlowHistory'
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: 'edit-subscription-application',
-    loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
+    loadChildren: () => import('app/subscriptions/edit-subscription.module').then(m => m.EditSubscriptionModule),
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'edit-subscription'
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: 'rate',
-    loadChildren: 'app/rate/rate.module#RateModule',
+    loadChildren: () => import('app/rate/rate.module').then(m => m.RateModule),
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'rate'
@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: 'quotacap',
-    loadChildren: 'app/quotacap/quotacap.module#QuotaCapModule',
+    loadChildren: () => import('app/quotacap/quotacap.module').then(m => m.QuotaCapModule),
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'quota'
@@ -46,7 +46,7 @@ const routes = [
   },
   {
     path: 'whitelist',
-    loadChildren: 'app/whitelist/whitelist.module#WhitelistModule',
+    loadChildren: () => import('app/whitelist/whitelist.module').then(m => m.WhitelistModule),
     canActivate: [PermissionGuard],
     data: {
       permissions: 'whiteList'
@@ -54,7 +54,7 @@ const routes = [
   },
   {
     path: 'approvals',
-    loadChildren: 'app/approvals/approvals.module#ApprovalsModule',
+    loadChildren: () => import('app/approvals/approvals.module').then(m => m.ApprovalsModule),
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'application,subscription'
@@ -62,7 +62,7 @@ const routes = [
   },
   {
     path: 'blacklist',
-    loadChildren: 'app/blacklist/blacklist.module#BlackListModule',
+    loadChildren: () => import('app/blacklist/blacklist.module').then(m => m.BlackListModule),
     canActivate: [PermissionGuard],
     data: {
       permissions: 'apiBlacklist,spBlackList'
