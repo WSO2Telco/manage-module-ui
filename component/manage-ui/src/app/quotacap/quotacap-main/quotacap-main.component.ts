@@ -6,7 +6,6 @@ import {QuotaService} from '../../commons/services/quotacap.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
-import {IMyDrpOptions} from 'mydaterangepicker';
 import {RateService} from "../../commons/services/rate.service";
 import {BlackListWhiteListService} from "../../commons/services/blacklist_whitelist.service";
 
@@ -72,7 +71,7 @@ export class QuotaCapMainComponent implements OnInit {
 
     private showOperatorListPermissions: string;
 
-    private myDateRangePickerOptions: IMyDrpOptions = {
+    private myDateRangePickerOptions = {
         dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
         indicateInvalidDateRange: true,

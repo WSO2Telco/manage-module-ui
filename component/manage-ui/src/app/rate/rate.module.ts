@@ -17,7 +17,6 @@ import {CurrencyComponent} from './create/rate-currency/currency.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 @NgModule({
     imports: [
@@ -32,7 +31,6 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
         TabsModule.forRoot(),
         CollapseModule.forRoot(),
         AngularDualListBoxModule,
-        MyDateRangePickerModule
     ],
     declarations: [
         RateMainComponent,
