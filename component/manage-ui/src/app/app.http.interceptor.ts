@@ -7,7 +7,7 @@ import {
   RequestOptionsArgs
 } from "@angular/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { TimerService } from "./commons/services/timer.service";
 
 @Injectable()

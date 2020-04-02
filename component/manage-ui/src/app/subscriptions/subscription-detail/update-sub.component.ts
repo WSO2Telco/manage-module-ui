@@ -15,7 +15,7 @@ import {
     AssignRateList
 } from '../../commons/models/common-data-models';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { forkJoin } from "rxjs/observable/forkJoin";
+import { forkJoin } from "rxjs";
 import { ApprovalHelperService } from 'app/approvals/approval-helper.service';
 import { EditApplicationTierParam, EditSubscriptionTierParam } from 'app/commons/models/application-data-models';
 import { BlackListWhiteListService } from 'app/commons/services/blacklist_whitelist.service';

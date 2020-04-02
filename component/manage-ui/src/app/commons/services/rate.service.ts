@@ -2,8 +2,7 @@ import {Injectable} from "@angular/core";
 import {RateRemoteDataService} from "../../data-providers/rate_remote-data.service";
 import {Category, Currency, Rate, Tariff, UpdatedRate, RateTax} from "../models/common-data-models";
 import {AuthenticationService} from "./authentication.service";
-import { forkJoin } from "rxjs/observable/forkJoin";
-import { Observable } from 'rxjs/Observable';
+import { forkJoin ,  Observable } from "rxjs";
 
 
 @Injectable()
