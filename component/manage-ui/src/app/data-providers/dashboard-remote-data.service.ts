@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {DashboardData, DashboardDataRequestParam, HistoryBarGraphData} from '../commons/models/dashboard-data-models';
 import {ApprovalRemoteDataService} from './approval-remote-data.service';
 import {ApplicationTaskResult} from '../commons/models/application-data-models';
@@ -75,7 +76,7 @@ export class DashboardRemoteDataService {
 
         return this.http.post(this.apiEndpoints['dashboardData'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => observableThrowError(error.json().message));
     };
 
     updateDashboardData(result: ApplicationTaskResult, type: string): void {
@@ -92,7 +93,7 @@ export class DashboardRemoteDataService {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['applicationGraph'], this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Application Creation History Graph Data',
                 error: error
@@ -118,7 +119,7 @@ export class DashboardRemoteDataService {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['subscriptionGraph'], this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Subscription Creation History Graph Data',
                 error: error

@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, Subject, BehaviorSubject, Observable} from 'rxjs';
 import {Injectable, Inject} from '@angular/core';
 import {Headers, RequestOptions, Http, Response} from "@angular/http";
-import {Subject, BehaviorSubject, Observable} from "rxjs";
 import {MessageService} from "../commons/services/message.service";
 import {SlimLoadingBarService} from "ng2-slim-loading-bar";
 import {
@@ -165,7 +166,7 @@ export class ReportingRemoteDataService {
 
         this.http.get(endPoint, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Application History List',
                 error: error

@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError, BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ApplicationTaskResult, ApplicationTaskResults} from '../commons/models/application-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
@@ -34,7 +35,7 @@ export class ApplicationRemoteDataService {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['search'], this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading My Application List',
                 error: error
@@ -60,7 +61,7 @@ export class ApplicationRemoteDataService {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['search'], this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading All Application List',
                 error: error

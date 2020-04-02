@@ -1,8 +1,9 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 /**
  * Created by manoj on 7/27/17.
  */
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { AuthenticationService } from '../commons/services/authentication.service';
 
@@ -48,7 +49,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Subscriber List',
                 error: error
@@ -75,7 +76,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Application List',
                 error: error
@@ -97,7 +98,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Application List',
                 error: error
@@ -118,7 +119,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Api List',
                 error: error
@@ -139,7 +140,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Api List',
                 error: error
@@ -160,7 +161,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Whitelist',
                 error: error
@@ -182,7 +183,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Blacklist',
                 error: error
@@ -211,7 +212,7 @@ export class BlackListWhiteListRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Removing MSISDN',
                 error: error
@@ -245,7 +246,7 @@ export class BlackListWhiteListRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Removing MSISDN',
                 error: error
@@ -287,7 +288,7 @@ export class BlackListWhiteListRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding Whitelist',
                 error: error
@@ -328,7 +329,7 @@ export class BlackListWhiteListRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding Blacklist',
                 error: error
@@ -344,7 +345,7 @@ export class BlackListWhiteListRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Subscription Tiers',
                 error: error
@@ -366,7 +367,7 @@ export class BlackListWhiteListRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error in executing validation Service',
                 error: error

@@ -1,5 +1,6 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 import { Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate, RateTax } from '../commons/models/common-data-models';
 import { AuthenticationService } from '../commons/services/authentication.service';
@@ -57,7 +58,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding New Category',
                 error: error
@@ -86,7 +87,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding New Tariff',
                 error: error
@@ -115,7 +116,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding New Currency',
                 error: error
@@ -144,7 +145,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding New Tax',
                 error: error
@@ -173,7 +174,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Adding New Rate Card',
                 error: error
@@ -204,7 +205,7 @@ export class RateRemoteDataService {
                         };
                     }
                 })
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error update API operation Rate',
                     error: error
@@ -226,7 +227,7 @@ export class RateRemoteDataService {
                         };
                     }
                 })
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error update API operation Rate',
                     error: error
@@ -261,7 +262,7 @@ export class RateRemoteDataService {
                     };
                 }
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Assigning Rates',
                 error: error
@@ -282,7 +283,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Tariff List',
                 error: error
@@ -302,7 +303,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Currency List',
                 error: error
@@ -322,7 +323,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Rate Type List',
                 error: error
@@ -342,7 +343,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Category List',
                 error: error
@@ -363,7 +364,7 @@ export class RateRemoteDataService {
                 };
             })
             .catch((error: Response) => {
-                return Observable.throw({
+                return observableThrowError({
                     success: false,
                     message: 'Error Loading Rate Definition List',
                     error: error
@@ -384,7 +385,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Rate Card List',
                 error: error
@@ -405,7 +406,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Rate Tax List',
                 error: error
@@ -425,7 +426,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading API List',
                 error: error
@@ -464,7 +465,7 @@ export class RateRemoteDataService {
                 return response.json();
             })
 
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading API Operation Rates',
                 error: error
@@ -485,7 +486,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading API Operations',
                 error: error
@@ -505,7 +506,7 @@ export class RateRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Operators',
                 error: error
@@ -526,7 +527,7 @@ export class RateRemoteDataService {
                 };
             })
             .catch((error: Response) => {
-                return Observable.throw({
+                return observableThrowError({
                     success: false,
                     message: 'Error Loading Application Tier List',
                     error: error
@@ -548,7 +549,7 @@ export class RateRemoteDataService {
                         payload: response.json()
                     };
                 })
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading Operators',
                     error: error
@@ -563,7 +564,7 @@ export class RateRemoteDataService {
                         payload: response.json()
                     };
                 })
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading Operation Rate list',
                     error: error

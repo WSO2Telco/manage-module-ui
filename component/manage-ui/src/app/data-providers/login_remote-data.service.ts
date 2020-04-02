@@ -1,5 +1,6 @@
+
+import {throwError as observableThrowError, Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {User, LoginResponse} from '../commons/models/common-data-models';
 
@@ -34,7 +35,7 @@ export class LoginRemoteDataService {
             payload: response.json()
           };
         })
-        .catch((error: Response) => Observable.throw({
+        .catch((error: Response) => observableThrowError({
           success: false,
           message: 'Login Error',
           error: error
@@ -49,7 +50,7 @@ export class LoginRemoteDataService {
   logout(userId: string): Observable<boolean> {
     return this.http.get(this.apiEndpoints['logout'] + '/' + userId)
       .map((response: Response) => response.json().success)
-      .catch((error: Response) => Observable.throw(error.json().message))
+      .catch((error: Response) => observableThrowError(error.json().message))
   }
 
   getUserDetails(userName: string) {
@@ -59,7 +60,7 @@ export class LoginRemoteDataService {
           const result = response.json();
           return result;
         })
-        .catch((error: Response) => Observable.throw(error.json().message()));
+        .catch((error: Response) => observableThrowError(error.json().message()));
   }
 
     /**

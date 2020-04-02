@@ -1,8 +1,9 @@
+
+import {throwError as observableThrowError, Observable} from 'rxjs';
 /**
  * Created by sahanK on 08/02/17.
  */
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {AuthenticationService} from '../commons/services/authentication.service';
 
@@ -42,7 +43,7 @@ export class QuotacapRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Subscribers',
                 error: error
@@ -62,7 +63,7 @@ export class QuotacapRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Operators',
                 error: error
@@ -83,7 +84,7 @@ export class QuotacapRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Loading Quota Limit Info',
                 error: error
@@ -99,7 +100,7 @@ export class QuotacapRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error While Validating Time Period',
                 error: error
@@ -123,7 +124,7 @@ export class QuotacapRemoteDataService {
                     payload: response.json()
                 };
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error While Adding New Quota Limit',
                 error: error

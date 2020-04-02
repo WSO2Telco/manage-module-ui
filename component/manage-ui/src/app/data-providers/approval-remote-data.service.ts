@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError,  Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
 import { Headers, RequestOptions, Response, Http } from "@angular/http";
-import { Observable, Subject, BehaviorSubject } from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
@@ -110,7 +111,7 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading My Application List',
                     error: error
@@ -151,7 +152,7 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading All Application List',
                     error: error
@@ -189,7 +190,7 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading My Subscription List',
                     error: error
@@ -229,7 +230,7 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
+                .catch((error: Response) => observableThrowError({
                     success: false,
                     message: 'Error Loading All Subscription List',
                     error: error
@@ -263,7 +264,7 @@ export class ApprovalRemoteDataService {
                 this.modifiedApplicationTaskIDs.push(taskId);
                 return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => observableThrowError(error.json().message));
 
     }
 
@@ -277,7 +278,7 @@ export class ApprovalRemoteDataService {
                 this.modifiedApplicationTaskIDs.push(taskId);
                 return response.json();
             })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .catch((error: Response) => observableThrowError(error.json().message));
     }
 
     getModifiedTaskIds(): number[] {
@@ -290,7 +291,7 @@ export class ApprovalRemoteDataService {
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Approving Application',
                 error: error
@@ -303,7 +304,7 @@ export class ApprovalRemoteDataService {
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error Approving Subscription',
                 error: error
@@ -316,7 +317,7 @@ export class ApprovalRemoteDataService {
     editApplicationTier(param: EditApplicationTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editAppTier'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error updating Application Tier',
                 error: error
@@ -329,7 +330,7 @@ export class ApprovalRemoteDataService {
     editSubscriptionTier(param: EditSubscriptionTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editSubTier'], param, this.getOptions())
             .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Error updating subscription Tier',
                 error: error
@@ -355,7 +356,7 @@ export class ApprovalRemoteDataService {
                 const result = response.json();
                 return result;
             })
-            .catch((error: Response) => Observable.throw({
+            .catch((error: Response) => observableThrowError({
                 success: false,
                 message: 'Unable to Load Credit Plan',
                 error: error
