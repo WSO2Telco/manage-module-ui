@@ -14655,11 +14655,6 @@
         "tslib": "^1.9.0"
       }
     },
-    "rxjs-compat": {
-      "version": "6.5.4",
-      "resolved": "https://registry.npmjs.org/rxjs-compat/-/rxjs-compat-6.5.4.tgz",
-      "integrity": "sha512-rkn+lbOHUQOurdd74J/hjmDsG9nFx0z66fvnbs8M95nrtKvNqCKdk7iZqdY51CGmDemTQk+kUPy4s8HVOHtkfA=="
-    },
     "safe-buffer": {
       "version": "5.1.0",
       "resolved": "https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.1.0.tgz",
@@ -17804,14 +17799,12 @@
             "minimist": {
               "version": "1.2.5",
               "bundled": true,
-              "dev": true,
-              "optional": true
+              "dev": true
             },
             "minipass": {
               "version": "2.9.0",
               "bundled": true,
               "dev": true,
-              "optional": true,
               "requires": {
                 "safe-buffer": "^5.1.2",
                 "yallist": "^3.0.0"
@@ -17830,7 +17823,6 @@
               "version": "0.5.3",
               "bundled": true,
               "dev": true,
-              "optional": true,
               "requires": {
                 "minimist": "^1.2.5"
               }
@@ -18011,8 +18003,7 @@
             "safe-buffer": {
               "version": "5.1.2",
               "bundled": true,
-              "dev": true,
-              "optional": true
+              "dev": true
             },
             "safer-buffer": {
               "version": "2.1.2",
@@ -18118,8 +18109,7 @@
             "yallist": {
               "version": "3.1.1",
               "bundled": true,
-              "dev": true,
-              "optional": true
+              "dev": true
             }
           }
         },
