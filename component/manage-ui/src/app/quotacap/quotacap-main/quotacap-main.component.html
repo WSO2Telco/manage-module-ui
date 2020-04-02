@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <form class="form-horizontal" #quotacapForm="ngForm" novalidate
+                    <form class="form-horizontal" #quotacapForm="ngForm" ngNoForm
                           (ngSubmit)="onquotacapFormSubmit(quotacapForm)" autocomplete="off">
 
                         <div class="form-group" [ngClass]="{'has-danger': isSpEmpty}">

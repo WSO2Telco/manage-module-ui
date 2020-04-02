@@ -5,7 +5,7 @@
             <div class="form-container subcategoryContainer">
                 <div class="row">
                     <div class="col-sm-6">
-                        <form #subcategoryForm="ngForm" novalidate (ngSubmit)="onSubmit(subcategoryForm)"
+                        <form #subcategoryForm="ngForm" ngNoForm (ngSubmit)="onSubmit(subcategoryForm)"
                               autocomplete="off">
                             <br><br>
                             <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
                                 <label class="control-label col-sm-4">Tariff<span>*</span></label>
-                                <template #customItemTemplate let-model="item" let-index="index">
+                                <ng-template #customItemTemplate let-model="item" let-index="index">
                                     <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b>
                                         <span
                                                 class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span
@@ -58,7 +58,7 @@
                                                 *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span
                                                 *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                                     </h6>
-                                </template>
+                                </ng-template>
                                 <div class="col-sm-6">
                                     <input [(ngModel)]="tariff"
                                            [typeahead]="tariffList"

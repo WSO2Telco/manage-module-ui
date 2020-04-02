@@ -1,8 +1,8 @@
-import { Directive, Input, SimpleChanges } from '@angular/core';
+import { Directive, Input, SimpleChanges,TemplateRef , ViewContainerRef} from '@angular/core';
 import { OnInit, OnChanges } from '@angular/core/src/metadata/lifecycle_hooks';
 import { AuthenticationService } from 'app/commons/services/authentication.service';
-import { TemplateRef } from '@angular/core/src/linker/template_ref';
-import { ViewContainerRef } from '@angular/core/src/linker/view_container_ref';
+//import { TemplateRef } from '@angular/core/src/linker/template_ref';
+//import { ViewContainerRef } from '@angular/core/src/linker/view_container_ref';
 
 @Directive({
   selector: '[appHasPermissions]'
