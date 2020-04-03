@@ -1,7 +1,7 @@
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpBackend } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { User, LoginResponse } from '../commons/models/common-data-models';
 
@@ -9,16 +9,16 @@ import { User, LoginResponse } from '../commons/models/common-data-models';
 @Injectable()
 export class LoginRemoteDataService {
 
+    private httpBasicClient: HttpClient
     private apiContext: string = 'api';
-    private httpBasicClient: HttpClient;
-
     private apiEndpoints = {
         login: this.apiContext + '/authentication/login',
         logout: this.apiContext + '/authentication/logout',
         getUserDetails: this.apiContext + '/authentication/userdetails'
     };
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, handler: HttpBackend) {
+        this.httpBasicClient = new HttpClient(handler);
     }
 
     /**
@@ -26,7 +26,7 @@ export class LoginRemoteDataService {
      * @param data
      * @returns {Observable<User>}
      */
-    login(data: User): Observable<LoginResponse> {
+    login(data: User){
         const httpOption = {
             headers: new HttpHeaders({
                 'Authorization': 'Basic ' + btoa(`${data.userName}:${data.userName}`),
@@ -35,7 +35,20 @@ export class LoginRemoteDataService {
             })
         };
 
-        return this.httpBasicClient.get<LoginResponse>(this.apiEndpoints.login, httpOption)
+        return this.httpBasicClient.get(this.apiEndpoints.login, httpOption).pipe(
+            map((response) => {
+                return {
+                  success: true,
+                  message: 'Login Successful',
+                  payload: response
+                };
+              }),
+              catchError((error: Response) => Observable.throw({
+                success: false,
+                message: 'Login Error',
+                error: error
+              }))
+        )
     }
 
     /**
