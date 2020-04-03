@@ -11,6 +11,7 @@ import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import { MessageService } from "../commons/services/message.service";
 import { TableDataType } from "../commons/models/common-data-models";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -111,26 +112,27 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 // .map((response: Response) => response.json())
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading My Application List',
-                //     error: error
-                // }))
-                // .subscribe(
-                //     data => {
-                //         if (data.success) {
-                //             this.MyApplicationApprovalTasksProvider.next(data.payload);
-                //             this.slimLoadingBarService.complete();
-                //         } else {
-                //             this.message.error(data.message);
-                //             this.slimLoadingBarService.stop();
-                //         }
-                //     },
-                //     error => {
-                //         this.message.error(error.message);
-                //         this.slimLoadingBarService.stop();
-                //     }
-                // );
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading My Application List',
+                        error: error
+                    }))
+                ).subscribe(
+                    data => {
+                        if (data) {
+                            this.MyApplicationApprovalTasksProvider.next(data['payload']);
+                            this.slimLoadingBarService.complete();
+                        } else {
+                            this.message.error(data['message']);
+                            this.slimLoadingBarService.stop();
+                        }
+                    },
+                    error => {
+                        this.message.error(error.message);
+                        this.slimLoadingBarService.stop();
+                    }
+                );
         }
     }
 
@@ -152,26 +154,28 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 // .map((response: Response) => response.json())
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading All Application List',
-                //     error: error
-                // }))
-                // .subscribe(
-                //     data => {
-                //         if (data.success) {
-                //             this.AllApplicationApprovalTasksProvider.next(data.payload);
-                //             this.slimLoadingBarService.complete();
-                //         } else {
-                //             this.message.error(data.message);
-                //             this.slimLoadingBarService.stop();
-                //         }
-                //     },
-                //     error => {
-                //         this.message.error(error.message);
-                //         this.slimLoadingBarService.stop();
-                //     }
-                // );
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading All Application List',
+                        error: error
+                    }))
+                )
+                .subscribe(
+                    data => {
+                        if (data['success']) {
+                            this.AllApplicationApprovalTasksProvider.next(data['payload']);
+                            this.slimLoadingBarService.complete();
+                        } else {
+                            this.message.error(data['message']);
+                            this.slimLoadingBarService.stop();
+                        }
+                    },
+                    error => {
+                        this.message.error(error.message);
+                        this.slimLoadingBarService.stop();
+                    }
+                );
         }
     }
 
@@ -190,26 +194,28 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 // .map((response: Response) => response.json())
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading My Subscription List',
-                //     error: error
-                // }))
-                // .subscribe(
-                //     data => {
-                //         if (data.success) {
-                //             this.MySubscriptionTasksProvider.next(data.payload);
-                //             this.slimLoadingBarService.complete();
-                //         } else {
-                //             this.message.error(data.message);
-                //             this.slimLoadingBarService.stop();
-                //         }
-                //     },
-                //     error => {
-                //         this.message.error(error.message);
-                //         this.slimLoadingBarService.stop();
-                //     }
-                // );
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading My Subscription List',
+                        error: error
+                    }))
+                )
+                .subscribe(
+                    data => {
+                        if (data['success']) {
+                            this.MySubscriptionTasksProvider.next(data['payload']);
+                            this.slimLoadingBarService.complete();
+                        } else {
+                            this.message.error(data['message']);
+                            this.slimLoadingBarService.stop();
+                        }
+                    },
+                    error => {
+                        this.message.error(error.message);
+                        this.slimLoadingBarService.stop();
+                    }
+                );
         }
     }
 
@@ -230,26 +236,28 @@ export class ApprovalRemoteDataService {
 
             this.http.get(endPoint, this.getOptions())
                 // .map((response: Response) => response.json())
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading All Subscription List',
-                //     error: error
-                // }))
-                // .subscribe(
-                //     data => {
-                //         if (data.success) {
-                //             this.GroupSubscriptionTasksProvider.next(data.payload);
-                //             this.slimLoadingBarService.complete();
-                //         } else {
-                //             this.message.error(data.message);
-                //             this.slimLoadingBarService.stop();
-                //         }
-                //     },
-                //     error => {
-                //         this.message.error(error.message);
-                //         this.slimLoadingBarService.stop();
-                //     }
-                // );
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading All Subscription List',
+                        error: error
+                    }))
+                )
+                .subscribe(
+                    data => {
+                        if (data['success']) {
+                            this.GroupSubscriptionTasksProvider.next(data['payload']);
+                            this.slimLoadingBarService.complete();
+                        } else {
+                            this.message.error(data['message']);
+                            this.slimLoadingBarService.stop();
+                        }
+                    },
+                    error => {
+                        this.message.error(error.message);
+                        this.slimLoadingBarService.stop();
+                    }
+                );
 
         }
     }
@@ -260,11 +268,13 @@ export class ApprovalRemoteDataService {
         }
 
         return this.http.post(this.apiEndpoints['applicationAssign'], data, this.getOptions())
-        //     .map((response: Response) => {
-        //         this.modifiedApplicationTaskIDs.push(taskId);
-        //         return response.json();
-        //     })
-        //     .catch((error: Response) => observableThrowError(error.json().message));
+            .pipe(
+                map((response: Response) => {
+                    this.modifiedApplicationTaskIDs.push(taskId);
+                    return response;
+                }),
+                catchError((error: Response) => observableThrowError(error['message']))
+            )
 
     }
 
@@ -274,11 +284,13 @@ export class ApprovalRemoteDataService {
         }
 
         return this.http.post(this.apiEndpoints['subscriptionAssign'], data, this.getOptions())
-            // .map((response: Response) => {
-            //     this.modifiedApplicationTaskIDs.push(taskId);
-            //     return response.json();
-            // })
-            // .catch((error: Response) => observableThrowError(error.json().message));
+            .pipe(
+                map((response: Response) => {
+                    this.modifiedApplicationTaskIDs.push(taskId);
+                    return response;
+                }),
+                catchError((error: Response) => observableThrowError(error['message']))
+            )
     }
 
     getModifiedTaskIds(): number[] {
@@ -291,11 +303,13 @@ export class ApprovalRemoteDataService {
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
             // .map((response: Response) => response.json())
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Approving Application',
-            //     error: error
-            // }));
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Approving Application',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -304,11 +318,13 @@ export class ApprovalRemoteDataService {
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
             // .map((response: Response) => response.json())
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Approving Subscription',
-            //     error: error
-            // }));
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Approving Subscription',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -316,12 +332,14 @@ export class ApprovalRemoteDataService {
    **/
     editApplicationTier(param: EditApplicationTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editAppTier'], param, this.getOptions())
-        //     .map((response: Response) => response.json())
-        //     .catch((error: Response) => observableThrowError({
-        //         success: false,
-        //         message: 'Error updating Application Tier',
-        //         error: error
-        //     }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error updating Application Tier',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -329,12 +347,14 @@ export class ApprovalRemoteDataService {
   **/
     editSubscriptionTier(param: EditSubscriptionTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editSubTier'], param, this.getOptions())
-        //     .map((response: Response) => response.json())
-        //     .catch((error: Response) => observableThrowError({
-        //         success: false,
-        //         message: 'Error updating subscription Tier',
-        //         error: error
-        //     }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error updating subscription Tier',
+                    error: error
+                }))
+            )
     }
 
     getAllTasks(): void {
@@ -356,11 +376,13 @@ export class ApprovalRemoteDataService {
             //     const result = response.json();
             //     return result;
             // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Unable to Load Credit Plan',
-            //     error: error
-            // }));
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Unable to Load Credit Plan',
+                    error: error
+                }))
+            )
     }
 
     getFilteredResult(filter: ApplicationTaskFilter): void {

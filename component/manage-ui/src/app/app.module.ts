@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule, BsDropdownModule, PopoverModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
@@ -43,6 +44,7 @@ import { ApiInterceptor } from './shared/api.interceptor';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         RootLevelRoutes,
         FormsModule,
         HttpClientModule,

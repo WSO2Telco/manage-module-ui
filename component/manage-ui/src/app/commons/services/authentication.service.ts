@@ -29,9 +29,9 @@ export class AuthenticationService {
                 if (data.success) {
                     const loginInfo = new LoginResponse();
                     loginInfo.start = new Date().getTime();
-                    loginInfo.userName = data.userName;
-                    loginInfo.permissions = data.permissions;
-                    loginInfo.operatorName = data.operatorName;
+                    loginInfo.userName = data.payload['userName'];
+                    loginInfo.permissions = data.payload['permissions'];
+                    loginInfo.operatorName = data.payload['operatorName'];
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
                     loginInfo.token = btoa(userName + ':' + password);
@@ -40,7 +40,7 @@ export class AuthenticationService {
                     sessionStorage.setItem('loginUserInfo', JSON.stringify(loginInfo));
                     this._router.navigate(['home']);
                 } else {
-                    this._remoteService.logout(data.userName);
+                    this._remoteService.logout(data.payload['userName']);
                     callback(data.message);
                 }
             },
