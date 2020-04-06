@@ -9,6 +9,7 @@ import {
 } from "../commons/models/reporing-data-models";
 import {AuthenticationService} from '../commons/services/authentication.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ReportingRemoteDataService {
@@ -17,13 +18,13 @@ export class ReportingRemoteDataService {
      * Subscribers stream
      * @type {BehaviorSubject<string[]>}
      */
-    public SubscribersProvider: Subject<string[]> = new BehaviorSubject<string[]>([]);
+    public SubscribersProvider: Subject<any> = new BehaviorSubject<string[]>([]);
 
     /**
      * Operators Stream
      * @type {BehaviorSubject<string[]>}
      */
-    public OperatorsProvider: Subject<string[]> = new BehaviorSubject<string[]>([]);
+    public OperatorsProvider: Subject<any> = new BehaviorSubject<string[]>([]);
 
     /**
      * Applications Stream
@@ -62,88 +63,84 @@ export class ReportingRemoteDataService {
     }
 
     getApplicationDetail(id: number, callback: Function) {
-        this.http.get<ApplicationHistory>(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
-            // .subscribe(
-            //     (applications) => {
-            //         this.ApplicationDetailProvider.next(applications);
-            //         callback(applications, true);
-            //     },
-            //     (error) => {
-            //         this.message.error(error);
-            //         callback(error, false);
-            //     }
-            // );
+        this.http.get<ApplicationHistory[]>(this.apiEndpoints['approvalHistory'] + '/' + id, this.getOptions())
+            .subscribe(
+                (applications) => {
+                    this.ApplicationDetailProvider.next(applications);
+                    callback(applications, true);
+                },
+                (error) => {
+                    this.message.error(error);
+                    callback(error, false);
+                }
+            );
     }
 
 
     getSubscriptionDetail(id: number,opId:string,apiid:string, callback: Function) {
         this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50'  , this.getOptions())
-            // .map((response: Response) => response.json())
-            // .subscribe(
-            //     (applications: ApplicationHistory[]) => {
-            //         this.ApplicationDetailProvider.next(applications);
-            //         callback(applications, true);
-            //     },
-            //     (error) => {
-            //         this.message.error(error);
-            //         callback(error, false);
-            //     }
-            // );
+            .subscribe(
+                (applications: ApplicationHistory[]) => {
+                    this.ApplicationDetailProvider.next(applications);
+                    callback(applications, true);
+                },
+                (error) => {
+                    this.message.error(error);
+                    callback(error, false);
+                }
+            );
     }
 
     getSubscribers() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['subscribers'], this.getOptions())
-            // .map((response: Response) => response.json())
-            // .subscribe(
-            //     (subscribers) => {
-            //         this.SubscribersProvider.next(subscribers)
-            //     },
-            //     (error) => {
-            //         this.message.error(error);
-            //         this.slimLoadingBarService.complete();
-            //     },
-            //     () => {
-            //         this.slimLoadingBarService.complete()
-            //     }
-            // )
+            .subscribe(
+                (subscribers) => {
+                    this.SubscribersProvider.next(subscribers)
+                },
+                (error) => {
+                    this.message.error(error);
+                    this.slimLoadingBarService.complete();
+                },
+                () => {
+                    this.slimLoadingBarService.complete()
+                }
+            )
     }
 
     getOperators() {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['operators'], this.getOptions())
-            // .map((response: Response) => response.json())
-            // .subscribe(
-            //     (operators) => {
-            //         this.OperatorsProvider.next(operators)
-            //     },
-            //     (error) => {
-            //         this.message.error(error);
-            //         this.slimLoadingBarService.complete();
-            //     },
-            //     () => {
-            //         this.slimLoadingBarService.complete()
-            //     }
-            // )
+            .subscribe(
+                (operators) => {
+                    this.OperatorsProvider.next(operators)
+                },
+                (error) => {
+                    this.message.error(error);
+                    this.slimLoadingBarService.complete();
+                },
+                () => {
+                    this.slimLoadingBarService.complete()
+                }
+            )
     }
 
     getApplicationsBySubscriber(subscriber: string) {
         if (!!subscriber) {
             this.slimLoadingBarService.start();
             this.http.get(this.apiEndpoints['applications'] + '/' + subscriber, this.getOptions())
-                // .map((response: Response) => response.json())
-                // .subscribe(
-                //     (applications: Application[]) => {
-                //         this.ApplicationsProvider.next(applications)
-                //     },
-                //     (error) => {
-                //         this.message.error(error);
-                //         this.slimLoadingBarService.complete();
-                //     },
-                //     () => {
-                //         this.slimLoadingBarService.complete()
-                //     }
-                // )
+                .subscribe(
+                    (applications: Application[]) => {
+                        this.ApplicationsProvider.next(applications)
+                    },
+                    (error) => {
+                        this.message.error(error);
+                        this.slimLoadingBarService.complete();
+                    },
+                    () => {
+                        this.slimLoadingBarService.complete()
+                    }
+                )
         } else {
             this.ApplicationsProvider.next([]);
         }
@@ -164,27 +161,28 @@ export class ReportingRemoteDataService {
             + '?start=' + historyFilter.offset + '&filterBy=' + historyFilter.filterString;
 
         this.http.get(endPoint, this.getOptions())
-            // .map((response: Response) => response.json())
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Application History List',
-            //     error: error
-            // }))
-            // .subscribe(
-            //     data => {
-            //         if (data.success) {
-            //             this.ApprovalHistoryProvider.next(data.payload);
-            //             this.slimLoadingBarService.complete();
-            //         } else {
-            //             this.message.error(data.message);
-            //             this.slimLoadingBarService.stop();
-            //         }
-            //     },
-            //     error => {
-            //         this.message.error(error.message);
-            //         this.slimLoadingBarService.stop();
-            //     }
-            // );
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Application History List',
+                    error: error
+                }))
+            )
+            .subscribe(
+                data => {
+                    if (data['success']) {
+                        this.ApprovalHistoryProvider.next(data['payload']);
+                        this.slimLoadingBarService.complete();
+                    } else {
+                        this.message.error(data['message']);
+                        this.slimLoadingBarService.stop();
+                    }
+                },
+                error => {
+                    this.message.error(error.message);
+                    this.slimLoadingBarService.stop();
+                }
+            );
     }
 
     getOptions() {
