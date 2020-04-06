@@ -72,14 +72,14 @@ export class SubscriptionDetailComponent implements OnInit {
         { columnName: 'Name', fieldName: 'name' },
         { columnName: 'Tier', fieldName: 'tier' },
         { columnName: 'ApprovalStatus', fieldName: 'approvalStatus' },
-        { columnName: 'last Updated', fieldName: 'lastUpdated' }];
+        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' }];
 
     private subscriptionfieldSet: FieldSet[] = [
         { columnName: 'Name', fieldName: 'name' },
         { columnName: 'version', fieldName: 'version' },
         { columnName: 'Tier', fieldName: 'tier' },
         { columnName: 'ApprovalStatus', fieldName: 'approvalStatus' },
-        { columnName: 'last Updated', fieldName: 'lastUpdated' }];
+        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' }];
 
     constructor(private router: Router,
         private reportingService: ReportingRemoteDataService,
@@ -219,7 +219,7 @@ export class SubscriptionDetailComponent implements OnInit {
                         appsfulldetails.name = splitted[1];
                         appsfulldetails.tier = splitted[2];
                         appsfulldetails.approvalStatus = splitted[3];
-                        appsfulldetails.lastUpdated = splitted[4];
+                        appsfulldetails.lastUpdated = splitted[4].substr(0, splitted[4].lastIndexOf('.'));
                         this.applicationSubscriptions.push(appsfulldetails);
                         app.id = splitted[0];
                         app.name = splitted[1];
@@ -258,7 +258,7 @@ export class SubscriptionDetailComponent implements OnInit {
                 appsfulldetails.id = item.id;
                 appsfulldetails.name = item.name;
                 appsfulldetails.tier = item.tier;
-                appsfulldetails.lastUpdated = item.lastUpdate;
+                appsfulldetails.lastUpdated = item.lastUpdate.substr(0, item.lastUpdate.lastIndexOf('.'));
                 appsfulldetails.approvalStatus = item.approvalStatus;
                 this.applicationSubscriptions.push(appsfulldetails);
             }
