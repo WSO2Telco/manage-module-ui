@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Category, Currency, Rate, ServerResponse, Tariff, UpdatedRate, RateTax } from '../commons/models/common-data-models';
 import { AuthenticationService } from '../commons/services/authentication.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, catchError } from 'rxjs/operators';
 
 
 @Injectable()
@@ -43,26 +44,28 @@ export class RateRemoteDataService {
      */
     addCategory(data: Category) {
         return this.http.post(this.apiEndpoints['categories'], JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'New Category Added Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Adding New Category',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Adding New Category',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'New Category Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding New Category',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding New Category',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -72,26 +75,28 @@ export class RateRemoteDataService {
      */
     addTariff(data: Tariff) {
         return this.http.post(this.apiEndpoints['tariffs'], JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'New Tariff Added Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Adding New Tariff',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Adding New Tariff',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'New Tariff Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding New Tariff',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding New Tariff',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -101,26 +106,28 @@ export class RateRemoteDataService {
      */
     addCurrency(data: Currency) {
         return this.http.post(this.apiEndpoints['currencies'], JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'New Currency Added Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Adding New Currency',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Adding New Currency',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'New Currency Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding New Currency',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding New Currency',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -130,26 +137,28 @@ export class RateRemoteDataService {
      */
     addTax(data: RateTax) {
         return this.http.post(this.apiEndpoints['tax'], JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'New Tax Added Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Adding New Tax',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Adding New Tax',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'New Tax Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding New Tax',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding New Tax',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -159,26 +168,28 @@ export class RateRemoteDataService {
      */
     addNewRateCard(data: Rate) {
         return this.http.post(this.apiEndpoints['rateCards'], JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'Rate Card Created Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Adding New Rate Card',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Adding New Rate Card',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'Rate Card Created Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding New Rate Card',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding New Rate Card',
+                    error: error
+                }))
+            );
     }
 
 
@@ -190,48 +201,52 @@ export class RateRemoteDataService {
     updateAPIOperationRate(appID: number, operatorId: string, apiname: string, apiversion: string, direction: string, data: UpdatedRate[]) {
         if (direction == "NBsubscriptions") {
             return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, data, this.getOptions())
-                // .map((response: Response) => {
-                //     if (response.status == 201) {
-                //         return {
-                //             success: true,
-                //             message: 'API operation Rate updated Successfully',
-                //             payload: response.json()
-                //         };
-                //     } else {
-                //         return {
-                //             success: false,
-                //             message: 'Error update API operation Rate',
-                //             payload: null
-                //         };
-                //     }
-                // })
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error update API operation Rate',
-                //     error: error
-                // }));
+                .pipe(
+                    map((response: Response) => {
+                        if (response.status == 201) {
+                            return {
+                                success: true,
+                                message: 'API operation Rate updated Successfully',
+                                payload: response
+                            };
+                        } else {
+                            return {
+                                success: false,
+                                message: 'Error update API operation Rate',
+                                payload: null
+                            };
+                        }
+                    }),
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error update API operation Rate',
+                        error: error
+                    }))
+                );
         } else {
             return this.http.post(this.apiEndpoints['approvedApiOperationRate'] + appID + '/operators/' + operatorId + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, data, this.getOptions())
-                // .map((response: Response) => {
-                //     if (response.status == 201) {
-                //         return {
-                //             success: true,
-                //             message: 'API operation Rate updated Successfully',
-                //             payload: response.json()
-                //         };
-                //     } else {
-                //         return {
-                //             success: false,
-                //             message: 'Error update API operation Rate',
-                //             payload: null
-                //         };
-                //     }
-                // })
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error update API operation Rate',
-                //     error: error
-                // }));
+                .pipe(
+                    map((response: Response) => {
+                        if (response.status == 201) {
+                            return {
+                                success: true,
+                                message: 'API operation Rate updated Successfully',
+                                payload: response
+                            };
+                        } else {
+                            return {
+                                success: false,
+                                message: 'Error update API operation Rate',
+                                payload: null
+                            };
+                        }
+                    }),
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error update API operation Rate',
+                        error: error
+                    }))
+                );
         }
     }
 
@@ -247,26 +262,28 @@ export class RateRemoteDataService {
         }
 
         return this.http.post(url, JSON.stringify(data), this.getOptions())
-            // .map((response: Response) => {
-            //     if (response.status == 201) {
-            //         return {
-            //             success: true,
-            //             message: 'Rate Values Assigned Successfully',
-            //             payload: response.json()
-            //         };
-            //     } else {
-            //         return {
-            //             success: false,
-            //             message: 'Error Assigning Rates',
-            //             payload: null
-            //         };
-            //     }
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Assigning Rates',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    if (response.status == 201) {
+                        return {
+                            success: true,
+                            message: 'Rate Values Assigned Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Assigning Rates',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Assigning Rates',
+                    error: error
+                }))
+            );
     }
 
 
@@ -276,18 +293,20 @@ export class RateRemoteDataService {
      */
     getTariffList() {
         return this.http.get(this.apiEndpoints['tariffs'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Tariff List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Tariff List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Tariff List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Tariff List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -296,18 +315,20 @@ export class RateRemoteDataService {
      */
     getCurrencyList() {
         return this.http.get(this.apiEndpoints['currencies'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Currency List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Currency List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Currency List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Currency List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -316,18 +337,20 @@ export class RateRemoteDataService {
      */
     getRateTypeList() {
         return this.http.get(this.apiEndpoints['rateTypes'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Type List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Rate Type List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Type List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Rate Type List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -336,18 +359,20 @@ export class RateRemoteDataService {
      */
     getCategoryList() {
         return this.http.get(this.apiEndpoints['categories'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Category List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Category List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Category List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Category List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -356,20 +381,22 @@ export class RateRemoteDataService {
      */
     getRateDefinitionList() {
         return this.http.get(this.apiEndpoints['rateDefinitions'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Definition List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => {
-            //     return observableThrowError({
-            //         success: false,
-            //         message: 'Error Loading Rate Definition List',
-            //         error: error
-            //     });
-            // });
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Definition List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => {
+                    return observableThrowError({
+                        success: false,
+                        message: 'Error Loading Rate Definition List',
+                        error: error
+                    });
+                })
+            );
     }
 
     /**
@@ -378,18 +405,20 @@ export class RateRemoteDataService {
      */
     getRateCards(operatorId: string) {
         return this.http.get(this.apiEndpoints['rateCardsByUser'] + operatorId + '?schema=full', this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Card List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Rate Card List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Card List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Rate Card List',
+                    error: error
+                }))
+            );
     }
 
 
@@ -399,18 +428,20 @@ export class RateRemoteDataService {
      */
     getRateTax() {
         return this.http.get(this.apiEndpoints['rateTaxes'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Rate Tax List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Rate Tax List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Rate Tax List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Rate Tax List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -419,18 +450,20 @@ export class RateRemoteDataService {
      */
     getApiList() {
         return this.http.get(this.apiEndpoints['apis'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'API List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading API List',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'API List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading API List',
+                    error: error
+                }))
+            );
     }
     /**
      * get rates for api, api operation, operator
@@ -460,16 +493,13 @@ export class RateRemoteDataService {
         }
 
         return this.http.get(url, this.getOptions())
-            // .map((response: Response) => {
-            //     response
-            //     return response.json();
-            // })
-
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading API Operation Rates',
-            //     error: error
-            // }));
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading API Operation Rates',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -479,18 +509,20 @@ export class RateRemoteDataService {
      */
     getApiOperations(api: string) {
         return this.http.get(this.apiEndpoints['apiOperations'] + api + '/operations', this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Operator List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading API Operations',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Operator List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading API Operations',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -499,18 +531,20 @@ export class RateRemoteDataService {
      */
     getOperatorList() {
         return this.http.get(this.apiEndpoints['operators'], this.getOptions())
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Operator List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => observableThrowError({
-            //     success: false,
-            //     message: 'Error Loading Operators',
-            //     error: error
-            // }));
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Operator List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Operators',
+                    error: error
+                }))
+            );
     }
 
       /**
@@ -519,20 +553,22 @@ export class RateRemoteDataService {
      */
     getApplicationTiers() {
         return this.http.get(this.apiEndpoints['applicationTier'])
-            // .map((response: Response) => {
-            //     return {
-            //         success: true,
-            //         message: 'Application Tier List Loaded Successfully',
-            //         payload: response.json()
-            //     };
-            // })
-            // .catch((error: Response) => {
-            //     return observableThrowError({
-            //         success: false,
-            //         message: 'Error Loading Application Tier List',
-            //         error: error
-            //     });
-            // });
+            .pipe(
+                map((response: Response) => {
+                    return {
+                        success: true,
+                        message: 'Application Tier List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => {
+                    return observableThrowError({
+                        success: false,
+                        message: 'Error Loading Application Tier List',
+                        error: error
+                    });
+                })
+            );
     }
 
     /**
@@ -542,33 +578,37 @@ export class RateRemoteDataService {
     getApprovedAPIOperationRate(appID: number, apiname: string, apiversion: string, operatorId: string, direction: string) {
         if (direction == "NBsubscriptions") {
             return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, this.getOptions())
-                // .map((response: Response) => {
-                //     return {
-                //         success: true,
-                //         message: 'Operator List Loaded Successfully',
-                //         payload: response.json()
-                //     };
-                // })
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading Operators',
-                //     error: error
-                // }));
+                .pipe(
+                    map((response: Response) => {
+                        return {
+                            success: true,
+                            message: 'Operator List Loaded Successfully',
+                            payload: response
+                        };
+                    }),
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading Operators',
+                        error: error
+                    }))
+                );
         }
         else {
             return this.http.get(this.apiEndpoints['approvedApiOperationRate'] + appID + '/operators/' + operatorId + '/apis/' + apiname + '/apiversion/' + apiversion + '/' + direction, this.getOptions())
-                // .map((response: Response) => {
-                //     return {
-                //         success: true,
-                //         message: 'Operation Rate list Loaded Successfully',
-                //         payload: response.json()
-                //     };
-                // })
-                // .catch((error: Response) => observableThrowError({
-                //     success: false,
-                //     message: 'Error Loading Operation Rate list',
-                //     error: error
-                // }));
+                .pipe(
+                    map((response: Response) => {
+                        return {
+                            success: true,
+                            message: 'Operation Rate list Loaded Successfully',
+                            payload: response
+                        };
+                    }),
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading Operation Rate list',
+                        error: error
+                    }))
+                );
         }
     }
 

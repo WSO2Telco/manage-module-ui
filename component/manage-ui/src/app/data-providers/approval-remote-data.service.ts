@@ -372,10 +372,6 @@ export class ApprovalRemoteDataService {
     getCreditPlan() {
         const endPoint = this.url.protocol + '//' + this.url.host + '/credit-control-service/services/getCreditLimitInfo';
         return this.http.get(endPoint, this.getOptions())
-            // .map((response: Response) => {
-            //     const result = response.json();
-            //     return result;
-            // })
             .pipe(
                 catchError((error: Response) => observableThrowError({
                     success: false,
