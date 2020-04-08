@@ -9,11 +9,10 @@ import {Router} from "@angular/router";
 })
 export class ApprovalSummeryComponent implements OnInit {
 
-    @Input()
-    private appDetailsSummery: DashboardData;
+    @Input() appDetailsSummery: DashboardData;
 
-    private showPendingApps: string;
-    private showPendingSubs: string;
+    public showPendingApps: string;
+    public showPendingSubs: string;
 
     constructor(private router: Router) {
     }

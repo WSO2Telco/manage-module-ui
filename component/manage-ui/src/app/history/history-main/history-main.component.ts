@@ -32,10 +32,9 @@ export class HistoryMainComponent implements OnInit {
 
     private currentPage: number = 1;
     private subCurrentPage: number = 1;
-    private subViewPermission: boolean;
-    private appViewPermission: boolean;
-
-    private depType: string;
+    public subViewPermission: boolean;
+    public appViewPermission: boolean;
+    public depType: string;
 
     ngOnInit() {
         this.filter = new ApprovalHistoryFilter();

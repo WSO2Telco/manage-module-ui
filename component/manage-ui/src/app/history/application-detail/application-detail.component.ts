@@ -16,7 +16,7 @@ export class ApplicationDetailComponent implements OnInit {
     private operatorApprovals: ApplicationHistory[];
     private id: number;
     private name:string;
-    private show: boolean;
+    public show: boolean;
     private depType : string = "internal_gateway_type2";
 
   constructor(private reportingService: ReportingRemoteDataService,

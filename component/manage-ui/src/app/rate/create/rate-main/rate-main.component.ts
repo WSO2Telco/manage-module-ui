@@ -16,55 +16,55 @@ import {Router} from '@angular/router';
 })
 export class RateMainComponent implements OnInit {
 
-    private isDescriptionError:boolean;
-    private isNameError:boolean;
-    private isDateEmpty:boolean;
-    private isCurrencyError:boolean;
-    private isRateTypeError:boolean;
-    private isTariffError:boolean;
+    public isDescriptionError:boolean;
+    public isNameError:boolean;
+    public isDateEmpty:boolean;
+    public isCurrencyError:boolean;
+    public isRateTypeError:boolean;
+    public isTariffError:boolean;
 
-    private currencyError:string;
-    private rateTypeError:string;
-    private tariffError:string;
+    public currencyError:string;
+    public rateTypeError:string;
+    public tariffError:string;
 
-    private nameError:string;
-    private descriptionError:string;
+    public nameError:string;
+    public descriptionError:string;
 
-    private rateDefName:string;
-    private rateDefDescription:string;
-    private currency:string;
-    private rateType:string;
-    private tariff:string;
-    private rateTax:string;
-    private rateTax2:string;
-    private rateTax3:string;
-    private rateTax4:string;
-    private rateTax5:string;
-    private taxId:number;
+    public rateDefName:string;
+    public rateDefDescription:string;
+    public currency:string;
+    public rateType:string;
+    public tariff:string;
+    public rateTax:string;
+    public rateTax2:string;
+    public rateTax3:string;
+    public rateTax4:string;
+    public rateTax5:string;
+    public taxId:number;
 
-    private showSubcategory:boolean;
-    private showAddCurrency:boolean;
-    private showAddTariff:boolean;
-    private isTariffSelect:boolean;
-    private showAddTax:boolean;
+    public showSubcategory:boolean;
+    public showAddCurrency:boolean;
+    public showAddTariff:boolean;
+    public isTariffSelect:boolean;
+    public showAddTax:boolean;
 
-    private dialogactionTitile:string;
-    private selectedtariff:string[];
+    public dialogactionTitile:string;
+    public selectedtariff:string[];
 
-    private tariffList:Tariff[];
+    public tariffList:Tariff[];
     public currencyList:Currency[];
-    private rateTypeList:RateType[];
-    private categoryList:Category[];
-    private rateCategories:RateCategory[];
-    private rateTaxList:RateTax[];
-    private mappingList:Mapping[];
-    private rateDefinitions:RateDefinition [];
+    public rateTypeList:RateType[];
+    public categoryList:Category[];
+    public rateCategories:RateCategory[];
+    public rateTaxList:RateTax[];
+    public mappingList:Mapping[];
+    public rateDefinitions:RateDefinition [];
 
-    private showChildNewCategory:boolean;
-    private showChildNewSubCategory:boolean;
-    private showChildNewTariff:boolean;
-    private taxValidityDatesArray:string[];
-    private multiselect:string[];
+    public showChildNewCategory:boolean;
+    public showChildNewSubCategory:boolean;
+    public showChildNewTariff:boolean;
+    public taxValidityDatesArray:string[];
+    public multiselect:string[];
 
     constructor(private rateService:RateService, private _router:Router,
                 private authService:AuthenticationService, private message:MessageService) {

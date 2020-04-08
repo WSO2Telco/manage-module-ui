@@ -24,7 +24,7 @@ export class CategoryComponent implements OnInit {
     @Output()
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private submissionError: string;
+    public submissionError: string;
 
     private isNameError: boolean;
     private isCodeError: boolean;

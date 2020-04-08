@@ -9,28 +9,22 @@ import {Router} from '@angular/router';
 })
 export class ResponsiveTableComponent implements OnInit {
 
-    @Input()
-    private tableHeader: string;
+    @Input() tableHeader: string;
 
-    @Input()
-    private dataSource: AppHistory[];
+    @Input() dataSource: AppHistory[];
 
-    @Input()
-    private fieldSet: string[];
+    @Input() fieldSet: string[];
 
-    @Input()
-    private filter: ApprovalHistoryFilter;
+    @Input() filter: ApprovalHistoryFilter;
 
-    @Output()
-    private applicationDetail: ApplicationHistory;
+    @Output() applicationDetail: ApplicationHistory;
 
-    @Output()
-    private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
+    @Output() onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
     private operatorApprovals: ApplicationHistory[];
     private subscriptions: ApplicationHistory[];
 
-    private isFilterVisible: boolean;
+    public isFilterVisible: boolean;
     private filterString: string;
 
     constructor(private router: Router) {

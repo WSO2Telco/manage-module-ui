@@ -10,18 +10,16 @@ import {AuthenticationService} from '../../commons/services/authentication.servi
 })
 export class HistoryFilterComponent implements OnInit {
 
-    private subscribers: string[];
-    private operators: string[];
-    private applications: Application[];
-    private selectedApplication: Application;
-    private loggedUser;
-    private isAdmin: boolean;
+    public subscribers: string[];
+    public applications: Application[];
+    public selectedApplication: Application;
+    public operators: string[];
+    public loggedUser;
+    public isAdmin: boolean;
 
-    @Input()
-    private filter: ApprovalHistoryFilter;
+    @Input() filter: ApprovalHistoryFilter;
 
-    @Output()
-    private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
+    @Output() onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
 
     constructor(private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {

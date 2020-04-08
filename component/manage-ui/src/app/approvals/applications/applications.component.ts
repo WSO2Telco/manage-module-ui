@@ -17,13 +17,13 @@ import {AuthenticationService} from '../../commons/services/authentication.servi
 })
 export class ApplicationsComponent implements OnInit {
 
-    private myApplications: ApplicationTaskResult;
+    public myApplications: ApplicationTaskResult;
 
-    private allApplications: ApplicationTaskResult;
+    public allApplications: ApplicationTaskResult;
 
-    private userApplicationFilter: ApplicationTaskFilter;
+    public userApplicationFilter: ApplicationTaskFilter;
 
-    private groupApplicationFilter: ApplicationTaskFilter;
+    public groupApplicationFilter: ApplicationTaskFilter;
 
     public creditPlan: string[];
 

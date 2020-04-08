@@ -15,31 +15,31 @@ import {MessageService} from '../../commons/services/message.service';
 
 export class WhitelistMainComponent implements OnInit {
 
-    private subscriber: string;
-    private app;
-    private api;
+    public subscriber: string;
+    public app;
+    public api;
 
-    private subscriberList;
-    private apiList: string[];
-    private msisdnList: string[];
+    public subscriberList;
+    public apiList: string[];
+    public msisdnList: string[];
 
-    private msisdn: string;
-    private msisdnMin: number;
-    private msisdnMax: number;
+    public msisdn: string;
+    public msisdnMin: number;
+    public msisdnMax: number;
 
-    private applications: Application[];
-    private apis: Api[];
+    public applications: Application[];
+    public apis: Api[];
 
-    private ismsisdnError: boolean;
-    private ismsisdnRangeError: boolean;
-    private isInvalidFieldError: boolean;
+    public ismsisdnError: boolean;
+    public ismsisdnRangeError: boolean;
+    public isInvalidFieldError: boolean;
 
-    private msisdnError: string;
-    private msisdnRangeError: string;
-    private invalidFieldError: string;
+    public msisdnError: string;
+    public msisdnRangeError: string;
+    public invalidFieldError: string;
 
 
-    private whitelistList: string[];
+    public whitelistList: string[];
 
 
     constructor(private blackListWhiteListService: BlackListWhiteListService,

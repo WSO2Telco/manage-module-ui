@@ -16,11 +16,11 @@ import {TableDataType} from '../../commons/models/common-data-models';
 })
 export class SubscriptionsComponent implements OnInit {
 
-    private mySubscriptions: ApplicationTaskResult;
-    private allSubscriptions: ApplicationTaskResult;
+    public mySubscriptions: ApplicationTaskResult;
+    public allSubscriptions: ApplicationTaskResult;
 
-    private mySubscriptionFilter: ApplicationTaskFilter;
-    private groupSubscriptionFilter: ApplicationTaskFilter;
+    public mySubscriptionFilter: ApplicationTaskFilter;
+    public groupSubscriptionFilter: ApplicationTaskFilter;
 
     constructor(private message: MessageService,
                 private approvalHelperService: ApprovalHelperService,

@@ -10,8 +10,8 @@ import {LoginResponse} from './commons/models/common-data-models';
 })
 
 export class AppComponent implements OnInit {
-    private isLoggedIn = false;
-    private isMenuExpanded = false;
+    public isLoggedIn = false;
+    public isMenuExpanded = false;
 
     constructor(private _authenticationService: AuthenticationService,
                 private _appCommonService: AppCommonService) {
