@@ -63,6 +63,11 @@ export class SubscriptionDetailComponent implements OnInit {
     private todate: string;
     private subscriptions: Subscriptions[];
     private applicationSubscriptions: Subscriptions[];
+    private editAppPermissions: string;
+    private editSubscriptionPermissions: string;
+    public issubscriptionEnabled: boolean;
+    public isappEnabled: boolean;
+
 
     private isSubscriberError: boolean;
     public isApplicationError: boolean;
@@ -103,8 +108,12 @@ export class SubscriptionDetailComponent implements OnInit {
         this.apis = [];
         this.apiList = [];
         this.operatorsList = ['ALL'];
-        this.getOperatorList();
+        this.editAppPermissions = "edit-subscription:edit-app-tiers";
+        this.editSubscriptionPermissions = "edit-subscription:edit-subscription-tier-rate";
 
+        this.isappEnabled = this.authService.hasPermissions(this.editAppPermissions);
+        this.issubscriptionEnabled = this.authService.hasPermissions(this.editSubscriptionPermissions);
+        this.getOperatorList();
     }
 
     /**
@@ -251,7 +260,9 @@ export class SubscriptionDetailComponent implements OnInit {
 
         for (const item of this.applications) {
             if (item.name == this.app) {
-                this.staticTabs.tabs[0].active = true;
+                if (this.isappEnabled) {
+                    this.staticTabs.tabs[0].active = true;
+                }
                 invalid = false;
                 this.applicationSubscriptions = [];
                 const appsfulldetails = new Subscriptions();
@@ -350,7 +361,6 @@ export class SubscriptionDetailComponent implements OnInit {
         this.reportingService.getSubscriptionDetail(id, opid, apiid, (response, status) => {
             if (status) {
                 this.subscriptions = response;
-                console.log('~~~~~~~'+response);
 
             } else {
                 this.message.error('Error Loading Subscription History Data');
@@ -369,7 +379,11 @@ export class SubscriptionDetailComponent implements OnInit {
         for (const item of this.apiList) {
             if (item == this.api) {
                 invalid = false;
-                this.staticTabs.tabs[1].active = true;
+                if (this.isappEnabled) {
+                    this.staticTabs.tabs[1].active = true;
+                } else {
+                    this.staticTabs.tabs[0].active = true;
+                }
             }
         }
 
@@ -419,19 +433,19 @@ export class SubscriptionDetailComponent implements OnInit {
     onIconClick(sup: Subscriptions, action: string) {
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-subscription-application/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers-rates/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
-                this.router.navigate(['edit-subscription-application/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers-rates/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'EDIT_TIER':
-                this.router.navigate(['edit-subscription-application/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers-rates/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW_APP':
-                this.router.navigate(['edit-subscription-application/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers-rates/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             default:

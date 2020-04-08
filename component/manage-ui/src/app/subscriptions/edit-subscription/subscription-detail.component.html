@@ -9,26 +9,26 @@
                     <div class="col-sm-12">
                         <div class="col-sm-12">
                             <div class="searchFilter">
-                                <div class="col-sm-3">
+                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-3': issubscriptionEnabled}">
                                     <input [(ngModel)]="subscriber" [typeahead]="subscriberList"
                                         typeaheadOptionField="name" [typeaheadMinLength]="0" type="text"
                                         class="form-control" (typeaheadOnSelect)="onSubscriberSelected()"
                                         (input)="onSubscriberSelected()" placeholder="Service provider"
                                         name="subscription">
                                 </div>
-                                <div class="col-sm-3">
+                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-3': issubscriptionEnabled}">
                                     <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0"
                                         type="text" class="form-control" (typeaheadOnSelect)="onAppSelected()"
                                         (input)="onAppSelected()" typeaheadOptionField="name" placeholder="Application"
                                         name="app">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3" *ngIf="issubscriptionEnabled">
                                     <input [(ngModel)]="api" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" container="body"
                                         [typeahead]="apiList" typeaheadOptionField="id" class="form-control" name="api"
                                         placeholder="Select API">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3" *ngIf="issubscriptionEnabled">
                                     <input [(ngModel)]="operator" [typeahead]="operatorsList" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onOperatorSelected()" (input)="onOperatorSelected()"
                                         typeaheadOptionField="operatorName" type="text" class="form-control"
@@ -40,7 +40,7 @@
                     </div>
                     <div class="col-sm-12">
                         <tabset [justified]="true" #staticTabs>
-                            <tab heading="Application Details" customClass="appTab">
+                            <tab heading="Application Details" customClass="appTab" *ngIf="isappEnabled">
                                 <div class="content-div" *ngIf="applications.length < 1">
                                     <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
                                         <br>
@@ -74,7 +74,7 @@
                                 </div>
 
                             </tab>
-                            <tab heading="Subscription Details" customClass="subTab">
+                            <tab heading="Subscription Details" customClass="subTab" *ngIf="issubscriptionEnabled">
                                 <div class="content-div" *ngIf="!isApiSelect">
                                     <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
                                         <br>

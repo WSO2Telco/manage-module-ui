@@ -21,7 +21,7 @@ const routes = [
     }
   },
   {
-    path: 'edit-subscription-application',
+    path: 'edit-tiers-rates',
     loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
     canActivate: [AppGuard, PermissionGuard],
     data: {
