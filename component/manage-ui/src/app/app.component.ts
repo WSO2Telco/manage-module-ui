@@ -6,9 +6,6 @@ import {LoginResponse} from './commons/models/common-data-models';
 @Component({
     selector: 'body',
     templateUrl: './app.component.html',
-    styles: [`:host {
-        background-color: blue
-    }`],
     styleUrls: ['./app.component.scss']
 })
 
