@@ -7,20 +7,15 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class ApprovalCountComponent implements OnInit {
 
-  @Input()
-  private totalCount:number;
+  @Input() totalCount:number;
 
-  @Input()
-  private myCount:number;
+  @Input() myCount:number;
 
-  @Input()
-  private groupCount:number;
+  @Input() groupCount:number;
 
-  @Input()
-  private name:string;
+  @Input() name:string;
 
-  @Input()
-  private iconClass:string;
+  @Input() iconClass:string;
 
   constructor() { }
 

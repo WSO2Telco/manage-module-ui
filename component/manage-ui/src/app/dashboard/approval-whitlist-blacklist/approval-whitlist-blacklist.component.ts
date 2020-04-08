@@ -16,11 +16,9 @@ export class ApprovalWhitelistBlacklistCountComponent implements OnInit {
     @Input()
     private groupCount: number;
 
-    @Input()
-    private name: string;
+    @Input() name: string;
 
-    @Input()
-    private iconClass: string;
+    @Input() iconClass: string;
 
     constructor() {
     }

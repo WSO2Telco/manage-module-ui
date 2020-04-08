@@ -17,39 +17,29 @@ import {Router} from '@angular/router';
 export class ApplicationDataTableComponent implements OnInit {
 
 
-    @Input()
-    private tableTitle: string;
+    @Input() tableTitle: string;
 
-    @Input()
-    private summeryModeRecordLimit: string;
+    @Input() summeryModeRecordLimit: string;
 
-    @Input()
-    private dataSource: ApplicationTaskResult;
+    @Input() dataSource: ApplicationTaskResult;
 
-    @Input()
-    private moreLinkPath: string;
+    @Input() moreLinkPath: string;
 
-    @Input()
-    private filter: ApplicationTaskFilter;
+    @Input() filter: ApplicationTaskFilter;
 
-    @Input()
-    private showTiersPermissions: string;
+    @Input() showTiersPermissions: string;
 
-    @Input()
-    private showCreditPlanPermissions: string;
+    @Input() showCreditPlanPermissions: string;
 
-    @Output()
-    private onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
+    @Output() onAssignTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
-    @Output()
-    private onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter();
+    @Output() onApproveRejectTask: EventEmitter<ApprovalEvent> = new EventEmitter();
 
-    @Output()
-    private onFilterChange: EventEmitter<ApplicationTaskFilter> = new EventEmitter();
+    @Output() onFilterChange: EventEmitter<ApplicationTaskFilter> = new EventEmitter();
 
     private FilterFieldsDataSource: ApplicationTask[];
 
-    private filterString: string;
+    public filterString: string;
 
     private apiNamesList: string[] = [''];
     private userNamesList: string[] = [''];
@@ -58,9 +48,9 @@ export class ApplicationDataTableComponent implements OnInit {
     private isFilterActivated = false;
 
     // Flag to determine whether to show or hide filtering panel
-    private isFilterVisible = false;
+    public isFilterVisible = false;
 
-    private currentPage = 1;
+    public currentPage = 1;
 
     constructor(private message: MessageService,
                 private _router: Router) {

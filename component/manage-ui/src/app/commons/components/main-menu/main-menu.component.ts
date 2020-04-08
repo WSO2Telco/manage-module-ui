@@ -10,11 +10,11 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class MainMenuComponent implements OnInit {
 
-    private selectedMenu: MenuItem;
-    private isExpand = false;
-    private isBilling: boolean;
+    public selectedMenu: MenuItem;
+    public isExpand = false;
+    public isBilling: boolean;
 
-    private menuSource: MenuItem[] = [
+    public menuSource: MenuItem[] = [
         { id: 1, route: '/home', name: 'Home', position: 'parent', iconName: 'home', pattern: '*' },
         { id: 2, route: '/', name: 'Workflow', position: 'parent has-child', iconName: 'assignment', pattern: 'application,subscription' },
         { id: 3, route: '/approvals/applications', position: 'child', name: 'Approve Applications', iconName: 'apps', pattern: 'application:visible' },

@@ -9,8 +9,8 @@ import {LoginResponse} from "../../models/common-data-models";
 })
 export class UserAvatarComponent implements OnInit {
 
-  private dropDownStatus:{isOpen:boolean} = {isOpen:false};
-  private loginInfo:LoginResponse;
+  public dropDownStatus:{isOpen:boolean} = {isOpen:false};
+  public loginInfo:LoginResponse;
 
   constructor(private _authenticationService:AuthenticationService) { }
 

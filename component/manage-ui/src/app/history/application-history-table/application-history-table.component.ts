@@ -15,30 +15,25 @@ import { AuthenticationService } from "../../commons/services/authentication.ser
 })
 export class ApplicationHistoryTableComponent implements OnInit {
 
-    @Input()
-    private tableHeader: string;
+    @Input() tableHeader: string;
 
-    @Input()
-    private dataSource: AppHistory[];
+    @Input() dataSource: AppHistory[];
 
-    @Input()
-    private filter: ApprovalHistoryFilter;
+    @Input() filter: ApprovalHistoryFilter;
 
-    @Output()
-    private applicationDetail: ApplicationHistory;
+    @Output() applicationDetail: ApplicationHistory;
 
-    @Output()
-    private onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
+    @Output() onFilterChange: EventEmitter<ApprovalHistoryFilter> = new EventEmitter();
 
-    private operatorApprovals: ApplicationHistory[];
-    private subscriptions: ApplicationHistory[];
-    private depType: string;
+    public operatorApprovals: ApplicationHistory[];
+    public subscriptions: ApplicationHistory[];
+    public depType: string;
 
-    private isFilterVisible: boolean;
-    private filterString: string;
-    private showApprovedOn: string;
+    public isFilterVisible: boolean;
+    public filterString: string;
+    public showApprovedOn: string;
     public name: string;
-    private loggedUser: any;
+    public loggedUser: any;
 
 
     constructor(private router: Router, private reportingService: ReportingRemoteDataService, private authService: AuthenticationService) {

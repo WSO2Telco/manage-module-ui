@@ -11,8 +11,8 @@ import { filter } from 'rxjs/operators';
 })
 export class BreadcrumbsComponent implements OnInit {
 
-    private activeView: any;
-    private approvals: boolean;
+    public activeView: any;
+    public approvals: boolean;
 
     constructor(private _router: Router,
         private approval: ApprovalRemoteDataService,

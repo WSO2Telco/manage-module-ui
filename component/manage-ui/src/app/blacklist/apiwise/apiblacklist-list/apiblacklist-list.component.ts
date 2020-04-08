@@ -10,14 +10,11 @@ import {MessageService} from '../../../commons/services/message.service';
 
 export class ApiBlacklistListComponent implements OnInit {
 
-    @Input()
-    private datasource: string[];
+    @Input() datasource: string[];
 
-    @Output()
-    private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
+    @Output() onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
-    @Input()
-    private apiId: string[];
+    @Input() apiId: string[];
 
     constructor(private blackListWhiteListService: BlackListWhiteListService,  private message: MessageService) {
 

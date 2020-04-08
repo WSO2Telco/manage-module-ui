@@ -29,9 +29,9 @@ export class SpBlacklistMainComponent implements OnInit {
     private long: string;
     private ismsisdnError: boolean;
     private islong: boolean;
-    private count;
     private isDublicate: boolean;
     private dublicate: string;
+    public count;
 
     constructor(private blackListService: BlackListWhiteListService) {
 

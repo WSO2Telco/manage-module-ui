@@ -14,7 +14,7 @@ import {AppCommonService} from "../../services/app-common.service";
 })
 export class HamburgerMenuComponent implements OnInit {
 
-  private isClicked:boolean = false;
+  public isClicked:boolean = false;
 
   constructor(private _appCommonService:AppCommonService) {
   }

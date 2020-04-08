@@ -1,7 +1,7 @@
 <div class="table-wrapper">
 
     <div class="tbl-header">
-        {{tableHeader}}
+        <!-- {{tableHeader}} -->
     </div>
 
     <div class="filter-container" [ngClass]="{'open':isFilterVisible}">
@@ -9,18 +9,11 @@
             <div class="head">Application History Filter<span class="clear" (click)="onClear()">Clear All</span></div>
             <div class="row">
                 <div class="form-group col-xs-8">
-                    <input type="text"
-                           [(ngModel)]="filterString"
-                           container="body"
-                           class="form-control" placeholder="Filter Application History">
+                    <input type="text" [(ngModel)]="filterString" container="body" class="form-control" placeholder="Filter Application History">
                 </div>
                 <div class="form-group col-xs-4">
-                    <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button>
-                    &nbsp;
-                    <span
-                            class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
-                            [tooltip]="FilterHelper" placement="right"
-                    ></span>
+                    <button (click)="onFilterItemAdded()" class="btn btn-primary">Search</button> &nbsp;
+                    <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view" [tooltip]="FilterHelper" placement="right"></span>
 
                 </div>
             </div>
@@ -33,7 +26,9 @@
                 <td>Filter Example</td>
             </tr>
             <tr>
-                <td><p>app name:app1,status:approved,status:pending</p></td>
+                <td>
+                    <p>app name:app1,status:approved,status:pending</p>
+                </td>
             </tr>
         </table>
     </ng-template>

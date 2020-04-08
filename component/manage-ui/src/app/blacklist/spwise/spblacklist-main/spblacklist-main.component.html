@@ -8,7 +8,7 @@
             <div class="searchFilter">
                 <h4 class="control-label col-sm-2">Service Providers:</h4>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control" [(ngModel)]="sp" [typeaheadMinLength]="0" container="body" [typeahead]="spList" typeaheadOptionField="spId" (typeaheadOnSelect)="onApiSelected($event)" placeholder="Select a Service provider">
+                    <input type="text" class="form-control" container="body" typeaheadOptionField="spId" (typeaheadOnSelect)="onApiSelected($event)" placeholder="Select a Service provider">
                 </div>
                 <div class="col-sm-4">
                     <h4>BlackListed SP count : &nbsp; <span class="label label-info">{{ count }}</span>
