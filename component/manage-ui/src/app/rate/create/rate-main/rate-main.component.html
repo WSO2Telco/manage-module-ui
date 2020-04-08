@@ -1,48 +1,25 @@
-<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true">
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title pull-left">{{dialogactionTitile}}</h4>
-                <button type="button" class="close pull-right"
-                        (click)="lgModal.hide(); clearModalContent()" aria-label="Close">
+                <button type="button" class="close pull-right" (click)="lgModal.hide(); clearModalContent()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <app-currency
-                        *ngIf="showAddCurrency"
-                        [existingCurrencyList]="currencyList"
-                        (onAddTask)="onAddCurrencyHandler($event)"
-                        (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
+                <app-currency *ngIf="showAddCurrency" [existingCurrencyList]="currencyList" (onAddTask)="onAddCurrencyHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-currency>
 
-                <app-addtariff *ngIf="showAddTariff"
-                               [existingTariffList]="tariffList"
-                               (onAddTask)="onAddTariffHandler($event)"
-                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+                <app-addtariff *ngIf="showAddTariff" [existingTariffList]="tariffList" (onAddTask)="onAddTariffHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
-                <app-addtax *ngIf="showAddTax"
-                               [existingTaxList]="taxList"
-                               (onAddTask)="onAddTaxHandler($event)"
-                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtax>
+                <app-addtax *ngIf="showAddTax" [existingTaxList]="taxList" (onAddTask)="onAddTaxHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-addtax>
 
-                <app-addtariff *ngIf="showChildNewTariff"
-                               [existingTariffList]="tariffList"
-                               (onAddTask)="onAddTariffHandler($event)"
-                               (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
+                <app-addtariff *ngIf="showChildNewTariff" [existingTariffList]="tariffList" (onAddTask)="onAddTariffHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-addtariff>
 
-                <app-category *ngIf="showChildNewCategory"
-                              type="Category"
-                              [existingCategories]="categoryList"
-                              (onAddTask)="onAddCategoryHandler($event)"
-                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+                <app-category *ngIf="showChildNewCategory" type="Category" [existingCategories]="categoryList" (onAddTask)="onAddCategoryHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
 
-                <app-category *ngIf="showChildNewSubCategory"
-                              type="Sub Category"
-                              [existingCategories]="categoryList"
-                              (onAddTask)="onAddCategoryHandler($event)"
-                              (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
+                <app-category *ngIf="showChildNewSubCategory" type="Sub Category" [existingCategories]="categoryList" (onAddTask)="onAddCategoryHandler($event)" (modalClose)="lgModal.hide(); clearModalContent()"></app-category>
             </div>
         </div>
     </div>
@@ -57,7 +34,7 @@
                 Create New Rate Card
             </div>
 
-            <form class="form-horizontal" #ratecardForm="ngForm" ngNoForm
+            <!-- <form class="form-horizontal" #ratecardForm="ngForm" ngNoForm
                   (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-sm-2">Rate Name <span>*</span></label>
@@ -354,7 +331,7 @@
                     </div>
                 </div>
 
-            </form>
+            </form> -->
 
         </div>
     </div>

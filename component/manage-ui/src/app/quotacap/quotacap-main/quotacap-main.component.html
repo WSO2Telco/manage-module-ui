@@ -7,7 +7,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6">
-                    <form class="form-horizontal" #quotacapForm="ngForm" ngNoForm
+                    <!-- <form class="form-horizontal" #quotacapForm="ngForm" ngNoForm
                           (ngSubmit)="onquotacapFormSubmit(quotacapForm)" autocomplete="off">
 
                         <div class="form-group" [ngClass]="{'has-danger': isSpEmpty}">
@@ -129,7 +129,7 @@
                             </div>
 
                         </div>
-                    </form>
+                    </form> -->
                 </div>
 
                 <div class="col-sm-6">
@@ -150,20 +150,17 @@
                                     <ng-container *ngFor="let item of quotalist">
                                         <div class="tbl-row">
                                             <div class="tbl-cell">{{item.quotaLimit}}</div>
-                                            <div class="tbl-cell"><i
-                                                    class="material-icons fromcolor">event_available</i>
-                                                &nbsp;{{item.fromDate}}
+                                            <div class="tbl-cell"><i class="material-icons fromcolor">event_available</i> &nbsp;{{item.fromDate}}
                                             </div>
-                                            <div class="tbl-cell text-right"><i
-                                                    class="material-icons tocolor">event_busy</i>
-                                                &nbsp;{{item.toDate}}
+                                            <div class="tbl-cell text-right"><i class="material-icons tocolor">event_busy</i> &nbsp;{{item.toDate}}
                                             </div>
                                         </div>
                                     </ng-container>
                                     <div class="no-rec-row tbl-row" *ngIf="quotalist.length == 0">
                                         <span class="no-rec">No Records..</span>
                                     </div>
-                                </div> <!--TABLE END-->
+                                </div>
+                                <!--TABLE END-->
                             </div>
                         </div>
                     </div>

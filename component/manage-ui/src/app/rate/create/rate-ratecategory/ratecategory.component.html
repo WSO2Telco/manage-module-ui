@@ -5,7 +5,7 @@
             <div class="form-container subcategoryContainer">
                 <div class="row">
                     <div class="col-sm-6">
-                        <form #subcategoryForm="ngForm" ngNoForm (ngSubmit)="onSubmit(subcategoryForm)"
+                        <!-- <form #subcategoryForm="ngForm" ngNoForm (ngSubmit)="onSubmit(subcategoryForm)"
                               autocomplete="off">
                             <br><br>
                             <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
 
-                        </form>
+                        </form> -->
                     </div>
                     <div class="col-sm-6">
                         <br><br>
@@ -112,8 +112,7 @@
                                                 <div class="tbl-cell">{{opt.subcategory}}</div>
                                                 <div class="tbl-cell text-right">{{opt.tariff}}</div>
                                                 <div class="tbl-cell text-right pad-r-15-im">
-                                                    <button class="btn btn-danger" type="button"
-                                                            (click)="onDelete(i)"><i
+                                                    <button class="btn btn-danger" type="button" (click)="onDelete(i)"><i
                                                             class="material-icons delIcon">delete</i></button>
                                                 </div>
                                             </div>
@@ -122,7 +121,8 @@
                                             <span class="no-rec">No Records..</span>
                                         </div>
                                     </div>
-                                </div> <!--TABLE END-->
+                                </div>
+                                <!--TABLE END-->
                             </div>
                         </div>
                         <br><br>
@@ -132,8 +132,3 @@
             </div>
         </div>
     </div>
-
-
-
-
-
