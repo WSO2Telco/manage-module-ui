@@ -8,7 +8,6 @@
     z-index: 200;
     height: $topbar-height;
     .container-fluid {
-        padding: 10px 35px 10px 15px;
         min-width: $app-min-width;
     }
     @media screen and (max-width: 768px) {
