@@ -1,20 +1,18 @@
 @import "../../../styles/colors";
-
-application-data-table{
-  margin-top: 20px;
+application-data-table {
+    margin-top: 20px;
 }
 
-:host /deep/ application-data-table.my {
-  .tbl-header{
-    color: $accent-color;
-    font-weight: 900;
-  }
-
-  .header{
-    background-color: $accent-color !important;
-  }
+:host :ng-deep application-data-table.my {
+    .tbl-header {
+        color: $accent-color;
+        font-weight: 900;
+    }
+    .header {
+        background-color: $accent-color !important;
+    }
 }
 
 .comment {
-  padding-top: 5px;
+    padding-top: 5px;
 }

@@ -1,49 +1,23 @@
 <div class="animated fadeInUp row">
-    <!--<div class="col-sm-12">-->
-        <!--<app-history-filter-->
-                <!--[filter]="filter"-->
-                <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
+    <!--<div class="col-md-12">-->
+    <!--<app-history-filter-->
+    <!--[filter]="filter"-->
+    <!--(onFilterChange)="onFilterChangeHandler($event)"></app-history-filter>-->
     <!--</div>-->
-    <div class="col-sm-12" *ngIf="appViewPermission">
-        <app-history-table
-                [dataSource]="approvalHistoryData?.applications"
-                [filter]="filter"
-                (onFilterChange)="onFilterChangeHandler($event)"></app-history-table>
+    <div class="col-md-12" *ngIf="appViewPermission">
+        <app-history-table [dataSource]="approvalHistoryData?.applications" [filter]="filter" (onFilterChange)="onFilterChangeHandler($event)"></app-history-table>
     </div>
-    <div class="col-sm-12 text-center" *ngIf="appViewPermission">
-        <pagination
-                [boundaryLinks]="true"
-                [totalItems]="totalItems"
-                [(ngModel)]="currentPage"
-                [itemsPerPage]="filter.count"
-                [maxSize]="3"
-                (pageChanged)="onPageChanged($event)"
-                class="pagination-sm"
-                previousText="&lsaquo;"
-                nextText="&rsaquo;"
-                firstText="&laquo;"
-                lastText="&raquo;"></pagination>
+    <div class="col-md-12 text-center" *ngIf="appViewPermission">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" [itemsPerPage]="filter.count" [maxSize]="3" (pageChanged)="onPageChanged($event)" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+            lastText="&raquo;"></pagination>
 
     </div>
-    <div class="col-sm-12" *ngIf="subViewPermission == true && !(depType == 'external_gateway' || depType == 'hub')">
-        <sub-history-table
-                [subscriptionDataSource]="subscriptionHistoryData?.subscriptions"
-                [subsFilter]="subFilter"
-                (onSubFilterChange)="onSubFilterChangeHandler($event)"></sub-history-table>
+    <div class="col-md-12" *ngIf="subViewPermission == true && !(depType == 'external_gateway' || depType == 'hub')">
+        <sub-history-table [subscriptionDataSource]="subscriptionHistoryData?.subscriptions" [subsFilter]="subFilter" (onSubFilterChange)="onSubFilterChangeHandler($event)"></sub-history-table>
     </div>
-    <div class="col-sm-12 text-center" *ngIf="subViewPermission == true && !(depType == 'external_gateway' || depType == 'hub')">
-        <pagination
-                [boundaryLinks]="true"
-                [totalItems]="totalItems"
-                [(ngModel)]="subCurrentPage"
-                [itemsPerPage]="subFilter.count"
-                [maxSize]="3"
-                (pageChanged)="onSubPageChanged($event)"
-                class="pagination-sm"
-                previousText="&lsaquo;"
-                nextText="&rsaquo;"
-                firstText="&laquo;"
-                lastText="&raquo;"></pagination>
+    <div class="col-md-12 text-center" *ngIf="subViewPermission == true && !(depType == 'external_gateway' || depType == 'hub')">
+        <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="subCurrentPage" [itemsPerPage]="subFilter.count" [maxSize]="3" (pageChanged)="onSubPageChanged($event)" class="pagination-sm" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+            lastText="&raquo;"></pagination>
 
     </div>
 </div>

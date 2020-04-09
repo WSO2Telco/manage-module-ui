@@ -27,7 +27,7 @@
 
 <div class="animated fadeInUp row">
 
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <!--Form Container - START-->
         <div class="form-container rateInputContainer">
             <div class="tbl-header">
@@ -37,8 +37,8 @@
             <!-- <form class="form-horizontal" #ratecardForm="ngForm" ngNoForm
                   (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
                 <div class="form-group" [ngClass]="{'has-danger': isNameError}">
-                    <label class="control-label col-sm-2">Rate Name <span>*</span></label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Rate Name <span>*</span></label>
+                    <div class="col-md-6">
                         <input class="form-control"
                                type="text"
                                autocomplete="off"
@@ -53,8 +53,8 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isDescriptionEmpty}">
-                    <label class="control-label col-sm-2">Rate Description <span>*</span></label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Rate Description <span>*</span></label>
+                    <div class="col-md-6">
                             <textarea rows="2" cols="50" class="form-control"
                                       type="text"
                                       autocomplete="off"
@@ -70,8 +70,8 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isCurrencyError}">
-                    <label class="control-label col-sm-2">Currency <span>*</span></label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Currency <span>*</span></label>
+                    <div class="col-md-6">
                         <input [(ngModel)]="currency"
                                [typeahead]="currencyList"
                                typeaheadOptionField="currencyCode"
@@ -90,8 +90,8 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isRateTypeError}">
-                    <label class="control-label col-sm-2">Rate Type <span>*</span></label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Rate Type <span>*</span></label>
+                    <div class="col-md-6">
                         <input [(ngModel)]="rateType"
                                [typeahead]="rateTypeList"
                                typeaheadOptionField="rateTypeCode"
@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
-                    <label class="control-label col-sm-2">Tariff <span>*</span></label>
+                    <label class="control-label col-md-2">Tariff <span>*</span></label>
                     <ng-template #customItemTemplate let-model="item" let-index="index">
                         <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b> <span
                                 class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span
@@ -124,7 +124,7 @@
                                 *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                         </h6>
                     </ng-template>
-                    <div class="col-sm-6">
+                    <div class="col-md-6">
                         <input [(ngModel)]="tariff"
                                [typeahead]="tariffList"
                                [typeaheadItemTemplate]="customItemTemplate"
@@ -205,8 +205,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax 1</label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Tax 1</label>
+                    <div class="col-md-6">
                         <select multiple
                                 [(ngModel)]="rateTax"
                                 class="form-control"
@@ -225,8 +225,8 @@
     
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax 2</label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Tax 2</label>
+                    <div class="col-md-6">
                         <select multiple
                                 [(ngModel)]="rateTax2"
                                 class="form-control"
@@ -245,8 +245,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax 3</label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Tax 3</label>
+                    <div class="col-md-6">
                         <select multiple
                                 [(ngModel)]="rateTax3"
                                 class="form-control"
@@ -264,8 +264,8 @@
                     ></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax 4</label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Tax 4</label>
+                    <div class="col-md-6">
                         <select multiple
                                 [(ngModel)]="rateTax4"
                                 class="form-control"
@@ -284,8 +284,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tax 5</label>
-                    <div class="col-sm-6">
+                    <label class="control-label col-md-2">Tax 5</label>
+                    <div class="col-md-6">
                         <select multiple
                                 [(ngModel)]="rateTax5"
                                 class="form-control"
@@ -304,8 +304,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-sm-2">Add Sub Category:</label>
-                    <div class="col-sm-4">
+                    <label class="control-label col-md-2">Add Sub Category:</label>
+                    <div class="col-md-4">
                         <label class="switch">
                             <input type="checkbox"
                                    (change)="onCheckBox()" [checked]="showSubcategory">
@@ -324,7 +324,7 @@
                                   (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
                 <div class="form-group">
-                    <div class="col-sm-4 col-sm-offset-2 btnContainer">
+                    <div class="col-md-4 col-md-offset-2 btnContainer">
                         <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
                         &nbsp;
                         <a class="btn btn-warning" (click)="reloadPage()">Clear</a>

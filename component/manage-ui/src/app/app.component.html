@@ -6,10 +6,10 @@
         </div>
         <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
             <div>
-                <div class="col-sm-12 breadcrumbs-bar" [ngClass]="{'menu-expand':isMenuExpanded}" *ngIf="isLoggedIn">
+                <div class="col-md-12 breadcrumbs-bar" [ngClass]="{'menu-expand':isMenuExpanded}" *ngIf="isLoggedIn">
                     <app-breadcrumbs></app-breadcrumbs>
                 </div>
-                <div class="col-sm-12 content-div">
+                <div class="col-md-12 content-div">
                     <router-outlet></router-outlet>
                 </div>
             </div>

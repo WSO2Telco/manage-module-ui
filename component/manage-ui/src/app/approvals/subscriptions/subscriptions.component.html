@@ -1,28 +1,12 @@
 <div class="animated fadeInUp">
- <div class="row">
-   <div class="col-sm-6">
-       <subscription-data-table
-               class="my"
-               [filter]="mySubscriptionFilter"
-               tableTitle="SUBSCRIPTION CREATIONS"
-               [dataSource]="mySubscriptions"
-               showTiersPermissions="subscription:changeTiers"
-               showRatePermissions="subscription:changeRates"
-               (onApproveRejectTask)="onApproveRejectHandler($event)"
-               (onFilterChange)="onFilterChangeHandler($event)"></subscription-data-table>
-   </div>
-   <div class="col-sm-6">
-       <subscription-data-table
-               class="group"
-               [filter]="groupSubscriptionFilter"
-               tableTitle="SUBSCRIPTION CREATIONS"
-               [unAssigned]="true"
-               showTiersPermissions="subscription:changeTiers"
-               showRatePermissions="subscription:changeRates"
-               [dataSource]="allSubscriptions"
-               (onAssignTask)="onAssignTaskHandler($event)"
-               (onFilterChange)="onFilterChangeHandler($event)"></subscription-data-table>
-   </div>
- </div>
+    <div class="row">
+        <div class="col-md-6">
+            <subscription-data-table class="my" [filter]="mySubscriptionFilter" tableTitle="SUBSCRIPTION CREATIONS" [dataSource]="mySubscriptions" showTiersPermissions="subscription:changeTiers" showRatePermissions="subscription:changeRates" (onApproveRejectTask)="onApproveRejectHandler($event)"
+                (onFilterChange)="onFilterChangeHandler($event)"></subscription-data-table>
+        </div>
+        <div class="col-md-6">
+            <subscription-data-table class="group" [filter]="groupSubscriptionFilter" tableTitle="SUBSCRIPTION CREATIONS" [unAssigned]="true" showTiersPermissions="subscription:changeTiers" showRatePermissions="subscription:changeRates" [dataSource]="allSubscriptions"
+                (onAssignTask)="onAssignTaskHandler($event)" (onFilterChange)="onFilterChangeHandler($event)"></subscription-data-table>
+        </div>
+    </div>
 </div>
-
