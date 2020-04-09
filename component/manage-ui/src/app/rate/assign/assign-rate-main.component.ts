@@ -12,29 +12,29 @@ import {AuthenticationService} from '../../commons/services/authentication.servi
 
 export class AssignRateMainComponent implements OnInit {
 
-    private operatorList: Operator[];
-    private apiOperationList: APIOperation[];
-    private apiList: API[];
+    public operatorList: Operator[];
+    public apiOperationList: APIOperation[];
+    public apiList: API[];
 
-    private sourceList: RateDefinition[];
-    private destinationList: RateDefinition[];
-    private assignedList: RateDefinition[];
+    public sourceList: RateDefinition[];
+    public destinationList: RateDefinition[];
+    public assignedList: RateDefinition[];
 
-    private api: string;
-    private operator: string;
-    private apiOperation: string;
+    public api: string;
+    public operator: string;
+    public apiOperation: string;
 
-    private loginInfo;
-    private display: string;
-    private key: string;
-    private format;
+    public loginInfo;
+    public display: string;
+    public key: string;
+    public format;
 
-    private isAdmin: boolean;
+    public isAdmin: boolean;
     /** since rate assign is only for hub-admin this value will be hard codes as true*/
 
-    private invalidApiOperation: boolean;
-    private invalidOperator: boolean;
-    private invalidApi: boolean;
+    public invalidApiOperation: boolean;
+    public invalidOperator: boolean;
+    public invalidApi: boolean;
 
     constructor(private rateService: RateService, private message: MessageService,
                 private _authenticationService: AuthenticationService) {
