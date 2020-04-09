@@ -138,7 +138,7 @@ export class UpdateSubComponent implements OnInit {
             }
 
             if (this.action == 'edit') {
-                this.staticTabs.tabs[1].active = true;
+                this.staticTabs.tabs[0].active = true;
             }
 
             if (this.status != 'Approved') {
@@ -314,7 +314,6 @@ export class UpdateSubComponent implements OnInit {
 
     editTierValue(flag: boolean, action: string) {
         this.editTierState = flag;
-        console.log(this.editTierState);
         if (this.editTierState) {
             if (action == 'application') {
                 this.appTiers = [];
@@ -353,6 +352,7 @@ export class UpdateSubComponent implements OnInit {
                 });
             }
         }
+        this.appmodal.hide();
     }
 
     onTierOptionChange(event, type: string) {
