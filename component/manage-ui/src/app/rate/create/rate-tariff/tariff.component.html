@@ -2,21 +2,13 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="form-container tariffContainer">
-                <!-- <form #addTariffForm="ngForm" class="form-horizontal" ngNoForm (ngSubmit)="onSubmit(addTariffForm)" autocomplete="off">
+                <form #addTariffForm="ngForm" class="form-horizontal" (ngSubmit)="onSubmit(addTariffForm)" autocomplete="off">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label col-md-4">Tariff Name <span>*</span></label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="text"
-                                           autocomplete="off"
-                                           placeholder="Name"
-                                           name="name"
-                                           #nameRef="ngModel"
-                                           required
-                                           [(ngModel)]="tariff.tariffName"
-                                           (input)="isNameUnique($event.target.value)">
+                                    <input class="form-control" type="text" autocomplete="off" placeholder="Name" name="name" #nameRef="ngModel" required [(ngModel)]="tariff.tariffName" (input)="isNameUnique($event.target.value)">
                                     <span class="error" *ngIf="isNameError">{{nameError}}</span>
                                 </div>
                             </div>
@@ -24,16 +16,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Tariff Description <span>*</span></label>
                                 <div class="col-md-6">
-                            <textarea rows="1" cols="50"
-                                      class="form-control"
-                                      type="text"
-                                      autocomplete="off"
-                                      placeholder="Description"
-                                      name="description"
-                                      #descriptionRef="ngModel"
-                                      required
-                                      [(ngModel)]="tariff.tariffDescription"
-                                      (input)="descriptionInvalid($event.target.value)">
+                                    <textarea rows="1" cols="50" class="form-control" type="text" autocomplete="off" placeholder="Description" name="description" #descriptionRef="ngModel" required [(ngModel)]="tariff.tariffDescription" (input)="descriptionInvalid($event.target.value)">
                             </textarea>
                                     <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                                 </div>
@@ -42,68 +25,26 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Default Value</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Default Value"
-                                           name="tariffDefaultVal"
-                                           #tariffDefaultValRef="ngModel"
-                                           required
-                                           [(ngModel)]="tariff.tariffDefaultVal">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Default Value" name="tariffDefaultVal" #tariffDefaultValRef="ngModel" required [(ngModel)]="tariff.tariffDefaultVal">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4">Max Count</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Max Count"
-                                           name="maxCount"
-                                           #maxCountRef="ngModel"
-                                           required
-                                           (ngModelChange)="tariffmaxcountchange($event)"
-                                           (onchange)="tariffmaxcountchange($event)"
-                                           [(ngModel)]="tariff.tariffMaxCount">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Max Count" name="maxCount" #maxCountRef="ngModel" required (ngModelChange)="tariffmaxcountchange($event)" (onchange)="tariffmaxcountchange($event)" [(ngModel)]="tariff.tariffMaxCount">
 
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4">Excess Rate</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Excess Rate"
-                                           name="excessRate"
-                                           #excessRateRef="ngModel"
-                                           required
-                                           (ngModelChange)="tariffExcessRatechange($event)"
-                                           (onchange)="tariffExcessRatechange($event)"
-                                           [(ngModel)]="tariff.tariffExcessRate">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Excess Rate" name="excessRate" #excessRateRef="ngModel" required (ngModelChange)="tariffExcessRatechange($event)" (onchange)="tariffExcessRatechange($event)" [(ngModel)]="tariff.tariffExcessRate">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4">Def Rate</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Def Rate"
-                                           name="defRate"
-                                           #defRateRef="ngModel"
-                                           required
-                                           (ngModelChange)="tariffDefRatechange($event)"
-                                           (onchange)="tariffDefRatechange($event)"
-                                           [(ngModel)]="tariff.tariffDefRate">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Def Rate" name="defRate" #defRateRef="ngModel" required (ngModelChange)="tariffDefRatechange($event)" (onchange)="tariffDefRatechange($event)" [(ngModel)]="tariff.tariffDefRate">
                                 </div>
                             </div>
                         </div>
@@ -111,18 +52,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">SP Commission</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="SP Commission"
-                                           name="spCommission"
-                                           #spCommissionRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffSPCommission"
-                                           (ngModelChange)="tariffSPCommission($event)"
-                                           (onchange)="tariffSPCommission($event)" >
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="SP Commission" name="spCommission" #spCommissionRef="ngModel" required [ngModel]="tariff.tariffSPCommission" (ngModelChange)="tariffSPCommission($event)" (onchange)="tariffSPCommission($event)">
 
                                     <span class="error" *ngIf="IsInvalidspCommission">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsInvalidMinusSpCommission">Range should between -100 to 0</span>
@@ -135,17 +65,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Ads Commission</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Ads Commission"
-                                           name="adsCommission"
-                                           #adsCommissionRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffAdsCommission"
-                                           (ngModelChange)="tariffAdsCommission($event)">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Ads Commission" name="adsCommission" #adsCommissionRef="ngModel" required [ngModel]="tariff.tariffAdsCommission" (ngModelChange)="tariffAdsCommission($event)">
                                     <span class="error" *ngIf="IsInvalidadsCommission">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsInvalidMinusAdsCommission">Range should between -100 to 0</span>
                                     <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
@@ -155,18 +75,8 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Opco Commission</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Opco Commission"
-                                           name="opcoCommission"
-                                           #opcoCommissionRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffOpcoCommission"
-                                           (ngModelChange)="tariffOpcoCommission($event)"
-                                           (onchange)="tariffOpcoCommission($event)">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Opco Commission" name="opcoCommission" #opcoCommissionRef="ngModel" required [ngModel]="tariff.tariffOpcoCommission" (ngModelChange)="tariffOpcoCommission($event)"
+                                        (onchange)="tariffOpcoCommission($event)">
                                     <span class="error" *ngIf="IsInvalidopcoCommission">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsInvalidMinusOpcoCommission">Range should between -100 to 0</span>
                                     <span class="error" *ngIf="IsExceedCommision">Total Commision cannot exceed 100  </span>
@@ -176,36 +86,14 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Sur Charge Value</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Sur Charge Value"
-                                           name="surChargeval"
-                                           [disabled]="isDisabled"
-                                           #surChargevalRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffSurChargeval"
-                                           (ngModelChange)="surChargeValue($event)">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Sur Charge Value" name="surChargeval" [disabled]="isDisabled" #surChargevalRef="ngModel" required [ngModel]="tariff.tariffSurChargeval" (ngModelChange)="surChargeValue($event)">
                                     <span class="error" *ngIf="IsEmptySurchargeval">Required</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-4">Sur Charge Ads</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Sur Charge Ads"
-                                           name="surChargeAds"
-                                           [disabled]="isDisabled"
-                                           #surChargeAdsRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffSurChargeAds"
-                                           (ngModelChange)="tariffSurChargeAds($event)">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Sur Charge Ads" name="surChargeAds" [disabled]="isDisabled" #surChargeAdsRef="ngModel" required [ngModel]="tariff.tariffSurChargeAds" (ngModelChange)="tariffSurChargeAds($event)">
                                     <span class="error" *ngIf="IsInvalidtariffSurChargeAds">Range should between 0 - 100</span>
                                     <span class="error" *ngIf="IsEmptySurchargeAddOpco">Required</span>
                                 </div>
@@ -213,18 +101,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Sur Charge Opco</label>
                                 <div class="col-md-6">
-                                    <input class="form-control"
-                                           type="number"
-                                           min="0"
-                                           step="1"
-                                           autocomplete="off"
-                                           placeholder="Sur Charge Opco"
-                                           name="surChargeOpco"
-                                           [disabled]="isDisabled"
-                                           #surChargeOpcoRef="ngModel"
-                                           required
-                                           [ngModel]="tariff.tariffSurChargeOpco"
-                                           (ngModelChange)="tariffSurChargeOpco($event)">
+                                    <input class="form-control" type="number" min="0" step="1" autocomplete="off" placeholder="Sur Charge Opco" name="surChargeOpco" [disabled]="isDisabled" #surChargeOpcoRef="ngModel" required [ngModel]="tariff.tariffSurChargeOpco" (ngModelChange)="tariffSurChargeOpco($event)">
                                     <span class="error" *ngIf="IsInvalidtariffSurChargeOpco">Range should between 0 - 100 </span>
                                     <span class="error" *ngIf="IsEmptySurchargeAddOpco">Required</span>
                                 </div>
@@ -237,12 +114,12 @@
                             <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
                         </div>
                         <div class="col-md-2">
-                            <a class="btn btn-warning" (click)="clearForm()" >Clear</a>
+                            <a class="btn btn-warning" (click)="clearForm()">Clear</a>
                         </div>
                         <span class="error" *ngIf="InValidCommisionTotal">Total of SP,Ads,Opco Commission should be 100 or -100</span>
                     </div>
 
-                </form> -->
+                </form>
             </div>
         </div>
     </div>

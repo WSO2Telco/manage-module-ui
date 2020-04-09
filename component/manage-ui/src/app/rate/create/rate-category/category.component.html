@@ -4,51 +4,26 @@
         <div class="col-lg-12">
             <div class="form-container newtypeContainer">
 
-                <!-- <form class="form-horizontal" #addCategoryForm="ngForm" autocomplete="off" ngNoForm
-                      (ngSubmit)="onSubmit(addCategoryForm)">
+                <form class="form-horizontal" #addCategoryForm="ngForm" autocomplete="off" (ngSubmit)="onSubmit(addCategoryForm)">
 
                     <div class="form-group">
                         <label class="control-label col-md-3">{{type}} Name <span>*</span></label>
                         <div class="col-md-4">
-                            <input class="form-control"
-                                   type="text"
-                                   autocomplete="off"
-                                   placeholder="Name"
-                                   name="name"
-                                   #nameRef="ngModel"
-                                   required
-                                   [(ngModel)]="name"
-                                   (input)="isNameUnique($event.target.value)">
+                            <input class="form-control" type="text" autocomplete="off" placeholder="Name" name="name" #nameRef="ngModel" required [(ngModel)]="name" (input)="isNameUnique($event.target.value)">
                             <span class="error" *ngIf="isNameError">{{nameError}}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">{{type}} Code <span>*</span></label>
                         <div class="col-md-4">
-                            <input class="form-control"
-                                   type="text"
-                                   autocomplete="off"
-                                   placeholder="Code"
-                                   name="code"
-                                   #codeRef="ngModel"
-                                   required
-                                   [(ngModel)]="code"
-                                   (input)="isCodeUnique($event.target.value)">
+                            <input class="form-control" type="text" autocomplete="off" placeholder="Code" name="code" #codeRef="ngModel" required [(ngModel)]="code" (input)="isCodeUnique($event.target.value)">
                             <span class="error" *ngIf="isCodeError">{{codeError}}</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3">{{type}} Description<span>*</span></label>
                         <div class="col-md-4">
-                            <textarea rows="4" cols="50" class="form-control"
-                                      type="text"
-                                      autocomplete="off"
-                                      placeholder="Description"
-                                      name="description"
-                                      #descriptionRef="ngModel"
-                                      required
-                                      [(ngModel)]="description"
-                                      (input)="descriptionInvalid($event.target.value)">
+                            <textarea rows="4" cols="50" class="form-control" type="text" autocomplete="off" placeholder="Description" name="description" #descriptionRef="ngModel" required [(ngModel)]="description" (input)="descriptionInvalid($event.target.value)">
                             </textarea>
                             <span class="error" *ngIf="isDescriptionError">{{descriptionError}}</span>
                         </div>
@@ -64,7 +39,7 @@
                     </div>
 
 
-                </form> -->
+                </form>
 
             </div>
 
