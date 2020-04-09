@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
     private allSubscriptions: ApplicationTaskResult;
 
-    private dashboardData: DashboardData;
+    public dashboardData: DashboardData;
 
     private myApplicationFilter: ApplicationTaskFilter;
     private mySubscriptionFilter: ApplicationTaskFilter;

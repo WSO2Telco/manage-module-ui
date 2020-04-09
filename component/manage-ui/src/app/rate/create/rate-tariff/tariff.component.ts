@@ -11,39 +11,36 @@ import {MessageService} from '../../../commons/services/message.service';
 })
 export class TariffComponent implements OnInit {
 
-    private tariff: Tariff;
+    public tariff: Tariff;
 
-    @Input()
-    private existingTariffList: Tariff[];
+    @Input() existingTariffList: Tariff[];
 
-    @Output()
-    private onAddTask: EventEmitter<boolean> = new EventEmitter();
+    @Output() onAddTask: EventEmitter<boolean> = new EventEmitter();
 
-    @Output()
-    private modalClose: EventEmitter<boolean> = new EventEmitter();
+    @Output() modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private isNameError: boolean;
-    private isDescriptionError: boolean;
-    private disableAddButton: boolean;
+    public isNameError: boolean;
+    public isDescriptionError: boolean;
+    public disableAddButton: boolean;
 
-    private nameError: string;
-    private descriptionError: string;
+    public nameError: string;
+    public descriptionError: string;
 
-    private IsInvalidtariffSurChargeAds: boolean;
-    private IsInvalidtariffSurChargeOpco: boolean;
-    private IsInvalidspCommission: boolean;
-    private IsInvalidadsCommission: boolean;
-    private IsInvalidopcoCommission: boolean;
-    private IsExceedCommision: boolean;
-    private ValidCommisionTotal: boolean;
-    private InValidCommisionTotal: boolean;
-    private IsMinusExceedCommision: boolean;
-    private IsInvalidMinusSpCommission: boolean;
-    private IsInvalidMinusAdsCommission: boolean;
-    private IsInvalidMinusOpcoCommission: boolean;
-    private isDisabled: boolean;
-    private IsEmptySurchargeAddOpco: boolean;
-    private IsEmptySurchargeval: boolean;
+    public IsInvalidtariffSurChargeAds: boolean;
+    public IsInvalidtariffSurChargeOpco: boolean;
+    public IsInvalidspCommission: boolean;
+    public IsInvalidadsCommission: boolean;
+    public IsInvalidopcoCommission: boolean;
+    public IsExceedCommision: boolean;
+    public ValidCommisionTotal: boolean;
+    public InValidCommisionTotal: boolean;
+    public IsMinusExceedCommision: boolean;
+    public IsInvalidMinusSpCommission: boolean;
+    public IsInvalidMinusAdsCommission: boolean;
+    public IsInvalidMinusOpcoCommission: boolean;
+    public isDisabled: boolean;
+    public IsEmptySurchargeAddOpco: boolean;
+    public IsEmptySurchargeval: boolean;
 
 
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {

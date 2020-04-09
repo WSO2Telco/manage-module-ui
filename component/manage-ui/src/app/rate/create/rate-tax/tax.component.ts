@@ -3,7 +3,6 @@ import {RateService} from '../../../commons/services/rate.service';
 import {RateTax} from '../../../commons/models/common-data-models';
 import {AuthenticationService} from '../../../commons/services/authentication.service';
 import {MessageService} from '../../../commons/services/message.service';
-import {IMyDrpOptions} from 'mydaterangepicker';
 
 @Component({
     selector: 'app-addtax',
@@ -12,37 +11,34 @@ import {IMyDrpOptions} from 'mydaterangepicker';
 })
 export class TaxComponent implements OnInit {
 
-    private tax: RateTax;
+    public tax: RateTax;
 
-    @Input()
-    private existingTaxList: RateTax[];
+    @Input() existingTaxList: RateTax[];
 
-    @Output()
-    private onAddTask: EventEmitter<boolean> = new EventEmitter();
+    @Output() onAddTask: EventEmitter<boolean> = new EventEmitter();
 
-    @Output()
-    private modalClose: EventEmitter<boolean> = new EventEmitter();
+    @Output() modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private isNameError: boolean;
-    private isCodeError: boolean;
-    private disableAddButton: boolean;
-    private is_invalid_period: boolean;
-    private isCalenderEnable: boolean;
-    private isCalendarEmpty: boolean;
-    private isvalueError: boolean;
-    private isdateError: boolean;
-    private datepickvalue: string;
-    private fromdate: string;
-    private todate: string;
-    private taxValue: string;
+    public isNameError: boolean;
+    public isCodeError: boolean;
+    public disableAddButton: boolean;
+    public is_invalid_period: boolean;
+    public isCalenderEnable: boolean;
+    public isCalendarEmpty: boolean;
+    public isvalueError: boolean;
+    public isdateError: boolean;
+    public datepickvalue: string;
+    public fromdate: string;
+    public todate: string;
+    public taxValue: string;
 
-    private nameError: string;
-    private codeError: string;
-    private valueError: string;
-    private dateError: string;
-    private date = new Date();
+    public nameError: string;
+    public codeError: string;
+    public valueError: string;
+    public dateError: string;
+    public date = new Date();
 
-    private myDateRangePickerOptions: IMyDrpOptions = {
+    public myDateRangePickerOptions = {
         dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
         indicateInvalidDateRange: true,
@@ -56,9 +52,9 @@ export class TaxComponent implements OnInit {
         showClearDateRangeBtn: false
     };
 
-    private defaultcalval: string;
+    public defaultcalval: string;
 
-    private model: Object = {
+    public model: Object = {
         beginDate: {
             year: this.date.getFullYear(),
             month: this.date.getMonth() + 1,

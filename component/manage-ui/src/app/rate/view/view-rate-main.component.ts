@@ -12,22 +12,22 @@ import {MessageService} from '../../commons/services/message.service';
 
 export class ViewRateMainComponent implements OnInit {
 
-    private selectedRate: string;
-    private rateDefinition: RateDefinition;
-    private rateCategory;
-    private rateTax;
-    private showRateDef: boolean;
-    private showCreateRate: string;
-    private operatorsList: OperatorList[];
-    private loggeduser: string;
+    public selectedRate: string;
+    public rateDefinition: RateDefinition;
+    public rateCategory;
+    public rateTax;
+    public showRateDef: boolean;
+    public showCreateRate: string;
+    public operatorsList: OperatorList[];
+    public loggeduser: string;
     public loggedusername: string;
     public isadminUser;
-    private isAdmin: boolean;
+    public isAdmin: boolean;
     public operatorId: string;
 
 
-    private rateDefinitions;
-    private rates;
+    public rateDefinitions;
+    public rates;
 
     constructor(private rateService: RateService, private message: MessageService, private authService: AuthenticationService) {
     }

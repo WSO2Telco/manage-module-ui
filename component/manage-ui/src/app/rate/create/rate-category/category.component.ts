@@ -15,27 +15,23 @@ export class CategoryComponent implements OnInit {
     code: string;
     description: string;
 
-    @Input()
-    private type: string;
+    @Input() type: string;
 
-    @Output()
-    private onAddTask: EventEmitter<boolean> = new EventEmitter();
+    @Output() onAddTask: EventEmitter<boolean> = new EventEmitter();
 
-    @Output()
-    private modalClose: EventEmitter<boolean> = new EventEmitter();
+    @Output() modalClose: EventEmitter<boolean> = new EventEmitter();
 
-    private submissionError: string;
+    public submissionError: string;
 
-    private isNameError: boolean;
-    private isCodeError: boolean;
-    private isDescriptionError: boolean;
+    public isNameError: boolean;
+    public isCodeError: boolean;
+    public isDescriptionError: boolean;
 
-    private nameError: string;
-    private codeError: string;
-    private descriptionError: string;
+    public nameError: string;
+    public codeError: string;
+    public descriptionError: string;
 
-    @Input()
-    private existingCategories: Category[];
+    @Input() existingCategories: Category[];
 
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {
     }

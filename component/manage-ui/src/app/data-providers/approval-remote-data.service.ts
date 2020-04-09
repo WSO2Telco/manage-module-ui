@@ -1,6 +1,6 @@
+
+import {throwError as observableThrowError,  Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Injectable, Inject } from '@angular/core';
-import { Headers, RequestOptions, Response, Http } from "@angular/http";
-import { Observable, Subject, BehaviorSubject } from "rxjs";
 import {
     ApplicationTask, ApplicationTaskSearchParam,
     AssignApplicationTaskParam, ApproveApplicationCreationTaskParam, ApproveSubscriptionCreationTaskParam,
@@ -10,6 +10,8 @@ import { AuthenticationService } from "../commons/services/authentication.servic
 import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import { MessageService } from "../commons/services/message.service";
 import { TableDataType } from "../commons/models/common-data-models";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class ApprovalRemoteDataService {
@@ -66,7 +68,7 @@ export class ApprovalRemoteDataService {
         }
     };
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
         @Inject('API_CONTEXT') private apiContext2: string,
         private slimLoadingBarService: SlimLoadingBarService,
         private message: MessageService,
@@ -109,19 +111,20 @@ export class ApprovalRemoteDataService {
                 + '?start=' + taskFilter.startRecordNumber + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
-                .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
-                    success: false,
-                    message: 'Error Loading My Application List',
-                    error: error
-                }))
-                .subscribe(
+                // .map((response: Response) => response.json())
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading My Application List',
+                        error: error
+                    }))
+                ).subscribe(
                     data => {
-                        if (data.success) {
-                            this.MyApplicationApprovalTasksProvider.next(data.payload);
+                        if (data) {
+                            this.MyApplicationApprovalTasksProvider.next(data['payload']);
                             this.slimLoadingBarService.complete();
                         } else {
-                            this.message.error(data.message);
+                            this.message.error(data['message']);
                             this.slimLoadingBarService.stop();
                         }
                     },
@@ -150,19 +153,21 @@ export class ApprovalRemoteDataService {
                 + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
-                .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
-                    success: false,
-                    message: 'Error Loading All Application List',
-                    error: error
-                }))
+                // .map((response: Response) => response.json())
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading All Application List',
+                        error: error
+                    }))
+                )
                 .subscribe(
                     data => {
-                        if (data.success) {
-                            this.AllApplicationApprovalTasksProvider.next(data.payload);
+                        if (data['success']) {
+                            this.AllApplicationApprovalTasksProvider.next(data['payload']);
                             this.slimLoadingBarService.complete();
                         } else {
-                            this.message.error(data.message);
+                            this.message.error(data['message']);
                             this.slimLoadingBarService.stop();
                         }
                     },
@@ -188,19 +193,21 @@ export class ApprovalRemoteDataService {
                 + '?start=' + taskFilter.startRecordNumber + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
-                .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
-                    success: false,
-                    message: 'Error Loading My Subscription List',
-                    error: error
-                }))
+                // .map((response: Response) => response.json())
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading My Subscription List',
+                        error: error
+                    }))
+                )
                 .subscribe(
                     data => {
-                        if (data.success) {
-                            this.MySubscriptionTasksProvider.next(data.payload);
+                        if (data['success']) {
+                            this.MySubscriptionTasksProvider.next(data['payload']);
                             this.slimLoadingBarService.complete();
                         } else {
-                            this.message.error(data.message);
+                            this.message.error(data['message']);
                             this.slimLoadingBarService.stop();
                         }
                     },
@@ -228,19 +235,21 @@ export class ApprovalRemoteDataService {
                 + '&filterBy=' + taskFilter.filerString;
 
             this.http.get(endPoint, this.getOptions())
-                .map((response: Response) => response.json())
-                .catch((error: Response) => Observable.throw({
-                    success: false,
-                    message: 'Error Loading All Subscription List',
-                    error: error
-                }))
+                // .map((response: Response) => response.json())
+                .pipe(
+                    catchError((error: Response) => observableThrowError({
+                        success: false,
+                        message: 'Error Loading All Subscription List',
+                        error: error
+                    }))
+                )
                 .subscribe(
                     data => {
-                        if (data.success) {
-                            this.GroupSubscriptionTasksProvider.next(data.payload);
+                        if (data['success']) {
+                            this.GroupSubscriptionTasksProvider.next(data['payload']);
                             this.slimLoadingBarService.complete();
                         } else {
-                            this.message.error(data.message);
+                            this.message.error(data['message']);
                             this.slimLoadingBarService.stop();
                         }
                     },
@@ -259,11 +268,13 @@ export class ApprovalRemoteDataService {
         }
 
         return this.http.post(this.apiEndpoints['applicationAssign'], data, this.getOptions())
-            .map((response: Response) => {
-                this.modifiedApplicationTaskIDs.push(taskId);
-                return response.json();
-            })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .pipe(
+                map((response: Response) => {
+                    this.modifiedApplicationTaskIDs.push(taskId);
+                    return response;
+                }),
+                catchError((error: Response) => observableThrowError(error['message']))
+            )
 
     }
 
@@ -273,11 +284,13 @@ export class ApprovalRemoteDataService {
         }
 
         return this.http.post(this.apiEndpoints['subscriptionAssign'], data, this.getOptions())
-            .map((response: Response) => {
-                this.modifiedApplicationTaskIDs.push(taskId);
-                return response.json();
-            })
-            .catch((error: Response) => Observable.throw(error.json().message));
+            .pipe(
+                map((response: Response) => {
+                    this.modifiedApplicationTaskIDs.push(taskId);
+                    return response;
+                }),
+                catchError((error: Response) => observableThrowError(error['message']))
+            )
     }
 
     getModifiedTaskIds(): number[] {
@@ -289,12 +302,14 @@ export class ApprovalRemoteDataService {
      * */
     approveApplicationCreationTask(param: ApproveApplicationCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveApplicationCreation'], param, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Approving Application',
-                error: error
-            }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Approving Application',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -302,12 +317,14 @@ export class ApprovalRemoteDataService {
      **/
     approveSubscriptionCreationTask(param: ApproveSubscriptionCreationTaskParam): Observable<any> {
         return this.http.post(this.apiEndpoints['approveSubscriptionCreation'], param, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Approving Subscription',
-                error: error
-            }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Approving Subscription',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -315,12 +332,14 @@ export class ApprovalRemoteDataService {
    **/
     editApplicationTier(param: EditApplicationTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editAppTier'], param, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error updating Application Tier',
-                error: error
-            }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error updating Application Tier',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -328,12 +347,14 @@ export class ApprovalRemoteDataService {
   **/
     editSubscriptionTier(param: EditSubscriptionTierParam): Observable<any> {
         return this.http.put(this.apiEndpoints['editSubTier'], param, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error updating subscription Tier',
-                error: error
-            }));
+            // .map((response: Response) => response.json())
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error updating subscription Tier',
+                    error: error
+                }))
+            )
     }
 
     getAllTasks(): void {
@@ -351,31 +372,29 @@ export class ApprovalRemoteDataService {
     getCreditPlan() {
         const endPoint = this.url.protocol + '//' + this.url.host + '/credit-control-service/services/getCreditLimitInfo';
         return this.http.get(endPoint, this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Unable to Load Credit Plan',
-                error: error
-            }));
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Unable to Load Credit Plan',
+                    error: error
+                }))
+            )
     }
 
     getFilteredResult(filter: ApplicationTaskFilter): void {
         this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType] && this.actionMap[filter.dataType.dataCategory][filter.dataType.dataType].call(this, filter);
     }
 
-    getOptions(): RequestOptions {
+    getOptions() {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
-        const headers = new Headers(
+        const headers = new HttpHeaders(
             {
                 'Authorization': 'Basic ' + token,
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({ headers: headers });
+        return { headers: headers };
     }
 
 }

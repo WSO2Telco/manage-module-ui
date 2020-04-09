@@ -31,19 +31,19 @@ export class ApprovalHistoryGraphComponent implements OnInit {
     public chartType = 'bar';
     public barChartLegend = false;
 
-    private appCreationHistoryDataSet: any[] = [{data: []}];
-    private appCreationHistoryLabels: string[] = [];
+    public appCreationHistoryDataSet: any[] = [{data: []}];
+    public appCreationHistoryLabels: string[] = [];
     public chartColors: Array<any> = [
         {
             backgroundColor: 'rgba(53,152,220,0.5)'
         }];
 
-    private subscriptionHistoryDataSet: any[] = [{data: []}];
-    private subscriptionHistoryLabels: string[] = [];
+    public subscriptionHistoryDataSet: any[] = [{data: []}];
+    public subscriptionHistoryLabels: string[] = [];
 
 
-    private showPendingApps: string;
-    private showPendingSubs: string;
+    public showPendingApps: string;
+    public showPendingSubs: string;
 
     constructor(private dashboardService: DashboardRemoteDataService,
                 private authService: AuthenticationService,

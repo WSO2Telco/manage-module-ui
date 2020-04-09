@@ -8,38 +8,33 @@ import {Category, Mapping, RateCategory, Tariff} from '../../../commons/models/c
 })
 export class RateCategoryComponent implements OnInit {
 
-    private category: string;
-    private subcategory: string;
-    private tariff: string;
-    private type: string;
+    public category: string;
+    public subcategory: string;
+    public tariff: string;
+    public type: string;
 
-    private isCategoryError: boolean;
-    private isSubcategoryError: boolean;
-    private isTariffError: boolean;
-    private isMappingError: boolean;
+    public isCategoryError: boolean;
+    public isSubcategoryError: boolean;
+    public isTariffError: boolean;
+    public isMappingError: boolean;
 
-    private categoryError: string;
-    private subcategoryError: string;
-    private tariffError: string;
+    public categoryError: string;
+    public subcategoryError: string;
+    public tariffError: string;
 
-    private showNewCategory: boolean;
-    private showNewSubCategory: boolean;
-    private showNewTariff: boolean;
+    public showNewCategory: boolean;
+    public showNewSubCategory: boolean;
+    public showNewTariff: boolean;
 
-    @Input()
-    private rateCategories: Mapping[];
+    @Input() rateCategories: Mapping[];
 
-    @Input()
-    private categoryList: Category[];
+    @Input() categoryList: Category[];
 
-    @Input()
-    private tariffList: Tariff[];
+    @Input() tariffList: Tariff[];
 
-    @Output()
-    private modalfire: EventEmitter<string> = new EventEmitter();
+    @Output() modalfire: EventEmitter<string> = new EventEmitter();
 
-    @Output()
-    private rateCatetgorySubmition: EventEmitter<Mapping[]> = new EventEmitter();
+    @Output() rateCatetgorySubmition: EventEmitter<Mapping[]> = new EventEmitter();
 
     constructor() {
     }

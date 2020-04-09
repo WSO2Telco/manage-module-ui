@@ -13,12 +13,8 @@ import {MessageService} from '../../commons/services/message.service';
 
 export class WhitelistListComponent implements OnInit {
 
-    @Input()
-    private dataSource: string[];
-
-
-    @Output()
-    private onDeleteTask: EventEmitter<boolean> = new EventEmitter();
+    @Input() dataSource: string[];
+    @Output() onDeleteTask: EventEmitter<boolean> = new EventEmitter();
 
 
     constructor(private blackListWhiteListService: BlackListWhiteListService, private message: MessageService) {

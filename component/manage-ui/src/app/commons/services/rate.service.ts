@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {RateRemoteDataService} from "../../data-providers/rate_remote-data.service";
 import {Category, Currency, Rate, Tariff, UpdatedRate, RateTax} from "../models/common-data-models";
 import {AuthenticationService} from "./authentication.service";
-import { forkJoin } from "rxjs/observable/forkJoin";
-import { Observable } from 'rxjs/Observable';
+import { forkJoin ,  Observable, EMPTY } from "rxjs";
+import { map, catchError } from "rxjs/operators";
 
 
 @Injectable()
@@ -315,39 +315,47 @@ export class RateService {
         if (this.authService.validateSession()) {
             if (operatorId) {
                 return forkJoin([
-                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator').catch(err => {
-                        throw err
-                    }),
-                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator-assign').catch(err => {
-                        throw err
-                    })
-                ]).map((result) => {
-                    return {
-                        success: true,
-                        message: 'Api Operation Rates List Loaded Successfully',
-                        payload: {
-                            source: result[0],
-                            destination: result[1]
+                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator').pipe(
+                        catchError(err => {
+                            throw err
+                        })
+                    ),
+                    this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'operator-assign').pipe(
+                        catchError(err => {
+                            throw err
+                        })
+                    )
+                ]).pipe(
+                    map((result) => {
+                        return {
+                            success: true,
+                            message: 'Api Operation Rates List Loaded Successfully',
+                            payload: {
+                                source: result[0],
+                                destination: result[1]
+                            }
                         }
-                    }
-                })
+                    })
+                )
             } else {
                 return forkJoin([
                     this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin'),
                     this._remoteService.getAPIOperationRates(apiName, apiOperationId, operatorId, 'admin-assign')
-                ]).map((res) => {
-                    return {
-                        success: true,
-                        message: 'Api Operation Rates List Loaded Successfully',
-                        payload: {
-                            source: res[0],
-                            destination: res[1]
+                ]).pipe(
+                    map((res) => {
+                        return {
+                            success: true,
+                            message: 'Api Operation Rates List Loaded Successfully',
+                            payload: {
+                                source: res[0],
+                                destination: res[1]
+                            }
                         }
-                    }
-                })
+                    })
+                )
             }
         } else {
-            return Observable.empty();
+            return EMPTY;
         }
     }
 

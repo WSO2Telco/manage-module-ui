@@ -6,18 +6,17 @@
         </div>
         <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
             <div>
-                <div class="col-sm-12 breadcrumbs-bar"  [ngClass]="{'menu-expand':isMenuExpanded}" *ngIf="isLoggedIn">
+                <div class="col-md-12 breadcrumbs-bar" [ngClass]="{'menu-expand':isMenuExpanded}" *ngIf="isLoggedIn">
                     <app-breadcrumbs></app-breadcrumbs>
                 </div>
-                <div class="col-sm-12 content-div">
+                <div class="col-md-12 content-div">
                     <router-outlet></router-outlet>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<ng2-toasty
-        [position]="'bottom-center'"></ng2-toasty>
+<ng2-toasty [position]="'bottom-center'"></ng2-toasty>
 
 <ng2-slim-loading-bar></ng2-slim-loading-bar>
 <app-user-inactive></app-user-inactive>

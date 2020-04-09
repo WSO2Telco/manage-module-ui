@@ -6,7 +6,6 @@ import {QuotaService} from '../../commons/services/quotacap.service';
 import {AuthenticationService} from '../../commons/services/authentication.service';
 import {Api, Application, QuotaList} from '../../commons/models/common-data-models';
 import {MessageService} from '../../commons/services/message.service';
-import {IMyDrpOptions} from 'mydaterangepicker';
 import {RateService} from "../../commons/services/rate.service";
 import {BlackListWhiteListService} from "../../commons/services/blacklist_whitelist.service";
 
@@ -17,62 +16,62 @@ import {BlackListWhiteListService} from "../../commons/services/blacklist_whitel
 })
 export class QuotaCapMainComponent implements OnInit {
 
-    private subscriber: string;
-    private app: string;
-    private api: string;
-    private selectedoperator: string;
+    public subscriber: string;
+    public app: string;
+    public api: string;
+    public selectedoperator: string;
 
-    private subscriberError: string;
-    private applicationError: string;
-    private apiError: string;
-    private operatorError: string;
+    public subscriberError: string;
+    public applicationError: string;
+    public apiError: string;
+    public operatorError: string;
 
-    private subscriberList;
-    private applicationList: string[];
-    private apiList: string[];
+    public subscriberList;
+    public applicationList: string[];
+    public apiList: string[];
 
-    private applications: Application[];
-    private apis: Api[];
-    private quotalist: QuotaList[];
+    public applications: Application[];
+    public apis: Api[];
+    public quotalist: QuotaList[];
 
-    private quotaValue: string[];
-    private quotaInputValue: string;
-    private is_edit: boolean;
-    private is_invalid_period: boolean;
-    private isSubscriberSelect: boolean;
-    private isAppSelect: boolean;
-    private isApiSelect: boolean;
-    private isCalenderEnable: boolean;
-    private appID: string;
-    private datepickvalue: string;
-    private fromdate: string;
-    private todate: string;
+    public quotaValue: string[];
+    public quotaInputValue: string;
+    public is_edit: boolean;
+    public is_invalid_period: boolean;
+    public isSubscriberSelect: boolean;
+    public isAppSelect: boolean;
+    public isApiSelect: boolean;
+    public isCalenderEnable: boolean;
+    public appID: string;
+    public datepickvalue: string;
+    public fromdate: string;
+    public todate: string;
 
-    private operatorsList: string[];
-    private ISoperatordisable: boolean;
+    public operatorsList: string[];
+    public ISoperatordisable: boolean;
 
-    private isNameEmpty: boolean;
-    private isInvalidquota: boolean;
-    private name: string;
-    private resultLabel: string;
+    public isNameEmpty: boolean;
+    public isInvalidquota: boolean;
+    public name: string;
+    public resultLabel: string;
 
 
-    private isSubscriberError: boolean;
-    private isApplicationError: boolean;
-    private isApiError: boolean;
-    private isOperatorError: boolean;
+    public isSubscriberError: boolean;
+    public isApplicationError: boolean;
+    public isApiError: boolean;
+    public isOperatorError: boolean;
 
-    private isCalendarEmpty: boolean;
-    private isAdmin: boolean;
+    public isCalendarEmpty: boolean;
+    public isAdmin: boolean;
 
-    private date = new Date();
-    private loggeduser: string;
+    public date = new Date();
+    public loggeduser: string;
     public loggedusername: string;
     public isadminUser;
 
-    private showOperatorListPermissions: string;
+    public showOperatorListPermissions: string;
 
-    private myDateRangePickerOptions: IMyDrpOptions = {
+    public myDateRangePickerOptions = {
         dateFormat: 'yyyy/mm/dd',
         sunHighlight: true,
         indicateInvalidDateRange: true,
@@ -86,9 +85,9 @@ export class QuotaCapMainComponent implements OnInit {
         showClearDateRangeBtn: false
     };
 
-    private defaultcalval: string;
+    public defaultcalval: string;
 
-    private model: Object = {
+    public model: Object = {
         beginDate: {
             year: this.date.getFullYear(),
             month: this.date.getMonth() + 1,

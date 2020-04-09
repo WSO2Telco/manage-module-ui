@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd} from "@angular/router";
-import {ApprovalRemoteDataService} from '../../../data-providers/approval-remote-data.service';
-import {MessageService} from "../../services/message.service";
+import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from "@angular/router";
+import { ApprovalRemoteDataService } from '../../../data-providers/approval-remote-data.service';
+import { MessageService } from "../../services/message.service";
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-breadcrumbs',
@@ -10,27 +11,28 @@ import {MessageService} from "../../services/message.service";
 })
 export class BreadcrumbsComponent implements OnInit {
 
-    private activeView: any;
-    private approvals: boolean;
+    public activeView: any;
+    public approvals: boolean;
 
     constructor(private _router: Router,
-                private approval: ApprovalRemoteDataService,
-                private message: MessageService) {
+        private approval: ApprovalRemoteDataService,
+        private message: MessageService) {
     }
 
     ngOnInit() {
         this.approvals = false;
-        this._router.events
-            .filter((event: any) => event instanceof NavigationEnd)
+        this._router.events.pipe(
+                filter((event: any) => event instanceof NavigationEnd)
+            )
             .subscribe((event: NavigationEnd) => {
                 this.activeView = event.url.replace('/', '').split('/');
-                if(this.activeView.length == 2){
-                    if(this.activeView[0] == 'approvals'){
+                if (this.activeView.length == 2) {
+                    if (this.activeView[0] == 'approvals') {
                         this.approvals = true
-                    }else {
+                    } else {
                         this.approvals = false;
                     }
-                }else {
+                } else {
                     this.approvals = false;
                 }
             });

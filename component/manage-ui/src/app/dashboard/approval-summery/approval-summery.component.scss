@@ -1,76 +1,67 @@
 @import "../../../styles/mixing";
-
-:host{
-  display: block;
-
-  @media screen and (max-width: 768px) {
-    padding: 0px 15px;
+:host {
     display: block;
-  }
+    @media screen and (max-width: 768px) {
+        padding: 0px 15px;
+        display: block;
+    }
 }
 
-app-approval-count{
-  margin-top: 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
+app-approval-count {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-app-approval-whitelist-blacklist{
-  margin-top: 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
+app-approval-whitelist-blacklist {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
-:host /deep/ app-approval-count.apps .approval-count{
-  background-color: #3598dc;
-  @include transition(all 0.2s ease-in);
-  &:hover{
-    background-color: #2f87c4;
-  }
-
-  .breakdown{
-    color : #a7d8fa;
-  }
+:host ::ng-deep app-approval-count.apps .approval-count {
+    background-color: #3598dc;
+    @include transition(all 0.2s ease-in);
+    &:hover {
+        background-color: #2f87c4;
+    }
+    .breakdown {
+        color: #a7d8fa;
+    }
 }
 
-:host /deep/ app-approval-count.subs .approval-count{
-  background-color: #8E44AD;
-
-  @include transition(all 0.2s ease-in);
-  &:hover{
-    background-color: #703588;
-  }
-
-  .breakdown{
-    color: #fb9db1;
-  }
-;
+:host ::ng-deep app-approval-count.subs .approval-count {
+    background-color: #8E44AD;
+    @include transition(all 0.2s ease-in);
+    &:hover {
+        background-color: #703588;
+    }
+    .breakdown {
+        color: #fb9db1;
+    }
+    ;
 }
 
-:host /deep/ app-approval-whitelist-blacklist.whitelist .approval-count{
-  background-color: #5cb85c;
-
-  @include transition(all 0.2s ease-in);
-  &:hover{
-    background-color: #2f9e44;
-  }
-
-  .breakdown{
-    color: #66d9e8;
-  }
-;
+:host ::ng-deep app-approval-whitelist-blacklist.whitelist .approval-count {
+    background-color: #5cb85c;
+    @include transition(all 0.2s ease-in);
+    &:hover {
+        background-color: #2f9e44;
+    }
+    .breakdown {
+        color: #66d9e8;
+    }
+    ;
 }
 
-:host /deep/ app-approval-whitelist-blacklist.blacklist .approval-count{
-  background-color: #dd0d0d;
-
-  @include transition(all 0.2s ease-in);
-  &:hover{
-    background-color: #bf0d0d;
-  }
-
-  .breakdown{
-    color: #f4f2c9;
-  }
-;
+:host ::ng-deep app-approval-whitelist-blacklist.blacklist .approval-count {
+    background-color: #dd0d0d;
+    @include transition(all 0.2s ease-in);
+    &:hover {
+        background-color: #bf0d0d;
+    }
+    .breakdown {
+        color: #f4f2c9;
+    }
+    ;
 }

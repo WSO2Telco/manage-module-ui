@@ -16,20 +16,17 @@ import {SubscriptionRemoteDataService} from "../../data-providers/subscription-r
 })
 export class SubscriptionHistoryTableComponent implements OnInit {
 
-    @Input()
-    private subscriptionDataSource: SubscriptionsHistory[];
+    @Input() subscriptionDataSource: SubscriptionsHistory[];
 
-    @Input()
-    private subsFilter: SubscriptionHistoryFilter;
+    @Input() subsFilter: SubscriptionHistoryFilter;
 
-    @Output()
-    private onSubFilterChange: EventEmitter<SubscriptionHistoryFilter> = new EventEmitter();
+    @Output() onSubFilterChange: EventEmitter<SubscriptionHistoryFilter> = new EventEmitter();
 
-    private isSubFilterVisible: boolean;
+    public isSubFilterVisible: boolean;
 
-    private filterSubString: string;
+    public filterSubString: string;
 
-    private subViewPermission: boolean;
+    public subViewPermission: boolean;
 
 
     constructor(private router: Router, private reportingService: ReportingRemoteDataService, private subscriptionService: SubscriptionRemoteDataService,

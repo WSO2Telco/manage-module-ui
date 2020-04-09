@@ -1,6 +1,22 @@
 {
-  "/api": {
-    "target": "http://localhost:3060/workflow",
-    "secure": false
-  }
+    "/api": {
+        "target": "https://localhost:9443/manage-service/public/",
+        "secure": false
+    },
+    "/workflow-service": {
+        "target": "https://localhost:9443",
+        "secure": false
+    },
+    "/credit-control-service": {
+        "target": "https://localhost:9443",
+        "secure": false
+    },
+    "/blacklist-whitelist-service": {
+        "target": "https://localhost:9443",
+        "secure": false
+    },
+    "/ratecard-service": {
+        "target": "https://localhost:9443",
+        "secure": false
+    }
 }

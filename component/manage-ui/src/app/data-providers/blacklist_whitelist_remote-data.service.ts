@@ -1,10 +1,12 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 /**
  * Created by manoj on 7/27/17.
  */
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { AuthenticationService } from '../commons/services/authentication.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 
 @Injectable()
@@ -30,7 +32,7 @@ export class BlackListWhiteListRemoteDataService {
         subscriptionTier: this.externalApiContext + 'subscription/'
     };
 
-    constructor(private http: Http, private _authenticationService: AuthenticationService) {
+    constructor(private http: HttpClient, private _authenticationService: AuthenticationService) {
         this.loginInfo = this._authenticationService.loginUserInfo.getValue();
 
     }
@@ -41,18 +43,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getSubscribers() {
         return this.http.get(this.apiEndpoints['subscribers'], this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Subscriber List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscriber List',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Subscriber List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Subscriber List',
+                    error: error
+                }))
+            );
     }
 
     /**
@@ -68,18 +72,20 @@ export class BlackListWhiteListRemoteDataService {
             operator = this.loginInfo.operator;
         }
         return this.http.get(this.apiEndpoints['apps'] + subscriberID + '/' + operator, this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Application List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Application List',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Application List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Application List',
+                    error: error
+                }))
+            )
     }
 
 
@@ -90,18 +96,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getAppsForEditSub(subscriberID: string) {
         return this.http.get(this.apiEndpoints['apps'] + subscriberID ,  this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Application List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Application List',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Application List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Application List',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -111,18 +119,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getApis(subscriberID: string, appID: string) {
         return this.http.get(this.apiEndpoints['apis'] + subscriberID + '/' + appID, this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'API List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Api List',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'API List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Api List',
+                    error: error
+                }))
+            );
     }
 
 
@@ -132,18 +142,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getApiList() {
         return this.http.get(this.apiEndpoints['apis'], this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'API List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Api List',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'API List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Api List',
+                    error: error
+                }))
+            )
     }
 
 
@@ -153,18 +165,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getWhitelist(subscriberID: string, appID: string, apiID, ) {
         return this.http.get(this.apiEndpoints['whitelist'] + subscriberID + '/' + apiID + '/' + appID, this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Whitelist Number List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Whitelist',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Whitelist Number List Loaded Successfully',
+                        payload: response
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Whitelist',
+                    error: error
+                }))
+            )
     }
 
 
@@ -175,18 +189,20 @@ export class BlackListWhiteListRemoteDataService {
      */
     getBlacklist(id: string) {
         return this.http.get(this.apiEndpoints['blacklist'] + id, this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Blacklist Number List Loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Blacklist',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Blacklist Number List Loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Blacklist',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -196,26 +212,28 @@ export class BlackListWhiteListRemoteDataService {
      */
     removeFromWhiteList(msisdn: string) {
         return this.http.post(this.apiEndpoints['removeFromWhiteList'] + msisdn, '', this.getOptions())
-            .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'MSISDN Removed Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Removing MSISDN',
-                        payload: null
-                    };
-                }
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Removing MSISDN',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    if (response) {
+                        return {
+                            success: true,
+                            message: 'MSISDN Removed Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Removing MSISDN',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Removing MSISDN',
+                    error: error
+                }))
+            )
     }
 
 
@@ -230,26 +248,28 @@ export class BlackListWhiteListRemoteDataService {
             'apiId': apiId
         };
         return this.http.post(this.apiEndpoints['removeFromBlackList'] + mssidn, data, this.getOptions())
-            .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'MSISDN Removed Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Removing MSISDN',
-                        payload: null
-                    };
-                }
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Removing MSISDN',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    if (response) {
+                        return {
+                            success: true,
+                            message: 'MSISDN Removed Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Removing MSISDN',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Removing MSISDN',
+                    error: error
+                }))
+            )
     };
 
     /**
@@ -272,26 +292,28 @@ export class BlackListWhiteListRemoteDataService {
         };
 
         return this.http.post(this.apiEndpoints['addNewWhitelist'], data, this.getOptions())
-            .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'New Whitelist Added Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Adding Whitelist',
-                        payload: null
-                    };
-                }
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Adding Whitelist',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    if (response) {
+                        return {
+                            success: true,
+                            message: 'New Whitelist Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding Whitelist',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding Whitelist',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -313,42 +335,46 @@ export class BlackListWhiteListRemoteDataService {
         };
 
         return this.http.post(this.apiEndpoints['addNewBlacklist'], data, this.getOptions())
-            .map((response: Response) => {
-                if (response.status == 200) {
-                    return {
-                        success: true,
-                        message: 'New Blacklist Added Successfully',
-                        payload: response.json()
-                    };
-                } else {
-                    return {
-                        success: false,
-                        message: 'Error Adding Blacklist',
-                        payload: null
-                    };
-                }
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Adding Blacklist',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    if (response) {
+                        return {
+                            success: true,
+                            message: 'New Blacklist Added Successfully',
+                            payload: response
+                        };
+                    } else {
+                        return {
+                            success: false,
+                            message: 'Error Adding Blacklist',
+                            payload: null
+                        };
+                    }
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Adding Blacklist',
+                    error: error
+                }))
+            )
     }
 
     getSubscriptionTiers(apiName: string, version: string, apiProvider: string) {
         return this.http.get(this.apiEndpoints['subscriptionTier'] + apiName + '/' + version + '/' + apiProvider + '/tiers', this.getOptions())
-            .map((response: Response) => {
-                return {
-                    success: true,
-                    message: 'Subscription Tier loaded Successfully',
-                    payload: response.json()
-                };
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscription Tiers',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return {
+                        success: true,
+                        message: 'Subscription Tier loaded Successfully',
+                        payload: response
+                    };
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Subscription Tiers',
+                    error: error
+                }))
+            )
     }
 
     /**
@@ -362,28 +388,32 @@ export class BlackListWhiteListRemoteDataService {
         };
 
         return this.http.post(this.apiEndpoints['msisdnValidation'], data, this.getOptions())
-            .map((response: Response) => {
-                const result = response.json();
-                return result;
-            })
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error in executing validation Service',
-                error: error
-            }));
+            .pipe(
+                map((response) => {
+                    return response;
+                }),
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error in executing validation Service',
+                    error: error
+                }))
+            )
 
     }
 
-    getOptions(): RequestOptions {
+    getOptions() {
         const token = this._authenticationService.loginUserInfo.getValue().token;
         const useName = this._authenticationService.loginUserInfo.getValue().userName;
-        const headers = new Headers(
-            {
+
+        const httpOption = {
+            headers: new HttpHeaders({
                 'Authorization': 'Basic ' + token,
-                'user-name': useName,
-                'Content-Type': 'application/json'
-            });
-        return new RequestOptions({ headers: headers });
+                'Content-Type': 'application/json',
+                'user-name': useName
+            })
+        };
+        
+        return httpOption;
     }
 
 

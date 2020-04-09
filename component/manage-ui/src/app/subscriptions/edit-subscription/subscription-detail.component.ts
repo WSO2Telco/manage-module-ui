@@ -9,7 +9,6 @@ import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../comm
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
-import { isEmpty } from "rxjs/operator/isEmpty";
 import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
@@ -19,8 +18,8 @@ import { TabsetComponent } from 'ngx-bootstrap';
 })
 export class SubscriptionDetailComponent implements OnInit {
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
-    private id: number;
-    private show: boolean;
+    public id: number;
+    public show: boolean;
     public directionList;
     public direction;
     public operatorsList: string[];
@@ -35,36 +34,36 @@ export class SubscriptionDetailComponent implements OnInit {
     public operatorId: string
     public isadminresult: boolean;
 
-    private subscriberError: string;
-    private applicationError: string;
+    public subscriberError: string;
+    public applicationError: string;
 
-    private apiError: string;
-    private operatorError: string;
+    public apiError: string;
+    public operatorError: string;
 
-    private applicationList: string[];
-    private apiList: string[];
+    public applicationList: string[];
+    public apiList: string[];
 
-    private applications: Application[];
-    private apis: Api[];
-    private quotalist: QuotaList[];
+    public applications: Application[];
+    public apis: Api[];
+    public quotalist: QuotaList[];
     public operatorList: Operator[];
 
-    private quotaValue: string[];
-    private quotaInputValue: string;
-    private is_edit: boolean;
-    private is_invalid_period: boolean;
-    private isSubscriberSelect: boolean;
-    private isAppSelect: boolean;
-    private isApiSelect: boolean;
-    private isCalenderEnable: boolean;
-    private appID: string;
-    private datepickvalue: string;
-    private fromdate: string;
-    private todate: string;
-    private subscriptions: Subscriptions[];
-    private applicationSubscriptions: Subscriptions[];
+    public quotaValue: string[];
+    public quotaInputValue: string;
+    public is_edit: boolean;
+    public is_invalid_period: boolean;
+    public isSubscriberSelect: boolean;
+    public isAppSelect: boolean;
+    public isApiSelect: boolean;
+    public isCalenderEnable: boolean;
+    public appID: string;
+    public datepickvalue: string;
+    public fromdate: string;
+    public todate: string;
+    public subscriptions: Subscriptions[];
+    public applicationSubscriptions: Subscriptions[];
 
-    private isSubscriberError: boolean;
+    public isSubscriberError: boolean;
     public isApplicationError: boolean;
 
 

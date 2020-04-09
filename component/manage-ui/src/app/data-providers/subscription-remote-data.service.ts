@@ -1,11 +1,13 @@
+
+import {throwError as observableThrowError, BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {Headers, Http, RequestOptions, Response} from '@angular/http';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {ApplicationTaskResult, ApplicationTaskResults} from '../commons/models/application-data-models';
 import {AuthenticationService} from '../commons/services/authentication.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 import {MessageService} from '../commons/services/message.service';
 import {SubscriptionHistoryFilter, SubscriptionHistoryResponse} from "../commons/models/reporing-data-models";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class SubscriptionRemoteDataService {
@@ -26,7 +28,7 @@ export class SubscriptionRemoteDataService {
         subscriptionHistory: this.apiContext + 'subscriptions/history',
     };
 
-    constructor(private http: Http,
+    constructor(private http: HttpClient,
                 private slimLoadingBarService: SlimLoadingBarService,
                 private authService: AuthenticationService,
                 private message: MessageService) {
@@ -35,19 +37,20 @@ export class SubscriptionRemoteDataService {
     getSubscriptionTasks(): void {
         this.slimLoadingBarService.start();
         this.http.get(this.apiEndpoints['search'], this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscription List',
-                error: error
-            }))
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Subscription List',
+                    error: error
+                }))
+            )
             .subscribe(
                 data => {
-                    if (data.success) {
-                        this.SubscriptionApprovalTaskProvider.next(data.payload);
+                    if (data) {
+                        this.SubscriptionApprovalTaskProvider.next(data['payload']);
                         this.slimLoadingBarService.complete();
                     } else {
-                        this.message.error(data.message);
+                        this.message.error(data['message']);
                         this.slimLoadingBarService.stop();
                     }
                 },
@@ -58,16 +61,16 @@ export class SubscriptionRemoteDataService {
             );
     }
 
-    getOptions(): RequestOptions {
+    getOptions() {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
-        const headers = new Headers(
+        const headers = new HttpHeaders(
             {
                 'Authorization': 'Basic ' + token,
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return {headers: headers};
     }
 
     getSubscriptionHistory(filter?: SubscriptionHistoryFilter) {
@@ -83,19 +86,20 @@ export class SubscriptionRemoteDataService {
             + '?start=' + subHistoryFilter.offset + '&filterBy=' + subHistoryFilter.filterString;
 
         this.http.get(endPoint, this.getOptions())
-            .map((response: Response) => response.json())
-            .catch((error: Response) => Observable.throw({
-                success: false,
-                message: 'Error Loading Subscription approval History List',
-                error: error
-            }))
+            .pipe(
+                catchError((error: Response) => observableThrowError({
+                    success: false,
+                    message: 'Error Loading Subscription approval History List',
+                    error: error
+                }))
+            )
             .subscribe(
                 data => {
-                    if (data.success) {
-                        this.SubApprovalHistoryProvider.next(data.payload);
+                    if (data) {
+                        this.SubApprovalHistoryProvider.next(data['payload']);
                         this.slimLoadingBarService.complete();
                     } else {
-                        this.message.error(data.message);
+                        this.message.error(data['message']);
                         this.slimLoadingBarService.stop();
                     }
                 },
