@@ -7,7 +7,7 @@
     min-width: 300px;
 }
 
-:host :ng-deep ng2-toasty .toast {
+:host ::ng-deep ng2-toasty .toast {
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
