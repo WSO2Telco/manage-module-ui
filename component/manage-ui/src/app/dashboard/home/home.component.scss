@@ -9,7 +9,7 @@ application-data-table {
     margin-bottom: 20px;
 }
 
-:host :ng-deep application-data-table.my {
+:host ::ng-deep application-data-table.my {
     .tbl-header {
         color: $accent-color;
         font-weight: 900;

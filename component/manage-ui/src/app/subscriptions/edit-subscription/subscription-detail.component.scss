@@ -933,21 +933,21 @@ fieldset[disabled] .btn {
 
 /********* Tab ***************/
 
-:host :ng-deep .appTab>a,
- :host :ng-deep .subTab>a {
+:host ::ng-deep .appTab>a,
+ :host ::ng-deep .subTab>a {
     background-color: #e7dddd!important;
     color: #333333 !important;
     font-weight: bold !important;
 }
 
-:host :ng-deep .appTab>a:hover,
- :host :ng-deep .subTab>a:hover {
+:host ::ng-deep .appTab>a:hover,
+ :host ::ng-deep .subTab>a:hover {
     background-color: #666666!important;
     color: #ffffff !important;
 }
 
-:host :ng-deep .appTab>.active,
- :host :ng-deep .subTab>.active {
+:host ::ng-deep .appTab>.active,
+ :host ::ng-deep .subTab>.active {
     background-color: #666666!important;
     color: #ffffff !important;
 }
