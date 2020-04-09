@@ -1,24 +1,17 @@
 <div class="animated fadeInUp" style="animation-delay: 0.1s">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-md-12">
             <div class="form-container rateInputContainer">
                 <div class="tbl-header">
                     Rate Definitions
                     <br>
                 </div>
-                <div class="searchFilter">
-                    <h4 class="control-label col-sm-2">Rate List:</h4>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control"
-                               [(ngModel)]="selectedRate"
-                               [typeaheadMinLength]="0"
-                               typeaheadOptionField="rateDefName"
-                               container="body"
-                               [typeahead]="rates"
-                               (typeaheadOnSelect)="onRateSelected()"
-                               placeholder="Select the Rate">
+                <div class="searchFilter row">
+                    <h4 class="control-label col-md-2">Rate List:</h4>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" [(ngModel)]="selectedRate" [typeaheadMinLength]="0" typeaheadOptionField="rateDefName" container="body" [typeahead]="rates" (typeaheadOnSelect)="onRateSelected()" placeholder="Select the Rate">
                     </div>
-                    <div class="col-sm-4" *appHasPermissions="showCreateRate">
+                    <div class="col-md-4" *appHasPermissions="showCreateRate">
                         <a class="btn btn-primary" href="#/rate/create">Create New Rate</a>
                     </div>
                 </div>
@@ -30,41 +23,41 @@
                 <div *ngIf="showRateDef">
                     <form class="form-horizontal viewListForm" autocomplete="off">
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Name:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Name:</label>
+                            <div class="col-md-4">
                                 <label>{{rateDefinition.rateDefName}}</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Description:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Description:</label>
+                            <div class="col-md-4">
                                 <label>{{rateDefinition.rateDefDescription}}</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Currency:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Currency:</label>
+                            <div class="col-md-4">
                                 <label>{{rateDefinition.currency.currencyCode}}</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Rate Type:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Rate Type:</label>
+                            <div class="col-md-4">
                                 <label>{{rateDefinition.rateType.rateTypeCode}}</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Tariff:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Tariff:</label>
+                            <div class="col-md-4">
                                 <label>{{rateDefinition.tariff.tariffName}}</label>
-                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
-                                      [tooltip]="ref" placement="right"
-                                ></span>
+                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view" [tooltip]="ref" placement="right"></span>
                             </div>
                             <ng-template #ref>
                                 <table style="width:100%">
                                     <tr>
-                                        <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{rateDefinition.tariff.tariffName}}</b></h5></th>
+                                        <th colspan="2">
+                                            <h5 style="text-align: center">Details of Tariff:<b>{{rateDefinition.tariff.tariffName}}</b></h5>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <td width="70%" style="text-align: right">Tariff DefaultValue:</td>
@@ -113,16 +106,16 @@
                             </ng-template>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Rate Taxes:</label>
-                            <div *ngIf="this.rateTax.length == 0" class="col-sm-4"><label>NO TAX</label></div>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Rate Taxes:</label>
+                            <div *ngIf="this.rateTax.length == 0" class="col-md-4"><label>NO TAX</label></div>
+                            <div class="col-md-4">
                                 <ng-container *ngFor="let item of rateTax"><label>{{item.tax.taxName}} </label><br>
                                 </ng-container>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2">Rate Categories:</label>
-                            <div class="col-sm-4">
+                            <label class="control-label col-md-2">Rate Categories:</label>
+                            <div class="col-md-4">
                                 <div class="table">
 
                                     <div class="tbl-row header">
@@ -141,15 +134,15 @@
                                             </div>
                                             <div class="tbl-cell text-right">
                                                 &nbsp;{{item.tariff.tariffName}}
-                                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
-                                                      [tooltip]="TariffRef" placement="top"
-                                                ></span>
+                                                <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view" [tooltip]="TariffRef" placement="top"></span>
                                             </div>
                                         </div>
                                         <ng-template #TariffRef>
                                             <table style="width:200px;">
                                                 <tr>
-                                                    <th colspan="2"><h5 style="text-align: center">Details of Tariff:<b>{{item.tariff.tariffName}}</b></h5></th>
+                                                    <th colspan="2">
+                                                        <h5 style="text-align: center">Details of Tariff:<b>{{item.tariff.tariffName}}</b></h5>
+                                                    </th>
                                                 </tr>
                                                 <tr>
                                                     <td width="70%" style="text-align: right">Tariff DefaultValue:</td>
@@ -200,7 +193,8 @@
                                     <div class="no-rec-row tbl-row" *ngIf="rateCategory.length == 0">
                                         <span class="no-rec">No Records..</span>
                                     </div>
-                                </div> <!--TABLE END-->
+                                </div>
+                                <!--TABLE END-->
                             </div>
 
                         </div>

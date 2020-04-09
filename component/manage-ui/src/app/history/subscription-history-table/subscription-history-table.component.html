@@ -6,19 +6,12 @@
         <div class="content animated fadeInUp delay-02" *ngIf="isSubFilterVisible">
             <div class="head">Subscription History Filter<span class="clear" (click)="onSubsClear()">Clear All</span></div>
             <div class="row">
-                <div class="form-group col-xs-8">
-                    <input type="text"
-                           [(ngModel)]="filterSubString"
-                           container="body"
-                           class="form-control" placeholder="Filter Subscription Approval History">
+                <div class="form-group col-xs-8 col-md-8">
+                    <input type="text" [(ngModel)]="filterSubString" container="body" class="form-control" placeholder="Filter Subscription Approval History">
                 </div>
-                <div class="form-group col-xs-4">
-                    <button (click)="onSubFilterItemAdded()" class="btn btn-primary">Search</button>
-                    &nbsp;
-                    <span
-                            class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view"
-                            [tooltip]="SubsFilterHelper" placement="right"
-                    ></span>
+                <div class="form-group col-xs-4 col-md-4">
+                    <button (click)="onSubFilterItemAdded()" class="btn btn-primary">Search</button> &nbsp;
+                    <span class="glyphicon glyphicon-info-sign info-tooltip info-tooltip-view" [tooltip]="SubsFilterHelper" placement="right"></span>
 
                 </div>
             </div>

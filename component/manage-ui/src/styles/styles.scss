@@ -11,15 +11,17 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-}
-
-body * {
+    font-size: 14px;
     font-family: 'Open Sans', sans-serif;
 }
 
 input,
 button {
     border-radius: 0!important;
+}
+
+.searchFilter {
+    margin: 0;
 }
 
 .form-control {

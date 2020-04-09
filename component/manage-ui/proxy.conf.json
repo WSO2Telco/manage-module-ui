@@ -10,5 +10,13 @@
     "/credit-control-service": {
         "target": "https://localhost:9443",
         "secure": false
+    },
+    "/blacklist-whitelist-service": {
+        "target": "https://localhost:9443",
+        "secure": false
+    },
+    "/ratecard-service": {
+        "target": "https://localhost:9443",
+        "secure": false
     }
 }
