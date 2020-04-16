@@ -9,7 +9,7 @@
                 <div class="col-md-10">
                     <form class="form-horizontal" #rateAssignForm="ngForm" autocomplete="off" (ngSubmit)="onRateAssigSubmition(rateAssignForm)">
 
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">API</label>
                             <div class="col-md-6">
                                 <input [(ngModel)]="api" [typeahead]="apiList" [typeaheadMinLength]="0" (typeaheadScrollable)="true" placeholder="Select API" name="typeapi" class="form-control" (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" typeaheadOptionField="apiName"
@@ -17,7 +17,7 @@
                                 <span class="error" *ngIf="invalidApi">Invalid API</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">APIOperation</label>
                             <div class="col-md-6">
                                 <input [(ngModel)]="apiOperation" [typeahead]="apiOperationList" [typeaheadMinLength]="0" placeholder="Select API Operation" name="typeapioperation" class="form-control" (typeaheadOnSelect)="onApiOperationSelected()" (input)="onApiOperationSelected()"
@@ -25,7 +25,7 @@
                                 <span class="error" *ngIf="invalidApiOperation">Invalid API Operation</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Operator</label>
                             <div class="col-md-6">
                                 <input [(ngModel)]="operator" [typeahead]="operatorList" [typeaheadMinLength]="0" placeholder="Select Operator" name="typeoperator" class="form-control" (typeaheadOnSelect)="onOperatorSelected()" (input)="onOperatorSelected()" typeaheadOptionField="operatorName"
@@ -33,7 +33,7 @@
                                 <span class="error" *ngIf="invalidOperator">Invalid Operator</span>
                             </div>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group row ">
                             <label class="control-label col-md-2">Assign new Rates</label>
                             <div class="col-md-8">
                                 <tabset>
@@ -56,8 +56,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-2">
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-2">
                                 <button type="submit" class="btn btn-primary animated fadeIn">Save</button>&nbsp;
                                 <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                             </div>
