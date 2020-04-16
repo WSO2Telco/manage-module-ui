@@ -22,31 +22,31 @@
 
                 <div *ngIf="showRateDef">
                     <form class="form-horizontal viewListForm" autocomplete="off">
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Name:</label>
                             <div class="col-md-4">
                                 <label>{{rateDefinition.rateDefName}}</label>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Description:</label>
                             <div class="col-md-4">
                                 <label>{{rateDefinition.rateDefDescription}}</label>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Currency:</label>
                             <div class="col-md-4">
                                 <label>{{rateDefinition.currency.currencyCode}}</label>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Rate Type:</label>
                             <div class="col-md-4">
                                 <label>{{rateDefinition.rateType.rateTypeCode}}</label>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Tariff:</label>
                             <div class="col-md-4">
                                 <label>{{rateDefinition.tariff.tariffName}}</label>
@@ -105,7 +105,7 @@
                                 </table>
                             </ng-template>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Rate Taxes:</label>
                             <div *ngIf="this.rateTax.length == 0" class="col-md-4"><label>NO TAX</label></div>
                             <div class="col-md-4">
@@ -113,7 +113,7 @@
                                 </ng-container>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <label class="control-label col-md-2">Rate Categories:</label>
                             <div class="col-md-4">
                                 <div class="table">

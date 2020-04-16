@@ -1,7 +1,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-6 offset-md-1">
                 <div class="tbl-header">
                     <label class="subtitle">Subscriber list</label>
                 </div>
@@ -17,8 +17,7 @@
                             <div class="tbl-row">
                                 <div class="tbl-cell">{{item.replace('tel3A+','')}}</div>
                                 <div class="tbl-cell text-right">
-                                    <button class="btn btn-danger"
-                                            (click)="onDelete(item, apiId.toString())"><i
+                                    <button class="btn btn-danger" (click)="onDelete(item, apiId.toString())"><i
                                             class="material-icons">delete</i></button>
                                 </div>
                             </div>
@@ -29,7 +28,8 @@
                         </div>
                         <br><br><br>
                     </div>
-                </div> <!--TABLE END-->
+                </div>
+                <!--TABLE END-->
 
             </div>
         </div>
