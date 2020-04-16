@@ -6,21 +6,21 @@
 
                 <form class="form-horizontal" #addCategoryForm="ngForm" autocomplete="off" (ngSubmit)="onSubmit(addCategoryForm)">
 
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="control-label col-md-3">{{type}} Name <span>*</span></label>
                         <div class="col-md-4">
                             <input class="form-control" type="text" autocomplete="off" placeholder="Name" name="name" #nameRef="ngModel" required [(ngModel)]="name" (input)="isNameUnique($event.target.value)">
                             <span class="error" *ngIf="isNameError">{{nameError}}</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="control-label col-md-3">{{type}} Code <span>*</span></label>
                         <div class="col-md-4">
                             <input class="form-control" type="text" autocomplete="off" placeholder="Code" name="code" #codeRef="ngModel" required [(ngModel)]="code" (input)="isCodeUnique($event.target.value)">
                             <span class="error" *ngIf="isCodeError">{{codeError}}</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="control-label col-md-3">{{type}} Description<span>*</span></label>
                         <div class="col-md-4">
                             <textarea rows="4" cols="50" class="form-control" type="text" autocomplete="off" placeholder="Description" name="description" #descriptionRef="ngModel" required [(ngModel)]="description" (input)="descriptionInvalid($event.target.value)">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" *ngIf="!isNameError && !isCodeError">
+                    <div class="form-group row" *ngIf="!isNameError && !isCodeError">
                         <div class="col-md-1 col-md-offset-3">
                             <button type="submit" class="btn btn-success">Add</button>
                         </div>

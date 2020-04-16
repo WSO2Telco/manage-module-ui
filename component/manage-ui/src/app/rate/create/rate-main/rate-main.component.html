@@ -1,4 +1,4 @@
-<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -35,7 +35,7 @@
             </div>
 
             <form class="form-horizontal" #ratecardForm="ngForm" (ngSubmit)="onRateCardSubmition(ratecardForm)" autocomplete="off">
-                <div class="form-group" [ngClass]="{'has-danger': isNameError}">
+                <div class="form-group row" [ngClass]="{'has-danger': isNameError}">
                     <label class="control-label col-md-2">Rate Name <span>*</span></label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" autocomplete="off" placeholder="Name" name="name" #nameRef="ngModel" required [(ngModel)]="rateDefName" (input)="isNameUnique($event.target.value)">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isDescriptionError}">
+                <div class="form-group row" [ngClass]="{'has-danger': isDescriptionError}">
                     <label class="control-label col-md-2">Rate Description <span>*</span></label>
                     <div class="col-md-6">
                         <textarea rows="2" cols="50" class="form-control" type="text" autocomplete="off" placeholder="Description" name="description" #descriptionRef="ngModel" required [(ngModel)]="rateDefDescription" (input)="descriptionEmpty($event.target.value)">
@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isCurrencyError}">
+                <div class="form-group row" [ngClass]="{'has-danger': isCurrencyError}">
                     <label class="control-label col-md-2">Currency <span>*</span></label>
                     <div class="col-md-6">
                         <input [(ngModel)]="currency" [typeahead]="currencyList" typeaheadOptionField="currencyCode" [typeaheadMinLength]="0" placeholder="Currency" name="typecurrency" class="form-control" required (typeaheadOnSelect)="isCurrencyValid()" (input)="isCurrencyValid()">
@@ -61,7 +61,7 @@
                     <span class="glyphicon glyphicon-plus info-tooltip" tooltip="Click here to Add a new currency to the list" placement="right" (click)="showAddCurrency=true;changeDialogTitle();lgModal.show();"></span>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isRateTypeError}">
+                <div class="form-group row" [ngClass]="{'has-danger': isRateTypeError}">
                     <label class="control-label col-md-2">Rate Type <span>*</span></label>
                     <div class="col-md-6">
                         <input [(ngModel)]="rateType" [typeahead]="rateTypeList" typeaheadOptionField="rateTypeCode" [typeaheadMinLength]="0" autocomplete="off" placeholder="Rate Type" name="rateType" #rateTypeRef="ngModel" class="form-control" required (typeaheadOnSelect)="isRateTypeValid()"
@@ -70,14 +70,13 @@
                     </div>
                 </div>
 
-                <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
+                <div class="form-group row" [ngClass]="{'has-danger': isTariffError}">
                     <label class="control-label col-md-2">Tariff <span>*</span></label>
                     <ng-template #customItemTemplate let-model="item" let-index="index">
                         <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b> <span class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span *ngIf="model.tariffMaxCount !== 0"> <b>MaxCount:</b> {{ model.tariffMaxCount }}</span>                            <span *ngIf="model.tariffExcessRate !== 0"> <b>ExcessRate:</b> {{ model.tariffExcessRate }}</span><span *ngIf="model.tariffDefRate !== 0"> <b>DefRate:</b> {{ model.tariffDefRate }}</span><span *ngIf="model.tariffSPCommission !== 0"> <b>SPCommission:</b> {{ model.tariffSPCommission }}</span>
                             <span *ngIf="model.tariffAdsCommission !== 0"> <b>AdsCommission:</b> {{ model.tariffAdsCommission }}</span><span *ngIf="model.tariffOpcoCommission !== 0"> <b>OpcoCommission:</b> {{ model.tariffOpcoCommission }}</span>
-                            <span
-                                *ngIf="model.tariffSurChargeval !== 0"> <b>SurChargeval:</b> {{ model.tariffSurChargeval }}</span>
-                                <span *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
+                            <span *ngIf="model.tariffSurChargeval !== 0"> <b>SurChargeval:</b> {{ model.tariffSurChargeval }}</span>
+                            <span *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                         </h6>
                     </ng-template>
                     <div class="col-md-6">
@@ -145,7 +144,7 @@
                     </ng-template>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Tax 1</label>
                     <div class="col-md-6">
                         <select multiple [(ngModel)]="rateTax" class="form-control" name="tax" required id="taxlist">
@@ -158,7 +157,7 @@
                     <span class="glyphicon glyphicon-plus info-tooltip" tooltip="Click here to Add a new tax to the list" placement="right" (click)="showAddTax=true;changeDialogTitle();lgModal.show();"></span>
 
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Tax 2</label>
                     <div class="col-md-6">
                         <select multiple [(ngModel)]="rateTax2" class="form-control" name="tax" required id="taxlist2">
@@ -171,7 +170,7 @@
                     <span class="glyphicon glyphicon-question-sign info-tooltip" tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Tax 3</label>
                     <div class="col-md-6">
                         <select multiple [(ngModel)]="rateTax3" class="form-control" name="tax" required id="taxlist3">
@@ -183,7 +182,7 @@
                     </div>
                     <span class="glyphicon glyphicon-question-sign info-tooltip" tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Tax 4</label>
                     <div class="col-md-6">
                         <select multiple [(ngModel)]="rateTax4" class="form-control" name="tax" required id="taxlist4">
@@ -196,7 +195,7 @@
                     <span class="glyphicon glyphicon-question-sign info-tooltip" tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Tax 5</label>
                     <div class="col-md-6">
                         <select multiple [(ngModel)]="rateTax5" class="form-control" name="tax" required id="taxlist5">
@@ -209,7 +208,7 @@
                     <span class="glyphicon glyphicon-question-sign info-tooltip" tooltip="Press CTR and click to select multiple tax item or leave empty" placement="right"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="control-label col-md-2">Add Sub Category:</label>
                     <div class="col-md-4">
                         <label class="switch">
@@ -221,8 +220,8 @@
                 </div>
                 <app-ratecategory *ngIf="showSubcategory" [categoryList]="categoryList" [tariffList]="tariffList" [rateCategories]="mappingList" (modalfire)="onmodalfireHandler($event);lgModal.show();changeDialogTitle();" (rateCatetgorySubmition)="onRateCategorySubmitionHandler($event)"></app-ratecategory>
 
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-2 btnContainer">
+                <div class="form-group row">
+                    <div class="col-md-4 offset-md-2 btnContainer">
                         <button type="submit" class="btn btn-primary animated fadeIn">Add</button> &nbsp;
                         <a class="btn btn-warning" (click)="reloadPage()">Clear</a>
                     </div>

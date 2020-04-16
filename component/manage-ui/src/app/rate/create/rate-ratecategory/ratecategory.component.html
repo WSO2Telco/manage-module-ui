@@ -7,7 +7,7 @@
                     <div class="col-md-6">
                         <form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm)" autocomplete="off">
                             <br><br>
-                            <div class="form-group" [ngClass]="{'has-danger': isCategoryError}">
+                            <div class="form-group row" [ngClass]="{'has-danger': isCategoryError}">
                                 <label class="control-label col-md-4">Category <span>*</span></label>
                                 <div class="col-md-6">
                                     <input [(ngModel)]="category" [typeahead]="categoryList" typeaheadOptionField="categoryName" [typeaheadMinLength]="0" placeholder="Category" name="typeCategory" class="form-control" required>
@@ -15,7 +15,7 @@
                                 </div>
                                 <span class="glyphicon glyphicon-plus info-tooltip" tooltip="Click here to Add a new Category to the list" placement="right" (click)='onAddNewModalFire("addNewCategory")' type="category"></span>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group row">
                                 <label class="control-label col-md-4">Sub Category</label>
                                 <div class="col-md-6">
                                     <input [(ngModel)]="subcategory" [typeahead]="categoryList" typeaheadOptionField="categoryName" [typeaheadMinLength]="0" placeholder="Sub Category" name="typeCaSubtegory" class="form-control" required>
@@ -23,15 +23,14 @@
                                 </div>
                                 <span class="glyphicon glyphicon-plus info-tooltip" tooltip="Click here to Add a new Sub Category to the list" placement="right" (click)='onAddNewModalFire("addNewSubCategory")' type='Sub Category'></span>
                             </div>
-                            <div class="form-group" [ngClass]="{'has-danger': isTariffError}">
+                            <div class="form-group row" [ngClass]="{'has-danger': isTariffError}">
                                 <label class="control-label col-md-4">Tariff<span>*</span></label>
                                 <ng-template #customItemTemplate let-model="item" let-index="index">
                                     <h6><span class="tariffdropname"> <b>Name:</b> {{model.tariffName}} </span> <b>|</b>
                                         <span class="tariff_des"> <span *ngIf="model.tariffDefaultVal !== 0"><b>DefaultVal:</b> {{ model.tariffDefaultVal }}</span><span *ngIf="model.tariffMaxCount !== 0"> <b>MaxCount:</b> {{ model.tariffMaxCount }}</span>                                        <span *ngIf="model.tariffExcessRate !== 0"> <b>ExcessRate:</b> {{ model.tariffExcessRate }}</span><span *ngIf="model.tariffDefRate !== 0"> <b>DefRate:</b> {{ model.tariffDefRate }}</span><span *ngIf="model.tariffSPCommission !== 0"> <b>SPCommission:</b> {{ model.tariffSPCommission }}</span>
                                         <span *ngIf="model.tariffAdsCommission !== 0"> <b>AdsCommission:</b> {{ model.tariffAdsCommission }}</span><span *ngIf="model.tariffOpcoCommission !== 0"> <b>OpcoCommission:</b> {{ model.tariffOpcoCommission }}</span>
-                                        <span
-                                            *ngIf="model.tariffSurChargeval !== 0"> <b>SurChargeval:</b> {{ model.tariffSurChargeval }}</span>
-                                            <span *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
+                                        <span *ngIf="model.tariffSurChargeval !== 0"> <b>SurChargeval:</b> {{ model.tariffSurChargeval }}</span>
+                                        <span *ngIf="model.tariffSurChargeAds !== 0"> <b>SurChargeAds:</b> {{ model.tariffSurChargeAds }}</span><span *ngIf="model.tariffSurChargeOpco !== 0"> <b>SurChargeOpco:</b> {{ model.tariffSurChargeOpco }}</span></span>
                                     </h6>
                                 </ng-template>
                                 <div class="col-md-6">
@@ -41,8 +40,8 @@
                                 <span class="glyphicon glyphicon-plus info-tooltip" tooltip="Click here to Add a new tariff to the list" placement="right" (click)='onAddNewModalFire("addNewTariff")' type='Tariff'></span>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
+                            <div class="form-group row">
+                                <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary animated fadeIn">Add Combination
                                     </button>
                                     <a class="btn btn-danger" (click)="clearCatSelection()">Clear</a>
@@ -56,7 +55,7 @@
                     </div>
                     <div class="col-md-6">
                         <br><br>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-md-4 subtitle">Selected combinations</div>
                         </div>
                         <div class="form-group">

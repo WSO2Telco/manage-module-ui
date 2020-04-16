@@ -16,32 +16,29 @@ const currencyCodes = require('./currencies');
 
 export class CurrencyComponent implements OnInit {
 
-    private currency: Currency;
+    public currency: Currency;
 
-    private currencycode: string;
-    private currencydesc: string;
+    public currencycode: string;
+    public currencydesc: string;
 
-    private isCurrencyError: boolean;
-    private isCurrencyDescError: boolean;
+    public isCurrencyError: boolean;
+    public isCurrencyDescError: boolean;
 
-    private currencyDescError: string;
-    private currencyCodeError: string;
+    public currencyDescError: string;
+    public currencyCodeError: string;
 
-    private isEmpty: boolean;
-    private currencyError: string;
+    public isEmpty: boolean;
+    public currencyError: string;
 
-    private desError: string;
-    private isDesEmpty: boolean;
-    private list: string[];
+    public desError: string;
+    public isDesEmpty: boolean;
+    public list: string[];
 
-    @Input()
-    private existingCurrencyList: Currency[];
+    @Input() existingCurrencyList: Currency[];
 
-    @Output()
-    private onAddTask: EventEmitter<boolean> = new EventEmitter();
+    @Output() onAddTask: EventEmitter<boolean> = new EventEmitter();
 
-    @Output()
-    private modalClose: EventEmitter<boolean> = new EventEmitter();
+    @Output() modalClose: EventEmitter<boolean> = new EventEmitter();
 
 
     constructor(private rateService: RateService, private authService: AuthenticationService, private message: MessageService) {

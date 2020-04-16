@@ -3,53 +3,35 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="form-container currencyContainer">
-                <!-- <form #currencyForm="ngForm" class="form-horizontal" autocomplete="off" ngNoForm
-                      (ngSubmit)="onCurrencyValueSubmit(currencyForm)">
+                <form #currencyForm="ngForm" class="form-horizontal" autocomplete="off" (ngSubmit)="onCurrencyValueSubmit(currencyForm)">
 
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="control-label col-md-3">Currency code<span>*</span></label>
                         <div class="col-md-4">
-                            <input  [ngModel]="currencycode"
-                                    (input)="isCurrencyCode($event.target.value)"
-                                   (ngModelChange)="isCurrencyCode($event)"
-                                   [typeahead]="list"
-                                   [typeaheadMinLength]="1"
-                                   placeholder="Currency"
-                                   name="typecurrency"
-                                   class="form-control"
-                                   required
-                            >
+                            <input [ngModel]="currencycode" (input)="isCurrencyCode($event.target.value)" (ngModelChange)="isCurrencyCode($event)" [typeahead]="list" [typeaheadMinLength]="1" placeholder="Currency" name="typecurrency" class="form-control" required>
 
                             <span class="error" *ngIf="isCurrencyError">{{currencyCodeError}}</span>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group row">
                         <label class="control-label col-md-3">Currency description<span>*</span></label>
                         <div class="col-md-4">
-                             <textarea rows="2" cols="50"
-                                       class="form-control"
-                                       type="text"
-                                       autocomplete="off"
-                                       placeholder="Description"
-                                       [(ngModel)]="currencydesc"
-                                       name="currencydesc"
-                                       required
-                                       (input)="descriptionInvalid($event.target.value)">
+                            <textarea rows="2" cols="50" class="form-control" type="text" autocomplete="off" placeholder="Description" [(ngModel)]="currencydesc" name="currencydesc" required (input)="descriptionInvalid($event.target.value)">
                              </textarea>
                             <span class="error" *ngIf="isCurrencyDescError">{{currencyDescError}}</span>
                         </div>
                     </div>
 
-                    <div class="form-group" *ngIf="!isCurrencyError">
-                        <div class="col-md-1 col-md-offset-3">
+                    <div class="form-group row" *ngIf="!isCurrencyError">
+                        <div class="col-md-1 offset-md-3">
                             <button type="submit" class="btn btn-primary animated fadeIn">Add</button>
                         </div>
                         <div class="col-md-2">
                             <a class="btn btn-warning" (click)="clearForm()">Clear</a>
                         </div>
                     </div>
-                </form> -->
+                </form>
             </div>
         </div>
     </div>
