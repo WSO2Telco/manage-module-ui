@@ -7,7 +7,7 @@
     "serve": "ng server --proxy-config proxy.conf.json  & node server/index.js",
     "serve:debug": "ng server --proxy-config proxy.conf.json  & node-debug server/index.js",
     "ng": "ng serve",
-    "start": "nodemon server/index.js",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "dev": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build --prod",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",

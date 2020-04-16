@@ -15,7 +15,7 @@ export class ApiInterceptor implements HttpInterceptor {
                 withCredentials: true,
                 setHeaders: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+                    // 'Authorization': `Bearer ${token}`
                 }
             });
         }

@@ -35,6 +35,11 @@ button {
     }
 }
 
+.form-horizontal .control-label {
+    text-align: right;
+    font-weight: bold;
+}
+
 .spinner-container {
     margin-top: 50%;
     min-height: 100%;

@@ -18,5 +18,9 @@
     "/ratecard-service": {
         "target": "https://localhost:9443",
         "secure": false
+    },
+    "/quota-service": {
+        "target": "https://localhost:9443",
+        "secure": false
     }
 }
