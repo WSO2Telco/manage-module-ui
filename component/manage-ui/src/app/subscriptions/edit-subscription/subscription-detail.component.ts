@@ -109,7 +109,7 @@ export class SubscriptionDetailComponent implements OnInit {
         this.apiList = [];
         this.operatorsList = ['ALL'];
         this.editAppPermissions = "edit-tiers:edit-app-tiers";
-        this.editSubscriptionPermissions = "edit-tiers:edit-subscription-tier";
+        this.editSubscriptionPermissions = "edit-tiers:edit-subscription-tiers";
 
         this.isappEnabled = this.authService.hasPermissions(this.editAppPermissions);
         this.issubscriptionEnabled = this.authService.hasPermissions(this.editSubscriptionPermissions);
