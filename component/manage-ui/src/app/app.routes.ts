@@ -21,11 +21,11 @@ const routes = [
     }
   },
   {
-    path: 'edit-tiers-rates',
+    path: 'edit-tiers',
     loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
     canActivate: [AppGuard, PermissionGuard],
     data: {
-      permissions: 'edit-subscription'
+      permissions: 'edit-tiers'
     }
   },
   {
