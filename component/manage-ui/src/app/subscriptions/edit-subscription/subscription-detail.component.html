@@ -9,31 +9,31 @@
                     <div class="col-sm-12">
                         <div class="col-sm-12">
                             <div class="searchFilter">
-                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-3': issubscriptionEnabled}">
+                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-4': issubscriptionEnabled}">
                                     <input [(ngModel)]="subscriber" [typeahead]="subscriberList"
                                         typeaheadOptionField="name" [typeaheadMinLength]="0" type="text"
                                         class="form-control" (typeaheadOnSelect)="onSubscriberSelected()"
                                         (input)="onSubscriberSelected()" placeholder="Service provider"
                                         name="subscription">
                                 </div>
-                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-3': issubscriptionEnabled}">
+                                <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-4': issubscriptionEnabled}">
                                     <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0"
                                         type="text" class="form-control" (typeaheadOnSelect)="onAppSelected()"
                                         (input)="onAppSelected()" typeaheadOptionField="name" placeholder="Application"
                                         name="app">
                                 </div>
-                                <div class="col-sm-3" *ngIf="issubscriptionEnabled">
+                                <div class="col-sm-4" *ngIf="issubscriptionEnabled">
                                     <input [(ngModel)]="api" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" container="body"
                                         [typeahead]="apiList" typeaheadOptionField="id" class="form-control" name="api"
                                         placeholder="Select API">
                                 </div>
-                                <div class="col-sm-3" *ngIf="issubscriptionEnabled">
+                               <!--  <div class="col-sm-3" *ngIf="issubscriptionEnabled">
                                     <input [(ngModel)]="operator" [typeahead]="operatorsList" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onOperatorSelected()" (input)="onOperatorSelected()"
                                         typeaheadOptionField="operatorName" type="text" class="form-control"
                                         placeholder="Operator" name="op">
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@
                                         <br>
                                     </span>
                                     <h4 class="center-block halfwidth text-center">Select the Service
-                                        Provider and Application to edit tier</h4>
+                                        Provider and Application to edit tiers</h4>
                                 </div>
                                 <div class="col-sm-12" *ngIf="applications.length >= 1">
                                     <app-common-data-table [dataSource]="applicationSubscriptions"
@@ -80,7 +80,7 @@
                                         <br>
                                     </span>
                                     <h4 class="center-block halfwidth text-center">Select the Service
-                                        Provider, Application and API to edit tier or rate</h4>
+                                        Provider, Application and API to edit tiers</h4>
                                 </div>
                                 <div class="col-sm-12" *ngIf="isApiSelect">
                                     <app-common-data-table [dataSource]="subscriptions"
@@ -93,7 +93,7 @@
                                                     (click)="onIconClick(item,'SHOW')">dvr</span>
 
                                                 <span *ngIf="item.approvalStatus == 'Approved'"
-                                                    tooltip="Edit Operation Rate , Edit Tier or Show More Details"
+                                                    tooltip="Edit Tier or Show More Details"
                                                     class="action  material-icons"
                                                     (click)="onIconClick(item,'EDIT')">mode_edit</span>
                                             </div>

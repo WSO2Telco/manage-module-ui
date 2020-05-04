@@ -108,8 +108,8 @@ export class SubscriptionDetailComponent implements OnInit {
         this.apis = [];
         this.apiList = [];
         this.operatorsList = ['ALL'];
-        this.editAppPermissions = "edit-subscription:edit-app-tiers";
-        this.editSubscriptionPermissions = "edit-subscription:edit-subscription-tier-rate";
+        this.editAppPermissions = "edit-tiers:edit-app-tiers";
+        this.editSubscriptionPermissions = "edit-tiers:edit-subscription-tier";
 
         this.isappEnabled = this.authService.hasPermissions(this.editAppPermissions);
         this.issubscriptionEnabled = this.authService.hasPermissions(this.editSubscriptionPermissions);
@@ -433,19 +433,19 @@ export class SubscriptionDetailComponent implements OnInit {
     onIconClick(sup: Subscriptions, action: string) {
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-tiers-rates/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
-                this.router.navigate(['edit-tiers-rates/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'EDIT_TIER':
-                this.router.navigate(['edit-tiers-rates/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW_APP':
-                this.router.navigate(['edit-tiers-rates/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             default:
