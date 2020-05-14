@@ -21,7 +21,7 @@ this will install all project dependencies defined in pom.xml file in the root d
 
 ### Installing Multiple Versions of Node.js Using nvm
 
-If you stuck with downgrading the node version, use NVM to do that task&nbsp;
+If you stuck with downgrading the node version, use NVM to do that task \n
 You can install nvm using cURL or Wget. On your terminal, run the following:
 ```bash
 With cURL:
@@ -41,5 +41,5 @@ By running the above in a terminal, nvm will install Node.js version 8.11.4
 
 Now you can Switch to Node.js version useing following command
 ```bash
-nvm use 13.6.0
+nvm use 8.11.4
 ```
