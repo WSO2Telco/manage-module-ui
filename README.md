@@ -21,8 +21,7 @@ this will install all project dependencies defined in pom.xml file in the root d
 
 ### Installing Multiple Versions of Node.js Using nvm
 
-If you stuck with downgrading the node version, use NVM to do that task \n
-You can install nvm using cURL or Wget. On your terminal, run the following:
+If you stuck with downgrading the node version, use NVM to do that task \nYou can install nvm using cURL or Wget. On your terminal, run the following:
 ```bash
 With cURL:
 
