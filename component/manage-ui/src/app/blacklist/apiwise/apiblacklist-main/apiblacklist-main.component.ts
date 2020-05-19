@@ -483,7 +483,7 @@ export class ApiBlacklistMainComponent implements OnInit {
 
         this.blackListWhiteListService.addBulkToBlacklist(newappId, this.id, fd, (response) => {
             if (response.success) {
-                this.message.success(response.message + ' (Added: ' + response.payload.processed + ' Failed: ' + response.payload.failed);
+                this.message.success(response.message + ' (Added: ' + response.payload.processed + ' Failed: ' + response.payload.failed + ' )');
 
                 this.getBlackListNumbersCount(this.id, newappId, newsp);
                 this.msisdn = '';
