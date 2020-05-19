@@ -320,7 +320,6 @@ export class WhitelistMainComponent implements OnInit {
      */
     getAppsofSubscriber(subscriberID: string) {
         this.applications = [{ id: '0', name: 'All App' }];
-        console.log(this.applications);
         this.blackListWhiteListService.getApps(subscriberID, (response) => {
             if (response.success) {
                 for (const entry of response.payload) {
@@ -388,7 +387,6 @@ export class WhitelistMainComponent implements OnInit {
         if (appID == '0') { appID = '_ALL_'; }
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
-        // this.subscriber == 'All'
         this.blackListWhiteListService.getApis(newsp, appID, (response) => {
             if (response.success) {
                 for (const entry of response.payload) {
@@ -480,13 +478,13 @@ export class WhitelistMainComponent implements OnInit {
         if (this.subscriber == 'All') { newsp = '_ALL_'; }
         else { newsp = this.subscriber }
         const fd = new FormData();
-        fd.append('action', 'blacklist')
+        fd.append('action', 'whitelist')
         fd.append('sp', newsp)
         fd.append('file', this.selectedFile, this.selectedFile.name)
 
         this.blackListWhiteListService.addBulkToBlacklist(newappId, this.id, fd, (response) => {
             if (response.success) {
-                this.message.success(response.message + ' (Added: ' + response.payload.processed + ' Failed: ' + response.payload.failed);
+                this.message.success('New Whitelist Number Added Successfully' + ' (Added: ' + response.payload.processed + ' Failed: ' + response.payload.failed + ' )');
 
                 this.getBlackListNumbersCount(this.id, newappId, newsp);
                 this.msisdn = '';
