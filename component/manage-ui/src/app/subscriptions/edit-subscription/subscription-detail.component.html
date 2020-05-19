@@ -15,6 +15,7 @@
                                        [typeaheadMinLength]="0"
                                        type="text"
                                        class="form-control"
+                                       autocomplete="off"
                                        (typeaheadOnSelect)="onSubscriberSelected()"
                                        (input)="onSubscriberSelected()"
                                        placeholder="Service provider"
@@ -27,6 +28,7 @@
                                        [typeaheadMinLength]="0"
                                        type="text"
                                        class="form-control"
+                                       autocomplete="off"
                                        (typeaheadOnSelect)="onAppSelected()"
                                        (input)="onAppSelected()"
                                        typeaheadOptionField="name"
@@ -42,6 +44,7 @@
                                        [typeahead]="apiList"
                                        typeaheadOptionField="id"
                                        class="form-control"
+                                       autocomplete="off"
                                        name="api"
                                        placeholder="Select API">
                             </div>
@@ -54,6 +57,7 @@
                                        typeaheadOptionField="operatorName"
                                        type="text"
                                        class="form-control"
+                                       autocomplete="off"
                                        placeholder="Operator"
                                        name="op">
                             </div>
