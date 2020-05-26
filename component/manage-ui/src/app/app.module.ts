@@ -31,6 +31,7 @@ import { TimerService } from './commons/services/timer.service';
 import { AppHTTPInterceptor } from './app.http.interceptor';
 import { httpFactory } from '@angular/http/src/http_module';
 import {SubscriptionRemoteDataService} from "./data-providers/subscription-remote-data.service";
+import { ThemeService } from './commons/services/theme.service';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import {SubscriptionRemoteDataService} from "./data-providers/subscription-remot
         {
             provide : 'API_CONTEXT',
             useValue : 'api'
-        }
+        },
+        ThemeService
     ],
     bootstrap: [AppComponent]
 })
