@@ -53,7 +53,6 @@ export class LoginRemoteDataService {
   }
 
   getUserDetails(userName: string) {
-    // console.log('hit in the rate remote data service to get currency');
     return this.http.get(this.apiEndpoints['getUserDetails'] + '/' + userName)
         .map((response: Response) => {
           const result = response.json();

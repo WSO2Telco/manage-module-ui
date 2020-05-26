@@ -40,6 +40,7 @@ export class LoginResponse {
     token: string;
     roles: string[];
     permissions: any;
+    theme:string;
 }
 
 export class SubCategory {
