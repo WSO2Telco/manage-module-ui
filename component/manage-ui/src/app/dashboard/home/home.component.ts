@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     ApplicationTask, ApprovalEvent, ApplicationTaskFilter,
     ApplicationTaskResult
 } from '../../commons/models/application-data-models';
-import {ApprovalRemoteDataService} from '../../data-providers/approval-remote-data.service';
-import {DashboardData} from '../../commons/models/dashboard-data-models';
-import {DashboardRemoteDataService} from '../../data-providers/dashboard-remote-data.service';
-import {MessageService} from '../../commons/services/message.service';
-import {ApprovalHelperService} from '../../approvals/approval-helper.service';
-import {TableDataType} from '../../commons/models/common-data-models';
+import { ApprovalRemoteDataService } from '../../data-providers/approval-remote-data.service';
+import { DashboardData } from '../../commons/models/dashboard-data-models';
+import { DashboardRemoteDataService } from '../../data-providers/dashboard-remote-data.service';
+import { MessageService } from '../../commons/services/message.service';
+import { ApprovalHelperService } from '../../approvals/approval-helper.service';
+import { TableDataType } from '../../commons/models/common-data-models';
+import { ThemeService } from '../../commons/services/theme.service';
+import { AuthenticationService } from '../../commons/services/authentication.service';
 
 @Component({
     selector: 'app-home',
@@ -32,11 +34,15 @@ export class HomeComponent implements OnInit {
     private groupApplicationFilter: ApplicationTaskFilter;
     private groupSubscriptionFilter: ApplicationTaskFilter;
 
+    private themeName;
+
 
     constructor(private approvalService: ApprovalRemoteDataService,
-                private approvalHelperService: ApprovalHelperService,
-                private dashboardService: DashboardRemoteDataService,
-                private message: MessageService) {
+        private approvalHelperService: ApprovalHelperService,
+        private dashboardService: DashboardRemoteDataService,
+        private message: MessageService,
+        private _authenticationService: AuthenticationService,
+        private _themeService: ThemeService) {
     }
 
     ngOnInit() {
@@ -79,6 +85,12 @@ export class HomeComponent implements OnInit {
             (error) => this.message.error(error));
 
         this.approvalService.getAllTasks();
+
+        this.themeName = this._authenticationService.loginUserInfo.getValue().theme
+
+        if (this.themeName) {
+            this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+        }
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
