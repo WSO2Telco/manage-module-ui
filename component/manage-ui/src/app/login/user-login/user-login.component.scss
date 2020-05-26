@@ -24,7 +24,7 @@
     margin-bottom: 35px;
     text-align: center;
     font-size: 2.5rem;
-    color: $accent-color;
+    color: var(--accent-color);
     .man {
       color: #8A98A0;
       font-weight: 300;
@@ -43,7 +43,7 @@
       margin: 0px;
       padding: 30px 0px 10px;
       text-align: center;
-      color: $secondary_color
+      color: var(--secondary_color);
     }
 
     .forgot-ps{
@@ -58,7 +58,7 @@
     margin: 35px 0px 10px;
 
     .login{
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
       color: white;
       font-weight: 600;
       @include transition(all 0.4 ease-in);

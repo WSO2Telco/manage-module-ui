@@ -100,7 +100,7 @@
         cursor: pointer;
 
         &:hover {
-          color: $accent-color;
+          color: var(--accent-color);
         }
       }
     }
