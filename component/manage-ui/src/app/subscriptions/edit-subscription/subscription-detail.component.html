@@ -12,20 +12,20 @@
                                 <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-4': issubscriptionEnabled}">
                                     <input [(ngModel)]="subscriber" [typeahead]="subscriberList"
                                         typeaheadOptionField="name" [typeaheadMinLength]="0" type="text"
-                                        class="form-control" (typeaheadOnSelect)="onSubscriberSelected()"
+                                        class="form-control" autocomplete="off" (typeaheadOnSelect)="onSubscriberSelected()"
                                         (input)="onSubscriberSelected()" placeholder="Service provider"
                                         name="subscription">
                                 </div>
                                 <div [ngClass]="{'col-sm-6': !issubscriptionEnabled,'col-sm-4': issubscriptionEnabled}">
                                     <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0"
-                                        type="text" class="form-control" (typeaheadOnSelect)="onAppSelected()"
+                                        type="text" class="form-control" autocomplete="off" (typeaheadOnSelect)="onAppSelected()"
                                         (input)="onAppSelected()" typeaheadOptionField="name" placeholder="Application"
                                         name="app">
                                 </div>
                                 <div class="col-sm-4" *ngIf="issubscriptionEnabled">
                                     <input [(ngModel)]="api" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" container="body"
-                                        [typeahead]="apiList" typeaheadOptionField="id" class="form-control" name="api"
+                                        [typeahead]="apiList" typeaheadOptionField="id" class="form-control" autocomplete="off" name="api"
                                         placeholder="Select API">
                                 </div>
                                <!--  <div class="col-sm-3" *ngIf="issubscriptionEnabled">
