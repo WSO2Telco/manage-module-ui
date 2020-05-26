@@ -35,11 +35,11 @@
 }
 
 .btn-primary{
-  background-color: $secondary_color;
+  background-color: var(--secondary_color);
   border-color: #29A2AD;
 
   &:hover{
-    background-color: $primary-color_light;
+    background-color: var(--primary-color_light);
   }
 }
 
@@ -60,7 +60,7 @@
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover{
-  background-color: $accent-color;
-  border-color: $accent-dark-color;
+  background-color: var(--accent-color);
+  border-color: var(--accent-dark-color);
   color: white !important;
 }
