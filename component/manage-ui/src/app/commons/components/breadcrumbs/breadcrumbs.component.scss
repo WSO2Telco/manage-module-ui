@@ -25,7 +25,7 @@
   right: 50px;
   height: 30px;
   width: 30px;
-  background-color: $accent-color;
+  background-color: var(--accent-color);
   text-align: center;
   line-height: 30px;
   border-radius: 20px;
@@ -41,7 +41,7 @@
   @include transition(all 0.2s ease-in);
 
   &:hover{
-    background-color: $accent-light-color;
+    background-color: var(--accent-light-color);
     color: black;
   }
 }

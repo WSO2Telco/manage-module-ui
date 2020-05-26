@@ -35,11 +35,11 @@
 
     &:hover {
       color: black;
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
     }
 
     &.on {
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
       color: black;
     }
   }
@@ -406,12 +406,12 @@
     @include transition(all 0.2s ease-in);
 
     &:hover {
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
       color: black;
     }
 
     &.A {
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
     }
 
     &.R {
@@ -478,7 +478,7 @@
         cursor: pointer;
 
         &:hover {
-          color: $accent-color;
+          color: var(--accent-color);
         }
       }
     }

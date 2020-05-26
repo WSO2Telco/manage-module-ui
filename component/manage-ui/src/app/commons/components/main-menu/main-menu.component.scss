@@ -4,7 +4,7 @@
 
 :host {
   display: block;
-  background-color: $primary-color_menu;
+  background-color: var(--primary-color_menu);
   height: 100%;
 }
 
@@ -18,12 +18,12 @@ ul {
     cursor: pointer;
     width: 100%;
     height: $main-menu-icon-height;
-    border-bottom: solid 1px $primary-color_light;
+    border-bottom: solid 1px var(--primary-color_light);
     position: relative;
     @include transition(all 0.3s ease-in);
 
     &:hover {
-      background-color: $primary-color_main;
+      background-color: var(--primary-color_main);
     }
 
     &:after {
@@ -57,7 +57,7 @@ ul {
     }
 
     &.selected {
-      background-color: $secondary_color;
+      background-color: var(--secondary_color);
       .icon {
         color: white;
       }

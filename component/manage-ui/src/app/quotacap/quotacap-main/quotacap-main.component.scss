@@ -23,16 +23,11 @@
 }
 
 .searchFilter {
-  /*overflow: hidden;
-  padding: 10px;
-  background-color: white;
-  border: solid 1px whitesmoke;
-    background-color: #E19131;*/
 
   min-height: 78px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #E19131;
+  background-color:var(--accent-color);
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;

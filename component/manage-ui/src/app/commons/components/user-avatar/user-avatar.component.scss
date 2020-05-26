@@ -4,7 +4,7 @@
 :host{
   height: 50px;
   display: block;
-  background-color: $primary-color_main;
+  background-color: var(--primary-color_main);
   @include transition(all 0.3s ease-in);
   color: $gray;
   cursor: pointer;
@@ -75,7 +75,7 @@
         line-height: 27px;
         @include transition(background-color 0.2s ease-in);
         &:hover{
-          background-color: $secondary_color;
+          background-color: var(--secondary_color);
         }
       }
 
