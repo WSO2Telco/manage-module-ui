@@ -1,16 +1,16 @@
 @import "../../../styles/colors";
 
-application-data-table{
+subscription-data-table{
   margin-top: 20px;
 }
 
-:host /deep/ application-data-table.my {
+:host /deep/ subscription-data-table.my {
   .tbl-header{
-    color: $accent-color;
+    color: var(--accent-color);
     font-weight: 900;
   }
 
   .header{
-    background-color: $accent-color !important;
+    background-color: var(--accent-color) !important;
   }
 }
