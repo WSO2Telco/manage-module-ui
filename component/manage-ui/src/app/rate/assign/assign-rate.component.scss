@@ -1,192 +1,179 @@
-@import "/../../../styles/colors";
-@import "/../../../styles/mixing";
-
+@import "../../../styles/colors";
+@import "../../../styles/mixing";
 :host {
-  display: block;
-  margin-top: 20px;
+    display: block;
+    margin-top: 20px;
 }
 
 .content-div {
-  background-color: #ffffff;
+    background-color: #ffffff;
 }
 
 .tbl-header {
-  margin-top: 10px;
-  font-weight: 600;
-  font-size: 1.3em;
-  padding: 5px 0px 15px;
-  color: #E19131;
-  text-transform: uppercase;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 5px 0px 15px;
+    color: #E19131;
+    text-transform: uppercase;
 }
 
-.assignRateContainer{
-  min-height: 100px;
-  padding: 10px;
-  background-color: white;
-  border: solid 1px whitesmoke;
-  overflow: initial;
+.assignRateContainer {
+    min-height: 100px;
+    padding: 10px;
+    background-color: white;
+    border: solid 1px whitesmoke;
+    overflow: initial;
 }
-
 
 .info-tooltip {
-  font-size: 1.5em;
-  color: #8E44AD;
-  vertical-align: top;
-  margin-top: 0.3em;
-  cursor: pointer;
+    font-size: 1.5em;
+    color: #8E44AD;
+    vertical-align: top;
+    margin-top: 0.3em;
+    cursor: pointer;
 }
 
 #scrollable-dropdown-menu .dropdown-menu {
-  max-height: 20px;
-  overflow-y: auto;
+    max-height: 20px;
+    overflow-y: auto;
 }
 
 .error {
-  font-size: 0.9em;
-  color: #f96565;
+    font-size: 0.9em;
+    color: #f96565;
 }
 
 .table .td {
-  padding-right: 5px;
+    padding-right: 5px;
 }
 
-.has-danger .form-control{
-  border-color: #d9534f;
-  color: #d9534f;
+.has-danger .form-control {
+    border-color: #d9534f;
+    color: #d9534f;
 }
-
 
 .table {
-  display: table;
-  width: 100%;
-
-  @media only screen and (max-width: 768px) {
-    // display: block;
-  }
-
-  .tbl-row {
-    display: table-row;
-    background-color: #f6f6f6;
-    height: 0px;
-    @include transition(all 0.5s ease-in);
-
-    &:nth-of-type(odd) {
-      background-color: white;
-    }
-
-    &.header {
-      background-color: #7788aa;
-      font-weight: 600;
-      color: white;
-    }
-
+    display: table;
+    width: 100%;
     @media only screen and (max-width: 768px) {
-      // display: block;
+        // display: block;
     }
-
-    .tbl-cell {
-      display: table-cell;
-      padding: 10px 10px;
-      @media only screen and (max-width: 768px) {
-        //  display: block;
-      }
+    .tbl-row {
+        display: table-row;
+        background-color: #f6f6f6;
+        height: 0px;
+        @include transition(all 0.5s ease-in);
+        &:nth-of-type(odd) {
+            background-color: white;
+        }
+        &.header {
+            background-color: #7788aa;
+            font-weight: 600;
+            color: white;
+        }
+        @media only screen and (max-width: 768px) {
+            // display: block;
+        }
+        .tbl-cell {
+            display: table-cell;
+            padding: 10px 10px;
+            @media only screen and (max-width: 768px) {
+                //  display: block;
+            }
+        }
+        &.modified {
+            background-color: #ffffcc;
+        }
+        &.open {
+            height: 158px;
+            background-color: #f4f2c9;
+            .action {
+                border-color: black;
+                color: black;
+            }
+            &.A,
+            &.R {
+                height: 243px;
+            }
+        }
+        .more-con {
+            padding: 10px 0px 10px 0px;
+            background-color: $gray_0;
+            position: absolute;
+            left: 10px;
+            right: 11px;
+            height: 105px;
+            margin-top: 53px;
+            border: solid 1px #d0d0d0;
+            @include box-shadow( inset 0px 10px 10px -9px rgba(209, 209, 209, 1));
+            &.A,
+            &.R {
+                height: 190px;
+            }
+            .more-row {
+                margin-bottom: 2px;
+            }
+            .field-name {
+                height: 40px;
+                background-color: $gray_1;
+                line-height: 40px;
+                text-align: right;
+                font-weight: 600;
+            }
+            .field-value {
+                height: 40px;
+                background-color: white;
+                line-height: 40px;
+            }
+            select,
+            input {
+                margin-top: 2px;
+            }
+            .btn {
+                margin-top: 10px;
+                padding-top: 5px!important;
+                padding-bottom: 5px !important;
+            }
+        }
     }
-
-    &.modified {
-      background-color: #ffffcc;
+    .no-rec-row {
+        position: relative;
+        .no-rec {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+            width: 100px;
+            padding-top: 15px;
+            color: $gray;
+        }
     }
-
-    &.open {
-      height: 158px;
-      background-color: #f4f2c9;
-
-      .action {
-        border-color: black;
-        color : black;
-      }
-
-      &.A,&.R{
-        height: 243px;
-      }
+    .fromcolor {
+        color: $success;
     }
-
-    .more-con{
-      padding:10px 0px 10px 0px;
-      background-color: $gray_0;
-      position: absolute;
-      left: 10px;
-      right: 11px;
-      height: 105px;
-      margin-top: 53px;
-      border:solid 1px #d0d0d0;
-      @include box-shadow( inset 0px 10px 10px -9px rgba(209,209,209,1));
-
-      &.A,&.R{
-        height: 190px;
-      }
-
-      .more-row{
-        margin-bottom: 2px;
-      }
-
-      .field-name{
-        height: 40px;
-        background-color: $gray_1;
-        line-height: 40px;
-        text-align: right;
-        font-weight: 600;
-      }
-
-      .field-value{
-        height: 40px;
-        background-color: white;
-        line-height: 40px;
-      }
-
-      select,input{
-        margin-top: 2px;
-      }
-
-      .btn{
-        margin-top: 10px;
-        padding-top: 5px!important;
-        padding-bottom: 5px !important;
-      }
+    .tocolor {
+        color: $error-red;
     }
-
-  }
-
-  .no-rec-row {
-    position: relative;
-
-    .no-rec {
-      position: absolute;
-      left: 0px;
-      right: 0px;
-      margin: auto;
-      width: 100px;
-      padding-top: 15px;
-      color: $gray;
-    }
-  }
-
-  .fromcolor{
-    color: $success;
-  }
-
-  .tocolor{
-    color: $error-red;
-  }
 }
 
 .subtitle {
-  color: #E19132;
+    color: #E19132;
 }
 
-.btn{ border-radius: 0px !important;}
+.btn {
+    border-radius: 0px !important;
+}
 
-.control-label span { color: #dd0d0d;}
+.control-label span {
+    color: #dd0d0d;
+}
 
-.tab-content{ background-color: #7a8ca5;}
+.tab-content {
+    background-color: #7a8ca5;
+}
 
-.norateMessage{ margin: 2% 0px; color: #343a40; }
+.norateMessage {
+    margin: 2% 0px;
+    color: #343a40;
+}
