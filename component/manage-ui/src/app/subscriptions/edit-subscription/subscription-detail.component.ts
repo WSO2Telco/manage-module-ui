@@ -9,7 +9,7 @@ import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../comm
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
-import { TabsetComponent } from 'ngx-bootstrap';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 
 @Component({
     selector: 'app-subscription-detail',

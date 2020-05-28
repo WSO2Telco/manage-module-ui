@@ -2,8 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ButtonsModule, BsDropdownModule, PopoverModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
+
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+
 import { AppComponent } from './app.component';
 import { RootLevelRoutes } from './app.routes';
 import { CommonsModule } from './commons/commons.module';

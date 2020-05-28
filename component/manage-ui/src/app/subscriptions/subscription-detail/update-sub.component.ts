@@ -3,7 +3,7 @@ import { ReportingRemoteDataService } from '../../data-providers/reporting-remot
 import { ApprovedApiOperationRate } from '../../commons/models/reporing-data-models';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../commons/services/message.service';
-import { TabsetComponent } from 'ngx-bootstrap';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { RateService } from "../../commons/services/rate.service";
 import {
     API,

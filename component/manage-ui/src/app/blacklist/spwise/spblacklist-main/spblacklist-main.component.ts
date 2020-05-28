@@ -1,7 +1,7 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {BlackListWhiteListService} from '../../../commons/services/blacklist_whitelist.service';
-import {BlackListNumbers} from '../../../commons/models/common-data-models';
-import {TypeaheadMatch} from 'ngx-bootstrap';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { BlackListWhiteListService } from '../../../commons/services/blacklist_whitelist.service';
+import { BlackListNumbers } from '../../../commons/models/common-data-models';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 
 @Component({
     selector: 'app-spblacklist-main',
