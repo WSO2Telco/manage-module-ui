@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     private isLoggedIn = false;
     private isMenuExpanded = false;
     private themeName;
+    private menuBackImage: boolean = false;
 
     constructor(private _authenticationService: AuthenticationService,
         private _appCommonService: AppCommonService, private _themeService: ThemeService) {
@@ -34,9 +35,13 @@ export class AppComponent implements OnInit {
 
         if (this.themeName) {
             this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+            this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
         }
 
         this._appCommonService.menuToggleStream.subscribe((isExpand: boolean) => this.isMenuExpanded = isExpand);
+    }
 
+    onChangeMenuBackground(falg){
+        this.menuBackImage = falg;
     }
 }
