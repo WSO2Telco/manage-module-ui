@@ -11,6 +11,7 @@ import { ApprovalHelperService } from '../../approvals/approval-helper.service';
 import { TableDataType } from '../../commons/models/common-data-models';
 import { ThemeService } from '../../commons/services/theme.service';
 import { AuthenticationService } from '../../commons/services/authentication.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
     selector: 'app-home',
@@ -35,14 +36,15 @@ export class HomeComponent implements OnInit {
     private groupSubscriptionFilter: ApplicationTaskFilter;
 
     private themeName;
-
+    private menuBackImage:boolean = false;
 
     constructor(private approvalService: ApprovalRemoteDataService,
         private approvalHelperService: ApprovalHelperService,
         private dashboardService: DashboardRemoteDataService,
         private message: MessageService,
         private _authenticationService: AuthenticationService,
-        private _themeService: ThemeService) {
+        private _themeService: ThemeService,
+        private mainCom: AppComponent) {
     }
 
     ngOnInit() {
@@ -90,7 +92,9 @@ export class HomeComponent implements OnInit {
 
         if (this.themeName) {
             this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+            this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
         }
+        this.mainCom.ngOnInit();
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
