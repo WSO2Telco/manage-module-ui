@@ -1,0 +1,26 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="btn-group" btnRadioGroup>
+            <div class="button-row" *ngFor="let t of allThemes">
+                <label>{{t.name}} :</label>
+                <button tabindex="0" role="button" class="color-btn"
+                    [style.backgroundColor]="t.primary">Primary</button>
+                <button tabindex="0" role="button" class="color-btn"
+                    [style.backgroundColor]="t.accent">Accent</button>
+                <button tabindex="0" role="button" class="color-btn"
+                    [style.backgroundColor]="t.secondary">Secondary</button>
+                    <label>
+                        <input type="radio" [(ngModel)]="selectedTheme" name="theme" [value]="t.className" (ngModelChange)="themeChanged($event)" /> Apply
+                    </label>
+            </div>
+        </div>
+        <hr><br>
+        <div class="button-row">
+          <label>Menu Background Image:</label>
+          <label class="switch">
+            <input type="checkbox" (change)="onBackgroundToggle($event)" [checked]="meunBackImage">
+            <span class="slider round"></span>
+          </label>
+        </div>
+    </div>
+</div>
