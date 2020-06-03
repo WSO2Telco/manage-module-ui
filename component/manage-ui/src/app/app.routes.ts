@@ -13,6 +13,11 @@ const routes = [
     canActivate: [AppGuard]
   },
   {
+    path: 'theme',
+    loadChildren: 'app/theme/theme.module#ThemeModule',
+    canActivate: [AppGuard]
+  },
+  {
     path: 'history',
     loadChildren: 'app/history/history.module#HistoryModule',
     canActivate: [AppGuard, PermissionGuard],
