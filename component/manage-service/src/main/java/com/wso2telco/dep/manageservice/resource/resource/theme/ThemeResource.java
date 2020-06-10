@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 @Path("/theme")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ThemeResource{
+public class ThemeResource {
     @POST
     @Path("/")
     public Response setTheme(@Context HttpHeaders headers, String data) throws JSONException {
@@ -22,13 +22,34 @@ public class ThemeResource{
         Object responseString = null;
         JSONObject json = new JSONObject(data);
         String loggedInUser = headers.getRequestHeader(HeaderParam.USER_NAME.getTObject()).get(0);
-        try{
+        try {
             responseString = themeService.changeTheme(loggedInUser, json.getString("value").toString());
             responseCode = Response.Status.OK;
-        } catch (Exception e){
+        } catch (Exception e) {
             responseString = "Theme update failed !!";
             responseCode = Response.Status.BAD_REQUEST;
         }
+        return Response.status(responseCode).entity(responseString).build();
+    }
+
+    @GET
+    @Path("/gettheme")
+    public Response getTheme(@Context HttpHeaders headers) {
+
+        String userName = headers.getRequestHeader(HeaderParam.USER_NAME.getTObject()).get(0);
+
+        ThemeService themeService = new ThemeService();
+        Response.Status responseCode = null;
+        Object responseString = null;
+        try {
+            responseString = themeService.getTheme(userName);
+            responseCode = Response.Status.OK;
+        } catch (Exception e) {
+
+            responseString = "Theme loading failed !!";
+            responseCode = Response.Status.BAD_REQUEST;
+        }
+
         return Response.status(responseCode).entity(responseString).build();
     }
 }
