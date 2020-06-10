@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <app-header *ngIf="isLoggedIn"></app-header>
     <div class="content-container">
-        <div class="menu-container animated slideInLeft" [ngClass]="{'backImg':menuBackImage}" *ngIf="isLoggedIn">
-            <app-main-menu></app-main-menu>
+        <div class="menu-container animated slideInLeft" *ngIf="isLoggedIn">
+            <app-main-menu [ngClass]="{'backImg':menuBackImage}"></app-main-menu>
         </div>
         <div class="view-container" [ngClass]="{'menu-expand':isMenuExpanded}">
             <div>
