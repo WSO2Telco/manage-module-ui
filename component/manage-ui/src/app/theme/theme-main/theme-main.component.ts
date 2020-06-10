@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../commons/services/authentication.service';
 import { ThemeService } from '../../commons/services/theme.service';
 import { AppComponent } from '../../app.component';
+import { MessageService } from '../../commons/services/message.service';
 
 @Component({
     selector: 'app-theme-main',
@@ -41,25 +42,48 @@ export class ThemeComponent implements OnInit {
 
     constructor(private _authenticationService: AuthenticationService,
         private _themeService: ThemeService,
-        private mainCom: AppComponent) {
+        private mainCom: AppComponent,
+        private message: MessageService) {
     }
 
     ngOnInit() {
-        let globalTheme = this._authenticationService.loginUserInfo.getValue().theme;
-
-        this.selectedTheme = globalTheme.substring(0, globalTheme.indexOf("_"));
-
-        this.meunBackImage = JSON.parse(globalTheme.slice(globalTheme.indexOf("_") + 1));
+        let globalTheme
+        this._themeService.getThemeValue((response) => {
+            if (response.success) {
+                globalTheme = response.payload.theme;
+                this.selectedTheme = globalTheme.substring(0, globalTheme.indexOf("_"));
+                this.meunBackImage = JSON.parse(globalTheme.slice(globalTheme.indexOf("_") + 1));
+            } else {
+                this.message.error(response.message);
+            }
+        });
 
     }
 
 
     themeChanged(themeName) {
+        this.selectedTheme = themeName;
+        this.updateThemeService();
         this._themeService.toggleTheme(themeName.replace(/[^a-zA-Z ]/g, ""));
     }
 
-    onBackgroundToggle(e:any) {
+    onBackgroundToggle(e: any) {
+        this.meunBackImage = e.currentTarget.checked;
+        this.updateThemeService();
         this.mainCom.onChangeMenuBackground(e.currentTarget.checked);
+    }
+
+    updateThemeService() {
+        const data = {
+            value: this.selectedTheme + '_' + String(this.meunBackImage)
+        };
+        this._themeService.updateThemeValue(data, (response) => {
+            if (response.success) {
+                this.message.success(response.message);
+            } else {
+                this.message.error(response.message);
+            }
+        });
     }
 
 }

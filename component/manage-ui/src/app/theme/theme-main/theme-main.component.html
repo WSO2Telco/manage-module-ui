@@ -10,7 +10,7 @@
                 <button tabindex="0" role="button" class="color-btn"
                     [style.backgroundColor]="t.secondary">Secondary</button>
                     <label>
-                        <input type="radio" [(ngModel)]="selectedTheme" name="theme" [value]="t.className" (ngModelChange)="themeChanged($event)" /> Apply
+                        <input type="radio" [(ngModel)]="selectedTheme" name="theme" [value]="t.className" (ngModelChange)="themeChanged(t.className)" /> Apply
                     </label>
             </div>
         </div>
