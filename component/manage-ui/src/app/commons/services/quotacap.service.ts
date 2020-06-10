@@ -3,7 +3,6 @@
  */
 import {Injectable} from '@angular/core';
 import {QuotacapRemoteDataService} from '../../data-providers/quotacap_remote-data.service';
-import {MessageService} from '../../commons/services/message.service';
 import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 

@@ -30,18 +30,20 @@ export class AppComponent implements OnInit {
 
         });
         if (this.isLoggedIn) {
-            this.themeName = this._authenticationService.loginUserInfo.getValue().theme
+            this._themeService.getThemeValue((response) => {
+                if (response.success) {
+                    this.themeName = response.payload.theme;
+                    this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+                    this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
+                }
+            });
         }
 
-        if (this.themeName) {
-            this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
-            this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
-        }
 
         this._appCommonService.menuToggleStream.subscribe((isExpand: boolean) => this.isMenuExpanded = isExpand);
     }
 
-    onChangeMenuBackground(falg){
+    onChangeMenuBackground(falg) {
         this.menuBackImage = falg;
     }
 }

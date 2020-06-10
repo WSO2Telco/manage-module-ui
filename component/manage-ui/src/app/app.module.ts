@@ -32,6 +32,7 @@ import { AppHTTPInterceptor } from './app.http.interceptor';
 import { httpFactory } from '@angular/http/src/http_module';
 import {SubscriptionRemoteDataService} from "./data-providers/subscription-remote-data.service";
 import { ThemeService } from './commons/services/theme.service';
+import { ThemeRemoteDataService } from './data-providers/theme_remote-data.service';
 
 @NgModule({
     declarations: [
@@ -78,6 +79,7 @@ import { ThemeService } from './commons/services/theme.service';
         ApprovalHelperService,
         QuotacapRemoteDataService,
         BlackListWhiteListRemoteDataService,
+        ThemeRemoteDataService,
         ApplicationRemoteDataService,
         {
             provide : 'API_CONTEXT',
