@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
     private groupSubscriptionFilter: ApplicationTaskFilter;
 
     private themeName;
-    private menuBackImage:boolean = false;
+    private menuBackImage: boolean = false;
 
     constructor(private approvalService: ApprovalRemoteDataService,
         private approvalHelperService: ApprovalHelperService,
@@ -88,13 +88,24 @@ export class HomeComponent implements OnInit {
 
         this.approvalService.getAllTasks();
 
-        this.themeName = this._authenticationService.loginUserInfo.getValue().theme
+        this._themeService.getThemeValue((response) => {
+            if (response.success) {
+                this.themeName = response.payload.theme;
+                this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+                this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
+                this.mainCom.ngOnInit();
+            } else {
+                this.message.error(response.message);
+            }
+        });
+        // this.themeName = this._authenticationService.loginUserInfo.getValue().theme
 
-        if (this.themeName) {
-            this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
-            this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
-        }
-        this.mainCom.ngOnInit();
+        /*  if (this.themeName) {
+             this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+             this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
+         } 
+         this.mainCom.ngOnInit();
+         */
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {
