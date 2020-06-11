@@ -16,17 +16,6 @@ export const themeapigategreen = {
 };
 
 export const themeapigateblue = {
-  'primary-color_main': '#14354C',
-  'primary-color_menu': '#1b4665',
-  'primary-color_light': '#164e6a',
-  'accent-light-color': '#e1a637',
-  'accent-color': '#e19131',
-  'accent-dark-color': '#c1711d',
-  'secondary_color': '#32c5d2',
-  'menu-bg-url': 'url("/manage-service/public/images/menuBg_blue.jpg")'
-};
-
-export const themeonelight = {
   'primary-color_main': '#283593',
   'primary-color_menu': '#303F9F',
   'primary-color_light': '#4f66e3',
@@ -34,6 +23,17 @@ export const themeonelight = {
   'accent-color': '#FFAB40',
   'accent-dark-color': '#c1901d',
   'secondary_color': '#bf245f',
+  'menu-bg-url': 'url("/manage-service/public/images/menuBg_blue.jpg")'
+};
+
+export const themeonelight = {
+  'primary-color_main': '#14354C',
+  'primary-color_menu': '#1b4665',
+  'primary-color_light': '#164e6a',
+  'accent-light-color': '#e1a637',
+  'accent-color': '#e19131',
+  'accent-dark-color': '#c1711d',
+  'secondary_color': '#32c5d2',
   'menu-bg-url': 'url("/manage-service/public/images/menuBg_light.jpg")'
 };
 

@@ -53,11 +53,16 @@ export class ThemeRemoteDataService {
     getTheme() {
         return this.http.get(this.apiEndpoints['getTheme'], this.getOptions())
             .map((response: Response) => {
-                if (response.status == 200) {
+                if ((response.status == 200) && (response.json().theme != null)) {
                     return {
                         success: true,
                         message: 'Theme load Successfully',
                         payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error While loading Theme',
                     };
                 }
             })
