@@ -20,9 +20,9 @@ export class ThemeComponent implements OnInit {
         {
             name: 'Default Theme',
             className: 'theme-one-light',
-            primary: '#283593',
-            accent: '#FFAB40',
-            secondary: '#bf245f'
+            primary: '#14354C',
+            accent: '#e19131',
+            secondary: '#32c5d2'
         },
         {
             name: 'Apigate Green',
@@ -34,9 +34,9 @@ export class ThemeComponent implements OnInit {
         {
             name: 'Apigate Blue',
             className: 'theme-apigate-blue',
-            primary: '#14354C',
-            accent: '#e19131',
-            secondary: '#32c5d2'
+            primary: '#283593',
+            accent: '#FFAB40',
+            secondary: '#bf245f'
         },
     ];
 
@@ -53,8 +53,8 @@ export class ThemeComponent implements OnInit {
                 globalTheme = response.payload.theme;
                 this.selectedTheme = globalTheme.substring(0, globalTheme.indexOf("_"));
                 this.meunBackImage = JSON.parse(globalTheme.slice(globalTheme.indexOf("_") + 1));
-            } else {
-                this.message.error(response.message);
+            }else{
+                this.selectedTheme = 'theme-one-light';
             }
         });
 

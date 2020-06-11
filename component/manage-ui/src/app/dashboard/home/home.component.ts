@@ -94,8 +94,6 @@ export class HomeComponent implements OnInit {
                 this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
                 this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
                 this.mainCom.ngOnInit();
-            } else {
-                this.message.error(response.message);
             }
         });
     }
