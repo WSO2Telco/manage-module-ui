@@ -65,6 +65,17 @@
                 <artifactId>auth-filter</artifactId>
                 <version>${com.wso2telco.core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${com.google.code.gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.wso2.carbon.apimgt</groupId>
+                <artifactId>org.wso2.carbon.apimgt.impl</artifactId>
+                <version>${org.wso2.carbon.apimgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <repositories>
@@ -168,12 +179,14 @@
         </pluginManagement>
     </build>
     <properties>
-        <jersey-container-servlet.version>2.17</jersey-container-servlet.version>
+        <jersey-container-servlet.version>2.25</jersey-container-servlet.version>
         <org.apache.httpcomponents.version>4.5.2</org.apache.httpcomponents.version>
         <com.esotericsoftware.yamlbeans.version>1.11</com.esotericsoftware.yamlbeans.version>
         <org.apache.commons.version>2.0</org.apache.commons.version>
         <org.wso2.carbon.version>4.4.8</org.wso2.carbon.version>
         <com.wso2telco.core.version>2.4.6-SNAPSHOT</com.wso2telco.core.version>
         <carbon.p2.plugin.version>1.5.8</carbon.p2.plugin.version>
+        <org.wso2.carbon.apimgt.version>6.3.95</org.wso2.carbon.apimgt.version>
+        <com.google.code.gson.version>2.3.1</com.google.code.gson.version>
     </properties>
 </project>
