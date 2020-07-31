@@ -66,7 +66,7 @@ public class ResponseFilterDAO {
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
-            StringBuilder query = new StringBuilder("INSERT INTO ");
+            final StringBuilder query = new StringBuilder("INSERT INTO ");
             query.append(Tables.RESPONSE_FILTER.getTObject());
             query.append(" (sp, application, api, operation, fields) values (?, ?, ?, ?, ?)");
             statement = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -121,7 +121,7 @@ public class ResponseFilterDAO {
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
-            StringBuilder query = new StringBuilder("SELECT id, fields FROM ");
+            final StringBuilder query = new StringBuilder("SELECT id, fields FROM ");
             query.append(Tables.RESPONSE_FILTER.getTObject());
             query.append(" WHERE sp=? AND application=? AND api=? AND operation=?");
             statement = connection.prepareStatement(query.toString());
@@ -177,7 +177,7 @@ public class ResponseFilterDAO {
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
-            StringBuilder query = new StringBuilder("SELECT sp, application, api, operation, fields FROM ");
+            final StringBuilder query = new StringBuilder("SELECT sp, application, api, operation, fields FROM ");
             query.append(Tables.RESPONSE_FILTER.getTObject());
             query.append(" WHERE id=?");
             statement = connection.prepareStatement(query.toString());
@@ -229,7 +229,7 @@ public class ResponseFilterDAO {
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
-            StringBuilder query = new StringBuilder("DELETE FROM ");
+            final StringBuilder query = new StringBuilder("DELETE FROM ");
             query.append(Tables.RESPONSE_FILTER.getTObject());
             query.append(" WHERE id=?");
 

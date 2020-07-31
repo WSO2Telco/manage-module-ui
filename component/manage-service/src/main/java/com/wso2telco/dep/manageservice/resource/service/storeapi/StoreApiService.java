@@ -43,16 +43,14 @@ public class StoreApiService {
      * Returns API definition as a JSON String by calling WSO2 api-store REST API v0.13.
      *
      * @param apiId unique ID of the API
-     * @return Callback with JSON representation of API definition
+     * @return String JSON representation of API definition
      * @throws BusinessException if any error occurred while retrieving API definitions
      */
-    public Callback getApiJsonStr(String apiId) throws BusinessException {
-        HttpGet request = new HttpGet(storeApiUrl(apiId));
+    public String getApiJsonStr(String apiId) throws BusinessException {
+        final HttpGet request = new HttpGet(storeApiUrl(apiId));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {
-            return new Callback().setMessage("success")
-                .setPayload(EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8.name()))
-                .setSuccess(true);
+            return EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8.name());
         } catch (IOException e) {
             throw new BusinessException("Error occurred while retrieving API details" + e.getLocalizedMessage());
         }
@@ -66,7 +64,7 @@ public class StoreApiService {
      * @throws BusinessException if any error occurred while retrieving API definitions
      */
     public Callback getResourcePolicies(String apiId) throws BusinessException {
-        HttpGet request = new HttpGet(storeApiUrl(apiId));
+        final HttpGet request = new HttpGet(storeApiUrl(apiId));
         try (CloseableHttpClient httpClient = HttpClients.createDefault();
              CloseableHttpResponse response = httpClient.execute(request)) {
             final List<ApiResourcePath> apiResourcePolicies = new ArrayList<>();

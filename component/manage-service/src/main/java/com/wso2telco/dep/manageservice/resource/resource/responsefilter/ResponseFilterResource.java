@@ -44,14 +44,12 @@ public class ResponseFilterResource {
     private static final Logger logger = Logger.getLogger(ResponseFilterResource.class.getName());
 
     @POST
-    @Path("/")
     public Response add(String payload) {
         final Gson gson = new GsonBuilder().serializeNulls().create();
         final ResponseFilter responseFilter = gson.fromJson(payload, ResponseFilter.class);
         try {
-            return Response.status(Response.Status.OK)
-                    .entity(new ResponseFilterService().addResponseFilter(responseFilter))
-                    .build();
+            final String jsonString = gson.toJson(new ResponseFilterService().addResponseFilter(responseFilter));
+            return Response.status(Response.Status.OK).entity(jsonString).build();
         } catch (BusinessException exception) {
             logger.log(Level.SEVERE, "error in add response filter : ", exception);
             return ErrorHandler.createErrorResponse(exception);
@@ -59,13 +57,12 @@ public class ResponseFilterResource {
     }
 
     @GET
-    @Path("/")
     public Response find(@QueryParam("sp") String sp, @QueryParam("application") String application,
                          @QueryParam("api") String api, @QueryParam("operation") String operation) {
         try {
-            final String jsonString = new Gson()
-                    .toJson(new ResponseFilterService()
-                    .findResponseFilter(sp, application, api, operation));
+            final String jsonString = new Gson().toJson(
+                new ResponseFilterService().findResponseFilter(sp, application, api, operation)
+            );
             return Response.status(Response.Status.OK).entity(jsonString).build();
         } catch (BusinessException exception) {
             logger.log(Level.SEVERE, "error in find response filter : ", exception);
@@ -77,9 +74,9 @@ public class ResponseFilterResource {
     @Path("/{id}")
     public Response findById(@PathParam("id") String id) {
         try {
-            final String jsonString = new Gson()
-                    .toJson(new ResponseFilterService()
-                    .findResponseFilter(Integer.parseInt(id)));
+            final String jsonString = new Gson().toJson(
+                new ResponseFilterService().findResponseFilter(Integer.parseInt(id))
+            );
             return Response.status(Response.Status.OK).entity(jsonString).build();
         } catch (BusinessException exception) {
             logger.log(Level.SEVERE, "error in find response filter by ID : ", exception);
@@ -91,9 +88,10 @@ public class ResponseFilterResource {
     @Path("/{id}")
     public Response delete(@PathParam("id") String id) {
         try {
-            return Response.status(Response.Status.OK)
-                    .entity(new ResponseFilterService().deleteResponseFilter(Integer.parseInt(id)))
-                    .build();
+            final String jsonString = new Gson().toJson(
+                new ResponseFilterService().deleteResponseFilter(Integer.parseInt(id))
+            );
+            return Response.status(Response.Status.OK).entity(jsonString).build();
         } catch (BusinessException exception) {
             logger.log(Level.SEVERE, "error in delete response filter : ", exception);
             return ErrorHandler.createErrorResponse(exception);

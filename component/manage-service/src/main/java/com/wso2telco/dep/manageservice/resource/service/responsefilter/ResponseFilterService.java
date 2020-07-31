@@ -32,9 +32,8 @@ public class ResponseFilterService {
      * @throws BusinessException if any errors occurred while doing the database operations
      */
     public Callback addResponseFilter(ResponseFilter responseFilter) throws BusinessException {
-        ResponseFilterDAO dataProvider = new ResponseFilterDAO();
-        GenericResponseWithIDs genericResponse = new GenericResponseWithIDs();
-        genericResponse.setId(dataProvider.addResponseFilter(responseFilter).getId());
+        final GenericResponseWithIDs genericResponse = new GenericResponseWithIDs();
+        genericResponse.setId(new ResponseFilterDAO().addResponseFilter(responseFilter).getId());
         genericResponse.setIdType("ResponseFilter ID");
         genericResponse.setMessage("ResponseFilter created successfully");
         return new Callback().setMessage("success").setPayload(genericResponse).setSuccess(true);
@@ -51,8 +50,7 @@ public class ResponseFilterService {
      * @throws BusinessException if any errors occurred while doing the database operations
      */
     public Callback findResponseFilter(String sp, String application, String api, String operation) throws BusinessException {
-        ResponseFilterDAO dataProvider = new ResponseFilterDAO();
-        ResponseFilter responseFilter = dataProvider.findResponseFilter(sp, application, api, operation);
+        final ResponseFilter responseFilter = new ResponseFilterDAO().findResponseFilter(sp, application, api, operation);
         return new Callback().setMessage("success").setPayload(responseFilter).setSuccess(true);
     }
 
@@ -64,8 +62,7 @@ public class ResponseFilterService {
      * @throws BusinessException if any errors occurred while doing the database operations
      */
     public Callback findResponseFilter(int id) throws BusinessException {
-        ResponseFilterDAO dataProvider = new ResponseFilterDAO();
-        ResponseFilter responseFilter = dataProvider.findResponseFilter(id);
+        final ResponseFilter responseFilter = new ResponseFilterDAO().findResponseFilter(id);
         return new Callback().setMessage("success").setPayload(responseFilter).setSuccess(true);
     }
 
@@ -77,9 +74,8 @@ public class ResponseFilterService {
      * @throws BusinessException if any errors occurred while doing the database operations
      */
     public Callback deleteResponseFilter(int id) throws BusinessException {
-        ResponseFilterDAO dataProvider = new ResponseFilterDAO();
-        dataProvider.deleteResponseFilter(id);
-        GenericResponseWithIDs genericResponse = new GenericResponseWithIDs();
+        new ResponseFilterDAO().deleteResponseFilter(id);
+        final GenericResponseWithIDs genericResponse = new GenericResponseWithIDs();
         genericResponse.setId(id);
         genericResponse.setIdType("ResponseFilter ID");
         genericResponse.setMessage("ResponseFilter deleted successfully");
