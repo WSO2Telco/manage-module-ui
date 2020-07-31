@@ -26,10 +26,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.wso2telco.core.dbutils.exception.BusinessException;
 import com.wso2telco.dep.manageservice.resource.service.storeapi.StoreApiService;
 import com.wso2telco.dep.manageservice.resource.util.ErrorHandler;
+import com.wso2telco.dep.manageservice.resource.util.GsonExclusionStrategy;
 
 @Path("/store-api")
 @Consumes("application/json")
@@ -42,9 +43,7 @@ public class StoreApiResource {
     @Path("/{apiId}")
     public Response find(@PathParam("apiId") String apiId) {
         try {
-            return Response.status(Response.Status.OK)
-                .entity(new StoreApiService().getApiJsonStr(apiId))
-                .build();
+            return Response.status(Response.Status.OK).entity(new StoreApiService().getApiJsonStr(apiId)).build();
         } catch (BusinessException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return ErrorHandler.createErrorResponse(e);
@@ -55,9 +54,10 @@ public class StoreApiResource {
     @Path("/{apiId}/resource-paths")
     public Response findResourcePolicies(@PathParam("apiId") String apiId) {
         try {
-            return Response.status(Response.Status.OK)
-                .entity(new Gson().toJson(new StoreApiService().getResourcePolicies(apiId)))
-                .build();
+            final String jsonString = new GsonBuilder()
+                .setExclusionStrategies(new GsonExclusionStrategy()).create()
+                .toJson(new StoreApiService().getResourcePolicies(apiId));
+            return Response.status(Response.Status.OK).entity(jsonString).build();
         } catch (BusinessException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return ErrorHandler.createErrorResponse(e);

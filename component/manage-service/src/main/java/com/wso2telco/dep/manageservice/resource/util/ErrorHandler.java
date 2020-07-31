@@ -22,6 +22,10 @@ import com.wso2telco.core.dbutils.exception.BusinessException;
 
 public class ErrorHandler {
 
+    private ErrorHandler() {
+        super();
+    }
+
     public static Response createErrorResponse(BusinessException exception) {
         final ErrorDTO.RequestError.ServiceException serviceException = new ErrorDTO.RequestError.ServiceException();
         serviceException.setMessageId(exception.getErrorType().getCode());
