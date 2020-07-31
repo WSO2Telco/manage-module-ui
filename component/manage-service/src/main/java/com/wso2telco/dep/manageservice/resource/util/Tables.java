@@ -18,7 +18,9 @@ package com.wso2telco.dep.manageservice.resource.util;
 
 public enum Tables {
 
-	RESPONSE_FILTER("response_filter");
+	RESPONSE_FILTER("response_filter"),
+	AM_API("am_api"),
+	AM_API_URL_MAPPING("am_api_url_mapping");
 
 	Tables(String tObject) {
 		this.tObject = tObject;
