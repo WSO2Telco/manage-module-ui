@@ -28,7 +28,7 @@ export class ApprovalRateFilter {
 }
 
 export class SubscriptionsHistory {
-    subscriptionId : number;
+    subscriptionId: number;
     tier: string;
     apiId: number;
     apiName: string;
@@ -61,14 +61,14 @@ export class AppHistory {
 }
 
 export class AppHistoryResponse {
-    applications: AppHistory [] = [];
+    applications: AppHistory[] = [];
     total: number;
     start: number;
     size: number;
 }
 
 export class SubscriptionHistoryResponse {
-    subscriptions: SubscriptionsHistory [] = [];
+    subscriptions: SubscriptionsHistory[] = [];
     total: number;
     start: number;
     size: number;
@@ -100,6 +100,28 @@ export class ApplicationHistory {
     status: string;
     operatorApprovals: OperatorApprovals;
     subscriptions: Subscriptions;
+}
+
+export class APIResponsePath {
+    payload: contexPathArr[];
+    status: string;
+    additionalProperties: any;
+}
+
+export class contexPathArr {
+    httpVerb: string;
+    resourcePath: string;
+}
+
+//Response Filter Model
+
+export class AddNewResponseParam {
+    sp: string;
+    application: string;
+    api: string;
+    operation: string;
+    fields: any;
+
 }
 
 export class OperatorApprovals {

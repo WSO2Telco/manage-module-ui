@@ -1,5 +1,5 @@
-import {RouterModule} from '@angular/router';
-import {AppGuard, LoginGuard, PermissionGuard} from './app.guard';
+import { RouterModule } from '@angular/router';
+import { AppGuard, LoginGuard, PermissionGuard } from './app.guard';
 
 const routes = [
   {
@@ -71,6 +71,14 @@ const routes = [
     canActivate: [PermissionGuard],
     data: {
       permissions: 'apiBlacklist,spBlackList'
+    }
+  },
+  {
+    path: 'response-filter',
+    loadChildren: 'app/response-filter/response-filter.module#ResponseFilterModule',
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'edit-tiers'
     }
   },
   {

@@ -1,0 +1,58 @@
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <div class="card card-block card-header">
+            <div class="form-container quotaInputContainer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <div class="searchFilter">
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="subscriber" [typeahead]="subscriberList"
+                                        typeaheadOptionField="name" [typeaheadMinLength]="0" type="text"
+                                        class="form-control" autocomplete="off"
+                                        (typeaheadOnSelect)="onSubscriberSelected()" (input)="onSubscriberSelected()"
+                                        placeholder="Service provider" name="subscription">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0"
+                                        type="text" class="form-control" autocomplete="off"
+                                        (typeaheadOnSelect)="onAppSelected()" (input)="onAppSelected()"
+                                        typeaheadOptionField="name" placeholder="Application" name="app">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="api" [typeaheadMinLength]="0"
+                                        (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" container="body"
+                                        [typeahead]="apiList" typeaheadOptionField="id" class="form-control"
+                                        autocomplete="off" name="api" placeholder="Select API">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input [(ngModel)]="enviorment" [typeaheadMinLength]="0"
+                                        (typeaheadOnSelect)="onenviormentSelected()" (input)="onenviormentSelected()"
+                                        container="body" [typeahead]="envList" typeaheadOptionField="httpVerb"
+                                        class="form-control" autocomplete="off" name="env"
+                                        placeholder="Enviorment Type">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="content-div" *ngIf="jdata == undefined">
+                            <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
+                                <br>
+                            </span>
+                            <h4 class="center-block halfwidth text-center">Select the Service
+                                Provider , Application and API's to proceed</h4>
+                        </div>
+                        <div class="content-div">
+                            <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
+                            <br>
+                            <button (click)="getJSON();" *ngIf="jdata != undefined" class="btn btn-primary animated fadeIn">Save the Response</button>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
