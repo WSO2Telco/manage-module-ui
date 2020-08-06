@@ -9,6 +9,7 @@ import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../comm
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions, contexPathArr } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
+import { ResponseFilterService } from '../../commons/services/response_filter.service';
 declare var JSONEditor;
 declare var require: any;
 
@@ -23,7 +24,6 @@ export class ResponseFilterComponent implements OnInit {
     public directionList;
     public direction;
     public operatorsList: string[];
-    //  public envList: string[] = ['production', 'sandbox'];
     public envList: contexPathArr[];
     public environmentURL: string;
     public isAdmin: boolean;
@@ -80,7 +80,8 @@ export class ResponseFilterComponent implements OnInit {
         private rateService: RateService,
         private authService: AuthenticationService,
         private quotaService: QuotaService,
-        private blackListWhiteListService: BlackListWhiteListService) { }
+        private blackListWhiteListService: BlackListWhiteListService,
+        private responseFilterService: ResponseFilterService) { }
 
     ngOnInit() {
         this.show = false;
@@ -98,9 +99,10 @@ export class ResponseFilterComponent implements OnInit {
 
 
         this.getOperatorList();
-        this.reportingService.getSuperToken((response, status) => {
-            this.bToken = response.token_type + ' ' + response.access_token;
-        });
+        /*        this.reportingService.getSuperToken((response, status) => {
+                   this.bToken = 'Bearer 047575c9-3353-350d-ae68-e1e3491c6d18';
+                   // this.bToken = response.token_type + ' ' + response.access_token;
+               }); */
 
     }
 
@@ -365,11 +367,10 @@ export class ResponseFilterComponent implements OnInit {
                     this.isApiSelect = true;
                     this.apiid = entry.id;
                 }
-            }/* 
-            this.onApplication(+this.appID, this.operatorId, this.apiid); */
+            }
             this.reportingService.getAPIResourcePath(this.apiid, (response, status) => {
                 if (status) {
-                    this.envList = response.payload
+                    this.mappingEnvArray(response.payload)
                     this.environmentURL = response.additionalProperties.endpointURLs[0].environmentURLs.https;
                 } else {
                     this.message.error('Error Loading Subscription History Data');
@@ -385,6 +386,11 @@ export class ResponseFilterComponent implements OnInit {
         }
     }
 
+    mappingEnvArray(data: any) {
+        this.envList = data.map(o => {
+            return { httpVerb: o.httpVerb, resourcePath: o.resourcePath, httpPathCom: o.httpVerb + ' ' + o.resourcePath };
+        });
+    }
     /**
     * when and API Operation value is selected form drop down
     * @param event
@@ -392,39 +398,99 @@ export class ResponseFilterComponent implements OnInit {
     onenviormentSelected() {
         let invalid = true;
         let contextPath;
+        let httpVerb;
 
         for (const item of this.envList) {
-            if (item.httpVerb == this.enviorment) {
+            if (item.httpPathCom == this.enviorment) {
                 invalid = false;
                 contextPath = this.environmentURL + item.resourcePath;
+                httpVerb = item.httpVerb
 
             }
         }
 
         if (!invalid) {
-            this.reportingService.getResponseByAPIOperation(contextPath, this.bToken, (response, status) => {
-                if (status) {
-                    this.jdata = response;
-                    if (this.renderCount == 0) {
 
-                        var container = document.getElementById("jsoneditor");
-                        var options = {
-                            mode: 'tree'
-                        };
-                        this.jconainer = new JSONEditor(container, options);
-                        this.jconainer.set(this.jdata);
-                        this.renderCount = 1;
-                    } else {
-                        this.jconainer.set(this.jdata);
-                    }
-
-
-                } else {
-                    this.message.error('Error Loading Response');
-                }
+            this.reportingService.getSuperToken().then((result) => {
+                this.bToken = result.token_type + ' ' + result.access_token;
+                this.invokeUserAction(contextPath, httpVerb)
+            }).catch((err) => {
+                console.log(err);
             });
         }
 
+    }
+
+    invokeUserAction(contextPath: string, httpVerb: string) {
+        if (httpVerb == 'POST') {
+
+            const data = {
+            };
+
+            this.responseFilterService.PostInvokeAPI(contextPath, data, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error(response.message);
+                    this.jdata = '';
+                }
+                this.RenderingResponseEditor();
+            });
+        } else if (httpVerb == 'GET') {
+
+            this.responseFilterService.GetInvokeAPI(contextPath, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error('Error Loading Response');
+                    this.jdata = '';
+                }
+                this.RenderingResponseEditor();
+            });
+
+        } else if (httpVerb == 'DELETE') {
+
+            const data = {
+            };
+
+            this.responseFilterService.DeleteInvokeAPI(contextPath, data, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error(response.message);
+                    this.jdata = '';
+                }
+                this.RenderingResponseEditor();
+            });
+        } else if (httpVerb == 'PUT') {
+
+            const data = {
+            };
+
+            this.responseFilterService.PutInvokeAPI(contextPath, data, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error(response.message);
+                    this.jdata = '';
+                }
+                this.RenderingResponseEditor();
+            });
+        }
+    }
+
+    RenderingResponseEditor() {
+        if (this.renderCount == 0) {
+            var container = document.getElementById("jsoneditor");
+            var options = {
+                mode: 'tree'
+            };
+            this.jconainer = new JSONEditor(container, options);
+            this.jconainer.set(this.jdata);
+            this.renderCount = 1;
+        } else {
+            this.jconainer.set(this.jdata);
+        }
     }
 
     /**

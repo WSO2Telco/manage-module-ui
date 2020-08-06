@@ -104,18 +104,12 @@ export class ReportingRemoteDataService {
             );
     }
 
-    getSuperToken(callback: Function) {
-        this.http.get(this.apiEndpoints['superToken'], this.getOptions())
-            .map((response: Response) => response.json())
-            .subscribe(
-                (tokenResponse: any) => {
-                    callback(tokenResponse, true);
-                },
-                (error) => {
-                    this.message.error(error);
-                    callback(error, false);
-                }
-            );
+    getSuperToken(): Promise<any> {
+        return this.http.get(this.apiEndpoints['superToken'], this.getOptions())
+            .toPromise()
+            .then((res: Response) => {
+                return res.json();
+            });
     }
 
     getAPIResourcePath(apiid: string, callback: Function) {
@@ -134,19 +128,100 @@ export class ReportingRemoteDataService {
     }
 
 
-    getResponseByAPIOperation(endpoint: string, btoken: string, callback: Function) {
-        this.http.get(endpoint, this.setApiInvokeOptions(btoken))
-            .map((response: Response) => response.json())
-            .subscribe(
-                (apiResponse: any) => {
-                    callback(apiResponse, true);
-                },
-                (error) => {
-                    this.message.error(error);
-                    callback(error, false);
+    getResponseByAPIOperation(endpoint: string, btoken: string) {
+        return this.http.get(endpoint, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if (response.status == 200) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error While Invoking API Operation',
+                    };
                 }
-            );
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Invoking API Operation',
+                error: error
+            }));
     }
+
+    /**
+    * to POST API invokation
+    * @param value
+    * @returns {Observable<R>}
+    */
+    PostResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200)|| (response.status == 201)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
+
+
+    /**
+    * to PUT API invokation
+    * @param value
+    * @returns {Observable<R>}
+    */
+    PutResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.put(endpoint, data, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200)|| (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
+
+
+    /**
+        * to DELETE API invokation
+        * @param value
+        * @returns {Observable<R>}
+        */
+    DeleteResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200)|| (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
+
 
     getSubscribers() {
         this.slimLoadingBarService.start();

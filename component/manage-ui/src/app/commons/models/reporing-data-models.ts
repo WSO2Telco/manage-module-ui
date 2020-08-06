@@ -111,6 +111,7 @@ export class APIResponsePath {
 export class contexPathArr {
     httpVerb: string;
     resourcePath: string;
+    httpPathCom: string;
 }
 
 //Response Filter Model
