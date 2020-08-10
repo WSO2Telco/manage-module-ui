@@ -10,6 +10,7 @@ import { BlackListWhiteListService } from "../../commons/services/blacklist_whit
 import { Subscriptions, contexPathArr } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
 import { ResponseFilterService } from '../../commons/services/response_filter.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 declare var JSONEditor;
 declare var require: any;
 
@@ -19,6 +20,7 @@ declare var require: any;
     styleUrls: ['./response-filter.component.scss']
 })
 export class ResponseFilterComponent implements OnInit {
+    @ViewChild('lgModal') public modal: ModalDirective;
     private id: number;
     private show: boolean;
     public directionList;
@@ -73,6 +75,8 @@ export class ResponseFilterComponent implements OnInit {
     private jdata: any;
     public jconainer: any;
     public renderCount: number = 0;
+    private contextPath: string;
+    private httpVerb: string;
 
     constructor(private router: Router,
         private reportingService: ReportingRemoteDataService,
@@ -397,37 +401,39 @@ export class ResponseFilterComponent implements OnInit {
     */
     onenviormentSelected() {
         let invalid = true;
-        let contextPath;
-        let httpVerb;
 
         for (const item of this.envList) {
             if (item.httpPathCom == this.enviorment) {
                 invalid = false;
-                contextPath = this.environmentURL + item.resourcePath;
-                httpVerb = item.httpVerb
+                this.contextPath = this.environmentURL + item.resourcePath;
+                this.httpVerb = item.httpVerb
 
             }
         }
 
         if (!invalid) {
-
-            this.reportingService.getSuperToken().then((result) => {
-                this.bToken = result.token_type + ' ' + result.access_token;
-                this.invokeUserAction(contextPath, httpVerb)
-            }).catch((err) => {
-                console.log(err);
-            });
+            this.modal.show();
         }
 
     }
 
-    invokeUserAction(contextPath: string, httpVerb: string) {
+    /**
+    * event handler method which is triggered when a payload set
+    * @param event
+    */
+    onSetPayloadHandler(event: any) {
+        this.reportingService.getSuperToken(event.enviormentName).then((result) => {
+            this.bToken = result.token_type + ' ' + result.access_token;
+            this.invokeUserAction(this.contextPath, this.httpVerb, event.payloadBody)
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
+    invokeUserAction(contextPath: string, httpVerb: string, body: any) {
         if (httpVerb == 'POST') {
 
-            const data = {
-            };
-
-            this.responseFilterService.PostInvokeAPI(contextPath, data, this.bToken, (response) => {
+            this.responseFilterService.PostInvokeAPI(contextPath, body, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -438,7 +444,7 @@ export class ResponseFilterComponent implements OnInit {
             });
         } else if (httpVerb == 'GET') {
 
-            this.responseFilterService.GetInvokeAPI(contextPath, this.bToken, (response) => {
+            this.responseFilterService.GetInvokeAPI(contextPath, this.bToken, body, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -450,10 +456,7 @@ export class ResponseFilterComponent implements OnInit {
 
         } else if (httpVerb == 'DELETE') {
 
-            const data = {
-            };
-
-            this.responseFilterService.DeleteInvokeAPI(contextPath, data, this.bToken, (response) => {
+            this.responseFilterService.DeleteInvokeAPI(contextPath, body, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -464,10 +467,7 @@ export class ResponseFilterComponent implements OnInit {
             });
         } else if (httpVerb == 'PUT') {
 
-            const data = {
-            };
-
-            this.responseFilterService.PutInvokeAPI(contextPath, data, this.bToken, (response) => {
+            this.responseFilterService.PutInvokeAPI(contextPath, body, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -528,4 +528,5 @@ export class ResponseFilterComponent implements OnInit {
         });
 
     }
+
 }
