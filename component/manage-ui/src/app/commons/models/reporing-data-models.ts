@@ -125,6 +125,11 @@ export class AddNewResponseParam {
 
 }
 
+export class payloadParam {
+    enviormentName: string;
+    payloadBody: string
+}
+
 export class OperatorApprovals {
     operatorName: string;
     approvalStatus: string;
