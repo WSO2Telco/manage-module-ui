@@ -23,10 +23,12 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 import com.wso2telco.core.dbutils.exception.BusinessException;
 import com.wso2telco.dep.manageservice.resource.service.supertoken.SuperTokenService;
+import com.wso2telco.dep.manageservice.resource.util.Environment;
 import com.wso2telco.dep.manageservice.resource.util.ErrorHandler;
 
 @Path("/super-token")
@@ -37,9 +39,9 @@ public class SuperTokenResource {
     private static final Logger logger = Logger.getLogger(SuperTokenResource.class.getName());
 
     @GET
-    public Response generate() {
+    public Response generate(@QueryParam("environment") Environment environment) {
         try {
-            return Response.status(Response.Status.OK).entity(new SuperTokenService().generate()).build();
+            return Response.status(Response.Status.OK).entity(new SuperTokenService().generate(environment)).build();
         } catch (BusinessException e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
             return ErrorHandler.createErrorResponse(e);
