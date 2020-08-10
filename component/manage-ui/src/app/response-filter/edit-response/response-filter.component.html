@@ -45,18 +45,43 @@
                                 Provider , Application and API's to proceed</h4>
                         </div>
                         <div class="content-div">
-                            <span  *ngIf="jdata == ''" class="glyphicon glyphicon-question-sign center-block quarterwidth noApiSet">
+                            <span *ngIf="jdata == ''"
+                                class="glyphicon glyphicon-question-sign center-block quarterwidth noApiSet">
                                 <br>
                                 <h4 class="center-block halfwidth text-center">Something wrong</h4>
                             </span>
-                            
+
                             <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
                             <br>
-                            <button (click)="getJSON();" *ngIf="jdata != undefined && jdata != ''" class="btn btn-primary animated fadeIn">Save the Response</button>
+                            <button (click)="getJSON();" *ngIf="jdata != undefined && jdata != ''"
+                                class="btn btn-primary animated fadeIn">Save the Response</button>
                         </div>
-                       
+
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-----Getting Additonal property from Popup ------>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Additional Properties</h4>
+                <button type="button" class="close pull-right" (click)="lgModal.hide();"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <app-response-filter-payload [httpTypes]="httpVerb" (onSetAdditionalParam)="onSetPayloadHandler($event)"
+                    (modalClose)="lgModal.hide();"></app-response-filter-payload>
+
             </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ import {SharedModule} from "../shared/shared.module";
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import {TooltipModule} from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { responseFilterPayloadComponent } from './edit-response-payload/response-filter-payload.component';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
         TabsModule.forRoot()
     ],
     declarations: [
-        ResponseFilterComponent
+        ResponseFilterComponent,
+        responseFilterPayloadComponent
         ]
 })
 export class ResponseFilterModule {
