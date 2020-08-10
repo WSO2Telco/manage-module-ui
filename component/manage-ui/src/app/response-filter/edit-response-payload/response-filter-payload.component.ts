@@ -10,6 +10,7 @@ import { payloadParam } from '../../commons/models/reporing-data-models';
 export class responseFilterPayloadComponent implements OnInit {
 
     private payloadDesc: string;
+    private urlParamDesc: string;
 
     private list: payloadParam;
 
@@ -30,7 +31,8 @@ export class responseFilterPayloadComponent implements OnInit {
 
     ngOnInit() {
         this.payloadDesc = '';
-       
+        this.urlParamDesc = '';
+
     }
 
     /**
@@ -42,6 +44,7 @@ export class responseFilterPayloadComponent implements OnInit {
 
         this.list.enviormentName = this.selectedEnv;
         this.list.payloadBody = this.payloadDesc;
+        this.list.urlParam = this.urlParamDesc;
 
         this.onSetAdditionalParam.emit(this.list);
         this.modalClose.emit(true);

@@ -7,7 +7,7 @@ import { AuthenticationService } from '../../commons/services/authentication.ser
 import { QuotaService } from '../../commons/services/quotacap.service';
 import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../commons/models/common-data-models';
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
-import { Subscriptions, contexPathArr } from '../../commons/models/reporing-data-models';
+import { Subscriptions, contexPathArr, payloadParam } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
 import { ResponseFilterService } from '../../commons/services/response_filter.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -421,19 +421,19 @@ export class ResponseFilterComponent implements OnInit {
     * event handler method which is triggered when a payload set
     * @param event
     */
-    onSetPayloadHandler(event: any) {
+    onSetPayloadHandler(event: payloadParam) {
         this.reportingService.getSuperToken(event.enviormentName).then((result) => {
             this.bToken = result.token_type + ' ' + result.access_token;
-            this.invokeUserAction(this.contextPath, this.httpVerb, event.payloadBody)
+            this.invokeUserAction(this.contextPath, this.httpVerb, event)
         }).catch((err) => {
             console.log(err);
         });
     }
 
-    invokeUserAction(contextPath: string, httpVerb: string, body: any) {
+    invokeUserAction(contextPath: string, httpVerb: string, OtherParam: payloadParam) {
         if (httpVerb == 'POST') {
 
-            this.responseFilterService.PostInvokeAPI(contextPath, body, this.bToken, (response) => {
+            this.responseFilterService.PostInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -444,7 +444,7 @@ export class ResponseFilterComponent implements OnInit {
             });
         } else if (httpVerb == 'GET') {
 
-            this.responseFilterService.GetInvokeAPI(contextPath, this.bToken, body, (response) => {
+            this.responseFilterService.GetInvokeAPI(contextPath + OtherParam.urlParam, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -456,7 +456,7 @@ export class ResponseFilterComponent implements OnInit {
 
         } else if (httpVerb == 'DELETE') {
 
-            this.responseFilterService.DeleteInvokeAPI(contextPath, body, this.bToken, (response) => {
+            this.responseFilterService.DeleteInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -467,7 +467,7 @@ export class ResponseFilterComponent implements OnInit {
             });
         } else if (httpVerb == 'PUT') {
 
-            this.responseFilterService.PutInvokeAPI(contextPath, body, this.bToken, (response) => {
+            this.responseFilterService.PutInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
