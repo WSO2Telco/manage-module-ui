@@ -33,6 +33,7 @@ import { httpFactory } from '@angular/http/src/http_module';
 import {SubscriptionRemoteDataService} from "./data-providers/subscription-remote-data.service";
 import { ThemeService } from './commons/services/theme.service';
 import { ThemeRemoteDataService } from './data-providers/theme_remote-data.service';
+import { ResponseFilterService } from './commons/services/response_filter.service';
 
 @NgModule({
     declarations: [
@@ -85,7 +86,8 @@ import { ThemeRemoteDataService } from './data-providers/theme_remote-data.servi
             provide : 'API_CONTEXT',
             useValue : 'api'
         },
-        ThemeService
+        ThemeService,
+        ResponseFilterService
     ],
     bootstrap: [AppComponent]
 })

@@ -28,7 +28,7 @@
                                 <div class="col-sm-3">
                                     <input [(ngModel)]="enviorment" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onenviormentSelected()" (input)="onenviormentSelected()"
-                                        container="body" [typeahead]="envList" typeaheadOptionField="httpVerb"
+                                        container="body" [typeahead]="envList" typeaheadOptionField="httpPathCom"
                                         class="form-control" autocomplete="off" name="env"
                                         placeholder="Enviorment Type">
                                 </div>
@@ -45,9 +45,14 @@
                                 Provider , Application and API's to proceed</h4>
                         </div>
                         <div class="content-div">
+                            <span  *ngIf="jdata == ''" class="glyphicon glyphicon-question-sign center-block quarterwidth noApiSet">
+                                <br>
+                                <h4 class="center-block halfwidth text-center">Something wrong</h4>
+                            </span>
+                            
                             <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
                             <br>
-                            <button (click)="getJSON();" *ngIf="jdata != undefined" class="btn btn-primary animated fadeIn">Save the Response</button>
+                            <button (click)="getJSON();" *ngIf="jdata != undefined && jdata != ''" class="btn btn-primary animated fadeIn">Save the Response</button>
                         </div>
                        
                     </div>
