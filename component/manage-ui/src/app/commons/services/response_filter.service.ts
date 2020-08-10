@@ -12,7 +12,7 @@ export class ResponseFilterService {
 
   PostInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
-    this._remoteService.PostResponseByAPIOperation(endpoint, data, 'Bearer 8e83ca22-a2bc-3046-b718-6e9337abf00d')
+    this._remoteService.PostResponseByAPIOperation(endpoint, data, btoken)
       .subscribe(
         response => {
           callback(response);
@@ -28,7 +28,7 @@ export class ResponseFilterService {
 
   GetInvokeAPI(endpoint: string, btoken: string, body: string, callback: Function) {
     this.slimLoadingBarService.start();
-    this._remoteService.getResponseByAPIOperation(endpoint + body, 'Bearer 8e83ca22-a2bc-3046-b718-6e9337abf00d')
+    this._remoteService.getResponseByAPIOperation(endpoint + body, btoken)
       .subscribe(
         response => {
           callback(response);
@@ -44,7 +44,7 @@ export class ResponseFilterService {
 
   PutInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
-    this._remoteService.PutResponseByAPIOperation(endpoint, data, 'Bearer 8e83ca22-a2bc-3046-b718-6e9337abf00d')
+    this._remoteService.PutResponseByAPIOperation(endpoint, data, btoken)
       .subscribe(
         response => {
           callback(response);
