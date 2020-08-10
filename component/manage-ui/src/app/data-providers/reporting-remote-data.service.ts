@@ -104,8 +104,8 @@ export class ReportingRemoteDataService {
             );
     }
 
-    getSuperToken(): Promise<any> {
-        return this.http.get(this.apiEndpoints['superToken'], this.getOptions())
+    getSuperToken(env: string): Promise<any> {
+        return this.http.get(this.apiEndpoints['superToken'] + '?environment=' + env.toUpperCase(), this.getOptions())
             .toPromise()
             .then((res: Response) => {
                 return res.json();
@@ -159,7 +159,7 @@ export class ReportingRemoteDataService {
     PostResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
         return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
-                if ((response.status == 200)|| (response.status == 201)) {
+                if ((response.status == 200) || (response.status == 201)) {
                     return {
                         success: true,
                         message: 'Successfully Invoked API Operation',
@@ -183,7 +183,7 @@ export class ReportingRemoteDataService {
     PutResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
         return this.http.put(endpoint, data, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
-                if ((response.status == 200)|| (response.status == 204)) {
+                if ((response.status == 200) || (response.status == 204)) {
                     return {
                         success: true,
                         message: 'Successfully Invoked API Operation',
@@ -207,7 +207,7 @@ export class ReportingRemoteDataService {
     DeleteResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
         return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
-                if ((response.status == 200)|| (response.status == 204)) {
+                if ((response.status == 200) || (response.status == 204)) {
                     return {
                         success: true,
                         message: 'Successfully Invoked API Operation',
