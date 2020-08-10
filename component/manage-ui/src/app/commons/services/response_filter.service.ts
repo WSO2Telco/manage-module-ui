@@ -26,9 +26,9 @@ export class ResponseFilterService {
       );
   }
 
-  GetInvokeAPI(endpoint: string, btoken: string, body: string, callback: Function) {
+  GetInvokeAPI(endpoint: string, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
-    this._remoteService.getResponseByAPIOperation(endpoint + body, btoken)
+    this._remoteService.getResponseByAPIOperation(endpoint, btoken)
       .subscribe(
         response => {
           callback(response);

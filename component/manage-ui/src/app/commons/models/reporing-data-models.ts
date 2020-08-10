@@ -127,7 +127,8 @@ export class AddNewResponseParam {
 
 export class payloadParam {
     enviormentName: string;
-    payloadBody: string
+    payloadBody: string;
+    urlParam:string;
 }
 
 export class OperatorApprovals {
