@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.wso2telco.core.dbutils.exception.BusinessException;
+import com.wso2telco.dep.manageservice.resource.util.Environment;
 import com.wso2telco.dep.manageservice.resource.util.PropertyUtil;
 import org.apache.http.NameValuePair;
 import org.apache.http.auth.AuthScope;
@@ -47,10 +48,11 @@ public class SuperTokenService {
      * in super-token-conf.properties file. The credentials should not disclosed to anyone and should be a super secret
      * since any API could be invoked using that credentials without having a valid subscription.
      *
+     * @param environment either PRODUCTION or SANDBOX. This will be used for pick the correct consumer keys
      * @return String JSON representation of super token object
      * @throws BusinessException if any error occurred while generating the token
      */
-    public String generate() throws BusinessException {
+    public String generate(Environment environment) throws BusinessException {
         final Properties superTokenConf = PropertyUtil.superTokenProperties();
 
         HttpPost request = new HttpPost(gatewayUrl());
@@ -60,8 +62,8 @@ public class SuperTokenService {
 
         CredentialsProvider provider = new BasicCredentialsProvider();
         provider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(
-            superTokenConf.getProperty("super.token.consumer.key"),
-            superTokenConf.getProperty("super.token.consumer.secret")
+            superTokenConf.getProperty("super.token." + environment.toString() + ".consumer.key"),
+            superTokenConf.getProperty("super.token." + environment.toString() + ".consumer.secret")
         ));
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().setDefaultCredentialsProvider(provider).build();
              CloseableHttpResponse response = httpClient.execute(request)) {
