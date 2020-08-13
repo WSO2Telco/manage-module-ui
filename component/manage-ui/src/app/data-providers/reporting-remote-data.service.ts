@@ -129,7 +129,6 @@ export class ReportingRemoteDataService {
 
 
     getResponseByAPIOperation(endpoint: string, btoken: string) {
-        console.log('hit')
         return this.http.get(endpoint, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
                 if (response.status == 200) {
