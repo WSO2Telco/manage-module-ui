@@ -27,7 +27,8 @@ export class ResponseFilterComponent implements OnInit {
     public direction;
     public operatorsList: string[];
     public envList: contexPathArr[];
-    public environmentURL: string;
+    public prodEnvironmentURL: string;
+    public sandboxEnvironmentURL: string;
     public isAdmin: boolean;
     public loggeduser: string;
     public subscriberList;
@@ -375,7 +376,8 @@ export class ResponseFilterComponent implements OnInit {
             this.reportingService.getAPIResourcePath(this.apiid, (response, status) => {
                 if (status) {
                     this.mappingEnvArray(response.payload)
-                    this.environmentURL = response.additionalProperties.endpointURLs[0].environmentURLs.https;
+                    this.prodEnvironmentURL = response.additionalProperties.endpointURLs[0].environmentURLs.https;
+                    this.sandboxEnvironmentURL = response.additionalProperties.endpointURLs[0].environmentURLs.http;
                 } else {
                     this.message.error('Error Loading Subscription History Data');
                 }
@@ -405,7 +407,12 @@ export class ResponseFilterComponent implements OnInit {
         for (const item of this.envList) {
             if (item.httpPathCom == this.enviorment) {
                 invalid = false;
-                this.contextPath = this.environmentURL + item.resourcePath;
+                if (item.resourcePath != '/*') {
+                    this.contextPath = item.resourcePath;
+                } else {
+                    this.contextPath = ''
+                }
+
                 this.httpVerb = item.httpVerb
 
             }
@@ -422,6 +429,11 @@ export class ResponseFilterComponent implements OnInit {
     * @param event
     */
     onSetPayloadHandler(event: payloadParam) {
+        if (event.enviormentName == 'production') {
+            this.contextPath = this.prodEnvironmentURL + this.contextPath;
+        } else {
+            this.contextPath = this.sandboxEnvironmentURL + this.contextPath;
+        }
         this.reportingService.getSuperToken(event.enviormentName).then((result) => {
             this.bToken = result.token_type + ' ' + result.access_token;
             this.invokeUserAction(this.contextPath, this.httpVerb, event)
