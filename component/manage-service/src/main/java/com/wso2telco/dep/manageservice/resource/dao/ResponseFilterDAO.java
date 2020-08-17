@@ -38,7 +38,7 @@ public class ResponseFilterDAO {
     private static final Logger logger = Logger.getLogger(ResponseFilterDAO.class.getName());
 
     /**
-     * Add a response filter record to the database
+     * Add (or update) a response filter record to the database
      *
      * @param responseFilter responseFilter record need to be added
      * @return responseFilter object added to the database with generated id
@@ -46,13 +46,8 @@ public class ResponseFilterDAO {
      */
     public ResponseFilter addResponseFilter(ResponseFilter responseFilter) throws BusinessException {
         if (isInvalidResponseFilter(responseFilter)) {
+            logger.log(Level.SEVERE, "Invalid response filter parameters");
             throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
-        }
-
-        if (this.findResponseFilter(responseFilter.getSp(), responseFilter.getApplication(),
-                responseFilter.getApi(), responseFilter.getOperation()) != null){
-            logger.log(Level.SEVERE, "Response filter already exists");
-            throw new BusinessException(ServiceError.INVALID_INPUT_VALUE);
         }
 
         Connection connection = null;
@@ -62,25 +57,37 @@ public class ResponseFilterDAO {
         try {
             connection = DbUtils.getDbConnection(DataSourceNames.WSO2TELCO_DEP_DB);
             if (connection == null) {
-                logger.log(Level.SEVERE, "unable to open {} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
+                logger.log(Level.SEVERE, "unable to open {0} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
-
-            final StringBuilder query = new StringBuilder("INSERT INTO ");
-            query.append(Tables.RESPONSE_FILTER.getTObject());
-            query.append(" (sp, application, api, operation, fields) values (?, ?, ?, ?, ?)");
-            statement = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, responseFilter.getSp());
-            statement.setString(2, responseFilter.getApplication());
-            statement.setString(3, responseFilter.getApi());
-            statement.setString(4, responseFilter.getOperation());
-            statement.setString(5, responseFilter.getFields().toString());
-            logger.log(Level.INFO, "sql query in addResponseFilter : {}", statement);
-            statement.executeUpdate();
-            resultSet = statement.getGeneratedKeys();
-
-            while (resultSet.next()) {
-                responseFilter.setId(resultSet.getInt(1));
+            ResponseFilter existingRf = this.findResponseFilter(responseFilter.getSp(), responseFilter.getApplication(),
+                    responseFilter.getApi(), responseFilter.getOperation());
+            if (existingRf != null) {
+                final StringBuilder query = new StringBuilder("UPDATE ");
+                query.append(Tables.RESPONSE_FILTER.getTObject());
+                query.append(" SET fields = ? WHERE id = ?");
+                statement = connection.prepareStatement(query.toString());
+                statement.setString(1, responseFilter.getFields().toString());
+                statement.setInt(2, existingRf.getId());
+                logger.log(Level.INFO, "sql query in addResponseFilter : {0}", statement);
+                statement.executeUpdate();
+                responseFilter.setId(existingRf.getId());
+            } else {
+                final StringBuilder query = new StringBuilder("INSERT INTO ");
+                query.append(Tables.RESPONSE_FILTER.getTObject());
+                query.append(" (sp, application, api, operation, fields) values (?, ?, ?, ?, ?)");
+                statement = connection.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
+                statement.setString(1, responseFilter.getSp());
+                statement.setString(2, responseFilter.getApplication());
+                statement.setString(3, responseFilter.getApi());
+                statement.setString(4, responseFilter.getOperation());
+                statement.setString(5, responseFilter.getFields().toString());
+                logger.log(Level.INFO, "sql query in addResponseFilter : {0}", statement);
+                statement.executeUpdate();
+                resultSet = statement.getGeneratedKeys();
+                while (resultSet.next()) {
+                    responseFilter.setId(resultSet.getInt(1));
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "database operation error in addResponseFilter : ", e);
@@ -117,7 +124,7 @@ public class ResponseFilterDAO {
         try {
             connection = DbUtils.getDbConnection(DataSourceNames.WSO2TELCO_DEP_DB);
             if (connection == null) {
-                logger.log(Level.SEVERE, "unable to open {} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
+                logger.log(Level.SEVERE, "unable to open {0} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
@@ -173,7 +180,7 @@ public class ResponseFilterDAO {
         try {
             connection = DbUtils.getDbConnection(DataSourceNames.WSO2TELCO_DEP_DB);
             if (connection == null) {
-                logger.log(Level.SEVERE, "unable to open {} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
+                logger.log(Level.SEVERE, "unable to open {0} database connection", DataSourceNames.WSO2TELCO_DEP_DB);
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
@@ -225,7 +232,7 @@ public class ResponseFilterDAO {
             connection = DbUtils.getDbConnection(DataSourceNames.WSO2TELCO_DEP_DB);
             if (connection == null) {
                 DataSourceNames wso2telcoDepDb = DataSourceNames.WSO2TELCO_DEP_DB;
-                logger.log(Level.SEVERE, "unable to open {} database connection", wso2telcoDepDb);
+                logger.log(Level.SEVERE, "unable to open {0} database connection", wso2telcoDepDb);
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
