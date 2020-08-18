@@ -10,6 +10,23 @@ export class ResponseFilterService {
     private slimLoadingBarService: SlimLoadingBarService) {
   }
 
+
+  GetFilteredDataBYAPIID(appname: string,sp: string, apiname: string, operation: string, callback: Function) {
+    this.slimLoadingBarService.start();
+    this._remoteService.getFilteredResponseByAPIID(appname,sp,apiname,operation)
+      .subscribe(
+        response => {
+          callback(response.payload);
+        },
+        error => {
+          callback(error);
+        },
+        () => {
+          this.slimLoadingBarService.complete();
+        }
+      );
+  }
+
   PostInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
     this._remoteService.PostResponseByAPIOperation(endpoint, data, btoken)
@@ -61,6 +78,23 @@ export class ResponseFilterService {
   DeleteInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
     this._remoteService.DeleteResponseByAPIOperation(endpoint, data, btoken)
+      .subscribe(
+        response => {
+          callback(response);
+        },
+        error => {
+          callback(error);
+        },
+        () => {
+          this.slimLoadingBarService.complete();
+        }
+      );
+  }
+
+
+  DeleteResponseFilteredEntry(id: string, callback: Function) {
+    this.slimLoadingBarService.start();
+    this._remoteService.DeleteFilteredAPIOperation(id)
       .subscribe(
         response => {
           callback(response);
