@@ -127,6 +127,29 @@ export class ReportingRemoteDataService {
             );
     }
 
+    getFilteredResponseByAPIID(appname: string, sp: string, apiname: string, operation: string) {
+        return this.http.get(this.apiEndpoints['newApiResponseFilter'] + '?application=' + appname + '&sp=' + sp + '&api=' + apiname + '&operation=' + operation, this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 200) {
+                    return {
+                        success: true,
+                        message: 'This is already filtered API',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Not Filtered',
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Getting filtered data',
+                error: error
+            }));
+    }
+
 
     getResponseByAPIOperation(endpoint: string, btoken: string) {
         return this.http.get(endpoint, this.setApiInvokeOptions(btoken))
@@ -205,7 +228,7 @@ export class ReportingRemoteDataService {
         * @returns {Observable<R>}
         */
     DeleteResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
-        return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
+        return this.http.delete(endpoint, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
                 if ((response.status == 200) || (response.status == 204)) {
                     return {
@@ -365,6 +388,30 @@ export class ReportingRemoteDataService {
             .catch((error: Response) => Observable.throw({
                 success: false,
                 message: 'Error Adding Modified Response',
+                error: error
+            }));
+    }
+
+
+    /**
+       * to DELETE API invokation
+       * @param value
+       * @returns {Observable<R>}
+       */
+    DeleteFilteredAPIOperation(id: string) {
+        return this.http.delete(this.apiEndpoints['newApiResponseFilter'] + '/' + id, this.getOptions())
+            .map((response: Response) => {
+                if ((response.status == 200) || (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Deleted the filtered API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Deleting Filtred API Operation',
                 error: error
             }));
     }
