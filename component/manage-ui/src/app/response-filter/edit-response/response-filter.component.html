@@ -50,7 +50,11 @@
                                 <br>
                                 <h4 class="center-block halfwidth text-center">Something wrong</h4>
                             </span>
-
+                            <p *ngIf="isFilteredOperation" class="bg-info notifyDiv"><span
+                                    class=" glyphicon glyphicon-info-sign"></span> This API
+                                operation already filtered. &nbsp;&nbsp; <button class="btn btn-danger"
+                                    (click)="onReset()">Reset
+                                </button></p>
                             <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
                             <br>
                             <button (click)="getJSON();" *ngIf="jdata != undefined && jdata != ''"
@@ -72,8 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title pull-left">Additional Properties</h4>
-                <button type="button" class="close pull-right" (click)="lgModal.hide();"
-                    aria-label="Close">
+                <button type="button" class="close pull-right" (click)="lgModal.hide();" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>

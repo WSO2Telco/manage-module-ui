@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, ViewChild, ElementRef, OnChanges, AfterViewInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ReportingRemoteDataService } from '../../data-providers/reporting-remote-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../../commons/services/message.service';
 import { RateService } from "../../commons/services/rate.service";
 import { AuthenticationService } from '../../commons/services/authentication.service';
 import { QuotaService } from '../../commons/services/quotacap.service';
-import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../commons/models/common-data-models';
+import { Api, Application, Operator } from '../../commons/models/common-data-models';
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions, contexPathArr, payloadParam } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
@@ -27,6 +27,7 @@ export class ResponseFilterComponent implements OnInit {
     public direction;
     public operatorsList: string[];
     public envList: contexPathArr[];
+    public filteredList: any;
     public prodEnvironmentURL: string;
     public sandboxEnvironmentURL: string;
     public isAdmin: boolean;
@@ -40,6 +41,7 @@ export class ResponseFilterComponent implements OnInit {
     public operator: string;
     public operatorId: string;
     public isadminresult: boolean;
+    private isFilteredOperation: boolean = false;
 
     private subscriberError: string;
     private applicationError: string;
@@ -420,6 +422,14 @@ export class ResponseFilterComponent implements OnInit {
 
         if (!invalid) {
             this.modal.show();
+            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.enviorment, (response) => {
+                if (response.success) {
+
+                    this.filteredList = response.payload;
+                } else {
+                    this.message.error(response.message);
+                }
+            });
         }
 
     }
@@ -463,6 +473,7 @@ export class ResponseFilterComponent implements OnInit {
                     this.message.error('Error Loading Response');
                     this.jdata = '';
                 }
+
                 this.RenderingResponseEditor();
             });
 
@@ -492,17 +503,43 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     RenderingResponseEditor() {
+        if (this.filteredList) {
+            this.isFilteredOperation = true;
+            var filter = require('uber-json-schema-filter');
+            var results = filter(this.filteredList.fields, this.jdata);
+            this.RenderingResponseEditorBaseOnStatus(results)
+        } else {
+            this.isFilteredOperation = false;
+            this.RenderingResponseEditorBaseOnStatus(this.jdata)
+        }
+
+    }
+
+    RenderingResponseEditorBaseOnStatus(data: any) {
         if (this.renderCount == 0) {
             var container = document.getElementById("jsoneditor");
             var options = {
                 mode: 'tree'
             };
             this.jconainer = new JSONEditor(container, options);
-            this.jconainer.set(this.jdata);
+            this.jconainer.set(data);
             this.renderCount = 1;
         } else {
-            this.jconainer.set(this.jdata);
+            this.jconainer.set(data);
         }
+    }
+
+    onReset() {
+
+        this.responseFilterService.DeleteResponseFilteredEntry(this.filteredList.id, (response) => {
+            if (response.success) {
+                this.filteredList = undefined;
+                this.message.success(response.message);
+            } else {
+                this.message.error(response.message);
+            }
+            this.RenderingResponseEditor();
+        });
     }
 
     /**
@@ -534,6 +571,14 @@ export class ResponseFilterComponent implements OnInit {
         this.reportingService.persitResponseFilter(this.subscriber, this.app, this.api, this.enviorment, schema, (response) => {
             if (response.success) {
                 this.message.success('Modified Response Successfully Saved');
+                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.enviorment, (response) => {
+                    if (response.success) {
+                        this.filteredList = response.payload;
+                        this.isFilteredOperation = true;
+                    } else {
+                        this.message.error(response.message);
+                    }
+                });
             } else {
                 this.message.error(response.message);
             }
