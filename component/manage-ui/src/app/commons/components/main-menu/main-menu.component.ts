@@ -29,7 +29,7 @@ export class MainMenuComponent implements OnInit {
         { id: 12, route: '/blacklist/apiwise', name: 'API Wise Blacklist', position: 'child', iconName: 'developer_board', pattern: 'apiBlacklist' },
         { id: 13, route: '/blacklist/spwise', name: 'Sp Wise Blacklist', position: 'child', iconName: 'dns', pattern: 'spBlackList' },
         { id: 14, route: '/whitelist', name: 'Whitelist', position: 'parent', iconName: 'phonelink_ring', pattern: 'whiteList' },
-        { id: 15, route: '/edit-subscription-rate', name: 'Edit Subscription(Rate)', position: 'parent', iconName: 'assignment', pattern: 'edit-subscription-rate' },
+        { id: 15, route: '/edit-subscription-rate', name: 'Edit Subscription(Rate)', position: 'parent', iconName: 'card_travel', pattern: 'edit-subscription-rate' },
         { id: 16, route: '/edit-tiers', name: 'Edit Tiers', position: 'parent', iconName: 'assignment', pattern: 'edit-tiers:visible' },
         { id: 17, route: '/response-filter', name: 'Filter Response', position: 'parent', iconName: 'blur_linear', pattern: 'response-filter' }
     ];
