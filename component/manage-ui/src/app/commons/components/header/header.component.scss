@@ -2,7 +2,7 @@
 @import "../../../../styles/varibles";
 
 .navbar{
-  background-color: $primary-color_main;
+  background-color: var(--primary-color_main);
   border : 0;
   border-radius: 0px;
   margin-bottom: 0px;
@@ -36,7 +36,7 @@
   float: right;
   padding-left: 25px;
   font-size: 1.6rem;
-  color: $accent-color;
+  color: var(--accent-color);
   position: relative;
 
   .logo,.name{
@@ -56,7 +56,7 @@
   }
 
   &:hover,&:focus,&:active{
-    color: $accent-color;
+    color: var(--accent-color);
   }
 
   .man {

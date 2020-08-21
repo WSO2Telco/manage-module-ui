@@ -1,13 +1,13 @@
-import {Injectable, Inject} from '@angular/core';
-import {Headers, RequestOptions, Http, Response} from "@angular/http";
-import {Subject, BehaviorSubject, Observable} from "rxjs";
-import {MessageService} from "../commons/services/message.service";
-import {SlimLoadingBarService} from "ng2-slim-loading-bar";
+import { Injectable, Inject } from '@angular/core';
+import { Headers, RequestOptions, Http, Response } from "@angular/http";
+import { Subject, BehaviorSubject, Observable } from "rxjs";
+import { MessageService } from "../commons/services/message.service";
+import { SlimLoadingBarService } from "ng2-slim-loading-bar";
 import {
     ApprovalHistory, ApprovalHistoryFilter, ApprovalHistoryDataset,
-    Application, ApplicationHistory, AppHistoryResponse
+    Application, ApplicationHistory, AppHistoryResponse, SubscriptionHistoryResponse, SubscriptionHistoryFilter, APIResponsePath
 } from "../commons/models/reporing-data-models";
-import {AuthenticationService} from '../commons/services/authentication.service';
+import { AuthenticationService } from '../commons/services/authentication.service';
 
 @Injectable()
 export class ReportingRemoteDataService {
@@ -38,25 +38,39 @@ export class ReportingRemoteDataService {
      */
     public ApprovalHistoryProvider: Subject<AppHistoryResponse> = new BehaviorSubject<AppHistoryResponse>(null);
 
-    private headers: Headers = new Headers({'Content-Type': 'application/json'});
 
-    private options: RequestOptions = new RequestOptions({headers: this.headers});
+    /**
+       * API ResourcePath Stream
+       * @type {BehaviorSubject<APIResponsePath[]>}
+       */
+    public APIResourcePathProvider: Subject<APIResponsePath[]> = new BehaviorSubject<APIResponsePath[]>([]);
+
+
+
+    private headers: Headers = new Headers({ 'Content-Type': 'application/json' });
+
+    private options: RequestOptions = new RequestOptions({ headers: this.headers });
 
     private url = new URL(window.location.href);
     private apiContext = this.url.protocol + '//' + this.url.host + '/workflow-service/workflow/';
+    private apiManageContext = this.url.protocol + '//' + this.url.host + '/manage-service/public/api/';
 
     private apiEndpoints: Object = {
         subscribers: this.apiContext + 'history/subscribers',
         operators: this.apiContext + 'history/operators',
+        depType: this.apiContext + 'history/deptype',
         approvalHistory: this.apiContext + 'history/approval',
         applications: this.apiContext + 'history/applications',
-        applicationHistory: this.apiContext + 'applications/history'
+        applicationHistory: this.apiContext + 'applications/history',
+        apiResourcePath: this.apiManageContext + 'store-api',
+        newApiResponseFilter: this.apiManageContext + 'response-filter',
+        superToken: this.apiManageContext + 'super-token'
     };
 
     constructor(private http: Http,
-                private message: MessageService,
-                private slimLoadingBarService: SlimLoadingBarService,
-                private authService: AuthenticationService) {
+        private message: MessageService,
+        private slimLoadingBarService: SlimLoadingBarService,
+        private authService: AuthenticationService) {
     }
 
     getApplicationDetail(id: number, callback: Function) {
@@ -75,8 +89,8 @@ export class ReportingRemoteDataService {
     }
 
 
-    getSubscriptionDetail(id: number,opId:string,apiid:string, callback: Function) {
-        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50'  , this.getOptions())
+    getSubscriptionDetail(id: number, opId: string, apiid: string, callback: Function) {
+        this.http.get(this.apiEndpoints['approvalHistory'] + '/' + id + '/operators/' + opId + '/apis/' + apiid + '/start/0/size/50', this.getOptions())
             .map((response: Response) => response.json())
             .subscribe(
                 (applications: ApplicationHistory[]) => {
@@ -90,8 +104,146 @@ export class ReportingRemoteDataService {
             );
     }
 
+    getSuperToken(env: string): Promise<any> {
+        return this.http.get(this.apiEndpoints['superToken'] + '?environment=' + env.toUpperCase(), this.getOptions())
+            .toPromise()
+            .then((res: Response) => {
+                return res.json();
+            });
+    }
+
+    getAPIResourcePath(apiid: string, callback: Function) {
+        this.http.get(this.apiEndpoints['apiResourcePath'] + '/' + apiid + '/resource-paths', this.getOptions())
+            .map((response: Response) => response.json())
+            .subscribe(
+                (apiResponsePath: APIResponsePath[]) => {
+                    this.APIResourcePathProvider.next(apiResponsePath)
+                    callback(apiResponsePath, true);
+                },
+                (error) => {
+                    this.message.error(error);
+                    callback(error, false);
+                }
+            );
+    }
+
+    getFilteredResponseByAPIID(appname: string, sp: string, apiname: string, operation: string) {
+        return this.http.get(this.apiEndpoints['newApiResponseFilter'] + '?application=' + appname + '&sp=' + sp + '&api=' + apiname + '&operation=' + operation, this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 200) {
+                    return {
+                        success: true,
+                        message: 'This is already filtered API',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Not Filtered',
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Getting filtered data',
+                error: error
+            }));
+    }
 
 
+    getResponseByAPIOperation(endpoint: string, btoken: string) {
+        return this.http.get(endpoint, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if (response.status == 200) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error While Invoking API Operation',
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error While Invoking API Operation',
+                error: error
+            }));
+    }
+
+    /**
+    * to POST API invokation
+    * @param value
+    * @returns {Observable<R>}
+    */
+    PostResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.post(endpoint, data, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200) || (response.status == 201)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
+
+
+    /**
+    * to PUT API invokation
+    * @param value
+    * @returns {Observable<R>}
+    */
+    PutResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.put(endpoint, data, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200) || (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
+
+
+    /**
+        * to DELETE API invokation
+        * @param value
+        * @returns {Observable<R>}
+        */
+    DeleteResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+        return this.http.delete(endpoint, this.setApiInvokeOptions(btoken))
+            .map((response: Response) => {
+                if ((response.status == 200) || (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Invoked API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Invoking API Operation',
+                error: error
+            }));
+    }
 
 
     getSubscribers() {
@@ -190,6 +342,89 @@ export class ReportingRemoteDataService {
             );
     }
 
+
+    persitResponseFilter(sp: string, application: string, api: string, operation: string, fields: any, callback: Function) {
+        this.newApiResponseFilter(sp, application, api, operation, fields)
+            .subscribe(
+                data => {
+                    callback(data);
+                },
+                error => {
+                    callback(error);
+                }
+            );
+    }
+
+    /**
+ * Add New Response Filter
+ * @param AddNewResponseParam
+ * @returns {Observable<R>}
+ */
+    newApiResponseFilter(sp: string, application: string, api: string, operation: string, fields: any) {
+        const data = {
+            'sp': sp,
+            'application': application,
+            'api': api,
+            'operation': operation,
+            'fields': fields
+        };
+
+        return this.http.post(this.apiEndpoints['newApiResponseFilter'], data, this.getOptions())
+            .map((response: Response) => {
+                if (response.status == 200) {
+                    return {
+                        success: true,
+                        message: 'Modified Response Successfully Saved',
+                        payload: response.json()
+                    };
+                } else {
+                    return {
+                        success: false,
+                        message: 'Error Adding Modified Response',
+                        payload: null
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Adding Modified Response',
+                error: error
+            }));
+    }
+
+
+    /**
+       * to DELETE API invokation
+       * @param value
+       * @returns {Observable<R>}
+       */
+    DeleteFilteredAPIOperation(id: string) {
+        return this.http.delete(this.apiEndpoints['newApiResponseFilter'] + '/' + id, this.getOptions())
+            .map((response: Response) => {
+                if ((response.status == 200) || (response.status == 204)) {
+                    return {
+                        success: true,
+                        message: 'Successfully Deleted the filtered API Operation',
+                        payload: response.json()
+                    };
+                }
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error In Deleting Filtred API Operation',
+                error: error
+            }));
+    }
+
+    setApiInvokeOptions(bToken): RequestOptions {
+        const headers = new Headers(
+            {
+                'Authorization': bToken,
+                'Content-Type': 'application/json'
+            });
+        return new RequestOptions({ headers: headers });
+    }
+
     getOptions(): RequestOptions {
         const token = this.authService.loginUserInfo.getValue().token;
         const useName = this.authService.loginUserInfo.getValue().userName;
@@ -199,7 +434,14 @@ export class ReportingRemoteDataService {
                 'user-name': useName,
                 'Content-Type': 'application/json'
             });
-        return new RequestOptions({headers: headers});
+        return new RequestOptions({ headers: headers });
     }
 
+    getDeploymentType(): Promise<any> {
+        return this.http.get(this.apiEndpoints['depType'], this.getOptions())
+            .toPromise()
+            .then((res: Response) => {
+                return res.json();
+            });
+    }
 }

@@ -30,6 +30,9 @@ import {ConfigService} from './commons/services/config.service';
 import { TimerService } from './commons/services/timer.service';
 import { AppHTTPInterceptor } from './app.http.interceptor';
 import { httpFactory } from '@angular/http/src/http_module';
+import { ThemeRemoteDataService } from './data-providers/theme_remote-data.service';
+import { ThemeService } from './commons/services/theme.service';
+import { ResponseFilterService } from './commons/services/response_filter.service';
 
 @NgModule({
     declarations: [
@@ -79,7 +82,10 @@ import { httpFactory } from '@angular/http/src/http_module';
         {
             provide : 'API_CONTEXT',
             useValue : 'api'
-        }
+        },
+        ThemeRemoteDataService,
+        ThemeService,
+        ResponseFilterService
     ],
     bootstrap: [AppComponent]
 })

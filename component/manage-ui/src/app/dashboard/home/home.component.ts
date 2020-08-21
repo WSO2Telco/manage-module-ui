@@ -9,6 +9,8 @@ import {DashboardRemoteDataService} from '../../data-providers/dashboard-remote-
 import {MessageService} from '../../commons/services/message.service';
 import {ApprovalHelperService} from '../../approvals/approval-helper.service';
 import {TableDataType} from '../../commons/models/common-data-models';
+import { ThemeService } from '../../commons/services/theme.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
     selector: 'app-home',
@@ -31,12 +33,16 @@ export class HomeComponent implements OnInit {
     private mySubscriptionFilter: ApplicationTaskFilter;
     private groupApplicationFilter: ApplicationTaskFilter;
     private groupSubscriptionFilter: ApplicationTaskFilter;
+    private themeName;
+    private menuBackImage: boolean = false;
 
 
     constructor(private approvalService: ApprovalRemoteDataService,
                 private approvalHelperService: ApprovalHelperService,
                 private dashboardService: DashboardRemoteDataService,
-                private message: MessageService) {
+                private message: MessageService,
+                private _themeService: ThemeService,
+                private mainCom: AppComponent) {
     }
 
     ngOnInit() {
@@ -79,6 +85,15 @@ export class HomeComponent implements OnInit {
             (error) => this.message.error(error));
 
         this.approvalService.getAllTasks();
+
+        this._themeService.getThemeValue((response) => {
+            if (response.success) {
+                this.themeName = response.payload.theme;
+                this._themeService.toggleTheme(this.themeName.substring(0, this.themeName.indexOf("_")).replace(/[^a-zA-Z ]/g, ""));
+                this.menuBackImage = JSON.parse(this.themeName.slice(this.themeName.indexOf("_") + 1));
+                this.mainCom.ngOnInit();
+            }
+        });
     }
 
     onAssignTaskHandler(event: ApprovalEvent): void {

@@ -40,6 +40,7 @@ export class LoginResponse {
     token: string;
     roles: string[];
     permissions: any;
+    theme:string;
 }
 
 export class SubCategory {
@@ -73,7 +74,12 @@ export class ApiList {
 export class Application {
     id: string;
     name: string;
+    tier?:string;
+    approvalStatus?:string;
+    lastUpdate?:string;
+
 }
+
 
 export class Api {
     id: string;
