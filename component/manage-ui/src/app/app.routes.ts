@@ -82,8 +82,16 @@ const routes = [
     }
   },
   {
-    path: 'edit-tiers',
+    path: 'edit-subscription-rate',
     loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'edit-subscription-rate'
+    }
+  },
+  {
+    path: 'edit-tiers',
+    loadChildren: 'app/edit-tiers/edit-tiers.module#EditTierModule',
     canActivate: [AppGuard, PermissionGuard],
     data: {
       permissions: 'edit-tiers'

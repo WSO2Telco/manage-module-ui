@@ -1,23 +1,24 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
-import {ReportingRemoteDataService} from '../../data-providers/reporting-remote-data.service';
-import {ActivatedRoute} from '@angular/router';
-import {MessageService} from '../../commons/services/message.service';
-import {RateService} from "../../commons/services/rate.service";
-import {AuthenticationService} from '../../commons/services/authentication.service';
-import {QuotaService} from '../../commons/services/quotacap.service';
-import {Api, Application, QuotaList, API, FieldSet, Operator} from '../../commons/models/common-data-models';
-import {BlackListWhiteListService} from "../../commons/services/blacklist_whitelist.service";
-import {Subscriptions} from '../../commons/models/reporing-data-models';
-import {Router} from '@angular/router';
-import {isEmpty} from "rxjs/operator/isEmpty";
+import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { ReportingRemoteDataService } from '../../data-providers/reporting-remote-data.service';
+import { ActivatedRoute } from '@angular/router';
+import { MessageService } from '../../commons/services/message.service';
+import { RateService } from "../../commons/services/rate.service";
+import { AuthenticationService } from '../../commons/services/authentication.service';
+import { QuotaService } from '../../commons/services/quotacap.service';
+import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../commons/models/common-data-models';
+import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
+import { Subscriptions } from '../../commons/models/reporing-data-models';
+import { Router } from '@angular/router';
+import { isEmpty } from "rxjs/operator/isEmpty";
+import { TabsetComponent } from 'ngx-bootstrap';
 
 @Component({
-    selector: 'app-subscription-detail',
-    templateUrl: './subscription-detail.component.html',
-    styleUrls: ['./subscription-detail.component.scss']
+    selector: 'app-tier-detail',
+    templateUrl: './tier-detail.component.html',
+    styleUrls: ['./tier-detail.component.scss']
 })
-export class SubscriptionDetailComponent implements OnInit {
-
+export class TierDetailComponent implements OnInit {
+    @ViewChild('staticTabs') staticTabs: TabsetComponent;
     private id: number;
     private show: boolean;
     public directionList;
@@ -61,25 +62,37 @@ export class SubscriptionDetailComponent implements OnInit {
     private fromdate: string;
     private todate: string;
     private subscriptions: Subscriptions[];
+    private applicationSubscriptions: Subscriptions[];
+    private editAppPermissions: string;
+    private editSubscriptionPermissions: string;
+    public issubscriptionEnabled: boolean;
+    public isappEnabled: boolean;
+
 
     private isSubscriberError: boolean;
     public isApplicationError: boolean;
 
 
-    private fieldSet: FieldSet[] = [
-        {columnName: 'Name', fieldName: 'name'},
-        {columnName: 'version', fieldName: 'version'},
-        {columnName: 'Tier', fieldName: 'tier'},
-        {columnName: 'ApprovalStatus', fieldName: 'approvalStatus'},
-        {columnName: 'last Updated', fieldName: 'lastUpdated'}];
+    private appfieldSet: FieldSet[] = [
+        { columnName: 'Name', fieldName: 'name' },
+        { columnName: 'Tier', fieldName: 'tier' },
+        { columnName: 'ApprovalStatus', fieldName: 'approvalStatus' },
+        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' }];
+
+    private subscriptionfieldSet: FieldSet[] = [
+        { columnName: 'Name', fieldName: 'name' },
+        { columnName: 'version', fieldName: 'version' },
+        { columnName: 'Tier', fieldName: 'tier' },
+        { columnName: 'ApprovalStatus', fieldName: 'approvalStatus' },
+        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' }];
 
     constructor(private router: Router,
-                private reportingService: ReportingRemoteDataService,
-                private route: ActivatedRoute, private message: MessageService,
-                private rateService: RateService,
-                private authService: AuthenticationService,
-                private quotaService: QuotaService,
-                private blackListWhiteListService: BlackListWhiteListService) {
+        private reportingService: ReportingRemoteDataService,
+        private route: ActivatedRoute, private message: MessageService,
+        private rateService: RateService,
+        private authService: AuthenticationService,
+        private quotaService: QuotaService,
+        private blackListWhiteListService: BlackListWhiteListService) {
     }
 
     ngOnInit() {
@@ -90,12 +103,17 @@ export class SubscriptionDetailComponent implements OnInit {
         this.subscriberList = [];
         this.applications = [];
         this.operatorList = [];
+        this.applicationSubscriptions = [];
         this.isApplicationError = false;
         this.apis = [];
         this.apiList = [];
         this.operatorsList = ['ALL'];
-        this.getOperatorList();
+        this.editAppPermissions = "edit-tiers:edit-app-tiers";
+        this.editSubscriptionPermissions = "edit-tiers:edit-subscription-tiers";
 
+        this.isappEnabled = this.authService.hasPermissions(this.editAppPermissions);
+        this.issubscriptionEnabled = this.authService.hasPermissions(this.editSubscriptionPermissions);
+        this.getOperatorList();
     }
 
     /**
@@ -196,16 +214,27 @@ export class SubscriptionDetailComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
-        this.blackListWhiteListService.getApps(subscriberID, (response) => {
+        this.blackListWhiteListService.getAppsOfEditSub(subscriberID, (response) => {
             if (response.success) {
                 if (response.payload.length == 0) {
                     this.message.warning('No Applications of Subscriber Found');
                 } else {
+                    this.applicationSubscriptions = [];
                     for (const entry of response.payload) {
                         const splitted = entry.split(':');
                         const app = new Application();
+                        const appsfulldetails = new Subscriptions();
+                        appsfulldetails.id = splitted[0];
+                        appsfulldetails.name = splitted[1];
+                        appsfulldetails.tier = splitted[2];
+                        appsfulldetails.approvalStatus = splitted[3];
+                        appsfulldetails.lastUpdated = splitted[4].substr(0, splitted[4].lastIndexOf('.'));
+                        this.applicationSubscriptions.push(appsfulldetails);
                         app.id = splitted[0];
                         app.name = splitted[1];
+                        app.tier = splitted[2];
+                        app.approvalStatus = splitted[3];
+                        app.lastUpdate = splitted[4];
                         this.applications.push(app);
                     }
                 }
@@ -231,7 +260,18 @@ export class SubscriptionDetailComponent implements OnInit {
 
         for (const item of this.applications) {
             if (item.name == this.app) {
+                if (this.isappEnabled) {
+                    this.staticTabs.tabs[0].active = true;
+                }
                 invalid = false;
+                this.applicationSubscriptions = [];
+                const appsfulldetails = new Subscriptions();
+                appsfulldetails.id = item.id;
+                appsfulldetails.name = item.name;
+                appsfulldetails.tier = item.tier;
+                appsfulldetails.lastUpdated = item.lastUpdate.substr(0, item.lastUpdate.lastIndexOf('.'));
+                appsfulldetails.approvalStatus = item.approvalStatus;
+                this.applicationSubscriptions.push(appsfulldetails);
             }
         }
 
@@ -323,7 +363,7 @@ export class SubscriptionDetailComponent implements OnInit {
                 this.subscriptions = response;
 
             } else {
-                this.message.error('Error Loading Application History Data');
+                this.message.error('Error Loading Subscription History Data');
             }
         });
     }
@@ -339,7 +379,11 @@ export class SubscriptionDetailComponent implements OnInit {
         for (const item of this.apiList) {
             if (item == this.api) {
                 invalid = false;
-
+                if (this.isappEnabled) {
+                    this.staticTabs.tabs[1].active = true;
+                } else {
+                    this.staticTabs.tabs[0].active = true;
+                }
             }
         }
 
@@ -389,11 +433,19 @@ export class SubscriptionDetailComponent implements OnInit {
     onIconClick(sup: Subscriptions, action: string) {
         switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-subscription-rate/' + this.appID + '/' + sup.name + '/' + sup.version + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
-                this.router.navigate(['edit-subscription-rate/' + this.appID + '/' + sup.name + '/' + sup.version + '/show/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                break;
+
+            case 'EDIT_TIER':
+                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                break;
+
+            case 'SHOW_APP':
+                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             default:
