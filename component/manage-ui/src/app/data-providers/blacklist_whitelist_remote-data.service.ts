@@ -30,7 +30,8 @@ export class BlackListWhiteListRemoteDataService {
         addBulkToBlacklist: this.apiContext + 'bulkAdd/',
         removeFromWhiteList: this.apiContext + 'RemoveFromWhiteList/',
         removeFromBlackList: this.apiContext + 'remove/',
-        msisdnValidation: this.externalApiContext + 'validation/msisdn'
+        msisdnValidation: this.externalApiContext + 'validation/msisdn',
+        subscriptionTier: this.externalApiContext + 'subscription/'
     };
 
     constructor(private http: Http, private _authenticationService: AuthenticationService) {
@@ -467,6 +468,22 @@ export class BlackListWhiteListRemoteDataService {
                 error: error
             }));
 
+    }
+
+    getSubscriptionTiers(apiName: string, version: string, apiProvider: string) {
+        return this.http.get(this.apiEndpoints['subscriptionTier'] + apiName + '/' + version + '/' + apiProvider + '/tiers', this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Subscription Tier loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Subscription Tiers',
+                error: error
+            }));
     }
 
     getOptions(): RequestOptions {
