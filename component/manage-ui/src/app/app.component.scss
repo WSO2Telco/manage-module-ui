@@ -37,8 +37,12 @@ ng2-slim-loading-bar{
   right: 0px;
 }
 
+.backImg {
+  background: var(--menu-bg-url);
+}
+
 :host /deep/ ng2-slim-loading-bar .slim-loading-bar-progress{
-  background-color: $accent-color !important;
+  background-color: var(--accent-color) !important;
   height: 4px !important;
 }
 

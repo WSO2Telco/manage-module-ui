@@ -39,7 +39,7 @@
   border-color: #29A2AD;
 
   &:hover{
-    background-color: $primary-color_light;
+    background-color: var(--primary-color_light);
   }
 }
 
@@ -60,7 +60,7 @@
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover{
-  background-color: $accent-color;
+  background-color: var(--accent-color);
   border-color: $accent-dark-color;
   color: white !important;
 }

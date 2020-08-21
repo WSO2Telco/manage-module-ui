@@ -34,6 +34,7 @@ export class AuthenticationService {
                     loginInfo.operatorName = data.payload.operatorName
                     loginInfo.isAdmin = true;
                     loginInfo.operator = '';
+                    loginInfo.theme= data.payload.theme
                     loginInfo.token = btoa(userName + ':' + password);
 
                     this.loginUserInfo.next(loginInfo);

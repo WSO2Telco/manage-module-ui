@@ -1,0 +1,50 @@
+<div class="animated fadeInUp" style="animation-delay: 0.1s">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-container currencyContainer">
+                <form #payloadForm="ngForm" class="form-horizontal" autocomplete="off" novalidate
+                    (ngSubmit)="onAdditionalValueSubmit(payloadForm)">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Environment <span>*</span></label>
+                        <div class="col-sm-6">
+                            <div class="btn-group" btnRadioGroup>
+                                <input type="radio" name="env" [(ngModel)]="selectedEnv" value="production" />
+                                Production &nbsp;
+                                <input type="radio" name="env" [(ngModel)]="selectedEnv" value="sandbox" /> Sandbox
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group" *ngIf="httpTypes != 'GET'">
+                        <label class="control-label col-sm-3">Payload Body</label>
+                        <div class="col-sm-6">
+                            <textarea rows="6" cols="200" class="form-control" type="text" autocomplete="off"
+                                placeholder='{"payload": "string"}' [(ngModel)]="payloadDesc" name="payloadBody">
+                             </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-3">Path param or Query param</label>
+                        <div class="col-sm-6">
+                            <input type="text" [(ngModel)]="urlParamDesc" name="pathparam"
+                                placeholder='Query param eg - &lt;URL&gt;?Color=brown or Path param eg - &lt;URL&gt;/{color}'
+                                style="min-width: 550px !important; padding: 2px;" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-3">
+                            <button type="submit" class="btn btn-primary animated fadeIn">Execute</button>
+                            &nbsp;
+                            <a class="btn btn-warning" (click)="clearForm()">Clear</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-import {RouterModule} from '@angular/router';
-import {AppGuard, LoginGuard, PermissionGuard} from './app.guard';
+import { RouterModule } from '@angular/router';
+import { AppGuard, LoginGuard, PermissionGuard } from './app.guard';
 
 const routes = [
   {
@@ -13,6 +13,11 @@ const routes = [
     canActivate: [AppGuard]
   },
   {
+    path: 'theme',
+    loadChildren: 'app/theme/theme.module#ThemeModule',
+    canActivate: [AppGuard]
+  },
+  {
     path: 'history',
     loadChildren: 'app/history/history.module#HistoryModule',
     canActivate: [AppGuard, PermissionGuard],
@@ -21,11 +26,11 @@ const routes = [
     }
   },
   {
-    path: 'edit-subscription',
+    path: 'edit-subscription-rate',
     loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
     canActivate: [AppGuard, PermissionGuard],
     data: {
-      permissions: 'edit-subscription'
+      permissions: 'edit-subscription-rate'
     }
   },
   {
@@ -66,6 +71,22 @@ const routes = [
     canActivate: [PermissionGuard],
     data: {
       permissions: 'apiBlacklist,spBlackList'
+    }
+  },
+  {
+    path: 'response-filter',
+    loadChildren: 'app/response-filter/response-filter.module#ResponseFilterModule',
+    canActivate: [PermissionGuard],
+    data: {
+      permissions: 'edit-tiers'
+    }
+  },
+  {
+    path: 'edit-tiers',
+    loadChildren: 'app/subscriptions/edit-subscription.module#EditSubscriptionModule',
+    canActivate: [AppGuard, PermissionGuard],
+    data: {
+      permissions: 'edit-tiers'
     }
   },
   {

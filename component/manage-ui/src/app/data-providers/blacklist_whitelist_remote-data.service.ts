@@ -85,6 +85,27 @@ export class BlackListWhiteListRemoteDataService {
             }));
     }
 
+       /**
+     * To get all the apps of the subscriber
+     * @param subscriberID
+     * @returns {Observable<R>}
+     */
+    getAppsForEditSub(subscriberID: string) {
+        return this.http.get(this.apiEndpoints['apps'] + subscriberID ,  this.getOptions())
+            .map((response: Response) => {
+                return {
+                    success: true,
+                    message: 'Application List Loaded Successfully',
+                    payload: response.json()
+                };
+            })
+            .catch((error: Response) => Observable.throw({
+                success: false,
+                message: 'Error Loading Application List',
+                error: error
+            }));
+    }
+
     /**
      * to get all the apis related to the selected app and subscriber
      * @param id
