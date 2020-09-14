@@ -70,6 +70,12 @@
                 <artifactId>gson</artifactId>
                 <version>${com.google.code.gson.version}</version>
             </dependency>
+	    <dependency>
+                <groupId>org.wso2.carbon.apimgt</groupId>
+                <artifactId>org.wso2.carbon.apimgt.api</artifactId>
+                <version>${org.wso2.carbon.apimgt.version}</version>
+                <scope>provided</scope>
+            </dependency>
             <dependency>
                 <groupId>org.wso2.carbon.apimgt</groupId>
                 <artifactId>org.wso2.carbon.apimgt.impl</artifactId>
