@@ -31,7 +31,6 @@ export class ApiBlacklistListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.selcetedAppId +''+this.apiId)
     }
 
     onDelete(msisdn: string) {
