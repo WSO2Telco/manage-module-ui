@@ -31,11 +31,12 @@ export class ApiBlacklistListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.selcetedAppId +''+this.apiId)
     }
 
-    onDelete(msisdn: string, selcetedAppId: string, apiId: string, spName: string) {
+    onDelete(msisdn: string) {
         if (msisdn.length != 0) {
-            this.blackListWhiteListService.removeFromBlackList(msisdn, selcetedAppId.toString(), apiId.toString(), spName.toString(),'blacklist', (response) => {
+            this.blackListWhiteListService.removeFromBlackList(msisdn, this.selcetedAppId.toString(), this.apiId.toString(), this.spName.toString(),'blacklist', (response) => {
                 if (response.success) {
                     this.onDeleteTask.emit(true);
                     this.message.success(response.message);

@@ -39,6 +39,7 @@ export class ApiBlacklistMainComponent implements OnInit {
     private subscriber: string;
     private app;
     private selcetedAppId;
+    private selcetedSubscriber;
 
     private subscriberList;
     private msisdnMin: number;
@@ -153,16 +154,12 @@ export class ApiBlacklistMainComponent implements OnInit {
      * Insert Number/s To blackList
      */
     addNewBlackListnumbers(msisdn: string) {
-        let newappId;
-        let newsp;
-        if (this.selcetedAppId == '0') { newappId = '_ALL_'; }
-        else { newappId = this.selcetedAppId }
-        if (this.subscriber == 'All') { newsp = '_ALL_'; }
-        else { newsp = this.subscriber }
-        this.blackListWhiteListService.addNewToBlacklist(newappId, this.id,this.subscriber, msisdn, 'blacklist', (response) => {
+        if (this.selcetedAppId == '0') { this.selcetedAppId = '_ALL_'; }
+        if (this.subscriber == 'All') { this.selcetedSubscriber = '_ALL_'; }
+        this.blackListWhiteListService.addNewToBlacklist(this.selcetedAppId, this.id,this.selcetedSubscriber, msisdn, 'blacklist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
-                this.getBlackListNumbersCount(this.id, newappId, newsp);
+                this.getBlackListNumbersCount(this.id, this.selcetedAppId, this.selcetedSubscriber);
                 this.msisdnBlacklist = '';
             } else {
                 this.message.error(response.message);
@@ -205,13 +202,9 @@ export class ApiBlacklistMainComponent implements OnInit {
     * @param AppId/APIID
     */
     searchBlackListNumbers() {
-        let newappId;
-        let newsp;
-        if (this.selcetedAppId == '0') { newappId = '_ALL_'; }
-        else { newappId = this.selcetedAppId }
-        if (this.subscriber == 'All') { newsp = '_ALL_'; }
-        else { newsp = this.subscriber }
-        this.blackListWhiteListService.getBlacklistNumberExit(newappId, this.id, this.msisdn, newsp, 'blacklist', (response) => {
+        if (this.selcetedAppId == '0') { this.selcetedAppId = '_ALL_'; }
+        if (this.subscriber == 'All') { this.selcetedSubscriber = '_ALL_'; }
+        this.blackListWhiteListService.getBlacklistNumberExit(this.selcetedAppId, this.id, this.msisdn, this.selcetedSubscriber, 'blacklist', (response) => {
 
             if (response.success) {
                 if (response.payload.exists) {
@@ -235,13 +228,9 @@ export class ApiBlacklistMainComponent implements OnInit {
    * @param AppId/APIID
    */
     downloadBlackListNumbers() {
-        let newappId;
-        let newsp;
-        if (this.selcetedAppId == '0') { newappId = '_ALL_'; }
-        else { newappId = this.selcetedAppId }
-        if (this.subscriber == 'All') { newsp = '_ALL_'; }
-        else { newsp = this.subscriber }
-        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, newappId, newsp, 'blacklist', (response) => {
+        if (this.selcetedAppId == '0') { this.selcetedAppId = '_ALL_'; }
+        if (this.subscriber == 'All') { this.selcetedSubscriber = '_ALL_'; }
+        this.blackListWhiteListService.downloadBlacklistNumberList(this.id, this.selcetedAppId, this.selcetedSubscriber, 'blacklist', (response) => {
 
             if (response.success) {
             } else {
@@ -256,14 +245,10 @@ export class ApiBlacklistMainComponent implements OnInit {
      * @param id
      */
     onDeleteHandler(event: boolean, id) {
-        let newappId;
-        let newsp;
-        if (this.selcetedAppId == '0') { newappId = '_ALL_'; }
-        else { newappId = this.selcetedAppId }
-        if (this.subscriber == 'All') { newsp = '_ALL_'; }
-        else { newsp = this.subscriber }
+        if (this.selcetedAppId == '0') { this.selcetedAppId = '_ALL_'; }
+        if (this.subscriber == 'All') { this.selcetedSubscriber = '_ALL_'; }
         if (event) {
-            this.getBlackListNumbersCount(id, newappId, newsp);
+            this.getBlackListNumbersCount(id, this.selcetedAppId, this.selcetedSubscriber);
             this.msisdn = '';
         }
     }
@@ -294,6 +279,7 @@ export class ApiBlacklistMainComponent implements OnInit {
         this.api = '';
         this.applications = [];
         this.apiList = [];
+        this.selcetedSubscriber = this.subscriber;
 
         let invalid = true;
         this.isInvalidFieldError = false;
