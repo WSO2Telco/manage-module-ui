@@ -60,6 +60,7 @@ export class ApiBlacklistMainComponent implements OnInit {
             headers: [{ name: 'Accept', value: 'application/json' }],
             autoUpload: true,
             maxFileSize: this.maxFileSize,
+            queueLimit: 5
         });
         this.uploader.onWhenAddingFileFailed = (item, filter, options) => this.onWhenAddingFileFailed(item, filter, options);
     }
@@ -87,9 +88,9 @@ export class ApiBlacklistMainComponent implements OnInit {
     }
 
     onAfterAddingFile(item: any) {
-        if (this.uploader.queue.length > 1) {
+        /* if (this.uploader.queue.length > 1) {
             this.uploader.removeFromQueue(this.uploader.queue[0]);
-        }
+        } */
 
         this.selectedFile = item._file;
         const reader = new FileReader();
