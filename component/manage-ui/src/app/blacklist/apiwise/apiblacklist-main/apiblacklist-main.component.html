@@ -113,7 +113,7 @@
                                         </div>
                                     </div>
                                 </label>
-                                <input type="file" (change)="fileChangeListener($event)" ng2FileSelect [uploader]="uploader"
+                                <input type="file" (change)="fileChangeListener($event)" (click)="onFileClick($event)" ng2FileSelect [uploader]="uploader"
                                     id="uploader-input" style="display:none" />
 
                                 <h3 class="error" *ngIf="uploader?.queue?.length == 0"><strong>{{errorMessage}}</strong></h3>

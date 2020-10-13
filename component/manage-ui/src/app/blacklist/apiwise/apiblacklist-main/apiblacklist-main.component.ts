@@ -117,6 +117,10 @@ export class ApiBlacklistMainComponent implements OnInit {
         }
     }
 
+    onFileClick(event) {
+        event.target.value = '';
+    }
+
 
     /**
      * to load the subscriber details
@@ -157,7 +161,7 @@ export class ApiBlacklistMainComponent implements OnInit {
     addNewBlackListnumbers(msisdn: string) {
         if (this.selcetedAppId == '0') { this.selcetedAppId = '_ALL_'; }
         if (this.subscriber == 'All') { this.selcetedSubscriber = '_ALL_'; }
-        this.blackListWhiteListService.addNewToBlacklist(this.selcetedAppId, this.id,this.selcetedSubscriber, msisdn, 'blacklist', (response) => {
+        this.blackListWhiteListService.addNewToBlacklist(this.selcetedAppId, this.id, this.selcetedSubscriber, msisdn, 'blacklist', (response) => {
             if (response.success) {
                 this.message.success(response.message);
                 this.getBlackListNumbersCount(this.id, this.selcetedAppId, this.selcetedSubscriber);
