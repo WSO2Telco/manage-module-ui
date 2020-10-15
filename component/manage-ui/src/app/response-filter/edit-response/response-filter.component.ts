@@ -505,8 +505,8 @@ export class ResponseFilterComponent implements OnInit {
     RenderingResponseEditor() {
         if (this.filteredList) {
             this.isFilteredOperation = true;
-            var filter = require('uber-json-schema-filter');
-            var results = filter(this.filteredList.fields, this.jdata);
+            var filter = require('json-schema-filter-js');
+            var results = filter(this.filteredList.fields, this.jdata, true);
             this.RenderingResponseEditorBaseOnStatus(results)
         } else {
             this.isFilteredOperation = false;
