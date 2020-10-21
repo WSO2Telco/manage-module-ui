@@ -1,0 +1,193 @@
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Update Operation Rate </h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="lgModal.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" *ngIf="updateOperationRate.length != 0">
+                    <form (ngSubmit)="updateAPIOperationRate()" #updateconfirmationForm="ngForm">
+                        <div class="col-sm-12">
+                            <h4>Please confirm your update</h4>
+                            <div class="col-sm-8">
+                                <span *ngIf="selectboxdisable"><input type="checkbox" [checked]="setForAll"
+                                        (change)="checkboxChange()" />Set
+                                    1st
+                                    Comment as for all changes<br></span>
+                                <ng-container *ngFor="let item of updateOperationRate ; let i = index">
+                                    <ng-container *ngFor="let opt of subscriptionsrate">
+                                        <div *ngIf="opt.apiOperationId == item.apiOperationId">
+                                            <label>{{opt.apiOperation}}</label> |Changed from <label
+                                                class="label label-success">{{opt.rateDefname}}</label>
+                                            <label *ngIf="opt.rateDefname == null" class="label label-danger">No
+                                                rate </label> &rArr; <label
+                                                class="label label-success">{{item.rateDefname}}</label><br>
+                                        </div>
+
+                                    </ng-container>
+                                    <textarea rows="2" cols="70" required id="{{item.apiOperationId}}"
+                                        placeholder="Comment" name="commentfield"
+                                        (input)="onSearchChange(item.apiOperationId)"></textarea>
+
+                                </ng-container>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="col-sm-4 col-sm-offset-6" style="margin-top: 2%">
+                            <button type="submit" [disabled]="!updateconfirmationForm.form.valid"
+                                class="btn btn-primary animated fadeIn">Update
+                            </button>&nbsp;
+                            <a class="btn btn-danger" (click)="lgModal.hide()">Close</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="row" *ngIf="updateOperationRate.length == 0">
+                    <div class="col-sm-8 col-sm-offset-4">
+                        <h3>No Rate operation to update</h3>
+                        <br>
+                        <a class="btn btn-danger col-sm-offset-2" (click)="lgModal.hide()">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #appModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="AppTierModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Update Tier</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>Are sure you want to change the Tier from <b>
+                                <ng-container *ngIf="tierAction != 'EDIT_SUB_TIER'">{{editAppTierParam?.applicationTier}}
+                                </ng-container>
+                                <ng-container *ngIf="tierAction == 'EDIT_SUB_TIER'">{{editSubTierParam?.subscriptionTier}}
+                                </ng-container>
+                            </b>to
+                            <b>{{newAppTier}}</b></h4>
+                        <form (ngSubmit)="updateApplicationTier()" #updateAppTierForm="ngForm">
+                            <button type="submit" class="btn btn-primary animated fadeIn">Yes
+                            </button>
+                            <a class="btn btn-danger" (click)="editTierValue(false, 'application')">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="animated fadeInUp row" style="animation-delay: 0.1s">
+    <div class="col-sm-12">
+        <button type="button" class="close pull-right closeBtnStyle" aria-label="Close" (click)="closeDialog();">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="form-container quotaInputContainer">
+            <div *ngIf="tierAction == 'EDIT_SUB_TIER' || tierAction == 'SHOW'">
+                <form class="form-horizontal subDesForm" autocomplete="off">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Name:</label>
+                        <div class="col-sm-4">
+                            <label class="fieldval">{{editSubTierParam?.apiName}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Version:</label>
+                        <div class="col-sm-4">
+                            <label class="fieldval">{{editSubTierParam?.apiVersion}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Existing Tier:</label>
+                        <div class="col-sm-4">
+                            <label class="fieldval"
+                                *ngIf="!editTierState">{{editSubTierParam?.subscriptionTier}}</label>
+                            <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState"
+                                (change)="onTierOptionChange($event,'subscription')">
+                                <ng-container *ngFor="let set of subscriptionTiers">
+                                    <option [value]="set">
+                                        {{set}}
+                                </ng-container>
+                            </select>
+                            &nbsp; <button *ngIf="tierAction != 'SHOW'" class="btn btn-primary animated fadeIn btn-md"
+                                (click)="editTierValue(true,'subscription')">Edit
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Approval Status:</label>
+                        <div class="col-sm-4">
+                            <span *ngIf="editSubTierParam?.approvalStatus == 'Approved'"
+                                class="label label-success">{{editSubTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editSubTierParam?.approvalStatus == 'Pending'"
+                                class="label label-warning">{{editSubTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editSubTierParam?.approvalStatus == 'ON_HOLD'"
+                                class="label label-warning">{{editSubTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editSubTierParam?.approvalStatus == 'Reject'"
+                                class="label label-danger">{{editSubTierParam?.approvalStatus}}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="tierAction == 'EDIT_APP_TIER' || tierAction == 'SHOW_APP'">
+                <form class="form-horizontal subDesForm" autocomplete="off">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Name:</label>
+                        <div class="col-sm-4">
+                            <label class="fieldval">{{editAppTierParam?.applicationName}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Existing Tier:</label>
+                        <div class="col-sm-4">
+                            <label class="fieldval" *ngIf="!editTierState">{{editAppTierParam?.applicationTier}}</label>
+                            <select class="form-control" style="width:50%;float: left;" *ngIf="editTierState"
+                                (change)="onTierOptionChange($event,'application')">
+                                <ng-container *ngFor="let set of appTiers">
+                                    <option [value]="set">
+                                        {{set}}
+                                </ng-container>
+                            </select>
+                            &nbsp; <button *ngIf="tierAction != 'SHOW_APP'"
+                                class="btn btn-primary animated fadeIn btn-md"
+                                (click)="editTierValue(true,'application')">Edit
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Approval Status:</label>
+                        <div class="col-sm-4">
+                            <span *ngIf="editAppTierParam?.approvalStatus == 'APPROVED'"
+                                class="label label-success">{{editAppTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editAppTierParam?.approvalStatus == 'PENDING'"
+                                class="label label-warning">{{editAppTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editAppTierParam?.approvalStatus == 'ON_HOLD'"
+                                class="label label-warning">{{editAppTierParam?.approvalStatus}}</span>
+                            <span *ngIf="editAppTierParam?.approvalStatus == 'REJECT'"
+                                class="label label-danger">{{editAppTierParam?.approvalStatus}}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-primary animated fadeIn" (click)="closeDialog();">
+                        Close
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
