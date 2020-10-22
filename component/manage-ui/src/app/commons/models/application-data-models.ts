@@ -121,6 +121,9 @@ export class EditApplicationTierParam {
     applicationName: string;
     applicationTier: string;
     user: string;
+    existingTier:string;
+    serviceProvider:string;
+    approvalStatus:string;
 }
 
 export class EditSubscriptionTierParam {
@@ -129,7 +132,14 @@ export class EditSubscriptionTierParam {
     subscriptionTier: string;
     user: string;
     apiName: string;
+    apiProvider:string
     department: string;
+    apiID:number;
+    existingTier:string;
+    apiVersion:string;
+    serviceProvider:string;
+    approvalStatus:string;
+
 }
 
 export class ApprovalEvent {
