@@ -171,7 +171,7 @@ export class TierEditComponent implements OnInit {
             editTierParam.applicationTier = this.newAppTier;
             editTierParam.user = this.loggedUser.userName;
             editTierParam.serviceProvider = this.editAppTierParam.serviceProvider;
-            editTierParam.existingTier = this.editAppTierParam.existingTier;
+            editTierParam.existingTier = this.editAppTierParam.applicationTier;
             
             
 
@@ -195,7 +195,7 @@ export class TierEditComponent implements OnInit {
             editsubTierParam.department = '';
             editsubTierParam.user = this.loggedUser.userName;
             editsubTierParam.apiID = this.editSubTierParam.apiID;
-            editsubTierParam.existingTier = this.editSubTierParam.existingTier;
+            editsubTierParam.existingTier = this.editSubTierParam.subscriptionTier;
             editsubTierParam.serviceProvider = this.editSubTierParam.serviceProvider;
            
 
