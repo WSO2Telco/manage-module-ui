@@ -5,8 +5,8 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EditTiersRoutes } from './edit-tiers.routes';
+import { TierEditComponent } from './tier-edit/tier-edit.component';
 import { TierDetailComponent } from './tier-detail/tier-detail.component';
-import { EditTierComponent } from './edit-tier/edit-tiers.component';
 
 @NgModule({
     imports: [
@@ -20,7 +20,7 @@ import { EditTierComponent } from './edit-tier/edit-tiers.component';
     ],
     declarations: [
         TierDetailComponent,
-        EditTierComponent
+        TierEditComponent
     ]
 })
 export class EditTierModule {
