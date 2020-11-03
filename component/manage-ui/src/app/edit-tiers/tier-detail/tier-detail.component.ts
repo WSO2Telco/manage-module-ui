@@ -9,8 +9,8 @@ import { Api, Application, QuotaList, API, FieldSet, Operator } from '../../comm
 import { BlackListWhiteListService } from "../../commons/services/blacklist_whitelist.service";
 import { Subscriptions } from '../../commons/models/reporing-data-models';
 import { Router } from '@angular/router';
-import { isEmpty } from "rxjs/operator/isEmpty";
-import { TabsetComponent } from 'ngx-bootstrap';
+import { TabsetComponent, ModalDirective } from 'ngx-bootstrap';
+import { EditApplicationTierParam, EditSubscriptionTierParam } from 'app/commons/models/application-data-models';
 
 @Component({
     selector: 'app-tier-detail',
@@ -19,6 +19,7 @@ import { TabsetComponent } from 'ngx-bootstrap';
 })
 export class TierDetailComponent implements OnInit {
     @ViewChild('staticTabs') staticTabs: TabsetComponent;
+    @ViewChild('lgModal') public modal: ModalDirective;
     private id: number;
     private show: boolean;
     public directionList;
@@ -32,8 +33,11 @@ export class TierDetailComponent implements OnInit {
     public api: string;
     public apiid: string;
     public operator: string;
-    public operatorId: string
+    public operatorId: string;
     public isadminresult: boolean;
+    private tierAction: string;
+    private editappTierParam: EditApplicationTierParam;
+    private editsubTierParam: EditSubscriptionTierParam;
 
     private subscriberError: string;
     private applicationError: string;
@@ -77,7 +81,8 @@ export class TierDetailComponent implements OnInit {
         { columnName: 'Name', fieldName: 'name' },
         { columnName: 'Tier', fieldName: 'tier' },
         { columnName: 'ApprovalStatus', fieldName: 'approvalStatus' },
-        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' }];
+        { columnName: 'last Updated Date and Time', fieldName: 'lastUpdated' },
+        { columnName: 'Action', fieldName: '' },];
 
     private subscriptionfieldSet: FieldSet[] = [
         { columnName: 'Name', fieldName: 'name' },
@@ -189,6 +194,10 @@ export class TierDetailComponent implements OnInit {
         if (!invalid) {
             this.getAppsofSubscriber(this.subscriber);
             this.isSubscriberSelect = true;
+            this.isApiSelect = false;
+            if (this.isappEnabled) {
+                this.staticTabs.tabs[0].active = true;
+            }
 
         } else if (this.app.length !== 0) {
             this.isSubscriberError = true;
@@ -214,6 +223,7 @@ export class TierDetailComponent implements OnInit {
      * @param subscriberID
      */
     getAppsofSubscriber(subscriberID: string) {
+        this.applications = [];
         this.blackListWhiteListService.getAppsOfEditSub(subscriberID, (response) => {
             if (response.success) {
                 if (response.payload.length == 0) {
@@ -304,7 +314,7 @@ export class TierDetailComponent implements OnInit {
      * @param appName
      */
     getApis(appName: string) {
-
+        console.log('hit api')
         let index = 0;
         let appID = '';
         for (const entry of this.applications) {
@@ -358,9 +368,14 @@ export class TierDetailComponent implements OnInit {
      * to load the subscription details
      */
     onApplication(id: number, opid: string, apiid: string) {
+        console.log('hit subscrip')
         this.reportingService.getSubscriptionDetail(id, opid, apiid, (response, status) => {
             if (status) {
                 this.subscriptions = response;
+                if (this.issubscriptionEnabled) {
+                    this.isApiSelect = true;
+                    this.staticTabs.tabs[1].active = true;
+                }
 
             } else {
                 this.message.error('Error Loading Subscription History Data');
@@ -431,9 +446,33 @@ export class TierDetailComponent implements OnInit {
 
 
     onIconClick(sup: Subscriptions, action: string) {
-        switch (action) {
+        this.tierAction = action;
+        if (action == 'EDIT_APP_TIER' || action == 'SHOW_APP') {
+            this.editappTierParam = new EditApplicationTierParam();
+            this.editappTierParam.applicationId = +sup.id;
+            this.editappTierParam.applicationName = sup.name;
+            this.editappTierParam.applicationTier = sup.tier;
+            this.editappTierParam.existingTier = sup.tier;
+            this.editappTierParam.serviceProvider = this.subscriber;
+            this.editappTierParam.approvalStatus = sup.approvalStatus;
+
+        } else if (action == 'EDIT_SUB_TIER' || action == 'SHOW') {
+            this.editsubTierParam = new EditSubscriptionTierParam();
+            this.editsubTierParam.applicationId = +this.appID;
+            this.editsubTierParam.apiName = sup.name;
+            this.editsubTierParam.apiVersion = sup.version;
+            this.editsubTierParam.subscriptionTier = sup.tier;
+            this.editsubTierParam.applicationName = this.app;
+            this.editsubTierParam.apiProvider = this.apis[0].provider;
+            this.editsubTierParam.department = '';
+            this.editsubTierParam.serviceProvider = this.subscriber;
+            this.editsubTierParam.existingTier = sup.tier;
+            this.editsubTierParam.apiID = +sup.id;
+            this.editsubTierParam.approvalStatus = sup.approvalStatus;
+        }
+        /* switch (action) {
             case 'EDIT':
-                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + this.appID + '/' + sup.name + '/' + this.app + '/' + sup.version + '/' + this.apis[0].provider + '/' + sup.tier + '/' + this.apiid + '/edit/' + sup.approvalStatus + '/' + this.operatorId]);
                 break;
 
             case 'SHOW':
@@ -445,11 +484,26 @@ export class TierDetailComponent implements OnInit {
                 break;
 
             case 'SHOW_APP':
-                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' + sup.approvalStatus + '/' + this.operatorId]);
+                this.router.navigate(['edit-tiers/' + sup.id + '/' + sup.name + '/' + sup.tier + '/edit-app/' +sup.approvalStatus  + '/' + this.operatorId]);
                 break;
 
             default:
                 break;
+        } */
+        this.modal.show();
+    }
+
+
+    updateList() {
+        if (this.tierAction == 'EDIT_APP_TIER') {
+            if (this.isAppSelect) {
+                this.getAppsofSubscriber(this.subscriber);
+                setTimeout(() => this.onAppSelected(), 500);
+            } else { this.getAppsofSubscriber(this.subscriber); }
+
+        }
+        else {
+            this.onApplication(+this.appID, this.operatorId, this.apiid);
         }
     }
 
