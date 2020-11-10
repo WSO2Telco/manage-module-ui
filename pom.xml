@@ -5,7 +5,7 @@
     <groupId>com.wso2telco.dep</groupId>
     <artifactId>manage-service-parent</artifactId>
     <packaging>pom</packaging>
-    <version>2.1.2-SNAPSHOT</version>
+    <version>2.1.4</version>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -160,7 +160,7 @@
         <url>https://github.com/WSO2Telco/manage-module-ui.git</url>
         <developerConnection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</developerConnection>
         <connection>scm:git:https://github.com/WSO2Telco/manage-module-ui.git</connection>
-        <tag>HEAD</tag>
+        <tag>v2_1_4</tag>
     </scm>
 
     <build>
