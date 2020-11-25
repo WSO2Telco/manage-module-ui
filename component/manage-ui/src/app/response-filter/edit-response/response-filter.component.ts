@@ -422,7 +422,7 @@ export class ResponseFilterComponent implements OnInit {
 
         if (!invalid) {
             this.modal.show();
-            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.enviorment, (response) => {
+            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
                 if (response.success) {
 
                     this.filteredList = response.payload;
@@ -440,9 +440,9 @@ export class ResponseFilterComponent implements OnInit {
     */
     onSetPayloadHandler(event: payloadParam) {
         if (event.enviormentName == 'production') {
-            this.contextPath = this.prodEnvironmentURL + this.contextPath;
+            this.contextPath = this.prodEnvironmentURL + this.replacePlaceholders(this.contextPath, event.pathParam);
         } else {
-            this.contextPath = this.sandboxEnvironmentURL + this.contextPath;
+            this.contextPath = this.sandboxEnvironmentURL + this.replacePlaceholders(this.contextPath, event.pathParam);
         }
         this.reportingService.getSuperToken(event.enviormentName).then((result) => {
             this.bToken = result.token_type + ' ' + result.access_token;
@@ -571,7 +571,7 @@ export class ResponseFilterComponent implements OnInit {
         this.reportingService.persitResponseFilter(this.subscriber, this.app, this.api, this.enviorment, schema, (response) => {
             if (response.success) {
                 this.message.success('Modified Response Successfully Saved');
-                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.enviorment, (response) => {
+                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
                     if (response.success) {
                         this.filteredList = response.payload;
                         this.isFilteredOperation = true;
@@ -584,6 +584,27 @@ export class ResponseFilterComponent implements OnInit {
             }
         });
 
+    }
+
+    extractPathParams(str : string) {
+        let pathParams = [],
+            rxp = /{([^}]+)}/g,
+            curMatch;
+        while(curMatch = rxp.exec( str ) ) {
+            pathParams.push( curMatch[1] );
+        }
+        return pathParams;
+    }
+
+    replacePlaceholders(contextPath : string, pathParams: string[]) {
+        Object.keys(pathParams).forEach(key => {
+            contextPath = contextPath.replace(new RegExp('{' + key + '}', 'gi'), encodeURIComponent(pathParams[key]));
+        });
+        return contextPath;
+    }
+
+    encodeCurlyBraces(str : string) {
+        return str.replace("{", "%7B").replace("}", "%7D");
     }
 
 }

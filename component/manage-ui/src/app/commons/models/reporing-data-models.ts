@@ -129,6 +129,7 @@ export class payloadParam {
     enviormentName: string;
     payloadBody: string;
     urlParam:string;
+    pathParam:string[];
 }
 
 export class OperatorApprovals {
