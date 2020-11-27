@@ -499,6 +499,31 @@ export class ResponseFilterComponent implements OnInit {
                 }
                 this.RenderingResponseEditor();
             });
+        } else if (httpVerb == 'PATCH') {
+
+            this.responseFilterService.PatchInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error(response.message);
+                    this.jdata = '';
+                }
+                this.RenderingResponseEditor();
+            });
+        }
+        else if (httpVerb == 'HEAD') {
+
+            this.responseFilterService.HeadInvokeAPI(contextPath + OtherParam.urlParam, this.bToken, (response) => {
+                if (response.success) {
+                    this.jdata = response.payload;
+                } else {
+                    this.message.error('Error Loading Response');
+                    this.jdata = '';
+                }
+
+                this.RenderingResponseEditor();
+            });
+
         }
     }
 
@@ -522,7 +547,7 @@ export class ResponseFilterComponent implements OnInit {
                 mode: 'tree',
                 enableTransform: false,
                 onEditable: function (node) {
-                   return false
+                    return false
                 }
             };
             this.jconainer = new JSONEditor(container, options);
@@ -592,24 +617,24 @@ export class ResponseFilterComponent implements OnInit {
 
     }
 
-    extractPathParams(str : string) {
+    extractPathParams(str: string) {
         let pathParams = [],
             rxp = /{([^}]+)}/g,
             curMatch;
-        while(curMatch = rxp.exec( str ) ) {
-            pathParams.push( curMatch[1] );
+        while (curMatch = rxp.exec(str)) {
+            pathParams.push(curMatch[1]);
         }
         return pathParams;
     }
 
-    replacePlaceholders(contextPath : string, pathParams: string[]) {
+    replacePlaceholders(contextPath: string, pathParams: string[]) {
         Object.keys(pathParams).forEach(key => {
             contextPath = contextPath.replace(new RegExp('{' + key + '}', 'gi'), encodeURIComponent(pathParams[key]));
         });
         return contextPath;
     }
 
-    encodeCurlyBraces(str : string) {
+    encodeCurlyBraces(str: string) {
         return str.replace("{", "%7B").replace("}", "%7D");
     }
 

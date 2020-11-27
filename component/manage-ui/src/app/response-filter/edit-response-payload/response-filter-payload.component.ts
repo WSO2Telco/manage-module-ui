@@ -32,6 +32,7 @@ export class responseFilterPayloadComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.httpTypes)
         this.payloadDesc = '';
         this.urlParamDesc = '';
         this.pathParamVal = [];
