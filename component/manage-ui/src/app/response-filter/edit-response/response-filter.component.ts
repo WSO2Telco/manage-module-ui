@@ -171,6 +171,8 @@ export class ResponseFilterComponent implements OnInit {
         this.app = '';
         this.api = '';
         this.appID = '';
+        this.envList = [];
+        this.enviorment = '';
         this.isSubscriberError = false;
         this.applications = [];
         let invalid = true;
@@ -246,6 +248,8 @@ export class ResponseFilterComponent implements OnInit {
         this.appID = '';
         this.apiid = '_ALL';
         this.apiList = [];
+        this.envList = [];
+        this.enviorment = '';
         this.isCalenderEnable = false;
         let invalid = true;
 
@@ -361,6 +365,8 @@ export class ResponseFilterComponent implements OnInit {
      */
     onApiSelected() {
         let invalid = true;
+        this.enviorment = '';
+        this.envList = [];
 
         for (const item of this.apiList) {
             if (item == this.api) {
