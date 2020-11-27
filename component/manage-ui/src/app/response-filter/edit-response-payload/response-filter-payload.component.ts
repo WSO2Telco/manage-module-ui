@@ -11,12 +11,14 @@ export class responseFilterPayloadComponent implements OnInit {
 
     private payloadDesc: string;
     private urlParamDesc: string;
+    private pathParamVal: string[];
 
     private list: payloadParam;
 
     private selectedEnv: string = 'production';
 
     @Input() httpTypes: string;
+    @Input() pathParams: string[];
 
     @Output()
     private onSetAdditionalParam: EventEmitter<payloadParam> = new EventEmitter();
@@ -32,7 +34,7 @@ export class responseFilterPayloadComponent implements OnInit {
     ngOnInit() {
         this.payloadDesc = '';
         this.urlParamDesc = '';
-
+        this.pathParamVal = [];
     }
 
     /**
@@ -45,6 +47,7 @@ export class responseFilterPayloadComponent implements OnInit {
         this.list.enviormentName = this.selectedEnv;
         this.list.payloadBody = this.payloadDesc;
         this.list.urlParam = this.urlParamDesc;
+        this.list.pathParam = this.pathParamVal;
 
         this.onSetAdditionalParam.emit(this.list);
         this.modalClose.emit(true);

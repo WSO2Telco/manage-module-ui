@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import org.glassfish.jersey.uri.UriTemplate;
 import com.wso2telco.core.dbutils.DbUtils;
 import com.wso2telco.core.dbutils.exception.BusinessException;
 import com.wso2telco.core.dbutils.exception.ServiceError;
@@ -128,24 +129,25 @@ public class ResponseFilterDAO {
                 throw new BusinessException(ServiceError.SERVICE_ERROR_OCCURED);
             }
 
-            final StringBuilder query = new StringBuilder("SELECT id, fields FROM ");
+            final StringBuilder query = new StringBuilder("SELECT id, fields, operation FROM ");
             query.append(Tables.RESPONSE_FILTER.getTObject());
-            query.append(" WHERE sp=? AND application=? AND api=? AND operation=?");
+            query.append(" WHERE sp=? AND application=? AND api=?");
             statement = connection.prepareStatement(query.toString());
             statement.setString(1, sp);
             statement.setString(2, application);
             statement.setString(3, api);
-            statement.setString(4, operation);
             resultSet = statement.executeQuery();
 
-            if (resultSet.next()) {
-                responseFilter = new ResponseFilter();
-                responseFilter.setSp(sp);
-                responseFilter.setApplication(application);
-                responseFilter.setApi(api);
-                responseFilter.setOperation(operation);
-                responseFilter.setId(resultSet.getInt(1));
-                responseFilter.setFields(new Gson().fromJson(resultSet.getString(2), JsonObject.class));
+            while (resultSet.next()) {
+                if (this.isSameOperation(operation, resultSet.getString(3))) {
+                    responseFilter = new ResponseFilter();
+                    responseFilter.setSp(sp);
+                    responseFilter.setApplication(application);
+                    responseFilter.setApi(api);
+                    responseFilter.setOperation(operation);
+                    responseFilter.setId(resultSet.getInt(1));
+                    responseFilter.setFields(new Gson().fromJson(resultSet.getString(2), JsonObject.class));
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "database operation error in findResponseFilter : ", e);
@@ -281,5 +283,15 @@ public class ResponseFilterDAO {
             return false;
         }
         return true;
+    }
+
+    private boolean isSameOperation(String thisOp, String thatOp) {
+        String[] thisComponents = thisOp.split(" ");
+        String[] thatComponents = thatOp.split(" ");
+        return thisComponents[0].equals(thatComponents[0]) &&
+            UriTemplate.COMPARATOR.compare(
+                new UriTemplate(thisComponents[1]),
+                new UriTemplate(thatComponents[1])
+            ) == 0;
     }
 }

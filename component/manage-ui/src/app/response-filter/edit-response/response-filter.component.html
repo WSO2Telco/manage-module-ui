@@ -82,7 +82,7 @@
             </div>
             <div class="modal-body">
 
-                <app-response-filter-payload [httpTypes]="httpVerb" (onSetAdditionalParam)="onSetPayloadHandler($event)"
+                <app-response-filter-payload [httpTypes]="httpVerb" [pathParams]="extractPathParams(enviorment)" (onSetAdditionalParam)="onSetPayloadHandler($event)"
                     (modalClose)="lgModal.hide();"></app-response-filter-payload>
 
             </div>
