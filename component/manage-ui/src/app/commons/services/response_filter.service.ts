@@ -59,9 +59,41 @@ export class ResponseFilterService {
       );
   }
 
+  HeadInvokeAPI(endpoint: string, btoken: string, callback: Function) {
+    this.slimLoadingBarService.start();
+    this._remoteService.headResponseByAPIOperation(endpoint, btoken)
+      .subscribe(
+        response => {
+          callback(response);
+        },
+        error => {
+          callback(error);
+        },
+        () => {
+          this.slimLoadingBarService.complete();
+        }
+      );
+  }
+
   PutInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
     this._remoteService.PutResponseByAPIOperation(endpoint, data, btoken)
+      .subscribe(
+        response => {
+          callback(response);
+        },
+        error => {
+          callback(error);
+        },
+        () => {
+          this.slimLoadingBarService.complete();
+        }
+      );
+  }
+
+  PatchInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
+    this.slimLoadingBarService.start();
+    this._remoteService.PatchResponseByAPIOperation(endpoint, data, btoken)
       .subscribe(
         response => {
           callback(response);
