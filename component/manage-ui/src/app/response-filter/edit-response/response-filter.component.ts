@@ -519,13 +519,19 @@ export class ResponseFilterComponent implements OnInit {
         if (this.renderCount == 0) {
             var container = document.getElementById("jsoneditor");
             var options = {
-                mode: 'tree'
+                mode: 'tree',
+                enableTransform: false,
+                onEditable: function (node) {
+                   return false
+                }
             };
             this.jconainer = new JSONEditor(container, options);
             this.jconainer.set(data);
+            this.jconainer.expandAll();
             this.renderCount = 1;
         } else {
             this.jconainer.set(data);
+            this.jconainer.expandAll();
         }
     }
 
