@@ -30,7 +30,7 @@
       ],
       "scripts": [
         "../node_modules/chart.js/dist/Chart.js",
-        "../node_modules/jsoneditor/dist/jsoneditor.js"
+        "./js/jsoneditor.js"
       ],
 	  
       "environmentSource": "environments/environment.ts",

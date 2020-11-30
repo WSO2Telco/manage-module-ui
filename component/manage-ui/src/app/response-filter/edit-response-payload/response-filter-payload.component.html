@@ -18,7 +18,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group" *ngIf="httpTypes != 'GET'">
+                    <div class="form-group" *ngIf="httpTypes != 'GET' && httpTypes != 'HEAD'">
                         <label class="control-label col-sm-3">Payload Body</label>
                         <div class="col-sm-6">
                             <textarea rows="6" cols="200" class="form-control" type="text" autocomplete="off"
