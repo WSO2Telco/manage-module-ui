@@ -11,7 +11,7 @@
                                         typeaheadOptionField="name" [typeaheadMinLength]="0" type="text"
                                         class="form-control" autocomplete="off"
                                         (typeaheadOnSelect)="onSubscriberSelected()" (input)="onSubscriberSelected()"
-                                        placeholder="Service provider" name="subscription">
+                                        placeholder="Service Provider" name="subscription">
                                 </div>
                                 <div class="col-sm-3">
                                     <input [(ngModel)]="app" [typeahead]="applications" [typeaheadMinLength]="0"
@@ -23,7 +23,7 @@
                                     <input [(ngModel)]="api" [typeaheadMinLength]="0"
                                         (typeaheadOnSelect)="onApiSelected()" (input)="onApiSelected()" container="body"
                                         [typeahead]="apiList" typeaheadOptionField="id" class="form-control"
-                                        autocomplete="off" name="api" placeholder="Select API">
+                                        autocomplete="off" name="api" placeholder="API">
                                 </div>
                                 <div class="col-sm-3">
                                     <input [(ngModel)]="enviorment" [typeaheadMinLength]="0"
@@ -37,14 +37,37 @@
 
                     </div>
                     <div class="col-sm-12">
-                        <div class="content-div" *ngIf="jdata == undefined">
-                            <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
-                                <br>
-                            </span>
-                            <h4 class="center-block halfwidth text-center">Select the Service
-                                Provider , Application and API's to proceed</h4>
-                        </div>
                         <div class="content-div">
+                            <div *ngIf="jdata == undefined">
+                                <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                                <div class="left-block info-text">
+                                    <h5>Select the "service provider", "application", "API" and "resource" to proceed.</h5>
+                                </div>
+                                <br/>
+                                <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                                <div class="left-block info-text">
+                                    <h5>All resources should be well defined in the API definition before enabling
+                                        API-wise response filtering.</h5>
+                                </div>
+                                <br/>
+                                <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                                <div class="left-block info-text">
+                                    <h5>The "response filter" mediation should be selected in "out flow" under
+                                        "message mediation policies".</h5>
+                                </div>
+                                <br/>
+                                <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                                <div class="left-block info-text">
+                                    <h5>Response format (schema) should not be changed for each resource. eg:- if a POST
+                                        request returns different response payloads (based on the request body), then
+                                        response filtering for this path is not applicable.</h5>
+                                </div>
+                                <br/>
+                                <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                                <div class="left-block info-text">
+                                    <h5>Wildcard resource path is not recommended / supported due to the same above reason.</h5>
+                                </div>
+                            </div>
                             <span *ngIf="jdata == ''"
                                 class="glyphicon glyphicon-question-sign center-block quarterwidth noApiSet">
                                 <br>
@@ -56,7 +79,7 @@
                                     (click)="onReset()">Reset
                                 </button></p>
                             <div id="jsoneditor" style="width: 100%; height: 100%;"></div>
-                            <br>
+                            <br *ngIf="jdata != undefined && jdata != ''">
                             <button (click)="getJSON();" *ngIf="jdata != undefined && jdata != ''"
                                 class="btn btn-primary animated fadeIn">Save the Response</button>
                         </div>
@@ -81,7 +104,16 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                <div class="row">
+                    <div class="content-div">
+                        <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
+                        <div class="left-block info-text">
+                            <h5 class="margin-0">Following additional properties will be used to complete the server
+                                request and <b>will not be considered</b> when filtering responses.</h5>
+                        </div>
+                    </div>
+                </div>
+                <br/>
                 <app-response-filter-payload [httpTypes]="httpVerb" [pathParams]="extractPathParams(enviorment)" (onSetAdditionalParam)="onSetPayloadHandler($event)"
                     (modalClose)="lgModal.hide();"></app-response-filter-payload>
 

@@ -913,8 +913,8 @@ fieldset[disabled] .btn {
 .content-div {
   padding: 2rem;
   background-color: #f9f9f9;
-  padding: 2rem;
   border: 1px solid #ddd;
+  margin: 0 15px;
 }
 
 .halfwidth {
@@ -960,4 +960,19 @@ fieldset[disabled] .btn {
 :host /deep/ .appTab > .active , :host /deep/ .subTab > .active {
   background-color: #666666!important;
   color: #ffffff !important;
+}
+
+.info-text {
+  display: inline-block;
+  width: 90%;
+}
+
+.info-icon {
+  margin-right: 1rem
+}
+
+.margin-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.3;
 }
