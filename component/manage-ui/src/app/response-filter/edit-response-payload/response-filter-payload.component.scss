@@ -14,8 +14,26 @@
   color: #f96565;
 }
 
-.btn{ border-radius: 0px !important;}
+.btn {
+  border-radius: 0px !important;
+}
 
-.control-label span { color: #dd0d0d;}
+.control-label span {
+  color: #dd0d0d;
+}
 
-.nospace {margin-bottom: 5px !important;}
+.nospace {
+  margin-bottom: 5px !important;
+}
+
+.info-tooltip {
+  font-size: 1.5em;
+  color: #8e44ad;
+  vertical-align: top;
+  margin-top: 0.3em;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  border: 1px solid #ccc;
+}

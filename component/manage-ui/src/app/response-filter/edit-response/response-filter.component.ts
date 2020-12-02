@@ -401,7 +401,7 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     mappingEnvArray(data: any) {
-        this.envList = data.map(o => {
+        this.envList = data.filter(o => o.resourcePath.indexOf("*")==-1).map(o => {
             return { httpVerb: o.httpVerb, resourcePath: o.resourcePath, httpPathCom: o.httpVerb + ' ' + o.resourcePath };
         });
     }

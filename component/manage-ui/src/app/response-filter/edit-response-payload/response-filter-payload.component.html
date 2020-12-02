@@ -27,12 +27,14 @@
                         </div>
                     </div>
 
-                    <div *ngFor="let pathParam of pathParams;let first = first; let last = last;" class="form-group" [class.nospace]="!last" >
-                        <label class="control-label col-sm-3"><div *ngIf="first">Path Params <span>*</span></div></label>
+                    <div *ngFor="let pathParam of pathParams;let first = first; let last = last;" class="form-group"
+                        [class.nospace]="!last">
+                        <label class="control-label col-sm-3">
+                            <div *ngIf="first">Path Params <span>*</span></div>
+                        </label>
                         <div class="col-sm-6">
                             <input type="text" [(ngModel)]="pathParamVal[pathParam]" name="pathparam"
-                                   placeholder=' {{pathParam}}'
-                                   style="min-width: 550px !important; padding: 2px;" />
+                                placeholder=' {{pathParam}}' style="min-width: 550px !important; padding: 2px;" />
                         </div>
                     </div>
 
@@ -41,8 +43,9 @@
                         <div class="col-sm-6">
                             <input type="text" [(ngModel)]="urlParamDesc" name="queryparam"
                                 placeholder=' Eg: ?color=brown&condition=new'
-                                style="min-width: 550px !important; padding: 2px;" />
+                                style="min-width: 444px !important; padding: 2px;" />
                         </div>
+
                     </div>
 
                     <div class="form-group">
