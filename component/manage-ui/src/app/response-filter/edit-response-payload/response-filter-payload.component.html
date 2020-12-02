@@ -25,11 +25,6 @@
                                 placeholder='{"payload": "string"}' [(ngModel)]="payloadDesc" name="payloadBody">
                              </textarea>
                         </div>
-                        <div class="col-sm-2">
-                            <span class="glyphicon glyphicon-info-sign info-tooltip"
-                                tooltip="Response filter may notbe able to save based on the Body"
-                                placement="right"></span>
-                        </div>
                     </div>
 
                     <div *ngFor="let pathParam of pathParams;let first = first; let last = last;" class="form-group"
@@ -49,12 +44,6 @@
                             <input type="text" [(ngModel)]="urlParamDesc" name="queryparam"
                                 placeholder=' Eg: ?color=brown&condition=new'
                                 style="min-width: 444px !important; padding: 2px;" />
-
-                        </div>
-                        <div class="col-sm-2">
-                            <span class="glyphicon glyphicon-info-sign info-tooltip"
-                                tooltip="Response filter may notbe able to save based on the queryparam"
-                                placement="right"></span>
                         </div>
 
                     </div>
