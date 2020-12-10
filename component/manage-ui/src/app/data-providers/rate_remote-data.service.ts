@@ -10,7 +10,7 @@ export class RateRemoteDataService {
 
     private url = new URL(window.location.href);
     private apiContext = this.url.protocol + '//' + this.url.host + '/ratecard-service/ratecardservice/';
-    private apiTierContext = this.url.protocol + '//' + this.url.host + '/api/am/store/v0.13/';
+    private apiTierContext = this.url.protocol + '//' + this.url.host + '/api/am/store/v1/';
 
     private apiEndpoints: Object = {
         rateCardsByUser: this.apiContext + 'ratecards/operator/',
@@ -29,7 +29,7 @@ export class RateRemoteDataService {
         apiOperationRates: this.apiContext + '/rate/apioperationrates',
         addRateCategory: this.apiContext + '/rate/addratecategory/',
         approvedApiOperationRate: this.apiContext + 'applications/',
-        applicationTier: this.apiTierContext + 'tiers/application'
+        applicationTier: this.apiTierContext + 'throttling-policies/application'
     };
 
     constructor(private http: Http, private authService: AuthenticationService) {
@@ -517,7 +517,7 @@ export class RateRemoteDataService {
      * @returns {Observable<R|T>}
      */
     getApplicationTiers() {
-        return this.http.get(this.apiEndpoints['applicationTier'])
+        return this.http.get(this.apiEndpoints['applicationTier'], this.getOptions())
             .map((response: Response) => {
                 return {
                     success: true,
