@@ -81,7 +81,7 @@ public class ResponseFilterDAO {
                 statement.setString(1, responseFilter.getSp());
                 statement.setString(2, responseFilter.getApplication());
                 statement.setString(3, responseFilter.getApi());
-                statement.setString(4, responseFilter.getOperation());
+                statement.setString(4, removeLeadingPlus(responseFilter.getOperation()));
                 statement.setString(5, responseFilter.getFields().toString());
                 logger.log(Level.INFO, "sql query in addResponseFilter : {0}", statement);
                 statement.executeUpdate();
