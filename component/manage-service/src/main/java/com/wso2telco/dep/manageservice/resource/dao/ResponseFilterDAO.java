@@ -290,8 +290,12 @@ public class ResponseFilterDAO {
         String[] thatComponents = thatOp.split(" ");
         return thisComponents[0].equals(thatComponents[0]) &&
             UriTemplate.COMPARATOR.compare(
-                new UriTemplate(thisComponents[1]),
-                new UriTemplate(thatComponents[1])
+                new UriTemplate(removeLeadingPlus(thisComponents[1])),
+                new UriTemplate(removeLeadingPlus(thatComponents[1]))
             ) == 0;
+    }
+
+    private String removeLeadingPlus(String value) {
+        return value.replace("+", "");
     }
 }
