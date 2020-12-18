@@ -428,7 +428,7 @@ export class ResponseFilterComponent implements OnInit {
 
         if (!invalid) {
             this.modal.show();
-            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
+            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeSpecialChars(this.enviorment), (response) => {
                 if (response.success) {
 
                     this.filteredList = response.payload;
@@ -608,7 +608,7 @@ export class ResponseFilterComponent implements OnInit {
         this.reportingService.persitResponseFilter(this.subscriber, this.app, this.api, this.enviorment, schema, (response) => {
             if (response.success) {
                 this.message.success('Modified Response Successfully Saved');
-                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
+                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeSpecialChars(this.enviorment), (response) => {
                     if (response.success) {
                         this.filteredList = response.payload;
                         this.isFilteredOperation = true;
@@ -635,13 +635,16 @@ export class ResponseFilterComponent implements OnInit {
 
     replacePlaceholders(contextPath: string, pathParams: string[]) {
         Object.keys(pathParams).forEach(key => {
-            contextPath = contextPath.replace(new RegExp('{' + key + '}', 'gi'), encodeURIComponent(pathParams[key]));
+            contextPath = contextPath.replace(new RegExp('{' + this.escapePlusSign(key) + '}', 'gi'), encodeURIComponent(pathParams[key]));
         });
         return contextPath;
     }
 
-    encodeCurlyBraces(str: string) {
-        return str.replace("{", "%7B").replace("}", "%7D");
+    encodeSpecialChars(str: string) {
+        return str.replace("{", "%7B").replace("}", "%7D").replace("+", "%2B");
     }
 
+    escapePlusSign(str: string) {
+        return str.replace("+", "\\+");
+    }
 }
