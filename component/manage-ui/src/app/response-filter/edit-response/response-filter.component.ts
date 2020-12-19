@@ -641,7 +641,7 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     encodeSpecialChars(str: string) {
-        return str.replace("{", "%7B").replace("}", "%7D").replace("+", "%2B");
+        return str.replace(/{/g, "%7B").replace(/}/g, "%7D").replace(/\+/g, "%2B");
     }
 
     escapePlusSign(str: string) {
