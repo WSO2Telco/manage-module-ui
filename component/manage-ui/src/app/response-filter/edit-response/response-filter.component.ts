@@ -485,7 +485,7 @@ export class ResponseFilterComponent implements OnInit {
 
         } else if (httpVerb == 'DELETE') {
 
-            this.responseFilterService.DeleteInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
+            this.responseFilterService.DeleteInvokeAPI(contextPath + OtherParam.urlParam, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
