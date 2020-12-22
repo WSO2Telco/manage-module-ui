@@ -107,9 +107,9 @@ export class ResponseFilterService {
       );
   }
 
-  DeleteInvokeAPI(endpoint: string, data: any, btoken: string, callback: Function) {
+  DeleteInvokeAPI(endpoint: string, btoken: string, callback: Function) {
     this.slimLoadingBarService.start();
-    this._remoteService.DeleteResponseByAPIOperation(endpoint, data, btoken)
+    this._remoteService.DeleteResponseByAPIOperation(endpoint, btoken)
       .subscribe(
         response => {
           callback(response);
