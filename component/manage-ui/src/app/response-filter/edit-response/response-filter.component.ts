@@ -547,6 +547,7 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     RenderingResponseEditorBaseOnStatus(data: any) {
+        data = this.removeRedundantArrayNodes(data);
         if (this.renderCount == 0) {
             var container = document.getElementById("jsoneditor");
             var options = {
@@ -564,6 +565,20 @@ export class ResponseFilterComponent implements OnInit {
             this.jconainer.set(data);
             this.jconainer.expandAll();
         }
+    }
+
+    removeRedundantArrayNodes(data: any) {
+        if (Array.isArray(data)) {
+            data.length = 1;
+            Object.keys(data[0]).forEach(key => {
+                data[0][key] = this.removeRedundantArrayNodes(data[0][key]);
+            });
+        } else if (typeof data == 'object') {
+            Object.keys(data).forEach(key => {
+                data[key] = this.removeRedundantArrayNodes(data[key]);
+            });
+        }
+        return data;
     }
 
     onReset() {
