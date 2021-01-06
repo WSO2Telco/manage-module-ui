@@ -109,14 +109,14 @@
                         <div class="glyphicon glyphicon-info-sign info-tooltip left-block info-icon"><br/></div>
                         <div class="left-block info-text">
                             <h5 class="margin-0">Following additional properties will be used to complete the server
-                                request and <b>will not be considered</b> when filtering responses.</h5>
+                                request and <b>will not be considered</b> when filtering responses. please note that
+                                the value of the <b>path params</b> should be entered without URL encoding.</h5>
                         </div>
                     </div>
                 </div>
                 <br/>
                 <app-response-filter-payload [httpTypes]="httpVerb" [pathParams]="extractPathParams(enviorment)" (onSetAdditionalParam)="onSetPayloadHandler($event)"
                     (modalClose)="lgModal.hide();"></app-response-filter-payload>
-
             </div>
         </div>
     </div>
