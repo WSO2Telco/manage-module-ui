@@ -428,7 +428,7 @@ export class ResponseFilterComponent implements OnInit {
 
         if (!invalid) {
             this.modal.show();
-            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
+            this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeSpecialChars(this.enviorment), (response) => {
                 if (response.success) {
 
                     this.filteredList = response.payload;
@@ -485,7 +485,7 @@ export class ResponseFilterComponent implements OnInit {
 
         } else if (httpVerb == 'DELETE') {
 
-            this.responseFilterService.DeleteInvokeAPI(contextPath + OtherParam.urlParam, OtherParam.payloadBody, this.bToken, (response) => {
+            this.responseFilterService.DeleteInvokeAPI(contextPath + OtherParam.urlParam, this.bToken, (response) => {
                 if (response.success) {
                     this.jdata = response.payload;
                 } else {
@@ -547,6 +547,7 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     RenderingResponseEditorBaseOnStatus(data: any) {
+        data = this.removeRedundantArrayNodes(data);
         if (this.renderCount == 0) {
             var container = document.getElementById("jsoneditor");
             var options = {
@@ -564,6 +565,20 @@ export class ResponseFilterComponent implements OnInit {
             this.jconainer.set(data);
             this.jconainer.expandAll();
         }
+    }
+
+    removeRedundantArrayNodes(data: any) {
+        if (Array.isArray(data)) {
+            data.length = 1;
+            Object.keys(data[0]).forEach(key => {
+                data[0][key] = this.removeRedundantArrayNodes(data[0][key]);
+            });
+        } else if (typeof data == 'object') {
+            Object.keys(data).forEach(key => {
+                data[key] = this.removeRedundantArrayNodes(data[key]);
+            });
+        }
+        return data;
     }
 
     onReset() {
@@ -608,7 +623,7 @@ export class ResponseFilterComponent implements OnInit {
         this.reportingService.persitResponseFilter(this.subscriber, this.app, this.api, this.enviorment, schema, (response) => {
             if (response.success) {
                 this.message.success('Modified Response Successfully Saved');
-                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeCurlyBraces(this.enviorment), (response) => {
+                this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeSpecialChars(this.enviorment), (response) => {
                     if (response.success) {
                         this.filteredList = response.payload;
                         this.isFilteredOperation = true;
@@ -635,13 +650,16 @@ export class ResponseFilterComponent implements OnInit {
 
     replacePlaceholders(contextPath: string, pathParams: string[]) {
         Object.keys(pathParams).forEach(key => {
-            contextPath = contextPath.replace(new RegExp('{' + key + '}', 'gi'), encodeURIComponent(pathParams[key]));
+            contextPath = contextPath.replace(new RegExp('{' + this.escapePlusSign(key) + '}', 'gi'), encodeURIComponent(pathParams[key]));
         });
         return contextPath;
     }
 
-    encodeCurlyBraces(str: string) {
-        return str.replace("{", "%7B").replace("}", "%7D");
+    encodeSpecialChars(str: string) {
+        return str.replace(/{/g, "%7B").replace(/}/g, "%7D").replace(/\+/g, "%2B");
     }
 
+    escapePlusSign(str: string) {
+        return str.replace("+", "\\+");
+    }
 }

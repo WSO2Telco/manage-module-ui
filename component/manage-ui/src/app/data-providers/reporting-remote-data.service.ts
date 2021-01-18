@@ -285,7 +285,7 @@ export class ReportingRemoteDataService {
         * @param value
         * @returns {Observable<R>}
         */
-    DeleteResponseByAPIOperation(endpoint: string, data: any, btoken: string) {
+    DeleteResponseByAPIOperation(endpoint: string, btoken: string) {
         return this.http.delete(endpoint, this.setApiInvokeOptions(btoken))
             .map((response: Response) => {
                 if ((response.status == 200) || (response.status == 204)) {
