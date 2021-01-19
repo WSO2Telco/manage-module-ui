@@ -76,6 +76,14 @@ export class SubscriptionDetailComponent implements OnInit {
     private isSubscriberError: boolean;
     public isApplicationError: boolean;
 
+    private paginatedSubscriptions: Subscriptions[];
+    private totalSubItems: number = 0;
+    private currentSubPage: number = 1;
+    private paginatedAppSubscriptions: Subscriptions[];
+    private totalAppItems: number = 0;
+    private currentAppPage: number = 1;
+    private itemsPerPage: number = 10;
+
 
     private appfieldSet: FieldSet[] = [
         { columnName: 'Name', fieldName: 'name' },
@@ -109,6 +117,7 @@ export class SubscriptionDetailComponent implements OnInit {
         this.applications = [];
         this.operatorList = [];
         this.applicationSubscriptions = [];
+        this.paginatedAppSubscriptions = [];
         this.isApplicationError = false;
         this.apis = [];
         this.apiList = [];
@@ -230,6 +239,7 @@ export class SubscriptionDetailComponent implements OnInit {
                     this.message.warning('No Applications of Subscriber Found');
                 } else {
                     this.applicationSubscriptions = [];
+                    this.updateAppPagination(this.applicationSubscriptions, 1, this.itemsPerPage);
                     for (const entry of response.payload) {
                         const splitted = entry.split(':');
                         const app = new Application();
@@ -247,6 +257,7 @@ export class SubscriptionDetailComponent implements OnInit {
                         app.lastUpdate = splitted[4];
                         this.applications.push(app);
                     }
+                    this.updateAppPagination(this.applicationSubscriptions, 1, this.itemsPerPage);
                 }
             } else {
                 this.message.error(response.message);
@@ -284,6 +295,7 @@ export class SubscriptionDetailComponent implements OnInit {
                 this.applicationSubscriptions.push(appsfulldetails);
             }
         }
+        this.updateAppPagination(this.applicationSubscriptions, 1, this.itemsPerPage);
 
         if (!invalid) {
             this.getApis(this.app);
@@ -372,6 +384,7 @@ export class SubscriptionDetailComponent implements OnInit {
         this.reportingService.getSubscriptionDetail(id, opid, apiid, (response, status) => {
             if (status) {
                 this.subscriptions = response;
+                this.updateSubPagination(this.subscriptions, 1, this.itemsPerPage);
                 if (this.issubscriptionEnabled) {
                     this.isApiSelect = true;
                     this.staticTabs.tabs[1].active = true;
@@ -505,6 +518,28 @@ export class SubscriptionDetailComponent implements OnInit {
         else {
             this.onApplication(+this.appID, this.operatorId, this.apiid);
         }
+    }
+
+    updateAppPagination(appSubscriptions: Subscriptions[], currentPage: number, itemsPerPage: number) {
+        const firstItemIndex = (currentPage - 1) * itemsPerPage;
+        this.paginatedAppSubscriptions = appSubscriptions.slice(firstItemIndex, firstItemIndex + itemsPerPage);
+        this.totalAppItems = appSubscriptions.length;
+        this.currentAppPage = currentPage;
+    }
+
+    updateSubPagination(subscriptions: Subscriptions[], currentPage: number, itemsPerPage: number) {
+        const firstItemIndex = (currentPage - 1) * itemsPerPage;
+        this.paginatedSubscriptions = subscriptions.slice(firstItemIndex, firstItemIndex + itemsPerPage);
+        this.totalSubItems = subscriptions.length;
+        this.currentSubPage = currentPage;
+    }
+
+    onAppPageChanged(event) {
+        this.updateAppPagination(this.applicationSubscriptions, event.page, this.itemsPerPage);
+    }
+
+    onSubPageChanged(event) {
+        this.updateSubPagination(this.subscriptions, event.page, this.itemsPerPage);
     }
 
 }
