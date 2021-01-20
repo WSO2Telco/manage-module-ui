@@ -11,6 +11,7 @@ import { Subscriptions, contexPathArr, payloadParam } from '../../commons/models
 import { Router } from '@angular/router';
 import { ResponseFilterService } from '../../commons/services/response_filter.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import {responseFilterPayloadComponent} from "../edit-response-payload/response-filter-payload.component";
 declare var JSONEditor;
 declare var require: any;
 
@@ -21,6 +22,7 @@ declare var require: any;
 })
 export class ResponseFilterComponent implements OnInit {
     @ViewChild('lgModal') public modal: ModalDirective;
+    @ViewChild('rfPayload') public responseFilterPayload: responseFilterPayloadComponent;
     private id: number;
     private show: boolean;
     public directionList;
@@ -427,6 +429,7 @@ export class ResponseFilterComponent implements OnInit {
         }
 
         if (!invalid) {
+            this.responseFilterPayload.clearForm();
             this.modal.show();
             this.responseFilterService.GetFilteredDataBYAPIID(this.app, this.subscriber, this.api, this.encodeSpecialChars(this.enviorment), (response) => {
                 if (response.success) {

@@ -26,15 +26,8 @@ export class responseFilterPayloadComponent implements OnInit {
     @Output()
     private modalClose: EventEmitter<boolean> = new EventEmitter();
 
-
-    constructor() {
-        this.clearForm();
-    }
-
     ngOnInit() {
-        this.payloadDesc = '';
-        this.urlParamDesc = '';
-        this.pathParamVal = [];
+        this.clearForm();
     }
 
     /**
@@ -60,6 +53,8 @@ export class responseFilterPayloadComponent implements OnInit {
     clearForm() {
         this.selectedEnv = 'production';
         this.payloadDesc = '';
+        this.urlParamDesc = '';
+        this.pathParamVal = [];
     }
 }
 

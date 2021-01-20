@@ -115,7 +115,7 @@
                     </div>
                 </div>
                 <br/>
-                <app-response-filter-payload [httpTypes]="httpVerb" [pathParams]="extractPathParams(enviorment)" (onSetAdditionalParam)="onSetPayloadHandler($event)"
+                <app-response-filter-payload #rfPayload [httpTypes]="httpVerb" [pathParams]="extractPathParams(enviorment)" (onSetAdditionalParam)="onSetPayloadHandler($event)"
                     (modalClose)="lgModal.hide();"></app-response-filter-payload>
             </div>
         </div>
