@@ -43,7 +43,7 @@
                                         Provider and Application to edit tiers</h4>
                                 </div>
                                 <div class="col-sm-12" *ngIf="applications.length >= 1">
-                                    <app-common-data-table [dataSource]="applicationSubscriptions"
+                                    <app-common-data-table [dataSource]="paginatedAppSubscriptions"
                                         [fieldSet]="appfieldSet">
                                         <template #dynamicCellContent let-item="element">
                                             <div>
@@ -59,10 +59,17 @@
                                         </template>
                                     </app-common-data-table>
                                     <div class=" text-center">
-                                        <pagination [boundaryLinks]="true" [totalItems]="totalItems"
-                                            [(ngModel)]="currentPage" [maxSize]="5"
-                                            (pageChanged)="onPageChanged($event)" class="pagination-sm"
-                                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                        <pagination
+                                            [boundaryLinks]="true"
+                                            [totalItems]="totalAppItems"
+                                            [(ngModel)]="currentAppPage"
+                                            [itemsPerPage]="itemsPerPage"
+                                            [maxSize]="5"
+                                            (pageChanged)="onAppPageChanged($event)"
+                                            class="pagination-sm"
+                                            previousText="&lsaquo;"
+                                            nextText="&rsaquo;"
+                                            firstText="&laquo;"
                                             lastText="&raquo;"></pagination>
                                     </div>
                                 </div>
@@ -71,13 +78,13 @@
                             <tab heading="Subscription Details" customClass="subTab" *ngIf="issubscriptionEnabled">
                                 <div class="content-div" *ngIf="!isApiSelect">
                                     <span class="glyphicon glyphicon-th-list center-block quarterwidth noApiSet">
-                                        <br>
+                       subscriptions                 <br>
                                     </span>
                                     <h4 class="center-block halfwidth text-center">Select the Service
                                         Provider, Application and API to edit tiers</h4>
                                 </div>
                                 <div class="col-sm-12" *ngIf="isApiSelect">
-                                    <app-common-data-table [dataSource]="subscriptions"
+                                    <app-common-data-table [dataSource]="paginatedSubscriptions"
                                         [fieldSet]="subscriptionfieldSet">
                                         <template #dynamicCellContent let-item="element">
                                             <div>
@@ -94,10 +101,17 @@
                                         </template>
                                     </app-common-data-table>
                                     <div class="col-sm-12 text-center">
-                                        <pagination [boundaryLinks]="true" [totalItems]="totalItems"
-                                            [(ngModel)]="currentPage" [maxSize]="5"
-                                            (pageChanged)="onPageChanged($event)" class="pagination-sm"
-                                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+                                        <pagination
+                                            [boundaryLinks]="true"
+                                            [totalItems]="totalSubItems"
+                                            [(ngModel)]="currentSubPage"
+                                            [itemsPerPage]="itemsPerPage"
+                                            [maxSize]="5"
+                                            (pageChanged)="onSubPageChanged($event)"
+                                            class="pagination-sm"
+                                            previousText="&lsaquo;"
+                                            nextText="&rsaquo;"
+                                            firstText="&laquo;"
                                             lastText="&raquo;"></pagination>
                                     </div>
                                 </div>
