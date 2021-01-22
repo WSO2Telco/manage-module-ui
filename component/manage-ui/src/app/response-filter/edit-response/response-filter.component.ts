@@ -537,6 +537,10 @@ export class ResponseFilterComponent implements OnInit {
     }
 
     RenderingResponseEditor() {
+        if (this.jdata == null) {
+            this.message.error('No Content');
+            this.jdata = '';
+        }
         if (this.filteredList) {
             this.isFilteredOperation = true;
             var filter = require('json-schema-filter-js');
