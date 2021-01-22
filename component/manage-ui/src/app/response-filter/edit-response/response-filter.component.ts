@@ -573,9 +573,13 @@ export class ResponseFilterComponent implements OnInit {
     removeRedundantArrayNodes(data: any) {
         if (Array.isArray(data)) {
             data.length = 1;
-            Object.keys(data[0]).forEach(key => {
-                data[0][key] = this.removeRedundantArrayNodes(data[0][key]);
-            });
+            if (typeof data[0] == 'object'){
+                Object.keys(data[0]).forEach(key => {
+                    data[0][key] = this.removeRedundantArrayNodes(data[0][key]);
+                });
+            } else {
+                data[0] = this.removeRedundantArrayNodes(data[0]);
+            }
         } else if (typeof data == 'object') {
             Object.keys(data).forEach(key => {
                 data[key] = this.removeRedundantArrayNodes(data[key]);
