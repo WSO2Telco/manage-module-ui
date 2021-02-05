@@ -192,7 +192,7 @@
         <org.wso2.carbon.version>4.4.8</org.wso2.carbon.version>
         <com.wso2telco.core.version>3.0.0-RC1</com.wso2telco.core.version>
         <carbon.p2.plugin.version>1.5.8</carbon.p2.plugin.version>
-        <org.wso2.carbon.apimgt.version>6.3.95</org.wso2.carbon.apimgt.version>
+        <org.wso2.carbon.apimgt.version>6.7.206</org.wso2.carbon.apimgt.version>
         <com.google.code.gson.version>2.3.1</com.google.code.gson.version>
     </properties>
 </project>

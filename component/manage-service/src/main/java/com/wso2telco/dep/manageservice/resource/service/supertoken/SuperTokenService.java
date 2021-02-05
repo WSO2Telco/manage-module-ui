@@ -37,8 +37,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.wso2.carbon.apimgt.hostobjects.internal.HostObjectComponent;
 import org.wso2.carbon.apimgt.impl.APIManagerConfiguration;
+import org.wso2.carbon.apimgt.impl.internal.ServiceReferenceHolder;
 
 public class SuperTokenService {
 
@@ -75,7 +75,7 @@ public class SuperTokenService {
 
     private String gatewayUrl() {
         final String GATEWAY_URL = "APIGateway.Environments.Environment.GatewayEndpoint";
-        APIManagerConfiguration apiManagerConfiguration = HostObjectComponent.getAPIManagerConfiguration();
+        APIManagerConfiguration apiManagerConfiguration = ServiceReferenceHolder.getInstance().getAPIManagerConfigurationService().getAPIManagerConfiguration();
         return apiManagerConfiguration.getFirstProperty(GATEWAY_URL).split(",")[0] + "/token";
     }
 }
