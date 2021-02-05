@@ -35,10 +35,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.wso2.carbon.apimgt.hostobjects.internal.HostObjectComponent;
 import org.wso2.carbon.apimgt.impl.APIConstants;
 import org.wso2.carbon.apimgt.impl.APIManagerConfiguration;
 import org.wso2.carbon.apimgt.impl.dto.Environment;
+import org.wso2.carbon.apimgt.impl.internal.ServiceReferenceHolder;
 
 public class StoreApiService {
 
@@ -115,13 +115,13 @@ public class StoreApiService {
     }
 
     private String storeApiUrl(String apiId) {
-        final APIManagerConfiguration config = HostObjectComponent.getAPIManagerConfiguration();
+        final APIManagerConfiguration config = ServiceReferenceHolder.getInstance().getAPIManagerConfigurationService().getAPIManagerConfiguration();
         return config.getFirstProperty(APIConstants.API_STORE_URL)
             .replace("store", "api/am/store/" + STORE_REST_API_VERSION + "/apis/") + apiId;
     }
 
     private List<EndpointURL> endPointUrls(String apiContext) {
-        final APIManagerConfiguration config = HostObjectComponent.getAPIManagerConfiguration();
+       final APIManagerConfiguration config =ServiceReferenceHolder.getInstance().getAPIManagerConfigurationService().getAPIManagerConfiguration();
         List<EndpointURL> endpointURLS = new ArrayList<>();
         for (Environment environment : config.getApiGatewayEnvironments().values()) {
             Map<String, String> environmentURLs = new HashMap<>();
